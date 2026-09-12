@@ -1,0 +1,10 @@
+_build*
+__pycache__/
+snapshot.png
+.env
+_reference/
+_build*/
+export/
+snapshot*.png
+__pycache__/
+*.pyc
