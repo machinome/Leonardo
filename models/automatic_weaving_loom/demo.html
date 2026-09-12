@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Leonardo · The automatic loom</title>
+<style>
+  * { box-sizing: border-box; }
+  body { margin: 0; color: #eee5d6; background: #262b28; font: 16px/1.55 system-ui, sans-serif; }
+  header { display: flex; align-items: baseline; justify-content: space-between; gap: 24px; padding: 20px 30px; border-bottom: 1px solid #ffffff20; }
+  h1 { margin: 0; font: 34px/1.1 Georgia, serif; font-weight: normal; }
+  .eyebrow { color: #c1ae88; letter-spacing: .15em; font-size: 11px; text-transform: uppercase; margin-bottom: 9px; }
+  .tag { font-size: 12px; color: #c4c9c4; }
+  main { display: grid; grid-template-columns: minmax(0, 1fr) 320px; min-height: calc(100vh - 100px); }
+  iframe { width: 100%; height: calc(100vh - 100px); min-height: 570px; border: 0; background: #f5f2eb; }
+  aside { padding: 24px; border-left: 1px solid #ffffff20; }
+  h2 { font: 25px/1.2 Georgia, serif; font-weight: normal; margin: 0 0 16px; }
+  p { font-size: 14px; margin: 12px 0; color: #d1d5ce; }
+  ol { padding-left: 23px; font-size: 14px; }
+  li { margin: 15px 0; padding-left: 4px; }
+  li::marker { color: #c9ad75; }
+  strong { color: #fff3df; }
+  .legend { display: flex; flex-wrap: wrap; gap: 8px 14px; font-size: 12px; padding: 17px 0; border-top: 1px solid #ffffff20; border-bottom: 1px solid #ffffff20; }
+  .dot { display: inline-block; width: 9px; height: 9px; border-radius: 50%; margin-right: 5px; }
+  .note { font-size: 12px; color: #aab3a8; margin-top: 20px; }
+  a { color: #ddc697; text-underline-offset: 3px; }
+  @media (max-width: 900px) { main { grid-template-columns: 1fr; } iframe { height: 65vh; min-height: 430px; } aside { border-left: 0; } header { display: block; } .tag { margin-top: 12px; } }
+</style>
+<header>
+  <div><div class="eyebrow">Leonardo da Vinci · Mechanical studies</div><h1>The automatic loom</h1></div>
+  <div class="tag">Codex Atlanticus, f.985r–v · Interactive solid-node reconstruction</div>
+</header>
+<main>
+  <iframe src="export/index.html" title="Interactive 3D model of Leonardo's automatic loom" allow="fullscreen"></iframe>
+  <aside>
+    <div class="eyebrow">One drive · Two alternating picks</div>
+    <h2>Follow a thread.</h2>
+    <p>Start the viewer's timeline to weave. Orbit the model to see the eccentric shaft below the two heddle frames. Use the named instructions to hold each stage.</p>
+    <ol>
+      <li><strong>Open shed · 60°</strong><br>Alternate warp threads separate. The captured eccentric lifts one heddle frame and lowers the other.</li>
+      <li><strong>Handoff · 90°</strong><br>The two arms meet inside the open shed. Their interleaved fingers support the red weft spool.</li>
+      <li><strong>Beat right · 180°</strong><br>The spool clears the ribbon. The reed advances toward the cloth edge to illustrate packing the pick.</li>
+      <li><strong>Return pick · 270°</strong><br>The shed reverses. The spool returns through the opposite opening, creating the next over-and-under pass.</li>
+    </ol>
+    <div class="legend">
+      <span><i class="dot" style="background:#ded3ad"></i>Warp A</span>
+      <span><i class="dot" style="background:#4c9fa9"></i>Warp B</span>
+      <span><i class="dot" style="background:#bb473b"></i>Weft spool</span>
+      <span><i class="dot" style="background:#bb884b"></i>Drive</span>
+    </div>
+    <p class="note">An educational reconstruction of the museum's narrow-ribbon interpretation. Dimensions and motion timing are chosen for this model. Intermediate transmissions, grip latches, yarn tension and cloth accumulation are not simulated.</p>
+    <p class="note"><a href="https://artsandculture.google.com/story/leonardo-and-the-art-of-weaving-leonardo-da-vinci-museum/2wVxLwuL6F11KQ?hl=en" target="_blank" rel="noreferrer">Historical source: Museo Leonardiano</a> · <a href="README.md">Project record</a></p>
+  </aside>
+</main>
+</html>
