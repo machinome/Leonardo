@@ -21,6 +21,7 @@ model = "hydraulic_sawmill"
 [tool.solid-node.models]
 hydraulic_sawmill = "models.hydraulic_sawmill.model:LeonardoHydraulicSawmill"
 automatic_weaving_loom = "models.automatic_weaving_loom.model:AutomaticWeavingLoom"
+cam_hammer = "models.cam_hammer.model:CamHammer"
 
 [tool.libresolid-studio]
 profile = "builder"

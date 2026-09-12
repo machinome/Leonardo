@@ -79,3 +79,21 @@ local; publication is a later pilot action.
 No pilot decision is outstanding within the commission. Geometric gaps
 and profile sampling are engineering choices to settle with evidence and
 record in the final validation report.
+
+## Implementation findings
+
+The straight tail arm collided with the cam's retreating flank at
+225–270 degrees. Its top is now recessed to z=-2 mm between local
+x=-48 and -16, with an 8 mm deep connected section below it. The shoe
+and the lift/return envelope are unchanged. Whole-root interference,
+contact and integrity remain active; the change fixes the colliding CAD.
+
+Side-view inspection found the initial cam column hid the shoe. Move each
+cam column to x=-108 and carry its journal on a 78 mm top bearing beam;
+the journal location stays (-60,0,170). The contact is visible in the final
+side and isometric snapshots and journal capture remains measured.
+
+Tests use distinct build directories from publication. A simultaneous
+export prunes fusion-ingredient files still needed by measurements, even
+though each build obtains the framework's lock. The overlapping attempt
+was discarded and rerun with independent directories; no dependency changed.

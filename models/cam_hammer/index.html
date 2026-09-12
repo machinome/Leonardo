@@ -1,0 +1,68 @@
+<!doctype html>
+<!-- Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only. -->
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Turn a cam, lift a hammer, watch it fall. An original interactive solid-node demonstration by Astra.">
+<link rel="icon" href="data:,">
+<title>Cam hammer · Leonardo gallery</title>
+<style>
+  * { box-sizing: border-box; }
+  body { margin: 0; background: #252c2c; color: #f2eadc; font: 16px/1.6 system-ui, sans-serif; }
+  a { color: #dfbd7e; text-underline-offset: 4px; }
+  header { padding: 25px 36px 28px; border-bottom: 1px solid #ffffff24; }
+  .overline { color: #d3b27d; font-size: 11px; letter-spacing: .18em; text-transform: uppercase; }
+  h1 { font: normal clamp(32px, 4vw, 56px)/1.12 Georgia, serif; margin: 12px 0; }
+  header p { margin: 0; color: #c0cbc7; font-size: 14px; }
+  main { display: grid; grid-template-columns: minmax(0,1fr) 340px; }
+  .machine { min-width: 0; background: #f4f0e7; }
+  iframe { display: block; width: 100%; height: min(78vh, 850px); min-height: 590px; border: 0; }
+  .caption { margin: 0; padding: 12px 24px; font-size: 12px; color: #455351; border-top: 1px solid #3c403324; }
+  aside { padding: 28px; }
+  h2 { font: normal 27px/1.2 Georgia, serif; margin: 9px 0 24px; }
+  ol { list-style: none; padding: 0; margin: 0; counter-reset: stages; }
+  li { counter-increment: stages; padding: 15px 0 18px 33px; position: relative; border-top: 1px solid #ffffff20; }
+  li::before { content: "0" counter(stages); position: absolute; left: 0; color: #d3b27d; font-size: 12px; top: 18px; }
+  li strong { font-size: 15px; font-weight: 600; }
+  li p, aside p { color: #c5cfca; font-size: 13px; margin: 6px 0 0; }
+  .limit { padding: 18px 0; border-top: 1px solid #ffffff20; }
+  footer { padding: 22px 36px; font-size: 12px; color: #adbab4; border-top: 1px solid #ffffff24; }
+  footer p { margin: 4px 0; }
+  @media (max-width: 900px) {
+    header { padding: 22px; }
+    main { grid-template-columns: 1fr; }
+    iframe { height: 560px; min-height: 0; }
+    aside { padding: 25px 22px; }
+    footer { padding: 20px 22px; }
+  }
+</style>
+<header>
+  <div class="overline">Leonardo gallery / 03 / Cam hammer</div>
+  <h1>A circle becomes a beat.</h1>
+  <p>Turn the brass-coloured cam. Follow the lever. Watch the hammer return to the anvil.</p>
+</header>
+<main>
+  <section class="machine" aria-label="Interactive cam hammer">
+    <iframe src="../../export/cam_hammer/index.html" title="Interactive cam hammer solid-node viewer" allow="fullscreen"></iframe>
+    <p class="caption">Drag to orbit · Scroll to zoom · Use the viewer's phase control to turn the crank by hand.</p>
+  </section>
+  <aside>
+    <div class="overline">One rotation / One stroke</div>
+    <h2>Follow the contact.</h2>
+    <ol>
+      <li><strong>Lift · 120°</strong><p>The cam pushes the short tail down. The lever turns in its journals, raising the hammer on the long arm.</p></li>
+      <li><strong>Release · 250°</strong><p>The cam retreats faster than the rounded shoe returns. A gap opens: the cam has let the hammer go.</p></li>
+      <li><strong>Strike · 320°</strong><p>The hammer reaches the anvil's flat face, then rests until the next rise. No material is deformed.</p></li>
+    </ol>
+    <p class="limit">Choose <strong>Run</strong> and play the viewer's timeline for a full cycle. Stage buttons stop the drive at named positions. For manual inspection set run to 0 and adjust phase. A full-speed loop ends at the same pose; looping at fractional run restarts at the phase setting.</p>
+    <div class="overline">An interpretation, not a replica</div>
+    <p>The cam and dimensions are Astra's original educational design. Return timing is prescribed; gravity, impact, wear and forging capacity are not simulated. The rounded tail is a fixed shoe. Small running gaps keep the rigid parts clear.</p>
+    <p class="limit">The <a href="https://www.mos.org/leonardo/activities/gadget-anatomy.html">Museum of Science</a> explains the gravity trip hammer; the <a href="https://leonardoavenezia.com/en/">Venice exhibition</a> describes its crank and intermittent stroke. No particular folio or invention priority is claimed.</p>
+    <p><a href="README.md">Design &amp; measured evidence</a> · <a href="../../export/cam_hammer/source.zip">Download gallery source</a></p>
+  </aside>
+</main>
+<footer>
+  <p>A <a href="https://solid-node.readthedocs.io/">solid-node demonstration</a> · Astra's single-prompt designs · <a href="https://github.com/LibreSolid/Leonardo">Leonardo gallery on GitHub</a> (publication pending)</p>
+  <p>Copyright © 2026 Luis Henrique Cassis Fagundes · <a href="../../LICENSE">AGPL-3.0-only</a></p>
+</footer>
+</html>

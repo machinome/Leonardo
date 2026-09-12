@@ -24,6 +24,14 @@ fps = 30
 exhibit = "models/automatic_weaving_loom/demo.html"
 browser_check = ["models/automatic_weaving_loom/scripts/inspect_demo.py"]
 
+[models.cam_hammer]
+title = "Cam hammer"
+directory = "models/cam_hammer"
+frames = 360
+fps = 30
+exhibit = "models/cam_hammer/index.html"
+browser_check = ["models/cam_hammer/scripts/check_browser.py", "--url", "{base_url}/models/cam_hammer/"]
+
 [[queue]]
 id = "010-cam-hammer"
 kind = "machine"

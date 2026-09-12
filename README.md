@@ -9,8 +9,8 @@ Copyright (C) 2026 Luis Henrique Cassis Fagundes.
 All original gallery code, CAD and documentation are **AGPL-3.0-only**;
 see [LICENSE](LICENSE) and [NOTICE](NOTICE).
 
-This is one repository with several named models. The first two exhibits
-are implemented; four more machines and the final static Sphinx site are
+This is one repository with several named models. Three exhibits are
+implemented; three more machines and the final static Sphinx site are
 in the [build queue](QUEUE.md). The complete public site is not built yet.
 Intended source home: [LibreSolid/Leonardo on GitHub](https://github.com/LibreSolid/Leonardo)
 (publication is pending; this URL is a recorded working assumption).
@@ -19,11 +19,13 @@ Intended source home: [LibreSolid/Leonardo on GitHub](https://github.com/LibreSo
 | --- | --- | --- |
 | `hydraulic_sawmill` | Waterwheel, crank, reciprocating blade and indexed timber feed | [Machine](models/hydraulic_sawmill/README.md) · [OpenSpec](models/hydraulic_sawmill/openspec/) |
 | `automatic_weaving_loom` | Alternating sheds, a supported weft handoff and beat-up | [Machine](models/automatic_weaving_loom/README.md) · [OpenSpec](models/automatic_weaving_loom/openspec/) |
+| `cam_hammer` | Cam contact, lever lift, released drop and anvil strike | [Machine](models/cam_hammer/README.md) · [OpenSpec](models/cam_hammer/openspec/) |
 
 These are original educational interpretations, not dimensioned replicas.
 Each machine identifies its historical sources, reconstruction choices and
 limits. Prescribed motion is labelled as such. The saw does not cut material;
 the loom does not solve yarn tension or accumulate cloth.
+The hammer's return is prescribed; gravity and impact are not simulated.
 
 ## Build and inspect
 
@@ -41,6 +43,7 @@ python scripts/gallery.py check
 python scripts/gallery.py list
 solid build hydraulic_sawmill
 solid build automatic_weaving_loom
+solid build cam_hammer
 python scripts/gallery.py test
 python scripts/gallery.py export
 python scripts/check_browsers.py
@@ -48,7 +51,8 @@ python -m http.server 8769 --bind 127.0.0.1
 ```
 
 Open the [sawmill](http://127.0.0.1:8769/models/hydraulic_sawmill/) or
-[loom](http://127.0.0.1:8769/models/automatic_weaving_loom/demo.html).
+[loom](http://127.0.0.1:8769/models/automatic_weaving_loom/demo.html) or
+[cam hammer](http://127.0.0.1:8769/models/cam_hammer/).
 Their plain viewers are at `export/<model>/index.html`.
 `gallery.py build|test|export` handles all registered models, or accepts
 model names to select a subset. Tests default to the exact kernel;
