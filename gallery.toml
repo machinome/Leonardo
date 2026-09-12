@@ -29,7 +29,7 @@ id = "010-cam-hammer"
 kind = "machine"
 model = "cam_hammer"
 title = "The cam hammer: a circle becomes a beat"
-status = "pending"
+status = "in_progress"
 brief = "QUEUE.md#010-cam-hammer"
 
 [[queue]]
