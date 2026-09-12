@@ -6,9 +6,10 @@ from pathlib import Path
 from playwright.sync_api import sync_playwright
 
 parser = argparse.ArgumentParser(description=__doc__)
-parser.add_argument('--url', default='http://127.0.0.1:8769')
+parser.add_argument('--url', default='http://127.0.0.1:8769/models/hydraulic_sawmill/')
 args = parser.parse_args()
 root = Path(__file__).resolve().parents[1]
+(root / 'evidence').mkdir(exist_ok=True)
 with sync_playwright() as p:
     browser = p.chromium.launch(headless=True, args=['--enable-webgl', '--use-gl=angle', '--use-angle=swiftshader', '--enable-unsafe-swiftshader'])
     page = browser.new_page(viewport={'width':1440, 'height':1200}, device_scale_factor=1)
@@ -43,7 +44,8 @@ with sync_playwright() as p:
     page.wait_for_function('window.exhibit.phase > 20')
     page.locator('#play').click()
     assert not page.evaluate('window.exhibit.playing')
-    assert page.request.get(args.url+'/export/source.zip').status == 200
+    source_url = page.locator('.source-link').evaluate('(a) => a.href')
+    assert page.request.get(source_url).status == 200
     page.set_viewport_size({'width':390, 'height':844})
     page.reload()
     page.wait_for_function("document.body.dataset.ready === 'true'")

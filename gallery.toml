@@ -1,0 +1,64 @@
+# Queue order and status are authoritative here. Briefs and gates: QUEUE.md.
+[gallery]
+title = "Leonardo da Vinci Gallery"
+creator = "Astra"
+copyright = "Copyright (C) 2026 Luis Henrique Cassis Fagundes"
+license = "AGPL-3.0-only"
+source_url = "https://github.com/LibreSolid/Leonardo"
+source_url_status = "intended publication destination; no remote configured yet"
+solid_node_url = "https://solid-node.readthedocs.io/"
+
+[models.hydraulic_sawmill]
+title = "Hydraulic sawmill"
+directory = "models/hydraulic_sawmill"
+frames = 480
+fps = 30
+exhibit = "models/hydraulic_sawmill/index.html"
+browser_check = ["models/hydraulic_sawmill/scripts/check-browser.py", "--url", "{base_url}/models/hydraulic_sawmill/"]
+
+[models.automatic_weaving_loom]
+title = "Automatic weaving loom"
+directory = "models/automatic_weaving_loom"
+frames = 360
+fps = 30
+exhibit = "models/automatic_weaving_loom/demo.html"
+browser_check = ["models/automatic_weaving_loom/scripts/inspect_demo.py"]
+
+[[queue]]
+id = "010-cam-hammer"
+kind = "machine"
+model = "cam_hammer"
+title = "The cam hammer: a circle becomes a beat"
+status = "pending"
+brief = "QUEUE.md#010-cam-hammer"
+
+[[queue]]
+id = "020-rack-and-pinion"
+kind = "machine"
+model = "rack_and_pinion"
+title = "Rack and pinion: turning becomes lifting"
+status = "pending"
+brief = "QUEUE.md#020-rack-and-pinion"
+
+[[queue]]
+id = "030-pulley-block"
+kind = "machine"
+model = "pulley_block"
+title = "The compound pulley: exchange distance for load"
+status = "pending"
+brief = "QUEUE.md#030-pulley-block"
+
+[[queue]]
+id = "040-swivel-crane"
+kind = "machine"
+model = "swivel_crane"
+title = "The swivel crane: place a stone in three dimensions"
+status = "pending"
+brief = "QUEUE.md#040-swivel-crane"
+
+[[queue]]
+id = "050-public-site"
+kind = "site"
+title = "The public Sphinx gallery"
+status = "pending"
+brief = "QUEUE.md#050-public-site"

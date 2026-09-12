@@ -2,7 +2,7 @@
 import numpy as np
 
 from solid_node.test import TestCase, testing_steps
-from .Leonardo_hydraulic_sawmill import LeonardoHydraulicSawmill
+from .model import LeonardoHydraulicSawmill
 
 
 class LeonardoHydraulicSawmillTest(TestCase):

@@ -13,7 +13,7 @@
   <header class="masthead">
     <a class="brand" href="./" aria-label="LibreSolid exhibit home"><svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="17"/><circle cx="20" cy="20" r="4"/><path d="M20 3v13m0 8v13M3 20h13m8 0h13M8 8l9 9m6 6 9 9M8 32l9-9m6-6 9-9"/></svg><span>LIBRESOLID<span class="brand-sub">THE MECHANICAL COLLECTION</span></span></a>
     <span class="edition">EXHIBIT 001 <span>/</span> LEONARDO DA VINCI</span>
-    <a class="source-link" href="export/source.zip" download>Get the source <span>↗</span></a>
+    <a class="source-link" href="../../export/hydraulic_sawmill/source.zip" download>Get the source <span>↗</span></a>
   </header>
   <main>
     <section class="intro">
@@ -39,9 +39,9 @@
       <div class="transport"><button id="play" class="play" aria-label="Pause animation">Ⅱ</button><button id="reset" class="reset" aria-label="Reset pass">↶</button><div class="timeline"><div><label for="timeline">THE WORKING CYCLE</label><span id="cycle">01 / 04</span></div><input id="timeline" type="range" min="0" max="1440" step="0.5" value="0" aria-label="Crank phase across four cycles"></div><label class="speed">SPEED<select id="speed" aria-label="Playback speed"><option value="0.25">¼×</option><option value="0.5">½×</option><option value="1" selected>1×</option><option value="2">2×</option></select></label><span class="transport-note">4 cycles · 16 seconds</span></div>
     </section>
     <section class="footnotes"><div><span class="eyebrow">A MACHINE BEFORE ITS TIME</span><p>Inspired by Leonardo’s study of an automatic hydraulic saw. An original digital interpretation of the mechanism, with the structure left open so every movement can be followed.</p><a href="https://museoleonardiano.it/en/opera/hydraulic-saw/" target="_blank" rel="noreferrer">Explore the historical reference ↗</a></div><dl><div><dt>48 <small>mm</small></dt><dd>SAW STROKE</dd></div><div><dt>8 <small>mm</small></dt><dd>FEED PER TURN</dd></div><div><dt>16</dt><dd>WHEEL PADDLES</dd></div></dl></section>
-    <details class="model-note"><summary>About this reconstruction</summary><p>This is a kinematic exhibit. The water is illustrative, the timber has a pre-cut blade slot, and the ratchet actuation is prescribed. It demonstrates geometry and coordinated movement, without simulating water forces, cutting, friction or torque. The indexed pawl carrier is an exhibit interpretation; a complete historical feed linkage is not reconstructed. Each four-cycle pass resets the carriage.</p><p>Built in Python with solid-node and CadQuery; the haul rope is evaluated with molejo. The browser renders the actual exported assembly. <a href="docs/validation.md">Validation record</a> · <a href="export/">Standard solid-node viewer</a></p></details>
+    <details class="model-note"><summary>About this reconstruction</summary><p>This is a kinematic exhibit. The water is illustrative, the timber has a pre-cut blade slot, and the ratchet actuation is prescribed. It demonstrates geometry and coordinated movement, without simulating water forces, cutting, friction or torque. The indexed pawl carrier is an exhibit interpretation; a complete historical feed linkage is not reconstructed. Each four-cycle pass resets the carriage.</p><p>Built in Python with solid-node and CadQuery; the haul rope is evaluated with molejo. The browser renders the actual exported assembly. <a href="docs/validation.md">Validation record</a> · <a href="../../export/hydraulic_sawmill/">Standard solid-node viewer</a></p></details>
   </main>
-  <footer><span>MADE WITH SOLID-NODE <b>·</b> BUILT TO BE UNDERSTOOD</span><span>© 2026 Luis Henrique Cassis Fagundes <b>·</b> <a href="LICENSE">AGPLv3</a></span></footer>
-  <script src="export/solid-widget.js"></script><script src="exhibit.js"></script>
+  <footer><span>VIBECODED BY ASTRA <b>·</b> <a href="https://solid-node.readthedocs.io/">MADE WITH SOLID-NODE</a></span><span>© 2026 Luis Henrique Cassis Fagundes <b>·</b> <a href="../../LICENSE">AGPLv3</a></span></footer>
+  <script src="../../export/hydraulic_sawmill/solid-widget.js"></script><script src="exhibit.js"></script>
 </body>
 </html>

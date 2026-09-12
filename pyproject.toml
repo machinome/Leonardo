@@ -1,0 +1,35 @@
+[project]
+name = "leonardo-gallery"
+version = "0.1.0"
+description = "Leonardo da Vinci's machines: a single-prompt solid-node gallery by Astra"
+readme = "README.md"
+requires-python = ">=3.12"
+authors = [{name = "Luis Henrique Cassis Fagundes"}]
+license = "AGPL-3.0-only"
+license-files = ["LICENSE", "NOTICE"]
+# These version floors do not describe the post-0.6 API requirement in README.
+# The public-site task must establish a reproducible public dependency set.
+dependencies = ["solid-node[viewer]>=0.6", "cadquery>=2.7", "molejo>=0.2"]
+
+[project.optional-dependencies]
+dev = ["playwright>=1.50"]
+site = ["sphinx>=8"]
+
+[tool.solid-node]
+model = "hydraulic_sawmill"
+
+[tool.solid-node.models]
+hydraulic_sawmill = "models.hydraulic_sawmill.model:LeonardoHydraulicSawmill"
+automatic_weaving_loom = "models.automatic_weaving_loom.model:AutomaticWeavingLoom"
+
+[tool.libresolid-studio]
+profile = "builder"
+
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+namespaces = false
+include = ["models", "models.*"]
+exclude = ["models.*.openspec*", "models.*.docs*", "models.*.scripts*"]

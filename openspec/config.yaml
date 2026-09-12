@@ -1,0 +1,9 @@
+schema: spec-driven
+context: |
+  Leonardo da Vinci Gallery: original single-prompt educational CAD by Astra.
+  Copyright (C) 2026 Luis Henrique Cassis Fagundes; AGPL-3.0-only.
+  This root owns gallery-wide behavior and the final Sphinx site.
+  Each machine owns models/<name>/openspec; never mix those records here.
+  docs/brief.md and QUEUE.md carry the pilot's delegated commission.
+  gallery.toml is the ordered queue and pyproject.toml is the built-model registry.
+  The site must credit/link solid-node and link the gallery's GitHub source.

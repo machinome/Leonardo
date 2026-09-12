@@ -5,27 +5,28 @@ hydraulic saw, Codex Atlanticus f. 1078r. Built with `solid new`, solid-node,
 CadQuery and molejo. The browser displays the actual exported model.
 
 Copyright (C) 2026 Luis Henrique Cassis Fagundes.
+Vibecoded by Astra as part of the [Leonardo gallery](../../README.md).
 Licensed under the GNU Affero General Public License, version 3 only
-(`AGPL-3.0-only`). See [LICENSE](LICENSE).
+(`AGPL-3.0-only`). See [LICENSE](../../LICENSE).
 
 ## Open the exhibit
 
-From this project directory, with the workspace environment activated:
+From the **Leonardo repository root**, with the workspace environment activated:
 
 ```sh
 source ../../.venv/bin/activate
-python scripts/demo.py
+python models/hydraulic_sawmill/scripts/demo.py
 ```
 
-Open **http://127.0.0.1:8769**. The command builds the machine, exports the
-viewer, packages the corresponding source, and serves the exhibit locally.
+Open **http://127.0.0.1:8769/models/hydraulic_sawmill/**. The command exports
+the machine and viewer, packages committed gallery source, and serves locally.
 Use `--port 8770` for a different port, `--build-only` for finite export, or
 `--no-build` to serve an existing export. Stop with Ctrl+C.
 
 Play/pause, speed selection, a four-cycle scrubber, four camera views and a
 mechanism reveal are available. Drag to orbit and scroll to zoom. Space toggles
 playback when the page background has focus. Reduced-motion preferences start
-the exhibit paused. The standard solid-node viewer is also at `/export/`.
+the exhibit paused. The standard viewer is also at `/export/hydraulic_sawmill/`.
 
 ## Model
 
@@ -56,15 +57,15 @@ use a checkout matching the workspace API reference and viewer API 7 or later.
 The viewer’s 0.1.0 package is locally founded, not claimed to be published.
 
 ```sh
-solid build
-solid test --faceted
-solid test --exact
-solid snapshot -o evidence/isometric.png --autocenter --viewall --time 0.065
-solid export -o export --fps 30 --frames 480
-python scripts/check-browser.py
+solid build hydraulic_sawmill
+solid test hydraulic_sawmill --faceted
+solid test hydraulic_sawmill --exact
+solid snapshot hydraulic_sawmill -o models/hydraulic_sawmill/evidence/isometric.png --autocenter --viewall --time 0.065
+python scripts/gallery.py export hydraulic_sawmill
+python models/hydraulic_sawmill/scripts/check-browser.py
 ```
 
-Tests use the default root reference. All part classes live in `parts.py` and
+Commands use the gallery's named model. All part classes live in `parts.py` and
 are tested through the assembled root, where their joints are connected.
 See [design](docs/design.md) and [validation](docs/validation.md) for the
 reconstruction decisions and measured limits. Generated meshes, exports and
@@ -73,3 +74,6 @@ inspection images are ignored by Git.
 Historical reference: [Museo Leonardiano hydraulic saw](https://museoleonardiano.it/en/opera/hydraulic-saw/).
 The source and dimensions here are original; museum photographs and geometry
 are not redistributed.
+
+The [machine's OpenSpec](openspec/) was added retrospectively during gallery
+consolidation; its evidence does not claim to be the original planning cycle.

@@ -6,17 +6,20 @@ This is original educational CAD based on online historical material, not a dime
 
 ## Open the demonstration
 
-In the shop's project hub, choose **Leonardo → Automatic-weaving-loom**. The manifest selects the complete machine, with the `builder` profile.
+Vibecoded by Astra as part of the single [Leonardo gallery](../../README.md).
+Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only;
+see [LICENSE](../../LICENSE). The gallery's root registry names this model
+`automatic_weaving_loom`; this folder is no longer a separate repository.
 
-For the standalone presentation, from this project directory, with the workspace virtual environment on PATH:
+For the standalone presentation, from the **Leonardo repository root**, with the workspace virtual environment on PATH:
 
 ```sh
-solid build
-solid export -o export --fps 30 --frames 360
+solid build automatic_weaving_loom
+python scripts/gallery.py export automatic_weaving_loom
 python -m http.server 8765 --bind 127.0.0.1
 ```
 
-Open **http://127.0.0.1:8765/demo.html**. The model animates automatically, and the page explains the four stages beside the 3D viewer. Orbit, pan and zoom to inspect the mechanism. A plain viewer is also available at `/export/index.html`. The generated export is present locally and can be regenerated; serve it over HTTP, not `file://`.
+Open **http://127.0.0.1:8765/models/automatic_weaving_loom/demo.html**. The model animates automatically, and the page explains the four stages beside the 3D viewer. Orbit, pan and zoom to inspect the mechanism. A plain viewer is also available at `/export/automatic_weaving_loom/index.html`. Generate the export before opening it; serve it over HTTP, not `file://`.
 
 In this workspace the exact executable is `/home/asa/devel/libresolid-studio/.venv/bin/solid`; Python is in the same `bin/` directory. The code requires the installed declarative motion API, which follows the published solid-node 0.6.0 release. Installed distribution labels alone do not distinguish these local additions. The independently installed viewer is 0.1.0 (founded, not published), CadQuery 2.7.0 and molejo 0.2.0.
 
@@ -39,7 +42,7 @@ The cream and blue strands are alternate warp ends. The red spool carries the or
 
 ## What is built
 
-The primary source is [Automatic_weaving_loom.py](Automatic_weaving_loom/Automatic_weaving_loom.py). Its 118-node tree contains 11 rigid occurrences (10 distinct pieces), 81 flexible leaves, and the assemblies that connect them.
+The primary source is [model.py](model.py). Its 118-node tree contains 11 rigid occurrences (10 distinct pieces), 81 flexible leaves, and the assemblies that connect them.
 
 Read the construction from the ground up:
 
@@ -51,7 +54,7 @@ Read the construction from the ground up:
 6. `WarpEnd`, cloth strands and `WeftTail`: flexible yarn geometry.
 7. `AutomaticWeavingLoom`: phase relations, controls and complete assembly.
 
-For an isolated foundation view, use `solid build Automatic_weaving_loom/Automatic_weaving_loom.py:TimberFrame`. For the crank, use `solid build Automatic_weaving_loom/Automatic_weaving_loom.py:Crank --set eccentricity=18`. Rebuild the default root afterward. Driven subassemblies receive their coordinates from the complete machine.
+For an isolated foundation view, use `solid build models/automatic_weaving_loom/model.py:TimberFrame`. For the crank, use `solid build models/automatic_weaving_loom/model.py:Crank --set eccentricity=18`. Rebuild `automatic_weaving_loom` afterward. Driven subassemblies receive their coordinates from the complete machine.
 
 ## Dimensions and mechanical assumptions
 
@@ -70,19 +73,19 @@ X runs across the cloth, Y from the front cloth beam toward the rear warp beam, 
 | Spool / fingers | 0.3 mm vertical seating gap; fingers occupy alternating lateral lanes. |
 | Roller journals | Ø10 mm shafts in Ø10.8 mm bores. |
 
-`shed_lift` is the one build parameter: `solid build --set shed_lift=20`. The supported range is 16–20 mm. It changes the eccentric throw, heddle travel and yarn geometry together. The upper limit keeps the pin inside the slot; the lower limit preserves the illustrative shed clearance. Other dimensions are fixed for this reconstruction.
+`shed_lift` is the one build parameter: `solid build automatic_weaving_loom --set shed_lift=20`. The supported range is 16–20 mm. It changes the eccentric throw, heddle travel and yarn geometry together. The upper limit keeps the pin inside the slot; the lower limit preserves the illustrative shed clearance. Other dimensions are fixed for this reconstruction.
 
 The support test **grounds the timber frame as a fixture** and checks the moving rigid pieces against it. It does not certify freestanding stability, dynamics, friction, wear, wood strength or manufacturing tolerances. No geometry or machine safety claim should be inferred from the educational scale.
 
 ## Verification
 
 ```sh
-solid test --faceted
-solid test --exact
-solid test --exact --set shed_lift=16
-solid test --exact --set shed_lift=20
-solid snapshot -o snapshot.png --autocenter --viewall --time 0.25
-python scripts/inspect_demo.py
+solid test automatic_weaving_loom --faceted
+solid test automatic_weaving_loom --exact
+solid test automatic_weaving_loom --exact --set shed_lift=16
+solid test automatic_weaving_loom --exact --set shed_lift=20
+solid snapshot automatic_weaving_loom -o models/automatic_weaving_loom/snapshot.png --autocenter --viewall --time 0.25
+python models/automatic_weaving_loom/scripts/inspect_demo.py
 ```
 
 The last command requires Playwright with Chromium and the generated export. It creates an ephemeral localhost server, checks actual browser controls and playback, records `_evidence/browser-demo.png`, and shuts the server down.
@@ -102,4 +105,4 @@ Accessed 12 September 2026. No upstream CAD geometry or code was copied. The exa
 
 ## Project record
 
-Created with `solid new Automatic-weaving-loom`, retaining its normalized Python package and both integrity contracts. The generated outer directory was renamed to the requested `Automatic-weaving-loom` spelling and initialized as its own Git repository. OpenSpec change `demonstrate-leonardos-loom` records the research, design, behavioral specifications, implementation and verification. Planning commit: `39e5d98`. This repository is independent of the shop; no framework or shop files were changed.
+Originally created with `solid new Automatic-weaving-loom`, retaining both integrity contracts. The original independent repository and planning commit `39e5d98` were subsequently merged into the Leonardo gallery without rewriting history. Its OpenSpec change `demonstrate-leonardos-loom` still records the original research, design, behavioral specifications, implementation and verification. The source now lives directly in this machine folder. See the [consolidation record](../../docs/consolidation.md).

@@ -1,7 +1,8 @@
+# Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
 import numpy as np
 from solid_node.test import TestCase, testing_steps
 from solid_node.simulation import ScenarioTest
-from .Automatic_weaving_loom import AutomaticWeavingLoom
+from .model import AutomaticWeavingLoom
 
 
 class AutomaticWeavingLoomTest(TestCase):

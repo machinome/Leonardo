@@ -53,7 +53,7 @@ async function mount(name='whole') {
     const chosen = views[name];
     const factor = Math.max(1, 560 / stage.clientWidth);
     const view = {target:chosen.target, camera:chosen.camera.map((v,i) => chosen.target[i]+(v-chosen.target[i])*factor)};
-    viewer = await SolidNodeWidget.mount(stage, 'export/manifest.json', {
+    viewer = await SolidNodeWidget.mount(stage, '../../export/hydraulic_sawmill/manifest.json', {
       animation: 'external', driverControls: 'none', autoplay: false,
       time: phase / 1440, view, up: [0,0,1], fov: 37,
       ariaLabel: 'Interactive three-dimensional reconstruction of Leonardo’s hydraulic sawmill',

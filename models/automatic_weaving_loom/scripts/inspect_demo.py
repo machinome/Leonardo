@@ -1,4 +1,5 @@
 """Finite browser check against an ephemeral localhost server; no shop session."""
+# Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
 from functools import partial
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
@@ -7,7 +8,8 @@ import json
 
 from playwright.sync_api import sync_playwright, expect
 
-ROOT = Path(__file__).resolve().parents[1]
+MACHINE = Path(__file__).resolve().parents[1]
+ROOT = Path(__file__).resolve().parents[3]
 
 
 class QuietHandler(SimpleHTTPRequestHandler):
@@ -16,6 +18,7 @@ class QuietHandler(SimpleHTTPRequestHandler):
 
 
 def main():
+    (MACHINE / "_evidence").mkdir(exist_ok=True)
     server = ThreadingHTTPServer(("127.0.0.1", 0), partial(QuietHandler, directory=ROOT))
     Thread(target=server.serve_forever, daemon=True).start()
     errors = []
@@ -24,7 +27,7 @@ def main():
             browser = p.chromium.launch(headless=True)
             page = browser.new_page(viewport={"width": 1600, "height": 1000})
             page.on("pageerror", lambda error: errors.append(str(error)))
-            response = page.goto(f"http://127.0.0.1:{server.server_port}/demo.html", wait_until="networkidle")
+            response = page.goto(f"http://127.0.0.1:{server.server_port}/models/automatic_weaving_loom/demo.html", wait_until="networkidle")
             assert response.status == 200
             frame = page.frames[1]
             frame.get_by_text("Handoff", exact=True).click()
@@ -43,7 +46,7 @@ def main():
                               "inputs": frame.locator("input").evaluate_all(
                                   "els => els.map(e => ({type:e.type, value:e.value, title:e.title, aria:e.getAttribute('aria-label')}))"),
                               "errors": errors}, indent=2))
-            page.screenshot(path=str(ROOT / "_evidence" / "browser-demo.png"))
+            page.screenshot(path=str(MACHINE / "_evidence" / "browser-demo.png"))
             assert not errors, errors
             browser.close()
     finally:

@@ -7,9 +7,9 @@ import http.server
 from pathlib import Path
 import shutil
 import subprocess
-import zipfile
+import sys
 
-ROOT = Path(__file__).resolve().parents[1]
+ROOT = Path(__file__).resolve().parents[3]
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
@@ -21,22 +21,14 @@ def main():
         solid = shutil.which('solid')
         if solid is None:
             raise SystemExit('Activate the Python environment containing solid-node and its viewer extra.')
-        subprocess.run([solid, 'build'], cwd=ROOT, check=True)
-        subprocess.run([solid, 'export', '-o', 'export', '--frames', '480', '--fps', '30'], cwd=ROOT, check=True)
-        # Ship the complete authored project, excluding generated or private state.
-        source_files = ['LICENSE', 'README.md', 'pyproject.toml', '.gitignore', 'index.html', 'exhibit.js', 'exhibit.css']
-        for folder in ('Leonardo_hydraulic_sawmill', 'docs', 'scripts'):
-            source_files.extend(str(p.relative_to(ROOT)) for p in (ROOT / folder).rglob('*')
-                                if p.is_file() and '__pycache__' not in p.parts)
-        with zipfile.ZipFile(ROOT/'export/source.zip', 'w', zipfile.ZIP_DEFLATED) as archive:
-            for name in source_files:
-                archive.write(ROOT/name, f'Leonardo-hydraulic-sawmill/{name}')
-        print('Browser export and corresponding source: export/', flush=True)
+        subprocess.run([sys.executable, str(ROOT / 'scripts/gallery.py'),
+                        'export', 'hydraulic_sawmill'], cwd=ROOT, check=True)
+        print('Browser export and committed source: export/hydraulic_sawmill/', flush=True)
     if args.build_only:
         return
     handler = functools.partial(http.server.SimpleHTTPRequestHandler, directory=str(ROOT))
     server = http.server.ThreadingHTTPServer(('127.0.0.1', args.port), handler)
-    print(f'Leonardo’s hydraulic sawmill: http://127.0.0.1:{args.port}', flush=True)
+    print(f'Leonardo’s hydraulic sawmill: http://127.0.0.1:{args.port}/models/hydraulic_sawmill/', flush=True)
     try:
         server.serve_forever()
     except KeyboardInterrupt:

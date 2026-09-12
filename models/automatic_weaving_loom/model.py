@@ -4,6 +4,7 @@ The eccentric/yoke drive is geometrically captured. Carrier and reed laws
 represent the synchronized transmission; intermediate gearing, latches and
 yarn/contact dynamics are not reconstructed.
 """
+# Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
 import cadquery as cq
 from molejo import Shape, Circle, Line, Spline, P
 from solid_node.node import AssemblyNode, FusionNode, CadQueryNode, MolejoNode
