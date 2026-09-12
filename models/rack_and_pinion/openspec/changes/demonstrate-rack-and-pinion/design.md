@@ -10,9 +10,10 @@ was retrieved on 12 September 2026. Its Rack and pinion record describes
 a crank-driven vertical rack ending in a hook and cites Codex Atlanticus
 f.998r. It credits its museum reconstruction to Fausto Colombo, Giovanni
 Sacchi and Giorgio Valentini (1983). These establish the interpretation,
-not historical dimensions or invention priority. The attempted object
-URL `/en/opera/rack-and-pinion/` is checked separately; retain the catalogue
-reference if that page does not expose the same record.
+not historical dimensions or invention priority. The object's own
+[English page](https://museoleonardiano.it/en/opera/rack-and-pinion/)
+was also retrieved and verified: its canonical Italian path is
+`/opera/pignone-a-cremagliera/`. The folio image itself was not interpreted.
 
 ## Goals / Non-Goals
 
@@ -83,3 +84,13 @@ Export committed source archives. No push or publication.
 
 No pilot decision remains within the brief. Exact tooth clearance and
 hook-eye seating are engineering measurements to resolve during the build.
+
+## Implementation evidence and ordinary refinements
+
+The initial rigid checks exposed a weight intersecting the stand, a rib
+using the rack's running gap, and a tight eye. The weight is 8*m by 6*m
+by 8*m; its perpendicular eye has outer radius 3.2*m, inner radius 1.8*m,
+and centre at local z=-60.1*m. The rack rib fits inside the backing width.
+Snapshots then moved the right-hand posts to x=28*m and extended the
+guides to them, revealing the hook and load in the isometric view. These
+are reconstruction refinements within the commissioned mechanism.

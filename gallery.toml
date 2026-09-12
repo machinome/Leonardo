@@ -32,6 +32,14 @@ fps = 30
 exhibit = "models/cam_hammer/index.html"
 browser_check = ["models/cam_hammer/scripts/check_browser.py", "--url", "{base_url}/models/cam_hammer/"]
 
+[models.rack_and_pinion]
+title = "Rack and pinion"
+directory = "models/rack_and_pinion"
+frames = 361
+fps = 30
+exhibit = "models/rack_and_pinion/index.html"
+browser_check = ["models/rack_and_pinion/scripts/check_browser.py", "--url", "{base_url}/models/rack_and_pinion/"]
+
 [[queue]]
 id = "010-cam-hammer"
 kind = "machine"

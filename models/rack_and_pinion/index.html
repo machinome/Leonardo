@@ -1,0 +1,68 @@
+<!doctype html>
+<!-- Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only. -->
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Turn a pinion, lift a load. Astra's original interactive rack lift, a solid-node demonstration inspired by Leonardo's study.">
+<link rel="icon" href="data:,">
+<title>Rack and pinion · Leonardo gallery</title>
+<style>
+  * { box-sizing: border-box; }
+  body { margin: 0; background: #252c2c; color: #f2eadc; font: 16px/1.6 system-ui, sans-serif; }
+  a { color: #dfbd7e; text-underline-offset: 4px; }
+  header { padding: 25px 36px 28px; border-bottom: 1px solid #ffffff24; }
+  .overline { color: #d3b27d; font-size: 11px; letter-spacing: .18em; text-transform: uppercase; }
+  h1 { font: normal clamp(32px, 4vw, 56px)/1.12 Georgia, serif; margin: 12px 0; }
+  header p { margin: 0; color: #c0cbc7; font-size: 14px; }
+  main { display: grid; grid-template-columns: minmax(0,1fr) 340px; }
+  .machine { min-width: 0; background: #f4f0e7; }
+  iframe { display: block; width: 100%; height: min(78vh, 850px); min-height: 620px; border: 0; }
+  .caption { margin: 0; padding: 12px 24px; font-size: 12px; color: #455351; border-top: 1px solid #3c403324; }
+  aside { padding: 28px; }
+  h2 { font: normal 27px/1.2 Georgia, serif; margin: 9px 0 24px; }
+  ol { list-style: none; padding: 0; margin: 0; counter-reset: stages; }
+  li { counter-increment: stages; padding: 15px 0 18px 33px; position: relative; border-top: 1px solid #ffffff20; }
+  li::before { content: "0" counter(stages); position: absolute; left: 0; color: #d3b27d; font-size: 12px; top: 18px; }
+  li strong { font-size: 15px; font-weight: 600; }
+  li p, aside p { color: #c5cfca; font-size: 13px; margin: 6px 0 0; }
+  .limit { padding: 18px 0; border-top: 1px solid #ffffff20; }
+  footer { padding: 22px 36px; font-size: 12px; color: #adbab4; border-top: 1px solid #ffffff24; }
+  footer p { margin: 4px 0; }
+  @media (max-width: 900px) {
+    header { padding: 22px; }
+    main { grid-template-columns: 1fr; }
+    iframe { height: 600px; min-height: 0; }
+    aside { padding: 25px 22px; }
+    footer { padding: 20px 22px; }
+  }
+</style>
+<header>
+  <div class="overline">Leonardo gallery / 04 / Rack and pinion</div>
+  <h1>Turning becomes lifting.</h1>
+  <p>A curved tooth meets a straight rack. Follow the crank, the hook, and the rising weight.</p>
+</header>
+<main>
+  <section class="machine" aria-label="Interactive rack lift">
+    <iframe src="../../export/rack_and_pinion/index.html" title="Interactive rack-and-pinion solid-node viewer" allow="fullscreen"></iframe>
+    <p class="caption">Drag to orbit · Scroll to zoom · Set run to 0 and move phase to inspect the lift by hand.</p>
+  </section>
+  <aside>
+    <div class="overline">One turn / A measured rise</div>
+    <h2>Follow the teeth.</h2>
+    <ol>
+      <li><strong>Bottom · phase 0°</strong><p>The rack rests at the lower demonstration position. Its hook carries the weight through a separate lifting eye.</p></li>
+      <li><strong>Mid-lift · phase 90°</strong><p>The crank has turned 68.75°. The 30 mm pitch radius converts that turn into 36 mm of vertical travel.</p></li>
+      <li><strong>Top · phase 180°</strong><p>The load has risen 72 mm. The crank reverses smoothly and lowers it again. The guides keep the finite rack engaged.</p></li>
+    </ol>
+    <p class="limit">Choose <strong>Run</strong> and play the timeline for the complete lift and return. Stage buttons hold named poses. Phase describes the up/down cycle, not the crank angle. Intermediate run settings blend that cycle with the selected static pose, reducing its excursion. Every setting loops continuously.</p>
+    <div class="overline">A study, not a load-rated tool</div>
+    <p>These dimensions and modern involute teeth are Astra's original educational choices. Positive backlash leaves space for the teeth to reverse. Holding the load requires torque at the crank: no brake, lifting capacity, friction or dynamics is simulated. The timber frame is a grounded fixture; joinery is simplified.</p>
+    <p class="limit">The <a href="https://museoleonardiano.it/en/opera/rack-and-pinion/">Museo Leonardiano record</a> links this crank, rack and hook to Leonardo's Codex Atlanticus, f.998r. Its 1983 reconstruction is a historical reference, not the geometry shown here. No invention priority is claimed.</p>
+    <p><a href="README.md">Design &amp; measured evidence</a> · <a href="../../export/rack_and_pinion/source.zip">Download gallery source</a></p>
+  </aside>
+</main>
+<footer>
+  <p>A <a href="https://solid-node.readthedocs.io/">solid-node demonstration</a> · Astra's single-prompt designs · <a href="https://github.com/LibreSolid/Leonardo">Leonardo gallery on GitHub</a> (publication pending)</p>
+  <p>Copyright © 2026 Luis Henrique Cassis Fagundes · <a href="../../LICENSE">AGPL-3.0-only</a></p>
+</footer>
+</html>
