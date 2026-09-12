@@ -1,0 +1,32 @@
+<!doctype html>
+<!-- Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only. -->
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:,">
+<title>Compound pulley · interactive model</title>
+<style>html,body,#viewer { margin:0; width:100%; height:100%; }</style>
+<div id="viewer"></div>
+<script src="../../export/pulley_block/solid-widget.js"></script>
+<script>
+  // The shipped viewer renders the exported manifest without modification.
+  // A modest front angle exposes all four rope lanes and the effort grip.
+  SolidNodeWidget.mount(document.getElementById("viewer"),
+    "../../export/pulley_block/manifest.json", {
+      animation: "inline",
+      view: { camera: [80, -385, 254], target: [0, 0, 155] },
+      ariaLabel: "Three-part pulley tackle"
+    }).then(handle => {
+      // Read committed driver values even while a numeric field is being
+      // edited or the visitor focuses another assembly in the tree.
+      window.readPulleyState = () => {
+        const timeline = document.querySelector('input[type="range"]');
+        return {phase: handle.driver("phase"), run: handle.driver("run"),
+          time: Number(timeline.value) / Number(timeline.max)};
+      };
+    }).catch(error => {
+      document.getElementById("viewer").textContent = "The model could not load: " + error.message;
+      console.error(error);
+    });
+</script>
+</html>

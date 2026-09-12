@@ -40,6 +40,14 @@ fps = 30
 exhibit = "models/rack_and_pinion/index.html"
 browser_check = ["models/rack_and_pinion/scripts/check_browser.py", "--url", "{base_url}/models/rack_and_pinion/"]
 
+[models.pulley_block]
+title = "Compound pulley"
+directory = "models/pulley_block"
+frames = 361
+fps = 30
+exhibit = "models/pulley_block/index.html"
+browser_check = ["models/pulley_block/scripts/check_browser.py", "--url", "{base_url}/models/pulley_block/"]
+
 [[queue]]
 id = "010-cam-hammer"
 kind = "machine"

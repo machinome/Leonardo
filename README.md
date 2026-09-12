@@ -9,8 +9,8 @@ Copyright (C) 2026 Luis Henrique Cassis Fagundes.
 All original gallery code, CAD and documentation are **AGPL-3.0-only**;
 see [LICENSE](LICENSE) and [NOTICE](NOTICE).
 
-This is one repository with several named models. Four exhibits are
-implemented; two more machines and the final static Sphinx site are
+This is one repository with several named models. Five exhibits are
+implemented; one more machine and the final static Sphinx site are
 in the [build queue](QUEUE.md). The complete public site is not built yet.
 Intended source home: [LibreSolid/Leonardo on GitHub](https://github.com/LibreSolid/Leonardo)
 (publication is pending; this URL is a recorded working assumption).
@@ -21,6 +21,7 @@ Intended source home: [LibreSolid/Leonardo on GitHub](https://github.com/LibreSo
 | `automatic_weaving_loom` | Alternating sheds, a supported weft handoff and beat-up | [Machine](models/automatic_weaving_loom/README.md) · [OpenSpec](models/automatic_weaving_loom/openspec/) |
 | `cam_hammer` | Cam contact, lever lift, released drop and anvil strike | [Machine](models/cam_hammer/README.md) · [OpenSpec](models/cam_hammer/openspec/) |
 | `rack_and_pinion` | Crank rotation, engaged teeth, guided lift and a hooked weight | [Machine](models/rack_and_pinion/README.md) · [OpenSpec](models/rack_and_pinion/openspec/) |
+| `pulley_block` | Three supporting rope spans, captured sheaves and 3:1 effort/load travel | [Machine](models/pulley_block/README.md) · [OpenSpec](models/pulley_block/openspec/) |
 
 These are original educational interpretations, not dimensioned replicas.
 Each machine identifies its historical sources, reconstruction choices and
@@ -29,6 +30,8 @@ the loom does not solve yarn tension or accumulate cloth.
 The hammer's return is prescribed; gravity and impact are not simulated.
 The rack lift demonstrates travel and engagement; holding torque, a brake
 and lifting capacity are outside its scope.
+The pulley preserves rope length and measures displacement; tension,
+efficiency, termination strength and load rating are not solved.
 
 ## Build and inspect
 
@@ -48,6 +51,7 @@ solid build hydraulic_sawmill
 solid build automatic_weaving_loom
 solid build cam_hammer
 solid build rack_and_pinion
+solid build pulley_block
 python scripts/gallery.py test
 python scripts/gallery.py export
 python scripts/check_browsers.py
@@ -57,7 +61,8 @@ python -m http.server 8769 --bind 127.0.0.1
 Open the [sawmill](http://127.0.0.1:8769/models/hydraulic_sawmill/) or
 [loom](http://127.0.0.1:8769/models/automatic_weaving_loom/demo.html) or
 [cam hammer](http://127.0.0.1:8769/models/cam_hammer/) or
-[rack lift](http://127.0.0.1:8769/models/rack_and_pinion/).
+[rack lift](http://127.0.0.1:8769/models/rack_and_pinion/) or
+[compound pulley](http://127.0.0.1:8769/models/pulley_block/).
 Their plain viewers are at `export/<model>/index.html`.
 `gallery.py build|test|export` handles all registered models, or accepts
 model names to select a subset. Tests default to the exact kernel;

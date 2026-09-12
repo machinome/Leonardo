@@ -66,11 +66,15 @@ measured, including perturbations bracketing running play. Independent
 mesh-ring centres recover the complete flexible route; segment lengths and
 arc radii recover its length without using the model's kinematic helper.
 Full-root rigid contracts remain active; flexible collisions, routing and
-attachments receive separate tests. Deliberately replace the effort travel
-ratio with -2 to prove the geometry/length tests detect a wrong reeving law.
+attachments receive separate tests. Deliberately replace the rope's local
+effort-end height coefficient -4 with -3 to prove the geometry/length tests
+detect a wrong reeving law; the rigid grip still travels the correct distance.
 
-The exhibit embeds the real solid export, with length readouts derived from
-the viewer's actual state/geometry, not a second machine implementation.
+The exhibit embeds the real solid export. Read-only explanatory arithmetic
+derives length labels from the viewer's displayed phase/run/timeline state;
+the browser check compares those labels with independently measured Python
+meshes. No JavaScript changes CAD or duplicates the viewer. During playback
+labels are rounded to the displayed timeline frame and say so visibly.
 Low/Mid/High/Run remain native instructions. Browser smoke verifies assets,
 controls, motion, pose return and desktop/narrow layouts.
 

@@ -1,0 +1,140 @@
+<!doctype html>
+<!-- Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only. -->
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Pull three lengths, lift one. An interactive solid-node tackle by Astra, inspired by Leonardo's pulley studies.">
+<link rel="icon" href="data:,">
+<title>The compound pulley · Leonardo gallery</title>
+<style>
+  * { box-sizing: border-box; }
+  body { margin: 0; background: #252d2d; color: #f2eadc; font: 16px/1.6 system-ui, sans-serif; }
+  a { color: #dfbd7e; text-underline-offset: 4px; }
+  header { padding: 26px 36px; border-bottom: 1px solid #ffffff24; }
+  .overline { color: #d8b780; font-size: 11px; letter-spacing: .17em; text-transform: uppercase; }
+  h1 { font: normal clamp(32px, 4vw, 56px)/1.1 Georgia, serif; margin: 12px 0; }
+  header p { margin: 0; color: #c1cec7; font-size: 14px; }
+  main { display: grid; grid-template-columns: minmax(0,1fr) 350px; }
+  .machine { min-width: 0; background: #f4f0e7; }
+  iframe { display: block; width: 100%; height: min(86vh, 920px); min-height: 700px; border: 0; }
+  .caption { margin: 0; padding: 14px 25px; color: #44534d; font-size: 12px; border-top: 1px solid #3c403324; }
+  .caption a { color: #715421; }
+  aside { padding: 26px; }
+  h2 { font: normal 28px/1.2 Georgia, serif; margin: 8px 0 12px; }
+  aside p { color: #c5d0c9; font-size: 13px; margin: 8px 0 18px; }
+  .meters { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 20px 0; }
+  .meters div { border-top: 1px solid #ffffff30; padding-top: 8px; }
+  .meters span { display: block; font-size: 11px; color: #c5d0c9; }
+  .meters output { font: 32px/1.4 Georgia, serif; color: #edc17e; }
+  .meters small { font: 12px system-ui; }
+  .key { width: 100%; height: 160px; }
+  table { border-collapse: collapse; width: 100%; font-size: 12px; }
+  th, td { padding: 5px 0; border-bottom: 1px solid #ffffff18; text-align: left; font-weight: normal; }
+  td:last-child { text-align: right; font-variant-numeric: tabular-nums; }
+  th { color: #b2c1b8; font-size: 10px; text-transform: uppercase; letter-spacing: .08em; }
+  .limit { margin-top: 20px; padding-top: 18px; border-top: 1px solid #ffffff24; }
+  .story { padding: 30px 36px; display: grid; grid-template-columns: 1fr 1fr; gap: 44px; border-top: 1px solid #ffffff24; }
+  .story p { font-size: 14px; color: #c5d0c9; margin: 10px 0; }
+  .story h2 { font-size: 25px; }
+  footer { padding: 22px 36px; font-size: 12px; color: #aebdb3; border-top: 1px solid #ffffff24; }
+  footer p { margin: 4px 0; }
+  @media (max-width: 900px) {
+    header { padding: 23px; }
+    main, .story { grid-template-columns: 1fr; }
+    iframe { height: 620px; min-height: 0; }
+    aside { padding: 25px 23px; }
+    .story { padding: 25px 23px; gap: 20px; }
+    footer { padding: 20px 23px; }
+  }
+</style>
+<header>
+  <div class="overline">Leonardo gallery / 05 / The compound pulley</div>
+  <h1>Pull three lengths. Lift one.</h1>
+  <p>One continuous rope. Three supporting spans. Follow where the distance goes.</p>
+</header>
+<main>
+  <section class="machine" aria-label="Interactive compound pulley">
+    <iframe id="exhibit" src="viewer.html" title="Interactive pulley-block solid-node viewer" allow="fullscreen"></iframe>
+    <p class="caption">Drag to orbit · Scroll to zoom · Choose Low, Mid or High to hold a pose.<br>
+      Choose Run and play the timeline to raise and lower the load.
+      <a href="../../export/pulley_block/">Open full-size model ↗</a></p>
+  </section>
+  <aside>
+    <div class="overline">A trade in distance</div>
+    <h2>Three spans share the rise.</h2>
+    <p>Raise the moving block by 1 mm: A, B and C each shorten by 1 mm.
+      The effort end must take up all 3 mm. The rope itself keeps its length.</p>
+    <div class="meters" aria-label="Current displacement">
+      <div><span>LOAD RISE ↑</span><output id="rise">—</output><small> mm</small></div>
+      <div><span>EFFORT PULL ↓</span><output id="pull">—</output><small> mm</small></div>
+    </div>
+    <svg class="key" viewBox="0 0 300 170" role="img" aria-labelledby="route-title">
+      <title id="route-title">Reeving key: A rises from the moving anchor, B descends to the moving sheave, C rises to the second fixed sheave, D descends to the effort grip.</title>
+      <g fill="none" stroke="#82918a" stroke-width="1.5">
+        <circle cx="85" cy="43" r="24"/><circle cx="205" cy="43" r="24"/>
+        <circle cx="145" cy="108" r="24"/>
+        <path d="M85 36v14m-7-7h14m113-7v14m-7-7h14M145 101v14m-7-7h14"/>
+      </g>
+      <path d="M55 112V43a30 30 0 0 1 60 0v65a30 30 0 0 0 60 0V43a30 30 0 0 1 60 0v103" fill="none" stroke="#e4a155" stroke-width="3"/>
+      <circle cx="55" cy="112" r="5" fill="#8ba7a0"/>
+      <circle cx="235" cy="146" r="5" fill="#e4a155"/>
+      <g fill="#f0d4a8" font-family="system-ui" font-size="13">
+        <text x="34" y="83">A</text><text x="124" y="83">B</text>
+        <text x="153" y="83">C</text><text x="248" y="83">D</text>
+      </g>
+      <g fill="#b6c6bc" font-family="system-ui" font-size="10">
+        <text x="26" y="134">anchor</text><text x="117" y="159">moving block</text>
+      </g>
+    </svg>
+    <table aria-label="Current rope lengths">
+      <thead><tr><th>Rope section</th><th>Length</th></tr></thead>
+      <tbody>
+        <tr><td>A · anchor to first fixed</td><td><output id="span-a">—</output> mm</td></tr>
+        <tr><td>B · first fixed to moving</td><td><output id="span-b">—</output> mm</td></tr>
+        <tr><td>C · moving to second fixed</td><td><output id="span-c">—</output> mm</td></tr>
+        <tr><td>D · second fixed to effort</td><td><output id="span-d">—</output> mm</td></tr>
+        <tr><td>Four wraps + secured tail</td><td>188.2 mm</td></tr>
+        <tr><td>Whole rope · unchanged</td><td><output id="rope-total">—</output> mm</td></tr>
+      </tbody>
+    </table>
+    <p id="readout-note">Lengths follow the selected pose; during playback they are rounded to the displayed timeline frame.</p>
+    <noscript><p>Enable JavaScript to operate the model. Low → Mid → High raises the load 0 → 20 → 40 mm and pulls the effort 0 → 60 → 120 mm.</p></noscript>
+    <p class="limit"><strong>Inspect by hand:</strong> set run to 0, then move phase.
+      At 0° the load is Low, 90° is Mid and 180° is High. The second half
+      of the cycle lowers it again. Intermediate run values blend the selected
+      pose with the cycle; every setting returns smoothly.</p>
+  </aside>
+</main>
+<section class="story" aria-label="History and reconstruction">
+  <div>
+    <div class="overline">From Leonardo's studies</div>
+    <h2>A small window into a larger idea.</h2>
+    <p>The <a href="https://museoleonardiano.it/opera/tirare-composto/">Museo Leonardiano's
+      Tirare composto</a> links its 33-pulley reconstruction to Madrid I, f.36v.
+      This original three-part tackle is a deliberately reduced teaching model
+      of the principle, not a replica of that drawing.</p>
+    <p>The staggered sheaves, dimensions, frame, pin and socket terminations
+      are Astra's educational choices. Orbit the model to inspect the small
+      return wrap at the moving anchor and the load's separate lifting eye.</p>
+    <p><a href="README.md">Design, sources &amp; measured evidence</a> ·
+      <a href="../../export/pulley_block/source.zip">Download gallery source</a></p>
+  </div>
+  <div>
+    <div class="overline">What the model demonstrates</div>
+    <h2>Geometry, with its limits visible.</h2>
+    <p>The timber frame is the grounded support fixture. The rope is prescribed
+      as taut, the effort socket represents a secured termination, and the
+      suspended block remains upright. Force balance, tension, sway, knot or
+      crimp strength, friction and efficiency are not solved.</p>
+    <p>The 3:1 result is a measured displacement relationship. Ideal equal rope
+      tension would suggest a force advantage, but no load rating or lifting
+      capacity is claimed. This exhibit is not a construction plan for rigging.</p>
+  </div>
+</section>
+<footer>
+  <p>A <a href="https://solid-node.readthedocs.io/">solid-node demonstration</a> ·
+    Astra's single-prompt designs · <a href="https://github.com/LibreSolid/Leonardo">Leonardo gallery on GitHub</a> (publication pending)</p>
+  <p>Copyright © 2026 Luis Henrique Cassis Fagundes · <a href="../../LICENSE">AGPL-3.0-only</a></p>
+</footer>
+<script src="readouts.js"></script>
+</html>
