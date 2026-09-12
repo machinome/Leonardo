@@ -15,5 +15,5 @@
 
 ## 3. Completion
 
-- [ ] 3.1 Commit verified source and record dependency revisions, source reference, commands, outcomes and limits.
-- [ ] 3.2 Sync specs, archive the completed change, update README and mark item 040 done in the local completion commit.
+- [x] 3.1 Commit verified source and record dependency revisions, source reference, commands, outcomes and limits.
+- [x] 3.2 Sync specs, archive the completed change, update README and mark item 040 done in the local completion commit.

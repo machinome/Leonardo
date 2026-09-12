@@ -2,9 +2,12 @@
 
 <!-- Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only. -->
 
-Implementation is being verified under queue item 040 and planning commit
-`cbed3e9`. This record will receive final results and the tested source revision
-before archival. Exact session prompt: “See the projects/Leonardo. Build next project.”
+Completed 12 September 2026 under queue item 040 and planning commit `cbed3e9`.
+Tested model, companion tests, exhibit and browser-check source:
+`b144465116d2302c6e4fc293f2b2d0728bdd8d34`. The later completion commit only
+records that revision, archives the cycle and updates queue status; it does not
+change the tested mechanism or UI. Exact session prompt:
+“See the projects/Leonardo. Build next project.”
 
 ## Final mechanical regression
 
@@ -136,6 +139,10 @@ there were no console, failed-request or asset errors.
 checks, including the crane's final camera layout, within the runner's unchanged
 180-second per-exhibit limit. Inspected selected final captures:
 [desktop](browser-desktop.png) and [narrow](browser-narrow.png).
+After committing `b144465`, regenerated the crane export and verified its
+ZIP integrity, revision marker, and byte-for-byte source equality for the model,
+tests, exhibit, viewer host and finite browser check. Generated exports and
+archives remain ignored and contain committed source, not private working files.
 
 ## Environment
 

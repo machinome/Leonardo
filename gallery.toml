@@ -85,7 +85,7 @@ id = "040-swivel-crane"
 kind = "machine"
 model = "swivel_crane"
 title = "The swivel crane: place a stone in three dimensions"
-status = "in_progress"
+status = "done"
 brief = "QUEUE.md#040-swivel-crane"
 
 [[queue]]
