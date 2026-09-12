@@ -37,4 +37,20 @@ Millimetres. X is across the cloth; Y runs from the front cloth beam toward the 
 
 ## Findings
 
-Pending implementation and measurement; add actual evidence here at closeout.
+The complete implementation and verification are recorded in
+`docs/verification.md`. The handwheel needed swept clearance in a lower rail;
+the carrier needed interleaved support fingers; the reed needed a timber
+bearer and close-running foot channels. Those findings were corrected in the
+project's geometry while retaining the whole-model integrity contracts.
+
+Support is tested with the timber frame explicitly grounded as a fixture;
+the inferred-ground check reported an unbalanced-frame verdict at an
+intermediate pose, and freestanding stability is not claimed. No moving
+rigid part is exempted from the grounded support contract.
+
+The root's `shed_lift` parameter drives both eccentric throw and heddle/yarn
+motion, guarded at 16–20 mm. Exact regression passes at 16, 18 and 20 mm;
+five code mutations were detected and reverted. The inspected publication
+has both drivers, six instructions, 11 rigid occurrences and 81 flexible
+leaves. The standalone browser demo also exercises real stage controls and
+automatic playback successfully. No framework changes were necessary.
