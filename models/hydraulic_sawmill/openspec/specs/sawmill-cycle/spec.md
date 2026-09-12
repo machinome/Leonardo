@@ -7,22 +7,28 @@ Demonstrate a crank-driven saw stroke and synchronized timber feed in the existi
 ## Requirements
 
 ### Requirement: Connected reciprocating saw
-The sawmill SHALL show a waterwheel and keyed shaft turning a crank whose connected rod moves a guided saw sash through a 48 mm stroke.
+The sawmill SHALL show a waterwheel and keyed shaft turning a crank whose
+connected rod moves a guided saw sash through twice the crank throw, with
+the blade held at both ends and the journals retained.
 
 #### Scenario: A turn of the wheel
 - **WHEN** a full wheel revolution is inspected
-- **THEN** the sash traverses both dead centers, the crank pin stays captured by the rod, and the sash stays inside its guides without rigid interpenetration.
+- **THEN** the sash traverses both dead centers, the crank pin stays captured
+  by the rod, and the sash stays inside its guides without rigid interpenetration.
 
 ### Requirement: Indexed timber feed
-The carriage SHALL dwell on the cutting downstroke and advance 8 mm during the return, completing a 32 mm advance over the four-cycle demonstration.
+The carriage SHALL dwell on the cutting downstroke and advance by one ratchet
+tooth's rope take-up during the return, completing four increments in a pass.
 
 #### Scenario: Cutting and return
-- **WHEN** the phase advances through 0, 180 and 360 degrees
-- **THEN** the carriage dwells between the first two poses and is 8 mm farther forward at the last pose.
+- **WHEN** phase advances through 0, 180 and 360 degrees
+- **THEN** the carriage dwells between the first two poses and advances by
+  the rope take-up corresponding to one tooth at the last pose.
 
 #### Scenario: Four-cycle pass
 - **WHEN** the pass reaches 1440 degrees
-- **THEN** the carriage has advanced 32 mm and the repeating presentation identifies its carriage reset.
+- **THEN** the carriage has advanced four increments and the repeating
+  presentation identifies its carriage reset as a replay operation.
 
 ### Requirement: Cleared blade path
 The blade SHALL remain clear of both halves of the pre-slotted timber throughout the demonstration.
@@ -30,4 +36,3 @@ The blade SHALL remain clear of both halves of the pre-slotted timber throughout
 #### Scenario: Inspect the kerf
 - **WHEN** the saw cycle is sampled at the supported kerf boundary
 - **THEN** the blade does not intersect either timber half.
-

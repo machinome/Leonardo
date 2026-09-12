@@ -2,43 +2,52 @@
 'use strict';
 const $ = id => document.getElementById(id);
 const views = {
-  whole: {camera: [620,-910,630], target: [0,-30,200]},
-  drive: {camera: [360,-660,320], target: [0,-120,170]},
-  saw: {camera: [335,-430,405], target: [-5,0,349]},
-  feed: {camera: [515,470,495], target: [200,35,330]},
+  whole: {camera: [940,-1260,940], target: [0,-20,290]},
+  drive: {camera: [330,-630,300], target: [0,-135,145]},
+  saw: {camera: [335,-470,505], target: [0,0,445]},
+  feed: {camera: [180,720,480], target: [-105,115,337]},
 };
 let viewer, phase = 0, playing = !matchMedia('(prefers-reduced-motion: reduce)').matches;
-let revealed = false, mounting = false, previousTime;
+let revealed = false, mounting = false, previousTime, measurements, resetUntil = 0;
 let currentView = 'whole';
 const stage = $('stage');
 const controls = document.querySelectorAll('button, input, select');
-const rad = Math.PI / 180;
-const height = a => 24 * Math.cos(a * rad) + Math.sqrt(146 ** 2 - (24 * Math.sin(a * rad)) ** 2);
-const curve = Array.from({length:121}, (_,i) => `${i?'L':'M'}${i*280/120},${14+(170-height(i*3))*56/48}`).join(' ');
-$('stroke-curve').setAttribute('d', curve);
+// This table is measured from the Python CAD. It changes labels only;
+// solid-node's exported relations drive every solid and the flexible rope.
+function reading(angle) {
+  const x = Math.max(0,Math.min(360,angle)) / measurements.step;
+  const i = Math.min(measurements.rows.length-2, Math.floor(x));
+  return measurements.rows[i].map((v,j) => v+(measurements.rows[i+1][j]-v)*(x-i));
+}
+function status() {
+  $('status').textContent = performance.now() < resetUntil
+    ? 'REPLAY RESET · CARRIAGE RETURNED'
+    : playing ? 'THE MILL IS RUNNING' : 'PAUSED FOR A CLOSER LOOK';
+}
 
 function setPlaying(value) {
   playing = value;
   $('play').textContent = playing ? 'Ⅱ' : '▶';
   $('play').setAttribute('aria-label', playing ? 'Pause animation' : 'Play animation');
-  $('status').textContent = playing ? 'THE MILL IS RUNNING' : 'PAUSED FOR A CLOSER LOOK';
+  status();
 }
 function pose() {
-  if (!viewer) return;
+  if (!viewer || !measurements) return;
   viewer.setTime(phase / 1440);
   $('timeline').value = phase;
   const a = phase % 360;
-  const q = (phase - Math.asin(Math.sin((phase - 90) * rad)) / rad - 90) / 360;
-  const feed = 8 * (q - Math.sin(360*q*rad)/(2*Math.PI));
+  const [drop,increment] = reading(a);
+  const feed = Math.floor(phase/360)*measurements.feed_per_turn+increment;
   $('angle').textContent = `${Math.round(a)}°`;
   $('feed').innerHTML = `${feed.toFixed(1)} <i>mm</i>`;
   $('cycle').textContent = `${String(Math.min(4,Math.floor(phase/360)+1)).padStart(2,'0')} / 04`;
   $('stroke-label').textContent = a < 180 ? 'CUTTING STROKE' : 'RETURN & FEED';
   $('trace-dot').setAttribute('cx', a*280/360);
-  $('trace-dot').setAttribute('cy', 14+(170-height(a))*56/48);
+  $('trace-dot').setAttribute('cy', 14+drop*56/48);
+  status();
 }
 function applyReveal() {
-  const names = new Set(['timber_structure','foundation','flume_water','tailrace','plaque']);
+  const names = new Set(['timber_structure','foundation','channel','water']);
   const walk = node => { if (names.has(node.name)) viewer.setVisible(node.path, !revealed); node.children.forEach(walk); };
   walk(viewer.assembly());
   $('reveal').setAttribute('aria-pressed',String(revealed));
@@ -49,6 +58,13 @@ async function mount(name='whole') {
   mounting = true;
   controls.forEach(c => c.disabled = true);
   try {
+    if (!measurements) {
+      const response = await fetch('readouts.json');
+      if (!response.ok) throw new Error('CAD measurement table unavailable');
+      measurements = await response.json();
+      const curve = Array.from({length:121}, (_,i) => `${i?'L':'M'}${i*280/120},${14+reading(i*3)[0]*56/48}`).join(' ');
+      $('stroke-curve').setAttribute('d', curve);
+    }
     if (viewer) viewer.dispose();
     const chosen = views[name];
     const factor = Math.max(1, 560 / stage.clientWidth);
@@ -76,7 +92,7 @@ async function mount(name='whole') {
   }
 }
 $('play').addEventListener('click', () => setPlaying(!playing));
-$('reset').addEventListener('click', () => {phase=0;pose()});
+$('reset').addEventListener('click', () => {phase=0;resetUntil=performance.now()+1800;pose()});
 $('timeline').addEventListener('input', e => {setPlaying(false);phase=Number(e.target.value);pose()});
 $('reveal').addEventListener('click', () => {revealed=!revealed;applyReveal()});
 document.querySelectorAll('[data-view]').forEach(button => button.addEventListener('click', () => mount(button.dataset.view)));
@@ -88,7 +104,11 @@ document.addEventListener('keydown', e => {
 function frame(now) {
   const elapsed = previousTime === undefined ? 0 : Math.min((now-previousTime)/1000,0.1);
   previousTime = now;
-  if (viewer && playing && !mounting && !document.hidden) {phase=(phase+elapsed*90*Number($('speed').value))%1440;pose()}
+  if (viewer && playing && !mounting && !document.hidden) {
+    const next=phase+elapsed*90*Number($('speed').value);
+    if (next>=1440) resetUntil=now+1800;
+    phase=next%1440;pose();
+  }
   requestAnimationFrame(frame);
 }
 mount();requestAnimationFrame(frame);
