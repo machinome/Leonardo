@@ -1,0 +1,9 @@
+_build*
+__pycache__/
+snapshot.png
+.env
+export/
+*.egg-info/
+.pytest_cache/
+evidence/*.png
+evidence/*.log

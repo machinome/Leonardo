@@ -1,0 +1,14 @@
+[project]
+name = "leonardo-hydraulic-sawmill"
+version = "0.1.0"
+description = "An animated reconstruction of Leonardo da Vinci's hydraulic sawmill"
+requires-python = ">=3.12"
+authors = [{name = "Luis Henrique Cassis Fagundes"}]
+license = "AGPL-3.0-only"
+dependencies = ["solid-node[viewer]>=0.6", "cadquery", "molejo>=0.2"]
+
+[project.optional-dependencies]
+dev = ["playwright>=1.50"]
+
+[tool.solid-node]
+model = "Leonardo_hydraulic_sawmill.Leonardo_hydraulic_sawmill:LeonardoHydraulicSawmill"

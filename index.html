@@ -1,0 +1,47 @@
+<!doctype html>
+<!-- Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only. -->
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#eee9df">
+  <meta name="description" content="An interactive mechanical reconstruction of Leonardo da Vinci’s hydraulic sawmill, built with solid-node.">
+  <title>Leonardo’s hydraulic sawmill · LibreSolid</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Ccircle cx='20' cy='20' r='17' fill='none' stroke='%23856340' stroke-width='3'/%3E%3Cpath d='M20 3v34M3 20h34M8 8l24 24M8 32L32 8' stroke='%23856340' stroke-width='2'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="exhibit.css">
+</head>
+<body>
+  <header class="masthead">
+    <a class="brand" href="./" aria-label="LibreSolid exhibit home"><svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="17"/><circle cx="20" cy="20" r="4"/><path d="M20 3v13m0 8v13M3 20h13m8 0h13M8 8l9 9m6 6 9 9M8 32l9-9m6-6 9-9"/></svg><span>LIBRESOLID<span class="brand-sub">THE MECHANICAL COLLECTION</span></span></a>
+    <span class="edition">EXHIBIT 001 <span>/</span> LEONARDO DA VINCI</span>
+    <a class="source-link" href="export/source.zip" download>Get the source <span>↗</span></a>
+  </header>
+  <main>
+    <section class="intro">
+      <div><p class="eyebrow">CODEX ATLANTICUS · FOLIO 1078r</p><h1>Water, turned<br>into <em>work.</em></h1></div>
+      <div class="intro-copy"><h2>Leonardo’s hydraulic sawmill</h2><p>A wheel, a blade, a little ingenuity.<br>Explore a Renaissance idea in motion.</p><span class="tag"><i></i> INTERACTIVE MECHANICAL RECONSTRUCTION</span></div>
+    </section>
+    <section class="exhibit" aria-label="Interactive sawmill exhibit">
+      <div class="stage-wrap">
+        <div class="stage-top"><span><i class="live-dot"></i> <span id="status">PREPARING THE MILL</span></span><span class="stage-number">FIG. 01</span></div>
+        <div class="canvas-area"><div id="stage" aria-label="Three-dimensional hydraulic sawmill"></div></div>
+        <div id="loading" role="status">Assembling the mill<span class="loading-line"></span></div>
+        <div class="stage-bottom"><span>DRAG TO ORBIT <b>·</b> SCROLL TO ZOOM</span><button id="reveal" type="button" aria-pressed="false">◇ Reveal mechanism</button></div>
+        <div class="view-tabs" aria-label="Camera views"><button class="active" data-view="whole">Whole machine</button><button data-view="drive">The drive</button><button data-view="saw">The saw</button><button data-view="feed">The feed</button></div>
+      </div>
+      <aside class="notebook">
+        <p class="eyebrow">FOLLOW THE MOTION</p>
+        <button class="chapter" data-view="drive"><span class="chapter-num">01</span><span><strong>Capture the current</strong><span>Sixteen wooden paddles turn a keyed shaft and its offset crank.</span></span><b>↗</b></button>
+        <button class="chapter" data-view="saw"><span class="chapter-num">02</span><span><strong>Turn rotation into a stroke</strong><span>The connecting rod raises and lowers the saw through its timber guides.</span></span><b>↗</b></button>
+        <button class="chapter" data-view="feed"><span class="chapter-num">03</span><span><strong>Advance, then wait</strong><span>The indexed drum draws the carriage forward during the return stroke.</span></span><b>↗</b></button>
+        <div class="trace"><div class="trace-title"><span>ONE TURN OF THE WHEEL</span><span id="stroke-label">CUTTING STROKE</span></div><svg viewBox="0 0 280 84" role="img" aria-label="Saw height through one wheel revolution"><path class="trace-grid" d="M0 20h280M0 64h280M140 0v84"/><path id="stroke-curve"/><circle id="trace-dot" cx="0" cy="14" r="4"/></svg><div class="trace-legend"><span>↓ Cut · carriage holds</span><span>↑ Return · carriage feeds</span></div></div>
+        <div class="readouts"><div><span id="angle">0°</span><small>WHEEL PHASE</small></div><div><span id="feed">0.0 <i>mm</i></span><small>CARRIAGE ADVANCE</small></div></div>
+      </aside>
+      <div class="transport"><button id="play" class="play" aria-label="Pause animation">Ⅱ</button><button id="reset" class="reset" aria-label="Reset pass">↶</button><div class="timeline"><div><label for="timeline">THE WORKING CYCLE</label><span id="cycle">01 / 04</span></div><input id="timeline" type="range" min="0" max="1440" step="0.5" value="0" aria-label="Crank phase across four cycles"></div><label class="speed">SPEED<select id="speed" aria-label="Playback speed"><option value="0.25">¼×</option><option value="0.5">½×</option><option value="1" selected>1×</option><option value="2">2×</option></select></label><span class="transport-note">4 cycles · 16 seconds</span></div>
+    </section>
+    <section class="footnotes"><div><span class="eyebrow">A MACHINE BEFORE ITS TIME</span><p>Inspired by Leonardo’s study of an automatic hydraulic saw. An original digital interpretation of the mechanism, with the structure left open so every movement can be followed.</p><a href="https://museoleonardiano.it/en/opera/hydraulic-saw/" target="_blank" rel="noreferrer">Explore the historical reference ↗</a></div><dl><div><dt>48 <small>mm</small></dt><dd>SAW STROKE</dd></div><div><dt>8 <small>mm</small></dt><dd>FEED PER TURN</dd></div><div><dt>16</dt><dd>WHEEL PADDLES</dd></div></dl></section>
+    <details class="model-note"><summary>About this reconstruction</summary><p>This is a kinematic exhibit. The water is illustrative, the timber has a pre-cut blade slot, and the ratchet actuation is prescribed. It demonstrates geometry and coordinated movement, without simulating water forces, cutting, friction or torque. The indexed pawl carrier is an exhibit interpretation; a complete historical feed linkage is not reconstructed. Each four-cycle pass resets the carriage.</p><p>Built in Python with solid-node and CadQuery; the haul rope is evaluated with molejo. The browser renders the actual exported assembly. <a href="docs/validation.md">Validation record</a> · <a href="export/">Standard solid-node viewer</a></p></details>
+  </main>
+  <footer><span>MADE WITH SOLID-NODE <b>·</b> BUILT TO BE UNDERSTOOD</span><span>© 2026 Luis Henrique Cassis Fagundes <b>·</b> <a href="LICENSE">AGPLv3</a></span></footer>
+  <script src="export/solid-widget.js"></script><script src="exhibit.js"></script>
+</body>
+</html>
