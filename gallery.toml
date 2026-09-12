@@ -69,7 +69,7 @@ id = "030-pulley-block"
 kind = "machine"
 model = "pulley_block"
 title = "The compound pulley: exchange distance for load"
-status = "in_progress"
+status = "done"
 brief = "QUEUE.md#030-pulley-block"
 
 [[queue]]

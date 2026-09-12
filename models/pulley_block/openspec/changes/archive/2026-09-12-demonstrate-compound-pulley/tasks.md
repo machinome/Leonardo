@@ -17,5 +17,5 @@ Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
 
 - [x] 3.1 Add working-model registry entries and README, run gallery check and all model regressions.
 - [x] 3.2 Certify every root on the exact kernel and run every registered browser check.
-- [ ] 3.3 Commit tested source, record revisions/measurements/limits and selected images.
-- [ ] 3.4 Sync specs, archive, set queue 030 done, commit completion and refresh source exports.
+- [x] 3.3 Commit tested source, record revisions/measurements/limits and selected images.
+- [x] 3.4 Sync specs, archive, set queue 030 done, commit completion and refresh source exports.

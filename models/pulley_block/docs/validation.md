@@ -6,8 +6,10 @@ Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
 
 Queue 030 authorizes this complete model. Planning commit `5a05aa0` records
 the historical basis, ordinary reconstruction choices and exact continuation
-prompt. The completion record below identifies the tested source commit;
-the completion commit only finalizes evidence, queue status and archival.
+prompt. Tested implementation source is
+`1dce89b61d5a4a8b4ce77235a551b1b7ec7de2ff`. Tests and inspections ran on
+these same source bytes before that commit; committing changed none of them.
+The completion commit only finalizes evidence, queue status and archival.
 The project was clean except for pre-existing untracked `screenshots/`.
 Those files and the other machine sources are preserved. A live floor
 session was assigned cam_hammer, not this model; no agent was dispatched.
@@ -225,5 +227,16 @@ source/test files remain byte-for-byte unchanged from `92a1253`.
 exhibits passed. The final pulley run used the front camera and public
 driver-handle readouts, verified labels against measured meshes on both
 viewports, and reported no browser console, page or network failures.
-The final commit records the tested source revision, all-exhibit browser
-check, OpenSpec archive and source ZIP audit.
+The four behavioral requirements are synchronized to the baseline spec;
+direct comparison confirms every requirement and scenario matches the delta.
+Strict validation passes for both change and baseline. The completion
+archive is `2026-09-12-demonstrate-compound-pulley`; queue 030 is done and
+queue 040, the swivel crane, is next. Nothing was pushed or published.
+
+All five exhibits were re-exported from implementation commit `1dce89b`.
+Every `source-revision.txt` matched that full hash. Each source ZIP passed
+an integrity check, and `unzip -p ... | cmp` verified byte-for-byte inclusion
+of this model, tests, exhibit, viewer shell, readouts and browser smoke.
+This supersedes the preliminary download smoke against the planning ZIP.
+The completion export refreshes the archives again to include this final
+record and its archived OpenSpec. Generated exports remain ignored.
