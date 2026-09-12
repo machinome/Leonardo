@@ -12,5 +12,5 @@
 - [x] 2.1 Inspect isometric and alignment OpenSCAD images and retain selected evidence.
 - [x] 2.2 Build the exhibit page, export real viewer assets and verify controls, motion and pose return at desktop and narrow widths with a finite browser script.
 - [x] 2.3 Register the working model, build and regress all registered roots; certify exact default and boundary runs and run all browser checks.
-- [ ] 2.4 Commit tested source and document commands, results, source revision, dependency revisions and limits.
-- [ ] 2.5 Sync baseline specs, archive the completed cycle, mark queue 020 done and commit the completion record.
+- [x] 2.4 Commit tested source and document commands, results, source revision, dependency revisions and limits.
+- [x] 2.5 Sync baseline specs, archive the completed cycle, mark queue 020 done and commit the completion record.

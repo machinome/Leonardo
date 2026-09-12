@@ -53,7 +53,7 @@ id = "020-rack-and-pinion"
 kind = "machine"
 model = "rack_and_pinion"
 title = "Rack and pinion: turning becomes lifting"
-status = "in_progress"
+status = "done"
 brief = "QUEUE.md#020-rack-and-pinion"
 
 [[queue]]

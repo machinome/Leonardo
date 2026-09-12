@@ -5,8 +5,11 @@ Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
 ## Scope and environment
 
 Queue 020 commissions this machine; planning commit `6160f9d` records the
-brief and exact continuation prompt. The implementation source revision
-will be recorded in the completion commit, after the final checks below.
+brief and exact continuation prompt. Tested implementation source:
+`e0edd8092cf588517c967a30eb6b5463d5a38f94`. The tests and inspections ran
+on these same source bytes before that commit; committing did not change
+them. The completion commit changes only evidence, queue/task status and
+archive placement, not the tested model, tests, exhibit or browser script.
 Only the new exhibit and shared registry/documentation entries are changed.
 The pre-existing untracked `screenshots/` directory is preserved.
 
@@ -184,8 +187,15 @@ all four registered exhibit checks. The rack's browser check also passed
 on its own; the inspected viewport captures are recorded above.
 
 The four behavioral requirements are synchronized to the machine's
-baseline spec and strict OpenSpec validation passes. A completion commit
-will record the tested implementation revision and archive the cycle.
-The final source archives must be regenerated from that committed gallery;
-the preliminary browser download smoke used the then-current planning
-commit's ZIP and is not evidence that it contained the new source.
+baseline spec; direct comparison confirms every requirement and scenario
+matches the delta, and strict OpenSpec validation passes. The completed
+cycle is archived as `2026-09-12-demonstrate-rack-and-pinion`. Queue 020
+is done; queue 030, the compound pulley, is next.
+
+All four exhibits were re-exported from the tested implementation commit.
+Each source-revision.txt matched that revision, and each source.zip was
+opened to verify byte-for-byte inclusion of this machine's model, tooth
+profiles and tests. This supersedes the preliminary browser download
+smoke, whose ZIP came from the then-current planning commit. The completion
+export refreshes the archives again to include this final record.
+Generated exports remain ignored. Nothing was pushed or published.
