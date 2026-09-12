@@ -1,0 +1,7 @@
+schema: spec-driven
+context: |
+  Hydraulic sawmill in the single Leonardo gallery repository.
+  The original implementation is preserved at history/hydraulic-sawmill.
+  record-existing-sawmill is a retrospective record, not prior ratification.
+  docs/design.md and docs/validation.md document the implemented envelope.
+  Gallery instructions and copyright apply; no nested Git repo or manifest.
