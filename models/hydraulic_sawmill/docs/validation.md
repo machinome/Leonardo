@@ -4,8 +4,12 @@ Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
 
 Validated 12 September 2026 in the LibreSolid Studio workspace. This replaces
 the simplified exhibit’s certificate, preserved at gallery commit `0936085`.
-The new cycle’s planning commit is `3ff37ba`. Final source-commit provenance
-is added after the implementation commit so this record is not self-referential.
+The new cycle’s planning commit is `3ff37ba`. The implementation source
+commit is `d5f92fbc7542c4e234a84c7150a40ab8bd34c829`. Its CAD and test
+sources were verified byte-identical to the staged tree used during the
+exact certificate (`daba7a0a15bdc119374d24bb35746607df9e2832`). A post-commit
+faceted run also passed all 19 tests in 10.25 seconds with zero volume epsilon.
+This provenance update changes documentation only.
 
 ## Environment
 
@@ -119,6 +123,14 @@ regenerated from the committed revision and records that revision alongside
 the source ZIP. A second sawmill browser run also passed after the final
 whole-view camera adjustment; that final desktop image was inspected with
 the entire plinth inside the viewport.
+
+The change is archived at
+`openspec/changes/archive/2026-09-12-reconstruct-museum-hydraulic-saw/`.
+All tasks are complete, all three baseline capability specifications match
+their deltas, and strict OpenSpec validation passes with no active changes.
+The committed-source export is reproduced with
+`python scripts/gallery.py export hydraulic_sawmill`; its
+`source-revision.txt` identifies the exact downloadable gallery revision.
 
 ## What is not certified
 
