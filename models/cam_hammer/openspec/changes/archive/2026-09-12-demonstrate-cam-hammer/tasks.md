@@ -14,5 +14,5 @@
 
 ## 3. Completion
 
-- [ ] 3.1 Write README and durable evidence including commands, tested revisions, history, assumptions, blind spots and selected images.
-- [ ] 3.2 Sync the baseline, archive this completed change, register the working exhibit and mark queue item done; commit locally and regenerate committed source exports.
+- [x] 3.1 Write README and durable evidence including commands, tested revisions, history, assumptions, blind spots and selected images.
+- [x] 3.2 Sync the baseline, archive this completed change, register the working exhibit and mark queue item done; commit locally and regenerate committed source exports.

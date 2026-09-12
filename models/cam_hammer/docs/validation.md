@@ -5,8 +5,10 @@ Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
 ## Scope and tested environment
 
 Queue 010 commissions this complete exhibit. Planning commit: `1c0be60`.
-The source revision is recorded in the completion section after the local
-source commit, so the evidence never contains its own commit hash.
+Tested source: `9df5851ada1021e343d22973d6c93fd4831e7237`.
+The recorded tests ran on the same source bytes immediately before that
+commit; committing them did not change their content. The completion
+commit changes only this record, task/queue status and archive placement.
 
 | Dependency | Tested content |
 | --- | --- |
@@ -174,3 +176,12 @@ integration, impact, wear, friction or forging capacity is modeled. Support
 is certified at rest; dynamic bearing reactions and manufacturing joinery
 are outside this educational commission. Fractional-run timeline looping
 restarts at phase and is explicitly described on the exhibit.
+
+## Completion
+
+The machine's four behavioral requirements are synchronized to
+`openspec/specs/cam-hammer-demonstration/spec.md`. The completed local cycle
+is archived as `2026-09-12-demonstrate-cam-hammer`; queue 010 is done and
+queue 020 (rack and pinion) is next. The source archive is regenerated from
+the committed gallery for every export, with its revision recorded beside
+it. No remote repository was created, pushed or published.
