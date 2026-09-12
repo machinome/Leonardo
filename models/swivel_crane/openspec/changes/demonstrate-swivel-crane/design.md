@@ -21,6 +21,11 @@ brake/holding torque, worksite stability, load rating or historical dimensions.
   slew ±60 degrees, hoist rise 0–25 mm. A single-start original thread mates
   with a clearance-cut nut; carriage rails prevent the nut rotating. Screw
   angle changes by minus 360 degrees per 12 mm traverse for its handedness.
+  Implementation evidence rejected periodic helical surfaces: OCCT Boolean
+  intersections disagreed with their meshes. The final thread uses explicit
+  ruled stations every 20°, five points on each radial sector edge, spanning
+  x=60–168 mm; the matching pocket retains the positive 0.4 mm clearance.
+  This original geometric approximation keeps the same mechanism and lead.
   Demonstration dimensions are constants; no untested size knob is advertised.
 - Rope route: trolley dead end → lower moving sheave → upper guide sheave
   → horizontal span → drum wrap → rotating drum termination. Route plane is
@@ -34,7 +39,10 @@ brake/holding torque, worksite stability, load rating or historical dimensions.
   trajectory lifts before swinging and returns to the starting pose. Any
   blend with manual settings remains inside the Cartesian tested envelope.
 - Model-specific page embeds the real export. The viewer owns all geometry,
-  controls and playback; page prose explains the power path and limits.
+  controls and playback; page prose explains the power path and limits. The
+  host mounts the shipped widget with a camera covering the swept envelope,
+  widened and lowered on a narrow screen; fitting only the initial pose was
+  observed to crop the jib after slewing.
 
 ## Risks / Trade-offs
 

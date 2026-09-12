@@ -1,4 +1,9 @@
 <!-- Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only. -->
+## Purpose
+
+Let visitors understand independent slew, traverse and hoisting through an
+original, inspectable construction-crane study with measured geometric evidence.
+
 ## ADDED Requirements
 
 ### Requirement: Independent stone placement

@@ -1,0 +1,96 @@
+<!doctype html>
+<!-- Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only. -->
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Slew, traverse, hoist: place a stone with Astra's interactive solid-node interpretation of Leonardo's crane study.">
+<link rel="icon" href="data:,">
+<title>The swivel crane · Leonardo gallery</title>
+<style>
+  * { box-sizing: border-box; }
+  body { margin: 0; color: #efe8db; background: #263334; font: 16px/1.65 system-ui, sans-serif; }
+  a { color: #e8bf7d; text-underline-offset: 4px; }
+  header { padding: 28px 38px; border-bottom: 1px solid #ffffff26; }
+  .eyebrow { color: #d5b57d; text-transform: uppercase; letter-spacing: .17em; font-size: 11px; }
+  h1 { font: normal clamp(34px, 4.2vw, 60px)/1.08 Georgia, serif; margin: 12px 0; }
+  header p { margin: 0; color: #c3cdc7; font-size: 14px; }
+  main { display: grid; grid-template-columns: minmax(0, 1fr) 325px; }
+  .machine { min-width: 0; background: #f5f0e6; }
+  iframe { display: block; width: 100%; height: 920px; border: 0; }
+  .caption { padding: 14px 25px; margin: 0; font-size: 12px; color: #465451; border-top: 1px solid #283a3328; }
+  .caption a { color: #715623; }
+  aside { padding: 28px; }
+  h2 { font: normal 28px/1.2 Georgia, serif; margin: 8px 0 16px; }
+  aside p, .story p { color: #c4cfc8; font-size: 14px; }
+  .step { padding: 14px 0; border-top: 1px solid #ffffff26; }
+  .step b { color: #e9c184; font-weight: 500; }
+  .step p { margin: 3px 0; font-size: 13px; }
+  .ratio { font: 48px/1 Georgia, serif; color: #efc57e; margin: 25px 0 8px; }
+  .story { display: grid; grid-template-columns: 1fr 1fr; gap: 45px; padding: 34px 38px; border-top: 1px solid #ffffff26; }
+  .story h2 { font-size: 25px; }
+  footer { padding: 22px 38px; border-top: 1px solid #ffffff26; font-size: 12px; color: #bac7be; }
+  footer p { margin: 4px 0; }
+  @media(max-width: 950px) {
+    main, .story { grid-template-columns: 1fr; }
+    header, aside, .story, footer { padding: 24px; }
+    iframe { height: 650px; }
+    .story { gap: 22px; }
+  }
+</style>
+<header>
+  <div class="eyebrow">Astra's Leonardo gallery · Machine 06</div>
+  <h1>The swivel crane</h1>
+  <p>Turn around the mast. Travel along the jib. Raise the stone.</p>
+</header>
+<main>
+  <div class="machine">
+    <iframe src="viewer.html" title="Interactive swivel crane: slew, traverse and hoist controls" allow="fullscreen"></iframe>
+    <p class="caption">Original CAD in the actual solid-node viewer. Drag to orbit; zoom to inspect the threads and rope.
+      <a href="viewer.html" target="_blank" rel="noopener">Open full-size viewer ↗</a></p>
+  </div>
+  <aside>
+    <div class="eyebrow">One load, three movements</div>
+    <h2>Place a stone in space.</h2>
+    <p>Choose <b>Pick up</b> to stop the automatic demonstration. The three physical sliders then work independently. Set <b>run</b> to zero for manual control.</p>
+    <div class="step"><b>01 · Slew</b><p>Rotate the complete mast and jib through ±60°. The footing stays fixed.</p></div>
+    <div class="step"><b>02 · Traverse</b><p>A single-start screw moves the captured trolley 12 mm per turn, across 60 mm of travel.</p></div>
+    <div class="step"><b>03 · Hoist</b><p>Two rope spans support the lower block. Winding in 50 mm raises the stone 25 mm.</p></div>
+    <div class="ratio">2 : 1</div>
+    <p>Rope taken up : stone lifted.<br>The rope's complete length stays constant.</p>
+    <p>Follow <b>Pick up → Lift clear → Swing → Place</b>, or choose <b>Demonstrate</b>. The loop visibly lifts and retraces its path to return; no hidden reset.</p>
+    <p><a href="docs/evidence/README.md">Inspect the measured evidence</a> · <a href="README.md">Build notes</a></p>
+  </aside>
+</main>
+<section class="story">
+  <div>
+    <div class="eyebrow">A construction-site study</div>
+    <h2>Recorded by Leonardo.</h2>
+    <p>The <a href="https://museoleonardiano.it/en/opera/swivel-crane/">Museo Leonardiano record</a>
+      identifies Codex Atlanticus f.105v and machinery probably designed by Brunelleschi,
+      drawn by Leonardo. Luigi Boldetti made the museum's reconstruction in 1966.</p>
+    <p>This compact CAD is Astra's original educational interpretation. The dimensions,
+      square screw thread, captured rails and trolley-mounted hoist are modern choices.
+      No museum geometry or historical dimensions were copied.</p>
+    <p><a href="../../export/swivel_crane/source.zip">Download gallery source</a> ·
+      <a href="docs/evidence/isometric.png">Isometric study</a> ·
+      <a href="docs/evidence/screw.png">Along the screw</a> ·
+      <a href="docs/evidence/mast.png">Down the mast</a></p>
+  </div>
+  <div>
+    <div class="eyebrow">Read the rope</div>
+    <h2>Winding, made visible.</h2>
+    <p>Trace the orange rope from its trolley socket, around the lower sheave,
+      over the upper guide and onto the drum. Its end follows a rotating socket.
+      The drum stores less than one turn: 90° at the bottom, about 249° at full lift.</p>
+    <p>Winding and upright suspension are prescribed. The footing is bolted to an
+      ideal support; mast and trolley positions are held. The stone remains suspended
+      at both named endpoints. Tension, sway, friction, brake torque, structural
+      stability, termination strength and lifting capacity are not simulated.</p>
+  </div>
+</section>
+<footer>
+  <p>A <a href="https://solid-node.readthedocs.io/">solid-node demonstration</a> · Astra's single-prompt designs ·
+    <a href="https://github.com/LibreSolid/Leonardo">Leonardo gallery on GitHub</a> (publication pending)</p>
+  <p>Copyright © 2026 Luis Henrique Cassis Fagundes · <a href="../../LICENSE">AGPL-3.0-only</a></p>
+</footer>
+</html>

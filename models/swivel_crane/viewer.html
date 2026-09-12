@@ -1,0 +1,27 @@
+<!doctype html>
+<!-- Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only. -->
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:,">
+<title>Swivel crane · interactive model</title>
+<style>html,body,#viewer { margin:0; width:100%; height:100%; }</style>
+<div id="viewer"></div>
+<script src="../../export/swivel_crane/solid-widget.js"></script>
+<script>
+  // The package's real renderer and unchanged exported manifest own all CAD.
+  // Frame the swept envelope; fitting only the starting pose crops a slewed jib.
+  const target = [70, 0, innerWidth < 600 ? 225 : 140];
+  const offset = [360, -650, 300];
+  const factor = Math.max(1, .75*innerHeight/innerWidth);
+  SolidNodeWidget.mount(document.getElementById("viewer"),
+    "../../export/swivel_crane/manifest.json", {
+      animation: "inline", fov: 37, up: [0, 0, 1],
+      view: {target, camera: offset.map((v, i) => target[i]+v*factor)},
+      ariaLabel: "Swivel crane with independent slew, traverse and hoist"
+    }).catch(error => {
+      document.getElementById("viewer").textContent = "The model could not load: " + error.message;
+      console.error(error);
+    });
+</script>
+</html>

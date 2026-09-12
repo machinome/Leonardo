@@ -24,6 +24,7 @@ automatic_weaving_loom = "models.automatic_weaving_loom.model:AutomaticWeavingLo
 cam_hammer = "models.cam_hammer.model:CamHammer"
 rack_and_pinion = "models.rack_and_pinion.model:RackAndPinion"
 pulley_block = "models.pulley_block.model:PulleyBlock"
+swivel_crane = "models.swivel_crane.model:SwivelCrane"
 
 [tool.libresolid-studio]
 profile = "builder"
