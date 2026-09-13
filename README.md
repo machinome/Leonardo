@@ -18,20 +18,24 @@ Intended source home: [LibreSolid/Leonardo on GitHub](https://github.com/LibreSo
 | Model | What you can follow | Record |
 | --- | --- | --- |
 | `hydraulic_sawmill` | Milan undershot saw: closed rocker/pawl feed, winding rope, return pulley and carriage | [Machine](models/hydraulic_sawmill/README.md) · [OpenSpec](models/hydraulic_sawmill/openspec/) |
-| `automatic_weaving_loom` | Alternating sheds, a supported weft handoff and beat-up | [Machine](models/automatic_weaving_loom/README.md) · [OpenSpec](models/automatic_weaving_loom/openspec/) |
+| `automatic_weaving_loom` | Vinci accompanied-spool loom: one/six/twelve indexing, four lower gears, belt, captured head and weighted cords | [Machine](models/automatic_weaving_loom/README.md) · [OpenSpec](models/automatic_weaving_loom/openspec/) |
 | `cam_hammer` | Cam contact, lever lift, released drop and anvil strike | [Machine](models/cam_hammer/README.md) · [OpenSpec](models/cam_hammer/openspec/) |
 | `rack_and_pinion` | Crank rotation, engaged teeth, guided lift and a hooked weight | [Machine](models/rack_and_pinion/README.md) · [OpenSpec](models/rack_and_pinion/openspec/) |
 | `pulley_block` | Three supporting rope spans, captured sheaves and 3:1 effort/load travel | [Machine](models/pulley_block/README.md) · [OpenSpec](models/pulley_block/openspec/) |
 | `swivel_crane` | Independent slew, engaged screw traverse and continuous 2:1 drum hoisting | [Machine](models/swivel_crane/README.md) · [OpenSpec](models/swivel_crane/openspec/) |
 
-These are original educational interpretations, not dimensioned replicas.
+These began as educational interpretations, not dimensioned replicas.
 Each machine identifies its historical sources, reconstruction choices and
 limits. The sawmill was subsequently researched and rebuilt at the pilot’s
 request against the Milan museum photographs, with the undershot water path
 and complete visible feed train; its [research record](models/hydraulic_sawmill/docs/reconstruction.md)
-distinguishes observations from inferred fittings. Prescribed motion is
-labelled as such. The saw does not cut material;
-the loom does not solve yarn tension or accumulate cloth.
+distinguishes observations from inferred fittings. The loom has likewise
+been rebuilt around Vinci's accompanied-spool interpretation, with its
+[concealed mechanisms documented as inferences](models/automatic_weaving_loom/docs/reconstruction.md).
+Its four-turn demonstration now spans one minute for slow-motion inspection.
+Prescribed motion is labelled as such. The saw does not cut material;
+the loom advances a pre-existing cloth sample by 2.22 mm but does not solve
+yarn tension or form new interlaced textile topology.
 The hammer's return is prescribed; gravity and impact are not simulated.
 The rack lift demonstrates travel and engagement; holding torque, a brake
 and lifting capacity are outside its scope.

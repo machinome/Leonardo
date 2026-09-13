@@ -11,7 +11,7 @@
   h1 { margin: 0; font: 34px/1.1 Georgia, serif; font-weight: normal; }
   .eyebrow { color: #c1ae88; letter-spacing: .15em; font-size: 11px; text-transform: uppercase; margin-bottom: 9px; }
   .tag { font-size: 12px; color: #c4c9c4; }
-  main { display: grid; grid-template-columns: minmax(0, 1fr) 320px; min-height: calc(100vh - 100px); }
+  main { display: grid; grid-template-columns: minmax(0, 1fr) 340px; min-height: calc(100vh - 100px); }
   iframe { width: 100%; height: calc(100vh - 100px); min-height: 570px; border: 0; background: #f5f2eb; }
   aside { padding: 24px; border-left: 1px solid #ffffff20; }
   h2 { font: 25px/1.2 Georgia, serif; font-weight: normal; margin: 0 0 16px; }
@@ -23,24 +23,27 @@
   .legend { display: flex; flex-wrap: wrap; gap: 8px 14px; font-size: 12px; padding: 17px 0; border-top: 1px solid #ffffff20; border-bottom: 1px solid #ffffff20; }
   .dot { display: inline-block; width: 9px; height: 9px; border-radius: 50%; margin-right: 5px; }
   .note { font-size: 12px; color: #aab3a8; margin-top: 20px; }
+  .power { padding: 14px 16px; background: #ffffff08; border-left: 2px solid #c9ad75; font-size: 13px; line-height: 1.8; }
+  .limit { border-top: 1px solid #ffffff20; padding-top: 14px; }
   a { color: #ddc697; text-underline-offset: 3px; }
   @media (max-width: 900px) { main { grid-template-columns: 1fr; } iframe { height: 65vh; min-height: 430px; } aside { border-left: 0; } header { display: block; } .tag { margin-top: 12px; } }
 </style>
 <header>
   <div><div class="eyebrow">Leonardo da Vinci · Mechanical studies</div><h1>The automatic loom</h1></div>
-  <div class="tag">Codex Atlanticus, f.985r–v · Interactive solid-node reconstruction</div>
+  <div class="tag">Vinci · Boldetti, 1954 · Codex Atlanticus, f.985r–v</div>
 </header>
 <main>
   <iframe src="../../export/automatic_weaving_loom/index.html" title="Interactive 3D model of Leonardo's automatic loom" allow="fullscreen"></iframe>
   <aside>
-    <div class="eyebrow">One drive · Two alternating picks</div>
-    <h2>Follow a thread.</h2>
-    <p>Start the viewer's timeline to weave. Orbit the model to see the eccentric shaft below the two heddle frames. Use the named instructions to hold each stage.</p>
+    <div class="eyebrow">Historical mechanism reconstruction</div>
+    <h2>One drive. A connected loom.</h2>
+    <p>The narrow-ribbon loom carries its spool between two hands. This is the Vinci museum interpretation, not a flying-shuttle loom. Orbit the actual CAD and use its stage buttons to inspect the transmission. The same shaft drives the captured head tracks and the gear train below.</p>
+    <div class="power">Single engaging pin → six-position wheel → twelve-tooth wheel → scroll and descending rack → lower wheel pairs and perforated belt.</div>
     <ol>
-      <li><strong>Open shed · 60°</strong><br>Alternate warp threads separate. The captured eccentric lifts one heddle frame and lowers the other.</li>
-      <li><strong>Handoff · 90°</strong><br>The two arms meet inside the open shed. Their interleaved fingers support the red weft spool.</li>
-      <li><strong>Beat right · 180°</strong><br>The spool clears the ribbon. The reed advances toward the cloth edge to illustrate packing the pick.</li>
-      <li><strong>Return pick · 270°</strong><br>The shed reverses. The spool returns through the opposite opening, creating the next over-and-under pass.</li>
+      <li><strong>Open shed · 60°</strong><br>Opposed captured followers separate the warp. The arm's rocking lever and cord control its approach.</li>
+      <li><strong>Handoff · 90°</strong><br>The hands pause together with both jaws closed. The donor then opens only after the receiving hand retains the spool.</li>
+      <li><strong>Beat right · 180°</strong><br>The spool clears the ribbon and the reed advances. Below, the intermittent train advances the winding apparatus.</li>
+      <li><strong>Return pick · 270°</strong><br>The shed and gripping sequence reverse. Both hands withdraw beyond the ribbon before the shed closes.</li>
     </ol>
     <div class="legend">
       <span><i class="dot" style="background:#ded3ad"></i>Warp A</span>
@@ -48,8 +51,10 @@
       <span><i class="dot" style="background:#bb473b"></i>Weft spool</span>
       <span><i class="dot" style="background:#bb884b"></i>Drive</span>
     </div>
-    <p class="note">An educational reconstruction of the museum's narrow-ribbon interpretation. Dimensions and motion timing are chosen for this model. Intermediate transmissions, grip latches, yarn tension and cloth accumulation are not simulated.</p>
-    <p class="note"><a href="https://artsandculture.google.com/story/leonardo-and-the-art-of-weaving-leonardo-da-vinci-museum/2wVxLwuL6F11KQ?hl=en" target="_blank" rel="noreferrer">Historical source: Museo Leonardiano</a> · <a href="README.md">Project record</a></p>
+    <p class="note limit"><strong>One-minute slow motion.</strong> Playback spans four input turns and eight picks in 60 seconds. At replay, the winding state resets; that reset is not an automatic reverse mechanism. Stage buttons stop the drive, and <strong>Run</strong> restores playback.</p>
+    <p class="note"><strong>Follow the cords.</strong> Each external return weight rises when its driven vertical end descends. All six operating cords retain their length; the outboard springs close the receiving jaws.</p>
+    <p class="note"><strong>Observed and inferred.</strong> The museum and manuscript establish the machine's arrangement. Concealed cam tracks, rockers, gripping details and fits are an explicitly documented mechanical completion, not measured museum geometry. Rope tension and spring closing are assumed; forces, wear and textile formation are not solved.</p>
+    <p class="note"><a href="https://museoleonardiano.it/en/opera/automatic-weaving-loom/" target="_blank" rel="noreferrer">Vinci museum object</a> · <a href="https://www.leonardodigitale.com/en/browse/Codex-atlanticus/0985-r/" target="_blank" rel="noreferrer">Atlanticus 985r</a> · <a href="docs/reconstruction.md">Reconstruction choices</a> · <a href="README.md">Project record</a></p>
     <p class="note">Vibecoded by Astra as a <a href="https://solid-node.readthedocs.io/">solid-node</a> demonstration.<br>© 2026 Luis Henrique Cassis Fagundes · <a href="../../LICENSE">AGPL-3.0-only</a> · <a href="../../export/automatic_weaving_loom/source.zip">Gallery source</a></p>
   </aside>
 </main>

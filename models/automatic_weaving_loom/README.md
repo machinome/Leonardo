@@ -1,17 +1,30 @@
 # Leonardo's automatic weaving loom
 
-A working **kinematic demonstration** in solid-node: turn one drive and watch alternate warp threads separate, two arms exchange the weft spool, the reed advance, and the cloth beams turn. The model follows the narrow-ribbon interpretation of Leonardo's Codex Atlanticus f.985r–v described by the Museo Leonardiano di Vinci.
+Historical reconstruction of the narrow-ribbon, **accompanied-spool** loom
+represented by Luigi Boldetti's 1954 model at the
+[Museo Leonardiano in Vinci](https://museoleonardiano.it/en/opera/automatic-weaving-loom/).
+The former illustrative drive is replaced by an upper timing train, descending
+feed, four lower gears, perforated belt and mechanically actuated weaving head.
 
-This is original educational CAD based on online historical material, not a dimensionally faithful replica or a manufacturing design. The captured eccentric drive and supported carrier handoff are checked geometrically. The other transmission laws are prescribed; intermediate gearing, grip latches, yarn tension, cloth accumulation and impact dynamics are not reconstructed.
+Concealed mechanisms are explicitly inferred, as authorized by the pilot.
+This is original reconstruction CAD, not a measured replica or a claim that
+Leonardo specified every completed cam, grip and fitting. See the
+[source-and-inference record](docs/reconstruction.md).
 
-## Open the demonstration
+**Paused at a committed implementation checkpoint, not fully certified.**
+The [Studio-time checkpoint](docs/checkpoint-2026-09-13.md) is the next agent's
+resume entry point. Python now declares a 60-second simulation, and the actual
+Studio UI passes its native slow-motion checks. Final whole-head/root exact
+certification and gallery-wide browser regression remain pending; the former
+educational certificate does not certify this reconstruction.
 
 Vibecoded by Astra as part of the single [Leonardo gallery](../../README.md).
 Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only;
-see [LICENSE](../../LICENSE). The gallery's root registry names this model
-`automatic_weaving_loom`; this folder is no longer a separate repository.
+see [LICENSE](../../LICENSE).
 
-For the standalone presentation, from the **Leonardo repository root**, with the workspace virtual environment on PATH:
+## Open the reconstruction
+
+From the Leonardo repository root, with the workspace environment on PATH:
 
 ```sh
 solid build automatic_weaving_loom
@@ -19,90 +32,120 @@ python scripts/gallery.py export automatic_weaving_loom
 python -m http.server 8765 --bind 127.0.0.1
 ```
 
-Open **http://127.0.0.1:8765/models/automatic_weaving_loom/demo.html**. The model animates automatically, and the page explains the four stages beside the 3D viewer. Orbit, pan and zoom to inspect the mechanism. A plain viewer is also available at `/export/automatic_weaving_loom/index.html`. Generate the export before opening it; serve it over HTTP, not `file://`.
+Open `http://127.0.0.1:8765/models/automatic_weaving_loom/demo.html`.
+Orbit the actual CAD, select a named stage, or scrub `phase`. The plain viewer
+is at `/export/automatic_weaving_loom/index.html`. Serve over HTTP, not
+`file://`. The source download contains the committed gallery revision,
+not an uncommitted working tree.
 
-In this workspace the exact executable is `/home/asa/devel/libresolid-studio/.venv/bin/solid`; Python is in the same `bin/` directory. The code requires the installed declarative motion API, which follows the published solid-node 0.6.0 release. Installed distribution labels alone do not distinguish these local additions. The independently installed viewer is 0.1.0 (founded, not published), CadQuery 2.7.0 and molejo 0.2.0.
+In **Studio**, open `Leonardo/automatic_weaving_loom`, expand **Timeline**, and
+choose **Playback speed** ×0.1, ×0.25 or ×0.5. The Python declaration supplies
+the one-minute clock; no companion HTML page is needed. With the project
+already open, `python models/automatic_weaving_loom/scripts/check_studio_time.py`
+checks that live UI (default Studio address `http://127.0.0.1:9000`).
 
-## Follow the cycle
+In this workspace, `solid` and Python are under
+`/home/asa/devel/libresolid-studio/.venv/bin/`. This model needs the installed
+post-0.6.0 declarative solid-node API, CadQuery 2.7 and molejo 0.2. The separate
+viewer is the local 0.1.0 package, founded but not publicly released.
 
-One 360° cycle represents **two picks**, one in each direction. The 360-frame export takes 12 seconds at 30 fps. That is an illustrative presentation speed, not a historical production rate.
+## Follow the mechanism
 
-| Button | Phase | What to observe |
+The common shaft carries a single engaging pin and the completed head cams.
+It indexes the six-position wheel by 60° per revolution; the six/twelve gear
+mesh advances the scroll by 30°. A captured pin lowers the descending rack
+1.8 mm. The rack drives the rear lower wheel, rear upper wheel, perforated
+leather belt, and front upper/lower pair. Every wheel is mounted and retained.
+
+Two arm cams drive captured followers and 5:1 slotted rockers. Constant-length
+haul cords translate the hands, with weighted return cords. Two other tracks
+alternate the heddles; a double-lobed track drives the reed. Two selectors
+open the spring-closed retaining jaws at the receiving region. The receiving
+jaw closes before the donor releases; both hands withdraw before shed closure.
+
+| Stage | Phase | Observation |
 | --- | ---: | --- |
-| Beat left | 0° | Spool outside the left selvedge; shed closed; reed forward. |
-| Open shed | 60° | Cream warp rises, blue warp falls; left arm accompanies the spool. |
-| Handoff | 90° | Both sets of fingers meet beneath the spool in the open shed. |
-| Beat right | 180° | Spool outside the right selvedge; reed reaches its forward limit. |
-| Return pick | 270° | Blue warp is uppermost; the spool returns through the opposite shed. |
-| Run | — | Restore automatic motion. |
+| Beat left | 0° | Spool outside the left selvedge, shed closed, reed forward |
+| Open shed | 60° | First shed open, accompanied spool reaches the receiving hand |
+| Handoff | 90° | Both jaws closed during the exchange dwell |
+| Beat right | 180° | Spool outside the right selvedge, reed forward |
+| Return pick | 270° | Opposite shed and opposite gripping exchange |
+| Run | — | Resume the finite four-turn demonstration |
 
-Stage instructions land in 0.6 seconds and set `run=0`, holding their phase even while the viewer's timeline continues. `phase` then lets you scrub the mechanism manually. `run=1` adds a full cycle over the viewer timeline; intermediate values scale the motion. The viewer's play/pause button controls the timeline itself.
+Instructions settle in 0.6 seconds. Stage buttons set `run=0`, holding their
+phase while the viewer timeline continues. `run=1` adds four input turns over
+the 60-second machine timeline; intermediate values scale it.
+The Python root declares `time = Time(loop=60)` and advances at 24°/s.
+This publishes `animation.loop=60` to Studio as well as exports, enabling
+the native speed selector and machine-time readout. Export frame count is
+only timeline resolution, not the simulation's duration. The viewer's play/pause
+button controls the timeline. Motion clamps at 1440°, the end of the modeled
+scroll segment. Replay resets the winding state; no automatic unwinding or
+historical reset mechanism is asserted.
 
-The cream and blue strands are alternate warp ends. The red spool carries the orange illustrative weft span. Eight red picks in the short cloth sample alternate over and under the warp; this sample stays in place. The free weft span exchanges its anchored edge near the closed shed, without a contact or yarn-length solve. The beams turn 10° per two-pick cycle to illustrate forward feed, then reset with the repeating presentation; they do not accumulate cloth.
+One turn makes two picks. Four turns represent eight picks and 2.22 mm of
+equal warp let-off and cloth take-up. The eight displayed picks are a
+pre-existing woven sample moving with the cloth web, not new textile topology
+formed by a contact solver. The free weft span is schematic.
 
-## What is built
+## Construction and dimensions
 
-The primary source is [model.py](model.py). Its 118-node tree contains 11 rigid occurrences (10 distinct pieces), 81 flexible leaves, and the assemblies that connect them.
+X is across the ribbon, Y toward the warp supply, Z upward. Every dimension
+is a reconstruction choice, not a measurement of the museum object.
 
-Read the construction from the ground up:
-
-1. `TimberFrame`: a connected timber structure, journals and slide guides.
-2. `Crank`: shaft, handwheel, opposed eccentric discs and captured pins.
-3. `Heddle`: a connected frame of alternate needle eyes, pushrod and slotted yoke.
-4. `Carrier`: two translating arms with interleaved support fingers and a boat-shaped weft spool.
-5. `Reed`, `ReedTracks`, `Roller`: beat-up and material-feed illustration.
-6. `WarpEnd`, cloth strands and `WeftTail`: flexible yarn geometry.
-7. `AutomaticWeavingLoom`: phase relations, controls and complete assembly.
-
-For an isolated foundation view, use `solid build models/automatic_weaving_loom/model.py:TimberFrame`. For the crank, use `solid build models/automatic_weaving_loom/model.py:Crank --set eccentricity=18`. Rebuild `automatic_weaving_loom` afterward. Driven subassemblies receive their coordinates from the complete machine.
-
-## Dimensions and mechanical assumptions
-
-X runs across the cloth, Y from the front cloth beam toward the rear warp beam, and Z upward. Ground is Z=0; the weaving plane is Z=180 mm. All dimensions below are demonstrator choices, not measurements of Leonardo's drawing.
-
-| Interface | Chosen geometry |
+| Interface | Geometry |
 | --- | --- |
-| Frame | 360 × 332 × 255 mm; moving arms extend beyond its sides. |
-| Warp | 24 ends at 6 mm spacing, X=-69…69 mm; radius 0.48 mm. |
-| Heddles | Y=20 and 40 mm; opposite ±18 mm lifts at the default. |
-| Spool | 24 × 12 × 6 mm; 260 mm crosswise travel. |
-| Eccentric / yoke | Ø6 mm pin, 6.6 × 46.6 mm slot; 0.3 mm vertical play per side. |
-| Sliding arms | 8 × 5 mm bodies in 8.6 × 5.6 mm guide apertures. |
-| Reed | 37 mm stroke, Y=-65…-102 mm; cloth fell at Y=-105 mm. |
-| Reed feet / bed | 0.3 mm lateral and vertical running gaps; bed seats 0.2 mm above its bearer. |
-| Spool / fingers | 0.3 mm vertical seating gap; fingers occupy alternating lateral lanes. |
-| Roller journals | Ø10 mm shafts in Ø10.8 mm bores. |
+| Main shaft / weaving plane | Z=400 / 520 mm; shaft Y=180 mm |
+| Upper gears | Six and twelve teeth, module 6, 54 mm centre distance |
+| Lower gears | Four 24-tooth wheels, module 4, 48 mm pitch radius |
+| Belt | 64 perforations at 4π mm pitch; two pegged sprockets |
+| Warp / heddles | 24 ends, 6 mm spacing; Y=170 and 190 mm; opposite ±18 mm lift |
+| Spool / hands | 24 × 12 × 6 mm boat; 260 mm total spool travel |
+| Retaining jaws | 14 mm selector lift; interleaving fingers and side cheeks |
+| Reed | 37 mm stroke, Y=48…85 mm; fell Y=45 mm |
+| Textile winding | 14.8 mm pitch radius, 0.555 mm per input turn |
+| Timber head tower | Z=615 mm |
 
-`shed_lift` is the one build parameter: `solid build automatic_weaving_loom --set shed_lift=20`. The supported range is 16–20 mm. It changes the eccentric throw, heddle travel and yarn geometry together. The upper limit keeps the pin inside the slot; the lower limit preserves the illustrative shed clearance. Other dimensions are fixed for this reconstruction.
+The guarded parameter `shed_lift` ranges from 16 to 20 mm. It changes the
+physical cam profiles, heddle motion and yarn motion together:
+`solid build automatic_weaving_loom --set shed_lift=20`.
 
-The support test **grounds the timber frame as a fixture** and checks the moving rigid pieces against it. It does not certify freestanding stability, dynamics, friction, wear, wood strength or manufacturing tolerances. No geometry or machine safety claim should be inferred from the educational scale.
+The construction is divided into [timing.py](timing.py),
+[winding.py](winding.py), [head.py](head.py), [cords.py](cords.py),
+[textile.py](textile.py), shared geometry in [parts.py](parts.py), and the
+registered [model.py](model.py). Independent fixtures exercise timing,
+winding, head closure, gripping and flexible routing. They are test fixtures,
+not additional gallery models.
 
-## Verification
+## Verification and limits
 
 ```sh
 solid test automatic_weaving_loom --faceted
 solid test automatic_weaving_loom --exact
 solid test automatic_weaving_loom --exact --set shed_lift=16
 solid test automatic_weaving_loom --exact --set shed_lift=20
-solid snapshot automatic_weaving_loom -o models/automatic_weaving_loom/snapshot.png --autocenter --viewall --time 0.25
+solid test models/automatic_weaving_loom/timing.py --exact
+solid test models/automatic_weaving_loom/winding.py --exact
+solid test models/automatic_weaving_loom/head_bench.py --exact
+solid test models/automatic_weaving_loom/grip_bench.py --exact
+solid test models/automatic_weaving_loom/cord_bench.py --exact
 python models/automatic_weaving_loom/scripts/inspect_demo.py
 ```
 
-The last command requires Playwright with Chromium and the generated export. It creates an ephemeral localhost server, checks actual browser controls and playback, records `_evidence/browser-demo.png`, and shuts the server down.
+The browser check uses the generated export and Playwright/Chromium, serves it
+on an ephemeral local port, and checks controls, changing/returning CAD pixels,
+playback and desktop/narrow layout. Results belong to this reconstruction's
+[verification record](docs/verification.md), not its former educational
+certificate preserved in Git history.
 
-The companion tests cover whole-model connectivity, rigid non-interference at 17 cycle samples, support on the grounded frame at nine samples, eccentric capture and bounded play, opposite heddle positions, spool travel and handoff, reed timing, actual flexible-yarn clearance, eye alignment, parameter guards and all six instruction targets. The instruction scenario also checks rigid interference every 0.5 simulated seconds. These are sampled geometric contracts, not continuous collision proofs.
+This is a connected **kinematic** simulation. Input torque, rope and belt
+tension, spring closing and textile tension are assumptions. No force,
+friction, impact, wear, wood strength, multilayer winding or manufacturing
+safety is solved. Sampled interference and capture checks do not constitute a
+continuous swept-volume proof. Flexible materials require separate checks;
+the rigid-only integrity gate cannot certify them.
 
-See [docs/verification.md](docs/verification.md) for results, fault injection, inspection and known blind spots. Generated geometry, screenshots, browser assets and raw logs remain ignored; the source, records and reproducible checks are committed.
-
-## Historical sources and interpretation
-
-- [Museo Leonardiano: Leonardo and the art of weaving](https://artsandculture.google.com/story/leonardo-and-the-art-of-weaving-leonardo-da-vinci-museum/2wVxLwuL6F11KQ?hl=en): principal explanation of the two alternating arms and narrow ribbon limitation.
-- [Museo Leonardiano: automatic loom reconstruction video record](https://museoleonardiano.it/opera/telaio-automatico-md/): identifies Codex Atlanticus f.985r–v.
-- [Museum object page](https://museoleonardiano.it/en/opera/automatic-weaving-loom/) and its [reference photograph](https://museoleonardiano.it/wp-content/uploads/2024/09/formato-immagine-sito-50.png): timber-frame architecture, rollers and visible drive components. The image was inspected locally and is not redistributed.
-- [Brix and Reesing, Creating Present-Day Solutions from Historical Knowledge](https://www.dmg-lib.org/thinkMOTION/wp-content/uploads/2011_Mexico-BrixReessing.pdf): secondary engineering context for common-shaft coordination.
-
-Accessed 12 September 2026. No upstream CAD geometry or code was copied. The exact arm trajectories, supports and phase laws are this model's explanatory implementation, not a claim about the historical drawing's complete transmission.
-
-## Project record
-
-Originally created with `solid new Automatic-weaving-loom`, retaining both integrity contracts. The original independent repository and planning commit `39e5d98` were subsequently merged into the Leonardo gallery without rewriting history. Its OpenSpec change `demonstrate-leonardos-loom` still records the original research, design, behavioral specifications, implementation and verification. The source now lives directly in this machine folder. See the [consolidation record](../../docs/consolidation.md).
+The original `demonstrate-leonardos-loom` cycle remains historical evidence.
+The new machine-owned OpenSpec cycle is `reconstruct-museum-automatic-loom`;
+no framework or sibling machine is part of this change. Museum photographs
+are private research references and are not redistributed.

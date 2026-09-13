@@ -45,6 +45,14 @@ animation and call that transmission.
 
 ## Decisions
 
+### Pilot clarification during implementation
+
+When asked whether concealed arm, grip and reed transmissions should await
+additional museum drawings or receive documented mechanical completions,
+the pilot explicitly chose: “Complete the gaps and document the inferred
+mechanisms”. This authorizes original, tested constructions for those gaps;
+it does not turn them into observed historical facts or authorize omission.
+
 ### Reconstruction and evidence
 
 Coordinates remain X across the ribbon, Y from cloth to warp, Z up. Layout
@@ -87,6 +95,14 @@ Clamp combined controls to the tested envelope. Derive the displayed output
 positions from the same Python mechanism; never build a second JS mechanism.
 Check desktop and narrow viewports, playback, stage controls and repeat poses.
 
+The pilot subsequently requested a one-minute simulation for Studio's native
+slow-motion controls, explicitly correcting an export-only interpretation.
+Declare `time = Time(loop=60)` on the Python root and drive the same four turns
+at 24 degrees per second. Root test timestamps are seconds, with the full
+289-sample sweep covering 0–60 seconds. Build and export must both publish
+`animation.loop = 60`; changing export frame count is not the implementation.
+The native viewer receives the declared loop and exposes its speed selector.
+
 Root connectedness and non-interference stay mandatory, across the cycle and
 transition neighborhoods. Tooth-pitch sampling, bounded free/blocked tests,
 shaft retention and independent geometry measurements establish engagement.
@@ -114,10 +130,42 @@ the reconstructed root under the existing registry name, and update the same
 exhibit URL. Preserve the former archive. After all gates pass, sync baseline
 specifications, archive this change and commit locally; do not push.
 
-## Open Questions
+## Implementation findings and resolved constructions
 
-Resolve the vertical feed transmission's contact surfaces, the exact carrier
-actuation/return path, and belt tooth seating from evidence and geometric
-construction. These are implementation research tasks, not claims already
-settled by the photographs. Record their disposition in the reconstruction
-and validation documents before completion.
+The pilot-authorized completions are recorded in `docs/reconstruction.md`:
+captured spiral groove and descending rack, four 24-tooth lower wheels and
+a 64-perforation leather belt; seven head cam tracks, 5:1 slotted rockers,
+opposed-opening retaining jaws, outboard closing springs and three weighted
+cord returns. These resolve the original implementation questions, not the
+historical uncertainty about concealed museum details.
+
+Red-first integration checks found several conditions that isolated rigid
+fixtures could not see. A four-millimetre-only empty-hand retreat left that
+hand inside the closing shed, so both arms now fully withdraw before closure.
+An early-opening, full-shed dwell replaces insufficient sinusoidal opening.
+Vertical grip opening and inboard spring bows crossed actual warp yarns;
+the jaws now open along opposite Y directions, with their springs outboard.
+The left actuator bar overlapped the closed arm-guide cap by 36 mm³; its
+outboard dogleg clears the cap without weakening the guide. Both bars retain
+inboard routes in the wider shed. At the minimum 16 mm lift, the right bar's
+short bridge also required shortening toward the back to clear the warp.
+At maximum 20 mm lift, the selector-cam outer rims touched the lowered heddle
+crossbar. Reducing the selector base radius from 45 to 42 mm and lowering
+their follower pins by the same 3 mm preserves captured actuation while
+clearing the heddle. These boundary failures are geometry corrections, not
+reductions of the advertised range or changes to the clearance tests.
+
+The pilot's counterweight observation became independent constant-length
+and opposed-endpoint tests. A deliberate same-direction mutation fails both.
+Expanded flexible/rigid route checks also found 72.5 mm of reed haul inside
+the follower stem. Moving its attachment to the real stem top keeps the
+sheaves unchanged and shortens the fixed rope by that amount. Cord and spring
+termination contact is explicitly bounded to 3 mm terminal zones; no entire
+rigid mate is excluded from the routing check.
+
+A test sequencing finding matters to every final certificate: `set_state`
+merges state, so a sweep changing time alone can inherit a held `run=0`.
+The project-owned sampler explicitly sets phase, run and time at each sample
+and restores a numeric neutral pose; it does not call `clear_state`, which
+unbinds drivers. Final regression uses these explicit sweeps. No dependency
+was changed to achieve this.

@@ -1,6 +1,7 @@
 # Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
 import numpy as np
-from solid_node.test import TestCase, testing_steps
+from solid_node.test import TestCase
+from .checks import sampled_poses, rigid_parts
 from solid_node.simulation import ScenarioTest
 from .model import AutomaticWeavingLoom
 
@@ -9,73 +10,311 @@ class AutomaticWeavingLoomTest(TestCase):
 
     node = AutomaticWeavingLoom
 
+    def test_00_declared_time_is_sixty_seconds(self):
+        self.assertEqual(getattr(AutomaticWeavingLoom.time, "loop", None), 60)
+        for seconds, angle in ((0, 0), (15, 360), (30, 720), (45, 1080), (60, 1440)):
+            self.node.set_state(phase=0, run=1, time=seconds)
+            self.assertAlmostEqual(self.node.cycle.value, angle)
+
+    def test_00_historical_timing_train_is_present(self):
+        self.assertTrue(
+            hasattr(self.node, "timing"),
+            "The one-tooth / six-tooth / twelve-tooth transmission is missing",
+        )
+
+    def test_01_weaving_outputs_have_physical_actuators(self):
+        self.assertTrue(
+            hasattr(self.node, "head_drive"),
+            "Arms, reed and gripping jaws still lack physical transmissions",
+        )
+
+    def test_02_operating_flexible_routes_clear_the_machine(self):
+        import trimesh
+        from .test_cord_bench import centerline
+
+        n = self.node
+        routes = []
+        for side in ("left", "right"):
+            group = getattr(n.cords, side)
+            arm = getattr(n.carrier, side)
+            mechanism = getattr(n.head_drive, side)
+            routes.extend(
+                (
+                    (
+                        side + " haul",
+                        group.haul.cord,
+                        8,
+                        {id(mechanism.output): 0, id(arm.body): -1},
+                    ),
+                    (
+                        side + " return",
+                        group.returning.cord,
+                        8,
+                        {id(arm.body): 0, id(group.weight): -1},
+                    ),
+                    (
+                        side + " spring",
+                        arm.spring,
+                        4,
+                        {id(arm.body): 0, id(arm.jaw): -1},
+                    ),
+                )
+            )
+        routes.extend(
+            (
+                (
+                    "reed haul",
+                    n.cords.reed.haul.cord,
+                    8,
+                    {id(n.head_drive.reed): 0, id(n.reed): -1},
+                ),
+                (
+                    "reed return",
+                    n.cords.reed.returning.cord,
+                    8,
+                    {id(n.reed): 0, id(n.cords.reed.weight): -1},
+                ),
+            )
+        )
+        rigid = list(rigid_parts(n))
+        for phase in range(0, 361, 15):
+            n.set_state(phase=phase, run=0, time=0)
+            meshes = [(path, part, part.mesh) for path, part in rigid]
+            for name, flexible, profile, terminations in routes:
+                mesh = flexible.mesh
+                a = mesh.bounds
+                ends = centerline(flexible, profile)
+                for path, part, other in meshes:
+                    b = other.bounds
+                    if not (np.all(a[0] < b[1]) and np.all(b[0] < a[1])):
+                        continue
+                    try:
+                        if id(part) not in terminations:
+                            self.assertNotIntersecting(flexible, part)
+                        else:
+                            # A cord is tied into a 3 mm terminal zone; a
+                            # spring is clamped/bearing at its ends. Admit
+                            # those local attachments, never an entire mate.
+                            overlap = trimesh.boolean.intersection(
+                                [mesh, other], engine="manifold"
+                            )
+                            if len(overlap.vertices):
+                                endpoint = ends[terminations[id(part)]]
+                                self.assertLessEqual(
+                                    np.linalg.norm(
+                                        overlap.vertices - endpoint, axis=1
+                                    ).max(),
+                                    3,
+                                )
+                    except AssertionError as error:
+                        raise AssertionError(
+                            f"{name}, {phase}°, {path}: {error}"
+                        ) from error
+
     def test_solid_integrity(self):
         self.assertNoDisconnectedSolids(self.node)
 
-    @testing_steps(17)
+    @sampled_poses(289, end=60)
     def test_assembly_integrity(self):
-        self.assertNoSolidInterference(self.node)
+        try:
+            self.assertNoSolidInterference(self.node)
+        except AssertionError as error:
+            raise AssertionError(
+                f"four-turn sample {self.node.time}: {error}"
+            ) from error
+
+    def test_transition_neighborhoods_and_combined_controls(self):
+        for angle in (
+            0,
+            10,
+            50,
+            60,
+            85,
+            90,
+            95,
+            120,
+            130,
+            170,
+            180,
+            190,
+            230,
+            240,
+            265,
+            270,
+            275,
+            300,
+            310,
+            350,
+            360,
+            480,
+            600,
+            720,
+            1080,
+            1440,
+        ):
+            for delta in (-0.1, 0, 0.1):
+                effective = min(1440, max(0, angle + delta))
+                self.node.set_state(phase=0, run=1, time=effective / 24)
+                self.assertNoSolidInterference(self.node)
+        # Two mixed controls representing the same imposed shaft coordinate
+        # must put actual geometry in the same place, including winding.
+        for phase, run, time in ((73, 0, 0), (13, 0.5, 5), (0, 1, 73 / 24)):
+            self.node.set_state(phase=phase, run=run, time=time)
+            if phase == 73:
+                spool = self.node.carrier.spool.mesh.vertices.copy()
+                rack = self.node.winding.rack.mesh.vertices.copy()
+            else:
+                np.testing.assert_allclose(
+                    self.node.carrier.spool.mesh.vertices, spool, atol=0.002
+                )
+                np.testing.assert_allclose(
+                    self.node.winding.rack.mesh.vertices, rack, atol=0.002
+                )
+        self.node.set_state(phase=0, run=1, time=60)
+        end = self.node.winding.rack.mesh.bounds.copy()
+        self.node.set_state(phase=360, run=1, time=60)
+        np.testing.assert_allclose(self.node.winding.rack.mesh.bounds, end, atol=0.002)
 
     def test_frame_stands_on_ground(self):
         bounds = self.node.frame.mesh.bounds
         self.assertAlmostEqual(bounds[0, 2], 0.0, delta=0.01)
-        self.assertGreater(bounds[1, 2], 240)
+        self.assertGreater(bounds[1, 2], 590)
 
-    @testing_steps(9)
+    @sampled_poses(9, end=15)
     def test_machine_has_a_support_path(self):
-        self.assertAssemblySupported(self.node, ground=self.node.frame, max_drop=0.8)
+        # The three weights are suspended by the independently checked taut
+        # cords. The rigid-only static checker cannot supply a rope tension.
+        weights = (
+            self.node.cords.left.weight,
+            self.node.cords.right.weight,
+            self.node.cords.reed.weight,
+        )
+        # Largest vertical cam play is 2.5-1.5=1.0 mm. A 1.2 mm drop
+        # exceeds it, but stays below the 1 mm finger plus its 0.3 mm gap.
+        self.assertAssemblySupported(
+            self.node,
+            ground=self.node.frame,
+            max_drop=1.2,
+            supports=[(weight, self.node.frame) for weight in weights],
+        )
+
+    def test_arm_and_jaw_guides_are_physically_closed(self):
+        for phase in range(0, 361, 15):
+            self.node.set_state(phase=phase, run=0, time=0)
+            for arm in (self.node.carrier.left, self.node.carrier.right):
+                for along in ((0, 1, 0), (0, 0, 1)):
+                    self.assertFreeWithin(arm.body, 0.1, self.node.frame, along=along)
+                    self.assertBlockedBeyond(
+                        arm.body, 0.7, self.node.frame, along=along
+                    )
+                for along in ((1, 0, 0), (0, 0, 1)):
+                    self.assertFreeWithin(arm.jaw, 0.1, arm.body, along=along)
+                    self.assertBlockedBeyond(arm.jaw, 0.7, arm.body, along=along)
+                from .test_cord_bench import centerline
+
+                spring = centerline(arm.spring, 4)
+                bounds = arm.body.mesh.bounds
+                outer = bounds[0, 0] if arm.side < 0 else bounds[1, 0]
+                origin_x = outer - arm.side * 192.5
+                np.testing.assert_allclose(
+                    spring[0],
+                    (origin_x + arm.side * 185, 140 if arm.side < 0 else 70, 522),
+                    atol=0.002,
+                )
+                # The tip bears on top of the jaw's actuation bar to close it.
+                tip_x = origin_x + arm.side * 185
+                top = arm.jaw.mesh.bounds[1, 2]
+                opening = arm.jaw.mesh.bounds[1, 1] - (139 if arm.side < 0 else 153)
+                np.testing.assert_allclose(
+                    spring[-1], (tip_x, 99 + opening, top), atol=0.002
+                )
 
     def test_opposite_heddles(self):
         lift = self.node.shed_lift
         for angle, expected in [(0, 0), (90, lift), (180, 0), (270, -lift)]:
             self.node.set_state(phase=angle, run=0, time=0)
-            for heddle, sign in [(self.node.heddle_a, 1), (self.node.heddle_b, -1)]:
+            for heddle, sign in [
+                (self.node.head_drive.heddle_a, 1),
+                (self.node.head_drive.heddle_b, -1),
+            ]:
                 z = heddle.cage.mesh.bounds[:, 2].mean()
-                self.assertAlmostEqual(z, 180 + sign * expected, delta=0.01)
+                self.assertAlmostEqual(z, 520 + sign * expected, delta=0.01)
 
     def test_yarn_reaches_its_heddle_eye(self):
         lift = self.node.shed_lift
         for angle, direction in [(90, 1), (270, -1)]:
             self.node.set_state(phase=angle, run=0, time=0)
-            for yarn, y, sign in [(self.node.warp_a[0], 20, 1),
-                                   (self.node.warp_b[0], 40, -1)]:
-                vertices = yarn.front.mesh.vertices
+            for yarn, y, sign in [
+                (self.node.warp_a[0], 170, 1),
+                (self.node.warp_b[0], 190, -1),
+            ]:
+                vertices = yarn.front.fiber.mesh.vertices
                 rim = vertices[abs(vertices[:, 1] - y) < 0.15]
                 self.assertGreater(len(rim), 0)
-                self.assertAlmostEqual(rim[:, 2].mean(), 180 + sign * direction * lift, delta=0.01)
+                self.assertAlmostEqual(
+                    rim[:, 2].mean(), 520 + sign * direction * lift, delta=0.01
+                )
 
     def test_shed_envelope_is_guarded(self):
         for lift in (15.9, 20.1):
             with self.assertRaises(ValueError):
                 AutomaticWeavingLoom(shed_lift=lift)
 
-    @testing_steps(9)
-    def test_eccentric_is_captured_with_bounded_play(self):
-        for heddle, pin in [(self.node.heddle_a, self.node.crank.pin_a),
-                            (self.node.heddle_b, self.node.crank.pin_b)]:
-            self.assertNotIntersecting(heddle.yoke, pin)
-            self.assertFreeWithin(heddle.yoke, 0.2, pin, along=(0, 0, 1))
-            self.assertBlockedBeyond(heddle.yoke, 0.8, pin, along=(0, 0, 1))
+    @sampled_poses(9, end=15)
+    def test_head_followers_are_captured_by_the_common_shaft(self):
+        h = self.node.head_drive
+        for name, follower in (
+            ("heddle A", h.heddle_a.follower),
+            ("heddle B", h.heddle_b.follower),
+            ("left arm", h.left.follower),
+            ("right arm", h.right.follower),
+            ("reed", h.reed),
+            ("selector A", h.selector_a),
+            ("selector B", h.selector_b),
+        ):
+            try:
+                self.assertNotIntersecting(follower, self.node.timing.input)
+                self.assertFreeWithin(
+                    follower, 0.1, self.node.timing.input, along=(0, 0, 1)
+                )
+                self.assertBlockedBeyond(
+                    follower, 1.5, self.node.timing.input, along=(0, 0, 1)
+                )
+            except AssertionError as error:
+                raise AssertionError(f"{name}: {error}") from error
+
+    @sampled_poses(17, end=15)
+    def test_rocking_levers_close_both_slots(self):
+        for arm in (self.node.head_drive.left, self.node.head_drive.right):
+            for slider in (arm.follower, arm.output):
+                self.assertFreeWithin(slider, 0.1, arm.lever, along=(0, 0, 1))
+                self.assertBlockedBeyond(slider, 0.7, arm.lever, along=(0, 0, 1))
 
     def test_shuttle_travel_and_handoff(self):
         for angle, x in [(0, -130), (90, 0), (180, 130), (270, 0), (360, -130)]:
             self.node.set_state(phase=angle, run=0, time=0)
-            self.assertAlmostEqual(self.node.carrier.spool.mesh.bounds[:, 0].mean(), x, delta=0.01)
+            self.assertAlmostEqual(
+                self.node.carrier.spool.mesh.bounds[:, 0].mean(), x, delta=0.01
+            )
             if x == 0:
-                lv = self.node.carrier.left.mesh.vertices
-                rv = self.node.carrier.right.mesh.vertices
-                left = lv[lv[:, 2] > 180, 0].max()
-                right = rv[rv[:, 2] > 180, 0].min()
+                lv = self.node.carrier.left.body.mesh.vertices
+                rv = self.node.carrier.right.body.mesh.vertices
+                # Measure the central outer stops, not the newly added
+                # side cheeks that deliberately extend along the boat.
+                left = lv[(lv[:, 2] > 520) & (abs(lv[:, 1] - 115) < 4.01), 0].max()
+                right = rv[(rv[:, 2] > 520) & (abs(rv[:, 1] - 115) < 4.01), 0].min()
                 self.assertAlmostEqual(left, -12.5, delta=0.02)
                 self.assertAlmostEqual(right, 12.5, delta=0.02)
 
     def test_reed_arrives_after_carrier_clears(self):
-        for angle, expected_y in [(0, -102), (90, -65), (180, -102), (270, -65)]:
+        for angle, expected_y in [(0, 48), (90, 85), (180, 48), (270, 85)]:
             self.node.set_state(phase=angle, run=0, time=0)
             y = self.node.reed.mesh.bounds[:, 1].mean()
             self.assertAlmostEqual(y, expected_y, delta=0.01)
-            if expected_y == -102:
-                self.assertGreater(abs(self.node.carrier.spool.mesh.bounds[:, 0].mean()), 90)
+            if expected_y == 48:
+                self.assertGreater(
+                    abs(self.node.carrier.spool.mesh.bounds[:, 0].mean()), 90
+                )
 
     def test_warp_paths_leave_space_for_spool(self):
         # Check actual yarn surfaces at the spool's fore/aft envelope,
@@ -84,10 +323,132 @@ class AutomaticWeavingLoomTest(TestCase):
             for phase in (angle, angle + 180):
                 self.node.set_state(phase=phase, run=0, time=0)
                 for thread in (self.node.warp_a[0], self.node.warp_b[0]):
-                    vertices = thread.front.mesh.vertices
-                    region = vertices[(vertices[:, 1] >= -43) & (vertices[:, 1] <= -27)]
+                    vertices = thread.front.fiber.mesh.vertices
+                    region = vertices[(vertices[:, 1] >= 107) & (vertices[:, 1] <= 123)]
                     self.assertGreater(len(region), 0)
-                    self.assertGreater(np.min(abs(region[:, 2] - 180)), 4.0)
+                    self.assertGreater(np.min(abs(region[:, 2] - 520)), 4.0)
+
+    def test_actual_warp_does_not_touch_the_hands_or_spool(self):
+        # Rigid integrity cannot see yarn. Check both shed signs, including
+        # entry and exit rather than only the centre handoff.
+        parts = (
+            self.node.carrier.spool,
+            self.node.carrier.left.body,
+            self.node.carrier.left.jaw,
+            self.node.carrier.right.body,
+            self.node.carrier.right.jaw,
+            self.node.carrier.left.spring,
+            self.node.carrier.right.spring,
+        )
+        yarns = [end.front.fiber for end in (*self.node.warp_a, *self.node.warp_b)]
+        for phase in range(0, 361, 5):
+            self.node.set_state(phase=phase, run=0, time=0)
+            bounds = {id(part): part.mesh.bounds for part in parts}
+            for yarn in yarns:
+                a = yarn.mesh.bounds
+                for part in parts:
+                    b = bounds[id(part)]
+                    if np.all(a[0] < b[1]) and np.all(b[0] < a[1]):
+                        try:
+                            self.assertNotIntersecting(yarn, part)
+                        except AssertionError as error:
+                            raise AssertionError(
+                                f"warp entry/exit at {phase}°: {error}"
+                            ) from error
+
+    def test_integrated_grips_retain_the_spool(self):
+        for phase in (
+            0,
+            30,
+            60,
+            84,
+            85,
+            89,
+            90,
+            91,
+            95,
+            96,
+            120,
+            180,
+            240,
+            264,
+            265,
+            269,
+            270,
+            271,
+            275,
+            276,
+            300,
+            360,
+        ):
+            self.node.set_state(phase=phase, run=0, time=0)
+            arm = (
+                self.node.carrier.left
+                if phase < 90 or phase >= 270
+                else self.node.carrier.right
+            )
+            for part, along in (
+                (arm.body, (arm.side, 0, 0)),
+                (arm.jaw, (-arm.side, 0, 0)),
+                (arm.jaw, (0, -arm.side, 0)),
+                (arm.body, (0, arm.side, 0)),
+                (arm.jaw, (0, 0, 1)),
+                (arm.body, (0, 0, -1)),
+            ):
+                self.assertFreeWithin(self.node.carrier.spool, 0.1, part, along=along)
+                self.assertBlockedBeyond(
+                    self.node.carrier.spool,
+                    0.8,
+                    part,
+                    along=along,
+                    directions="forward",
+                )
+
+    def test_cords_meet_the_real_arm_and_reed_attachments(self):
+        from .test_cord_bench import centerline
+
+        for phase in range(0, 361, 15):
+            self.node.set_state(phase=phase, run=0, time=0)
+            for mechanism, arm, cords in (
+                (
+                    self.node.head_drive.left,
+                    self.node.carrier.left,
+                    self.node.cords.left,
+                ),
+                (
+                    self.node.head_drive.right,
+                    self.node.carrier.right,
+                    self.node.cords.right,
+                ),
+            ):
+                haul = centerline(cords.haul.cord)
+                output = mechanism.output.mesh.bounds
+                np.testing.assert_allclose(
+                    haul[0], (output[:, 0].mean(), 240, output[0, 2] + 200), atol=0.002
+                )
+                bounds = arm.body.mesh.bounds
+                attach_x = bounds[0, 0] + 7.5 if arm.side < 0 else bounds[1, 0] - 7.5
+                np.testing.assert_allclose(haul[-1], (attach_x, 240, 520), atol=0.002)
+                self.assertAlmostEqual(
+                    haul[0, 2] + cords.weight.mesh.bounds[1, 2], 848, delta=0.002
+                )
+            reed = self.node.reed.mesh.bounds
+            np.testing.assert_allclose(
+                centerline(self.node.cords.reed.haul.cord)[-1],
+                (-240.2, reed[:, 1].mean(), 485),
+                atol=0.002,
+            )
+            np.testing.assert_allclose(
+                centerline(self.node.cords.reed.haul.cord)[0],
+                (-240.2, 180, self.node.head_drive.reed.mesh.bounds[1, 2]),
+                atol=0.002,
+            )
+            self.assertAlmostEqual(
+                centerline(self.node.cords.reed.haul.cord)[0, 2]
+                + self.node.cords.reed.weight.mesh.bounds[1, 2],
+                832.5,
+                delta=0.002,
+            )
 
 
 class LoomScenarioTest(ScenarioTest):
@@ -97,9 +458,14 @@ class LoomScenarioTest(ScenarioTest):
 
     def test_every_instruction_lands_and_stays_clear(self):
         sim = self.simulation()
-        stages = [("Beat left", 0, 0), ("Open shed", 60, 0),
-                  ("Handoff", 90, 0), ("Beat right", 180, 0),
-                  ("Return pick", 270, 0), ("Run", 0, 1)]
+        stages = [
+            ("Beat left", 0, 0),
+            ("Open shed", 60, 0),
+            ("Handoff", 90, 0),
+            ("Beat right", 180, 0),
+            ("Return pick", 270, 0),
+            ("Run", 0, 1),
+        ]
         self.assertEqual(set(self.node.instructions), {stage[0] for stage in stages})
         for index, (name, _, _) in enumerate(stages):
             start = index * 1.0

@@ -1,109 +1,160 @@
-# Verification record — 12 September 2026
+# Automatic loom reconstruction: verification record
 
-The implementation was checked in the primary workspace virtual environment,
-inside this independent project repository. No framework source was changed.
-The public solid-node API and machining skills determined the declarative
-joints/relations, red-first checks, whole-model integrity, fault challenge,
-visual inspection and final exact-kernel validation.
+Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
 
-## Results
+**Checkpoint on 13 September 2026 — not a completion certificate.** This replaces the former
+illustrative model's report, preserved at the planning commit `cec7cf1`.
+The reconstruction was commissioned on 12 September 2026; mechanical
+validation continued on 13 September. The pilot explicitly authorized
+documented inference for concealed mechanisms.
 
-| Run | Result |
+The project-owned simulation workflow supplies the red-first checks,
+physical engagement contracts, whole-root integrity, fault challenges,
+visual inspection and final exact-kernel gates. No framework, viewer or
+sibling machine has been changed.
+
+## Environment and evidence precision
+
+- solid-node checkout `6e41f2da132a8604f9b68895967247fb8876fc4d`,
+  metadata 0.6.0 with the post-release declarative API.
+- solid-node-viewer checkout `6fb082ba9823fb0839631bd4a3ecbf4a41b33b64`,
+  local 0.1.0, founded but not publicly released, viewer API 7.
+- molejo checkout `e76c9039cf906cfc0005324d78ccee7116e0ff4a`, version 0.2.0.
+- CadQuery 2.7, Python 3.12, Linux; workspace virtual environment.
+- Exact runs compare rigid pairs on OCCT solids. Flexible leaves retain their
+  mesh representation; an exact run does not make a rope an exact rigid part.
+- No interference volume epsilon is used. The fixed timber frame is declared
+  ground; this does not prove freestanding stability. Only the three hanging
+  weights use declared rigid-support exceptions, because their independently
+  measured flexible cords provide a tension that the rigid static checker
+  cannot supply.
+
+## Red-first findings and challenges
+
+The absent upper train, descending drive and head actuators first failed
+omission contracts. Detailed grip checks then failed on incomplete retention,
+missing capture and collisions during exchange. Implementation did not omit
+those parts or weaken the whole-root integrity gate.
+
+| Finding | Resolution / evidence |
 | --- | --- |
-| Initial contracts against `solid new` scaffold | 2 passed, 7 failed; expected missing frame, drive, heddles, carrier, reed, yarn and scenario. The single-solid scaffold's interference check was vacuous. |
-| Initial support contract | Failed: spool, reed and reed bed lacked a support path. |
-| Completed faceted default regression | 12 passed, 0 failed; no volume epsilon. |
-| Faceted upper boundary, `shed_lift=20` | 12 passed, 0 failed. |
-| Exact default, `shed_lift=18` | 12 passed, 0 failed in 24.07 s. |
-| Exact upper boundary, `shed_lift=20` | 12 passed, 0 failed in 24.11 s. |
-| Exact lower boundary, `shed_lift=16` | 12 passed, 0 failed in 22.72 s. |
-| Published build and export | Successful; 118 tree nodes, 11 rigid occurrences, 10 distinct pieces, 81 flexible leaves. Every rigid model path exists. |
-| Browser check | Chromium loaded the model; Handoff reached phase 90/run 0, Return pick reached phase 270, Run restored playback; timeline value changed; no page errors. |
+| Missing one/six/twelve train | Explicit indexing pin, dwell lands, cycloidal gears, retained shafts |
+| Upper wheel centre-distance fault | Deliberate offset failed engagement, interference and shaft measurements; restored |
+| Lower winding feed absent | Captured scroll follower, descending rack, four gears and perforated belt |
+| Arm output slot too short | Real circular pin path exceeded the slot end; widened/recentred the actual slot |
+| Buried pulley journal | A frame union closed the bore, creating an internal void and shaft interference; rerouted the bearer |
+| Open arm bearings | Truncating the old frame removed upper guide caps; restored closed guides and measured their capture |
+| Bearing feet overlapped their seats | Corrected seat height and added the intermediate-post mortise |
+| Empty hand in closing shed | Full withdrawal replaces the unsuccessful four-millimetre-only retreat |
+| Warp contact on entry / release | Early-opening heddle dwell, opening along the shed, outboard grip actuators |
+| Counterweight crossed a cam | Arm returns now hang behind the shaft at Y=260 mm |
+| Counterweight moved with its driven end | Corrected the reed return sign; full rope length and equal-and-opposite endpoint motion are measured |
 
-All mechanical node classes live in one source module; the root companion
-tests build and exercise its complete realized tree. There are no other node
-modules omitted from the regression. The published document is version 4,
-with 19 shared expression bindings, both drivers, and all six instructions.
-The expressions retain `phase`, `run` and `$t`, including both signs of the
-shed lift and the flexible-yarn bindings. Build and export logs contain no
-warnings or errors.
+The pilot's counterweight observation has a deliberate regression challenge:
+changing both the reed weight and its cord endpoint to the same-direction
+motion produced **3 passed, 2 failed**. At 5° the actual rope was already
+0.56217 mm shorter than its required length; the vertical endpoint sum
+changed by 0.56211 mm. Restoring opposite motion returned **5 passed, 0 failed**.
+Endpoint attachment alone still passed the fault: it cannot prove fixed
+rope length, which is why these are independent checks.
 
-## Deliberate fault challenge
+## Results at the resumed checkpoint
 
-Five independent code faults were introduced together into the node source,
-then the complete faceted regression ran. Each dedicated contract detected
-its corresponding fault; the combined run returned 4 passed, 8 failed.
-All five faults were reverted before the successful boundary and exact runs.
-
-| Injected code fault | Detection |
+| Fixture / gate | Observed result |
 | --- | --- |
-| Translate the timber frame upward 2 mm | Ground-plane measurement reports 2 instead of 0 mm; interference also detects displaced carrier guides. |
-| Add 3 mm to the first eccentric pin's throw without changing its follower | Captured-pin test detects yoke/pin intersection. |
-| Shorten actual carrier travel coefficient from 130 to 110 | Spool mesh center is -110 instead of -130 mm. |
-| Add 90° to the reed's twice-per-cycle timing law | Reed center is -83.5 instead of -102 mm at beat-up. |
-| Reverse warp A's actual lift binding | Yarn-at-eye measurement reports Z=162 instead of Z=198 mm. |
+| Upper timing, exact | 7 passed, 0 failed, 91.98 s |
+| Lower winding and belt, exact | 8 passed, 0 failed, 1238.56 s |
+| Flexible cords / winding, exact | 5 passed, 0 failed, 13.33 s |
+| Opposed-opening grips, exact | 4 passed, 0 failed, 6.99 s |
+| Whole head, faceted, final cam geometry | 3 passed, 0 failed, 37.38 s |
+| Integrated root, before seconds migration, 16 / 18 / 20 mm | 21/21 each, 215.88 / 229.23 / 247.01 s |
+| Python-declared clock | 60 s loop; 0 / 15 / 30 / 45 / 60 s produce 0 / 360 / 720 / 1080 / 1440° |
+| Root after seconds migration, 16 / 18 / 20 mm | 22/22 each, 399.61 / 408.29 / 406.96 s, faceted, zero volume epsilon |
+| Whole-head and root final exact certification | Outstanding; no complete verdict |
+| OpenSCAD snapshots | Isometric, side-alignment and head views rendered and inspected |
+| Standalone desktop/narrow browser before declared clock | All six stages, exact/slider controls, repeat CAD pixels, playback, assets and source inventory passed |
+| Live Studio clock | PASS: actual served `loop=60`, native ×0.1/×0.25/×0.5, 1:00.0 endpoint, changed CAD and playback; screenshot inspected |
+| All registered gallery browser checks | Outstanding |
 
-The absolute warp-clearance test intentionally does **not** detect a sign
-reversal: either sign can leave an empty shed. The independent eye-position
-test supplies that coverage. Connectivity alone is blind to every pose-only
-fault; non-interference alone cannot prove correct stroke or timing. The
-combined challenge is recorded as one run, not five isolated runs.
+Whole-head and default-root exact runs were deliberately stopped at the pilot's
+new pause request. They had no completed verdict. Boundary exact runs also
+cannot be counted: rebuilding a shared artifact directory removed the other
+parameter variants' STL files while those runs were reading them. The resulting
+`FileNotFoundError` is an orchestration failure, not a geometric verdict. Future
+root runs must each use a separate build directory; do not build/export into a
+running test's directory. The clock migration also requires new root runs.
 
-## Geometry findings resolved in this design
+Every final fixture run above uses `checks.sampled_poses`: each sample explicitly sets
+`phase=0`, `run=1` and its time, then restores an explicit neutral state.
+Earlier sweeps could inherit `run=0` from a preceding held-pose check and
+therefore fail to exercise motion. `clear_state()` is not a reset to driver
+defaults; an initial helper using it also produced failures and was corrected.
+The fixture results in the table are reruns on the corrected sampler, not the
+superseded first-pause results. Root sweeps now cover explicit seconds: 289
+samples over 0–60 s and one-turn contact checks over 0–15 s.
 
-- The rotating handwheel handle struck the original lower stretcher. Its
-  swept clearance is now cut into that rail; root interference stays active.
-- The spool initially had no vertical support. Complementary pairs of narrow
-  fingers now pass beneath it from either arm, with 0.3 mm seating clearance,
-  and interleave without collision at handoff.
-- The reed bed initially floated. A connected timber bearer seats it with a
-  0.2 mm gap; the reed foot channels have 0.3 mm vertical/lateral play.
-- A nine-pose support test with inferred ground reported an unbalanced-frame
-  verdict at an intermediate pose. The delivered support claim explicitly
-  fixes the timber frame as `ground`, and proves the other rigid pieces have
-  supported equilibrium against that fixture. No freestanding stability
-  certification is claimed or hidden behind an epsilon or an exempt moving
-  body.
+The resumed run reproduced the 36 mm³ left-jaw/frame collision on exact solids
+and corrected the bar route without weakening the closed guide. Expanded tests
+then failed on spring/yarn contact (0.15312 mm³) and a reed haul routed 72.5 mm
+inside its follower stem. Moving springs outboard and the attachment to the
+stem top resolved those failures. Minimum-lift yarn contact (including 305°)
+and maximum-lift selector-rim/heddle contact required handed bar routes and
+42 mm selector base radii. The table's three complete faceted root runs include
+these final boundary corrections. A +10° selector-phase mutation failed real
+cam contact at 90° (1.6412692 mm³); its relation was restored. This challenge
+preceded the later radius correction and may be repeated on the final source.
 
-## Visual evidence
+The pilot corrected an export-only interpretation of the duration request.
+The model now declares `Time(loop=60)` in Python and drives its shaft at 24°/s.
+The new declaration test failed first (`None != 60`) and then passed, including
+the independently expected quarter-loop shaft angles. The normal Studio build
+and standalone export both publish `animation.loop=60`; frame count is restored
+to 360 and is only timeline resolution. Direct pytest invocation of a plain
+solid-node `TestCase` did not prepare `self.node` and was an invalid harness
+attempt, not a model failure; the normal `solid test` runner prepares it.
 
-Images were generated by `solid snapshot` with the default OpenSCAD renderer
-and inspected, then reframed to include the complete frame:
+The [first pause](pause-2026-09-13.md) remains historical. The
+[latest checkpoint](checkpoint-2026-09-13.md) is the current resume record.
 
-- `snapshot-isometric.png`, time 1/6: complete timber frame, offset heddles,
-  reed, cloth sample, carrier and eccentric assembly.
-- `snapshot-side.png`, time 1/4: cream warp above blue warp, the central spool
-  inside the open shed, and the lower eccentric/yoke position.
-- `snapshot-return.png`, time 3/4: blue warp above cream warp and the opposite
-  follower position, confirming visible reversal in the same camera view.
-- `_evidence/browser-demo.png`: actual standalone browser presentation,
-  material colors, named controls and explanatory sidebar.
+## Coverage to retain in the final certificate
 
-The first inspection exposed clipped frame feet in the chosen camera; final
-views use a longer camera distance. The three final CAD images, not only the
-initial render, were inspected. Generated images and logs remain local and
-ignored, with reproduction instructions in README.
+- All rigid pieces connected, with whole-root interference active.
+- 289 samples over four input revolutions, transition neighborhoods,
+  combined phase/run/time controls, held endpoint and instruction trajectories.
+- Physical one-tooth indexing, dwell retention, six/twelve engagement,
+  scroll/rack capture, all lower gear mates, bearings and axial retention.
+- Every perforated-belt bridge joins both bands; actual belt material clears
+  both sprockets and blocks an independently displaced sprocket.
+- Seven captured head followers, both slots of each 5:1 rocker, real arm and
+  jaw guides, all-direction spool retention and selector-ramp contact.
+- Actual warp surfaces clear both hands and the spool at 73 phases, including
+  entry and exit, not merely an open centre pose.
+- Six operating cord lengths, their terminations, spring endpoints, opposite
+  counterweight travel, and actual equal warp let-off / cloth take-up.
+- Desktop and narrow browser controls, CAD pixels, playback, source ZIP,
+  manifest asset inventory and gallery regression.
 
-## Practical limits
+## Limits
 
-- Rigid interference is sampled at 17 phases over a revolution; follower
-  engagement and grounded support at nine phases. The six-instruction scenario
-  checks rigid interference every 0.5 s with a 0.05 s integration step.
-- Flexible threads are measured for shed clearance and eye alignment. The
-  rigid-body integrity contract does not include them, and this is not an
-  exhaustive yarn-to-yarn or yarn-to-machine contact solution.
-- The reed, carrier and roller coordinates follow prescribed relations. A
-  common input and plausible geometry do not prove a complete force-transmitting
-  historical drivetrain; its missing intermediate transmission is documented.
-- The drawn current weft span and static eight-pick sample illustrate yarn
-  routing and interlacing. No cloth is accumulated, no tension is solved, and
-  roller advance resets at the presentation loop boundary.
-- Default, lower and upper shed heights are verified; these checks do not
-  establish manufacturability or every point of a continuous parameter space.
+These are sampled geometric and kinematic contracts, not a continuous
+swept-volume, torque, friction, tension, impact or wear solution. The input
+is imposed. Rope tension, installed belt tension, spring closing and textile
+tension are assumptions. No manufacturing safety or museum-measured dimensions
+are certified.
 
-Raw logs: `_evidence/faceted.log`, `boundary-faceted.log`, `mutations.log`,
-`grounded-support.log`, `exact-default.log`, `exact-upper.log`,
-`exact-lower.log`, `build.log`, `export.log`, `browser.log`, and snapshot logs.
-The earliest red-run outputs were recorded in the development session; some
-initial `_build/` logs were swept by publication, so only their observed
-results are retained here. Later logs use `_evidence/` to survive builds.
+The cloth web and eight pre-existing picks advance 2.22 mm over the finite
+four-turn envelope. No new interlaced textile topology is generated. The
+current weft span is schematic, and replay resets winding rather than
+simulating an invented historical automatic reset.
+
+Current checkpoint logs and source hashes are retained under the project's
+ignored `_evidence/automatic_weaving_loom/checkpoint-2026-09-13/`. The latest
+checkpoint names their commands, outcomes and resume order. These are working
+evidence, not a complete exact certificate.
+
+Earlier working logs are retained under the project's ignored
+`_evidence/automatic_weaving_loom/pause-2026-09-13/`: `grip.log`,
+`cords-restored.log`, `counterweight-mutation.log` and
+`root-before-opposed-jaws.log`. These are checkpoint evidence, not final
+certificates. Reproducible grip commands and remaining gates are recorded in
+the pause checkpoint. Research photographs remain private under `_reference/`.

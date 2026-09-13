@@ -15,6 +15,12 @@ mechanical envelope and with views that reveal its transmissions.
 - **THEN** the machine remains inside its tested travel and any winding reset
   is described visibly rather than attributed to an automatic reverse.
 
+#### Scenario: One-minute simulation in Studio
+- **WHEN** the maker opens the Python simulation in Studio
+- **THEN** its existing four input turns and eight picks span 60 seconds of
+  machine time and the native viewer offers slow-motion speed controls,
+  without changing the mechanical ratios, winding travel or phase controls.
+
 ### Requirement: Historical and verification evidence
 The project SHALL identify primary historical sources, the later museum
 interpretation, original reconstruction choices and omitted physics, and retain
