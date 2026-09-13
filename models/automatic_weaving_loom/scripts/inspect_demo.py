@@ -115,7 +115,10 @@ def check(url):
         page.on("requestfailed", lambda r: failures.append(f"{r.url}: {r.failure}"))
         for width, height, label in ((1500, 1100, "desktop"), (390, 844, "narrow")):
             page.set_viewport_size({"width": width, "height": height})
-            response = page.goto(url, wait_until="networkidle")
+            # The embedded CAD has its own asynchronous asset/render work.
+            # Readiness is proved below by its canvas, controls and pixels,
+            # not by a quiet network interval during a software-WebGL reload.
+            response = page.goto(url, wait_until="domcontentloaded")
             assert response.status == 200
             frame = page.frame_locator("iframe")
             canvas = frame.locator("canvas")

@@ -23,6 +23,8 @@ frames = 360
 fps = 30
 exhibit = "models/automatic_weaving_loom/demo.html"
 browser_check = ["models/automatic_weaving_loom/scripts/inspect_demo.py"]
+# Two full viewport passes through the dense flexible loom on software WebGL.
+browser_timeout = 600
 
 [models.cam_hammer]
 title = "Cam hammer"

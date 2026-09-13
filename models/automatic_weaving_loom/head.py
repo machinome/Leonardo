@@ -18,6 +18,14 @@ from .timing import SingleToothInput, cylinder, clip
 from .winding import FeedTimingTrain
 from .parts import box, axle, HeddleCage, CarrierArm, WeftSpool, Reed, shuttle_x
 from .profiles import polar
+from .reeding import (
+    REED_CAM_X,
+    REED_CAM_BASE,
+    REED_TIE_X,
+    REED_TIE_Z,
+    REED_TRAVEL,
+    reed_lift,
+)
 
 
 def reaches(angle):
@@ -74,12 +82,30 @@ def face_cam(x, radius_law, maximum, groove_half_width=2.5):
     return body.cut(groove)
 
 
+def reed_cam(x):
+    # Offset the roller-centre path normally, not merely radially: on the
+    # steep beat flanks a radial band would pinch the physical roller.
+    points = [polar(REED_CAM_BASE + float(reed_lift(i)), -i) for i in range(360)]
+    outlines = [
+        cq.Workplane("YZ")
+        .spline(points, periodic=True)
+        .close()
+        .offset2D(offset, "arc")
+        .extrude(4.2)
+        .translate((x, 0, 0))
+        for offset in (1.65, -1.65)
+    ]
+    return cylinder(REED_CAM_BASE + REED_TRAVEL + 4, x - 1, x + 4).cut(
+        outlines[0].cut(outlines[1])
+    )
+
+
 class LoomInput(SingleToothInput):
     shed_lift = Length(18, min=16, max=20)
 
     def render(self):
         body = super().render()
-        body = body.union(cylinder(5, -475, -16.3)).union(cylinder(3, -18, -15))
+        body = body.union(cylinder(5, -585, -16.3)).union(cylinder(3, -18, -15))
         # Coordinates in this component are relative to the right drive face.
         cams = [
             (
@@ -94,7 +120,6 @@ class LoomInput(SingleToothInput):
             ),
             (-235, lambda a: arm_radius(a, -1), 52),
             (235, lambda a: arm_radius(a, 1), 52),
-            (-247, lambda a: 38.5 - 18.5 * cos(2 * a), 57),
             (-24.8, lambda a: 42 + selector_lift(a, -1), 56),
             (11.2, lambda a: 42 + selector_lift(a, 1), 56),
         ]
@@ -104,6 +129,7 @@ class LoomInput(SingleToothInput):
             body = body.union(
                 face_cam(x - 195, law, maximum, 2.6 if abs(x) == 235 else 2.5)
             )
+        body = body.union(reed_cam(REED_CAM_X - 195))
         for x in (-126.3, -108.7, 105.7, 123.3):
             body = body.union(cylinder(9, x - 195, x - 192))
         wheel = cylinder(46, -474, -470).cut(cylinder(39, -475, -469))
@@ -112,7 +138,7 @@ class LoomInput(SingleToothInput):
             spoke = box(4, 84, 5, (-472, 0, 0)).rotate((0, 0, 0), (1, 0, 0), angle)
             wheel = wheel.union(spoke)
         wheel = wheel.union(cylinder(3, -484, -471, 0, 38))
-        return body.union(wheel)
+        return body.union(wheel.translate((-110, 0, 0)))
 
 
 class LoomTiming(FeedTimingTrain):
@@ -233,10 +259,10 @@ class ArmMechanism(AssemblyNode):
 
 class ReedFollower(CadQueryNode):
     color = "#776346"
-    rise = Prismatic(axis=(0, 0, 1), range=(-0.01, 37.01))
+    rise = Prismatic(axis=(0, 0, 1), range=(-0.01, REED_TRAVEL + 0.01))
 
     def render(self):
-        return cylinder(1.5, -6.5, 1).union(box(3, 4, 75, (0, 0, 35)))
+        return cylinder(1.5, -6.5, 1).union(box(3, 4, 135, (0, 0, 65)))
 
 
 class Selector(CadQueryNode):
@@ -251,9 +277,14 @@ class Selector(CadQueryNode):
         # heddle crossbar even at the advertised 20 mm shed lift.
         body = cylinder(1.5, -6.5, 1, z=28)
         body = body.union(box(3, 4, 100, (0, 0, 48)))
-        body = body.union(box(3, 69, 4, (0, -32.5, 30)))
-        body = body.union(box(171, 4, 4, (self.side * 83.5, -65, 30)))
-        body = body.union(box(4, 20, 4, (self.side * 167, -73, 30)))
+        body = body.union(box(3, 28, 4, (0, -10, 30)))
+        # Raise only the cross-shed tie above the extended reed tracks.
+        # Keep the rear bridge low enough to clear a fully lowered heddle.
+        # Cross behind the reed's parked feet, not through their travel.
+        body = body.union(box(171, 4, 4, (self.side * 83.5, -22, 52)))
+        for x in (0, self.side * 167):
+            body = body.union(box(3 if x == 0 else 4, 4, 26, (x, -22, 41)))
+        body = body.union(box(4, 63, 4, (self.side * 167, -51.5, 30)))
         # Compound plane: vertical selector rise produces equal Y opening;
         # withdrawing the arm lowers that opening by half its X retreat.
         low, high = (-32, 4) if self.side < 0 else (-4, 32)
@@ -391,7 +422,13 @@ class GrippingCarrier(AssemblyNode):
 
 class DrivenReed(Reed):
     def render(self):
-        return super().render().union(box(148, 4, 4, (-168.2, 0, -35)))
+        start, end = REED_TIE_X - 2, -94.2
+        # The haul tie crosses above both grip selectors, whose wedges
+        # occupy the former lower tie's new, longer path.
+        body = super().render().union(box(4, 4, 16, (-93, 0, 44)))
+        return body.union(
+            box(end - start, 4, 4, ((start + end) / 2, 0, REED_TIE_Z - 520))
+        )
 
 
 class HeadDrive(AssemblyNode):
@@ -412,7 +449,7 @@ class HeadDrive(AssemblyNode):
     )
     angle.drives(left.radius, law=lambda a, b: lambda t: arm_radius(t + 270, -1))
     angle.drives(right.radius, law=lambda a, b: lambda t: arm_radius(t + 270, 1))
-    angle.drives(reed.rise, law=lambda a, b: lambda t: 18.5 * (1 - cos(2 * (t + 270))))
+    angle.drives(reed.rise, law=lambda a, b: lambda t: reed_lift(t + 270))
     angle.drives(selector_a.rise, law=lambda a, b: lambda t: selector_lift(t + 270, -1))
     angle.drives(selector_b.rise, law=lambda a, b: lambda t: selector_lift(t + 270, 1))
 
@@ -421,6 +458,6 @@ class HeadDrive(AssemblyNode):
         self.heddle_b.translate([0, 190, 520])
         self.left.translate([-208.2, 250, 433])
         self.right.translate([221.8, 250, 433])
-        self.reed.translate([-240.2, 180, 420])
+        self.reed.translate([REED_TIE_X, 180, 400 + REED_CAM_BASE])
         self.selector_a.translate([-18, 180, 414])
         self.selector_b.translate([18, 180, 414])

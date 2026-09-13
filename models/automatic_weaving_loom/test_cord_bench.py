@@ -30,7 +30,7 @@ class CordBenchTest(TestCase):
         for phase in range(0, 361, 5):
             self.node.set_state(phase=phase, run=0, time=0)
             c = self.node.cords
-            for group, total in ((c.left, 848), (c.right, 848), (c.reed, 832.5)):
+            for group, total in ((c.left, 848), (c.right, 848), (c.reed, 1027.5)):
                 driven = centerline(group.haul.cord)[0, 2]
                 weight_top = group.weight.mesh.bounds[1, 2]
                 self.assertAlmostEqual(driven + weight_top, total, delta=0.002)
@@ -41,10 +41,10 @@ class CordBenchTest(TestCase):
         cords = (
             (c.left.haul.cord, 257.8 + 3 * quarter),
             (c.right.haul.cord, 244.2 + 3 * quarter),
-            (c.reed.haul.cord, 349.5 + 3 * quarter),
+            (c.reed.haul.cord, 501.5 + 3 * quarter),
             (c.left.returning.cord, 206.5 + quarter),
             (c.right.returning.cord, 206.5 + quarter),
-            (c.reed.returning.cord, 203.5 + quarter),
+            (c.reed.returning.cord, 293.5 + quarter),
         )
         for phase in range(0, 361, 5):
             self.node.set_state(phase=phase, run=0, time=0)
@@ -66,7 +66,7 @@ class CordBenchTest(TestCase):
                 haul = centerline(group.haul.cord)[-1]
                 start = centerline(group.returning.cord)[0]
                 if group is c.reed:
-                    np.testing.assert_allclose(haul, start, atol=0.002)
+                    np.testing.assert_allclose(haul - start, (-26, 0, 0), atol=0.002)
                 else:
                     np.testing.assert_allclose(haul - start, (0, -20, 0), atol=0.002)
 

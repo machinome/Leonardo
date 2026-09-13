@@ -16,9 +16,9 @@
 - [x] 3.2 Implement the mechanically connected head, guides, returns and grips; integrate all transmissions in the registered root.
 - [x] 3.3 Check spool retention, actual warp clearance, reed timing and instruction trajectories; fault-inject the head's central connection.
 
-## 4. Exhibit and delivery
+- [x] 3.4 Correct the pilot-observed reed/carrier crossing: prove the short-stroke failure, extend and support the tracks, clear the head drive, connect and time the full beat/return, and verify red-weft response, cord lengths, root clearance, mutation and inspected motion views.
 
-- [ ] 3.4 Correct the pilot-observed reed/carrier crossing: prove the short-stroke failure, extend and support the tracks, clear the head drive, connect and time the full beat/return, and verify red-weft response, cord lengths, root clearance, mutation and inspected motion views.
+## 4. Exhibit and delivery
 
 - [x] 4.1 Update the actual exported exhibit with mechanism views, historical sources, controls and explicit reset/physical limits; declare the pilot's 60-second Python time base and verify Studio build metadata and native slow-motion controls.
 - [ ] 4.2 Run full faceted and final exact regressions, including parameter limits and combined controls; inspect isometric and alignment snapshots.
@@ -26,10 +26,11 @@
 - [ ] 4.4 Complete the reconstruction and validation records with tested source/dependency revisions and confidence limits.
 - [ ] 4.5 Sync accepted baseline specs, archive the completed change and commit the implementation locally; preserve unrelated files and do not push.
 
-Paused again at the pilot's explicit request, with a partial implementation
-commit and `docs/checkpoint-2026-09-13.md` as the resume entry point.
-All 22 root contracts pass on the faceted kernel at 16, 18 and 20 mm shed lift.
-Studio's actual served Python clock, native slow-speed controls and playback
-pass. Timing, winding, grip and cord exact fixtures pass, but head/root exact
-certification and gallery-wide browser regression remain unfinished. Do not
-mark this change complete, sync baseline specs or archive it at this checkpoint.
+Paused at the pilot's explicit wrap-up-and-commit request on 13 September,
+10:09 UTC. `docs/reed-correction.md` is the current checkpoint and resume
+record. All 26 root contracts pass on the faceted kernel at 16, 18 and 20 mm
+shed lift, and the core correction is implemented. Final exact root/head
+runs were stopped without a complete verdict; final grip/cord exact runs and
+the latest browser-harness rerun remain pending. Do not sync baseline specs
+or archive before the remaining gates complete. Preserve the older pause
+records as historical evidence.

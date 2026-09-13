@@ -11,12 +11,12 @@ This is original reconstruction CAD, not a measured replica or a claim that
 Leonardo specified every completed cam, grip and fitting. See the
 [source-and-inference record](docs/reconstruction.md).
 
-**Paused at a committed implementation checkpoint, not fully certified.**
-The [Studio-time checkpoint](docs/checkpoint-2026-09-13.md) is the next agent's
-resume entry point. Python now declares a 60-second simulation, and the actual
-Studio UI passes its native slow-motion checks. Final whole-head/root exact
-certification and gallery-wide browser regression remain pending; the former
-educational certificate does not certify this reconstruction.
+The pilot's reed/carrier correction is implemented and **paused at the pilot's
+requested checkpoint**, before final certification. See the [current correction record](docs/reed-correction.md)
+for the longer stroke, relocated tracks and drive, red-first evidence and
+completed checks. The [Studio-time checkpoint](docs/checkpoint-2026-09-13.md)
+is historical; the former educational certificate does not certify this
+reconstruction.
 
 Vibecoded by Astra as part of the single [Leonardo gallery](../../README.md).
 Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only;
@@ -102,13 +102,23 @@ is a reconstruction choice, not a measurement of the museum object.
 | Warp / heddles | 24 ends, 6 mm spacing; Y=170 and 190 mm; opposite ±18 mm lift |
 | Spool / hands | 24 × 12 × 6 mm boat; 260 mm total spool travel |
 | Retaining jaws | 14 mm selector lift; interleaving fingers and side cheeks |
-| Reed | 37 mm stroke, Y=48…85 mm; fell Y=45 mm |
+| Reed | 100 mm stroke, Y=48…148 mm; crosses the carrier at Y=115; fell Y=45 mm |
 | Textile winding | 14.8 mm pitch radius, 0.555 mm per input turn |
-| Timber head tower | Z=615 mm |
+| Timber head tower / reed-drive support | Z=615 / 736 mm |
 
 The guarded parameter `shed_lift` ranges from 16 to 20 mm. It changes the
 physical cam profiles, heddle motion and yarn motion together:
 `solid build automatic_weaving_loom --set shed_lift=20`.
+
+The reed parks behind the carrier through each insertion and exchange. It
+crosses between the withdrawn hands, approaches the fell and returns during
+the 26° on either side of each beat. Its extended guide bed sits beneath the
+carrier. The selector crossbars move behind the reed and rise 22 mm to clear
+the bed and cam rims; the larger reed cam sits outboard on the common shaft
+with a raised guide and sheaves.
+The red weft's displayed bend follows the working face while its free end
+stays attached to the spool. This remains a kinematic illustration of yarn
+contact, not textile formation or a force simulation.
 
 The construction is divided into [timing.py](timing.py),
 [winding.py](winding.py), [head.py](head.py), [cords.py](cords.py),

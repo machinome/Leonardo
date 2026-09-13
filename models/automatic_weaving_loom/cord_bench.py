@@ -5,11 +5,11 @@ import math
 from solid_node.node import AssemblyNode
 from solid_node.simulation import Driver
 from solid_node.motion.ports import RotationalPort
-from solid_node.math import cos
 from .head import reaches
 from .cords import CordTransmission
 from .textile import WarpRollEnd, ClothWeb
 from .timing import clip, index_angle
+from .reeding import reed_lift
 
 
 class CordBench(AssemblyNode):
@@ -24,7 +24,7 @@ class CordBench(AssemblyNode):
     angle.drives(cords.right.lift, law=lambda a, b: lambda t: 65 - reaches(t)[1])
     angle.drives(cords.left.travel, law=lambda a, b: lambda t: reaches(t)[0])
     angle.drives(cords.right.travel, law=lambda a, b: lambda t: reaches(t)[1])
-    angle.drives(cords.reed.lift, law=lambda a, b: lambda t: 18.5 * (1 - cos(2 * t)))
+    angle.drives(cords.reed.lift, law=lambda a, b: reed_lift)
     angle.drives(
         winding,
         law=lambda a, b: lambda t: index_angle(t) * 0.5 * 0.06 / 48 * 180 / math.pi,

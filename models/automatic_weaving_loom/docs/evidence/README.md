@@ -8,6 +8,31 @@ are not museum photographs. Dimensions,
 concealed head tracks and fittings are reconstructed choices documented in
 [the evidence and inference record](../reconstruction.md).
 
+## Reed correction
+
+- [Reed retracted at the first handoff, 90°](reed-retracted.png): the reed
+  parks behind the carrier, on the full-length guide bed. The outboard reed
+  cam, shaft extension, raised follower guide and sheave support are visible.
+- [Reed crossing the carrier plane, 15.84°](reed-crossing.png): the top view
+  shows the reed passing between the withdrawn hands. Its travel and
+  clearance are independently measured in the root tests.
+- [Beat-up at 180°](reed-beat.png): the reed reaches the fell and the red
+  weft bends ahead of its working face, with its free end still on the spool.
+
+Reproduce these views from the gallery root, using a build directory not
+being read by a running test:
+
+```sh
+SOLID_BUILD_DIR=_build/loom-reed-views solid snapshot automatic_weaving_loom --time 0.0625 --autocenter --viewall --camera 0,0,0,65,0,35,1200 --imgsize 1500x1100 -o models/automatic_weaving_loom/docs/evidence/reed-retracted.png
+SOLID_BUILD_DIR=_build/loom-reed-views solid snapshot automatic_weaving_loom --time 0.011 --camera 0,100,1400,0,100,520 --projection ortho --imgsize 1500x1100 -o models/automatic_weaving_loom/docs/evidence/reed-crossing.png
+SOLID_BUILD_DIR=_build/loom-reed-views solid snapshot automatic_weaving_loom --time 0.125 --camera 550,-400,850,0,150,520 --projection ortho --imgsize 1500x1100 -o models/automatic_weaving_loom/docs/evidence/reed-beat.png
+```
+
+## Historical checkpoint views
+
+These earlier images predate the reed/carrier correction and remain as
+checkpoint evidence, not views of the corrected guide and drive arrangement.
+
 - [Whole loom at the first handoff, 90°](museum-isometric.png): tall timber
   frame, upper head, winding beams, four lower gears, perforated belt and
   external cord returns. The continuous material route reaches both beams.

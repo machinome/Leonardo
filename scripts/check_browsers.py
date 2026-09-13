@@ -30,7 +30,7 @@ def main():
                 raise ValueError(f"No browser check registered for {name}")
             print(f"Browser check: {name}", flush=True)
             subprocess.run([sys.executable, *[arg.replace("{base_url}", base) for arg in command]],
-                           cwd=ROOT, check=True, timeout=180)
+                           cwd=ROOT, check=True, timeout=model.get("browser_timeout", 180))
     finally:
         server.shutdown()
         server.server_close()

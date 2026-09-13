@@ -28,6 +28,80 @@ class AutomaticWeavingLoomTest(TestCase):
             "Arms, reed and gripping jaws still lack physical transmissions",
         )
 
+    def test_01_reed_crosses_the_carrier_and_returns_behind_it(self):
+        n = self.node
+        for phase, expected_y in (
+            (0, 48),
+            (45, 148),
+            (90, 148),
+            (135, 148),
+            (180, 48),
+            (225, 148),
+            (270, 148),
+            (315, 148),
+            (360, 48),
+        ):
+            n.set_state(phase=phase, run=0, time=0)
+            self.assertAlmostEqual(
+                n.reed.mesh.bounds[:, 1].mean(), expected_y, delta=0.01
+            )
+        crossings = []
+        for phase in range(361):
+            n.set_state(phase=phase, run=0, time=0)
+            bounds = n.reed.mesh.bounds
+            if bounds[0, 1] < 123 and bounds[1, 1] > 107:
+                crossings.append(phase)
+                self.assertLess(n.carrier.left.body.mesh.bounds[1, 0], -98)
+                self.assertGreater(n.carrier.right.body.mesh.bounds[0, 0], 98)
+                for _, part in rigid_parts(n.carrier):
+                    self.assertNotIntersecting(n.reed, part)
+        self.assertGreaterEqual(len(crossings), 4, "Reed never crosses the hands")
+
+    def test_01_reed_tracks_carry_the_entire_working_stroke(self):
+        n = self.node
+        for phase in (0, 10, 20, 45, 90, 160, 170, 180):
+            n.set_state(phase=phase, run=0, time=0)
+            feet = n.reed.mesh.vertices
+            feet = feet[feet[:, 2] < 445]
+            track = n.reed_tracks.mesh.bounds
+            self.assertGreater(feet[:, 1].min(), track[0, 1])
+            self.assertLess(feet[:, 1].max(), track[1, 1])
+            self.assertNotIntersecting(n.reed, n.reed_tracks)
+            self.assertFreeWithin(n.reed, 0.1, n.reed_tracks, along=(1, 0, 0))
+            self.assertBlockedBeyond(n.reed, 0.7, n.reed_tracks, along=(1, 0, 0))
+
+    def test_reed_cam_captures_the_roller_on_the_beat_flanks(self):
+        # The former 45-degree head sampling saw only this cam's dwells.
+        # Probe the steep motion sectors themselves, in both directions.
+        for beat in (0, 180):
+            for offset in range(-26, 27, 2):
+                phase = (beat + offset) % 360
+                self.node.set_state(phase=phase, run=0, time=0)
+                roller, cam = self.node.head_drive.reed, self.node.timing.input
+                try:
+                    self.assertNotIntersecting(roller, cam)
+                    self.assertFreeWithin(roller, 0.1, cam, along=(0, 0, 1))
+                    self.assertBlockedBeyond(roller, 1.5, cam, along=(0, 0, 1))
+                except AssertionError as error:
+                    raise AssertionError(f"reed cam at {phase}°: {error}") from error
+
+    def test_01_reed_presses_the_visible_red_weft_toward_the_fell(self):
+        from .test_cord_bench import centerline
+
+        n = self.node
+        for phase in (0, 180, 360):
+            n.set_state(phase=phase, run=0, time=0)
+            yarn = centerline(n.weft)
+            ribbon = yarn[np.abs(yarn[:, 0]) < 60]
+            self.assertGreater(len(ribbon), 0)
+            self.assertLessEqual(ribbon[:, 1].max(), 46.55)
+            self.assertGreaterEqual(ribbon[:, 1].min(), 45)
+            np.testing.assert_allclose(
+                yarn[-1],
+                (n.carrier.spool.mesh.bounds[:, 0].mean(), 115, 520),
+                atol=0.002,
+            )
+
     def test_02_operating_flexible_routes_clear_the_machine(self):
         import trimesh
         from .test_cord_bench import centerline
@@ -307,7 +381,7 @@ class AutomaticWeavingLoomTest(TestCase):
                 self.assertAlmostEqual(right, 12.5, delta=0.02)
 
     def test_reed_arrives_after_carrier_clears(self):
-        for angle, expected_y in [(0, 48), (90, 85), (180, 48), (270, 85)]:
+        for angle, expected_y in [(0, 48), (90, 148), (180, 48), (270, 148)]:
             self.node.set_state(phase=angle, run=0, time=0)
             y = self.node.reed.mesh.bounds[:, 1].mean()
             self.assertAlmostEqual(y, expected_y, delta=0.01)
@@ -339,6 +413,7 @@ class AutomaticWeavingLoomTest(TestCase):
             self.node.carrier.right.jaw,
             self.node.carrier.left.spring,
             self.node.carrier.right.spring,
+            self.node.reed,
         )
         yarns = [end.front.fiber for end in (*self.node.warp_a, *self.node.warp_b)]
         for phase in range(0, 361, 5):
@@ -435,18 +510,23 @@ class AutomaticWeavingLoomTest(TestCase):
             reed = self.node.reed.mesh.bounds
             np.testing.assert_allclose(
                 centerline(self.node.cords.reed.haul.cord)[-1],
-                (-240.2, reed[:, 1].mean(), 485),
+                (-357, reed[:, 1].mean(), 570),
                 atol=0.002,
             )
             np.testing.assert_allclose(
                 centerline(self.node.cords.reed.haul.cord)[0],
-                (-240.2, 180, self.node.head_drive.reed.mesh.bounds[1, 2]),
+                (-357, 180, self.node.head_drive.reed.mesh.bounds[1, 2]),
+                atol=0.002,
+            )
+            np.testing.assert_allclose(
+                centerline(self.node.cords.reed.returning.cord)[0],
+                (-331, reed[:, 1].mean(), 570),
                 atol=0.002,
             )
             self.assertAlmostEqual(
                 centerline(self.node.cords.reed.haul.cord)[0, 2]
                 + self.node.cords.reed.weight.mesh.bounds[1, 2],
-                832.5,
+                1027.5,
                 delta=0.002,
             )
 

@@ -91,8 +91,8 @@ convert output lift to arm translation at a 1:1 length relation. The opposite
 cords and weights maintain return tension. Both hands withdraw to their outer
 parking positions between picks. An earlier four-millimetre-only retreat
 left the empty hand inside the closing warp and failed the yarn-contact test;
-it is not the delivered mechanism. The reed has a separate 37 mm captured
-stroke. Opposed 14 mm selector motions open only a hand that has reached the
+it is not the delivered mechanism. The reed has a separate 100 mm captured
+stroke, described below. Opposed 14 mm selector motions open only a hand that has reached the
 receiving region; the other hand remains closed on the spool. The receiving
 hand closes before the donor opens: both are closed during 85–95° and
 265–275°. Cosine-eased arm approaches stop at the centre during 60–120° and
@@ -139,11 +139,51 @@ recedes toward its return pulley, its weight descends: reversing this sign
 shortened the actual rope by twice the reed motion and failed the length
 contract. Each rope is measured on its actual flexible sweep, not just the
 coordinates from which that sweep was constructed.
-The reed haul starts on the follower stem's actual top, Z=492.5 mm at rest,
-not on the cam pin below it. Starting at the pin put 72.5 mm of cord inside
-the stem. Its completed route is 365.99336 mm long. The summed heights of
-that attachment and the external weight top remain 832.5 mm; the two arm
-attachment/weight sums remain 848 mm each. All six rope lengths are constant.
+The reed haul starts on the follower stem's actual top, Z=602.5 mm at rest,
+not on the cam pin below it. The former checkpoint's 72.5 mm internal-cord
+error remains documented in its historical evidence. The longer mechanism's
+haul and return have nominal lengths 517.99336 and 298.99779 mm. The summed
+heights of the haul attachment and weight top remain 1027.5 mm; the two arm
+attachment/weight sums remain 848 mm each. The reed's return is attached
+26 mm inboard of its haul, on the same rigid crossbar, so its horizontal span
+clears the follower and supporting post. All six rope lengths are constant.
+
+### Reed passage correction, 13 September
+
+The pilot identified a functional gap in the checkpoint: Y=48–85 never
+crossed the carrier at Y=115. A test that merely checked those former end
+coordinates could not establish beat-up. The corrected stroke is Y=48–148.
+The reed dwells behind the carrier during insertion and transfer, advances
+between fully withdrawn hands, reaches the fell at each half-turn boundary,
+then retreats before the hands enter again. Each advance/return occupies
+26° either side of the beat; the remaining interval is a rear dwell.
+
+Two 132 mm guide rails span Y=32–164 beneath the carrier, joined at the
+existing front bearer. Timber supports carry the rails over their full
+length. The open centre of this U-shaped bed clears the central cams. Each
+selector's cross-shed tie moves back to Y=158 behind the parked reed and
+rises 22 mm to Z=466, with risers at its ends; its rear
+bridge keeps the original height to clear a fully lowered heddle. Small
+timber bridges carry the side rails over slots that clear the raised ties
+at maximum lift. The ties clear both the parked reed and the largest cam
+rims; simply raising them above the tracks would still obstruct the reed's
+legs or intersect a cam.
+
+The reed cam is relocated to X=−365 on the extended, supported common shaft.
+Its roller-centre radius spans 70–170 mm. A periodic spline and true normal
+offsets form a groove with 1.65 mm half-width for the 1.5 mm roller. A smaller
+base radius made the tight return unable to retain the roller; a segmented
+offset produced an unusable mesh. The adopted curve must pass the dedicated
+2° beat-flank capture sweep as well as the ordinary head tests. This is an
+original concealed-mechanism completion, not a dimension measured from Vinci.
+
+The follower guide is at Z=590, its haul sheaves at Z=730, and the reed's
+rigid haul crossbar is above the grip selectors at Z=570. The unchanged six
+other cam tracks and the weaving plane retain their original alignment.
+The displayed red weft bends ahead of the reed during beat-up, returning to
+the free straight span when the reed withdraws. That prescribed contact
+display does not calculate forces, conserve newly delivered weft length,
+or generate new interlaced cloth topology.
 
 Cord tie-offs and leaf-spring clamps/bearing ends occupy named terminal zones
 no more than 3 mm from the measured route ends. The routing contract checks
@@ -157,8 +197,8 @@ warp and winds the same length of cloth. The four-turn envelope therefore
 advances 2.22 mm of material. A continuous cloth web reaches the lower cloth
 beam through its upper guide; the warp unwinds from the rear upper beam.
 Eight pre-existing picks move with the cloth. They are a displayed woven
-sample, not newly formed yarn topology. The current weft span remains a
-schematic indication of the carrying spool, not a weft-length/contact solve.
+sample, not newly formed yarn topology. The current weft span shows the
+carrying spool and prescribed reed contact, not a weft-length or force solve.
 
 The imposed input, maintained rope tension, installed belt tension and
 spring closing are force assumptions. There is no simulation of wood
@@ -168,7 +208,14 @@ solid engagement, guide capture, flexible routing and retained geometry.
 
 ## Current implementation status
 
-This change is **paused at the pilot's requested checkpoint**, not yet
+The reed/carrier correction supersedes the short-stroke geometry described
+at the earlier pause. Its implementation, mutation, snapshots and the latest
+pilot-requested pause are recorded in [reed-correction.md](reed-correction.md).
+Full exact certification and the final browser-harness rerun remain pending.
+
+### Earlier Studio-time checkpoint
+
+At the pilot's requested pause, this change was not yet
 certified or archived. All 22 integrated contracts, including the declared
 seconds clock, pass on the faceted kernel at 16, 18 and 20 mm shed lift. The final
 upper timing, lower winding, grip and cord fixtures respectively pass seven,
@@ -184,5 +231,5 @@ pose-changing and repeat-pose pixels pass. The subsequent Python-declared
 one-minute clock passes its actual Studio metadata, native slow-speed options,
 one-minute endpoint, changing CAD and playback check. Gallery-wide browser
 regression remains pending.
-See the [latest checkpoint](checkpoint-2026-09-13.md) and
+See the [historical checkpoint](checkpoint-2026-09-13.md) and
 [verification record](verification.md).

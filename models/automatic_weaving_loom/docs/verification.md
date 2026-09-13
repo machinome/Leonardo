@@ -2,7 +2,12 @@
 
 Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
 
-**Checkpoint on 13 September 2026 — not a completion certificate.** This replaces the former
+The current reed/carrier correction and its validation are recorded in
+[reed-correction.md](reed-correction.md). The report below preserves the
+earlier reconstruction checkpoint and must not be read as a verdict on the
+subsequently extended reed stroke and relocated drive.
+
+**Earlier checkpoint on 13 September 2026 — not a completion certificate.** This replaces the former
 illustrative model's report, preserved at the planning commit `cec7cf1`.
 The reconstruction was commissioned on 12 September 2026; mechanical
 validation continued on 13 September. The pilot explicitly authorized
@@ -114,7 +119,7 @@ solid-node `TestCase` did not prepare `self.node` and was an invalid harness
 attempt, not a model failure; the normal `solid test` runner prepares it.
 
 The [first pause](pause-2026-09-13.md) remains historical. The
-[latest checkpoint](checkpoint-2026-09-13.md) is the current resume record.
+[Studio-time checkpoint](checkpoint-2026-09-13.md) records the later pause.
 
 ## Coverage to retain in the final certificate
 

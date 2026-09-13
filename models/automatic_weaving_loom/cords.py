@@ -14,6 +14,14 @@ from solid_node.motion.joints import Revolute, Prismatic
 from solid_node.motion.ports import TranslationalPort
 from .parts import box
 from .head import y_cylinder
+from .reeding import (
+    REED_TIE_X,
+    REED_STEM_TOP,
+    REED_SHEAVE_Z,
+    REED_TRAVEL,
+    REED_TIE_Z,
+    REED_RETURN_X,
+)
 
 PULLEY_R = 3.5
 ROPE_R = 0.6
@@ -107,7 +115,7 @@ class ReturnAttachment(AssemblyNode):
 
 class ReturnWeight(CadQueryNode):
     color = "#77614a"
-    rise = Prismatic(axis=(0, 0, 1), range=(-37.01, 130.01))
+    rise = Prismatic(axis=(0, 0, 1), range=(-REED_TRAVEL - 0.01, 130.01))
 
     def render(self):
         return cq.Workplane("XY").circle(5.5).extrude(14)
@@ -179,12 +187,11 @@ class ReedHaul(MolejoNode):
 class ReedHaulAttachment(AssemblyNode):
     rise = Prismatic(axis=(0, 0, 1))
     cord = ReedHaul()
-    # Start on the actual stem top, 72.5 mm above the cam pin; starting
-    # at the pin sent the rope through the entire follower stem.
-    rise.drives(cord.upper, ratio=-1, offset=64)
-    rise.drives(cord.top, ratio=-1, offset=67.5)
-    rise.drives(cord.lower, ratio=-1, offset=-4)
-    rise.drives(cord.end_z, ratio=-1, offset=-7.5)
+    # The raised sheaves stay above the stem throughout its longer stroke.
+    rise.drives(cord.upper, ratio=-1, offset=REED_SHEAVE_Z - REED_STEM_TOP)
+    rise.drives(cord.top, ratio=-1, offset=REED_SHEAVE_Z + 3.5 - REED_STEM_TOP)
+    rise.drives(cord.lower, ratio=-1, offset=REED_TIE_Z + 3.5 - REED_STEM_TOP)
+    rise.drives(cord.end_z, ratio=-1, offset=REED_TIE_Z - REED_STEM_TOP)
     rise.drives(cord.end_y, offset=-132)
 
 
@@ -210,8 +217,8 @@ class ReedCordReturn(MolejoNode):
 class ReedReturnAttachment(AssemblyNode):
     slide = Prismatic(axis=(0, 1, 0))
     cord = ReedCordReturn()
-    slide.drives(cord.to_pulley, ratio=-1, offset=62)
-    slide.drives(cord.to_weight, ratio=-1, offset=65.5)
+    slide.drives(cord.to_pulley, ratio=-1, offset=152)
+    slide.drives(cord.to_weight, ratio=-1, offset=155.5)
     slide.drives(cord.drop, ratio=-1, offset=-145)
 
 
@@ -233,16 +240,17 @@ class ReedCords(AssemblyNode):
     lift.drives(return_pulley.turn, ratio=180 / (math.pi * PULLEY_R))
 
     def render(self):
-        self.haul.translate([-240.2, 180, 492.5])
-        self.returning.translate([-240.2, 48, 485])
+        self.haul.translate([REED_TIE_X, 180, REED_STEM_TOP])
+        self.returning.translate([REED_RETURN_X, 48, REED_TIE_Z])
         for pulley, y, z in (
-            (self.first, 176.5, 556.5),
-            (self.corner, 3.5, 556.5),
-            (self.lower, 3.5, 488.5),
-            (self.return_pulley, 110, 481.5),
+            (self.first, 176.5, REED_SHEAVE_Z),
+            (self.corner, 3.5, REED_SHEAVE_Z),
+            (self.lower, 3.5, REED_TIE_Z + 3.5),
+            (self.return_pulley, 200, REED_TIE_Z - 3.5),
         ):
-            pulley.rotate(-90, [0, 0, 1]).translate([-240.2, y, z])
-        self.weight.translate([-240.2, 113.5, 326])
+            x = REED_RETURN_X if pulley is self.return_pulley else REED_TIE_X
+            pulley.rotate(-90, [0, 0, 1]).translate([x, y, z])
+        self.weight.translate([REED_RETURN_X, 203.5, REED_TIE_Z - 159])
 
 
 class CordSupports(CadQueryNode):
@@ -264,17 +272,22 @@ class CordSupports(CadQueryNode):
             holes.append(y_cylinder(1.3, 263, 269, s * 145, 516.5))
             pieces.append(box(12, 48, 98, (s * 170, 224, 513.5)))
         # A left-side upright carries the reed's three changes of direction.
-        pieces.append(box(4, 195, 12, (-234.2, 90, 556.5)))
-        for y, z in ((176.5, 556.5), (3.5, 556.5), (3.5, 488.5), (110, 481.5)):
-            pieces.append(box(4, 12, 12, (-234.2, y, z)))
+        x = REED_TIE_X + 6
+        pieces.append(box(4, 220, 12, (x, 102.5, REED_SHEAVE_Z)))
+        for seat_x, y, z in (
+            (x, 176.5, REED_SHEAVE_Z),
+            (x, 3.5, REED_SHEAVE_Z),
+            (x, 3.5, REED_TIE_Z + 3.5),
+            (REED_RETURN_X + 6, 200, REED_TIE_Z - 3.5),
+        ):
+            pieces.append(box(4, 12, 12, (seat_x, y, z)))
             holes.append(
-                cq.Workplane("YZ").circle(1.3).extrude(6).translate((-237.2, y, z))
+                cq.Workplane("YZ").circle(1.3).extrude(6).translate((seat_x - 3, y, z))
             )
-        pieces.append(box(4, 12, 82, (-234.2, 3.5, 521.5)))
-        pieces.append(box(4, 12, 20, (-234.2, 110, 476)))
-        pieces.append(box(4, 32, 12, (-234.2, 120, 470)))
-        pieces.append(box(75, 12, 12, (-202.5, 130, 470)))
-        pieces.append(box(75, 12, 12, (-202.5, 190, 556.5)))
+        pieces.append(box(4, 12, 168.5, (x, 3.5, 651.75)))
+        pieces.append(box(4, 12, 175.5, (REED_RETURN_X + 6, 200, 648.25)))
+        pieces.append(box(38, 12, 12, (-338, 200, REED_SHEAVE_Z)))
+        pieces.append(box(20, 12, 12, (-345, 186, REED_SHEAVE_Z)))
         body = pieces[0]
         for p in pieces[1:]:
             body = body.union(p)

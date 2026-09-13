@@ -6,6 +6,7 @@ from solid_node.node import AssemblyNode, CadQueryNode
 from solid_node.parameters import Length
 from solid_node.motion.ports import RotationalPort, Time
 from solid_node.simulation import Driver, Instruction
+from solid_node.math import sqrt
 from .parts import (
     TimberFrame,
     ReedTracks,
@@ -30,6 +31,22 @@ from .textile import (
 )
 from .timing import clip
 from .winding import WindingTrain, CAM_RISE, CENTERS
+from .reeding import REED_REST_Y, REED_TRAVEL, REED_TIE_X
+
+
+def weft_route(angle, stroke):
+    """Schematic yarn contact with the reed; the free end stays on the boat.
+
+    A bend just outside the 144 mm ribbon follows the reed's working face.
+    While withdrawn, both segments lie on the original straight free span.
+    This illustrates beat-up, without claiming yarn dynamics or new cloth.
+    """
+    anchor = weft_selvedge(angle)
+    tip = shuttle_x(angle) - anchor
+    edge = 75 * tip / sqrt(tip * tip + 0.0001)
+    fraction = clip((edge - anchor) * tip / (tip * tip + 0.0001), 0.05, 0.95)
+    face = REED_REST_Y + stroke - 45 - 1.46
+    return tip, fraction * tip, clip(70 * fraction, 0, face)
 
 
 class MuseumFrame(CadQueryNode):
@@ -57,11 +74,21 @@ class MuseumFrame(CadQueryNode):
             frame = frame.union(box(165, 100, 16, (s * 237.5, 226, 284.8)))
             frame = frame.union(box(18, 26, 57, (s * 170, 259, 313.3)))
         # Plain vertical guides for reed and selector followers.
-        for x, width in ((-240.2, 3.6), (-18, 3.6), (18, 3.6)):
+        for x, width in ((-18, 3.6), (18, 3.6)):
             support = box(abs(x) + 20, 12, 10, (x / 2, 180, 490))
             guide = box(12, 12, 10, (x, 180, 490))
             support = support.union(guide).cut(box(width, 4.6, 12, (x, 180, 490)))
             frame = frame.union(support)
+        # Support the outboard reed cam's extended shaft and raised guide.
+        frame = frame.union(box(184, 12, 12, (-253, 180, 330)))
+        frame = frame.union(box(12, 12, 406, (-345, 186, 533)))
+        bearing = box(12, 24, 20, (-345, 180, 400))
+        frame = frame.union(bearing).cut(axle(5.4, 16, (-345, 180, 400)))
+        guide = box(32, 12, 10, (-349, 180, 590))
+        frame = frame.union(guide).cut(box(3.6, 4.6, 12, (REED_TIE_X, 180, 590)))
+        frame = frame.union(box(350, 12, 10, (0, 180, 490)))
+        for x in (-93, 93):
+            frame = frame.union(box(14, 132, 12, (x, 98, 417.8)))
         # Two material guides at the upper cloth/warp turns.
         for y in (CLOTH_GUIDE, 305):
             frame = frame.union(axle(4, 340, (0, y, 515.2)))
@@ -77,7 +104,6 @@ class MuseumFrame(CadQueryNode):
         frame = frame.union(CordSupports().render())
         frame = frame.union(box(18, 18, 98, (-170, 180, 513)))
         for x, w, d in (
-            (-240.2, 3.6, 4.6),
             (-228.2, 3.6, 4.6),
             (-145, 6.6, 7.6),
             (-18, 3.6, 4.6),
@@ -88,6 +114,10 @@ class MuseumFrame(CadQueryNode):
                 frame = frame.cut(box(w, d, 12, (x, 180, z)))
         for x in (-298.2, 311.8):
             frame = frame.cut(box(4.6, 4.6, 18, (x, 240, 284.8)))
+        # Local timber bridges carry the side rails over the selector ties.
+        for x in (-170, 170):
+            frame = frame.union(box(18, 24, 28, (x, 158, 482)))
+            frame = frame.cut(box(20, 4.6, 22, (x, 158, 473)))
         # Mortise for the left winding standard's continuous foot where it
         # passes the intermediate timber post; 0.2 mm assembly clearance.
         frame = frame.cut(box(8.4, 24, 12.4, (-162, -5, 46)))
@@ -133,7 +163,7 @@ class AutomaticWeavingLoom(AssemblyNode):
     timing.input.turn.drives(head_drive.angle)
     head_drive.left.output.rise.drives(carrier.left.slide, offset=-65)
     head_drive.right.output.rise.drives(carrier.right.slide, ratio=-1, offset=65)
-    head_drive.reed.rise.drives(reed.stroke, offset=-37)
+    head_drive.reed.rise.drives(reed.stroke, offset=-REED_TRAVEL)
     head_drive.left.output.rise.drives(cords.left.lift)
     head_drive.right.output.rise.drives(cords.right.lift)
     carrier.left.slide.drives(cords.left.travel)
@@ -148,7 +178,10 @@ class AutomaticWeavingLoom(AssemblyNode):
     )
     head_drive.heddle_a.rise.drives(warp_a.lift)
     head_drive.heddle_b.rise.drives(warp_b.lift)
-    cycle.drives(weft.tip_x, law=lambda a, b: lambda t: shuttle_x(t) - weft_selvedge(t))
+    (cycle & reed.stroke).drives(
+        (weft.tip_x, weft.contact_x, weft.contact_y),
+        law=lambda a, b: weft_route,
+    )
 
     instructions = {
         "Beat left": Instruction({"phase": 0, "run": 0}, duration=0.6),
@@ -163,7 +196,7 @@ class AutomaticWeavingLoom(AssemblyNode):
         self.timing.translate([195, 180, 376])
         self.winding.translate([195, 72, 106])
         self.carrier.translate([0, 115, 520])
-        self.reed.translate([0, 85, 520])
+        self.reed.translate([0, REED_REST_Y, 520])
         self.reed_tracks.translate([0, 150, 340])
         for i, (a, b) in enumerate(zip(self.warp_a, self.warp_b)):
             a.translate([-69 + 12 * i, 305, 520])

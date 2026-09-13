@@ -13,6 +13,7 @@ from solid_node.motion.joints import Prismatic
 from solid_node.motion.ports import TranslationalPort
 from solid_node.math import sin, cos, sqrt, atan2
 from .timing import clip
+from .reeding import REED_TRAVEL
 
 
 def box(x, y, z, at=(0, 0, 0)):
@@ -103,7 +104,7 @@ class HeddleCage(CadQueryNode):
 
 class Reed(CadQueryNode):
     color = "#bfa76d"
-    stroke = Prismatic(axis=(0, 1, 0), range=(-37.01, 0.01))
+    stroke = Prismatic(axis=(0, 1, 0), range=(-REED_TRAVEL - 0.01, 0.01))
 
     def render(self):
         frame = box(194, 7, 78).cut(box(178, 11, 62))
@@ -118,10 +119,13 @@ class ReedTracks(CadQueryNode):
     color = "#563e2b"
 
     def render(self):
-        base = box(206, 75, 8, (0, -83, 88))
+        # A U-shaped bed: the front bearer joins both rails, while the
+        # open rear centre clears the shaft's selector cams underneath.
+        base = box(206, 16, 8, (0, -83, 88))
         for x in (-93, 93):
-            wall = box(15, 75, 12, (x, -83, 98))
-            wall = wall.cut(box(8.6, 80, 14, (x, -83, 102.7)))
+            base = base.union(box(15, 132, 8, (x, -52, 88)))
+            wall = box(15, 132, 12, (x, -52, 98))
+            wall = wall.cut(box(8.6, 136, 14, (x, -52, 102.7)))
             base = base.union(wall)
         return base
 
@@ -255,9 +259,14 @@ class ClothPick(MolejoNode):
 
 class WeftTail(MolejoNode):
     tip_x = TranslationalPort()
+    contact_x = TranslationalPort()
+    contact_y = TranslationalPort()
     color = "#d66c4a"
 
     def render(self):
         return Shape(
-            Circle(0.45), [Line((P.tip_x, 70, 0))], path_samples=80, profile_samples=8
+            Circle(0.45),
+            [Line((P.contact_x, P.contact_y, 0)), Line((P.tip_x, 70, 0))],
+            path_samples=40,
+            profile_samples=8,
         )
