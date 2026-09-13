@@ -18,6 +18,8 @@
 
 ## 4. Exhibit and delivery
 
+- [ ] 3.4 Correct the pilot-observed reed/carrier crossing: prove the short-stroke failure, extend and support the tracks, clear the head drive, connect and time the full beat/return, and verify red-weft response, cord lengths, root clearance, mutation and inspected motion views.
+
 - [x] 4.1 Update the actual exported exhibit with mechanism views, historical sources, controls and explicit reset/physical limits; declare the pilot's 60-second Python time base and verify Studio build metadata and native slow-motion controls.
 - [ ] 4.2 Run full faceted and final exact regressions, including parameter limits and combined controls; inspect isometric and alignment snapshots.
 - [ ] 4.3 Check build/manifest assets and the browser at desktop and narrow sizes; run the gallery check and all registered browser checks.

@@ -20,6 +20,13 @@ retreat during insertion, driven by a physically connected transmission.
 - **WHEN** the spool crosses the shed
 - **THEN** the same transmission holds the reed withdrawn and clear.
 
+#### Scenario: Reed crosses the carrier's working plane
+- **WHEN** the carrier hands have withdrawn after insertion
+- **THEN** the reed passes between them from behind their working plane to
+  the cloth fell, brings the displayed red weft toward the cloth, and returns
+  behind the carrier before the next insertion.
+- **AND** its tracks support and guide the complete stroke beneath the carrier.
+
 ### Requirement: Connected shedding drive
 The input SHALL mechanically drive the two heddle frames in opposition,
 with captured joints or continuously attached tensioned connections.

@@ -132,6 +132,34 @@ specifications, archive this change and commit locally; do not push.
 
 ## Implementation findings and resolved constructions
 
+### Pilot correction: reed must cross the carrier (13 September)
+
+The pilot observed that the reed never crosses the carrier and requested
+tracks beneath it, with the obstructing head drive raised as necessary.
+The checkpoint stroke, Y=48–85, lies entirely ahead of the carrier at Y=115;
+its timing test certified those coordinates without proving beat-up.
+Correct this before resuming the remaining reconstruction delivery work.
+
+The working construction is a 100 mm stroke from Y=148 behind the carrier
+to Y=48 at the fell. Hold the reed behind the hands during insertion and
+exchange; advance and return around each beat only after the hands withdraw.
+Extend the two guide rails under the crossing, retaining a front cross-bearer
+so the central cams have clearance. Move the larger reed cam outboard on the
+same shaft, extend and support that shaft, and raise its follower guide and
+haul sheaves to accommodate the full stroke. Keep the remaining six head
+tracks, heddle eyes, arm transmissions and winding coordinates unchanged.
+These dimensions are delegated reconstruction choices; the tests and pixels
+must establish the completed layout. Re-route both reed cords to their actual
+attachments, preserve their lengths and opposed weight motion, and make the
+schematic red weft respond to the reed's working face during beat-up.
+
+Independent regressions must measure reed geometry on both sides of the
+carrier plane, its passage only while the hands clear the full reed width,
+its capture in the extended rails, the fell approach, and its return to the
+rear dwell. Retain every whole-root integrity and flexible-routing check.
+The earlier 22-test checkpoint is historical evidence, not certification of
+this correction.
+
 The pilot-authorized completions are recorded in `docs/reconstruction.md`:
 captured spiral groove and descending rack, four 24-tooth lower wheels and
 a 64-perforation leather belt; seven head cam tracks, 5:1 slotted rockers,
