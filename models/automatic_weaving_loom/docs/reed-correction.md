@@ -104,6 +104,9 @@ All concealed dimensions are original reconstruction choices.
 
 ## Validation record
 
+Tested mechanical source: checkpoint `f50446d`. Its Python files match the
+frozen source manifest; this provenance note changes no model or test code.
+
 Implementation verification is paused at the pilot's request; no final exact
 certificate is claimed. Raw logs and development renders are under
 ignored `_evidence/automatic_weaving_loom/reed-*`. The frozen mechanical-source
