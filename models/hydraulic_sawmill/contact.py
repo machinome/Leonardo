@@ -93,5 +93,10 @@ def lift_for(pose,profile,teeth,base):
 def table_value(fraction,values,clip):
     """Hinge-basis interpolation uses only supported symbolic arithmetic."""
     segments=len(values)-1
-    return values[0]+sum((b-a)*clip(fraction*segments-i)
-                         for i,(a,b) in enumerate(zip(values,values[1:])))
+    terms=[(b-a)*clip(fraction*segments-i)
+           for i,(a,b) in enumerate(zip(values,values[1:]))]
+    # Keep the symbolic tree shallow enough for the builder to copy.
+    while len(terms)>1:
+        terms=[terms[i]+terms[i+1] if i+1<len(terms) else terms[i]
+               for i in range(0,len(terms),2)]
+    return values[0]+(terms[0] if terms else 0)
