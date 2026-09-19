@@ -2,6 +2,8 @@
 # Technical settings for episode.yaml. Narration and directions belong there.
 # Null values are unresolved choices, never defaults to invent.
 
+series: LEONARDO · HOW IT WORKS
+
 output:
   width: 1920
   height: 1080
@@ -10,18 +12,27 @@ output:
 
 model:
   manifest: "../../export/hydraulic_sawmill/manifest.json"
-  expectedDurationSeconds: 108
+  expectedDurationSeconds: 296
   timeMode: "normalized-loop"
-  sourceRevision: null
-  readiness: "Full-timber-pass model is being updated independently; re-export and pin after its validation."
+  sourceRevision: "0904386e9c5c876c51337d704da7b94304b2ee1d"
+  readiness: "Completed full-timber-pass export; 320 mm timber and 296-second timeline."
 
 audio:
-  provider: null
-  model: null
-  voice: null
+  provider: elevenlabs
+  model: eleven_multilingual_v2
+  voice: JBFqnCBsd6RMkjVDRZzb
+  voiceLabel: George
+  voiceSettings:
+    stability: 0.65
+    similarity_boost: 0.75
+    style: 0
+    use_speaker_boost: true
+    speed: 1.0
+  replacements:
+    Machinome: machine-ohm
   direction: "Curious, clear, conversational. Leave space to watch the mechanism. No music in the rehearsal."
   pronunciation:
-    Machinome: "Confirm with the pilot before voice generation"
+    Machinome: "mah-SHEEN-ohm — machine + genome; confirmed by the pilot"
     pawl: "rhymes with ball"
     AGPL: "A G P L"
   timing: "Generate and measure each beat; align speech and captions, then revise the draft shot timing."
@@ -30,12 +41,17 @@ style:
   background: "#faf7ef"
   foreground: "#222222"
   accent: "#237c86"
-  fontFamily: "sans-serif"
+  fontFamily: "DejaVu Sans, sans-serif"
   captions: "bottom-safe-area"
   safeInsetFraction: 0.08
   note: "Landscape rehearsal; a vertical edit needs deliberate reframing, not a center crop."
 
 cameras:
+  cut:
+    position: [160, -200, 720]
+    target: [-90, 0, 408]
+    up: [0, 0, 1]
+    fov: 37
   whole:
     position: [940, -1260, 940]
     target: [0, -20, 290]
@@ -63,6 +79,8 @@ cameras:
     fov: 37
 
 layers:
+  sash-frame:
+    - [Saw mechanism, Guided saw sash, frame]
   structure:
     - ["Frame and guides", "Timber stand and guides"]
   water:
@@ -74,7 +92,7 @@ evidence:
   model: "../../models/hydraulic_sawmill/model.py"
   dimensions: "../../models/hydraulic_sawmill/layout.py"
   kinematics: "../../models/hydraulic_sawmill/kinematics.py"
-  full-pass-design: "../../models/hydraulic_sawmill/openspec/changes/full-timber-pass/design.md"
+  full-pass-design: "../../models/hydraulic_sawmill/docs/full-pass-validation.md"
   gallery-readme: "../../README.md"
   notice: "../../NOTICE"
   gallery-metadata: "../../gallery.toml"

@@ -18,11 +18,10 @@ https://www.leonardodigitale.com/en/browse/Codex-atlanticus/1078-r/
 
 This is an educational interpretation informed by a later museum reconstruction.
 The opening cut is visualized geometrically; fluid power, cutting forces and
-wood fracture are not simulated. The video shows part of the 108-second pass.
+wood fracture are not simulated. The video shows part of the 296-second pass.
 
 Production: AI-authored script and synthetic narration; animation rendered
 from the Machinome model. No museum photographs or manuscript scans are used.
 
-[DRAFT: production statement is intended release copy, not completed work.
-Replace both URL placeholders and verify the public simulation before release.
+[REHEARSAL: replace both URL placeholders and verify the public simulation before release.
 For a vertical Short, also configure the channel-profile simulation link.]

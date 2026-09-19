@@ -7,9 +7,8 @@ an `episode.yaml` screenplay with narration and shot directions together,
 `production.yaml` settings, evidence and release copy. Generated media belongs in the episode's ignored `_build/` directory.
 No generated audio or video is committed here.
 
-The independent `videomaker` project will consume these sources. Its renderer
-is not implemented yet. Read and edit the YAML directly in a text editor;
-the future tool will consume these same files. No code execution is needed
-to inspect an episode.
+The independent `videomaker` project consumes these sources to generate speech,
+inspect a storyboard and render video. Read and edit the YAML directly in a
+text editor; no code execution is needed to inspect an episode.
 
 First episode: [Leonardo's sawmill: one wheel, two jobs](hydraulic-sawmill/README.md).

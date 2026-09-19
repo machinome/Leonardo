@@ -5,7 +5,7 @@
 format: "machinome-video-draft/0.2"
 id: "leonardo-hydraulic-sawmill"
 title: "Leonardo’s Sawmill: One Wheel, Two Jobs"
-status: "rehearsal-source-only"
+status: "rehearsal"
 learningGoal: >-
   Explain how one waterwheel coordinates the saw stroke and intermittent
   timber feed.
@@ -71,28 +71,34 @@ shots:
       - {from: 5, to: 12, text: "Rotation → reciprocation", position: top}
     evidence: ["reconstruction", "model"]
 
-  # 0:28–0:36
+  # 0:28–0:37
   - id: hold
     start: 28
-    end: 36
+    end: 37
     narration: >-
       Watch the timber. During the downward cutting stroke, the carriage
       stays still. As the blade rises, the feed begins.
     direction: >-
-      Keep the camera still for one complete revolution at half speed. The
-      first four video seconds show cutting; the next four show feeding.
-    simulation: {from: 32, to: 36}
+      Keep the camera still for one complete revolution over nine seconds.
+      The first 5.6 seconds show cutting; feeding begins with “As the blade rises.”
+    simulation:
+      from: 32
+      to: 36
+      keyframes:
+        - {at: 0, seconds: 32}
+        - {at: 5.6, seconds: 34}
+        - {at: 9, seconds: 36}
     camera:
       - {at: 0, preset: saw}
     hiddenLayers: ["structure"]
     overlays:
-      - {from: 0, to: 4, text: "DOWNSTROKE · CARRIAGE HOLDS", position: top}
-      - {from: 4, to: 8, text: "RETURN STROKE · CARRIAGE ADVANCES", position: top}
+      - {from: 0, to: 5.6, text: "DOWNSTROKE · CARRIAGE HOLDS", position: top}
+      - {from: 5.6, to: 9, text: "RETURN STROKE · CARRIAGE ADVANCES", position: top}
     evidence: ["reconstruction", "model", "dimensions", "kinematics"]
 
-  # 0:36–0:50
+  # 0:37–0:50
   - id: ratchet
-    start: 36
+    start: 37
     end: 50
     narration: >-
       This rocking lever pulls a small hook, called a pawl. It advances the
@@ -107,7 +113,7 @@ shots:
     hiddenLayers: ["structure", "water"]
     overlays:
       - {from: 0, to: 7, text: "Rocking lever → driving pawl", position: top}
-      - {from: 7, to: 14, text: "Ratchet + holding pawl", position: top}
+      - {from: 7, to: 13, text: "Ratchet + holding pawl", position: top}
     evidence: ["reconstruction", "model"]
 
   # 0:50–1:00
@@ -129,31 +135,43 @@ shots:
       - {from: 0, to: 10, text: "Drum → rope → return pulley → carriage", position: top}
     evidence: ["reconstruction", "model"]
 
-  # 1:00–1:08
+  # 1:00–1:09
   - id: rhythm
     start: 60
-    end: 68
+    end: 69
     narration: >-
       Cut. Advance. Cut. Advance. The linkage sets the timing, and the cut
       opens as the timber moves through.
     direction: >-
-      Show two cycles from a fixed saw close-up. Alternate CUT and ADVANCE
-      with the actual half-strokes. Let the model show the opening cut.
-    simulation: {from: 52, to: 60}
+      Look down at the opening cut, hiding the wooden sash frame for clarity.
+      Match the first two cycles to the spoken Cut / Advance beats, then let
+      one slower cycle run during the explanation. Timings follow the cached voice.
+    simulation:
+      from: 52
+      to: 64
+      keyframes:
+        - {at: 0, seconds: 52}
+        - {at: 0.77, seconds: 54}
+        - {at: 1.69, seconds: 56}
+        - {at: 2.31, seconds: 58}
+        - {at: 3.35, seconds: 60}
+        - {at: 9, seconds: 64}
     camera:
-      - {at: 0, preset: saw}
-    hiddenLayers: ["structure"]
+      - {at: 0, preset: cut}
+    hiddenLayers: ["structure", "sash-frame"]
     overlays:
-      - {from: 0, to: 2, text: "CUT", position: top}
-      - {from: 2, to: 4, text: "ADVANCE", position: top}
-      - {from: 4, to: 6, text: "CUT", position: top}
-      - {from: 6, to: 8, text: "ADVANCE", position: top}
-      - {from: 0, to: 8, text: "Cut opening visualized · cutting forces not simulated", position: lower-third}
+      - {from: 0, to: 0.77, text: "CUT", position: top}
+      - {from: 0.77, to: 1.69, text: "ADVANCE", position: top}
+      - {from: 1.69, to: 2.31, text: "CUT", position: top}
+      - {from: 2.31, to: 3.35, text: "ADVANCE", position: top}
+      - {from: 3.35, to: 6.175, text: "CUT", position: top}
+      - {from: 6.175, to: 9, text: "ADVANCE", position: top}
+      - {from: 0, to: 9, text: "Cut opening visualized · cutting forces not simulated", position: lower-third}
     evidence: ["reconstruction", "model", "full-pass-design"]
 
-  # 1:08–1:24
+  # 1:09–1:24
   - id: closing
-    start: 68
+    start: 69
     end: 84
     narration: >-
       Vibecoded by Astra with Machinome. The model’s source is shared under
@@ -162,14 +180,14 @@ shots:
     direction: >-
       Restore the timber stand and water display. Cut to the whole assembly
       and let it continue moving behind the credits and invitation.
-    simulation: {from: 60, to: 76}
+    simulation: {from: 64, to: 80}
     camera:
       - {at: 0, preset: whole}
     hiddenLayers: []
     overlays:
-      - {from: 0, to: 16, text: "Vibecoded by Astra · Made with Machinome", position: top}
+      - {from: 0, to: 15, text: "Vibecoded by Astra · Made with Machinome", position: top}
       - from: 0
-        to: 16
+        to: 15
         text: |-
           Original CAD and code: AGPL-3.0-only
           © 2026 Luis Henrique Cassis Fagundes
