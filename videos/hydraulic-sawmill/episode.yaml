@@ -1,0 +1,178 @@
+# Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
+# Read this file as the screenplay. All numeric times are seconds.
+# Camera coordinates, model paths and voice settings live in production.yaml.
+
+format: "machinome-video-draft/0.2"
+id: "leonardo-hydraulic-sawmill"
+title: "Leonardo’s Sawmill: One Wheel, Two Jobs"
+status: "rehearsal-source-only"
+learningGoal: >-
+  Explain how one waterwheel coordinates the saw stroke and intermittent
+  timber feed.
+production: production.yaml
+
+shots:
+  # 0:00–0:08
+  - id: hook
+    start: 0
+    end: 8
+    narration: >-
+      A waterwheel can move a saw. But how does it feed the log forward at
+      just the right moment?
+    direction: >-
+      Start with the machine already moving. Keep the blade and timber
+      together in a close view so the question has a visible subject.
+    simulation: {from: 8, to: 16}
+    camera:
+      - {at: 0, preset: saw}
+    hiddenLayers: []
+    overlays:
+      - {from: 0, to: 8, text: "Who moves the log?", position: top}
+    evidence: ["reconstruction", "model"]
+
+  # 0:08–0:16
+  - id: introduce
+    start: 8
+    end: 16
+    narration: >-
+      This reconstruction brings a hydraulic saw studied by Leonardo da
+      Vinci into motion. One wheel coordinates two jobs.
+    direction: >-
+      Pull back from the saw to the whole assembly over three seconds. Give
+      the viewer time to see the waterwheel below and the timber above.
+    simulation: {from: 16, to: 24}
+    camera:
+      - {at: 0, preset: saw}
+      - {at: 3, preset: whole}
+    hiddenLayers: []
+    overlays:
+      - {from: 0, to: 8, text: "Leonardo’s hydraulic sawmill", position: top}
+      - {from: 0, to: 8, text: "Educational reconstruction · Machinome", position: lower-third}
+    evidence: ["reconstruction", "model"]
+
+  # 0:16–0:28
+  - id: drive
+    start: 16
+    end: 28
+    narration: >-
+      Water passes beneath the wheel. A crank and connecting rod turn its
+      rotation into the saw’s up-and-down stroke. Follow the rod.
+    direction: >-
+      Hide the timber stand to reveal the transmission. Hold on the wheel
+      for five seconds, move up to the saw over four seconds, then hold.
+    simulation: {from: 24, to: 32}
+    camera:
+      - {at: 0, preset: drive}
+      - {at: 5, preset: drive}
+      - {at: 9, preset: saw}
+    hiddenLayers: ["structure"]
+    overlays:
+      - {from: 0, to: 5, text: "Water beneath the wheel", position: top}
+      - {from: 5, to: 12, text: "Rotation → reciprocation", position: top}
+    evidence: ["reconstruction", "model"]
+
+  # 0:28–0:36
+  - id: hold
+    start: 28
+    end: 36
+    narration: >-
+      Watch the timber. During the downward cutting stroke, the carriage
+      stays still. As the blade rises, the feed begins.
+    direction: >-
+      Keep the camera still for one complete revolution at half speed. The
+      first four video seconds show cutting; the next four show feeding.
+    simulation: {from: 32, to: 36}
+    camera:
+      - {at: 0, preset: saw}
+    hiddenLayers: ["structure"]
+    overlays:
+      - {from: 0, to: 4, text: "DOWNSTROKE · CARRIAGE HOLDS", position: top}
+      - {from: 4, to: 8, text: "RETURN STROKE · CARRIAGE ADVANCES", position: top}
+    evidence: ["reconstruction", "model", "dimensions", "kinematics"]
+
+  # 0:36–0:50
+  - id: ratchet
+    start: 36
+    end: 50
+    narration: >-
+      This rocking lever pulls a small hook, called a pawl. It advances the
+      ratchet by one tooth. A second pawl holds that progress while the
+      first resets.
+    direction: >-
+      Cut to the rear feed mechanism. Hide the structure and water display.
+      Hold the view while the driving and holding pawls take their turns.
+    simulation: {from: 36, to: 44}
+    camera:
+      - {at: 0, preset: feed}
+    hiddenLayers: ["structure", "water"]
+    overlays:
+      - {from: 0, to: 7, text: "Rocking lever → driving pawl", position: top}
+      - {from: 7, to: 14, text: "Ratchet + holding pawl", position: top}
+    evidence: ["reconstruction", "model"]
+
+  # 0:50–1:00
+  - id: rope
+    start: 50
+    end: 60
+    narration: >-
+      The ratchet turns a drum, winding a rope. Around the end pulley, that
+      rope pulls the carriage forward, ready for the next cut.
+    direction: >-
+      Move from the drum to a wider view of the rope and return pulley over
+      four seconds. Hold long enough to follow the rope to the carriage.
+    simulation: {from: 44, to: 52}
+    camera:
+      - {at: 0, preset: feed}
+      - {at: 4, preset: rope}
+    hiddenLayers: ["structure", "water"]
+    overlays:
+      - {from: 0, to: 10, text: "Drum → rope → return pulley → carriage", position: top}
+    evidence: ["reconstruction", "model"]
+
+  # 1:00–1:08
+  - id: rhythm
+    start: 60
+    end: 68
+    narration: >-
+      Cut. Advance. Cut. Advance. The linkage sets the timing, and the cut
+      opens as the timber moves through.
+    direction: >-
+      Show two cycles from a fixed saw close-up. Alternate CUT and ADVANCE
+      with the actual half-strokes. Let the model show the opening cut.
+    simulation: {from: 52, to: 60}
+    camera:
+      - {at: 0, preset: saw}
+    hiddenLayers: ["structure"]
+    overlays:
+      - {from: 0, to: 2, text: "CUT", position: top}
+      - {from: 2, to: 4, text: "ADVANCE", position: top}
+      - {from: 4, to: 6, text: "CUT", position: top}
+      - {from: 6, to: 8, text: "ADVANCE", position: top}
+      - {from: 0, to: 8, text: "Cut opening visualized · cutting forces not simulated", position: lower-third}
+    evidence: ["reconstruction", "model", "full-pass-design"]
+
+  # 1:08–1:24
+  - id: closing
+    start: 68
+    end: 84
+    narration: >-
+      Vibecoded by Astra with Machinome. The model’s source is shared under
+      A G P L version three. Explore the interactive simulation linked in
+      the description, and through our channel profile.
+    direction: >-
+      Restore the timber stand and water display. Cut to the whole assembly
+      and let it continue moving behind the credits and invitation.
+    simulation: {from: 60, to: 76}
+    camera:
+      - {at: 0, preset: whole}
+    hiddenLayers: []
+    overlays:
+      - {from: 0, to: 16, text: "Vibecoded by Astra · Made with Machinome", position: top}
+      - from: 0
+        to: 16
+        text: |-
+          Original CAD and code: AGPL-3.0-only
+          © 2026 Luis Henrique Cassis Fagundes
+          Explore the simulation: description / channel profile
+        position: lower-third
+    evidence: ["gallery-readme", "notice", "gallery-metadata"]

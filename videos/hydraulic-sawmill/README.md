@@ -3,9 +3,11 @@
 Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
 
 **Rehearsal sources only. No audio or video has been generated.**
-Entry point: [episode.mjs](episode.mjs). Spoken text lives only in
-[narration.mjs](narration.mjs); camera/visibility/time directions live in
-[shots.mjs](shots.mjs). [description.md](description.md) is draft release copy.
+Read [episode.yaml](episode.yaml) as a screenplay: each shot puts its narration
+beside a plain-language visual direction, timing and camera cues.
+[production.yaml](production.yaml) holds camera coordinates, model paths,
+voice settings, evidence and credits. [description.md](description.md) is
+draft release copy. The future tool reads these same files.
 
 ## Editorial plan
 
@@ -52,13 +54,19 @@ model. Hiding structure is an explanatory reveal, not physical disassembly.
 - Supply public simulation/source URLs. Current gallery metadata describes an
   intended source destination, not verified publication. No URL is invented here.
 
-## Inspect the source without rendering
+## Edit the screenplay
 
-From the gallery root (Node, no package installation):
+Open `episode.yaml` in your text editor and read the shots in order. Change
+the `narration` paragraph to edit the voiceover and `direction` to describe
+the intended picture. Keep the numeric camera, time and visibility cues in
+agreement with the direction. `start`/`end` are video seconds; camera and
+overlay cues are seconds since the shot began. `simulation` uses model seconds.
+The `>-` marker lets a paragraph span readable lines while remaining one spoken
+paragraph; `|-` keeps deliberate line breaks in a credit card.
 
-```sh
-node --input-type=module -e 'import episode from "./videos/hydraulic-sawmill/episode.mjs"; console.log(JSON.stringify(episode, null, 2))'
-```
+Named cameras such as `saw` and `feed` let you read the script without inspecting
+coordinates. Adjust those presets in `production.yaml` when refining framing.
+No program or dependency installation is needed to read either file.
 
 Future build output goes only in `_build/`: resolved episode/provenance,
 per-beat audio and alignment, frames, captions, thumbnail, MP4 and release copy.
