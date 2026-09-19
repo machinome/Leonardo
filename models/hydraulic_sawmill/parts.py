@@ -2,7 +2,7 @@
 # Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
 import math
 import cadquery as cq
-from molejo import Shape, Circle, Line, Arc, P
+from molejo import Shape, Circle, Polygon, Line, Arc, Helix, P
 from machinome.node import CadQueryNode, MolejoNode
 from machinome.parameters import Length, Flag
 from machinome.motion.joints import Revolute, Orbit, Prismatic
@@ -10,7 +10,8 @@ from machinome.motion.ports import TranslationalPort, RotationalPort
 from .layout import (CRANK, ROD, SASH_HEIGHT, TEETH, DRUM_RADIUS, ROPE_RADIUS,
                      ROPE_PITCH_RADIUS, RATCHET_ROOT, RATCHET_TIP, PAWL_LENGTH,
                      ROCKER_LONG, TIE_LENGTH, ROCKER_BRANCH, LINK_Y, TIE_Y,
-                     PAWL_Y, ROPE_Y, ROPE_TOP, PULLEY_X, RATCHET_X, RATCHET_Z)
+                     PAWL_Y, ROPE_Y, ROPE_TOP, PULLEY_X, RATCHET_X, RATCHET_Z,
+                     TIMBER_LENGTH, CRADLE_X, INITIAL_WRAP, CLEAT_Y, DRUM_Y)
 from .kinematics import SHORT_ARM, START_CONTACT, HOLD_LENGTH, HOLD_X, HOLD_Z
 
 IRON = '#39464B'
@@ -41,20 +42,20 @@ def eyed_link(length,width,depth,bore):
 class Foundation(CadQueryNode):
     color='#51443A'
     def render(self):
-        return box(785,505,18,(0,-30,9)).edges('|Z').chamfer(4)
+        return box(875,505,18,(0,-30,9)).edges('|Z').chamfer(4)
 
 class OakStructure(CadQueryNode):
     color='#A87944'
     def render(self):
-        shape=box(610,18,20,(0,-99,72))
+        shape=box(720,18,20,(0,-99,72))
         for y in (-99,115):
-            shape=shape.union(box(610,18,20,(0,y,72)))
-            shape=shape.union(box(610,18,18,(0,y,330)))
-            for x in (-285,285):
+            shape=shape.union(box(720,18,20,(0,y,72)))
+            shape=shape.union(box(720,18,18,(0,y,330)))
+            for x in (-335,335):
                 shape=shape.union(box(22,22,320,(x,y,178)))
-        for x in (-285,0,285):
+        for x in (-335,0,335):
             shape=shape.union(box(22,235,18,(x,8,72)))
-        for x in (-285,285):
+        for x in (-335,335):
             shape=shape.union(box(22,235,16,(x,8,330)))
         # Only TWO continuous guide posts, as on the reference object.
         for y in (-78,78):
@@ -64,7 +65,7 @@ class OakStructure(CadQueryNode):
             shape=shape.union(post)
         shape=shape.union(box(26,176,16,(0,0,637)))
         for y in (-42,42):
-            shape=shape.union(box(650,12,10,(0,y,340)))
+            shape=shape.union(box(760,12,10,(0,y,340)))
         # Under-table shaft and rocker pivot bores.
         for x,z,r in ((RATCHET_X,330,5.6),(-235,330,3.6)):
             shape=shape.cut(cylinder_y(r,260,(x,0,z)))
@@ -181,18 +182,21 @@ class SashPin(CadQueryNode):
 
 class CarriageBed(CadQueryNode):
     color='#A57348'
+    kerf=Length(3.2,min=2,max=5)
     def render(self):
-        shape=box(360,10,22,(0,-31,373.4)).union(box(360,10,22,(0,31,373.4)))
-        for x in (-125,125):
+        shape=box(420,10,22,(0,-31,373.4)).union(box(420,10,22,(0,31,373.4)))
+        for x in (-CRADLE_X,CRADLE_X):
             saddle=box(18,72,51,(x,0,388.5))
             recess=cq.Workplane('YZ').circle(29.3).extrude(24).translate((x-12,0,408.2))
-            shape=shape.union(saddle.cut(recess))
+            saddle=saddle.cut(recess).cut(box(20,self.kerf,60,(x,0,388.5)))
+            shape=shape.union(saddle)
+        for x in (-185,185):
             for y in (-31,31):
                 shape=shape.union(box(16,10,24,(x,y,366)))
             shape=shape.cut(cylinder_y(3.6,105,(x,0,357.2)))
-        shape=shape.union(box(14,132,10,(174,34,370)))
-        shape=shape.union(box(14,8,21,(174,ROPE_Y,355.5)))
-        return shape.cut(cq.Workplane('YZ').circle(1.3).extrude(20).translate((164,ROPE_Y,ROPE_TOP)))
+        shape=shape.union(box(14,132,10,(204,34,370)))
+        shape=shape.union(box(14,8,21,(204,ROPE_Y,355.5)))
+        return shape.cut(cq.Workplane('YZ').circle(1.3).extrude(20).translate((194,ROPE_Y,ROPE_TOP)))
 
 class CarriageWheel(CadQueryNode):
     color=IRON
@@ -218,7 +222,7 @@ class LogHalf(CadQueryNode):
             a=2*math.pi*i/64
             r=28+0.6*math.sin(5*a)**2
             pts.append((r*math.cos(a),r*math.sin(a)))
-        shape=cq.Workplane('YZ').polyline(pts).close().extrude(350).translate((-175,0,408.2))
+        shape=cq.Workplane('YZ').polyline(pts).close().extrude(TIMBER_LENGTH).translate((-TIMBER_LENGTH/2,0,408.2))
         y=-100+self.kerf/2 if self.positive else 100-self.kerf/2
         return shape.cut(box(354,200,100,(0,y,408.2)))
 
@@ -233,13 +237,30 @@ class EndGrain(CadQueryNode):
         y=-100+self.kerf/2 if self.positive else 100-self.kerf/2
         return shape.cut(box(4,200,100,(0,y,0)))
 
+class UncutTimber(MolejoNode):
+    """Display material ahead of the teeth; collapsed mesh when fully cut.
+
+    Sweep across the kerf so the Line never degenerates. The profile shrinks
+    along the timber, then closes to zero area over its final 0.1 mm.
+    The conservative 56 mm height stays inside the bark outline.
+    """
+    color='#745238'
+    kerf=Length(3.2,min=2,max=5)
+    remaining=TranslationalPort(unit='mm')
+    top=TranslationalPort(unit='mm')
+    bottom=TranslationalPort(unit='mm')
+    def render(self):
+        return Shape(Polygon([(0,P.bottom),(P.remaining,P.bottom),
+                              (P.remaining,P.top),(0,P.top)]),
+                     [Line((0,0,self.kerf))],path_samples=1,profile_samples=4)
+
 class RatchetDrum(CadQueryNode):
     color=IRON
     spin=Revolute(axis=(0,1,0))
     def render(self):
-        shape=cylinder_y(5,PAWL_Y+132,(0,(PAWL_Y-126)/2,0)).union(cylinder_y(DRUM_RADIUS,10,(0,ROPE_Y,0)))
-        for y in (ROPE_Y-6,ROPE_Y+6):
-            shape=shape.union(cylinder_y(27.5,3,(0,y,0)))
+        shape=cylinder_y(5,PAWL_Y+132,(0,(PAWL_Y-126)/2,0)).union(cylinder_y(DRUM_RADIUS,22,(0,DRUM_Y,0)))
+        for y in (DRUM_Y-12,DRUM_Y+12):
+            shape=shape.union(cylinder_y(27.5,2,(0,y,0)))
         from .contact import tooth_profile
         pts=tooth_profile(START_CONTACT)
         wheel=profile_xz(pts,6,PAWL_Y)
@@ -247,9 +268,9 @@ class RatchetDrum(CadQueryNode):
             wheel=wheel.cut(cylinder_y(8,10,(24*math.sin(math.radians(a)),PAWL_Y,24*math.cos(math.radians(a)))))
         shape=shape.union(wheel)
         # Rope end seats in a radial hole in this rotating iron cleat.
-        cleat=box(6,5,6,(ROPE_PITCH_RADIUS,ROPE_Y,0))
-        cleat=cleat.cut(cq.Workplane('XY').circle(1.3).extrude(9).translate((ROPE_PITCH_RADIUS,ROPE_Y,-4.5)))
-        return shape.union(cleat)
+        cleat=box(6,3.2,6,(ROPE_PITCH_RADIUS,CLEAT_Y,0))
+        cleat=cleat.cut(cq.Workplane('XY').circle(1.3).extrude(9).translate((ROPE_PITCH_RADIUS,CLEAT_Y,-4.5)))
+        return shape.union(cleat.rotate((0,ROPE_Y,0),(0,ROPE_Y+1,0),INITIAL_WRAP-270))
 
 class Rocker(CadQueryNode):
     color=IRON
@@ -324,7 +345,7 @@ class PulleyBracket(CadQueryNode):
         shape=box(34,42,12,(PULLEY_X,ROPE_Y,294))
         for y in (ROPE_Y-16,ROPE_Y+16):
             shape=shape.union(box(16,8,43,(PULLEY_X,y,321)))
-        shape=shape.union(box(54,14,10,(304,104,295)))
+        shape=shape.union(box(80,14,10,(PULLEY_X-34,104,295)))
         return shape.cut(cylinder_y(3.6,50,(PULLEY_X,ROPE_Y,330)))
 
 class PulleyPin(CadQueryNode):
@@ -335,13 +356,27 @@ class PulleyPin(CadQueryNode):
 class HaulRope(MolejoNode):
     color='#D3B989'
     to_pulley=TranslationalPort(unit='mm')
-    to_drum=TranslationalPort(unit='mm')
-    wrap=RotationalPort(unit='rad')
     def render(self):
         r=ROPE_PITCH_RADIUS
         return Shape(Circle(ROPE_RADIUS),[
             Line((P.to_pulley,0,0)),
             Arc((P.to_pulley,0,-r),(0,1,0),math.pi),
-            Line((P.to_drum,0,-2*r)),
-            Arc((P.to_drum,0,-r),(0,1,0),P.wrap),
         ],path_samples=72,profile_samples=12)
+
+class ReturnSpan(MolejoNode):
+    """Separate straight sweep keeps the fleet-angle span analytic."""
+    color='#D3B989'
+    drum_y=TranslationalPort(unit='mm')
+    def render(self):
+        return Shape(Circle(ROPE_RADIUS),
+                     [Line((RATCHET_X-PULLEY_X,P.drum_y,0))],
+                     path_samples=1,profile_samples=12)
+
+class WindingRope(MolejoNode):
+    color='#D3B989'
+    turns=RotationalPort(unit='rev')
+    height=TranslationalPort(unit='mm')
+    def render(self):
+        return Shape(Circle(ROPE_RADIUS),
+                     [Helix(ROPE_PITCH_RADIUS,P.turns,P.height)],
+                     path_samples=240,profile_samples=12)

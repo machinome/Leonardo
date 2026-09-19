@@ -23,12 +23,14 @@ Open **http://127.0.0.1:8769/models/hydraulic_sawmill/**.
 Use `--build-only` for a finite export, `--no-build` to serve an existing
 export, or `--port 8770`. Stop the local server with Ctrl+C.
 
-Play/pause, speed, the four-cycle scrubber, four camera views and mechanism
+Play/pause, speed, the full-pass timeline, four camera views and mechanism
 reveal let you follow each transmission. The feed view looks at the rear
 linkage; restore the frame to understand the fixed pivots. Reduced-motion
 preferences start paused. The standard viewer at
-`/export/hydraulic_sawmill/` also exposes all six named instructions and exact
-driver entry.
+`/export/hydraulic_sawmill/` exposes the same timeline and an assembly sidebar.
+There are no machine input drivers or instruction buttons. Open “Explore the
+assembly” to navigate frame, water drive, saw, timber carriage and feed;
+the timber and rollers have their own subgroups.
 
 ## What is reconstructed
 
@@ -42,11 +44,16 @@ driver entry.
   bored carriage tie-off, flanged rollers, retained axles and log cradles.
 
 A 24 mm crank throw gives a **48 mm stroke**. One return stroke advances one
-ratchet tooth: **4.594579 mm of carriage travel**, or 18.378317 mm over the
-four-turn demonstration. The carriage dwells during the cutting downstroke.
+ratchet tooth: **approximately 4.60 mm of carriage travel**. The full pass takes
+**74 turns / 296 seconds**, advancing **340.062622 mm**. The carriage dwells
+during the cutting downstroke.
 
-`phase` spans 0–1440°; `playback` spans 0–1. Set playback to zero for manual
-phase inspection. Their combined motion clamps at the four-cycle endpoint.
+The **320 mm timber** starts wholly before the teeth and finishes beyond the
+blade. Slotted cradles support it throughout; all four rollers stay on the
+modestly extended rails. The timber is 30 mm shorter than the original,
+while the table grows from 610 to 720 mm. Blade entry clearance is 1 mm;
+exit clearance is about 4.06 mm. A shrinking molejo insert fills the uncut kerf ahead of the
+teeth and reveals the split behind them, disappearing at completion.
 The sole geometric parameter is `kerf`, 2–5 mm (default 3.2 mm). Paddle count
 is fixed to the reconstruction, not exposed as an arbitrary variant.
 A loop restart is visibly labelled as a replay reset, not automatic reversal.
@@ -61,20 +68,25 @@ invented hydraulic sawing.
 
 The linkage closes geometrically. Pawl seating is constructed from the tooth
 profiles, with running clearance; gravity, friction and torque are not solved.
-The rope assumes maintained tension. Water is illustrative, the kerf is
-already open and the timber is assumed secured. The tension screw is shown
+The rope assumes maintained tension and orderly helical winding on the drum. Water and material removal are
+illustrative, and the timber is assumed secured. The rigid halves have an
+open kerf; the flexible insert supplies the cutting impression. Its last
+0.1 mm collapses to zero area, not a remaining solid or sawdust simulation.
+The tension screw is shown
 set, without helical thread or blade-strain simulation. Stopping water,
 releasing pawls and reloading remain manual operations, explained in the
 exhibit; no hidden automatic return is invented.
 
 See the [source-by-source reconstruction record](docs/reconstruction.md),
-[design](docs/design.md) and [validation](docs/validation.md).
+[design](docs/design.md) and [full-pass validation](docs/full-pass-validation.md).
+The [previous validation](docs/validation.md) records the superseded four-turn exhibit.
 
 ## Reproduce the evidence
 
 Use the workspace’s **post-0.6 development API**, including declarative joints
-and relations, and viewer API 7. Published machinome 0.6.0 alone is
-insufficient. Viewer 0.1.0 is locally founded, not claimed to be released.
+and relations, and viewer API 20 (Machinome browser names and assembly navigator).
+Published machinome 0.6.0 alone is insufficient. The tested viewer 0.2.0 is
+a local development package, not claimed to be released.
 Exact dependency revisions are recorded in the validation certificate.
 
 ```sh
@@ -84,7 +96,7 @@ machinome test hydraulic_sawmill --exact
 machinome test hydraulic_sawmill --set kerf=2 --exact
 machinome test hydraulic_sawmill --set kerf=5 --exact
 python models/hydraulic_sawmill/scripts/readouts.py --check
-machinome snapshot hydraulic_sawmill -o models/hydraulic_sawmill/docs/evidence/museum-isometric.png --autocenter --viewall --time 0.1875 --imgsize 1400x1000
+machinome snapshot hydraulic_sawmill -o models/hydraulic_sawmill/docs/evidence/full-pass-start.png --autocenter --viewall --time 0 --imgsize 1400x1000
 python scripts/gallery.py check
 python scripts/gallery.py export hydraulic_sawmill
 python models/hydraulic_sawmill/scripts/check-browser.py

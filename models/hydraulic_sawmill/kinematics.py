@@ -1,10 +1,12 @@
 """Closed geometric linkage; the same degree expressions drive the viewer."""
 # Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
+from math import pi
 from machinome.math import acos, sin, cos, sqrt, atan2
 from .layout import (CRANK, ROD, AXLE_Z, FEED, TEETH, DRUM_RADIUS, PITCH,
                      ROCKER_X, ROCKER_Z, ROCKER_LONG, TIE_LENGTH,
                      ROCKER_BRANCH, PAWL_LENGTH, CONTACT_RADIUS,
-                     RATCHET_X, RATCHET_Z)
+                     RATCHET_X, RATCHET_Z, PULLEY_X, ROPE_Y, CLEAT_Y,
+                     INITIAL_WRAP, WIND_PITCH, ROPE_PITCH_RADIUS)
 from .contact import tooth_profile, drive_profile, hold_profile, transformed, lift_for, table_value
 
 def clip01(x):
@@ -60,6 +62,14 @@ def ratchet_angle(angle):
     # circle closure on return. This is not an independent feed animation.
     active = 180+180*clip01((local-180)/180)
     return completed*PITCH+contact_angle(rocker_angle(saw_height(active)),SHORT_ARM)-START_CONTACT
+
+def carriage_advance(spin):
+    """Constant rope length, including the winding helix and fleet angle."""
+    span = PULLEY_X-RATCHET_X
+    y0 = CLEAT_Y+WIND_PITCH*INITIAL_WRAP/360-ROPE_Y
+    y = y0+WIND_PITCH*spin/360
+    effective_radius = sqrt(ROPE_PITCH_RADIUS**2+(WIND_PITCH/(2*pi))**2)
+    return spin*pi/180*effective_radius+sqrt(span**2+y**2)-sqrt(span**2+y0**2)
 
 def feed_steps(angle):
     return ratchet_angle(angle)/PITCH

@@ -31,8 +31,10 @@ def check(url):
     OUTPUT.mkdir(parents=True,exist_ok=True)
     destination=ROOT/'export/hydraulic_sawmill'
     manifest=json.loads((destination/'manifest.json').read_text())
-    assert set(manifest['drivers'])=={'phase','playback'}
-    assert len(manifest['instructions'])==6
+    assert manifest['drivers']=={}
+    assert manifest['instructions']=={}
+    assert manifest['animation']['loop']==296
+    assert [n['name'] for n in manifest['root']['children']]==['Frame and guides','Water drive','Saw mechanism','Timber carriage','Feed mechanism']
     names=set()
     def assets(node):
         names.add(node['name'])
@@ -41,7 +43,7 @@ def check(url):
         for child in node.get('children',[]):
             assets(child)
     assets(manifest['root'])
-    assert {'feed_tie','rocker','pawl','holding_pawl','return_pulley','rope','channel','water'}<=names
+    assert {'Saw-to-rocker tie','Feed rocker','Driving pawl','Holding pawl','Return pulley','Haul rope','Water channel','Water surface','Uncut wood at the kerf'}<=names
     errors,failures=[],[]
     with sync_playwright() as p:
         browser=p.chromium.launch(headless=True,args=['--enable-webgl','--use-gl=angle',
@@ -59,19 +61,22 @@ def check(url):
             canvas=page.locator('#stage canvas')
             expect(canvas).to_be_visible()
             assert not page.evaluate('window.exhibit.playing')
+            page.locator('.assembly-tree summary').click()
+            expect(page.get_by_role('tree',name='Sawmill assembly').get_by_text('Timber carriage',exact=True)).to_be_visible()
+            page.locator('.assembly-tree summary').click()
             def pose(phase):
                 page.locator('#timeline').fill(str(phase))
                 page.locator('#timeline').dispatch_event('input')
                 page.wait_for_timeout(150)
             pose(0)
             start=pixels(canvas)
-            for phase,feed in ((180,'0.0'),(270,'2.0'),(360,'4.6'),(450,'4.6'),(1440,'18.4')):
+            for phase,feed in ((180,'0.0'),(270,'2.0'),(360,'4.6'),(450,'4.6'),(1440,'18.4'),(4860,'59.7'),(13320,'170.0'),(26640,'340.1')):
                 pose(phase)
                 assert feed in page.locator('#feed').inner_text(), (phase,page.locator('#feed').inner_text())
                 assert ImageChops.difference(start,pixels(canvas)).getbbox(), 'CAD did not move'
             pose(0)
             assert ImageChops.difference(start,pixels(canvas)).getbbox() is None, 'CAD pose return drifted'
-            pose(270)
+            pose(13320)
             page.screenshot(path=str(OUTPUT/f'{label}-whole.png'),full_page=True)
             for name in ('drive','saw','feed'):
                 page.locator(f'.view-tabs [data-view="{name}"]').click()
@@ -99,33 +104,40 @@ def check(url):
         assert source.status==200
         with ZipFile(BytesIO(source.body())) as archive:
             assert 'Leonardo/models/hydraulic_sawmill/contact.py' in archive.namelist(), 'Source ZIP is stale'
-        # Native viewer instructions act on the exported driver bank.
+        # Native export exposes only timeline transport and functional navigation.
         page.set_viewport_size({'width':1200,'height':950})
-        page.goto(urljoin(url,'../../export/hydraulic_sawmill/?autoplay=0'))
+        page.goto(urljoin(url,'../../export/hydraulic_sawmill/?autoplay=0&sidebar=open'))
         expect(page.locator('canvas')).to_be_visible()
-        phase=page.get_by_label('phase exact value (deg)',exact=True)
-        playback=page.get_by_label('playback exact value',exact=True)
-        for instruction,target in (('Start of pass','0.0000'),('Half stroke','90.0000'),
-                                   ('Bottom of cut','180.0000'),('Feed working','270.0000'),
-                                   ('Run four cycles','1440.0000')):
-            page.get_by_role('button',name=f'Run {instruction}',exact=True).click()
-            expect(phase).to_have_value(target,timeout=25000)
-            expect(playback).to_have_value('0.0000')
-        page.get_by_role('button',name='Run Timeline motion',exact=True).click()
-        expect(phase).to_have_value('0.0000')
-        expect(playback).to_have_value('1.0000')
-        page.get_by_label('phase (deg)',exact=True).fill('720')
-        page.get_by_label('phase (deg)',exact=True).dispatch_event('input')
-        expect(phase).to_have_value('720.0000')
-        page.get_by_role('button',name='Edit phase exact value (deg)',exact=True).click()
-        phase.fill('270')
-        phase.press('Enter')
-        expect(phase).to_have_value('270.0000')
-        page.screenshot(path=str(OUTPUT/'native-instructions.png'),full_page=True)
+        expect(page.locator('input[type=range]')).to_have_count(1)
+        expect(page.get_by_role('button',name='Run ',exact=False)).to_have_count(0)
+        slider=page.locator('input[type=range]')
+        slider.fill('0')
+        slider.dispatch_event('input')
+        start=pixels(page.locator('canvas'))
+        slider.fill('1')
+        slider.dispatch_event('input')
+        page.wait_for_timeout(200)
+        assert ImageChops.difference(start,pixels(page.locator('canvas'))).getbbox()
+        slider.fill('0')
+        slider.dispatch_event('input')
+        page.wait_for_timeout(200)
+        assert ImageChops.difference(start,pixels(page.locator('canvas'))).getbbox() is None
+        tree=page.get_by_role('tree')
+        for name in ('Frame and guides','Water drive','Saw mechanism','Timber carriage','Feed mechanism'):
+            expect(tree.get_by_text(name,exact=True)).to_be_visible()
+        carriage=tree.get_by_role('treeitem').filter(has=page.locator('.machinome-nav-name',has_text='Timber carriage'))
+        carriage.locator('.machinome-nav-twisty').click()
+        expect(tree.get_by_text('Timber',exact=True)).to_be_visible()
+        timber=tree.get_by_role('treeitem').filter(has=page.get_by_text('Timber',exact=True))
+        timber.press('Enter')
+        expect(page.locator('.machinome-nav-full')).to_be_enabled()
+        page.screenshot(path=str(OUTPUT/'native-timber-tree.png'),full_page=True)
+        page.locator('.machinome-nav-full').click()
+        page.screenshot(path=str(OUTPUT/'native-timeline.png'),full_page=True)
         assert not errors,errors
         assert not failures,failures
         browser.close()
-    print('PASS: real export assets, 6 native instructions, manual/slider controls, CAD pixel return, playback, all 4 views, reveal, source ZIP, readouts, desktop/narrow; no console or network failures.')
+    print('PASS: real export assets, timeline-only controls, functional assembly tree, complete timber course, CAD pixel return, playback, all 4 views, reveal, source ZIP, readouts, desktop/narrow; no console or network failures.')
 
 
 if __name__=='__main__':

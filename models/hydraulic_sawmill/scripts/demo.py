@@ -18,7 +18,7 @@ def main():
     parser.add_argument('--no-build', action='store_true')
     args = parser.parse_args()
     if not args.no_build:
-        solid = shutil.which('solid')
+        solid = shutil.which('machinome')
         if solid is None:
             raise SystemExit('Activate the Python environment containing machinome and its viewer extra.')
         subprocess.run([sys.executable, str(ROOT / 'scripts/gallery.py'),

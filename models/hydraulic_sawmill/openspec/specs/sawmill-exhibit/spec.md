@@ -7,14 +7,14 @@ Provide an inspectable, exportable and honestly documented presentation of the h
 ## Requirements
 
 ### Requirement: Controllable browser exhibit
-A visitor SHALL be able to play, pause, change speed, scrub four cycles,
-select mechanism views, reveal the drive and reset the actual exported model.
+A visitor SHALL control the actual model with animation timeline transport
+only, including play, pause, speed and full-pass scrubbing; no machine input
+drivers or instruction buttons SHALL be exposed. Views and reveal remain available.
 
 #### Scenario: Inspect and resume
-- **WHEN** the visitor scrubs to 450 degrees and selects the feed view
-- **THEN** geometry changes, the phase readout shows 90 degrees within the
-  second cycle, the carriage shows one completed increment, the connected
-  feed linkage is visible, and playback can resume.
+- **WHEN** the visitor scrubs within the full-pass timeline
+- **THEN** the model and measured readouts follow that instant, playback can
+  resume, and one complete pass lasts 296 seconds at normal speed.
 
 ### Requirement: Rigid integrity
 Every rigid piece SHALL be connected and distinct rigid pieces SHALL remain free of shared volume across the sampled demonstration poses.
@@ -37,3 +37,11 @@ explain all modeled mechanisms and omitted physics, and provide source/license.
 #### Scenario: Retrieve source
 - **WHEN** a visitor follows the source link after a committed gallery export
 - **THEN** a downloadable source archive and the AGPL license are available.
+
+### Requirement: Functional assembly navigation
+The assembly tree SHALL group the machine by frame, water drive, saw mechanism,
+timber carriage and feed mechanism, with readable names and timber/running-gear subgroups.
+
+#### Scenario: Find a mechanism
+- **WHEN** a visitor opens the tree and selects the timber or a feed component
+- **THEN** the relevant physical parts are reachable under their functional group.

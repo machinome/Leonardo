@@ -7,7 +7,7 @@ const views = {
   saw: {camera: [335,-470,505], target: [0,0,445]},
   feed: {camera: [180,720,480], target: [-105,115,337]},
 };
-let viewer, phase = 0, playing = !matchMedia('(prefers-reduced-motion: reduce)').matches;
+let viewer, navigator, phase = 0, playing = !matchMedia('(prefers-reduced-motion: reduce)').matches;
 let revealed = false, mounting = false, previousTime, measurements, resetUntil = 0;
 let currentView = 'whole';
 const stage = $('stage');
@@ -33,21 +33,25 @@ function setPlaying(value) {
 }
 function pose() {
   if (!viewer || !measurements) return;
-  viewer.setTime(phase / 1440);
+  viewer.setTime(phase / measurements.pass_angle);
   $('timeline').value = phase;
   const a = phase % 360;
   const [drop,increment] = reading(a);
-  const feed = Math.floor(phase/360)*measurements.feed_per_turn+increment;
+  const turn = Math.min(measurements.pass_turns-1, Math.floor(phase/360));
+  const startFeed = measurements.turn_feed[turn];
+  const turnFeed = measurements.turn_feed[turn+1]-startFeed;
+  const feed = phase >= measurements.pass_angle ? measurements.turn_feed.at(-1)
+    : startFeed + turnFeed*increment/measurements.feed_per_turn;
   $('angle').textContent = `${Math.round(a)}°`;
   $('feed').innerHTML = `${feed.toFixed(1)} <i>mm</i>`;
-  $('cycle').textContent = `${String(Math.min(4,Math.floor(phase/360)+1)).padStart(2,'0')} / 04`;
+  $('cycle').textContent = `${String(Math.min(measurements.pass_turns,Math.floor(phase/360)+1)).padStart(2,'0')} / ${measurements.pass_turns}`;
   $('stroke-label').textContent = a < 180 ? 'CUTTING STROKE' : 'RETURN & FEED';
   $('trace-dot').setAttribute('cx', a*280/360);
   $('trace-dot').setAttribute('cy', 14+drop*56/48);
   status();
 }
 function applyReveal() {
-  const names = new Set(['timber_structure','foundation','channel','water']);
+  const names = new Set(['Frame and guides','Water channel','Water surface']);
   const walk = node => { if (names.has(node.name)) viewer.setVisible(node.path, !revealed); node.children.forEach(walk); };
   walk(viewer.assembly());
   $('reveal').setAttribute('aria-pressed',String(revealed));
@@ -62,25 +66,29 @@ async function mount(name='whole') {
       const response = await fetch('readouts.json');
       if (!response.ok) throw new Error('CAD measurement table unavailable');
       measurements = await response.json();
+      $('timeline').max = measurements.pass_angle;
+      document.querySelector('.transport-note').textContent = `${measurements.pass_turns} turns · ${measurements.pass_seconds} seconds`;
       const curve = Array.from({length:121}, (_,i) => `${i?'L':'M'}${i*280/120},${14+reading(i*3)[0]*56/48}`).join(' ');
       $('stroke-curve').setAttribute('d', curve);
     }
+    if (navigator) navigator.dispose();
     if (viewer) viewer.dispose();
     const chosen = views[name];
     const factor = Math.max(1, 560 / stage.clientWidth);
     const view = {target:chosen.target, camera:chosen.camera.map((v,i) => chosen.target[i]+(v-chosen.target[i])*factor)};
-    viewer = await MachinomeWidget.mount(stage, '../../export/hydraulic_sawmill/manifest.json', {
+    viewer = await MachinomeViewer.mount(stage, '../../export/hydraulic_sawmill/manifest.json', {
       animation: 'external', driverControls: 'none', autoplay: false,
-      time: phase / 1440, view, up: [0,0,1], fov: 37,
+      time: phase / measurements.pass_angle, view, up: [0,0,1], fov: 37,
       ariaLabel: 'Interactive three-dimensional reconstruction of Leonardo’s hydraulic sawmill',
     });
+    navigator = MachinomeViewer.mountNavigator('#assembly-tree', viewer, {label: 'Sawmill assembly'});
     applyReveal(); pose(); setPlaying(playing);
     $('loading').hidden = true;
     document.querySelectorAll('.view-tabs button').forEach(b => b.classList.toggle('active',b.dataset.view===name));
     document.body.dataset.ready = 'true';
     currentView = name;
     // Read-only observability for the project's browser acceptance check.
-    window.exhibit = {get phase(){return phase}, get playing(){return playing}, get revealed(){return revealed}, get view(){return viewer.view()}};
+    window.exhibit = {get phase(){return phase}, get playing(){return playing}, get revealed(){return revealed}, get view(){return viewer.view()}, get assembly(){return viewer.assembly()}};
   } catch(error) {
     $('loading').hidden = false;
     $('loading').textContent = `The model could not open: ${error.message}`;
@@ -105,9 +113,9 @@ function frame(now) {
   const elapsed = previousTime === undefined ? 0 : Math.min((now-previousTime)/1000,0.1);
   previousTime = now;
   if (viewer && playing && !mounting && !document.hidden) {
-    const next=phase+elapsed*90*Number($('speed').value);
-    if (next>=1440) resetUntil=now+1800;
-    phase=next%1440;pose();
+    const next=phase+elapsed*(measurements.pass_angle/measurements.pass_seconds)*Number($('speed').value);
+    if (next>=measurements.pass_angle) resetUntil=now+1800;
+    phase=next%measurements.pass_angle;pose();
   }
   requestAnimationFrame(frame);
 }

@@ -74,7 +74,7 @@ Coordinates: +X is carriage advance; +Y follows the axle toward the feed
 linkage; +Z is up. The channel approaches from +X and flows toward −X, so
 positive wheel rotation carries the lower paddles downstream. Axle height is
 120 mm. The wheel has 80 mm rims and projecting paddle tips at about 92 mm;
-water is shown below those tips. The plinth is 785 × 505 × 18 mm and tower
+water is shown below those tips. The revised plinth is 875 × 505 × 18 mm and tower
 height is 645 mm.
 
 The crank throw is 24 mm, the connecting rod 146 mm and the saw stroke 48 mm.
@@ -84,12 +84,23 @@ link with the lower saw journal. Circle intersection determines the rocker
 angle; its approximately 49.917 mm short arm is solved so the 75 mm driving
 pawl's contact circle traverses one 11.25° tooth pitch between dead centers.
 
-The ratchet has 32 teeth. Rope centerline radius is 23.4 mm, giving
-`2π × 23.4 / 32 = 4.594579 mm` carriage advance per turn and 18.378317 mm
-over four turns. The difference between centerline and solid drum radius
-includes the rope's 0.9 mm radius and a 0.3 mm visible running clearance.
-The fixed return pulley reverses the rope but gives no mechanical advantage.
-Initial winding is 270°; four increments add 45°, staying below a full wrap.
+The ratchet has 32 teeth. Rope centerline radius is 23.4 mm; winding pitch
+is 3.2 mm per drum revolution. Approximately 4.60 mm feed per waterwheel
+turn gives 340.062622 mm over the 74-turn, 296-second pass. The exact
+carriage law includes helical take-up and the changing lower-span fleet
+angle. The 0.9 mm rope radius leaves 0.3 mm radial running clearance.
+
+Following the pilot's proportion and tight-fit corrections, the timber is
+320 mm rather than the original 350 mm (the short 100 mm trial was rejected).
+The carriage grows from 360 to 420 mm, table from 610 to 720, and rails from
+650 to 760. Cradles stand at +/-120 mm; axle stations at +/-185 mm remain
+outside the blade throughout. Timber centre starts at X=-171 mm, leaving
+1 mm leading-face clearance and about 4.06 mm trailing-face clearance at
+completion. The tower and waterwheel proportions are retained.
+The return pulley moves to X=400 mm; the winding drum is locally wider.
+Initial winding is 15° and final winding 847.5°, in separated helical turns.
+These are educational reconstruction choices, not newly discovered museum
+measurements. Orderly winding is prescribed without a level-winding device.
 
 Pawl recovery is a cam construction against the same polygon profiles used
 by the CAD. Each recovery is sampled at 181 points; the first clear position
@@ -115,14 +126,15 @@ rides the next tooth and seats for the next cut.
 
 At a finished cut an operator must stop the water, release the pawls, unwind
 the haul rope, return/reload the carriage and secure the timber for the next
-board. The four-turn viewer replay is labelled as a replay reset; it is not
+board. The full-course viewer replay is labelled as a replay reset; it is not
 an automatic reverse mechanism attributed to the historical saw. The visible
-kerf is already open: no material removal or fluid forces are simulated.
+kerf in the rigid halves is filled ahead of the teeth by a shrinking molejo
+insert: it illustrates progressive cutting, without material-removal or fluid physics.
 
 ## Verification status
 
-See [validation.md](validation.md) for the completed geometric and browser
-certificate: default and both kerf limits pass the 19-test exact run. The
+See [full-pass-validation.md](full-pass-validation.md) for the current geometric
+and browser certificate: default and both kerf limits pass 23 exact tests. The
 mechanism inventory above is implemented. The historical confidence limits
 remain: unseen dimensions and fittings are interpretations, not newly
 discovered facts about Leonardo's drawing or the museum object.

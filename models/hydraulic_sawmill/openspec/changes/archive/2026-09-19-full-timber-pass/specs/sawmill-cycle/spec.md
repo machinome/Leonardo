@@ -31,3 +31,14 @@ The blade SHALL remain clear of both halves of the pre-slotted timber throughout
 #### Scenario: Inspect the kerf
 - **WHEN** the saw cycle is sampled at the supported kerf boundary
 - **THEN** the blade does not intersect either timber half.
+
+## ADDED Requirements
+
+### Requirement: Progressive cutting impression
+The timber SHALL appear joined ahead of the teeth and split behind them,
+using a molejo insert in the uncut kerf without claiming cutting-force physics.
+
+#### Scenario: Follow the kerf
+- **WHEN** the timber passes the blade along the timeline
+- **THEN** the insert shortens at the teeth, stays clear of the blade and
+  supports, and has zero visible area at the end of the cut.

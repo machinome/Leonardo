@@ -1,5 +1,9 @@
 # Hydraulic saw reconstruction: validation certificate
 
+Historical certificate for the 12 September four-turn exhibit. For the current
+full timber course, timeline-only controls and progressive kerf insert, see
+[19 September validation](full-pass-validation.md).
+
 Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
 
 Validated 12 September 2026 in the Machinome Studio workspace. This replaces

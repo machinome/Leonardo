@@ -70,7 +70,7 @@ def validate(catalogue, solid):
 
 
 def run_models(command, names, catalogue, kernel):
-    solid = shutil.which("solid")
+    solid = shutil.which("machinome")
     if not solid:
         raise ValueError("Activate the environment with machinome and its viewer")
     for name in names:

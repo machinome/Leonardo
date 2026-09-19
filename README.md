@@ -33,8 +33,10 @@ distinguishes observations from inferred fittings. The loom has likewise
 been rebuilt around Vinci's accompanied-spool interpretation, with its
 [concealed mechanisms documented as inferences](models/automatic_weaving_loom/docs/reconstruction.md).
 Its four-turn demonstration now spans one minute for slow-motion inspection.
-Prescribed motion is labelled as such. The saw does not cut material;
-the loom advances a pre-existing cloth sample by 2.22 mm but does not solve
+Prescribed motion is labelled as such. The saw now traverses a complete
+320 mm timber in a 296-second timeline, with a shrinking molejo insert showing
+the kerf opening; it does not simulate physical material removal.
+The loom advances a pre-existing cloth sample by 2.22 mm but does not solve
 yarn tension or form new interlaced textile topology.
 The hammer's return is prescribed; gravity and impact are not simulated.
 The rack lift demonstrates travel and engagement; holding torque, a brake

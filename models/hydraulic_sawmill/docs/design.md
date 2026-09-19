@@ -31,12 +31,13 @@ The timber foundation, stand and channel are grounded display fixtures.
 The two-post tower guides the sash. Bearings support the input and feed
 shafts; fixed brackets locate the rocker, holding-pawl and return-pulley pins.
 Blade forks and the upper stem/nut retain the blade at a displayed set tension.
-The pre-open kerf avoids claiming material removal.
+A molejo insert fills the uncut part of the rigid halves' kerf. It recedes at
+the teeth to show progressive cutting, without a cutting-force solver.
 
 All rigid leaves are original exact CadQuery components. The assembled stand
 is a fused stationary fixture, not disconnected parts hidden in a compound.
-The rope is a molejo flexible leaf with two straight runs, a semicircular
-pulley return and a varying drum wrap. Distinct solids keep real running
+The rope has three molejo flexible leaves: the upper run and semicircular
+pulley return, the lower fleet-angle span, and a helical drum winding. Distinct solids keep real running
 clearances; the water surface sits just below the lower paddles.
 
 ## Kinematic closure
@@ -59,29 +60,54 @@ spacing at every pose. This is prescribed quasi-static seating, not a
 gravity/contact-force solver; the independent whole-solid tests check the
 result, including intermediate positions.
 
-The drum’s rope pitch radius is 23.4 mm. Its 11.25° index takes up
-4.594579 mm, which is both carriage travel and loss of free upper rope.
-An initial 270° wrap grows to 315° over four cycles. The fixed return
-pulley reverses the pull without multiplying force or travel. The complete
-centerline is 844.783170 mm long throughout.
+The drum's rope pitch radius is 23.4 mm, with 3.2 mm axial winding pitch.
+An initial 15° wrap grows to 847.5° over 74 turns; adjacent coils do not overlap.
+The drum is widened locally, with a narrow bored cleat at Y=93 mm.
+Carriage feed conserves the total rope length, including helix length and
+the changing fleet angle of the lower free span. Feed varies very slightly
+from turn to turn (approximately 4.60 mm). The fixed return pulley only
+reverses the pull. The free span and winding meet at the lower drum tangent.
 
-The flexible leaf’s ports must exactly match its shape parameters. Its
-moving origin is therefore placed explicitly in `simulate()`, driven by
-the same drum take-up as the carriage. The three shape parameters describe
-the two remaining free spans and wrap; no alternate free-running rope input
-is exposed. This uses the public framework contract and changes no dependency.
+Flexible leaf ports exactly match their shape parameters. The free rope's
+moving origin is placed in simulate(), driven by the same carriage law.
+The winding leaf sits in a translating wrapper so its axial placement
+remains distinct from its rest orientation. No extra machine input or
+dependency change is needed. Orderly winding is prescribed, not physically
+solved; the splice approximates the very small tangent/fleet-angle change.
 
 ## Control and explanation
 
-There are two drivers: phase 0–1440° and playback 0–1. Their sum clamps at
-four turns even when both are nonzero. Six instructions expose the start,
-half stroke, bottom, active feed, complete pass and timeline operation.
-Only kerf is a build parameter, tested from 2 to 5 mm.
+The pilot's 19 September 2026 requests replace the four-turn inspection with
+a full timber pass and remove every instruction and driver. A declared 296-second
+loop is the only motion control: four seconds per wheel turn, 74 turns total.
+Only kerf remains a build parameter, tested from 2 to 5 mm.
+
+The 320 mm timber begins at X=-171 mm. Its slotted support cradles stand
+120 mm each side of its centre. The carriage is 420 mm long, with axles
+at +/-185 mm; neither axle crosses the blade during the course.
+The leading bark face starts just 1 mm before the teeth. After 340.062622 mm
+of travel the trailing face is 4.062622 mm beyond the blade's back.
+End-grain veneers also clear both ends. Table and rails grow modestly to
+720 and 760 mm, with the foundation length 875 mm; tower, wheel and log
+cross-section are unchanged. These replace the rejected 100 mm trial.
+
+The uncut molejo insert spans the kerf and a conservative 56 mm timber height.
+Its leading boundary stops at X=-10.2 mm (0.2 mm ahead of the teeth). Its
+length decreases with the carriage's measured feed, clamped from 320 to 0 mm.
+A polygon swept across the fixed kerf width avoids a zero-length path, which
+molejo refuses. In its final 0.1 mm the polygon also loses height; at completion
+it is a finite, zero-area display mesh. That collapsed mesh is intentionally
+not an exact OCCT solid. Tests measure its endpoints, volume and disappearance.
+
+The physical tree has five root groups: Frame and guides, Water drive,
+Saw mechanism, Timber carriage, Feed mechanism. Timber and running gear are
+separate carriage subgroups. Both viewers expose the bundle's navigator.
 
 The exhibit embeds the actual machinome widget, with whole, drive, saw and
 rear-feed views and a reversible frame reveal. The UI’s numeric labels and
 stroke trace interpolate a table measured from the Python meshes at 0.5°
-intervals; they never place CAD or implement another mechanism. The finite
+intervals, with measured endpoints for all 74 turns to account for the
+small fleet-angle contribution to feed; they never place CAD or implement another mechanism. The finite
 readout script checks that table. Browser replay explicitly announces the
 carriage reset and explains the historical manual release/reload sequence.
 
@@ -90,10 +116,11 @@ carriage reset and explains the historical manual release/reload sequence.
 Whole-root connectedness and non-interference are mandatory. Geometric tests
 cover crank/key engagement, guide capture, both tie ends, fixed pawl journals,
 active tooth engagement, blade forks, wheel retention, rope routing and
-attachments, stroke, dwell, travel, repeatability and combined control limits.
-A timed instruction scenario checks the assembled pass.
+attachments, stroke, dwell, travel, repeatability and full-course support/clearance. The timeline endpoint tests measure both
+timber ends independently of the motion law. No instruction scenario remains
+because the machine declares no instructions.
 
-The [validation record](validation.md) separates exact rigid comparisons from
+The [validation record](full-pass-validation.md) separates exact rigid comparisons from
 the flexible mesh fallback, sampled motion from continuous proof, and
 historical observation from inferred fits. Load capacity, equilibrium,
 fluid forces, cutting, friction, rope tension and threaded fastener strength

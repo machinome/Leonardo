@@ -1,5 +1,26 @@
 # Selected reconstruction evidence
 
+## Full timber pass — 19 September 2026
+
+Inspected original CAD snapshots for the current model:
+
+- [Start](full-pass-start.png): the billet is entirely upstream of the teeth.
+- [Mid-cut](cutting-mid-pass.png): the split is open behind the teeth and filled
+  by the shrinking molejo insert ahead of them.
+- [End, side alignment](full-pass-end.png): the trailing end clears the saw;
+  both pairs of rollers remain on the rails.
+
+```sh
+machinome snapshot hydraulic_sawmill -o models/hydraulic_sawmill/docs/evidence/full-pass-start.png --autocenter --viewall --time 0 --imgsize 1400x1000
+machinome snapshot hydraulic_sawmill -o models/hydraulic_sawmill/docs/evidence/cutting-mid-pass.png --camera=250,-220,850,0,0,410 --time 0.5 --imgsize 1200x900
+machinome snapshot hydraulic_sawmill -o models/hydraulic_sawmill/docs/evidence/full-pass-end.png --autocenter --viewall --time 1 --camera 0,0,300,90,0,0,1200 --imgsize 1400x1000
+```
+
+## Earlier reconstruction evidence
+
+The images and commands below document the former four-turn model. Its phase
+fractions are historical; the current timeline spans 74 turns.
+
 Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
 
 Original CAD renders, inspected on 12 September 2026. These are not museum

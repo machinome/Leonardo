@@ -25,7 +25,7 @@ The visible rope SHALL remain attached to its carriage and winding spindle,
 follow the end pulley tangentially, and conserve its total modeled length.
 
 #### Scenario: Inspect a complete pass
-- **WHEN** the machine traverses all four demonstration cycles
+- **WHEN** the machine traverses the full timber course
 - **THEN** the decrease in free rope equals the increase in winding length,
   the pulley turns consistently with rope travel and the rope clears the frame.
 

@@ -8,7 +8,7 @@ drivers or instruction buttons SHALL be exposed. Views and reveal remain availab
 #### Scenario: Inspect and resume
 - **WHEN** the visitor scrubs within the full-pass timeline
 - **THEN** the model and measured readouts follow that instant, playback can
-  resume, and one complete pass lasts 108 seconds at normal speed.
+  resume, and one complete pass lasts 296 seconds at normal speed.
 
 ### Requirement: Rigid integrity
 Every rigid piece SHALL be connected and distinct rigid pieces SHALL remain free of shared volume across the sampled demonstration poses.

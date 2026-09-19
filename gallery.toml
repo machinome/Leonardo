@@ -11,7 +11,7 @@ machinome_url = "https://machinome.readthedocs.io/"
 [models.hydraulic_sawmill]
 title = "Hydraulic sawmill"
 directory = "models/hydraulic_sawmill"
-frames = 480
+frames = 8880
 fps = 30
 exhibit = "models/hydraulic_sawmill/index.html"
 browser_check = ["models/hydraulic_sawmill/scripts/check-browser.py", "--url", "{base_url}/models/hydraulic_sawmill/"]
