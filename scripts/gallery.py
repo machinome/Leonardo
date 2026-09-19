@@ -18,7 +18,7 @@ def read_catalogue():
         catalogue = tomllib.load(stream)
     with (ROOT / "pyproject.toml").open("rb") as stream:
         manifest = tomllib.load(stream)
-    return catalogue, manifest["tool"]["solid-node"]
+    return catalogue, manifest["tool"]["machinome"]
 
 
 def validate(catalogue, solid):
@@ -72,7 +72,7 @@ def validate(catalogue, solid):
 def run_models(command, names, catalogue, kernel):
     solid = shutil.which("solid")
     if not solid:
-        raise ValueError("Activate the environment with solid-node and its viewer")
+        raise ValueError("Activate the environment with machinome and its viewer")
     for name in names:
         info = catalogue["models"][name]
         env = os.environ.copy()

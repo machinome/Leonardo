@@ -3,12 +3,12 @@
 from math import pi
 
 import cadquery as cq
-from solid_node.math import cos
-from solid_node.node import AssemblyNode, CadQueryNode, FusionNode
-from solid_node.parameters import Length
-from solid_node.motion.joints import Prismatic, Revolute
-from solid_node.motion.ports import RotationalPort
-from solid_node.simulation import Driver, Instruction
+from machinome.math import cos
+from machinome.node import AssemblyNode, CadQueryNode, FusionNode
+from machinome.parameters import Length
+from machinome.motion.joints import Prismatic, Revolute
+from machinome.motion.ports import RotationalPort
+from machinome.simulation import Driver, Instruction
 
 from .profiles import hook_outline, pinion_outline, rack_outline
 

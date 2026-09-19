@@ -20,9 +20,9 @@ sibling machine has been changed.
 
 ## Environment and evidence precision
 
-- solid-node checkout `6e41f2da132a8604f9b68895967247fb8876fc4d`,
+- machinome checkout `6e41f2da132a8604f9b68895967247fb8876fc4d`,
   metadata 0.6.0 with the post-release declarative API.
-- solid-node-viewer checkout `6fb082ba9823fb0839631bd4a3ecbf4a41b33b64`,
+- machinome-viewer checkout `6fb082ba9823fb0839631bd4a3ecbf4a41b33b64`,
   local 0.1.0, founded but not publicly released, viewer API 7.
 - molejo checkout `e76c9039cf906cfc0005324d78ccee7116e0ff4a`, version 0.2.0.
 - CadQuery 2.7, Python 3.12, Linux; workspace virtual environment.
@@ -115,8 +115,8 @@ The new declaration test failed first (`None != 60`) and then passed, including
 the independently expected quarter-loop shaft angles. The normal Studio build
 and standalone export both publish `animation.loop=60`; frame count is restored
 to 360 and is only timeline resolution. Direct pytest invocation of a plain
-solid-node `TestCase` did not prepare `self.node` and was an invalid harness
-attempt, not a model failure; the normal `solid test` runner prepares it.
+machinome `TestCase` did not prepare `self.node` and was an invalid harness
+attempt, not a model failure; the normal `machinome test` runner prepares it.
 
 The [first pause](pause-2026-09-13.md) remains historical. The
 [Studio-time checkpoint](checkpoint-2026-09-13.md) records the later pause.

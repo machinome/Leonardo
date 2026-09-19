@@ -3,7 +3,7 @@
 Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
 
 Astra's original single-prompt educational design, a
-[solid-node demonstration](https://solid-node.readthedocs.io/) in the
+[machinome demonstration](https://machinome.readthedocs.io/) in the
 [Leonardo gallery](https://github.com/LibreSolid/Leonardo) (publication pending).
 Commission: [queue 030](../../QUEUE.md#030-pulley-block). Exact session prompt:
 
@@ -96,12 +96,12 @@ drawing trace or image asset is imported.
 
 ## Build and verify
 
-Use the gallery's documented post-0.6 solid-node environment and local
+Use the gallery's documented post-0.6 machinome environment and local
 viewer API 7. From the gallery root, with `../../.venv` activated:
 
 ```sh
-SOLID_BUILD_DIR=_build/pulley_tests solid test pulley_block --faceted
-SOLID_BUILD_DIR=_build/pulley_exact solid test pulley_block --exact
+SOLID_BUILD_DIR=_build/pulley_tests machinome test pulley_block --faceted
+SOLID_BUILD_DIR=_build/pulley_exact machinome test pulley_block --exact
 python scripts/gallery.py build pulley_block
 python scripts/gallery.py export pulley_block
 python models/pulley_block/scripts/check_browser.py

@@ -7,11 +7,11 @@ compaction and newly interlacing material are not solved by this construction.
 # Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
 import math
 from molejo import Shape, Circle, Polygon, Line, Arc, P
-from solid_node.node import AssemblyNode, MolejoNode
-from solid_node.parameters import Count
-from solid_node.motion.joints import Free, Prismatic
-from solid_node.motion.ports import RotationalPort, TranslationalPort
-from solid_node.math import sin, cos
+from machinome.node import AssemblyNode, MolejoNode
+from machinome.parameters import Count
+from machinome.motion.joints import Free, Prismatic
+from machinome.motion.ports import RotationalPort, TranslationalPort
+from machinome.math import sin, cos
 from .parts import ClothPick
 from .winding import CENTERS
 

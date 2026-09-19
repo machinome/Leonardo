@@ -15,8 +15,8 @@ The pre-existing untracked `screenshots/` directory is preserved.
 
 | Dependency | Tested content |
 | --- | --- |
-| solid-node | `6e41f2da132a8604f9b68895967247fb8876fc4d`, package metadata 0.6.0 |
-| solid-node-viewer | `6fb082ba9823fb0839631bd4a3ecbf4a41b33b64`, local 0.1.0 |
+| machinome | `6e41f2da132a8604f9b68895967247fb8876fc4d`, package metadata 0.6.0 |
+| machinome-viewer | `6fb082ba9823fb0839631bd4a3ecbf4a41b33b64`, local 0.1.0 |
 | molejo | `e76c9039cf906cfc0005324d78ccee7116e0ff4a`, 0.2.0 for existing exhibits |
 | CadQuery | 2.7.0 |
 | trimesh | 4.4.9 |
@@ -24,10 +24,10 @@ The pre-existing untracked `screenshots/` directory is preserved.
 
 All three dependency repositories were clean. Linux, Python 3.12, workspace
 environment `../../.venv`. This uses the post-0.6 declarative motion API;
-published solid-node 0.6 alone is insufficient. The viewer is locally
+published machinome 0.6 alone is insufficient. The viewer is locally
 founded, not described as published. No dependency was modified.
 
-The complete shared solid-node API and machining manuals informed the
+The complete shared machinome API and machining manuals informed the
 joint, relation and geometric-contract design. Context7 supplied current
 CadQuery polygon/extrusion and Playwright iframe documentation. Historical
 research reached the museum's object page via HTTP after the web reader
@@ -125,10 +125,10 @@ authored solids. All comparisons use zero volume epsilon.
 Activate the documented environment and run from the gallery root:
 
 ```sh
-SOLID_BUILD_DIR=_build/rack_tests solid test rack_and_pinion --faceted
-SOLID_BUILD_DIR=_build/rack_tests solid test rack_and_pinion --exact
-SOLID_BUILD_DIR=_build/rack_25 solid test rack_and_pinion --exact --set module=2.5
-SOLID_BUILD_DIR=_build/rack_35 solid test rack_and_pinion --exact --set module=3.5
+SOLID_BUILD_DIR=_build/rack_tests machinome test rack_and_pinion --faceted
+SOLID_BUILD_DIR=_build/rack_tests machinome test rack_and_pinion --exact
+SOLID_BUILD_DIR=_build/rack_25 machinome test rack_and_pinion --exact --set module=2.5
+SOLID_BUILD_DIR=_build/rack_35 machinome test rack_and_pinion --exact --set module=3.5
 python scripts/gallery.py check
 python scripts/gallery.py build
 python scripts/gallery.py export

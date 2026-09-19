@@ -2,11 +2,11 @@
 
 # Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
 import math
-from solid_node.node import AssemblyNode, CadQueryNode
-from solid_node.parameters import Length
-from solid_node.motion.ports import RotationalPort, Time
-from solid_node.simulation import Driver, Instruction
-from solid_node.math import sqrt
+from machinome.node import AssemblyNode, CadQueryNode
+from machinome.parameters import Length
+from machinome.motion.ports import RotationalPort, Time
+from machinome.simulation import Driver, Instruction
+from machinome.math import sqrt
 from .parts import (
     TimberFrame,
     ReedTracks,

@@ -1,8 +1,8 @@
 # Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
 import numpy as np
-from solid_node.test import TestCase
+from machinome.test import TestCase
 from .checks import sampled_poses, rigid_parts
-from solid_node.simulation import ScenarioTest
+from machinome.simulation import ScenarioTest
 from .model import AutomaticWeavingLoom
 
 

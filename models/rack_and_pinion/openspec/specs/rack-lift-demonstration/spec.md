@@ -46,7 +46,7 @@ desktop and narrow screens.
 ### Requirement: Honest educational provenance
 The exhibit SHALL cite its museum source and distinguish Leonardo's study,
 the later museum reconstruction and Astra's original dimensions and modern
-teeth. It SHALL identify solid-node, Astra's single-prompt design credit,
+teeth. It SHALL identify machinome, Astra's single-prompt design credit,
 the gallery source and AGPL copyright. It SHALL disclose that brake,
 holding torque, lifting capacity and dynamics are outside the demonstration.
 

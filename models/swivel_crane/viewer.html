@@ -14,7 +14,7 @@
   const target = [70, 0, innerWidth < 600 ? 225 : 140];
   const offset = [360, -650, 300];
   const factor = Math.max(1, .75*innerHeight/innerWidth);
-  SolidNodeWidget.mount(document.getElementById("viewer"),
+  MachinomeWidget.mount(document.getElementById("viewer"),
     "../../export/swivel_crane/manifest.json", {
       animation: "inline", fov: 37, up: [0, 0, 1],
       view: {target, camera: offset.map((v, i) => target[i]+v*factor)},

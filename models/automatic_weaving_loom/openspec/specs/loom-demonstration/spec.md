@@ -2,7 +2,7 @@
 
 ## Purpose
 
-Provide a usable and honestly documented solid-node demonstration of Leonardo's loom, with tested rigid geometry and inspectable motion.
+Provide a usable and honestly documented machinome demonstration of Leonardo's loom, with tested rigid geometry and inspectable motion.
 
 ## Requirements
 

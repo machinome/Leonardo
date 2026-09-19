@@ -157,8 +157,8 @@ index page. Use local assets, keyboard access, useful iframe titles, narrow
 screen layouts and reduced-motion behavior. Inspect the rendered result.
 
 The landing page and persistent site navigation/footer must visibly say
-that this is a **demonstration of solid-node**, link to
-`gallery.solid_node_url`, credit **Astra: single-prompt mechanical designs**,
+that this is a **demonstration of machinome**, link to
+`gallery.machinome_url`, credit **Astra: single-prompt mechanical designs**,
 and link to the **Leonardo gallery on GitHub** at `gallery.source_url`.
 Read the values from gallery.toml; do not hardcode divergent destinations.
 Reconcile the intended `https://github.com/LibreSolid/Leonardo` with a
@@ -169,7 +169,7 @@ is pending, not an error to conceal or authority to create a remote.
 
 One documented finite command from a fresh clone/environment must:
 
-1. Validate queue and model inventory, then run `solid export <model>` for
+1. Validate queue and model inventory, then run `machinome export <model>` for
    **every registered model**, with per-model build and export directories.
    Keep instructions, drivers and animation in the real viewer. No manually
    animated alternate geometry, screenshots posing as 3D, remote renderer,
@@ -193,11 +193,11 @@ One documented finite command from a fresh clone/environment must:
 
 Build from committed sources and a clean staging directory. Resolve and
 record an actually obtainable dependency set: the current models need
-post-release solid-node and a local viewer. Use compatible published
+post-release machinome and a local viewer. Use compatible published
 versions if then available, otherwise include redistributable dependency
 source snapshots with their own licenses and deterministic build commands.
 Do not pin an unreachable development commit on a public URL or claim
-that `pip install solid-node==0.6.0` reproduces these models. Do not push or
+that `pip install machinome==0.6.0` reproduces these models. Do not push or
 publish dependencies as a side effect. Test the documented setup in a
 throwaway environment before saying the public source reproduces the site.
 
@@ -206,7 +206,7 @@ directory, once at root and once under `/Leonardo/`. Open every exhibit,
 change a control and trigger an instruction, observe actual geometry change,
 pause/play and revisit a pose. Fail on console errors, missing model assets,
 broken internal links, empty previews or narrow-screen overflow. Verify
-the solid-node credit/link and GitHub gallery link appear in generated HTML
+the machinome credit/link and GitHub gallery link appear in generated HTML
 and are usable. Required runtime assets must work with external network
 requests blocked; historical links may of course leave the site.
 

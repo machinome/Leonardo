@@ -53,7 +53,7 @@ attached throughout the motion.
 
 ### Requirement: Understand reconstruction and physical limits
 
-The exhibit SHALL credit Astra's original single-prompt solid-node design,
+The exhibit SHALL credit Astra's original single-prompt machinome design,
 link historical sources and gallery source, distinguish the three-part
 teaching tackle from the historical 33-pulley study, and state its grounded
 fixture and prescribed-motion assumptions. It SHALL disclaim solved tension,

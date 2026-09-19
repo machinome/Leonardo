@@ -1,6 +1,6 @@
 // Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
 // Read-only explanatory arithmetic. All CAD, motion, controls and rope
-// evaluation belong to the actual solid export in the iframe.
+// evaluation belong to the actual machinome export in the iframe.
 // The browser smoke compares these labels against independently measured
 // Python geometry, including fractional run and timeline positions.
 "use strict";

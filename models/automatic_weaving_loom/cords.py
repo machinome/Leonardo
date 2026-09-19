@@ -8,10 +8,10 @@ that a rope force, spring force, friction or impact solver is running.
 import math
 import cadquery as cq
 from molejo import Shape, Circle, Line, Arc, P
-from solid_node.node import AssemblyNode, CadQueryNode, MolejoNode
-from solid_node.parameters import Scalar, Length
-from solid_node.motion.joints import Revolute, Prismatic
-from solid_node.motion.ports import TranslationalPort
+from machinome.node import AssemblyNode, CadQueryNode, MolejoNode
+from machinome.parameters import Scalar, Length
+from machinome.motion.joints import Revolute, Prismatic
+from machinome.motion.ports import TranslationalPort
 from .parts import box
 from .head import y_cylinder
 from .reeding import (

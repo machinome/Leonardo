@@ -27,7 +27,7 @@ see [LICENSE](../../LICENSE).
 From the Leonardo repository root, with the workspace environment on PATH:
 
 ```sh
-solid build automatic_weaving_loom
+machinome build automatic_weaving_loom
 python scripts/gallery.py export automatic_weaving_loom
 python -m http.server 8765 --bind 127.0.0.1
 ```
@@ -45,8 +45,8 @@ already open, `python models/automatic_weaving_loom/scripts/check_studio_time.py
 checks that live UI (default Studio address `http://127.0.0.1:9000`).
 
 In this workspace, `solid` and Python are under
-`/home/asa/devel/libresolid-studio/.venv/bin/`. This model needs the installed
-post-0.6.0 declarative solid-node API, CadQuery 2.7 and molejo 0.2. The separate
+`/home/asa/devel/machinome-studio/.venv/bin/`. This model needs the installed
+post-0.6.0 declarative machinome API, CadQuery 2.7 and molejo 0.2. The separate
 viewer is the local 0.1.0 package, founded but not publicly released.
 
 ## Follow the mechanism
@@ -108,7 +108,7 @@ is a reconstruction choice, not a measurement of the museum object.
 
 The guarded parameter `shed_lift` ranges from 16 to 20 mm. It changes the
 physical cam profiles, heddle motion and yarn motion together:
-`solid build automatic_weaving_loom --set shed_lift=20`.
+`machinome build automatic_weaving_loom --set shed_lift=20`.
 
 The reed parks behind the carrier through each insertion and exchange. It
 crosses between the withdrawn hands, approaches the fell and returns during
@@ -130,15 +130,15 @@ not additional gallery models.
 ## Verification and limits
 
 ```sh
-solid test automatic_weaving_loom --faceted
-solid test automatic_weaving_loom --exact
-solid test automatic_weaving_loom --exact --set shed_lift=16
-solid test automatic_weaving_loom --exact --set shed_lift=20
-solid test models/automatic_weaving_loom/timing.py --exact
-solid test models/automatic_weaving_loom/winding.py --exact
-solid test models/automatic_weaving_loom/head_bench.py --exact
-solid test models/automatic_weaving_loom/grip_bench.py --exact
-solid test models/automatic_weaving_loom/cord_bench.py --exact
+machinome test automatic_weaving_loom --faceted
+machinome test automatic_weaving_loom --exact
+machinome test automatic_weaving_loom --exact --set shed_lift=16
+machinome test automatic_weaving_loom --exact --set shed_lift=20
+machinome test models/automatic_weaving_loom/timing.py --exact
+machinome test models/automatic_weaving_loom/winding.py --exact
+machinome test models/automatic_weaving_loom/head_bench.py --exact
+machinome test models/automatic_weaving_loom/grip_bench.py --exact
+machinome test models/automatic_weaving_loom/cord_bench.py --exact
 python models/automatic_weaving_loom/scripts/inspect_demo.py
 ```
 

@@ -7,11 +7,11 @@ winding.py and head.py. The free weft span remains a schematic indicator.
 # Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
 import cadquery as cq
 from molejo import Shape, Circle, Line, Spline, P
-from solid_node.node import AssemblyNode, CadQueryNode, MolejoNode
-from solid_node.parameters import Length, Scalar, Count
-from solid_node.motion.joints import Prismatic
-from solid_node.motion.ports import TranslationalPort
-from solid_node.math import sin, cos, sqrt, atan2
+from machinome.node import AssemblyNode, CadQueryNode, MolejoNode
+from machinome.parameters import Length, Scalar, Count
+from machinome.motion.joints import Prismatic
+from machinome.motion.ports import TranslationalPort
+from machinome.math import sin, cos, sqrt, atan2
 from .timing import clip
 from .reeding import REED_TRAVEL
 

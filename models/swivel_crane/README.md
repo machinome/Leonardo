@@ -4,7 +4,7 @@
 
 Three independent coordinates place one suspended stone: slew the mast,
 traverse the screw-driven trolley, then hoist through two supporting rope spans.
-Original CAD by Astra, commissioned by queue item 040 as a solid-node demo.
+Original CAD by Astra, commissioned by queue item 040 as a machinome demo.
 
 Open [the exhibit](index.html) through the local HTTP server described below.
 It embeds the real exported model, including its native controls and playback.
@@ -82,9 +82,9 @@ From the gallery repository root, using its documented development environment:
 
 ```sh
 source ../../.venv/bin/activate
-solid build swivel_crane
-solid test swivel_crane --faceted
-solid test swivel_crane --exact
+machinome build swivel_crane
+machinome test swivel_crane --faceted
+machinome test swivel_crane --exact
 python scripts/gallery.py export swivel_crane
 python models/swivel_crane/scripts/check_browser.py
 python -m http.server 8769 --bind 127.0.0.1

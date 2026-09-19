@@ -4,11 +4,11 @@
 import math
 import cadquery as cq
 from molejo import Shape, Polygon, Line, Wrap
-from solid_node.node import AssemblyNode, CadQueryNode, MolejoNode
-from solid_node.parameters import Flag
-from solid_node.motion.joints import Revolute, Prismatic, Free
-from solid_node.motion.ports import RotationalPort, TranslationalPort
-from solid_node.math import sin, cos, atan2
+from machinome.node import AssemblyNode, CadQueryNode, MolejoNode
+from machinome.parameters import Flag
+from machinome.motion.joints import Revolute, Prismatic, Free
+from machinome.motion.ports import RotationalPort, TranslationalPort
+from machinome.math import sin, cos, atan2
 from .profiles import cycloidal_outline, cycloidal_rack, polar
 from .timing import TimingBench, TimingTrain, TwelveToothWheel, cylinder, clip
 

@@ -54,17 +54,17 @@ the pilot. Never push, create a remote repo/PR, publish, or contact anyone.
 
 ## Design and mechanical craft
 
-This is original CAD authored by Astra for a public solid-node demo. No
+This is original CAD authored by Astra for a public machinome demo. No
 upstream CAD imports or traced museum assets are needed. Link historical
 sources and distinguish Leonardo's drawings, later museum reconstructions
 and our educational choices. Do not imply Leonardo invented mechanisms
 he studied or recorded, particularly Brunelleschi's crane.
 
-In the LibreSolid Studio workspace, read the complete shared
-`shop-skills/solid-node-api/SKILL.md` and `shop-skills/solid-node/SKILL.md`
+In the Machinome Studio workspace, read the complete shared
+`shop-skills/machinome-api/SKILL.md` and `shop-skills/machinome/SKILL.md`
 before modeling. Resolve the enclosing shop within this workspace; never
 search sibling workspaces or inspect framework internals for an API.
-Outside this workspace, use the supported public solid-node documentation
+Outside this workspace, use the supported public machinome documentation
 matching the installed version. Missing capabilities are findings to
 report, not permission to patch dependencies. Use Context7 for current
 third-party library documentation, and primary historical sources.
@@ -105,11 +105,11 @@ choose laws/ranges accordingly. Explain any end-of-loop reset visibly.
   not a fabricated new red-first history. Existing tests and evidence are
   preserved unless new evidence justifies a documented revision.
 - Render and **inspect** at least an isometric snapshot and a view of the
-  important alignment at different phases. Use `solid snapshot` with the
+  important alignment at different phases. Use `machinome snapshot` with the
   default OpenSCAD renderer. Save a small, intentionally selected set of
   evidence images in `docs/evidence/` for public inspection; keep raw
   batches/builds ignored. Screenshots alone do not prove engagement.
-- Export the real model with `solid export`; verify manifest assets,
+- Export the real model with `machinome export`; verify manifest assets,
   drivers, instructions, playback, manual controls and a return to a prior
   pose in a real browser. Check desktop and a narrow viewport, console and
   asset failures. Retain a reproducible finite browser smoke script, register
@@ -130,9 +130,9 @@ unfinished rather than making a broken publication look ready.
 ## Final site
 
 The site is the last item and depends on every machine. Follow its full
-brief in QUEUE.md. Sphinx creates a static directory; `solid export`
+brief in QUEUE.md. Sphinx creates a static directory; `machinome export`
 supplies every interactive exhibit. The visible site must identify itself
-as a **solid-node demonstration**, link to solid-node, credit **Astra's
+as a **machinome demonstration**, link to machinome, credit **Astra's
 single-prompt designs**, and link to the **Leonardo gallery on GitHub**.
 Copyright remains Luis Henrique Cassis Fagundes, AGPL-3.0-only. Use
 gallery.toml for those URLs and credits. The pilot publishes; stop with a

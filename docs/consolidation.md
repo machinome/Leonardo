@@ -40,9 +40,9 @@ tags travel with this repository; the administrative backups do not need to.
 Consolidation uses the existing workspace environment:
 
 - Python 3.12; CadQuery 2.7.0; molejo 0.2.0.
-- solid-node checkout `685188a6be5e7a68502bb3723e5a1185d1bdf671`,
+- machinome checkout `685188a6be5e7a68502bb3723e5a1185d1bdf671`,
   post-0.6 development API (metadata alone still says 0.6.0).
-- solid-node-viewer `6fb082ba9823fb0839631bd4a3ecbf4a41b33b64`,
+- machinome-viewer `6fb082ba9823fb0839631bd4a3ecbf4a41b33b64`,
   local 0.1.0 / viewer API 7.
 - Original per-machine evidence remains in each machine's `docs/` and
   is historical evidence, not a claim to have repeated those runs today.
@@ -67,7 +67,7 @@ The refactored source and registry passed on 12 September 2026:
 | Git integrity and ancestry | `git fsck --full` and both original-tip ancestor checks passed |
 
 Commands: `python scripts/gallery.py test`, `python scripts/gallery.py
-export`, `python scripts/check_browsers.py`, and `solid test
+export`, `python scripts/check_browsers.py`, and `machinome test
 hydraulic_sawmill --exact --set kerf=2 --set paddles=24`, from the root with
 the workspace environment activated. Raw logs are local under `_evidence/`.
 

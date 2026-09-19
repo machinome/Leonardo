@@ -1,6 +1,6 @@
 """Closed geometric linkage; the same degree expressions drive the viewer."""
 # Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
-from solid_node.math import acos, sin, cos, sqrt, atan2
+from machinome.math import acos, sin, cos, sqrt, atan2
 from .layout import (CRANK, ROD, AXLE_Z, FEED, TEETH, DRUM_RADIUS, PITCH,
                      ROCKER_X, ROCKER_Z, ROCKER_LONG, TIE_LENGTH,
                      ROCKER_BRANCH, PAWL_LENGTH, CONTACT_RADIUS,

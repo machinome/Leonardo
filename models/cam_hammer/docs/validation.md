@@ -12,8 +12,8 @@ commit changes only this record, task/queue status and archive placement.
 
 | Dependency | Tested content |
 | --- | --- |
-| solid-node | local post-0.6 source `6e41f2da132a8604f9b68895967247fb8876fc4d` (package metadata 0.6.0) |
-| solid-node-viewer | `6fb082ba9823fb0839631bd4a3ecbf4a41b33b64` (local 0.1.0) |
+| machinome | local post-0.6 source `6e41f2da132a8604f9b68895967247fb8876fc4d` (package metadata 0.6.0) |
+| machinome-viewer | `6fb082ba9823fb0839631bd4a3ecbf4a41b33b64` (local 0.1.0) |
 | molejo | `e76c9039cf906cfc0005324d78ccee7116e0ff4a` (0.2.0; existing exhibits) |
 | CadQuery | 2.7.0 |
 | trimesh | 4.4.9 |
@@ -118,12 +118,12 @@ no new red-first history is claimed for those unchanged exhibits.
 From the gallery root in the installed environment:
 
 ```sh
-SOLID_BUILD_DIR=_build/cam_hammer_tests solid test cam_hammer --faceted
-SOLID_BUILD_DIR=_build/cam_hammer_16 solid test cam_hammer --faceted --set lift_angle=16
-SOLID_BUILD_DIR=_build/cam_hammer_20 solid test cam_hammer --faceted --set lift_angle=20
-SOLID_BUILD_DIR=_build/cam_hammer_tests solid test cam_hammer --exact
-SOLID_BUILD_DIR=_build/cam_hammer_16 solid test cam_hammer --exact --set lift_angle=16
-SOLID_BUILD_DIR=_build/cam_hammer_20 solid test cam_hammer --exact --set lift_angle=20
+SOLID_BUILD_DIR=_build/cam_hammer_tests machinome test cam_hammer --faceted
+SOLID_BUILD_DIR=_build/cam_hammer_16 machinome test cam_hammer --faceted --set lift_angle=16
+SOLID_BUILD_DIR=_build/cam_hammer_20 machinome test cam_hammer --faceted --set lift_angle=20
+SOLID_BUILD_DIR=_build/cam_hammer_tests machinome test cam_hammer --exact
+SOLID_BUILD_DIR=_build/cam_hammer_16 machinome test cam_hammer --exact --set lift_angle=16
+SOLID_BUILD_DIR=_build/cam_hammer_20 machinome test cam_hammer --exact --set lift_angle=20
 python scripts/gallery.py test hydraulic_sawmill automatic_weaving_loom --kernel faceted
 python scripts/gallery.py test hydraulic_sawmill automatic_weaving_loom --kernel exact
 python scripts/gallery.py build
@@ -150,7 +150,7 @@ The [selected OpenSCAD images](evidence/README.md) were rendered and read,
 showing lift isometrically and release along the shaft. An early side image
 exposed the obscured shoe and prompted the bearing-column revision.
 
-The finite browser check uses the real `solid export` manifest and widget,
+The finite browser check uses the real `machinome export` manifest and widget,
 not a second machine or viewer implementation. It tests the native
 instruction ramps, exact editor, slider, run, playback, scrubbing, source
 ZIP and document overflow at 1440×1100 and 390×844. CAD-region screenshots

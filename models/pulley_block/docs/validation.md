@@ -16,17 +16,17 @@ session was assigned cam_hammer, not this model; no agent was dispatched.
 
 | Dependency | Tested content revision |
 | --- | --- |
-| solid-node | `6e41f2da132a8604f9b68895967247fb8876fc4d`, metadata 0.6.0 |
-| solid-node-viewer | `6fb082ba9823fb0839631bd4a3ecbf4a41b33b64`, local 0.1.0, API 7 |
+| machinome | `6e41f2da132a8604f9b68895967247fb8876fc4d`, metadata 0.6.0 |
+| machinome-viewer | `6fb082ba9823fb0839631bd4a3ecbf4a41b33b64`, local 0.1.0, API 7 |
 | molejo | `e76c9039cf906cfc0005324d78ccee7116e0ff4a`, 0.2.0 |
 | CadQuery / trimesh / Playwright | 2.7.0 / 4.4.9 / 1.62.0 |
 
 Linux, Python 3.12, workspace `../../.venv`, installed Chromium. The three
 dependency repositories were clean on inspection; none was modified.
-The post-0.6 declarative API is required; PyPI solid-node 0.6 alone is
+The post-0.6 declarative API is required; PyPI machinome 0.6 alone is
 insufficient and the local viewer is not described as released.
 
-The complete shared solid-node API and machining skills informed the motion
+The complete shared machinome API and machining skills informed the motion
 and geometric contracts. Context7 supplied current CadQuery, molejo and
 Playwright documentation. Molejo's public Python, concepts and B-rep manuals
 supplied the line/arc vocabulary, declared ring ordering and exactness contract.
@@ -156,8 +156,8 @@ for phase in (0, 90, 180):
 Activate the documented environment and run from the gallery root:
 
 ```sh
-SOLID_BUILD_DIR=_build/pulley_tests solid test pulley_block --faceted
-SOLID_BUILD_DIR=_build/pulley_exact solid test pulley_block --exact
+SOLID_BUILD_DIR=_build/pulley_tests machinome test pulley_block --faceted
+SOLID_BUILD_DIR=_build/pulley_exact machinome test pulley_block --exact
 python scripts/gallery.py check
 python scripts/gallery.py build
 python scripts/gallery.py export

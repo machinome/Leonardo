@@ -2,9 +2,9 @@
 
 # Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
 import math
-from solid_node.node import AssemblyNode
-from solid_node.simulation import Driver
-from solid_node.motion.ports import RotationalPort
+from machinome.node import AssemblyNode
+from machinome.simulation import Driver
+from machinome.motion.ports import RotationalPort
 from .head import reaches
 from .cords import CordTransmission
 from .textile import WarpRollEnd, ClothWeb

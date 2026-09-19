@@ -9,11 +9,11 @@ These concealed profiles are our construction, not observed museum details.
 # Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
 import cadquery as cq
 from molejo import Shape, Polygon, Spline, P
-from solid_node.node import AssemblyNode, CadQueryNode, FusionNode, MolejoNode
-from solid_node.parameters import Length, Scalar, Count
-from solid_node.motion.joints import Revolute, Prismatic
-from solid_node.motion.ports import RotationalPort, TranslationalPort
-from solid_node.math import sin, cos, sqrt, asin, atan2
+from machinome.node import AssemblyNode, CadQueryNode, FusionNode, MolejoNode
+from machinome.parameters import Length, Scalar, Count
+from machinome.motion.joints import Revolute, Prismatic
+from machinome.motion.ports import RotationalPort, TranslationalPort
+from machinome.math import sin, cos, sqrt, asin, atan2
 from .timing import SingleToothInput, cylinder, clip
 from .winding import FeedTimingTrain
 from .parts import box, axle, HeddleCage, CarrierArm, WeftSpool, Reed, shuttle_x

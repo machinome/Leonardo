@@ -1,7 +1,7 @@
 """Reconstructed reed layout and beat dwell, in millimetres and degrees."""
 
 # Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
-from solid_node.math import acos, cos
+from machinome.math import acos, cos
 from .timing import clip
 
 REED_TRAVEL = 100

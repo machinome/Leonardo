@@ -42,7 +42,7 @@ clearances; the water surface sits just below the lower paddles.
 ## Kinematic closure
 
 `layout.py` owns reconstruction dimensions; `parts.py` owns solids.
-`kinematics.py` uses solid-node’s symbolic degree math so Python and the
+`kinematics.py` uses machinome’s symbolic degree math so Python and the
 exported browser use the same closed mechanism.
 
 The crank/rod equation closes the slider-crank. Intersection of the rocker-tip
@@ -78,7 +78,7 @@ four turns even when both are nonzero. Six instructions expose the start,
 half stroke, bottom, active feed, complete pass and timeline operation.
 Only kerf is a build parameter, tested from 2 to 5 mm.
 
-The exhibit embeds the actual solid-node widget, with whole, drive, saw and
+The exhibit embeds the actual machinome widget, with whole, drive, saw and
 rear-feed views and a reversible frame reveal. The UI’s numeric labels and
 stroke trace interpolate a table measured from the Python meshes at 0.5°
 intervals; they never place CAD or implement another mechanism. The finite

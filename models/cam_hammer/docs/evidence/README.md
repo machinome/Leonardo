@@ -10,8 +10,8 @@ hammer/anvil alignment. No museum images are included.
 From the gallery root, using the installed environment:
 
 ```sh
-SOLID_BUILD_DIR=_build/cam_hammer solid snapshot cam_hammer -o _evidence/cam-hammer-isometric.png --autocenter --viewall --time 0.333333333 --imgsize 1400x1000
-SOLID_BUILD_DIR=_build/cam_hammer solid snapshot cam_hammer -o _evidence/cam-hammer-side.png --autocenter --viewall --camera 0,0,0,90,0,0,600 --time 0.694444444 --imgsize 1400x1000
+SOLID_BUILD_DIR=_build/cam_hammer machinome snapshot cam_hammer -o _evidence/cam-hammer-isometric.png --autocenter --viewall --time 0.333333333 --imgsize 1400x1000
+SOLID_BUILD_DIR=_build/cam_hammer machinome snapshot cam_hammer -o _evidence/cam-hammer-side.png --autocenter --viewall --camera 0,0,0,90,0,0,600 --time 0.694444444 --imgsize 1400x1000
 ```
 
 ![Lift, isometric](isometric-lift.png)

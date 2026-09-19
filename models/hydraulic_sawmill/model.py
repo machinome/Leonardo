@@ -1,11 +1,11 @@
 """MUST IGB-37 hydraulic saw: a source-led, connected reconstruction."""
 # Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
 from math import pi
-from solid_node.node import AssemblyNode, FusionNode
-from solid_node.parameters import Length
-from solid_node.motion.joints import Prismatic
-from solid_node.motion.ports import RotationalPort
-from solid_node.simulation import Driver, Instruction
+from machinome.node import AssemblyNode, FusionNode
+from machinome.parameters import Length
+from machinome.motion.joints import Prismatic
+from machinome.motion.ports import RotationalPort
+from machinome.simulation import Driver, Instruction
 from .parts import (Foundation, OakStructure, WaterChannel, WaterSurface, Wheel,
                     Crankshaft, ConnectingRod, SashWood, SawBlade, BladeClamp,
                     TensionNut, SashPin, CarriageBed, CarriageWheel, CarriageAxle,

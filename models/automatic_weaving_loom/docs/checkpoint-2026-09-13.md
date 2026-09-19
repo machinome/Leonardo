@@ -10,7 +10,7 @@ as the resume entry point. Do not archive the active OpenSpec change yet.
 
 ## Authority and repository
 
-- Work only in `/home/asa/devel/libresolid-studio/projects/Leonardo`, its own Git
+- Work only in `/home/asa/devel/machinome-studio/projects/Leonardo`, its own Git
   repository on `main`. Verify that root before writing or committing.
 - Planning commit: `cec7cf1`. This checkpoint's source and records are committed
   together; obtain its id from `git log -1` or the history of this document.
@@ -19,20 +19,20 @@ as the resume entry point. Do not archive the active OpenSpec change yet.
 - The pilot authorized documented mechanical completions of concealed museum
   mechanisms. They are not measured historical facts. See [reconstruction.md](reconstruction.md).
 - The pilot uses **Studio**, not the companion HTML exhibit. The duration must
-  be declared in Python, not merely supplied to `solid export`.
+  be declared in Python, not merely supplied to `machinome export`.
 - Preserve the pre-existing untracked `screenshots/`. No shop, dependency,
   sibling-model or remote changes belong to this checkpoint. Nothing is pushed.
 
 ## Latest advancement
 
 `AutomaticWeavingLoom` now declares `time = Time(loop=60)` from
-`solid_node.motion.ports`. Its shaft advances at 24° per machine second, so the
+`machinome.motion.ports`. Its shaft advances at 24° per machine second, so the
 same four turns/eight picks span one minute. `phase`, `run`, winding travel,
 all gear ratios and fixed-length opposite counterweight motion are unchanged.
 Root tests now use seconds, including 289 samples across 0–60 s. Isolated
 fixtures retain their own documented fractional timelines.
 
-`solid build automatic_weaving_loom` rebuilt the normal Studio artifact at
+`machinome build automatic_weaving_loom` rebuilt the normal Studio artifact at
 `_build/automatic_weaving_loom/viewer.json`. Both this artifact and the live
 Studio session's served document report `animation.loop: 60`. Studio's native
 Timeline control exposes ×0.1, ×0.25 and ×0.5, as well as faster options.
@@ -98,17 +98,17 @@ The project-owned `sampled_poses` helper sets **all** phase/run/time values and
 restores an explicit neutral state. Do not replace this with time-only updates
 or `clear_state()`: the former can inherit a held `run=0`, the latter unbinds
 drivers instead of restoring defaults. Do not run these plain `TestCase`s
-directly under pytest: use `solid test`, which instantiates their node.
+directly under pytest: use `machinome test`, which instantiates their node.
 
 ## Resume commands and remaining work
 
 From the Leonardo root, with `../../.venv/bin` on PATH:
 
 ```sh
-SOLID_BUILD_DIR=_build/loom-seconds-18 PYTHONUNBUFFERED=1 solid test automatic_weaving_loom --exact
-SOLID_BUILD_DIR=_build/loom-seconds-16 PYTHONUNBUFFERED=1 solid test automatic_weaving_loom --set shed_lift=16 --exact
-SOLID_BUILD_DIR=_build/loom-seconds-20 PYTHONUNBUFFERED=1 solid test automatic_weaving_loom --set shed_lift=20 --exact
-SOLID_BUILD_DIR=_build/loom-final-fixtures PYTHONUNBUFFERED=1 solid test models/automatic_weaving_loom/head_bench.py --exact
+SOLID_BUILD_DIR=_build/loom-seconds-18 PYTHONUNBUFFERED=1 machinome test automatic_weaving_loom --exact
+SOLID_BUILD_DIR=_build/loom-seconds-16 PYTHONUNBUFFERED=1 machinome test automatic_weaving_loom --set shed_lift=16 --exact
+SOLID_BUILD_DIR=_build/loom-seconds-20 PYTHONUNBUFFERED=1 machinome test automatic_weaving_loom --set shed_lift=20 --exact
+SOLID_BUILD_DIR=_build/loom-final-fixtures PYTHONUNBUFFERED=1 machinome test models/automatic_weaving_loom/head_bench.py --exact
 ```
 
 Each root path above is distinct. The head's exact cam-contact check can take
@@ -120,7 +120,7 @@ Restore faults and rerun their green contracts before final certification.
 For the pilot's already-open Studio project:
 
 ```sh
-solid build automatic_weaving_loom
+machinome build automatic_weaving_loom
 python models/automatic_weaving_loom/scripts/check_studio_time.py --base-url http://127.0.0.1:9000
 ```
 

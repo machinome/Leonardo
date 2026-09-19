@@ -23,9 +23,9 @@ Reproduce these views from the gallery root, using a build directory not
 being read by a running test:
 
 ```sh
-SOLID_BUILD_DIR=_build/loom-reed-views solid snapshot automatic_weaving_loom --time 0.0625 --autocenter --viewall --camera 0,0,0,65,0,35,1200 --imgsize 1500x1100 -o models/automatic_weaving_loom/docs/evidence/reed-retracted.png
-SOLID_BUILD_DIR=_build/loom-reed-views solid snapshot automatic_weaving_loom --time 0.011 --camera 0,100,1400,0,100,520 --projection ortho --imgsize 1500x1100 -o models/automatic_weaving_loom/docs/evidence/reed-crossing.png
-SOLID_BUILD_DIR=_build/loom-reed-views solid snapshot automatic_weaving_loom --time 0.125 --camera 550,-400,850,0,150,520 --projection ortho --imgsize 1500x1100 -o models/automatic_weaving_loom/docs/evidence/reed-beat.png
+SOLID_BUILD_DIR=_build/loom-reed-views machinome snapshot automatic_weaving_loom --time 0.0625 --autocenter --viewall --camera 0,0,0,65,0,35,1200 --imgsize 1500x1100 -o models/automatic_weaving_loom/docs/evidence/reed-retracted.png
+SOLID_BUILD_DIR=_build/loom-reed-views machinome snapshot automatic_weaving_loom --time 0.011 --camera 0,100,1400,0,100,520 --projection ortho --imgsize 1500x1100 -o models/automatic_weaving_loom/docs/evidence/reed-crossing.png
+SOLID_BUILD_DIR=_build/loom-reed-views machinome snapshot automatic_weaving_loom --time 0.125 --camera 550,-400,850,0,150,520 --projection ortho --imgsize 1500x1100 -o models/automatic_weaving_loom/docs/evidence/reed-beat.png
 ```
 
 ## Historical checkpoint views
@@ -51,9 +51,9 @@ checkpoint evidence, not views of the corrected guide and drive arrangement.
 From the gallery root with the workspace environment active:
 
 ```sh
-solid snapshot automatic_weaving_loom --time 0.0625 --autocenter --viewall --camera 0,0,0,65,0,35,1200 --imgsize 1500x1100 -o models/automatic_weaving_loom/docs/evidence/museum-isometric.png
-solid snapshot automatic_weaving_loom --time 0.125 --autocenter --viewall --camera 0,0,0,90,0,90,1200 --imgsize 1500x1100 -o models/automatic_weaving_loom/docs/evidence/transmission-alignment.png
-solid snapshot automatic_weaving_loom --time 0.1875 --camera 550,-400,850,0,160,470 --projection ortho --imgsize 1500x1100 -o models/automatic_weaving_loom/docs/evidence/weaving-head.png
+machinome snapshot automatic_weaving_loom --time 0.0625 --autocenter --viewall --camera 0,0,0,65,0,35,1200 --imgsize 1500x1100 -o models/automatic_weaving_loom/docs/evidence/museum-isometric.png
+machinome snapshot automatic_weaving_loom --time 0.125 --autocenter --viewall --camera 0,0,0,90,0,90,1200 --imgsize 1500x1100 -o models/automatic_weaving_loom/docs/evidence/transmission-alignment.png
+machinome snapshot automatic_weaving_loom --time 0.1875 --camera 550,-400,850,0,160,470 --projection ortho --imgsize 1500x1100 -o models/automatic_weaving_loom/docs/evidence/weaving-head.png
 ```
 
 The timeline covers four input turns, so these normalized times correspond

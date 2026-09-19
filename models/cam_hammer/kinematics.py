@@ -1,6 +1,6 @@
 """Designed pitch envelope and periodic symbolic motion, all angles in degrees."""
 # Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
-from solid_node.math import sin, cos, atan2, sqrt
+from machinome.math import sin, cos, atan2, sqrt
 
 
 def clip01(value):

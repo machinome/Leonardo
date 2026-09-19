@@ -3,8 +3,8 @@
 import math
 
 from trimesh.proximity import closest_point
-from solid_node.test import TestCase, testing_steps
-from solid_node.simulation import ScenarioTest
+from machinome.test import TestCase, testing_steps
+from machinome.simulation import ScenarioTest
 
 from .model import CamHammer
 

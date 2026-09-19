@@ -20,7 +20,7 @@ def main():
     if not args.no_build:
         solid = shutil.which('solid')
         if solid is None:
-            raise SystemExit('Activate the Python environment containing solid-node and its viewer extra.')
+            raise SystemExit('Activate the Python environment containing machinome and its viewer extra.')
         subprocess.run([sys.executable, str(ROOT / 'scripts/gallery.py'),
                         'export', 'hydraulic_sawmill'], cwd=ROOT, check=True)
         print('Browser export and committed source: export/hydraulic_sawmill/', flush=True)

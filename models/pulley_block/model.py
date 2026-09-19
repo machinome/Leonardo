@@ -4,11 +4,11 @@ from math import pi
 
 import cadquery as cq
 from molejo import Shape, Circle, Line, Arc, P
-from solid_node.math import cos
-from solid_node.node import AssemblyNode, CadQueryNode, MolejoNode
-from solid_node.motion.joints import Prismatic, Revolute
-from solid_node.motion.ports import TranslationalPort
-from solid_node.simulation import Driver, Instruction
+from machinome.math import cos
+from machinome.node import AssemblyNode, CadQueryNode, MolejoNode
+from machinome.motion.joints import Prismatic, Revolute
+from machinome.motion.ports import TranslationalPort
+from machinome.simulation import Driver, Instruction
 
 
 def box(x, y, z, at):

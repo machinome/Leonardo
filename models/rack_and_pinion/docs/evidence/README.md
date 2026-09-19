@@ -14,8 +14,8 @@ Generated batch images and browser captures remain ignored under `_evidence/`.
 From the gallery root with the documented environment activated:
 
 ```sh
-SOLID_BUILD_DIR=_build/rack_snapshot solid snapshot rack_and_pinion --time 0.25 --autocenter --viewall --imgsize 1200x1200 -o models/rack_and_pinion/docs/evidence/isometric-mid-lift.png
-SOLID_BUILD_DIR=_build/rack_snapshot solid snapshot rack_and_pinion --time 0.5 --camera 0,-800,210,0,0,210 --autocenter --viewall --projection ortho --imgsize 1200x1200 -o models/rack_and_pinion/docs/evidence/front-top.png
+SOLID_BUILD_DIR=_build/rack_snapshot machinome snapshot rack_and_pinion --time 0.25 --autocenter --viewall --imgsize 1200x1200 -o models/rack_and_pinion/docs/evidence/isometric-mid-lift.png
+SOLID_BUILD_DIR=_build/rack_snapshot machinome snapshot rack_and_pinion --time 0.5 --camera 0,-800,210,0,0,210 --autocenter --viewall --projection ortho --imgsize 1200x1200 -o models/rack_and_pinion/docs/evidence/front-top.png
 ```
 
 The first isometric inspection exposed a post hiding the hook. Moving the

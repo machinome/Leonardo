@@ -5,7 +5,7 @@ Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
 ## Purpose
 
 Let visitors follow the contact, lift, release and strike of an original
-educational cam hammer, using the actual solid-node model and controls.
+educational cam hammer, using the actual machinome model and controls.
 
 ## Requirements
 
@@ -34,7 +34,7 @@ bounded return that lands on the anvil face without penetration.
 
 ### Requirement: Operable export
 The exhibit SHALL provide phase/run controls and Lift, Release, Strike and
-Run instructions in its real solid-node viewer on desktop and narrow screens.
+Run instructions in its real machinome viewer on desktop and narrow screens.
 
 #### Scenario: Inspect and return
 - **WHEN** a visitor plays, manually poses, selects named stages and returns
@@ -44,7 +44,7 @@ Run instructions in its real solid-node viewer on desktop and narrow screens.
 
 ### Requirement: Honest historical and simulation claims
 The exhibit SHALL identify Astra's original educational reconstruction,
-its historical sources, the solid-node demonstration and the gallery source.
+its historical sources, the machinome demonstration and the gallery source.
 
 #### Scenario: Read the exhibit's interpretation
 - **WHEN** a visitor reads the exhibit

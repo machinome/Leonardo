@@ -3,7 +3,7 @@
 Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
 
 An original educational model by **Astra**, made from one continuation
-prompt as a [solid-node demonstration](https://solid-node.readthedocs.io/).
+prompt as a [machinome demonstration](https://machinome.readthedocs.io/).
 The hand crank turns a shaped cam above the lever's short tail. Pressing
 the tail down lifts the hammer; the cam retreats and the hammer returns
 to the anvil. [Open the exhibit](index.html) after building the export and
@@ -78,14 +78,14 @@ the complete local cycle. The plan is commit `1c0be60`; the
 
 From the gallery root, activate the workspace environment as described in
 the [gallery README](../../README.md). It requires the local post-0.6
-motion API and separate viewer, not solely published solid-node 0.6.0.
+motion API and separate viewer, not solely published machinome 0.6.0.
 
 ```sh
-solid build cam_hammer
-SOLID_BUILD_DIR=_build/cam_hammer_tests solid test cam_hammer --faceted
-SOLID_BUILD_DIR=_build/cam_hammer_tests solid test cam_hammer --exact
-SOLID_BUILD_DIR=_build/cam_hammer_16 solid test cam_hammer --exact --set lift_angle=16
-SOLID_BUILD_DIR=_build/cam_hammer_20 solid test cam_hammer --exact --set lift_angle=20
+machinome build cam_hammer
+SOLID_BUILD_DIR=_build/cam_hammer_tests machinome test cam_hammer --faceted
+SOLID_BUILD_DIR=_build/cam_hammer_tests machinome test cam_hammer --exact
+SOLID_BUILD_DIR=_build/cam_hammer_16 machinome test cam_hammer --exact --set lift_angle=16
+SOLID_BUILD_DIR=_build/cam_hammer_20 machinome test cam_hammer --exact --set lift_angle=20
 python scripts/gallery.py export cam_hammer
 python models/cam_hammer/scripts/check_browser.py
 python -m http.server 8769 --bind 127.0.0.1

@@ -1,7 +1,7 @@
 [project]
 name = "leonardo-gallery"
 version = "0.1.0"
-description = "Leonardo da Vinci's machines: a single-prompt solid-node gallery by Astra"
+description = "Leonardo da Vinci's machines: a single-prompt machinome gallery by Astra"
 readme = "README.md"
 requires-python = ">=3.12"
 authors = [{name = "Luis Henrique Cassis Fagundes"}]
@@ -9,16 +9,16 @@ license = "AGPL-3.0-only"
 license-files = ["LICENSE", "NOTICE"]
 # These version floors do not describe the post-0.6 API requirement in README.
 # The public-site task must establish a reproducible public dependency set.
-dependencies = ["solid-node[viewer]>=0.6", "cadquery>=2.7", "molejo>=0.2"]
+dependencies = ["machinome[viewer]>=0.6", "cadquery>=2.7", "molejo>=0.2"]
 
 [project.optional-dependencies]
 dev = ["playwright>=1.50"]
 site = ["sphinx>=8"]
 
-[tool.solid-node]
+[tool.machinome]
 model = "hydraulic_sawmill"
 
-[tool.solid-node.models]
+[tool.machinome.models]
 hydraulic_sawmill = "models.hydraulic_sawmill.model:LeonardoHydraulicSawmill"
 automatic_weaving_loom = "models.automatic_weaving_loom.model:AutomaticWeavingLoom"
 cam_hammer = "models.cam_hammer.model:CamHammer"
@@ -26,7 +26,7 @@ rack_and_pinion = "models.rack_and_pinion.model:RackAndPinion"
 pulley_block = "models.pulley_block.model:PulleyBlock"
 swivel_crane = "models.swivel_crane.model:SwivelCrane"
 
-[tool.libresolid-studio]
+[tool.machinome-studio]
 profile = "builder"
 
 [build-system]

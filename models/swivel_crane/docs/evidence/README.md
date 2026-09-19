@@ -17,7 +17,7 @@ and `python scripts/gallery.py export` built and exported all six roots.
 The final crane was rebuilt, re-exported and re-rendered after refining its thread.
 
 Exact runs used `python scripts/gallery.py test --kernel exact`, followed by
-`SOLID_BUILD_DIR=_build/swivel_crane solid test swivel_crane --exact` after the
+`SOLID_BUILD_DIR=_build/swivel_crane machinome test swivel_crane --exact` after the
 crane-only thread correction. None of the five other models changed.
 
 | Model | Exact result | Reported test time |
@@ -108,7 +108,7 @@ Inspected default-OpenSCAD snapshots, all 1400×1100:
 Example command, from the gallery root with the workspace environment active:
 
 ```sh
-SOLID_BUILD_DIR=_build/swivel_crane solid snapshot swivel_crane \
+SOLID_BUILD_DIR=_build/swivel_crane machinome snapshot swivel_crane \
   -o models/swivel_crane/docs/evidence/isometric.png \
   --autocenter --viewall --time 0.28 --imgsize 1400x1100
 ```
@@ -148,15 +148,15 @@ archives remain ignored and contain committed source, not private working files.
 
 Checked 12 September 2026 on Linux with Python 3.12.3, CadQuery 2.7.0,
 molejo 0.2.0 and Playwright 1.62.0 / its installed headless Chromium.
-The editable solid-node package reports 0.6.0 but includes post-release
+The editable machinome package reports 0.6.0 but includes post-release
 declarative API changes. The local viewer reports 0.1.0; it is founded, not
 published. These are checkout-specific results, not evidence that published
 0.6.0 alone supplies every API used here.
 
 Dependency content revisions (all three worktrees clean and unmodified):
 
-- solid-node: `6e41f2da132a8604f9b68895967247fb8876fc4d`
-- solid-node-viewer: `6fb082ba9823fb0839631bd4a3ecbf4a41b33b64`
+- machinome: `6e41f2da132a8604f9b68895967247fb8876fc4d`
+- machinome-viewer: `6fb082ba9823fb0839631bd4a3ecbf4a41b33b64`
 - molejo: `e76c9039cf906cfc0005324d78ccee7116e0ff4a`
 
 ## Evidence limits

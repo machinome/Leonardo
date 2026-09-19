@@ -1,7 +1,7 @@
 """Geometry, not timing metadata, must retain the accompanied spool."""
 
 # Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
-from solid_node.test import TestCase
+from machinome.test import TestCase
 from .checks import sampled_poses
 from .grip_bench import GripBench
 

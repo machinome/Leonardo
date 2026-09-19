@@ -5,8 +5,8 @@ import math
 
 import numpy as np
 from scipy.spatial.distance import cdist
-from solid_node.test import TestCase, testing_steps
-from solid_node.simulation import ScenarioTest
+from machinome.test import TestCase, testing_steps
+from machinome.simulation import ScenarioTest
 
 from .model import SwivelCrane
 

@@ -3,10 +3,10 @@
 import math
 import cadquery as cq
 from molejo import Shape, Circle, Line, Arc, P
-from solid_node.node import CadQueryNode, MolejoNode
-from solid_node.parameters import Length, Flag
-from solid_node.motion.joints import Revolute, Orbit, Prismatic
-from solid_node.motion.ports import TranslationalPort, RotationalPort
+from machinome.node import CadQueryNode, MolejoNode
+from machinome.parameters import Length, Flag
+from machinome.motion.joints import Revolute, Orbit, Prismatic
+from machinome.motion.ports import TranslationalPort, RotationalPort
 from .layout import (CRANK, ROD, SASH_HEIGHT, TEETH, DRUM_RADIUS, ROPE_RADIUS,
                      ROPE_PITCH_RADIUS, RATCHET_ROOT, RATCHET_TIP, PAWL_LENGTH,
                      ROCKER_LONG, TIE_LENGTH, ROCKER_BRANCH, LINK_Y, TIE_Y,

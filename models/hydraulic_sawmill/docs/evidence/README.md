@@ -15,9 +15,9 @@ and the [certificate](../validation.md) for geometric evidence and limits.
 Reproduce from the gallery root with the default OpenSCAD renderer:
 
 ```sh
-solid snapshot hydraulic_sawmill -o models/hydraulic_sawmill/docs/evidence/museum-isometric.png --autocenter --viewall --time 0.1875 --imgsize 1400x1000
-solid snapshot hydraulic_sawmill -o models/hydraulic_sawmill/docs/evidence/feed-alignment.png --camera=-90,1200,400,-90,120,340 --time 0.1458333333 --imgsize 1600x1000
-solid snapshot hydraulic_sawmill -o models/hydraulic_sawmill/docs/evidence/undershot-drive.png --camera=160,-1500,250,0,-80,200 --time 0.0625 --imgsize 1400x1100
+machinome snapshot hydraulic_sawmill -o models/hydraulic_sawmill/docs/evidence/museum-isometric.png --autocenter --viewall --time 0.1875 --imgsize 1400x1000
+machinome snapshot hydraulic_sawmill -o models/hydraulic_sawmill/docs/evidence/feed-alignment.png --camera=-90,1200,400,-90,120,340 --time 0.1458333333 --imgsize 1600x1000
+machinome snapshot hydraulic_sawmill -o models/hydraulic_sawmill/docs/evidence/undershot-drive.png --camera=160,-1500,250,0,-80,200 --time 0.0625 --imgsize 1400x1100
 ```
 
 The rear and drive images deliberately frame the transmission, not the full

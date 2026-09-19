@@ -3,7 +3,7 @@
 Leonardo's machines, made inspectable: turn a drive, follow the movement,
 and see how the parts work together. **Vibecoded by Astra**, from one user
 prompt per design, as a demonstration of
-[solid-node](https://solid-node.readthedocs.io/).
+[machinome](https://machinome.readthedocs.io/).
 
 Copyright (C) 2026 Luis Henrique Cassis Fagundes.
 All original gallery code, CAD and documentation are **AGPL-3.0-only**;
@@ -46,9 +46,9 @@ worksite stability, structural strength and lifting capacity are outside its sco
 
 ## Build and inspect
 
-Use Python 3.12 and an environment containing solid-node's **post-0.6
-declarative motion API**, CadQuery, molejo and solid-node-viewer API 7 or
-later. Published solid-node 0.6.0 alone is insufficient. The viewer's local
+Use Python 3.12 and an environment containing machinome's **post-0.6
+declarative motion API**, CadQuery, molejo and machinome-viewer API 7 or
+later. Published machinome 0.6.0 alone is insufficient. The viewer's local
 0.1.0 package is founded, not asserted to be released. See the tested
 [environment and consolidation record](docs/consolidation.md).
 
@@ -58,12 +58,12 @@ In the development workspace, from this repository root:
 source ../../.venv/bin/activate
 python scripts/gallery.py check
 python scripts/gallery.py list
-solid build hydraulic_sawmill
-solid build automatic_weaving_loom
-solid build cam_hammer
-solid build rack_and_pinion
-solid build pulley_block
-solid build swivel_crane
+machinome build hydraulic_sawmill
+machinome build automatic_weaving_loom
+machinome build cam_hammer
+machinome build rack_and_pinion
+machinome build pulley_block
+machinome build swivel_crane
 python scripts/gallery.py test
 python scripts/gallery.py export
 python scripts/check_browsers.py
@@ -120,6 +120,6 @@ explains the import and path moves. No original prompt transcript was
 present in those repositories; the single-prompt attribution comes from
 the pilot's statement, recorded in [the gallery brief](docs/brief.md).
 
-The final site must visibly credit solid-node and link to this gallery's
+The final site must visibly credit machinome and link to this gallery's
 GitHub source. Building the site does not publish it: publication remains
 the pilot's action after the queue is complete.

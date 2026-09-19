@@ -13,7 +13,7 @@ let currentView = 'whole';
 const stage = $('stage');
 const controls = document.querySelectorAll('button, input, select');
 // This table is measured from the Python CAD. It changes labels only;
-// solid-node's exported relations drive every solid and the flexible rope.
+// machinome's exported relations drive every solid and the flexible rope.
 function reading(angle) {
   const x = Math.max(0,Math.min(360,angle)) / measurements.step;
   const i = Math.min(measurements.rows.length-2, Math.floor(x));
@@ -69,7 +69,7 @@ async function mount(name='whole') {
     const chosen = views[name];
     const factor = Math.max(1, 560 / stage.clientWidth);
     const view = {target:chosen.target, camera:chosen.camera.map((v,i) => chosen.target[i]+(v-chosen.target[i])*factor)};
-    viewer = await SolidNodeWidget.mount(stage, '../../export/hydraulic_sawmill/manifest.json', {
+    viewer = await MachinomeWidget.mount(stage, '../../export/hydraulic_sawmill/manifest.json', {
       animation: 'external', driverControls: 'none', autoplay: false,
       time: phase / 1440, view, up: [0,0,1], fov: 37,
       ariaLabel: 'Interactive three-dimensional reconstruction of Leonardo’s hydraulic sawmill',

@@ -3,7 +3,7 @@
 Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
 
 An original educational reconstruction by **Astra**, made from the gallery's
-single continuation prompt as a **solid-node demonstration**. A hand crank
+single continuation prompt as a **machinome demonstration**. A hand crank
 turns a twenty-tooth pinion, raising a guided rack, its open hook and a
 small weight. Turn it back and the load descends: the contact that converts
 rotation into travel is visible and geometrically tested.
@@ -76,11 +76,11 @@ was not independently interpreted for this build.
 From the gallery root, with the environment in the root README activated:
 
 ```sh
-solid build rack_and_pinion
-SOLID_BUILD_DIR=_build/rack_tests solid test rack_and_pinion --faceted
-SOLID_BUILD_DIR=_build/rack_tests solid test rack_and_pinion --exact
-SOLID_BUILD_DIR=_build/rack_25 solid test rack_and_pinion --exact --set module=2.5
-SOLID_BUILD_DIR=_build/rack_35 solid test rack_and_pinion --exact --set module=3.5
+machinome build rack_and_pinion
+SOLID_BUILD_DIR=_build/rack_tests machinome test rack_and_pinion --faceted
+SOLID_BUILD_DIR=_build/rack_tests machinome test rack_and_pinion --exact
+SOLID_BUILD_DIR=_build/rack_25 machinome test rack_and_pinion --exact --set module=2.5
+SOLID_BUILD_DIR=_build/rack_35 machinome test rack_and_pinion --exact --set module=3.5
 python scripts/gallery.py export rack_and_pinion
 python models/rack_and_pinion/scripts/check_browser.py
 python scripts/check_browsers.py
@@ -95,8 +95,8 @@ Use independent test build directories to avoid another session's model
 publication removing test ingredient artifacts. Generated exports stay
 ignored. Re-export after committing so source.zip contains the final source.
 
-The tested environment uses post-0.6 local solid-node, local viewer 0.1.0
-and CadQuery 2.7. Published solid-node 0.6 alone does not supply this API.
+The tested environment uses post-0.6 local machinome, local viewer 0.1.0
+and CadQuery 2.7. Published machinome 0.6 alone does not supply this API.
 See the [gallery environment record](../../docs/consolidation.md).
 
 ## Commission

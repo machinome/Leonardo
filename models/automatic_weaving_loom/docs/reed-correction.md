@@ -174,20 +174,20 @@ use their own `_build/loom-gallery-regression-<model>` directories.
 Reproduction commands, from the gallery root with the workspace environment:
 
 ```sh
-SOLID_BUILD_DIR=_build/loom-reed-fix solid test automatic_weaving_loom --faceted
-SOLID_BUILD_DIR=_build/loom-reed-16 solid test automatic_weaving_loom --set shed_lift=16 --faceted
-SOLID_BUILD_DIR=_build/loom-reed-20 solid test automatic_weaving_loom --set shed_lift=20 --faceted
-SOLID_BUILD_DIR=_build/loom-reed-fix solid test automatic_weaving_loom --exact
-SOLID_BUILD_DIR=_build/loom-reed-16 solid test automatic_weaving_loom --set shed_lift=16 --exact
-SOLID_BUILD_DIR=_build/loom-reed-20 solid test automatic_weaving_loom --set shed_lift=20 --exact
-SOLID_BUILD_DIR=_build/loom-reed-delivery solid build automatic_weaving_loom
+SOLID_BUILD_DIR=_build/loom-reed-fix machinome test automatic_weaving_loom --faceted
+SOLID_BUILD_DIR=_build/loom-reed-16 machinome test automatic_weaving_loom --set shed_lift=16 --faceted
+SOLID_BUILD_DIR=_build/loom-reed-20 machinome test automatic_weaving_loom --set shed_lift=20 --faceted
+SOLID_BUILD_DIR=_build/loom-reed-fix machinome test automatic_weaving_loom --exact
+SOLID_BUILD_DIR=_build/loom-reed-16 machinome test automatic_weaving_loom --set shed_lift=16 --exact
+SOLID_BUILD_DIR=_build/loom-reed-20 machinome test automatic_weaving_loom --set shed_lift=20 --exact
+SOLID_BUILD_DIR=_build/loom-reed-delivery machinome build automatic_weaving_loom
 python scripts/gallery.py export automatic_weaving_loom
 python scripts/gallery.py check
 python scripts/check_browsers.py
 python models/automatic_weaving_loom/scripts/check_studio_time.py --base-url http://127.0.0.1:9000
 ```
 
-Each fixture is checked with `solid test models/automatic_weaving_loom/<fixture>.py
+Each fixture is checked with `machinome test models/automatic_weaving_loom/<fixture>.py
 --exact` (and `--faceted` during development), where `<fixture>` is `timing`,
 `winding`, `head_bench`, `grip_bench` or `cord_bench`.
 
@@ -199,13 +199,13 @@ Dependencies observed during this correction:
 
 | Dependency | Content revision / installed version |
 | --- | --- |
-| solid-node | `6e41f2da132a8604f9b68895967247fb8876fc4d`, reports 0.6.0 with post-release APIs |
-| solid-node-viewer | `6fb082ba9823fb0839631bd4a3ecbf4a41b33b64`, local 0.1.0 |
+| machinome | `6e41f2da132a8604f9b68895967247fb8876fc4d`, reports 0.6.0 with post-release APIs |
+| machinome-viewer | `6fb082ba9823fb0839631bd4a3ecbf4a41b33b64`, local 0.1.0 |
 | molejo | `e76c9039cf906cfc0005324d78ccee7116e0ff4a`, 0.2.0 |
 | CadQuery | 2.7.0 |
 
-The project uses the enclosing workspace's `.venv/bin/solid` and Python.
-`solid snapshot --time` takes a normalized fraction of the 60-second loop;
+The project uses the enclosing workspace's `.venv/bin/machinome` and Python.
+`machinome snapshot --time` takes a normalized fraction of the 60-second loop;
 the root tests' `set_state(time=...)` takes machine seconds. Thus a snapshot
 at `0.0625` is the 90° handoff, while `set_state(time=3.75, run=1, phase=0)`
 is the same pose in the tests.

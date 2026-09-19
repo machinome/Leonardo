@@ -7,11 +7,11 @@ here; the manuscript does not dimension those concealed contact surfaces.
 
 # Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
 import cadquery as cq
-from solid_node.node import AssemblyNode, CadQueryNode
-from solid_node.motion.joints import Revolute
-from solid_node.motion.ports import RotationalPort
-from solid_node.simulation import Driver
-from solid_node.math import sin, cos, sqrt, atan2
+from machinome.node import AssemblyNode, CadQueryNode
+from machinome.motion.joints import Revolute
+from machinome.motion.ports import RotationalPort
+from machinome.simulation import Driver
+from machinome.math import sin, cos, sqrt, atan2
 from .profiles import cycloidal_outline, polar
 
 

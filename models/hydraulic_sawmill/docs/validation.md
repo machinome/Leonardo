@@ -2,7 +2,7 @@
 
 Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
 
-Validated 12 September 2026 in the LibreSolid Studio workspace. This replaces
+Validated 12 September 2026 in the Machinome Studio workspace. This replaces
 the simplified exhibit’s certificate, preserved at gallery commit `0936085`.
 The new cycle’s planning commit is `3ff37ba`. The implementation source
 commit is `d5f92fbc7542c4e234a84c7150a40ab8bd34c829`. Its CAD and test
@@ -13,9 +13,9 @@ This provenance update changes documentation only.
 
 ## Environment
 
-- solid-node checkout `6e41f2d`, metadata version 0.6.0, with the
+- machinome checkout `6e41f2d`, metadata version 0.6.0, with the
   post-release declarative node/motion API.
-- solid-node-viewer checkout `6fb082b`, metadata 0.1.0, viewer API 7.
+- machinome-viewer checkout `6fb082b`, metadata 0.1.0, viewer API 7.
   This local package is founded, not claimed to be publicly released.
 - CadQuery 2.7.0; molejo 0.2.0; Playwright 1.62.0; Python 3.12; Linux.
 - Exact OCCT comparisons for rigid pairs; rope comparisons use the flexible
@@ -70,10 +70,10 @@ holding torque or stable contact under load.
 Commands from the gallery root, using the workspace environment:
 
 ```sh
-solid test hydraulic_sawmill --faceted
-solid test hydraulic_sawmill --exact
-solid test hydraulic_sawmill --set kerf=2 --exact
-solid test hydraulic_sawmill --set kerf=5 --exact
+machinome test hydraulic_sawmill --faceted
+machinome test hydraulic_sawmill --exact
+machinome test hydraulic_sawmill --set kerf=2 --exact
+machinome test hydraulic_sawmill --set kerf=5 --exact
 python models/hydraulic_sawmill/scripts/readouts.py --check
 python scripts/gallery.py check
 ```
@@ -104,7 +104,7 @@ museum photographs. The source photographs are privately cached and not
 redistributed.
 
 ```sh
-solid export hydraulic_sawmill -o export/hydraulic_sawmill --fps 30 --frames 480
+machinome export hydraulic_sawmill -o export/hydraulic_sawmill --fps 30 --frames 480
 python models/hydraulic_sawmill/scripts/check-browser.py
 python scripts/check_browsers.py
 ```

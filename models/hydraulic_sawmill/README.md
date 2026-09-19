@@ -73,18 +73,18 @@ See the [source-by-source reconstruction record](docs/reconstruction.md),
 ## Reproduce the evidence
 
 Use the workspace’s **post-0.6 development API**, including declarative joints
-and relations, and viewer API 7. Published solid-node 0.6.0 alone is
+and relations, and viewer API 7. Published machinome 0.6.0 alone is
 insufficient. Viewer 0.1.0 is locally founded, not claimed to be released.
 Exact dependency revisions are recorded in the validation certificate.
 
 ```sh
-solid build hydraulic_sawmill
-solid test hydraulic_sawmill --faceted
-solid test hydraulic_sawmill --exact
-solid test hydraulic_sawmill --set kerf=2 --exact
-solid test hydraulic_sawmill --set kerf=5 --exact
+machinome build hydraulic_sawmill
+machinome test hydraulic_sawmill --faceted
+machinome test hydraulic_sawmill --exact
+machinome test hydraulic_sawmill --set kerf=2 --exact
+machinome test hydraulic_sawmill --set kerf=5 --exact
 python models/hydraulic_sawmill/scripts/readouts.py --check
-solid snapshot hydraulic_sawmill -o models/hydraulic_sawmill/docs/evidence/museum-isometric.png --autocenter --viewall --time 0.1875 --imgsize 1400x1000
+machinome snapshot hydraulic_sawmill -o models/hydraulic_sawmill/docs/evidence/museum-isometric.png --autocenter --viewall --time 0.1875 --imgsize 1400x1000
 python scripts/gallery.py check
 python scripts/gallery.py export hydraulic_sawmill
 python models/hydraulic_sawmill/scripts/check-browser.py

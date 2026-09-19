@@ -3,7 +3,7 @@
 # Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
 import math
 import numpy as np
-from solid_node.test import TestCase
+from machinome.test import TestCase
 from .checks import sampled_poses
 from .timing import TimingBench
 
