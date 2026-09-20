@@ -9,7 +9,7 @@ license = "AGPL-3.0-only"
 license-files = ["LICENSE", "NOTICE"]
 # These version floors do not describe the post-0.6 API requirement in README.
 # The public-site task must establish a reproducible public dependency set.
-dependencies = ["machinome[viewer]>=0.6", "cadquery>=2.7", "molejo>=0.2"]
+dependencies = ["machinome[viewer]>=0.6", "machinome-mechanics", "cadquery>=2.7", "molejo>=0.2"]
 
 [project.optional-dependencies]
 dev = ["playwright>=1.50"]

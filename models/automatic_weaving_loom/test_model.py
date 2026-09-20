@@ -1,9 +1,12 @@
 # Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
+import math
+
 import numpy as np
 from machinome.test import TestCase
 from .checks import sampled_poses, rigid_parts
 from machinome.simulation import ScenarioTest
 from .model import AutomaticWeavingLoom
+from .textile import BEAM_PITCH
 
 
 class AutomaticWeavingLoomTest(TestCase):
@@ -21,6 +24,21 @@ class AutomaticWeavingLoomTest(TestCase):
             hasattr(self.node, "timing"),
             "The one-tooth / six-tooth / twelve-tooth transmission is missing",
         )
+
+    def test_00_travelling_picks_follow_beam_pitch_circle(self):
+        for phase, run, seconds in (
+            (0, 0, 0),
+            (60, 0, 0),
+            (270, 0, 0),
+            (0, 1, 15),
+            (0, 1, 45),
+            (0, 1, 60),
+        ):
+            self.node.set_state(phase=phase, run=run, time=seconds)
+            turn = self.node.winding.front_lower.turn.value
+            expected = turn * BEAM_PITCH * math.pi / 180
+            for pick in (*self.node.cloth_picks_a, *self.node.cloth_picks_b):
+                self.assertAlmostEqual(pick.travel.value, expected, places=12)
 
     def test_01_weaving_outputs_have_physical_actuators(self):
         self.assertTrue(

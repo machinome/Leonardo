@@ -4,6 +4,7 @@ from math import pi
 
 import cadquery as cq
 from machinome.math import cos
+from machinome_mechanics import rolling_travel
 from machinome.node import AssemblyNode, CadQueryNode, FusionNode
 from machinome.parameters import Length
 from machinome.motion.joints import Prismatic, Revolute
@@ -168,7 +169,7 @@ class RackAndPinion(AssemblyNode):
     pinion = Pinion(module=module)
     carriage = LiftCarriage(module=module)
     crank_angle.drives(pinion.spin)
-    pinion.spin.drives(carriage.slide, ratio=10*module*pi/180)
+    pinion.spin.drives(carriage.slide, ratio=rolling_travel(1, 10*module.value))
 
     instructions = {
         "Bottom": Instruction({"phase": 0, "run": 0}, duration=0.6),

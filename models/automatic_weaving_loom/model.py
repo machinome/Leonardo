@@ -2,6 +2,7 @@
 
 # Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
 import math
+from machinome_mechanics import rolling_travel
 from machinome.node import AssemblyNode, CadQueryNode
 from machinome.parameters import Length
 from machinome.motion.ports import RotationalPort, Time
@@ -155,10 +156,10 @@ class AutomaticWeavingLoom(AssemblyNode):
         cloth_web.wrap, ratio=math.pi / 180, offset=-math.pi / 2
     )
     winding.front_lower.turn.drives(
-        cloth_picks_a.travel, ratio=BEAM_PITCH * math.pi / 180
+        cloth_picks_a.travel, ratio=rolling_travel(1, BEAM_PITCH)
     )
     winding.front_lower.turn.drives(
-        cloth_picks_b.travel, ratio=BEAM_PITCH * math.pi / 180
+        cloth_picks_b.travel, ratio=rolling_travel(1, BEAM_PITCH)
     )
     timing.input.turn.drives(head_drive.angle)
     head_drive.left.output.rise.drives(carrier.left.slide, offset=-65)
