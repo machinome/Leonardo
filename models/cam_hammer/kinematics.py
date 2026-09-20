@@ -1,24 +1,14 @@
 """Designed pitch envelope and periodic symbolic motion, all angles in degrees."""
 # Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
-from machinome.math import sin, cos, atan2, sqrt
-
-
-def clip01(value):
-    positive = (value + sqrt(value * value)) / 2
-    excess = positive - 1
-    return positive - (excess + sqrt(excess * excess)) / 2
-
-
-def cycle_angle(angle):
-    return 180 + atan2(sin(angle - 180), cos(angle - 180))
+from machinome.math import cos, sin, sqrt
+from machinome_mechanics import harmonic_cam_lift
 
 
 def lift_envelope(angle, amplitude, return_span=80):
     """Half-cosine rise then return, with a closed rest interval."""
-    theta = cycle_angle(angle)
-    up = clip01(theta / 240)
-    down = clip01((theta - 240) / return_span)
-    return amplitude * (cos(180 * down) - cos(180 * up)) / 2
+    return harmonic_cam_lift(
+        angle, amplitude, rise_span=240, return_span=return_span
+    )
 
 
 def pitch_point(angle, amplitude):
