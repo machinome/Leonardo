@@ -11,10 +11,12 @@ machinome_url = "https://machinome.readthedocs.io/"
 [models.hydraulic_sawmill]
 title = "Hydraulic sawmill"
 directory = "models/hydraulic_sawmill"
-frames = 8880
+frames = 43800
 fps = 30
 exhibit = "models/hydraulic_sawmill/index.html"
 browser_check = ["models/hydraulic_sawmill/scripts/check-browser.py", "--url", "{base_url}/models/hydraulic_sawmill/"]
+# Five views at both viewport sizes, dense rope spline and isolated-pawl proof.
+browser_timeout = 600
 
 [models.automatic_weaving_loom]
 title = "Automatic weaving loom"

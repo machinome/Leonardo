@@ -24,7 +24,44 @@ class QuietHandler(SimpleHTTPRequestHandler):
 
 
 def pixels(canvas):
-    return Image.open(BytesIO(canvas.screenshot())).convert('RGB')
+    result=Image.open(BytesIO(canvas.screenshot())).convert('RGB')
+    assert len(result.getcolors(result.width*result.height) or [])>30, 'The CAD canvas is blank'
+    return result
+
+
+def check_holding_pawl(page, pass_angle):
+    """Isolate the real exported part; changing labels cannot pass this check."""
+    page.evaluate("""async () => {
+      const target=document.createElement('div');
+      target.id='pawl-proof';
+      target.style.cssText='position:fixed;inset:0 auto auto 0;width:500px;height:500px;z-index:9999;background:white';
+      document.body.append(target);
+      window.pawlProof=await MachinomeViewer.mount(target,
+        '../../export/hydraulic_sawmill/manifest.json', {
+          animation:'external',driverControls:'none',autoplay:false,time:0,
+          view:{camera:[60,270,350],target:[60,58,335]},up:[0,0,1],fov:25
+        });
+      const walk=node => {
+        if (node.children.length) node.children.forEach(walk);
+        else pawlProof.setVisible(node.path,node.name==='Holding pawl');
+      };
+      walk(pawlProof.assembly());
+    }""")
+    canvas=page.locator('#pawl-proof canvas')
+    def at(angle):
+        page.evaluate('(t)=>pawlProof.setTime(t)',angle/pass_angle)
+        page.wait_for_timeout(30)
+        return pixels(canvas)
+    try:
+        for turn in (0,10,16,64,182,364):
+            seated=at(turn*360+180)
+            for phase in (183,184,270,359):
+                assert ImageChops.difference(seated,at(turn*360+phase)).getbbox() is None, (
+                    f'Exported holding pawl chatters on recovery {turn}, phase {phase}')
+        assert ImageChops.difference(at(0),at(90)).getbbox(), 'Holding pawl is frozen instead of following a tooth'
+    finally:
+        page.evaluate("pawlProof.dispose();document.getElementById('pawl-proof').remove();delete window.pawlProof")
+    print('PASS: actual holding-pawl pixels remain seated on recovery and move during indexing',flush=True)
 
 
 def check(url):
@@ -33,7 +70,8 @@ def check(url):
     manifest=json.loads((destination/'manifest.json').read_text())
     assert manifest['drivers']=={}
     assert manifest['instructions']=={}
-    assert manifest['animation']['loop']==296
+    readings=json.loads((ROOT/'models/hydraulic_sawmill/readouts.json').read_text())
+    assert manifest['animation']['loop']==readings['pass_seconds']==1460
     assert [n['name'] for n in manifest['root']['children']]==['Frame and guides','Water drive','Saw mechanism','Timber carriage','Feed mechanism']
     names=set()
     def assets(node):
@@ -43,7 +81,11 @@ def check(url):
         for child in node.get('children',[]):
             assets(child)
     assets(manifest['root'])
-    assert {'Saw-to-rocker tie','Feed rocker','Driving pawl','Holding pawl','Return pulley','Haul rope','Water channel','Water surface','Uncut wood at the kerf'}<=names
+    assert {'Saw-to-rocker tie','Feed rocker','Driving pawl','Holding pawl',
+            'Upper rope roller','Lower drive-rope pulley','Compound winding shaft',
+            'Ratchet and slender winding axle','Top-centred carriage rope',
+            'Fixed saw tower and shaft seats','Horizontal bed frame',
+            'Water channel','Water surface','Uncut wood at the kerf'}<=names
     errors,failures=[],[]
     with sync_playwright() as p:
         browser=p.chromium.launch(headless=True,args=['--enable-webgl','--use-gl=angle',
@@ -65,20 +107,27 @@ def check(url):
             expect(page.get_by_role('tree',name='Sawmill assembly').get_by_text('Timber carriage',exact=True)).to_be_visible()
             page.locator('.assembly-tree summary').click()
             def pose(phase):
-                page.locator('#timeline').fill(str(phase))
+                page.wait_for_function("document.body.dataset.ready==='true'")
+                expect(page.locator('#timeline')).to_be_enabled()
+                page.locator('#timeline').fill(f'{phase:g}')
                 page.locator('#timeline').dispatch_event('input')
                 page.wait_for_timeout(150)
             pose(0)
             start=pixels(canvas)
-            for phase,feed in ((180,'0.0'),(270,'2.0'),(360,'4.6'),(450,'4.6'),(1440,'18.4'),(4860,'59.7'),(13320,'170.0'),(26640,'340.1')):
+            for phase,feed in ((180,'0.3'),(270,'0.3'),(360,'0.3'),(450,'0.5'),
+                              (1440,f"{readings['turn_feed'][4]:.1f}"),
+                              (360*(readings['pass_turns']//2),f"{readings['turn_feed'][readings['pass_turns']//2]:.1f}"),
+                              (readings['pass_angle'],f"{readings['turn_feed'][-1]:.1f}")):
                 pose(phase)
                 assert feed in page.locator('#feed').inner_text(), (phase,page.locator('#feed').inner_text())
+                expect(page.locator('#stroke-label')).to_have_text(
+                    'CUT & PULL FEED' if phase%360<180 else 'RETURN · HOLD')
                 assert ImageChops.difference(start,pixels(canvas)).getbbox(), 'CAD did not move'
             pose(0)
             assert ImageChops.difference(start,pixels(canvas)).getbbox() is None, 'CAD pose return drifted'
-            pose(13320)
+            pose(readings['pass_angle']/2)
             page.screenshot(path=str(OUTPUT/f'{label}-whole.png'),full_page=True)
-            for name in ('drive','saw','feed'):
+            for name in ('drive','saw','feed','reduction'):
                 page.locator(f'.view-tabs [data-view="{name}"]').click()
                 page.wait_for_function(f"document.querySelector('.view-tabs [data-view={name}]').classList.contains('active')")
                 page.screenshot(path=str(OUTPUT/f'{label}-{name}.png'),full_page=True)
@@ -100,10 +149,12 @@ def check(url):
             assert page.evaluate('document.documentElement.scrollWidth<=innerWidth'), 'Horizontal overflow'
             print(f'PASS: {label} exhibit controls, geometry and layout',flush=True)
 
+        check_holding_pawl(page,readings['pass_angle'])
+
         source=page.request.get(page.locator('.source-link').evaluate('(a)=>a.href'))
         assert source.status==200
         with ZipFile(BytesIO(source.body())) as archive:
-            assert 'Leonardo/models/hydraulic_sawmill/contact.py' in archive.namelist(), 'Source ZIP is stale'
+            assert 'Leonardo/models/hydraulic_sawmill/rope_drive.py' in archive.namelist(), 'Source ZIP is stale'
         # Native export exposes only timeline transport and functional navigation.
         page.set_viewport_size({'width':1200,'height':950})
         page.goto(urljoin(url,'../../export/hydraulic_sawmill/?autoplay=0&sidebar=open'))
@@ -137,7 +188,7 @@ def check(url):
         assert not errors,errors
         assert not failures,failures
         browser.close()
-    print('PASS: real export assets, timeline-only controls, functional assembly tree, complete timber course, CAD pixel return, playback, all 4 views, reveal, source ZIP, readouts, desktop/narrow; no console or network failures.')
+    print('PASS: real export assets, timeline-only controls, functional assembly tree, complete timber course, CAD pixel return, playback, all 5 views, reveal, source ZIP, readouts, desktop/narrow; no console or network failures.')
 
 
 if __name__=='__main__':

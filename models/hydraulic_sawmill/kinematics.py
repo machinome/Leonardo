@@ -2,12 +2,12 @@
 # Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
 from math import pi
 from machinome.math import acos, sin, cos, sqrt, atan2
-from .layout import (CRANK, ROD, AXLE_Z, FEED, TEETH, DRUM_RADIUS, PITCH,
+from .layout import (CRANK, ROD, AXLE_Z, TEETH, PITCH,
                      ROCKER_X, ROCKER_Z, ROCKER_LONG, TIE_LENGTH,
                      ROCKER_BRANCH, PAWL_LENGTH, CONTACT_RADIUS,
-                     RATCHET_X, RATCHET_Z, PULLEY_X, ROPE_Y, CLEAT_Y,
-                     INITIAL_WRAP, WIND_PITCH, ROPE_PITCH_RADIUS)
-from .contact import tooth_profile, drive_profile, hold_profile, transformed, lift_for, table_value
+                     RATCHET_X, RATCHET_Z, HOLD_RADIUS)
+from .rope_drive import carriage_advance
+from .contact import tooth_profile, drive_profile, hold_profile, transformed, lift_for, table_value, follow_lift
 
 def clip01(x):
     positive = (x + sqrt(x*x))/2
@@ -49,30 +49,24 @@ def _short_arm():
     return (lo+hi)/2
 
 SHORT_ARM = _short_arm()
-START_CONTACT = contact_angle(rocker_angle(ROD-CRANK),SHORT_ARM)
-HOLD_CONTACT = START_CONTACT+10*PITCH
-HOLD_X, HOLD_Z = RATCHET_X+78.0, RATCHET_Z+55.0
-HOLD_LENGTH = sqrt((RATCHET_X+CONTACT_RADIUS*sin(HOLD_CONTACT)-HOLD_X)**2
-                  +(RATCHET_Z+CONTACT_RADIUS*cos(HOLD_CONTACT)-HOLD_Z)**2)
+START_CONTACT = contact_angle(rocker_angle(ROD+CRANK),SHORT_ARM)
+# Seat after the departing tooth has cleared, before the wheel's dwell.
+# The previous +1 degree reach left the pawl on the crest at the seam.
+HOLD_CONTACT = START_CONTACT+10*PITCH+3.0
+HOLD_X, HOLD_Z = RATCHET_X+78.0, RATCHET_Z+10.0
+HOLD_LENGTH = sqrt((RATCHET_X+HOLD_RADIUS*sin(HOLD_CONTACT)-HOLD_X)**2
+                  +(RATCHET_Z+HOLD_RADIUS*cos(HOLD_CONTACT)-HOLD_Z)**2)
 
 def ratchet_angle(angle):
     local = cycle_angle(angle)
     completed = (angle-local)/360
-    # Freeze the linkage input at bottom during cutting; follow actual
-    # circle closure on return. This is not an independent feed animation.
-    active = 180+180*clip01((local-180)/180)
-    return completed*PITCH+contact_angle(rocker_angle(saw_height(active)),SHORT_ARM)-START_CONTACT
-
-def carriage_advance(spin):
-    """Constant rope length, including the winding helix and fleet angle."""
-    span = PULLEY_X-RATCHET_X
-    y0 = CLEAT_Y+WIND_PITCH*INITIAL_WRAP/360-ROPE_Y
-    y = y0+WIND_PITCH*spin/360
-    effective_radius = sqrt(ROPE_PITCH_RADIUS**2+(WIND_PITCH/(2*pi))**2)
-    return spin*pi/180*effective_radius+sqrt(span**2+y**2)-sqrt(span**2+y0**2)
+    # The descending short arm PULLS its hook away from the wheel.
+    # The wheel holds at bottom while the hook rises over the next tooth.
+    active = 180*clip01(local/180)
+    return -completed*PITCH+contact_angle(rocker_angle(saw_height(active)),SHORT_ARM)-START_CONTACT
 
 def feed_steps(angle):
-    return ratchet_angle(angle)/PITCH
+    return -ratchet_angle(angle)/PITCH
 
 def _drive_at_radius(angle,radius):
     rocker = rocker_angle(saw_height(angle))
@@ -82,7 +76,7 @@ def _drive_at_radius(angle,radius):
     return (atan2(RATCHET_X+radius*sin(g)-dx,RATCHET_Z+radius*cos(g)-dz),dx,dz)
 
 def pawl_pose(angle):
-    fraction=clip01(cycle_angle(angle)/180)
+    fraction=clip01((cycle_angle(angle)-180)/180)
     radius=CONTACT_RADIUS+table_value(fraction,DRIVE_LIFTS,clip01)
     return _drive_at_radius(angle,radius)
 
@@ -99,17 +93,34 @@ def _hold_at_radius(radius):
     return atan2(RATCHET_X+radius*sin(g)-HOLD_X,RATCHET_Z+radius*cos(g)-HOLD_Z)
 
 def holding_angle(spin):
-    fraction=cycle_angle(spin*TEETH)/360
-    return _hold_at_radius(CONTACT_RADIUS+table_value(fraction,HOLD_LIFTS,clip01))
+    fraction=cycle_angle(-spin*TEETH)/360
+    return _hold_at_radius(HOLD_RADIUS+table_value(fraction,HOLD_LIFTS,clip01))
 
 # Construction-time contact sampling. Circle closure is retained at every
 # intermediate viewer pose; only contact/gravity seating is approximated.
 _teeth=tooth_profile(START_CONTACT)
 DRIVE_LIFTS=tuple(lift_for(
-    lambda radius,a=i*180/180: (
+    lambda radius,a=180+i: (
         lambda turn,x,z:(turn,x-RATCHET_X,z-RATCHET_Z))(*_drive_at_radius(a,radius)),
-    drive_profile(),_teeth,CONTACT_RADIUS) for i in range(181))
-HOLD_LIFTS=tuple(lift_for(
-    lambda radius:(_hold_at_radius(radius),HOLD_X-RATCHET_X,HOLD_Z-RATCHET_Z),
-    hold_profile(HOLD_LENGTH),transformed(_teeth,i*PITCH/180),CONTACT_RADIUS)
-    for i in range(181))
+    drive_profile(),transformed(_teeth,-PITCH),CONTACT_RADIUS) for i in range(181))
+# Clearance-envelope interpolation must cover both sides of a tooth-tip
+# transition: anticipate its rise and retain its lift before lowering.
+# This is prescribed seating, not a gravity/contact-force simulation.
+def _holding_envelope():
+    values=[]
+    retained=0.0
+    # Warm through a tooth first: a fresh low landing is not necessarily
+    # reachable from the preceding tooth. Keep the steady periodic branch.
+    for i in range(360):
+        retained=follow_lift(
+            lambda radius:(_hold_at_radius(radius),HOLD_X-RATCHET_X,HOLD_Z-RATCHET_Z),
+            hold_profile(HOLD_LENGTH),transformed(_teeth,-i*PITCH/180),HOLD_RADIUS,retained)
+        if i>=180:
+            values.append(retained)
+    envelope=tuple(max(values[(i-1)%180],values[i],values[(i+1)%180]) for i in range(180))
+    # Identical seam values make roundoff either side of a completed tooth
+    # harmless in Python and the exported browser relation, without an
+    # epsilon phase shift or a second animation law.
+    return envelope+(envelope[0],)
+
+HOLD_LIFTS=_holding_envelope()

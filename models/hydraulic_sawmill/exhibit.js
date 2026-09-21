@@ -3,9 +3,10 @@
 const $ = id => document.getElementById(id);
 const views = {
   whole: {camera: [940,-1260,940], target: [0,-20,290]},
-  drive: {camera: [330,-630,300], target: [0,-135,145]},
+  drive: {camera: [430,-550,305], target: [0,-65,160]},
   saw: {camera: [335,-470,505], target: [0,0,445]},
-  feed: {camera: [180,720,480], target: [-105,115,337]},
+  feed: {camera: [280,740,470], target: [115,45,305]},
+  reduction: {camera: [-650,530,465], target: [-320,35,250]},
 };
 let viewer, navigator, phase = 0, playing = !matchMedia('(prefers-reduced-motion: reduce)').matches;
 let revealed = false, mounting = false, previousTime, measurements, resetUntil = 0;
@@ -38,14 +39,16 @@ function pose() {
   const a = phase % 360;
   const [drop,increment] = reading(a);
   const turn = Math.min(measurements.pass_turns-1, Math.floor(phase/360));
-  const startFeed = measurements.turn_feed[turn];
-  const turnFeed = measurements.turn_feed[turn+1]-startFeed;
+  const position=(turn+increment/measurements.feed_per_turn)*measurements.feed_subdivisions;
+  const index=Math.min(measurements.feed_samples.length-2,Math.floor(position));
   const feed = phase >= measurements.pass_angle ? measurements.turn_feed.at(-1)
-    : startFeed + turnFeed*increment/measurements.feed_per_turn;
+    : measurements.feed_samples[index]+(measurements.feed_samples[index+1]-measurements.feed_samples[index])*(position-index);
   $('angle').textContent = `${Math.round(a)}°`;
   $('feed').innerHTML = `${feed.toFixed(1)} <i>mm</i>`;
   $('cycle').textContent = `${String(Math.min(measurements.pass_turns,Math.floor(phase/360)+1)).padStart(2,'0')} / ${measurements.pass_turns}`;
-  $('stroke-label').textContent = a < 180 ? 'CUTTING STROKE' : 'RETURN & FEED';
+  const seconds=Math.floor(phase*measurements.pass_seconds/measurements.pass_angle);
+  $('elapsed').textContent = `${Math.floor(seconds/60)}:${String(seconds%60).padStart(2,'0')} elapsed`;
+  $('stroke-label').textContent = a < 180 ? 'CUT & PULL FEED' : 'RETURN · HOLD';
   $('trace-dot').setAttribute('cx', a*280/360);
   $('trace-dot').setAttribute('cy', 14+drop*56/48);
   status();
@@ -60,6 +63,7 @@ function applyReveal() {
 async function mount(name='whole') {
   if (mounting) return;
   mounting = true;
+  document.body.dataset.ready = 'false';
   controls.forEach(c => c.disabled = true);
   try {
     if (!measurements) {
@@ -67,7 +71,7 @@ async function mount(name='whole') {
       if (!response.ok) throw new Error('CAD measurement table unavailable');
       measurements = await response.json();
       $('timeline').max = measurements.pass_angle;
-      document.querySelector('.transport-note').textContent = `${measurements.pass_turns} turns · ${measurements.pass_seconds} seconds`;
+      document.querySelector('.transport-note').textContent = `${measurements.pass_turns} turns · ${Math.floor(measurements.pass_seconds/60)}m ${measurements.pass_seconds%60}s`;
       const curve = Array.from({length:121}, (_,i) => `${i?'L':'M'}${i*280/120},${14+reading(i*3)[0]*56/48}`).join(' ');
       $('stroke-curve').setAttribute('d', curve);
     }
@@ -105,7 +109,17 @@ $('timeline').addEventListener('input', e => {setPlaying(false);phase=Number(e.t
 $('reveal').addEventListener('click', () => {revealed=!revealed;applyReveal()});
 document.querySelectorAll('[data-view]').forEach(button => button.addEventListener('click', () => mount(button.dataset.view)));
 let resizeTimer;
-window.addEventListener('resize', () => {clearTimeout(resizeTimer);resizeTimer=setTimeout(()=>mount(currentView),250)});
+let lastStageWidth=stage.clientWidth;
+window.addEventListener('resize', () => {
+  // The viewer handles canvas height itself. Only a changed stage width
+  // changes our responsive camera distance; full-page captures must not
+  // dispose the model just because the viewport height changed.
+  const width=stage.clientWidth;
+  if (width===lastStageWidth) return;
+  lastStageWidth=width;
+  clearTimeout(resizeTimer);
+  resizeTimer=setTimeout(()=>mount(currentView),250);
+});
 document.addEventListener('keydown', e => {
   if (e.code==='Space' && e.target===document.body) {e.preventDefault();setPlaying(!playing)}
 });

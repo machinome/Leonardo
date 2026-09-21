@@ -10,17 +10,20 @@ from .layout import TEETH, RATCHET_ROOT, RATCHET_TIP, PAWL_LENGTH
 
 
 def tooth_profile(start):
-    return [(r*math.sin(math.radians(start+2.2+i*360/TEETH+a)),
-             r*math.cos(math.radians(start+2.2+i*360/TEETH+a)))
+    return [(r*math.sin(math.radians(start-360/TEETH-1.0+i*360/TEETH+a)),
+             r*math.cos(math.radians(start-360/TEETH-1.0+i*360/TEETH+a)))
             for i in range(TEETH)
-            for a,r in ((0,RATCHET_ROOT),(0.7,RATCHET_TIP),
-                        (360/TEETH-0.7,RATCHET_ROOT))]
+            for a,r in ((0,RATCHET_ROOT),(360/TEETH-0.7,RATCHET_TIP),
+                        (360/TEETH-0.05,RATCHET_ROOT))]
 
 
 def drive_profile():
     length=PAWL_LENGTH
-    return [(-1.5,0),(1.5,0),(1.5,length-20),(-4,length-10),
-            (0,length),(-1,length+0.4),(-7,length-10),(-1.5,length-20)]
+    # A returning hook: outside shank, crown and downward-facing toe.
+    # The underside of the toe (z=length) carries the pulling reaction.
+    return [(-1.5,0),(1.5,0),(1.5,length-25),(-5,length-12),
+            (-5,length+1),(-1,length+1),(-1,length),(3,length),
+            (3,length+2),(-7,length+2),(-7,length-12),(-1.5,length-25)]
 
 
 def hold_profile(length):
@@ -100,3 +103,32 @@ def table_value(fraction,values,clip):
         terms=[terms[i]+terms[i+1] if i+1<len(terms) else terms[i]
                for i in range(0,len(terms),2)]
     return values[0]+(terms[0] if terms else 0)
+
+
+def follow_lift(pose,profile,teeth,base,previous):
+    """Follow the current contact branch; never teleport through a tooth.
+
+    A free low landing may be separated from the current pose by solid
+    tooth material. Descend only through the connected clear interval.
+    """
+    def fits(lift):
+        turn,x,z=pose(base+lift)
+        return clear(transformed(profile,turn,x,z),teeth)
+    high=previous
+    while not fits(high):
+        high+=0.1
+        if high>9:
+            raise ValueError('Holding pawl cannot follow the passing tooth')
+    while high>0:
+        low=max(0,high-0.05)
+        if fits(low):
+            high=low
+            continue
+        for _ in range(12):
+            mid=(low+high)/2
+            if fits(mid):
+                high=mid
+            else:
+                low=mid
+        break
+    return high

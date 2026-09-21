@@ -1,8 +1,33 @@
 # Selected reconstruction evidence
 
+## Corrected transmission — 21 September 2026
+
+- [Isometric](transmission-isometric.png): reversed teeth and carriage,
+  centered haul and gear across the timber from the wheel.
+- [Iron layers](transmission-layers.png): pulling hook, single frame rail,
+  central crank/rod and adjacent feed take-off at the first bottom dead center.
+- [Lower drive](transmission-drive.png): round axle, second wooden bearing,
+  square crank connection and centered rod.
+- [Two-rope reduction](transmission-reduction.png): lower pulley in the saw
+  tower, large and thin winding sections inside the bed, upper roller and top haul.
+- [Radial input winding](transmission-winding.png): end-of-pass coil close to
+  the gear, built over its previous turns without traversing into the rocker.
+
+These are original OpenSCAD CAD renders, not altered museum photographs.
+The [new validation record](../transmission-validation.md) supersedes the
+earlier certificates for drive placement and feed timing.
+
+```sh
+machinome snapshot hydraulic_sawmill -o models/hydraulic_sawmill/docs/evidence/transmission-isometric.png --camera 1241,-1660,1145,0,-20,320 --projection ortho --imgsize 1400x1000 --time 0
+machinome snapshot hydraulic_sawmill -o models/hydraulic_sawmill/docs/evidence/transmission-drive.png --camera 530,-550,320,0,-55,175 --projection ortho --imgsize 1400x1000 --time 0.000684931506849
+machinome snapshot hydraulic_sawmill -o models/hydraulic_sawmill/docs/evidence/transmission-layers.png --camera 530,750,400,80,0,240 --projection ortho --imgsize 1400x1000 --time 0.001369863013699
+machinome snapshot hydraulic_sawmill -o models/hydraulic_sawmill/docs/evidence/transmission-reduction.png --camera=-650,530,465,-200,30,235 --projection ortho --imgsize 1400x1000 --time 0.5
+machinome snapshot hydraulic_sawmill -o models/hydraulic_sawmill/docs/evidence/transmission-winding.png --camera 400,-340,415,105,50,300 --projection ortho --imgsize 1400x1000 --time 1
+```
+
 ## Full timber pass — 19 September 2026
 
-Inspected original CAD snapshots for the current model:
+Inspected original CAD snapshots for the preceding full-pass model:
 
 - [Start](full-pass-start.png): the billet is entirely upstream of the teeth.
 - [Mid-cut](cutting-mid-pass.png): the split is open behind the teeth and filled
@@ -19,7 +44,7 @@ machinome snapshot hydraulic_sawmill -o models/hydraulic_sawmill/docs/evidence/f
 ## Earlier reconstruction evidence
 
 The images and commands below document the former four-turn model. Its phase
-fractions are historical; the current timeline spans 74 turns.
+fractions are historical; the current timeline spans 365 turns.
 
 Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
 
