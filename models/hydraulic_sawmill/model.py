@@ -1,15 +1,16 @@
 """MUST IGB-37 hydraulic saw: a source-led, connected reconstruction."""
 # Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
 from math import pi
-from machinome.node import AssemblyNode, FusionNode
+from machinome.node import AssemblyNode
 from machinome.parameters import Length, Angle
 from machinome.motion.joints import Prismatic, Revolute
 from machinome.motion.ports import RotationalPort, Time
-from .parts import (Foundation, OakStructure, SawTowerWood, ShaftBearing, WaterChannel, WaterSurface, Wheel,
+from .frame import Frame
+from .parts import (WaterChannel, WaterSurface, Wheel,
                     Crankshaft, Crank, CrankRetainer, ConnectingRod, SashWood, SawBlade, BladeClamp,
                     TensionNut, SashPin, CarriageBed, CarriageWheel, CarriageAxle,
                     LogHalf, EndGrain, RatchetDrum, Rocker, FeedTie, DrivingPawl,
-                    HoldingPawl, FeedBearings, FixedPins, UpperRoller,
+                    HoldingPawl, FixedPins, UpperRoller,
                     ReductionShaft, UpperPin, DriveIdler, IdlerPin, DrumTie,
                     HaulRope, HaulSpan, DriveRope, WindingRope, RadialWindingRope,
                     UncutTimber, CarriageAnchor)
@@ -33,26 +34,6 @@ def uncut_profile(advance):
     remaining=TIMBER_LENGTH*clip01((-10.2-CARRIAGE_START+TIMBER_LENGTH/2-advance)/TIMBER_LENGTH)
     half_height=28*clip01(remaining/0.1)
     return remaining,half_height,-half_height
-
-class TimberBed(FusionNode):
-    color='#A87944'
-    table=OakStructure()
-    feed_supports=FeedBearings()
-    def render(self):
-        self.feed_supports.rotate(180,[0,0,1]).translate([0,FEED_OFFSET_Y,0])
-
-class FixedSawTower(FusionNode):
-    color='#A87944'
-    wood=SawTowerWood()
-    outer_bearing=ShaftBearing(foot=18,name='Wheel-side wooden bearing')
-    inner_bearing=ShaftBearing(name='Inner wooden bearing')
-    def render(self):
-        self.outer_bearing.translate([0,-207,0])
-        self.inner_bearing.translate([0,BEARING_Y,0])
-
-class TimberStand(AssemblyNode):
-    bed=TimberBed(name='Horizontal bed frame')
-    saw_tower=FixedSawTower(name='Fixed saw tower and shaft seats')
 
 class BladeAttachments(AssemblyNode):
     lower=BladeClamp()
@@ -103,10 +84,6 @@ class TimberCarriage(AssemblyNode):
     running_gear=RunningGear(name='Rollers and axles')
     feed.drives(running_gear.outer_wheels.spin,ratio=180/(12*pi))
     feed.drives(running_gear.inner_wheels.spin,ratio=180/(12*pi))
-
-class Frame(AssemblyNode):
-    foundation=Foundation(name='Foundation')
-    timber_structure=TimberStand(name='Fixed timber structure')
 
 class WaterDrive(AssemblyNode):
     channel=WaterChannel(name='Water channel')

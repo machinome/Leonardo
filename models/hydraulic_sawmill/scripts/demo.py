@@ -23,6 +23,8 @@ def main():
             raise SystemExit('Activate the Python environment containing machinome and its viewer extra.')
         subprocess.run([sys.executable, str(ROOT / 'scripts/gallery.py'),
                         'export', 'hydraulic_sawmill'], cwd=ROOT, check=True)
+        subprocess.run([sys.executable, str(Path(__file__).with_name('frame-study.py'))],
+                       cwd=ROOT, check=True)
         print('Browser export and committed source: export/hydraulic_sawmill/', flush=True)
     if args.build_only:
         return

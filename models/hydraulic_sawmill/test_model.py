@@ -20,6 +20,39 @@ class BearingJournalProbe(CadQueryNode):
 class LeonardoHydraulicSawmillTest(TestCase):
     node = LeonardoHydraulicSawmill
 
+    @staticmethod
+    def fixture_parts(fixture):
+        if fixture.rigid:
+            yield fixture
+        else:
+            for child in fixture.children:
+                yield from LeonardoHydraulicSawmillTest.fixture_parts(child)
+
+    def assertFixtureFree(self, moving, amount, fixture, **kwargs):
+        # The fixture is now actual parts, with no fused fixture STL.
+        for part in self.fixture_parts(fixture):
+            self.assertFreeWithin(moving, amount, part, **kwargs)
+
+    def fixture_mesh(self, fixture):
+        return trimesh.util.concatenate([part.mesh for part in self.fixture_parts(fixture)])
+
+    def assertFixtureBlocked(self, moving, amount, fixture, **kwargs):
+        # Preserve whole-fixture semantics: each direction must meet at least
+        # one real part; opposed stops need not be the same member.
+        directions = kwargs.pop('directions', 'both')
+        for sign in ((1,) if directions == 'forward' else (1, -1)):
+            options = dict(kwargs, directions='forward')
+            key = 'along' if 'along' in options else 'axis'
+            options[key] = tuple(sign*v for v in options.get(key, (0,0,1)))
+            for part in self.fixture_parts(fixture):
+                try:
+                    self.assertBlockedBeyond(moving, amount, part, **options)
+                except AssertionError:
+                    continue
+                break
+            else:
+                self.fail(f'{moving.name} is not blocked by {fixture.name}, direction {sign}')
+
     def test_photographed_handedness(self):
         self.node.set_keyframe(0)
         blade=self.node.saw.sash.blade.mesh.bounds
@@ -68,13 +101,13 @@ class LeonardoHydraulicSawmillTest(TestCase):
             self.assertLess(free[0,0],self.node.carriage.bed.mesh.bounds[0,0]+20)
 
     def test_frame_has_no_duplicate_rail_above_the_gear(self):
-        wood=self.node.frame.timber_structure.bed.mesh
+        wood=self.fixture_mesh(self.node.frame.timber_structure.bed)
         hits,_,_=wood.ray.intersects_location([[150,115,400]],[[0,0,-1]])
         self.assertGreater(len(hits),0)
         self.assertAlmostEqual(hits[:,2].max(),339,delta=0.01)
 
     def test_rectangular_frame_has_no_pulley_outrigger_or_rope_notch(self):
-        wood=self.node.frame.timber_structure.bed.mesh
+        wood=self.fixture_mesh(self.node.frame.timber_structure.bed)
         self.assertAlmostEqual(wood.bounds[0,0],-wood.bounds[1,0],delta=0.01,
                                msg='The end pulley must not require a wooden outrigger')
         for x in (-335,335):
@@ -145,7 +178,7 @@ class LeonardoHydraulicSawmillTest(TestCase):
                          'Bed and fixed saw tower must not be one fused display solid')
 
     def test_running_rails_are_continuous_at_the_saw_tower(self):
-        bed=self.node.frame.timber_structure.bed.mesh
+        bed=self.fixture_mesh(self.node.frame.timber_structure.bed)
         for y in (-42,42):
             hits,_,_=bed.ray.intersects_location([[0,y,350]],[[0,0,-1]])
             self.assertGreater(len(hits),0,'No unsupported gap in a running rail')
@@ -169,12 +202,12 @@ class LeonardoHydraulicSawmillTest(TestCase):
             for shaft,fixture in ((self.node.feed.feed_drum,wood),
                                   (self.node.feed.reduction_shaft,wood),
                                   (self.node.feed.idler_pin,tower)):
-                self.assertFreeWithin(shaft,0.3,fixture,along=(1,0,0))
-                self.assertBlockedBeyond(shaft,1.3,fixture,along=(1,0,0))
-            self.assertFreeWithin(self.node.feed.reduction_shaft,2,wood,along=(0,1,0))
-            self.assertBlockedBeyond(self.node.feed.reduction_shaft,3.2,wood,along=(0,1,0))
-            self.assertFreeWithin(self.node.feed.feed_drum,0.2,wood,along=(0,1,0))
-            self.assertBlockedBeyond(self.node.feed.feed_drum,1,wood,along=(0,1,0))
+                self.assertFixtureFree(shaft,0.3,fixture,along=(1,0,0))
+                self.assertFixtureBlocked(shaft,1.3,fixture,along=(1,0,0))
+            self.assertFixtureFree(self.node.feed.reduction_shaft,2,wood,along=(0,1,0))
+            self.assertFixtureBlocked(self.node.feed.reduction_shaft,3.2,wood,along=(0,1,0))
+            self.assertFixtureFree(self.node.feed.feed_drum,0.2,wood,along=(0,1,0))
+            self.assertFixtureBlocked(self.node.feed.feed_drum,1,wood,along=(0,1,0))
             for direction in ((1,0,0),(0,1,0)):
                 self.assertFreeWithin(self.node.feed.drive_idler,0.2,self.node.feed.idler_pin,along=direction)
                 self.assertBlockedBeyond(self.node.feed.drive_idler,1.3,self.node.feed.idler_pin,along=direction)
@@ -192,13 +225,13 @@ class LeonardoHydraulicSawmillTest(TestCase):
             self.node.set_keyframe(phase/90)
             shaft=self.node.water_drive.crankshaft
             wood=self.node.frame.timber_structure.saw_tower
-            self.assertFreeWithin(shaft,0.3,wood,along=(1,0,0))
-            self.assertBlockedBeyond(shaft,1.3,wood,along=(1,0,0))
-            self.assertBlockedBeyond(shaft,1.3,wood,along=(0,0,1))
+            self.assertFixtureFree(shaft,0.3,wood,along=(1,0,0))
+            self.assertFixtureBlocked(shaft,1.3,wood,along=(1,0,0))
+            self.assertFixtureBlocked(shaft,1.3,wood,along=(0,0,1))
             for probe in probes:
-                self.assertFreeWithin(probe,0.3,wood,along=(1,0,0))
-                self.assertBlockedBeyond(probe,1.3,wood,along=(1,0,0))
-                self.assertBlockedBeyond(probe,1.3,wood,along=(0,0,1))
+                self.assertFixtureFree(probe,0.3,wood,along=(1,0,0))
+                self.assertFixtureBlocked(probe,1.3,wood,along=(1,0,0))
+                self.assertFixtureBlocked(probe,1.3,wood,along=(0,0,1))
 
     def test_driving_hook_transmits_a_pull(self):
         pawl=self.node.feed.pawl
@@ -389,7 +422,7 @@ class LeonardoHydraulicSawmillTest(TestCase):
         self.assertLess(below[:,2].max(),28)
         self.assertLess(water[:,2].max(),120)
         self.assertLess(self.node.water_drive.channel.mesh.bounds[1,2],150)
-        self.assertAlmostEqual(self.node.frame.timber_structure.saw_tower.mesh.bounds[1,2],645,delta=0.01)
+        self.assertAlmostEqual(self.fixture_mesh(self.node.frame.timber_structure.saw_tower).bounds[1,2],645,delta=0.01)
         first=self.node.water_drive.waterwheel.mesh.vertices.copy()
         low=int(np.argmin(first[:,2]))
         self.node.set_keyframe((1) / 90)
@@ -475,8 +508,7 @@ class LeonardoHydraulicSawmillTest(TestCase):
                 initial=total
             np.testing.assert_allclose(total,initial,atol=0.001)
             for rope in (free,lower,drive,*windings):
-                for rigid in (self.node.frame.timber_structure.bed,
-                              self.node.frame.timber_structure.saw_tower,self.node.feed.upper_roller,
+                for rigid in (*self.fixture_parts(self.node.frame.timber_structure),self.node.feed.upper_roller,
                               self.node.feed.feed_drum,self.node.feed.reduction_shaft,
                               self.node.feed.drive_idler,self.node.carriage.bed,
                               self.node.saw.sash.frame,self.node.saw.sash.blade):
@@ -493,7 +525,7 @@ class LeonardoHydraulicSawmillTest(TestCase):
         self.assertFreeWithin(self.node.water_drive.waterwheel,0.3,self.node.water_drive.crankshaft,along=(0,1,0))
         self.assertBlockedBeyond(self.node.water_drive.waterwheel,2,self.node.water_drive.crankshaft,along=(0,1,0))
         for wheel in (*self.node.carriage.running_gear.outer_wheels,*self.node.carriage.running_gear.inner_wheels):
-            self.assertFreeWithin(wheel,0.2,self.node.frame.timber_structure.bed,along=(0,1,0))
+            self.assertFixtureFree(wheel,0.2,self.node.frame.timber_structure.bed,along=(0,1,0))
         self.assertFreeWithin(self.node.feed.upper_roller,0.2,self.node.feed.upper_pin,along=(1,0,0))
         self.assertBlockedBeyond(self.node.feed.upper_roller,1.2,self.node.feed.upper_pin,along=(1,0,0))
 
@@ -511,8 +543,8 @@ class LeonardoHydraulicSawmillTest(TestCase):
 
     @testing_steps(9, end=4)
     def test_sash_stays_in_guide_slots(self):
-        self.assertFreeWithin(self.node.saw.sash.frame, 0.3, self.node.frame.timber_structure.saw_tower, along=(1, 0, 0))
-        self.assertBlockedBeyond(self.node.saw.sash.frame, 1.3, self.node.frame.timber_structure.saw_tower, along=(1, 0, 0))
+        self.assertFixtureFree(self.node.saw.sash.frame, 0.3, self.node.frame.timber_structure.saw_tower, along=(1, 0, 0))
+        self.assertFixtureBlocked(self.node.saw.sash.frame, 1.3, self.node.frame.timber_structure.saw_tower, along=(1, 0, 0))
 
     def test_waterwheel_is_keyed_to_shaft(self):
         self.assertFreeWithin(self.node.water_drive.waterwheel, 1, self.node.water_drive.crankshaft, axis=(0, 1, 0))
@@ -547,7 +579,7 @@ class LeonardoHydraulicSawmillTest(TestCase):
                 self.assertLess(wheel.mesh.bounds[1,0],380)
                 travel=171-self.node.carriage.bed.mesh.bounds[:,0].mean()
                 theta=travel/12
-                self.assertBlockedBeyond(wheel,0.5,self.node.frame.timber_structure.bed,
+                self.assertFixtureBlocked(wheel,0.5,self.node.frame.timber_structure.bed,
                                          along=(math.sin(theta),0,-math.cos(theta)),
                                          directions='forward')
             self.assertNotIntersecting(self.node.saw.sash.blade,self.node.carriage.bed)

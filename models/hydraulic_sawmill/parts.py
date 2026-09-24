@@ -55,58 +55,6 @@ class Foundation(CadQueryNode):
     def render(self):
         return box(875,505,18,(0,-30,9)).edges('|Z').chamfer(4)
 
-class OakStructure(CadQueryNode):
-    color='#A87944'
-    def render(self):
-        shape=box(720,18,20,(0,-99,72))
-        for y in (-99,115):
-            shape=shape.union(box(720,18,20,(0,y,72)))
-            shape=shape.union(box(720,18,18,(0,-115 if y<0 else 115,330)))
-            for x in (-335,335):
-                shape=shape.union(box(22,22,320,(x,y,178)))
-                if y<0:
-                    shape=shape.union(box(22,38,22,(x,-107,327)))
-        for x in (-335,335):
-            shape=shape.union(box(22,235,18,(x,8,72)))
-        for x in (-335,335):
-            member=box(22,252,16,(x,0,330))
-            shape=shape.union(member)
-        for y in (-42,42):
-            shape=shape.union(box(760,12,10,(0,y,340)))
-        # Under-table shaft and rocker pivot bores.
-        shape=shape.cut(cylinder_y(5.6,260,(-RATCHET_X,0,330)))
-        for x,z in ((235,330),(-HOLD_X,HOLD_Z)):
-            shape=shape.cut(cylinder_y(3.6,120,(x,70,z)))
-        # Photographed end transmission: journals in existing timber only.
-        shape=shape.cut(cylinder_y(6.6,260,(-REDUCER_X,0,REDUCER_Z)))
-        shape=shape.cut(cylinder_y(3.6,110,(-UPPER_X,0,UPPER_Z)))
-        return shape
-
-class SawTowerWood(CadQueryNode):
-    """Fixed inner vertical frame, distinct from both bed and moving sash."""
-    color='#A87944'
-    def render(self):
-        # These are the existing members, separated at the bed joints.
-        shape=box(22,196,18,(0,8,72))
-        shape=shape.union(box(24,330,1.8,(0,-42,18.9)))
-        for y in (-78,78):
-            post=box(26,20,627,(0,y,331.5))
-            post=post.cut(box(17.2,12.4,405,(0,66*(1 if y>0 else -1),416.5)))
-            post=post.cut(box(17.2,24,66,(0,y,267)))
-            shape=shape.union(post)
-        shape=shape.union(box(26,176,16,(0,0,637)))
-        shape=shape.cut(cylinder_y(9,28,(0,-78,120)))
-        return shape.cut(cylinder_y(4.8,26,(-IDLER_X,78,IDLER_Z)))
-
-class ShaftBearing(CadQueryNode):
-    """Stepped timber cheek seated on a bearer; round bored iron journal."""
-    color='#A87944'
-    foot=Length(80)
-    def render(self):
-        shape=profile_xz([(-19,self.foot),(19,self.foot),(19,129),
-                          (9,129),(9,137),(-9,137),(-9,129),(-19,129)],14)
-        return shape.cut(cylinder_y(6.6,20,(0,0,120)))
-
 class WaterChannel(CadQueryNode):
     color='#BD9156'
     def render(self):
@@ -387,18 +335,6 @@ class HoldingPawl(CadQueryNode):
         from .contact import hold_profile
         shape=cylinder_y(5.5,4).union(profile_xz(hold_profile(HOLD_LENGTH),4))
         return shape.cut(cylinder_y(3.6,8))
-
-class FeedBearings(CadQueryNode):
-    color='#A87944'
-    def render(self):
-        shape=None
-        for x,z,end in ((-235,330,LINK_Y-6),(HOLD_X,HOLD_Z,PAWL_Y-6)):
-            # Local cheeks only: no duplicate timber stacked above the rail.
-            arm=box(20,end+72,24,(x,(end-72)/2,z))
-            shape=arm if shape is None else shape.union(arm)
-        for x,z in ((-235,330),(HOLD_X,HOLD_Z)):
-            shape=shape.cut(cylinder_y(3.6,140,(x,-25,z)))
-        return shape
 
 class FixedPins(CadQueryNode):
     color=IRON

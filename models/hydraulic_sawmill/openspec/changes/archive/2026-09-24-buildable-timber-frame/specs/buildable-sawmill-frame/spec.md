@@ -1,3 +1,8 @@
+## Purpose
+
+Demonstrate the sawmill's fixed frame as buildable, inspectable period-plausible
+carpentry while preserving its working mechanism and historical provenance.
+
 ## ADDED Requirements
 
 ### Requirement: Individually cut fixed timbers

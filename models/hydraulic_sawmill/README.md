@@ -1,9 +1,11 @@
 # Leonardo’s hydraulic sawmill
 
-The photographed transmission correction is implemented, including the
-pilot's holding-pawl chatter correction. All 42 checks pass on faceted geometry
-and exact solids at default and boundary kerfs; the real-browser pawl regression
-also passes. See the [current evidence and limits](docs/transmission-validation.md).
+The fixed frame is now **24 individually cut oak timbers and 34 wooden pins**,
+with matching mortises, tenons, housings and bored joints. A reversible
+carpentry study uses the same parts as the working machine; its cutting book
+supplies stock sizes, grain directions, machining coordinates, four views and
+exact STEP solids. See [construction and provenance](docs/carpentry.md) and
+the [current validation](docs/carpentry-validation.md).
 
 A connected historical reconstruction of the hydraulic saw in Milan’s Museo
 Nazionale Scienza e Tecnologia, IGB-37, researched against its photographs and
@@ -39,10 +41,21 @@ preferences start paused. The standard viewer at
 There are no machine input drivers or instruction buttons. Open “Explore the
 assembly” to navigate frame, water drive, saw, timber carriage and feed;
 the timber and rollers have their own subgroups. The fixed saw tower and
-horizontal bed frame are separately identifiable.
+horizontal bed frame expand into individual timbers, with separate pins.
+
+Select **Open the carpentry study** for the frame-only assembly at
+`/export/hydraulic_sawmill-frame/`. Its 0–11 slider and numbered stage buttons
+withdraw pins and separate the fitted members in erection order; reverse the
+sequence to assemble. The adjacent **Cutting book** link opens
+`/export/hydraulic_sawmill-frame/carpentry/`. These are frame study controls,
+not extra inputs to the operating saw.
 
 ## What is reconstructed
 
+- Individually joined table legs, upper rails, low stretchers, end crossmembers,
+  running rails, feed bearers, grooved tower, crosshead, shoulder ties and shaft
+  seats. Staggered corner tenons retain wood between mortises; running-surface
+  pin heads are recessed below the rollers.
 - Low descending channel and undershot wheel with eight paddle stations,
   rims, spokes, keyed shaft, bearing journals and retaining collars.
 - Crank, captured connecting rod, two-post grooved guide, moving saw sash,
@@ -103,10 +116,9 @@ The [previous validation](docs/validation.md) records the superseded four-turn e
 
 ## Reproduce the evidence
 
-Use the workspace’s **post-0.6 development API**, including declarative joints
-and relations, and viewer API 23 (Machinome browser names and assembly navigator).
-Published machinome 0.6.0 alone is insufficient. The tested viewer 0.2.0 is
-a local development package, not claimed to be released.
+Use the workspace’s **Machinome 0.7.0** and **machinome-viewer 0.7.0**
+(viewer API 27). These local release-state packages are not claimed to be
+published; the older published 0.6.0 package is insufficient.
 Exact dependency revisions are recorded in the validation certificate.
 
 ```sh
@@ -115,10 +127,11 @@ machinome test hydraulic_sawmill --faceted
 machinome test hydraulic_sawmill --exact
 machinome test hydraulic_sawmill --set kerf=2 --exact
 machinome test hydraulic_sawmill --set kerf=5 --exact
+machinome test models/hydraulic_sawmill/frame.py --exact
 python models/hydraulic_sawmill/scripts/readouts.py --check
 machinome snapshot hydraulic_sawmill -o models/hydraulic_sawmill/docs/evidence/transmission-isometric.png --autocenter --viewall --time 0 --imgsize 1400x1000
 python scripts/gallery.py check
-python scripts/gallery.py export hydraulic_sawmill
+python models/hydraulic_sawmill/scripts/demo.py --build-only
 python models/hydraulic_sawmill/scripts/check-browser.py
 python scripts/check_browsers.py
 ```

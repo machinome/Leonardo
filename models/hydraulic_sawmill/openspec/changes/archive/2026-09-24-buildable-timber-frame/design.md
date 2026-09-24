@@ -72,3 +72,23 @@ source and certificates as history. No publication or remote changes.
 
 No pilot decision is outstanding. Concealed joint details are delegated
 working choices, revised if geometry or assembly evidence rejects them.
+
+## Implementation findings
+
+The completed layout has 24 timbers and 34 separate oak pins. Lower corner
+tenons are staggered vertically; vertical pins have integral whittled heads,
+recessed below running surfaces where needed. Positive seating allowances
+of 0.1 mm eliminate coplanar mesh ambiguity without an interference epsilon.
+The ratchet's existing underside running-rail relief is preserved.
+
+The verified eleven-step extraction first withdraws pins, then removes rails
+and the outer bearing, crosshead and top crossmembers; the side frames move
+outward to release the transverse tenons. Tower pins withdraw toward −X,
+away from F2. The outer bearing must leave early to clear the wheel-side
+stretcher's later path. Those are geometric assembly findings, not arbitrary
+explosion offsets. The reverse sequence erects the unloaded frame.
+
+The plinth remains the explicit display ground. F1/B2 and F2/B2 need named
+cantilever holds in the vertical-support solver; independent pin engagement
+and ±2° tipping checks measure their actual capture. This is not a calculated
+load rating. A1 rests on the plinth; A2 has a removable pegged foot in T1.

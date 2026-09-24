@@ -1,0 +1,68 @@
+<!doctype html>
+<!-- Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only. -->
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The sawmill frame — carpentry study</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#f7f2e8;color:#392e23;font:16px/1.45 system-ui}
+header,footer{padding:18px 24px}h1{font:30px Georgia,serif;margin:0 0 8px}a{color:#73502b}
+header p{margin:6px 0}main{display:grid;grid-template-columns:minmax(0,1fr) 330px;border-block:1px solid #c7bba8}
+#stage{height:75vh;min-height:520px;background:white}aside{padding:18px;min-width:0;max-height:75vh;overflow:auto}
+label{display:block}input{width:100%;margin:12px 0}button{font:inherit;text-align:left;color:inherit;border:1px solid #bbae98;border-radius:4px;background:#fffaf0;padding:8px;cursor:pointer}
+button:hover,button[aria-pressed=true]{background:#e1cfaf}#steps{display:grid;gap:6px}#steps button{font-size:14px}
+details{margin-top:20px}summary{cursor:pointer}#message{font-size:14px}footer{font-size:13px}
+@media(max-width:700px){header,footer{padding:14px}h1{font-size:25px}main{display:block}#stage{height:52vh;min-height:350px}aside{max-height:none;padding:14px}#steps{grid-template-columns:1fr 1fr}}
+</style>
+<header><h1>The sawmill frame: how the wood fits</h1>
+<p>24 cut oak timbers · 34 wooden pins · the actual frame from the working saw</p>
+<p><a href="carpentry/">Cutting book &amp; STEP parts</a> · <a href="../hydraulic_sawmill/">Working saw</a> · <a href="source.zip">Source</a></p></header>
+<main><div id="stage" aria-label="Carpentry model"></div><aside>
+<label for="disassembly">Assembly stage <output id="value">0.00</output> / 11</label>
+<input id="disassembly" aria-label="Disassembly stage" type="range" min="0" max="11" step="any" value="0" disabled>
+<p id="message" role="status">Loading the cut timbers…</p><div id="steps"></div>
+<p><button id="fit" disabled>Show the whole frame</button></p>
+<details><summary>Find a timber or pin</summary><div id="tree"></div></details>
+<p>Move forward to dismantle; reverse to erect. Support loose members on trestles. Remove the moving machinery before dismantling its frame.</p>
+</aside></main>
+<footer>Photographs establish the arrangement; concealed joints, oak selection and dimensions are reconstruction choices. Museum-model scale, not a full-size load rating.<br>Copyright (C) 2026 Luis Henrique Cassis Fagundes · AGPL-3.0-only · Machinome Leonardo gallery</footer>
+<script src="machinome-viewer.js"></script>
+<script>
+'use strict';
+const stage=document.getElementById('stage'), slider=document.getElementById('disassembly');
+const value=document.getElementById('value'), message=document.getElementById('message');
+const steps=document.getElementById('steps'), fit=document.getElementById('fit');
+let viewer;
+function camera(){
+  const target=[0,-20,330], eye=[1300,-1700,1210];
+  const factor=0.76*Math.max(1,1.25/(stage.clientWidth/stage.clientHeight));
+  return {target,camera:eye.map((v,i)=>target[i]+(v-target[i])*factor)};
+}
+function show(number){
+  slider.value=number;value.textContent=number.toFixed(2);
+  for(const button of steps.children)button.setAttribute('aria-pressed',String(Math.abs(number-Number(button.dataset.stage))<0.001));
+  message.textContent=number===0?'Assembled — orbit or isolate a member to inspect it.':
+    number===11?'Separated — reverse the stages to assemble.':'Separating the actual fitted members.';
+}
+(async()=>{
+  try{
+    viewer=await MachinomeViewer.mount(stage,'manifest.json',{
+      animation:'external',autoplay:false,driverControls:'none',view:camera(),fov:40,
+      ariaLabel:'Interactive sawmill carpentry assembly'
+    });
+    MachinomeViewer.mountNavigator('#tree',viewer,{label:'Frame timbers and pins'});
+    for(const [name,instruction] of Object.entries(viewer.instructions()).sort(([a],[b])=>a.localeCompare(b))){
+      const button=document.createElement('button');button.textContent=name;
+      button.dataset.stage=instruction.targets.disassembly;
+      button.addEventListener('click',()=>viewer.trigger(name));steps.append(button);
+    }
+    viewer.onDriverChange((id,number)=>{if(id==='disassembly')show(number)});
+    slider.addEventListener('input',()=>viewer.setDriver('disassembly',Number(slider.value)));
+    fit.addEventListener('click',()=>{viewer.setRoot(null);viewer.setView(camera())});
+    new ResizeObserver(()=>viewer.setView(camera())).observe(stage);
+    slider.disabled=false;fit.disabled=false;show(viewer.driver('disassembly'));
+    document.body.dataset.ready='true';
+  }catch(error){message.textContent='The frame could not load: '+error.message;console.error(error)}
+})();
+</script>
+</html>

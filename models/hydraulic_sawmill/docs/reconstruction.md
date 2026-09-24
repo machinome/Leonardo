@@ -48,6 +48,17 @@ reconstructs its mechanisms; unseen dimensions and fittings remain our choices.
 
 ## Mechanism inventory and interpretation
 
+### 24 September 2026 carpentry commission
+
+The pilot asked to replace the single-piece frame with buildable period
+carpentry while preserving the reliable mechanism. Overall and lower-drive
+museum images, both 2015 catalogue views and the 2009 bearing close-up were
+re-inspected. [carpentry.md](carpentry.md) separates photographed members from
+inferred joints and records the pre-Renaissance joinery evidence. The result
+is 24 cut oak members and 34 separate pins, including staggered corner tenons,
+housed crossmembers, a bridled crosshead and separate shaft seats. Oak and
+the hidden joinery are reconstruction choices, not museum identifications.
+
 ### 20–21 September 2026 correction
 
 The pilot identified errors by comparing the [overall photograph](https://www.museoscienza.org/besrv/sites/default/files/2019-11/sega-idraulica.jpg),
@@ -97,7 +108,7 @@ is invented to route around the rectangular frame.
 | Ratchet and spindle | Carriage and mechanism details | 32 asymmetric teeth, slender bare iron axle and fixed-plane radial winding; tooth profile and clearances dimensioned here |
 | Two-rope reduction | Supplied overall/lower views, enlarged 2015/2019 details and pilot's confirmed interpretation | Lower idler inside the saw tower; large and thin winding sections on the inboard compound shaft; separate carriage rope over upper roller. Winding leads, diameters and through-bore ties are choices |
 | Carriage and timber | Overall and carriage detail | Four flanged rollers, retained axles, two cradles, side/end timbers and hauled attachment; a started central kerf clears the blade |
-| Frame and supports | Overall views | Four-legged table, low stretchers, rails, two-post tower and bearing blocks; horizontal bed and fixed saw tower are independently identifiable rigid groups |
+| Frame and supports | Overall views; lower-drive and 2015/2009 details | Four-legged table, low stretchers, rails, two-post tower and bearing blocks; bed and tower now contain individual cut members and matching wooden pins. Hidden joints are inferred |
 
 This table accounts for the functional systems visible in the supplied museum
 views. It does not certify hidden joinery or claim a measured replica of every
@@ -183,8 +194,9 @@ insert: it illustrates progressive cutting, without material-removal or fluid ph
 
 ## Verification status
 
-See [transmission-validation.md](transmission-validation.md) for the current geometric
-and browser evidence. The earlier [full-pass certificate](full-pass-validation.md)
+See [carpentry-validation.md](carpentry-validation.md) for the current frame,
+mechanism regression and browser evidence. [transmission-validation.md](transmission-validation.md)
+records the preceding correction. The earlier [full-pass certificate](full-pass-validation.md)
 is retained as history, not certification of the corrected drive. The
 mechanism inventory above is implemented. The historical confidence limits
 remain: unseen dimensions and fittings are interpretations, not newly

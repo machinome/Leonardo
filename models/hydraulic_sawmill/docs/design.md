@@ -10,6 +10,10 @@ explicitly places the lower pulley inside the fixed saw tower, requires winding 
 inside the bed. Earlier single-rope and outboard arrangements are rejected.
 See [reconstruction.md](reconstruction.md) for sources and historical limits.
 
+The 24 September commission adds buildable fixed-frame carpentry without
+changing that transmission. [carpentry.md](carpentry.md) owns its stock,
+joinery, tool sequence, historical inferences and erection order.
+
 ## Mechanical arrangement
 
 The waterwheel remains on negative Y. The blade teeth face positive X;
@@ -38,7 +42,7 @@ the return stroke. The fixed pivot is unchanged. Rollback contact is measured
 on the actual faces within the existing 5-degree play bound, not assumed at
 2.5 degrees. This models geometric seating, not gravity, impact or friction.
 
-The fixed timber structure exposes two separate rigid groups in the tree:
+The fixed timber structure exposes two separate assemblies in the tree:
 **Horizontal bed frame** and **Fixed saw tower and shaft seats**. The latter
 is the inner stationary vertical frame, not the moving sash. The lower
 drive-rope pulley is journalled in the positive-Y tower upright, on its
@@ -137,10 +141,16 @@ material-removal physics. The log is assumed secured in its cradles.
 
 ## Controls and evidence
 
-The only motion control is the complete-pass timeline. Kerf is the sole build
+The working saw's only motion control is the complete-pass timeline. Kerf is the sole build
 parameter: 2–5 mm, default 3.2. Playback speed changes presentation rate only;
 the elapsed-time display retains the machine's four-second wheel period.
 A replay reset is labelled and never attributed to automatic historical return.
+
+The separate frame study reuses all 24 stationary timbers and 34 pins, with
+a reversible 0–11 disassembly control and twelve numbered stage buttons.
+It shows unloaded placement and access; the moving machinery must be removed
+before dismantling the surrounding frame. Its cutting book is generated from
+those same exact solids and feature records, not a second illustrative model.
 
 Five camera views, frame reveal and a navigable assembly tree expose the
 actual exported CAD. Labels interpolate 721 first-cycle measurements and

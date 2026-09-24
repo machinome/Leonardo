@@ -6,6 +6,7 @@ from functools import partial
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 from io import BytesIO
 import json
+import importlib.util
 from pathlib import Path
 from threading import Thread
 from urllib.parse import urljoin
@@ -104,6 +105,8 @@ def check(url):
             expect(canvas).to_be_visible()
             assert not page.evaluate('window.exhibit.playing')
             page.locator('.assembly-tree summary').click()
+            expect(page.get_by_role('link',name='Open the carpentry study',exact=False)).to_be_visible()
+            expect(page.get_by_role('link',name='Cutting book, stock list',exact=False)).to_be_visible()
             expect(page.get_by_role('tree',name='Sawmill assembly').get_by_text('Timber carriage',exact=True)).to_be_visible()
             page.locator('.assembly-tree summary').click()
             def pose(phase):
@@ -189,6 +192,10 @@ def check(url):
         assert not failures,failures
         browser.close()
     print('PASS: real export assets, timeline-only controls, functional assembly tree, complete timber course, CAD pixel return, playback, all 5 views, reveal, source ZIP, readouts, desktop/narrow; no console or network failures.')
+    spec=importlib.util.spec_from_file_location('frame_browser',Path(__file__).with_name('check-frame-browser.py'))
+    frame_browser=importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(frame_browser)
+    frame_browser.check(urljoin(url,'../../export/hydraulic_sawmill-frame/'))
 
 
 if __name__=='__main__':
