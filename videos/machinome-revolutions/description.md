@@ -52,8 +52,7 @@ Machinome model and viewer. An original, procedurally composed electronic
 score accompanies it; this is illustrative sound, not a recording of the
 historical machine. No sampled music is used. No museum images, manuscript scans, fabricated
 historical footage or invented conversation screenshots appear.
-The first-person voice and “ancestor” are literary devices connecting tools
-through human history; they do not claim machine consciousness or memory.
+The first-person narrator considers its place in a human history of making.
 
 [UPLOAD PREPARATION: replace and verify both project URL placeholders before
 publishing. No source or simulation address has been invented. Nothing has

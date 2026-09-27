@@ -19,9 +19,8 @@ The film makes Machinome concrete:
 parts, connections and motion expressed in source that people can inspect,
 change and test. Historical language does not claim Leonardo invented the
 water-powered saw, or date the Industrial Revolution to his lifetime.
-“Ancestor” is a literary analogy, not a technical lineage or a claim of
-sentience. First-person reconstruction expresses the commissioned machine
-perspective; it does not assert autobiographical memory across AI sessions.
+The first-person narrator considers its place in a human history of making:
+a present-day tool looking at an ancestor in that tradition.
 
 Production choices: English; 2 minutes 57 seconds; 1920×1080 landscape; 30 fps;
 George synthetic voice; restrained warm background; original restrained

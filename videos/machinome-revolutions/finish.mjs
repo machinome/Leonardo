@@ -1,14 +1,23 @@
 // Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
 // Original, deterministic electronic score and final mix. No sampled assets.
-import {readFile, writeFile} from 'node:fs/promises';
+import {readFile, writeFile, mkdir} from 'node:fs/promises';
 import {execFileSync} from 'node:child_process';
 import {createHash} from 'node:crypto';
-import {fileURLToPath} from 'node:url';
+import {fileURLToPath, pathToFileURL} from 'node:url';
 import {dirname, resolve} from 'node:path';
 
 const base = dirname(fileURLToPath(import.meta.url));
 const build = resolve(base, '_build');
-const source = JSON.parse(await readFile(resolve(build, 'rehearsal-manifest.json')));
+const audioOnly = process.argv[2] === '--audio-only';
+let source;
+if (audioOnly) {
+  if (!process.argv[3]) throw new Error('Supply the resolved Videomaker directory');
+  const {loadEpisode} = await import(pathToFileURL(resolve(process.argv[3],'src/episode.mjs')));
+  const audio = JSON.parse(await readFile(resolve(build,'audio-manifest.json')));
+  source = {episode:await loadEpisode(resolve(base,'episode.yaml')),audio:audio.records};
+} else {
+  source = JSON.parse(await readFile(resolve(build, 'rehearsal-manifest.json')));
+}
 const episode = source.episode;
 const duration = episode.output.durationSeconds;
 const sr = 48000;
@@ -117,6 +126,7 @@ const normalize = `loudnorm=I=-16:TP=-1.5:LRA=11:measured_I=${measurement.input_
   `measured_thresh=${measurement.input_thresh}:offset=${measurement.target_offset}:linear=true`;
 execFileSync('ffmpeg',['-y','-v','error','-i',mix,'-af',normalize,
   '-ar','48000','-c:a','pcm_s24le',master]);
+if (audioOnly) { console.log(master); process.exit(0); }
 const output = resolve(build,'machinome-revolutions.mp4');
 execFileSync('ffmpeg',['-y','-v','error','-i',source.output,'-i',master,
   '-map','0:v:0','-map','1:a:0','-c:v','copy','-c:a','aac','-b:a','192k',
@@ -128,6 +138,24 @@ const sound = probe.streams.find(s=>s.codec_type==='audio');
 if (video.width!==episode.output.width || video.height!==episode.output.height ||
     Number(video.nb_read_frames)!==duration*episode.output.fps || !sound ||
     Math.abs(Number(probe.format.duration)-duration)>.1) throw new Error('Final media does not match the edit');
+// Inspectable frames from the encoded delivery, not only from the capture cache.
+const review = resolve(build,'review');
+await mkdir(review,{recursive:true});
+const reviewFrames = [];
+for (const [index, scene] of episode.shots.entries()) {
+  const spoken = source.audio.find(r=>r.id===scene.id);
+  const time = spoken.offset + spoken.duration/2;
+  const file = resolve(review,`${String(index).padStart(2,'0')}-${scene.id}.png`);
+  execFileSync('ffmpeg',['-y','-v','error','-ss',String(time),'-i',output,
+    '-frames:v','1',file]);
+  reviewFrames.push({id:scene.id,time,file});
+}
+execFileSync('ffmpeg',['-y','-v','error','-pattern_type','glob','-i',resolve(review,'*.png'),
+  '-vf','scale=480:-1,tile=4x4','-frames:v','1',resolve(build,'release-contact-sheet.jpg')]);
+const thumbnail = resolve(build,'thumbnail.png');
+execFileSync('ffmpeg',['-y','-v','error','-ss',String(shot('revolution').end-.5),
+  '-i',output,'-frames:v','1',thumbnail]);
+execFileSync('ffmpeg',['-v','error','-i',output,'-f','null','-']);
 const sha = async path => createHash('sha256').update(await readFile(path)).digest('hex');
 await writeFile(resolve(build,'release-manifest.json'),JSON.stringify({
   output, outputSha256:await sha(output), duration, probe,
@@ -136,6 +164,7 @@ await writeFile(resolve(build,'release-manifest.json'),JSON.stringify({
   captureManifest:'rehearsal-manifest.json', captureManifestSha256:await sha(resolve(build,'rehearsal-manifest.json')),
   score:'Original deterministic electronic composition, no samples; illustrative soundtrack, not recorded machine sound.',
   loudnessTarget:{integratedLUFS:-16,truePeakDBTP:-1.5},measurement,
+  thumbnail,thumbnailSha256:await sha(thumbnail),reviewFrames,fullDecodeCheck:true,
   releaseReady:source.releaseReady,published:false,
 },null,2)+'\n');
 console.log(output);
