@@ -381,8 +381,8 @@ shots:
   - id: now
     start: 133.5
     end: 146
-    narration: Now code can be written in conversation. So can this film. You are watching
-      that change happen, with a human choosing the question and judging the answer.
+    narration: Now code can be written in conversation. So can this film. Machinome itself
+      is being built this way, with a human choosing the question and judging the answer.
     direction: Return to the exposed mechanism as something a person can investigate. AI
       production is the commissioned subject. No vendor or creator attribution, fictional
       prompt or chat screenshot appears.
