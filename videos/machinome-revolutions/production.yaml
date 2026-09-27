@@ -1,0 +1,292 @@
+# Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
+series: ""
+output:
+  width: 1920
+  height: 1080
+  fps: 30
+  durationSeconds: 177
+model:
+  manifest: ../../export/hydraulic_sawmill/manifest.json
+  expectedDurationSeconds: 1460
+  timeMode: normalized-loop
+  sourceRevision: a01fb865426de9967f690b4a7a1230684eb1e523
+  readiness: Existing completed export with corrected two-rope transmission and fitted
+    timber frame. 365 wheel turns in 1460 seconds. Posed geometric motion.
+audio:
+  provider: elevenlabs
+  model: eleven_multilingual_v2
+  voice: JBFqnCBsd6RMkjVDRZzb
+  voiceLabel: George
+  voiceSettings:
+    stability: 0.65
+    similarity_boost: 0.75
+    style: 0
+    use_speaker_boost: true
+    speed: 0.88
+  replacements:
+    Machinome: machine-ohm
+  direction: Reflective, curious and precise. A machine describing a human undertaking.
+    Understate the larger claims; leave room to watch. English, landscape, A restrained
+    synthetic voice, not an impersonated person. The previous mechanism rehearsal is not
+    an editorial or creative reference.
+  pronunciation:
+    Machinome: mah-SHEEN-ohm; machine + genome, as specified by the pilot
+    pawl: rhymes with ball
+  timing: Measure cached speech before locking the edit and mechanism beats.
+style:
+  background: "#f5f1e8"
+  foreground: "#24211d"
+  accent: "#bf531f"
+  fontFamily: DejaVu Sans, sans-serif
+  captions: bottom-safe-area
+  safeInsetFraction: 0.08
+cameras:
+  whole:
+    position:
+      - 770
+      - -1037
+      - 824
+    target:
+      - 0
+      - -20
+      - 295
+    up:
+      - 0
+      - 0
+      - 1
+    fov: 37
+  whole-left:
+    position:
+      - 525
+      - -1176
+      - 742
+    target:
+      - 0
+      - -20
+      - 295
+    up:
+      - 0
+      - 0
+      - 1
+    fov: 37
+  whole-rear:
+    position:
+      - 930
+      - 1320
+      - 900
+    target:
+      - 0
+      - 0
+      - 295
+    up:
+      - 0
+      - 0
+      - 1
+    fov: 37
+  closing:
+    position:
+      - 864
+      - -1166
+      - 899
+    target:
+      - 0
+      - -20
+      - 295
+    up:
+      - 0
+      - 0
+      - 1
+    fov: 37
+  wheel:
+    position:
+      - 200
+      - -445
+      - 255
+    target:
+      - 0
+      - -140
+      - 120
+    up:
+      - 0
+      - 0
+      - 1
+    fov: 37
+  crank:
+    position:
+      - 370
+      - 800
+      - 500
+    target:
+      - 0
+      - 0
+      - 315
+    up:
+      - 0
+      - 0
+      - 1
+    fov: 37
+  saw:
+    position:
+      - 335
+      - -470
+      - 505
+    target:
+      - 0
+      - 0
+      - 415
+    up:
+      - 0
+      - 0
+      - 1
+    fov: 37
+  linkage:
+    position:
+      - 390
+      - 690
+      - 520
+    target:
+      - 125
+      - 0
+      - 340
+    up:
+      - 0
+      - 0
+      - 1
+    fov: 37
+  pawls:
+    position:
+      - 145
+      - 410
+      - 400
+    target:
+      - 135
+      - 0
+      - 332
+    up:
+      - 0
+      - 0
+      - 1
+    fov: 37
+  rope-wide:
+    position:
+      - -540
+      - 830
+      - 610
+    target:
+      - -80
+      - 0
+      - 300
+    up:
+      - 0
+      - 0
+      - 1
+    fov: 37
+  reduction:
+    position:
+      - -590
+      - 350
+      - 425
+    target:
+      - -305
+      - 0
+      - 315
+    up:
+      - 0
+      - 0
+      - 1
+    fov: 37
+  cut:
+    position:
+      - 160
+      - -200
+      - 720
+    target:
+      - 30
+      - 0
+      - 408
+    up:
+      - 0
+      - 0
+      - 1
+    fov: 37
+  mechanism:
+    position:
+      - 740
+      - 940
+      - 705
+    target:
+      - 0
+      - 0
+      - 320
+    up:
+      - 0
+      - 0
+      - 1
+    fov: 37
+  mechanism-close:
+    position:
+      - 590
+      - 770
+      - 611
+    target:
+      - 0
+      - 0
+      - 320
+    up:
+      - 0
+      - 0
+      - 1
+    fov: 37
+layers:
+  saw:
+    - - Saw mechanism
+  feed:
+    - - Feed mechanism
+  structure:
+    - - Frame and guides
+      - Fixed timber structure
+  foundation:
+    - - Frame and guides
+      - Foundation
+  water:
+    - - Water drive
+      - Water channel
+    - - Water drive
+      - Water surface
+  carriage:
+    - - Timber carriage
+  timber:
+    - - Timber carriage
+      - Timber
+  sash-frame:
+    - - Saw mechanism
+      - Guided saw sash
+      - frame
+evidence:
+  commission: ./README.md
+  historical-research: ./research.md
+  framework: ./research.md
+  reconstruction: ../../models/hydraulic_sawmill/docs/reconstruction.md
+  transmission: ../../models/hydraulic_sawmill/docs/transmission-validation.md
+  carpentry-validation: ../../models/hydraulic_sawmill/docs/carpentry-validation.md
+  model: ../../models/hydraulic_sawmill/model.py
+  kinematics: ../../models/hydraulic_sawmill/kinematics.py
+  rope-drive: ../../models/hydraulic_sawmill/rope_drive.py
+credits:
+  project: Leonardo da Vinci Gallery
+  creator: Vibecoded by Astra
+  copyright: Copyright (C) 2026 Luis Henrique Cassis Fagundes
+  license: AGPL-3.0-only
+  licenseFile: ../../LICENSE
+  historicalReferences:
+    - title: Milan hydraulic saw, interpretative model IGB-37, 1952–1953
+      url: https://collezioni-online.museoscienza.org/detail/IT-MUST-NTR001-008357/sega-idraulica
+    - title: Leonardo, Codex Atlanticus 1078r
+      url: https://www.leonardodigitale.com/en/browse/Codex-atlanticus/1078-r/
+  interpretation: Original digital reconstruction of a later museum interpretation, under
+    the pilot's direction. Unseen dimensions and fittings are choices.
+release:
+  simulationUrl: null
+  sourceUrl: null
+  descriptionTemplate: ./description.md
+  publish: false

@@ -1,0 +1,481 @@
+# Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
+format: machinome-video-draft/0.2
+id: machinome-revolutions
+title: Revolutions
+status: release-film-in-production
+learningGoal: "Introduce Machinome through a human-directed reconstruction of Leonardo's
+  sawmill: explain its central mechanism, then connect source code and AI tools to the
+  human decisions that give machines a purpose."
+production: production.yaml
+shots:
+  - id: revolution
+    start: 0
+    end: 8.5
+    speechOffset: 0.7
+    narration: A wheel makes a revolution. What makes it matter is the work people give it.
+    direction: An isolated, moving wheel and shaft. The first line establishes the literal
+      turn; the second makes people the subject. Title arrives after the first sentence.
+      No mechanical lesson labels.
+    simulation:
+      from: 400
+      to: 408
+    camera:
+      - at: 0
+        preset: wheel
+    hiddenLayers:
+      - structure
+      - foundation
+      - water
+      - saw
+      - feed
+      - carriage
+    overlays:
+      - from: 2.941
+        to: 8.5
+        text: REVOLUTIONS
+        position: top
+    evidence:
+      - commission
+      - model
+  - id: river
+    start: 8.5
+    end: 17.5
+    narration: "Five hundred years ago, Leonardo studied a machine that gave a river a new
+      task: sawing timber."
+    direction: Reveal the complete sawmill in the same wheel pose, then pull out. The wheel
+      belongs to a larger human arrangement. Identify the later reconstruction so it
+      cannot be mistaken for a surviving artifact.
+    simulation:
+      from: 408
+      to: 416
+    camera:
+      - at: 0
+        preset: wheel
+      - at: 5.727
+        preset: whole
+    hiddenLayers: []
+    overlays:
+      - from: 3.273
+        to: 9
+        text: Leonardo's hydraulic sawmill
+        position: top
+      - from: 3.273
+        to: 9
+        text: Digital reconstruction of a later museum interpretation
+        position: lower-third
+    evidence:
+      - reconstruction
+      - historical-research
+  - id: ancestor
+    start: 17.5
+    end: 30
+    narration: Today, a person asked me to reconstruct it. I am a machine too. In the long
+      history of human tools, this sawmill is one of my ancestors.
+    direction: Approach the timber and blade from the full assembly. Give the first-person
+      disclosure room; ancestor is explicitly the history of tools, not biological descent
+      or personal memory.
+    simulation:
+      from: 416
+      to: 428
+    camera:
+      - at: 0
+        preset: whole
+      - at: 9.821
+        preset: saw
+    hiddenLayers: []
+    overlays: []
+    evidence:
+      - commission
+      - reconstruction
+  - id: stroke
+    start: 30
+    end: 39.5
+    narration: Water beneath the wheel turns a shaft. A crank and rod turn that rotation into
+      the saw's repeated stroke.
+    direction: Uncover the shaft, crank, rod and saw. Hold a single readable view of their
+      connection rather than touring individual parts.
+    simulation:
+      from: 428
+      to: 436
+    camera:
+      - at: 0
+        preset: crank
+    hiddenLayers:
+      - structure
+      - foundation
+      - water
+      - feed
+      - carriage
+    overlays:
+      - from: 2.591
+        to: 9.5
+        text: Rotation becomes a stroke.
+        position: top
+    evidence:
+      - model
+      - kinematics
+      - reconstruction
+  - id: pawls
+    start: 39.5
+    end: 49.5
+    narration: The same stroke pulls a hook across a toothed wheel. One tooth forward; another
+      hook holds it there during the return.
+    direction: Reveal the feed train and frame both pawls. One slow downstroke advances the
+      ratchet; the return leaves it still. Match the half-cycle boundary to measured
+      speech.
+    simulation:
+      from: 436
+      to: 440
+      keyframes:
+        - at: 0
+          seconds: 436
+        - at: 5.366
+          seconds: 438
+        - at: 10
+          seconds: 440
+    camera:
+      - at: 0
+        preset: pawls
+    hiddenLayers:
+      - structure
+      - foundation
+      - water
+      - carriage
+    overlays:
+      - from: 0
+        to: 5.366
+        text: Pull · advance one tooth
+        position: top
+      - from: 5.366
+        to: 10
+        text: Return · hold that progress
+        position: top
+    evidence:
+      - transmission
+      - kinematics
+  - id: ropes
+    start: 49.5
+    end: 63
+    narration: Two ropes and a winding shaft carry that small movement to the timber. The saw
+      descends; the timber advances. The saw rises; the feed waits.
+    direction: Restore the loaded carriage, with the frame hidden to expose the two ropes.
+      Widen from their compound winding shaft to the connected mechanism. Synchronize the
+      final actions with the last wheel turn.
+    simulation:
+      from: 440
+      to: 448
+      keyframes:
+        - at: 0
+          seconds: 440
+        - at: 5.448
+          seconds: 444
+        - at: 8.571
+          seconds: 446
+        - at: 13.5
+          seconds: 448
+    camera:
+      - at: 0
+        preset: reduction
+      - at: 3.2
+        preset: reduction
+      - at: 5.448
+        preset: rope-wide
+    hiddenLayers:
+      - structure
+      - foundation
+      - water
+    overlays:
+      - from: 0
+        to: 5.448
+        text: Two ropes · one winding shaft
+        position: top
+      - from: 5.448
+        to: 8.571
+        text: Downstroke · cut and advance
+        position: top
+      - from: 8.571
+        to: 13.5
+        text: Upstroke · reset and hold
+        position: top
+    evidence:
+      - reconstruction
+      - transmission
+      - rope-drive
+  - id: work
+    start: 63
+    end: 70
+    narration: Rotation becomes a rhythm. A river becomes useful work.
+    direction: Cut close to the blade and opening kerf. One deliberate whole turn gives the
+      mechanism a moment to speak without further labels.
+    simulation:
+      from: 448
+      to: 452
+    camera:
+      - at: 0
+        preset: cut
+    hiddenLayers:
+      - structure
+      - foundation
+      - water
+      - sash-frame
+    overlays: []
+    evidence:
+      - model
+      - transmission
+  - id: relationships
+    start: 70
+    end: 80.5
+    narration: "Reconstructing it meant writing down those relationships: what is a part, what
+      can move, what drives what."
+    direction: Hold a pose and pull back to the connected mechanism. Show real declarations
+      from its source, not a fabricated editor or conversation.
+    simulation:
+      from: 453
+      to: 453
+    camera:
+      - at: 0
+        preset: mechanism-close
+      - at: 8.591
+        preset: mechanism
+    hiddenLayers:
+      - structure
+      - foundation
+      - water
+    overlays:
+      - from: 0.955
+        to: 10.5
+        text: What drives what?
+        position: top
+      - from: 4.773
+        to: 10.5
+        text: |-
+          cycle.drives(water_drive.waterwheel.spin)
+          water_drive.waterwheel.spin.drives(water_drive.crankshaft.spin)
+        position: lower-third
+    evidence:
+      - model
+      - commission
+  - id: machinome
+    start: 80.5
+    end: 94.5
+    narration: This is Machinome. A Python framework for giving machines source code.
+      Geometry, motion, and tests together, so a design can be examined and changed.
+    direction: Restore the complete assembly in the same held pose, then resume motion. The
+      reveal and resumption make the product promise concrete. The title names the film's
+      subject, not a product credit.
+    simulation:
+      from: 453
+      to: 461
+      keyframes:
+        - at: 0
+          seconds: 453
+        - at: 3.733
+          seconds: 453
+        - at: 14
+          seconds: 461
+    camera:
+      - at: 0
+        preset: mechanism
+    hiddenLayers: []
+    overlays:
+      - from: 0
+        to: 14
+        text: Machinome
+        position: top
+      - from: 2.8
+        to: 14
+        text: Source code for machines
+        position: lower-third
+    evidence:
+      - framework
+      - model
+  - id: genome
+    start: 94.5
+    end: 107
+    narration: Machine, with genome. A description you can rebuild, set in motion, and
+      question. Pause it. Look inside. Test a connection.
+    direction: Expose the mechanism. Move briefly, then freeze at an intermediate phase as the
+      voice says pause. Geometric tests are documented evidence, not a fabricated
+      on-screen test run.
+    simulation:
+      from: 461
+      to: 466.8
+      keyframes:
+        - at: 0
+          seconds: 461
+        - at: 6.899
+          seconds: 466.8
+        - at: 12.5
+          seconds: 466.8
+    camera:
+      - at: 0
+        preset: mechanism
+      - at: 9.615
+        preset: linkage
+    hiddenLayers:
+      - structure
+      - foundation
+      - water
+    overlays:
+      - from: 0
+        to: 5.769
+        text: machine + genome
+        position: top
+      - from: 6.899
+        to: 12.5
+        text: Pause. Inspect. Test.
+        position: top
+    evidence:
+      - commission
+      - model
+      - carpentry-validation
+  - id: corrections
+    start: 107
+    end: 119
+    narration: "The person directing me kept looking closer. The water belongs underneath. The
+      hook must pull. Look again: there are two ropes."
+    direction: Restore the full machine and movement. Gently change the oblique view; the line
+      is about human observation. The project records these corrections, without an
+      invented chat transcript.
+    simulation:
+      from: 466.8
+      to: 476
+    camera:
+      - at: 0
+        preset: whole-left
+      - at: 12
+        preset: whole
+    hiddenLayers: []
+    overlays: []
+    evidence:
+      - reconstruction
+      - commission
+  - id: judgment
+    start: 119
+    end: 133.5
+    narration: That is how this reconstruction took shape. Propose. Inspect. Correct. The
+      model shows its motion; the water's power and the forces of cutting remain outside
+      it.
+    direction: Keep saw and timber in view. State the physical limits in voice and image
+      without interrupting the argument with a legal card.
+    simulation:
+      from: 476
+      to: 488
+    camera:
+      - at: 0
+        preset: saw
+    hiddenLayers: []
+    overlays:
+      - from: 1.933
+        to: 6.767
+        text: Propose. Inspect. Correct.
+        position: top
+      - from: 6.678
+        to: 14.5
+        text: Water power and cutting forces are not simulated
+        position: lower-third
+    evidence:
+      - transmission
+      - carpentry-validation
+      - reconstruction
+  - id: now
+    start: 133.5
+    end: 146
+    narration: Now code can be written in conversation. So can this film. You are watching
+      that change happen, with a human choosing the question and judging the answer.
+    direction: Return to the exposed mechanism as something a person can investigate. AI
+      production is the commissioned subject. No vendor or creator attribution, fictional
+      prompt or chat screenshot appears.
+    simulation:
+      from: 488
+      to: 500
+    camera:
+      - at: 0
+        preset: mechanism-close
+      - at: 12.5
+        preset: mechanism
+    hiddenLayers:
+      - structure
+      - foundation
+      - water
+    overlays:
+      - from: 2.5
+        to: 12.5
+        text: Human direction. AI tools. Inspectable work.
+        position: top
+    evidence:
+      - commission
+      - framework
+      - reconstruction
+  - id: purpose
+    start: 146
+    end: 156.5
+    narration: A tool can make a task possible. It cannot decide what is worth making. That
+      belongs to the people who use it.
+    direction: Restore the machine, including its fitted timber structure. Hold the complete
+      view. Give the human-purpose line no competing text.
+    simulation:
+      from: 500
+      to: 508
+    camera:
+      - at: 0
+        preset: whole
+    hiddenLayers: []
+    overlays: []
+    evidence:
+      - commission
+      - model
+  - id: next-revolution
+    start: 156.5
+    end: 169
+    narration: My ancestor turned water into motion. I help turn an intention into something
+      you can inspect. The next revolution begins with what you want to build.
+    direction: Echo the opening wheel, now part of a whole sawmill. Pull out as the invitation
+      transfers agency to the viewer.
+    simulation:
+      from: 508
+      to: 520
+    camera:
+      - at: 0
+        preset: wheel
+      - at: 3.333
+        preset: wheel
+      - at: 10
+        preset: whole
+    hiddenLayers: []
+    overlays:
+      - from: 7.5
+        to: 12.5
+        text: What would you build?
+        position: top
+    evidence:
+      - commission
+      - model
+  - id: invitation
+    start: 169
+    end: 177
+    speechOffset: 0.4
+    narration: Explore this machine. Then make the next question yours.
+    direction: Continue the same assembly with a slow widening and a few seconds to read. No
+      authorship card. Publication needs verified description links.
+    simulation:
+      from: 520
+      to: 528
+    camera:
+      - at: 0
+        preset: whole
+      - at: 8
+        preset: closing
+    hiddenLayers: []
+    overlays:
+      - from: 0
+        to: 8
+        text: What would you build?
+        position: top
+      - from: 0
+        to: 8
+        text: Explore the interactive machine · links in the description
+        position: lower-third
+    evidence:
+      - commission
+      - model
