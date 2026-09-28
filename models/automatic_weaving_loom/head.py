@@ -1,9 +1,14 @@
-"""Explicit inferred completion of the concealed weaving-head transmission.
+"""Explicit inferred completion of the concealed weaving-head
+transmission.
 
-Seven captured face-cam tracks on the common shaft drive two heddles, two
-5:1 slotted rocking levers, the reed and two grip selectors. The lever and
-cord closure, not a second animation clock, determines each carrier's travel.
-These concealed profiles are our construction, not observed museum details.
+Seven captured face-cam tracks on the common shaft drive two heddles,
+two
+5:1 slotted rocking levers, the reed and two grip selectors. The lever
+and
+cord closure, not a second animation clock, determines each carrier's
+travel.
+These concealed profiles are our construction, not observed museum
+details.
 """
 
 # Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
@@ -14,9 +19,18 @@ from machinome.parameters import Length, Scalar, Count
 from machinome.motion.joints import Revolute, Prismatic
 from machinome.motion.ports import RotationalPort, TranslationalPort
 from machinome.math import sin, cos, sqrt, asin, atan2
+
 from .timing import SingleToothInput, cylinder, clip
 from .winding import FeedTimingTrain
-from .parts import box, axle, HeddleCage, CarrierArm, WeftSpool, Reed, shuttle_x
+from .parts import (
+    box,
+    axle,
+    HeddleCage,
+    CarrierArm,
+    WeftSpool,
+    Reed,
+    shuttle_x,
+)
 from .profiles import polar
 from .reeding import (
     REED_CAM_X,
@@ -32,7 +46,8 @@ def reaches(angle):
     x = shuttle_x(angle)
     distance = sqrt(x * x)
     # Both hands must clear the entire ribbon before the shed closes.
-    # The empty hand's initial release retreat continues into full parking.
+    # The empty hand's initial release retreat continues into full
+    # parking.
     return -distance, distance
 
 
@@ -83,9 +98,12 @@ def face_cam(x, radius_law, maximum, groove_half_width=2.5):
 
 
 def reed_cam(x):
-    # Offset the roller-centre path normally, not merely radially: on the
+    # Offset the roller-centre path normally, not merely radially: on
+    # the
     # steep beat flanks a radial band would pinch the physical roller.
-    points = [polar(REED_CAM_BASE + float(reed_lift(i)), -i) for i in range(360)]
+    points = [
+        polar(REED_CAM_BASE + float(reed_lift(i)), -i) for i in range(360)
+    ]
     outlines = [
         cq.Workplane("YZ")
         .spline(points, periodic=True)
@@ -105,8 +123,11 @@ class LoomInput(SingleToothInput):
 
     def render(self):
         body = super().render()
-        body = body.union(cylinder(5, -585, -16.3)).union(cylinder(3, -18, -15))
-        # Coordinates in this component are relative to the right drive face.
+        body = body.union(cylinder(5, -585, -16.3)).union(
+            cylinder(3, -18, -15)
+        )
+        # Coordinates in this component are relative to the right drive
+        # face.
         cams = [
             (
                 -152.5,
@@ -123,7 +144,8 @@ class LoomInput(SingleToothInput):
             (-24.8, lambda a: 42 + selector_lift(a, -1), 56),
             (11.2, lambda a: 42 + selector_lift(a, 1), 56),
         ]
-        # The right arm cam lies beyond the timing train on the same shaft.
+        # The right arm cam lies beyond the timing train on the same
+        # shaft.
         body = body.union(cylinder(3, 20, 49))
         for x, law, maximum in cams:
             body = body.union(
@@ -135,7 +157,9 @@ class LoomInput(SingleToothInput):
         wheel = cylinder(46, -474, -470).cut(cylinder(39, -475, -469))
         wheel = wheel.union(cylinder(9, -475, -469))
         for angle in range(0, 180, 30):
-            spoke = box(4, 84, 5, (-472, 0, 0)).rotate((0, 0, 0), (1, 0, 0), angle)
+            spoke = box(4, 84, 5, (-472, 0, 0)).rotate(
+                (0, 0, 0), (1, 0, 0), angle
+            )
             wheel = wheel.union(spoke)
         wheel = wheel.union(cylinder(3, -484, -471, 0, 38))
         return body.union(wheel.translate((-110, 0, 0)))
@@ -170,7 +194,12 @@ class DrivenHeddle(FusionNode):
 
 
 def y_cylinder(radius, start, end, x=0, z=0):
-    return cq.Workplane("XZ").circle(radius).extrude(end - start).translate((x, end, z))
+    return (
+        cq.Workplane("XZ")
+        .circle(radius)
+        .extrude(end - start)
+        .translate((x, end, z))
+    )
 
 
 class ArmFollower(CadQueryNode):
@@ -179,11 +208,14 @@ class ArmFollower(CadQueryNode):
     rise = Prismatic(axis=(0, 0, 1), range=(-0.01, 26.01))
 
     def render(self):
-        # Cam roller is 6 mm above the short-lever pin's horizontal slot.
+        # Cam roller is 6 mm above the short-lever pin's horizontal
+        # slot.
         body = cylinder(1.5, -6.5, 1, 0, 6)
         body = body.union(box(3, 69, 4, (0, 33, -4)))
         center = -self.side * 2.4
-        ring = box(13, 3, 6, (center, 65, 0)).cut(box(7.4, 5, 2.6, (center, 65, 0)))
+        ring = box(13, 3, 6, (center, 65, 0)).cut(
+            box(7.4, 5, 2.6, (center, 65, 0))
+        )
         return body.union(ring).union(box(3, 4, 75, (0, 0, 35)))
 
 
@@ -208,7 +240,9 @@ class ArmOutput(CadQueryNode):
     rise = Prismatic(axis=(0, 0, 1), range=(-65.01, 65.01))
 
     def render(self):
-        ring = box(34, 3, 6, (0, 0, 0)).cut(box(26.7, 5, 2.6, (-self.side * 2, 0, 0)))
+        ring = box(34, 3, 6, (0, 0, 0)).cut(
+            box(26.7, 5, 2.6, (-self.side * 2, 0, 0))
+        )
         # A plain guided stem also provides the haul-rope attachment.
         return ring.union(box(4, 4, 200, (0, -5, -100))).union(
             box(6, 8, 4, (0, -2, -4.5))
@@ -220,12 +254,16 @@ class LeverStand(CadQueryNode):
     color = "#785537"
 
     def render(self):
-        # Local origin at lever pivot, fixture reaches an outrigger below.
+        # Local origin at lever pivot, fixture reaches an outrigger
+        # below.
         body = box(12, 4, 24, (0, 6, -6)).union(box(12, 4, 24, (0, -6, -6)))
-        body = body.union(box(12, 32, 6, (0, 6, -15))).cut(y_cylinder(3.3, -9, 9))
+        body = body.union(box(12, 32, 6, (0, 6, -15))).cut(
+            y_cylinder(3.3, -9, 9)
+        )
         body = body.union(box(12, 8, 180, (0, 18, -50)))
         body = body.union(box(108, 96, 10, (self.side * 50, -26, -135)))
-        # Separate guide collars connect by an outboard horizontal bearer.
+        # Separate guide collars connect by an outboard horizontal
+        # bearer.
         for x, y, z, w in (
             (self.side * 20, -70, 40, 3.6),
             (self.side * 90, -10, -100, 4.6),
@@ -249,10 +287,13 @@ class ArmMechanism(AssemblyNode):
     follower.rise.drives(
         lever.turn, law=lambda a, b: lambda z: -b.side * asin((z - 13) / 20)
     )
-    lever.turn.drives(output.rise, law=lambda a, b: lambda t: -a.side * 100 * sin(t))
+    lever.turn.drives(
+        output.rise, law=lambda a, b: lambda t: -a.side * 100 * sin(t)
+    )
 
     def render(self):
-        # The follower pin and each lever pin meet in a real horizontal slot.
+        # The follower pin and each lever pin meet in a real horizontal
+        # slot.
         self.follower.translate([self.side * 20, -70, -13])
         self.output.translate([self.side * 90, -5, 0])
 
@@ -279,13 +320,15 @@ class Selector(CadQueryNode):
         body = body.union(box(3, 4, 100, (0, 0, 48)))
         body = body.union(box(3, 28, 4, (0, -10, 30)))
         # Raise only the cross-shed tie above the extended reed tracks.
-        # Keep the rear bridge low enough to clear a fully lowered heddle.
+        # Keep the rear bridge low enough to clear a fully lowered
+        # heddle.
         # Cross behind the reed's parked feet, not through their travel.
         body = body.union(box(171, 4, 4, (self.side * 83.5, -22, 52)))
         for x in (0, self.side * 167):
             body = body.union(box(3 if x == 0 else 4, 4, 26, (x, -22, 41)))
         body = body.union(box(4, 63, 4, (self.side * 167, -51.5, 30)))
-        # Compound plane: vertical selector rise produces equal Y opening;
+        # Compound plane: vertical selector rise produces equal Y
+        # opening;
         # withdrawing the arm lowers that opening by half its X retreat.
         low, high = (-32, 4) if self.side < 0 else (-4, 32)
         front, back = (-4, 18) if self.side < 0 else (-18, 4)
@@ -319,11 +362,14 @@ class Jaw(CadQueryNode):
     def render(self):
         s = self.side
         # The hands own opposite halves of the shed and open away from
-        # each other. Their upper fingers never sweep through the other jaw.
+        # each other. Their upper fingers never sweep through the other
+        # jaw.
         body = box(8, 6, 1, (s * 21, -s * 4.5, 3.8))
         for lane, tip in ((3.5, 11.8), (5, 10.3)):
             y = -s * lane
-            body = body.union(box(22 + tip, 1, 1, (s * (21 - tip) / 2, y, 3.8)))
+            body = body.union(
+                box(22 + tip, 1, 1, (s * (21 - tip) / 2, y, 3.8))
+            )
             body = body.union(box(1, 1, 6.8, (-s * tip, y, 0.9)))
         body = body.union(box(4, 1, 6.8, (s * 5, -s * 6.8, 0.9)))
         body = body.union(box(18, 1, 1, (s * 12, -s * 6.8, 3.8)))
@@ -353,11 +399,13 @@ class GrippingArmBody(CarrierArm):
     def render(self):
         s = self.side
         body = super().render()
-        # The cheek opposite the opening direction stays fixed to the hand.
+        # The cheek opposite the opening direction stays fixed to the
+        # hand.
         body = body.union(box(4, 1, 6.5, (s * 5, s * 6.8, -0.25)))
         body = body.union(box(14, 1, 1, (s * 10, s * 6.8, -3.8)))
         body = body.union(box(3, 5.3, 2.8, (s * 15, s * 4.65, -2.9)))
-        # Rigid attachment rail stays outside the textile and heddle frames.
+        # Rigid attachment rail stays outside the textile and heddle
+        # frames.
         rail_length, rail_y = (149, 71.5) if s < 0 else (194, 49)
         body = body.union(box(4, rail_length, 4, (s * 185, rail_y, 0)))
         body = body.union(box(7, 17, 5, (s * 18, -6, 0)))
@@ -366,10 +414,13 @@ class GrippingArmBody(CarrierArm):
             box(4, 4, 14, (s * 185, 14, -5))
         )
         guide = guide.cut(box(2.6, 14, 2.6, (s * 185, 14, -10)))
-        # The external vertical actuator passes a short slot in the arm's
+        # The external vertical actuator passes a short slot in the
+        # arm's
         # outer rail. It never crosses a warp end to reach the selector.
         slot_length, slot_y = (17, -9) if s < 0 else (32, -16)
-        return body.union(guide).cut(box(2.6, slot_length, 6, (s * 185, slot_y, 0)))
+        return body.union(guide).cut(
+            box(2.6, slot_length, 6, (s * 185, slot_y, 0))
+        )
 
 
 class JawSpring(MolejoNode):
@@ -400,9 +451,13 @@ class GrippingArm(AssemblyNode):
     )
 
     def render(self):
-        # Closing leaves and their actual bearings stay outside every warp
-        # end. An inboard bowed leaf crossed yarn despite rigid-only green.
-        self.spring.translate([self.side * 185, 25 if self.side < 0 else -45, 2])
+        # Closing leaves and their actual bearings stay outside every
+        # warp
+        # end. An inboard bowed leaf crossed yarn despite rigid-only
+        # green.
+        self.spring.translate(
+            [self.side * 185, 25 if self.side < 0 else -45, 2]
+        )
 
 
 class GrippingCarrier(AssemblyNode):
@@ -410,9 +465,12 @@ class GrippingCarrier(AssemblyNode):
     left = GrippingArm(side=-1)
     right = GrippingArm(side=1)
     spool = WeftSpool()
-    # Ownership transfers only while both hands dwell at the same position.
-    # Outside that dwell the boat follows the enclosing hand exactly; the
-    # independent retention contracts test which hand actually encloses it.
+    # Ownership transfers only while both hands dwell at the same
+    # position.
+    # Outside that dwell the boat follows the enclosing hand exactly;
+    # the
+    # independent retention contracts test which hand actually encloses
+    # it.
     (handoff & left.slide & right.slide).drives(
         spool.slide,
         law=lambda a, b: lambda t, left, right: left * clip(0.5 + cos(t), 0, 1)
@@ -442,16 +500,26 @@ class HeadDrive(AssemblyNode):
     selector_a = Selector(side=-1)
     selector_b = Selector(side=1)
     angle.drives(
-        heddle_a.rise, law=lambda a, b: lambda t: a.shed_lift * shed_fraction(t + 270)
+        heddle_a.rise,
+        law=lambda a, b: lambda t: a.shed_lift * shed_fraction(t + 270),
     )
     angle.drives(
-        heddle_b.rise, law=lambda a, b: lambda t: -a.shed_lift * shed_fraction(t + 270)
+        heddle_b.rise,
+        law=lambda a, b: lambda t: -a.shed_lift * shed_fraction(t + 270),
     )
-    angle.drives(left.radius, law=lambda a, b: lambda t: arm_radius(t + 270, -1))
-    angle.drives(right.radius, law=lambda a, b: lambda t: arm_radius(t + 270, 1))
+    angle.drives(
+        left.radius, law=lambda a, b: lambda t: arm_radius(t + 270, -1)
+    )
+    angle.drives(
+        right.radius, law=lambda a, b: lambda t: arm_radius(t + 270, 1)
+    )
     angle.drives(reed.rise, law=lambda a, b: lambda t: reed_lift(t + 270))
-    angle.drives(selector_a.rise, law=lambda a, b: lambda t: selector_lift(t + 270, -1))
-    angle.drives(selector_b.rise, law=lambda a, b: lambda t: selector_lift(t + 270, 1))
+    angle.drives(
+        selector_a.rise, law=lambda a, b: lambda t: selector_lift(t + 270, -1)
+    )
+    angle.drives(
+        selector_b.rise, law=lambda a, b: lambda t: selector_lift(t + 270, 1)
+    )
 
     def render(self):
         self.heddle_a.translate([0, 170, 520])

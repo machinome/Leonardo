@@ -12,11 +12,15 @@ license-files = ["LICENSE", "NOTICE"]
 dependencies = ["machinome[viewer]>=0.6", "machinome-mechanics", "cadquery>=2.7", "molejo>=0.2"]
 
 [project.optional-dependencies]
-dev = ["playwright>=1.50"]
+dev = ["playwright>=1.50", "black>=26.5", "pycodestyle>=2.14"]
 site = ["sphinx>=8"]
 
 [tool.machinome]
 model = "hydraulic_sawmill"
+
+[tool.black]
+line-length = 79
+target-version = ["py312"]
 
 [tool.machinome.models]
 hydraulic_sawmill = "models.hydraulic_sawmill.model:LeonardoHydraulicSawmill"

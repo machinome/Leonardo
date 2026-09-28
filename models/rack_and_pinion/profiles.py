@@ -1,4 +1,6 @@
-"""Original sampled involute and straight conjugate rack, dimensions in mm."""
+"""Original sampled involute and straight conjugate rack, dimensions in
+mm."""
+
 # Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
 import math
 
@@ -31,13 +33,17 @@ def pinion_outline(module):
             radius = base + (tip - base) * i / 20
             points.append(point(radius, centre - half(radius)))
         for i in range(1, 5):
-            points.append(point(tip, centre - half(tip) + 2 * half(tip) * i / 4))
+            points.append(
+                point(tip, centre - half(tip) + 2 * half(tip) * i / 4)
+            )
         for i in range(19, -1, -1):
             radius = base + (tip - base) * i / 20
             points.append(point(radius, centre + half(radius)))
         points.append(point(root, centre + half(base)))
         for i in range(1, 6):
-            angle = centre + half(base) + (math.tau / 20 - 2 * half(base)) * i / 6
+            angle = (
+                centre + half(base) + (math.tau / 20 - 2 * half(base)) * i / 6
+            )
             points.append(point(root, angle))
     return points
 
@@ -51,20 +57,29 @@ def rack_outline(module):
     points = [(16 * module, -48 * module), (11.25 * module, -48 * module)]
     for tooth in range(-15, 11):
         centre = (tooth + 0.5) * pitch
-        points.extend([(11.25 * module, centre - root_half),
-                       (9 * module, centre - tip_half),
-                       (9 * module, centre + tip_half),
-                       (11.25 * module, centre + root_half)])
+        points.extend(
+            [
+                (11.25 * module, centre - root_half),
+                (9 * module, centre - tip_half),
+                (9 * module, centre + tip_half),
+                (11.25 * module, centre + root_half),
+            ]
+        )
     points.extend([(11.25 * module, 36 * module), (16 * module, 36 * module)])
     return points
 
 
 def hook_outline(module):
-    """Open lower semicircle with a two-module section, centred (18,-56)."""
+    """Open lower semicircle with a two-module section, centred
+    (18,-56)."""
     points = []
     for radius, angles in ((5, range(180, 361, 3)), (3, range(360, 179, -3))):
         for angle in angles:
             a = math.radians(angle)
-            points.append(((18 + radius * math.cos(a)) * module,
-                           (-56 + radius * math.sin(a)) * module))
+            points.append(
+                (
+                    (18 + radius * math.cos(a)) * module,
+                    (-56 + radius * math.sin(a)) * module,
+                )
+            )
     return points

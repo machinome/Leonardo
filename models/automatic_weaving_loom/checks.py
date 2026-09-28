@@ -1,11 +1,13 @@
-"""Explicit control-state sweeps, independent of prior tests' held poses."""
+"""Explicit control-state sweeps, independent of prior tests' held
+poses."""
 
 # Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
 from functools import wraps
 
 
 def rigid_parts(node, path="loom"):
-    """Public-tree traversal in the same topmost-rigid unit as root checks."""
+    """Public-tree traversal in the same topmost-rigid unit as root
+    checks."""
     if node.rigid:
         yield path, node
     else:
@@ -28,8 +30,10 @@ def sampled_poses(count, end=1):
                             f"explicit time={time}: {error}"
                         ) from error
             finally:
-                # clear_state() unbinds drivers; it is not a reset to their
-                # defaults. Restore an explicit neutral snapshot instead.
+                # clear_state() unbinds drivers; it is not a reset to
+                # their
+                # defaults. Restore an explicit neutral snapshot
+                # instead.
                 self.node.set_state(phase=0, run=1, time=0)
 
         return run

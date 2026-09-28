@@ -1,4 +1,6 @@
-"""Original three-part tackle: one rope, three supporting spans, 3:1 travel."""
+"""Original three-part tackle: one rope, three supporting spans, 3:1
+travel."""
+
 # Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
 from math import pi
 
@@ -16,11 +18,18 @@ def box(x, y, z, at):
 
 
 def axle(radius, length, at=(0, 0, 0)):
-    return cq.Workplane("XZ").circle(radius).extrude(length/2, both=True).translate(at)
+    return (
+        cq.Workplane("XZ")
+        .circle(radius)
+        .extrude(length / 2, both=True)
+        .translate(at)
+    )
 
 
 class TimberFrame(CadQueryNode):
-    """Grounded stand with integral bearing supports and captive stub axles."""
+    """Grounded stand with integral bearing supports and captive stub
+    axles."""
+
     color = "#936640"
 
     def render(self):
@@ -46,18 +55,35 @@ class Sheave(CadQueryNode):
 
     def render(self):
         # Radial X / axial Y section. A 0.35 mm bottom gap under the
-        # 1.25 mm rope is deliberate; sloped flanges capture axial escape.
-        section = [(3.25, -5), (20.7, -5), (20.7, -3.4), (16.4, -1.6),
-                   (16.4, 1.6), (20.7, 3.4), (20.7, 5), (3.25, 5)]
-        wheel = cq.Workplane("XY").polyline(section).close().revolve(360, (0, 0), (0, 1))
+        # 1.25 mm rope is deliberate; sloped flanges capture axial
+        # escape.
+        section = [
+            (3.25, -5),
+            (20.7, -5),
+            (20.7, -3.4),
+            (16.4, -1.6),
+            (16.4, 1.6),
+            (20.7, 3.4),
+            (20.7, 5),
+            (3.25, 5),
+        ]
+        wheel = (
+            cq.Workplane("XY")
+            .polyline(section)
+            .close()
+            .revolve(360, (0, 0), (0, 1))
+        )
         for angle in (0, 90, 180, 270):
-            hole = axle(3.1, 12, (10, 0, 0)).rotate((0, 0, 0), (0, 1, 0), angle)
+            hole = axle(3.1, 12, (10, 0, 0)).rotate(
+                (0, 0, 0), (0, 1, 0), angle
+            )
             wheel = wheel.cut(hole)
         return wheel
 
 
 class MovingCarrier(CadQueryNode):
     """One connected yoke, anchor-pin cheek and pinned load hanger."""
+
     color = "#526c70"
 
     def render(self):
@@ -74,7 +100,9 @@ class MovingCarrier(CadQueryNode):
         # Tail socket faces down; the hairpin routes around the separate
         # anchor peg before entering the first supporting lane.
         socket = box(6, 14, 6, (-62, 0, 21))
-        bore = cq.Workplane("XY").circle(1.5).extrude(4.3).translate((-62, 0, 18))
+        bore = (
+            cq.Workplane("XY").circle(1.5).extrude(4.3).translate((-62, 0, 18))
+        )
         return carrier.union(socket.cut(bore))
 
 
@@ -83,11 +111,18 @@ class DemonstratorLoad(CadQueryNode):
     linear_deflection = 0.015
 
     def render(self):
-        eye = cq.Workplane("XZ").circle(6).circle(3.3).extrude(3, both=True).translate((-18, 0, -39))
+        eye = (
+            cq.Workplane("XZ")
+            .circle(6)
+            .circle(3.3)
+            .extrude(3, both=True)
+            .translate((-18, 0, -39))
+        )
         neck = box(6, 6, 10, (-18, 0, -46))
         weight = box(24, 20, 20, (-18, 0, -56))
         # Bore the complete joined eye/shank: the neck must not refill
-        # the bottom sector of the eye's clearance around its support pin.
+        # the bottom sector of the eye's clearance around its support
+        # pin.
         return eye.union(neck).union(weight).cut(axle(3.3, 8, (-18, 0, -39)))
 
 
@@ -96,7 +131,7 @@ class MovingBlock(AssemblyNode):
     carrier = MovingCarrier()
     wheel = Sheave()
     load = DemonstratorLoad()
-    lift.drives(wheel.spin, ratio=-2*180/(18*pi))
+    lift.drives(wheel.spin, ratio=-2 * 180 / (18 * pi))
 
 
 class EffortGrip(CadQueryNode):
@@ -105,9 +140,19 @@ class EffortGrip(CadQueryNode):
     linear_deflection = 0.015
 
     def render(self):
-        socket = cq.Workplane("XY").circle(3.5).extrude(12).translate((0, 0, -4))
-        bore = cq.Workplane("XY").circle(1.5).extrude(9.3).translate((0, 0, -0.3))
-        ring = cq.Workplane("XZ").circle(8).circle(5).extrude(3, both=True).translate((0, 0, -10))
+        socket = (
+            cq.Workplane("XY").circle(3.5).extrude(12).translate((0, 0, -4))
+        )
+        bore = (
+            cq.Workplane("XY").circle(1.5).extrude(9.3).translate((0, 0, -0.3))
+        )
+        ring = (
+            cq.Workplane("XZ")
+            .circle(8)
+            .circle(5)
+            .extrude(3, both=True)
+            .translate((0, 0, -10))
+        )
         return socket.cut(bore).union(ring)
 
 
@@ -117,17 +162,22 @@ class ContinuousRope(MolejoNode):
     end = TranslationalPort(unit="mm")
 
     def render(self):
-        return Shape(Circle(1.25), [
-            Line((0, 0, -6)),
-            Arc((4, 0, -6), (0, -1, 0), pi),
-            Line((8, 0, P.top)),
-            Arc((26, 0, P.top), (0, 1, 0), pi),
-            Line((44, 0, -22)),
-            Arc((62, 0, -22), (0, -1, 0), pi),
-            Line((80, 0, P.top)),
-            Arc((98, 0, P.top), (0, 1, 0), pi),
-            Line((116, 0, P.end)),
-        ], path_samples=48, profile_samples=16)
+        return Shape(
+            Circle(1.25),
+            [
+                Line((0, 0, -6)),
+                Arc((4, 0, -6), (0, -1, 0), pi),
+                Line((8, 0, P.top)),
+                Arc((26, 0, P.top), (0, 1, 0), pi),
+                Line((44, 0, -22)),
+                Arc((62, 0, -22), (0, -1, 0), pi),
+                Line((80, 0, P.top)),
+                Arc((98, 0, P.top), (0, 1, 0), pi),
+                Line((116, 0, P.end)),
+            ],
+            path_samples=48,
+            profile_samples=16,
+        )
 
 
 class PulleyBlock(AssemblyNode):
@@ -143,8 +193,8 @@ class PulleyBlock(AssemblyNode):
 
     rise.drives(block.lift)
     block.lift.drives(effort.travel, ratio=-3)
-    block.lift.drives(first.spin, ratio=180/(18*pi))
-    block.lift.drives(second.spin, ratio=3*180/(18*pi))
+    block.lift.drives(first.spin, ratio=180 / (18 * pi))
+    block.lift.drives(second.spin, ratio=3 * 180 / (18 * pi))
 
     instructions = {
         "Low": Instruction({"phase": 0, "run": 0}, duration=0.6),
@@ -161,9 +211,11 @@ class PulleyBlock(AssemblyNode):
         self.rope.translate([-62, 0, 112])
 
     def simulate(self):
-        cosine = (1-self.run)*cos(self.phase) + self.run*cos(self.phase + 360*self.time)
-        height = 20*(1-cosine)
+        cosine = (1 - self.run) * cos(self.phase) + self.run * cos(
+            self.phase + 360 * self.time
+        )
+        height = 20 * (1 - cosine)
         self.rise = height
-        self.rope.top = 118-height
-        self.rope.end = 88-4*height
+        self.rope.top = 118 - height
+        self.rope.end = 88 - 4 * height
         self.rope.translate([0, 0, height])

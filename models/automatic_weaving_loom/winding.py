@@ -2,6 +2,7 @@
 
 # Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
 import math
+
 import cadquery as cq
 from molejo import Shape, Polygon, Line, Wrap
 from machinome.node import AssemblyNode, CadQueryNode, MolejoNode
@@ -9,6 +10,7 @@ from machinome.parameters import Flag
 from machinome.motion.joints import Revolute, Prismatic, Free
 from machinome.motion.ports import RotationalPort, TranslationalPort
 from machinome.math import sin, cos, atan2
+
 from .profiles import cycloidal_outline, cycloidal_rack, polar
 from .timing import TimingBench, TimingTrain, TwelveToothWheel, cylinder, clip
 
@@ -24,19 +26,25 @@ def box(x, y, z, at):
 
 
 class FeedWheel(TwelveToothWheel):
-    """The visible scroll face: captured radial follower, not a decorative line."""
+    """The visible scroll face: captured radial follower, not a
+    decorative line."""
 
     def render(self):
         wheel = super().render()
         face = cylinder(31, 7, 12)
-        # Local polar angle -90-turn meets the vertical follower below centre.
+        # Local polar angle -90-turn meets the vertical follower below
+        # centre.
         points = []
         for side, turns in ((-1, range(-10, 131)), (1, range(130, -11, -1))):
             for turn in turns:
                 radius = 14 + CAM_RISE * turn + side * 1.8
                 points.append(polar(radius, -90 - turn))
         groove = (
-            cq.Workplane("YZ").polyline(points).close().extrude(5).translate((8, 0, 0))
+            cq.Workplane("YZ")
+            .polyline(points)
+            .close()
+            .extrude(5)
+            .translate((8, 0, 0))
         )
         return wheel.union(face.cut(groove))
 
@@ -51,7 +59,8 @@ class DescendingRack(CadQueryNode):
 
     def render(self):
         rack = cq.Workplane("YZ").polyline(cycloidal_rack()).close().extrude(6)
-        # Backing reaches the cam without crossing the lower wheel's teeth.
+        # Backing reaches the cam without crossing the lower wheel's
+        # teeth.
         rack = rack.union(box(6, 4, 276, (3, 56, 92)))
         # Pin lies on Y=54, Z=256: fourteen below the upper cam centre.
         rack = rack.union(box(18, 4, 6, (8, 56, 226)))
@@ -86,8 +95,15 @@ class WindingWheel(CadQueryNode):
         if self.sprocket:
             body = body.union(cylinder(43, 14, 18))
             for i in range(24):
-                peg = cq.Workplane("XY").circle(1.5).extrude(10).translate((16, 0, 41))
-                body = body.union(peg.rotate((0, 0, 0), (1, 0, 0), -97.5 + 15 * i))
+                peg = (
+                    cq.Workplane("XY")
+                    .circle(1.5)
+                    .extrude(10)
+                    .translate((16, 0, 41))
+                )
+                body = body.union(
+                    peg.rotate((0, 0, 0), (1, 0, 0), -97.5 + 15 * i)
+                )
         return body
 
 
@@ -95,8 +111,10 @@ class WindingBearings(CadQueryNode):
     color = "#735137"
 
     def render(self):
-        # Two connected bearing standards; the full model seats their feet
-        # on timber. This bench connects them with two long cross-bearers.
+        # Two connected bearing standards; the full model seats their
+        # feet
+        # on timber. This bench connects them with two long
+        # cross-bearers.
         pieces = []
         for x in (-8, -357):
             side = box(8, CENTERS + 22, 12, (x, -CENTERS / 2, -60))
@@ -108,8 +126,11 @@ class WindingBearings(CadQueryNode):
             pieces.append(side)
         for y in (0, -CENTERS):
             pieces.append(box(358, 14, 12, (-182.5, y, -60)))
-        # Descending bar guide: four faces capture the rack's plain backing.
-        guide = box(15, 15, 12, (3, 56, 160)).cut(box(6.6, 4.6, 14, (3, 56, 160)))
+        # Descending bar guide: four faces capture the rack's plain
+        # backing.
+        guide = box(15, 15, 12, (3, 56, 160)).cut(
+            box(6.6, 4.6, 14, (3, 56, 160))
+        )
         pieces.append(guide.union(box(8, 64, 12, (-8, 26, 160))))
         pieces.append(box(8, 14, 64, (-8, 0, 132)))
         result = pieces[0]
@@ -139,7 +160,8 @@ class BeltBand(MolejoNode):
 
 
 class BeltBridge(MolejoNode):
-    """Leather between punched holes, transported with the belt material."""
+    """Leather between punched holes, transported with the belt
+    material."""
 
     color = "#56452e"
 
@@ -161,19 +183,24 @@ class BeltRung(AssemblyNode):
 
 
 def belt_pose(distance):
-    # The half-pitch offset keeps the finite envelope away from atan2's seam.
+    # The half-pitch offset keeps the finite envelope away from atan2's
+    # seam.
     s = (
         LOOP / 2
         + LOOP
         / (2 * math.pi)
-        * atan2(sin(360 * distance / LOOP - 180), cos(360 * distance / LOOP - 180))
+        * atan2(
+            sin(360 * distance / LOOP - 180), cos(360 * distance / LOOP - 180)
+        )
         * math.pi
         / 180
     )
     top = clip(s, 0, CENTERS)
     a = 180 * clip((s - CENTERS) / (math.pi * RADIUS), 0, 1)
     bottom = clip(s - CENTERS - math.pi * RADIUS, 0, CENTERS)
-    b = 180 * clip((s - 2 * CENTERS - math.pi * RADIUS) / (math.pi * RADIUS), 0, 1)
+    b = 180 * clip(
+        (s - 2 * CENTERS - math.pi * RADIUS) / (math.pi * RADIUS), 0, 1
+    )
     return (
         -CENTERS + top - bottom + RADIUS * sin(a) - RADIUS * sin(b),
         96 + RADIUS * (1 + cos(a) - cos(b)),
@@ -217,9 +244,13 @@ class WindingTrain(AssemblyNode):
     rack.slide.drives(rear_lower.turn, ratio=180 / (math.pi * RADIUS))
     rear_lower.turn.drives(rear_upper.turn, ratio=-1, offset=7.5)
     rear_upper.turn.drives(
-        belt.travel, ratio=-math.pi * RADIUS / 180, offset=7.5 * math.pi * RADIUS / 180
+        belt.travel,
+        ratio=-math.pi * RADIUS / 180,
+        offset=7.5 * math.pi * RADIUS / 180,
     )
-    belt.travel.drives(front_upper.turn, ratio=-180 / (math.pi * RADIUS), offset=7.5)
+    belt.travel.drives(
+        front_upper.turn, ratio=-180 / (math.pi * RADIUS), offset=7.5
+    )
     front_upper.turn.drives(front_lower.turn, ratio=-1, offset=7.5)
 
     def render(self):

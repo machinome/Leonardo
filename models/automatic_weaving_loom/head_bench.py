@@ -1,9 +1,11 @@
-"""Unregistered development fixture for the inferred, common-shaft head."""
+"""Unregistered development fixture for the inferred, common-shaft
+head."""
 
 # Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
 from machinome.node import AssemblyNode
 from machinome.simulation import Driver
 from machinome.motion.ports import RotationalPort
+
 from .head import LoomInput, HeadDrive
 from .timing import clip
 

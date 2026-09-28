@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
-"""Finite smoke of the actual exported viewer; optionally use gallery server."""
+"""Finite smoke of the actual exported viewer; optionally use gallery
+server."""
+
 # Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
 import argparse
 from functools import partial
@@ -8,10 +10,10 @@ from io import BytesIO
 import json
 import os
 import sys
-import numpy as np
 from pathlib import Path
 from threading import Thread
 
+import numpy as np
 from PIL import Image, ImageChops
 from playwright.sync_api import sync_playwright, expect
 
@@ -19,7 +21,9 @@ ROOT = Path(__file__).resolve().parents[3]
 OUTPUT = ROOT / "_evidence/pulley_block"
 sys.path.insert(0, str(ROOT))
 os.environ["SOLID_BUILD_DIR"] = str(ROOT / "_build/pulley_browser")
-from models.pulley_block.model import PulleyBlock
+# Direct invocation needs the gallery root and build directory set
+# first.
+from models.pulley_block.model import PulleyBlock  # noqa: E402
 
 
 class QuietHandler(SimpleHTTPRequestHandler):
@@ -34,25 +38,37 @@ def pixels(png):
 def scene_pixels(page, canvas):
     """Capture the CAD viewport between its control overlays.
 
-    Moving sliders or changing readout text must not satisfy a motion test.
+    Moving sliders or changing readout text must not satisfy a motion
+    test.
     The original screenshot is framed at capture time, never edited.
     """
     canvas.scroll_into_view_if_needed()
     bounds = canvas.bounding_box()
-    return pixels(page.screenshot(clip={"x": bounds["x"], "y": bounds["y"] + 170,
-                                       "width": bounds["width"],
-                                       "height": bounds["height"] - 205}))
+    return pixels(
+        page.screenshot(
+            clip={
+                "x": bounds["x"],
+                "y": bounds["y"] + 170,
+                "width": bounds["width"],
+                "height": bounds["height"] - 205,
+            }
+        )
+    )
 
 
 def check(url):
     OUTPUT.mkdir(parents=True, exist_ok=True)
-    manifest = json.loads((ROOT / "export/pulley_block/manifest.json").read_text())
+    manifest = json.loads(
+        (ROOT / "export/pulley_block/manifest.json").read_text()
+    )
     assert set(manifest["drivers"]) == {"phase", "run"}
     assert set(manifest["instructions"]) == {"Mid", "High", "Low", "Run"}
 
     def walk(node):
         if "model" in node:
-            assert (ROOT / "export/pulley_block" / node["model"]).is_file(), node["model"]
+            assert (
+                ROOT / "export/pulley_block" / node["model"]
+            ).is_file(), node["model"]
         for child in node.get("children", []):
             walk(child)
 
@@ -65,23 +81,62 @@ def check(url):
 
     def check_labels(page, phase, run=0, time=0):
         machine.set_state(phase=phase, run=run, time=time)
-        joints = machine.rope.mesh.vertices[:-2].reshape(-1, 16, 3).mean(axis=1)[::48]
-        lengths = [np.linalg.norm(joints[i+1]-joints[i]) for i in (2, 4, 6, 8)]
-        values = [machine.block.load.mesh.bounds[0, 2]-24,
-                  208-machine.effort.mesh.bounds[1, 2], *lengths,
-                  sum(lengths)+6+58*np.pi]
-        for name, value in zip(("rise", "pull", "span-a", "span-b", "span-c", "span-d", "rope-total"), values):
-            expect(page.locator("#"+name)).to_have_text(f"{value:.1f}")
+        joints = (
+            machine.rope.mesh.vertices[:-2]
+            .reshape(-1, 16, 3)
+            .mean(axis=1)[::48]
+        )
+        lengths = [
+            np.linalg.norm(joints[i + 1] - joints[i]) for i in (2, 4, 6, 8)
+        ]
+        values = [
+            machine.block.load.mesh.bounds[0, 2] - 24,
+            208 - machine.effort.mesh.bounds[1, 2],
+            *lengths,
+            sum(lengths) + 6 + 58 * np.pi,
+        ]
+        for name, value in zip(
+            (
+                "rise",
+                "pull",
+                "span-a",
+                "span-b",
+                "span-c",
+                "span-d",
+                "rope-total",
+            ),
+            values,
+        ):
+            expect(page.locator("#" + name)).to_have_text(f"{value:.1f}")
 
     errors, failures = [], []
     with sync_playwright() as p:
         browser = p.chromium.launch(headless=True)
-        page = browser.new_page(viewport={"width": 1440, "height": 1100}, device_scale_factor=1)
+        page = browser.new_page(
+            viewport={"width": 1440, "height": 1100}, device_scale_factor=1
+        )
         page.on("pageerror", lambda error: errors.append(str(error)))
-        page.on("console", lambda msg: errors.append(msg.text) if msg.type == "error" else None)
-        page.on("response", lambda r: failures.append(f"{r.status} {r.url}") if r.status >= 400 else None)
-        page.on("requestfailed", lambda r: failures.append(f"{r.url}: {r.failure}"))
-        for width, height, label in ((1440, 1100, "desktop"), (390, 844, "narrow")):
+        page.on(
+            "console",
+            lambda msg: (
+                errors.append(msg.text) if msg.type == "error" else None
+            ),
+        )
+        page.on(
+            "response",
+            lambda r: (
+                failures.append(f"{r.status} {r.url}")
+                if r.status >= 400
+                else None
+            ),
+        )
+        page.on(
+            "requestfailed", lambda r: failures.append(f"{r.url}: {r.failure}")
+        )
+        for width, height, label in (
+            (1440, 1100, "desktop"),
+            (390, 844, "narrow"),
+        ):
             page.set_viewport_size({"width": width, "height": height})
             page.goto(url, wait_until="networkidle")
             frame = page.frame_locator("iframe")
@@ -89,7 +144,8 @@ def check(url):
             expect(canvas).to_be_visible()
             phase = frame.get_by_label("phase exact value (deg)", exact=True)
             run = frame.get_by_label("run exact value (play)", exact=True)
-            # Native instructions are real viewer controls, including the ramp.
+            # Native instructions are real viewer controls, including
+            # the ramp.
             frame.get_by_role("button", name="Run Mid", exact=True).click()
             expect(phase).to_have_value("90.0000")
             expect(run).to_have_value("0.0000")
@@ -104,15 +160,22 @@ def check(url):
             lifted = scene_pixels(page, canvas)
             check_labels(page, 90)
             for name, target in (("High", "180.0000"), ("Low", "0.0000")):
-                frame.get_by_role("button", name=f"Run {name}", exact=True).click()
+                frame.get_by_role(
+                    "button", name=f"Run {name}", exact=True
+                ).click()
                 expect(phase).to_have_value(target)
                 expect(run).to_have_value("0.0000")
                 check_labels(page, float(target))
             page.wait_for_timeout(150)
             struck = scene_pixels(page, canvas)
-            assert ImageChops.difference(lifted, struck).getbbox(), "Stage geometry did not move"
-            # Manual exact entry returns to the previous rendered geometry.
-            frame.get_by_role("button", name="Edit phase exact value (deg)", exact=True).click()
+            assert ImageChops.difference(
+                lifted, struck
+            ).getbbox(), "Stage geometry did not move"
+            # Manual exact entry returns to the previous rendered
+            # geometry.
+            frame.get_by_role(
+                "button", name="Edit phase exact value (deg)", exact=True
+            ).click()
             phase.fill("90")
             phase.press("Enter")
             expect(phase).to_have_value("90.0000")
@@ -120,9 +183,13 @@ def check(url):
             canvas.screenshot(path=str(OUTPUT / f"{label}-return.png"))
             returned = scene_pixels(page, canvas)
             difference = ImageChops.difference(lifted, returned)
-            assert difference.getbbox() is None, f"Pose return changed geometry: {difference.getbbox()}"
+            assert (
+                difference.getbbox() is None
+            ), f"Pose return changed geometry: {difference.getbbox()}"
             frame.get_by_label("phase (deg)", exact=True).fill("60")
-            frame.get_by_label("phase (deg)", exact=True).dispatch_event("input")
+            frame.get_by_label("phase (deg)", exact=True).dispatch_event(
+                "input"
+            )
             expect(phase).to_have_value("60.0000")
             check_labels(page, 60)
             frame.get_by_role("button", name="Run Run", exact=True).click()
@@ -134,7 +201,9 @@ def check(url):
             expect(timeline).not_to_have_value(initial_tick)
             first_play = scene_pixels(page, canvas)
             page.wait_for_timeout(500)
-            assert ImageChops.difference(first_play, scene_pixels(page, canvas)).getbbox(), "Playback did not animate geometry"
+            assert ImageChops.difference(
+                first_play, scene_pixels(page, canvas)
+            ).getbbox(), "Playback did not animate geometry"
             frame.get_by_title("Pause", exact=True).click()
             timeline.fill("0")
             timeline.dispatch_event("input")
@@ -142,10 +211,15 @@ def check(url):
             timeline.fill("180")
             timeline.dispatch_event("input")
             page.wait_for_timeout(150)
-            assert ImageChops.difference(start, scene_pixels(page, canvas)).getbbox(), "Timeline scrubbing did not move geometry"
-            # Intermediate run is an excursion blend, so its loop closes too.
+            assert ImageChops.difference(
+                start, scene_pixels(page, canvas)
+            ).getbbox(), "Timeline scrubbing did not move geometry"
+            # Intermediate run is an excursion blend, so its loop closes
+            # too.
             frame.get_by_label("run (play)", exact=True).fill("0.5")
-            frame.get_by_label("run (play)", exact=True).dispatch_event("input")
+            frame.get_by_label("run (play)", exact=True).dispatch_event(
+                "input"
+            )
             timeline.fill("0")
             timeline.dispatch_event("input")
             page.wait_for_timeout(150)
@@ -154,7 +228,12 @@ def check(url):
             timeline.fill(timeline.get_attribute("max"))
             timeline.dispatch_event("input")
             page.wait_for_timeout(150)
-            assert ImageChops.difference(loop_start, scene_pixels(page, canvas)).getbbox() is None, "Fractional-run loop jumped"
+            assert (
+                ImageChops.difference(
+                    loop_start, scene_pixels(page, canvas)
+                ).getbbox()
+                is None
+            ), "Fractional-run loop jumped"
             check_labels(page, 0, 0.5, 1)
             timeline.fill("90")
             timeline.dispatch_event("input")
@@ -163,18 +242,31 @@ def check(url):
             expect(run).to_have_value("0.0000")
             expect(phase).to_have_value("90.0000")
             check_labels(page, 90)
-            assert page.evaluate("document.documentElement.scrollWidth <= innerWidth"), "Exhibit overflow"
+            assert page.evaluate(
+                "document.documentElement.scrollWidth <= innerWidth"
+            ), "Exhibit overflow"
             inner = page.frames[1]
-            assert inner.evaluate("document.documentElement.scrollWidth <= innerWidth"), "Viewer overflow"
-            page.screenshot(path=str(OUTPUT / f"browser-{label}.png"), full_page=True)
-        source = page.get_by_role("link", name="Download gallery source").get_attribute("href")
+            assert inner.evaluate(
+                "document.documentElement.scrollWidth <= innerWidth"
+            ), "Viewer overflow"
+            page.screenshot(
+                path=str(OUTPUT / f"browser-{label}.png"), full_page=True
+            )
+        source = page.get_by_role(
+            "link", name="Download gallery source"
+        ).get_attribute("href")
         from urllib.parse import urljoin
+
         response = page.request.get(urljoin(url, source))
         assert response.status == 200 and response.body().startswith(b"PK")
         assert not errors, errors
         assert not failures, failures
         browser.close()
-    print("PASS: pulley block assets, named stages, manual input/slider, pixel pose return, playback/scrub, labels against measured meshes, source ZIP, desktop/narrow; no console or network failures.")
+    print(
+        "PASS: pulley block assets, named stages, manual input/slider, "
+        "pixel pose return, playback/scrub, labels against measured meshes, "
+        "source ZIP, desktop/narrow; no console or network failures."
+    )
 
 
 def main():
@@ -184,7 +276,9 @@ def main():
     if args.url:
         check(args.url)
         return
-    server = ThreadingHTTPServer(("127.0.0.1", 0), partial(QuietHandler, directory=str(ROOT)))
+    server = ThreadingHTTPServer(
+        ("127.0.0.1", 0), partial(QuietHandler, directory=str(ROOT))
+    )
     worker = Thread(target=server.serve_forever, daemon=True)
     worker.start()
     try:

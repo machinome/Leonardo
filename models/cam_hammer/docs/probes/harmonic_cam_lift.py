@@ -8,16 +8,38 @@ from machinome.scad_expression import get_animation_time
 from models.cam_hammer.kinematics import cam_outline, lift_envelope
 from models.cam_hammer.model import CamHammer
 
-
-ANGLES = (-720.1, -360, -0.1, 0, 0.1, 30, 120, 239.9, 240, 240.1,
-          250, 262.5, 280, 284.9, 285, 285.1, 319.9, 320, 320.1, 360, 720.1)
+ANGLES = (
+    -720.1,
+    -360,
+    -0.1,
+    0,
+    0.1,
+    30,
+    120,
+    239.9,
+    240,
+    240.1,
+    250,
+    262.5,
+    280,
+    284.9,
+    285,
+    285.1,
+    319.9,
+    320,
+    320.1,
+    360,
+    720.1,
+)
 
 
 def legacy_lift(angle, amplitude, return_span):
-    theta = 180 + math.degrees(math.atan2(
-        math.sin(math.radians(angle - 180)),
-        math.cos(math.radians(angle - 180)),
-    ))
+    theta = 180 + math.degrees(
+        math.atan2(
+            math.sin(math.radians(angle - 180)),
+            math.cos(math.radians(angle - 180)),
+        )
+    )
 
     def clip01(value):
         positive = (value + math.sqrt(value * value)) / 2
@@ -26,10 +48,14 @@ def legacy_lift(angle, amplitude, return_span):
 
     up = clip01(theta / 240)
     down = clip01((theta - 240) / return_span)
-    return amplitude * (
-        math.cos(math.radians(180 * down))
-        - math.cos(math.radians(180 * up))
-    ) / 2
+    return (
+        amplitude
+        * (
+            math.cos(math.radians(180 * down))
+            - math.cos(math.radians(180 * up))
+        )
+        / 2
+    )
 
 
 def legacy_pitch_point(angle, amplitude):
@@ -57,9 +83,9 @@ def legacy_cam_outline(amplitude):
 
 
 def close(actual, expected, tolerance=1e-11):
-    assert math.isclose(actual, expected, rel_tol=tolerance, abs_tol=tolerance), (
-        actual, expected
-    )
+    assert math.isclose(
+        actual, expected, rel_tol=tolerance, abs_tol=tolerance
+    ), (actual, expected)
 
 
 def evaluate(expression, animation_time):
@@ -79,8 +105,10 @@ numeric = 0
 for amplitude in (16, 18, 20, -18):
     for return_span in (80, 45):
         for angle in ANGLES:
-            close(lift_envelope(angle, amplitude, return_span),
-                  legacy_lift(angle, amplitude, return_span))
+            close(
+                lift_envelope(angle, amplitude, return_span),
+                legacy_lift(angle, amplitude, return_span),
+            )
             numeric += 1
 
 machine = CamHammer()

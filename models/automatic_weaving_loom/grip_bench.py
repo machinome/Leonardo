@@ -1,9 +1,11 @@
-"""Fixture for both real gripping hands and the opposed selector ramps."""
+"""Fixture for both real gripping hands and the opposed selector
+ramps."""
 
 # Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
 from machinome.node import AssemblyNode
 from machinome.simulation import Driver
 from machinome.motion.ports import RotationalPort
+
 from .head import GrippingCarrier, Selector, reaches, selector_lift
 from .timing import clip
 
@@ -18,10 +20,15 @@ class GripBench(AssemblyNode):
     angle.drives(carrier.handoff)
     angle.drives(carrier.left.slide, law=lambda a, b: lambda t: reaches(t)[0])
     angle.drives(carrier.right.slide, law=lambda a, b: lambda t: reaches(t)[1])
-    angle.drives(selector_a.rise, law=lambda a, b: lambda t: selector_lift(t, -1))
-    angle.drives(selector_b.rise, law=lambda a, b: lambda t: selector_lift(t, 1))
+    angle.drives(
+        selector_a.rise, law=lambda a, b: lambda t: selector_lift(t, -1)
+    )
+    angle.drives(
+        selector_b.rise, law=lambda a, b: lambda t: selector_lift(t, 1)
+    )
     (selector_a.rise & carrier.left.slide).drives(
-        carrier.left.jaw.opening, law=lambda a, b: lambda z, x: clip(z + 0.5 * x, 0, 14)
+        carrier.left.jaw.opening,
+        law=lambda a, b: lambda z, x: clip(z + 0.5 * x, 0, 14),
     )
     (selector_b.rise & carrier.right.slide).drives(
         carrier.right.jaw.opening,

@@ -1,4 +1,6 @@
-"""Astra's original cam hammer: cam contact with a prescribed released drop."""
+"""Astra's original cam hammer: cam contact with a prescribed released
+drop."""
+
 # Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
 import cadquery as cq
 
@@ -16,7 +18,12 @@ def box(x, y, z, at=(0, 0, 0)):
 
 
 def axle(radius, length, at=(0, 0, 0)):
-    return cq.Workplane("XZ").circle(radius).extrude(length / 2, both=True).translate(at)
+    return (
+        cq.Workplane("XZ")
+        .circle(radius)
+        .extrude(length / 2, both=True)
+        .translate(at)
+    )
 
 
 class TimberFrame(CadQueryNode):
@@ -31,7 +38,8 @@ class TimberFrame(CadQueryNode):
             frame = frame.union(box(78, 18, 22, (-80, y, 170)))
             frame = frame.union(box(22, 18, 122, (0, y, 67)))
             frame = frame.union(box(130, 18, 14, (-54, y, 28)))
-            # Overlapping diagonal timber brace into each tall post/base.
+            # Overlapping diagonal timber brace into each tall
+            # post/base.
             brace = box(14, 18, 94).rotate((0, 0, 0), (0, 1, 0), 17)
             frame = frame.union(brace.translate((-121, y, 56)))
         frame = frame.cut(axle(5.35, 90, (-60, 0, 170)))
@@ -39,7 +47,8 @@ class TimberFrame(CadQueryNode):
 
 
 class CapturedShaft(CadQueryNode):
-    """10 mm journal with collars 0.3 mm clear of the post outer faces."""
+    """10 mm journal with collars 0.3 mm clear of the post outer
+    faces."""
 
     def render(self):
         shaft = axle(5, 80)
@@ -54,10 +63,18 @@ class CamProfile(CadQueryNode):
     angular_deflection = 0.04
 
     def render(self):
-        cam = cq.Workplane("XZ").polyline(cam_outline(self.lift_angle)).close().extrude(5, both=True)
-        # Three open windows make the shaft and direction easy to follow.
+        cam = (
+            cq.Workplane("XZ")
+            .polyline(cam_outline(self.lift_angle))
+            .close()
+            .extrude(5, both=True)
+        )
+        # Three open windows make the shaft and direction easy to
+        # follow.
         for angle in (30, 150, 270):
-            window = axle(9, 14, (25, 0, 0)).rotate((0, 0, 0), (0, 1, 0), angle)
+            window = axle(9, 14, (25, 0, 0)).rotate(
+                (0, 0, 0), (0, 1, 0), angle
+            )
             cam = cam.cut(window)
         return cam
 
@@ -83,10 +100,21 @@ class LeverCore(CadQueryNode):
         # Recess the tail behind the rounded shoe: the cam's retreating
         # flank sweeps across this region during release. This keeps an
         # 8 mm deep continuous arm below that envelope.
-        outline = [(-60, -4), (-48, -10), (-16, -10), (0, -4),
-                   (111, -4), (111, 4), (0, 4), (-16, -2),
-                   (-48, -2), (-60, 3)]
-        beam = cq.Workplane("XZ").polyline(outline).close().extrude(5, both=True)
+        outline = [
+            (-60, -4),
+            (-48, -10),
+            (-16, -10),
+            (0, -4),
+            (111, -4),
+            (111, 4),
+            (0, 4),
+            (-16, -2),
+            (-48, -2),
+            (-60, 3),
+        ]
+        beam = (
+            cq.Workplane("XZ").polyline(outline).close().extrude(5, both=True)
+        )
         return beam.union(axle(10, 12))
 
 

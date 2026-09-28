@@ -2,15 +2,18 @@
 
 # Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
 import math
+
 import numpy as np
 from machinome.test import TestCase
+
 from .checks import sampled_poses
 from .timing import TimingBench
 
 
 def marker_angle(node, center):
     vertices = node.mesh.vertices
-    # A shallow radial marker on the outer shaft end uniquely measures angle.
+    # A shallow radial marker on the outer shaft end uniquely measures
+    # angle.
     rim = vertices[vertices[:, 0] > vertices[:, 0].max() - 0.01]
     delta = rim[:, 1:].mean(axis=0) - np.asarray(center)
     return math.degrees(math.atan2(delta[1], delta[0]))
@@ -38,11 +41,19 @@ class TimingBenchTest(TestCase):
                 )
             )
         for index in (1, 2):
-            self.assertAlmostEqual(records[index][1], records[0][1], delta=0.01)
+            self.assertAlmostEqual(
+                records[index][1], records[0][1], delta=0.01
+            )
         for index in (6, 7, 8):
-            self.assertAlmostEqual(records[index][1] - records[0][1], -60, delta=0.01)
-            self.assertAlmostEqual(records[index][2] - records[0][2], 30, delta=0.01)
-        for (_, six, twelve), (_, s0, t0) in zip(records[3:6], records[:1] * 3):
+            self.assertAlmostEqual(
+                records[index][1] - records[0][1], -60, delta=0.01
+            )
+            self.assertAlmostEqual(
+                records[index][2] - records[0][2], 30, delta=0.01
+            )
+        for (_, six, twelve), (_, s0, t0) in zip(
+            records[3:6], records[:1] * 3
+        ):
             self.assertAlmostEqual(twelve - t0, -(six - s0) / 2, delta=0.01)
 
     def test_pin_engages_the_six_tooth_wheel(self):
@@ -59,7 +70,10 @@ class TimingBenchTest(TestCase):
         for phase in np.linspace(120, 240, 25):
             self.node.set_state(phase=float(phase), run=0, time=0)
             self.assertFreeWithin(
-                self.node.train.twelve, 0.1, self.node.train.six, axis=(1, 0, 0)
+                self.node.train.twelve,
+                0.1,
+                self.node.train.six,
+                axis=(1, 0, 0),
             )
             self.assertBlockedBeyond(
                 self.node.train.twelve, 2, self.node.train.six, axis=(1, 0, 0)
@@ -81,11 +95,15 @@ class TimingBenchTest(TestCase):
             self.node.train.six,
             self.node.train.twelve,
         ):
-            self.assertFreeWithin(part, 0.1, self.node.train.bearings, along=(0, 1, 0))
+            self.assertFreeWithin(
+                part, 0.1, self.node.train.bearings, along=(0, 1, 0)
+            )
             self.assertBlockedBeyond(
                 part, 0.7, self.node.train.bearings, along=(0, 1, 0)
             )
-            self.assertFreeWithin(part, 0.1, self.node.train.bearings, along=(1, 0, 0))
+            self.assertFreeWithin(
+                part, 0.1, self.node.train.bearings, along=(1, 0, 0)
+            )
             self.assertBlockedBeyond(
                 part, 0.7, self.node.train.bearings, along=(1, 0, 0)
             )

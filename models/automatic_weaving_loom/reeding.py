@@ -1,7 +1,9 @@
-"""Reconstructed reed layout and beat dwell, in millimetres and degrees."""
+"""Reconstructed reed layout and beat dwell, in millimetres and
+degrees."""
 
 # Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
 from machinome.math import acos, cos
+
 from .timing import clip
 
 REED_TRAVEL = 100
@@ -16,6 +18,7 @@ REED_RETURN_X = -331
 
 
 def reed_lift(angle):
-    """Rear dwell during insertion; full beat at each half-turn boundary."""
+    """Rear dwell during insertion; full beat at each half-turn
+    boundary."""
     distance = acos(cos(2 * angle)) / 2
     return REED_TRAVEL * (1 - cos(180 * clip(distance / 26, 0, 1))) / 2

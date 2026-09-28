@@ -1,17 +1,21 @@
-"""Taut-cord completion of the loom's hidden haul and weighted return routes.
+"""Taut-cord completion of the loom's hidden haul and weighted return
+routes.
 
-Lengths and attachment motion are kinematic constraints. No claim is made
+Lengths and attachment motion are kinematic constraints. No claim is
+made
 that a rope force, spring force, friction or impact solver is running.
 """
 
 # Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
 import math
+
 import cadquery as cq
 from molejo import Shape, Circle, Line, Arc, P
 from machinome.node import AssemblyNode, CadQueryNode, MolejoNode
 from machinome.parameters import Scalar, Length
 from machinome.motion.joints import Revolute, Prismatic
 from machinome.motion.ports import TranslationalPort
+
 from .parts import box
 from .head import y_cylinder
 from .reeding import (
@@ -138,13 +142,16 @@ class SideCords(AssemblyNode):
     travel.drives(returning.slide)
     travel.drives(weight.rise, law=lambda a, b: lambda x: a.side * x)
     lift.drives(
-        first.turn, law=lambda a, b: lambda z: a.side * z / PULLEY_R * 180 / math.pi
+        first.turn,
+        law=lambda a, b: lambda z: a.side * z / PULLEY_R * 180 / math.pi,
     )
     lift.drives(
-        corner.turn, law=lambda a, b: lambda z: a.side * z / PULLEY_R * 180 / math.pi
+        corner.turn,
+        law=lambda a, b: lambda z: a.side * z / PULLEY_R * 180 / math.pi,
     )
     lift.drives(
-        lower.turn, law=lambda a, b: lambda z: a.side * z / PULLEY_R * 180 / math.pi
+        lower.turn,
+        law=lambda a, b: lambda z: a.side * z / PULLEY_R * 180 / math.pi,
     )
     travel.drives(return_pulley.turn, ratio=180 / (math.pi * PULLEY_R))
 
@@ -187,7 +194,8 @@ class ReedHaul(MolejoNode):
 class ReedHaulAttachment(AssemblyNode):
     rise = Prismatic(axis=(0, 0, 1))
     cord = ReedHaul()
-    # The raised sheaves stay above the stem throughout its longer stroke.
+    # The raised sheaves stay above the stem throughout its longer
+    # stroke.
     rise.drives(cord.upper, ratio=-1, offset=REED_SHEAVE_Z - REED_STEM_TOP)
     rise.drives(cord.top, ratio=-1, offset=REED_SHEAVE_Z + 3.5 - REED_STEM_TOP)
     rise.drives(cord.lower, ratio=-1, offset=REED_TIE_Z + 3.5 - REED_STEM_TOP)
@@ -271,7 +279,8 @@ class CordSupports(CadQueryNode):
             pieces.append(box(40, 4, 12, (s * 160, 266, 516.5)))
             holes.append(y_cylinder(1.3, 263, 269, s * 145, 516.5))
             pieces.append(box(12, 48, 98, (s * 170, 224, 513.5)))
-        # A left-side upright carries the reed's three changes of direction.
+        # A left-side upright carries the reed's three changes of
+        # direction.
         x = REED_TIE_X + 6
         pieces.append(box(4, 220, 12, (x, 102.5, REED_SHEAVE_Z)))
         for seat_x, y, z in (
@@ -282,7 +291,10 @@ class CordSupports(CadQueryNode):
         ):
             pieces.append(box(4, 12, 12, (seat_x, y, z)))
             holes.append(
-                cq.Workplane("YZ").circle(1.3).extrude(6).translate((seat_x - 3, y, z))
+                cq.Workplane("YZ")
+                .circle(1.3)
+                .extrude(6)
+                .translate((seat_x - 3, y, z))
             )
         pieces.append(box(4, 12, 168.5, (x, 3.5, 651.75)))
         pieces.append(box(4, 12, 175.5, (REED_RETURN_X + 6, 200, 648.25)))

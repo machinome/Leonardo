@@ -2,6 +2,7 @@
 
 # Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
 from machinome.test import TestCase
+
 from .checks import sampled_poses
 from .grip_bench import GripBench
 
@@ -10,7 +11,22 @@ class GripBenchTest(TestCase):
     node = GripBench
 
     def test_spool_is_enclosed_in_all_three_directions(self):
-        for phase in (0, 30, 60, 89, 90, 91, 120, 180, 240, 269, 270, 271, 300, 360):
+        for phase in (
+            0,
+            30,
+            60,
+            89,
+            90,
+            91,
+            120,
+            180,
+            240,
+            269,
+            270,
+            271,
+            300,
+            360,
+        ):
             self.node.set_state(phase=phase, run=0, time=0)
             active = (
                 self.node.carrier.left
@@ -69,7 +85,11 @@ class GripBenchTest(TestCase):
                 self.node.set_state(phase=phase, run=0, time=0)
                 self.assertFreeWithin(arm.jaw, 0.1, ramp, along=(0, 1, 0))
                 self.assertBlockedBeyond(
-                    arm.jaw, 0.7, ramp, along=(0, arm.side, 0), directions="forward"
+                    arm.jaw,
+                    0.7,
+                    ramp,
+                    along=(0, arm.side, 0),
+                    directions="forward",
                 )
 
     @sampled_poses(73)
@@ -77,4 +97,6 @@ class GripBenchTest(TestCase):
         try:
             self.assertNoSolidInterference(self.node)
         except AssertionError as error:
-            raise AssertionError(f"phase {self.node.time*360}: {error}") from error
+            raise AssertionError(
+                f"phase {self.node.time * 360}: {error}"
+            ) from error

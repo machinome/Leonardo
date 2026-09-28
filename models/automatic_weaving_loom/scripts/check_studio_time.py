@@ -1,7 +1,10 @@
-"""Check the declared Python clock in an already-open Studio loom session.
+"""Check the declared Python clock in an already-open Studio loom
+session.
 
-This only inspects the existing session and changes controls in its own browser.
-It does not open a project, dispatch agents or send any project messages.
+This only inspects the existing session and changes controls in its own
+browser.
+It does not open a project, dispatch agents or send any project
+messages.
 """
 
 # Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
@@ -13,7 +16,8 @@ from playwright.sync_api import expect, sync_playwright
 from inspect_demo import cad_pixels
 
 OUTPUT = (
-    Path(__file__).resolve().parents[3] / "_evidence/automatic_weaving_loom/browser"
+    Path(__file__).resolve().parents[3]
+    / "_evidence/automatic_weaving_loom/browser"
 )
 
 
@@ -67,16 +71,21 @@ def check(base):
         timeline.fill("0")
         timeline.dispatch_event("input")
         expect(page.locator(".machine-time")).to_have_text("0:00.0")
-        assert final != cad_pixels(canvas), "Reset did not change the actual CAD"
+        assert final != cad_pixels(
+            canvas
+        ), "Reset did not change the actual CAD"
         page.get_by_title("Play", exact=True).click()
         expect(timeline).not_to_have_value("0", timeout=10000)
         page.get_by_title("Pause", exact=True).click()
         OUTPUT.mkdir(parents=True, exist_ok=True)
-        page.screenshot(path=str(OUTPUT / "studio-time-controls.png"), timeout=60000)
+        page.screenshot(
+            path=str(OUTPUT / "studio-time-controls.png"), timeout=60000
+        )
         browser.close()
         api.dispose()
     print(
-        "PASS: live Studio publishes loop=60; native ×0.1/×0.25/×0.5 controls, 1:00.0 endpoint, changed CAD and slow playback"
+        "PASS: live Studio publishes loop=60; native ×0.1/×0.25/×0.5 "
+        "controls, 1:00.0 endpoint, changed CAD and slow playback"
     )
 
 

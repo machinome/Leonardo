@@ -1,8 +1,12 @@
-"""One-pin / six / twelve intermittent drive, original reconstructed surfaces.
+"""One-pin / six / twelve intermittent drive, original reconstructed
+surfaces.
 
-The tooth counts come from Atlanticus 985r. Radial pin slots, complementary
-dwell lands and cycloidal flanks are the explicit geometric completion used
-here; the manuscript does not dimension those concealed contact surfaces.
+The tooth counts come from Atlanticus 985r. Radial pin slots,
+complementary
+dwell lands and cycloidal flanks are the explicit geometric completion
+used
+here; the manuscript does not dimension those concealed contact
+surfaces.
 """
 
 # Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
@@ -12,12 +16,16 @@ from machinome.motion.joints import Revolute
 from machinome.motion.ports import RotationalPort
 from machinome.simulation import Driver
 from machinome.math import sin, cos, sqrt, atan2
+
 from .profiles import cycloidal_outline, polar
 
 
 def cylinder(radius, start, end, y=0, z=0):
     return (
-        cq.Workplane("YZ").circle(radius).extrude(end - start).translate((start, y, z))
+        cq.Workplane("YZ")
+        .circle(radius)
+        .extrude(end - start)
+        .translate((start, y, z))
     )
 
 
@@ -30,11 +38,14 @@ def shaft():
 
 
 def clip(value, low, high):
-    return (low + high + sqrt((value - low) ** 2) - sqrt((value - high) ** 2)) / 2
+    return (
+        low + high + sqrt((value - low) ** 2) - sqrt((value - high) ** 2)
+    ) / 2
 
 
 def index_angle(angle):
-    """Pin-in-radial-slot closure, summed over the bounded four-turn exhibit."""
+    """Pin-in-radial-slot closure, summed over the bounded four-turn
+    exhibit."""
     total = 0
     for cycle in range(4):
         local = clip(angle - 180 - 360 * cycle, -60, 60)
@@ -47,7 +58,9 @@ class TimingBearings(CadQueryNode):
 
     def render(self):
         body = cq.Workplane("XY").box(8, 80, 14).translate((-8, -27, 0))
-        body = body.union(cq.Workplane("XY").box(8, 14, 38).translate((-8, 0, 12)))
+        body = body.union(
+            cq.Workplane("XY").box(8, 14, 38).translate((-8, 0, 12))
+        )
         for y, z in ((0, 24), (0, 0), (-54, 0)):
             body = body.cut(cylinder(3.3, -13, -3, y=y, z=z))
         return body
@@ -70,10 +83,16 @@ class SixToothWheel(CadQueryNode):
     turn = Revolute(axis=(1, 0, 0))
 
     def render(self):
-        gear = cq.Workplane("YZ").polyline(cycloidal_outline(6)).close().extrude(6)
+        gear = (
+            cq.Workplane("YZ")
+            .polyline(cycloidal_outline(6))
+            .close()
+            .extrude(6)
+        )
         star = cylinder(20.7, 6.3, 11)
         for i in range(6):
-            # Slots are radial: their centerline sweeps with the actual pin.
+            # Slots are radial: their centerline sweeps with the actual
+            # pin.
             slot = cq.Workplane("XY").box(7, 26, 3.6).translate((8.5, 23, 0))
             star = star.cut(slot.rotate((0, 0, 0), (1, 0, 0), 210 + 60 * i))
         lands = cylinder(20.7, 12, 15)
@@ -90,7 +109,12 @@ class TwelveToothWheel(CadQueryNode):
     turn = Revolute(axis=(1, 0, 0))
 
     def render(self):
-        gear = cq.Workplane("YZ").polyline(cycloidal_outline(12)).close().extrude(6)
+        gear = (
+            cq.Workplane("YZ")
+            .polyline(cycloidal_outline(12))
+            .close()
+            .extrude(6)
+        )
         return shaft().union(gear)
 
 
@@ -101,7 +125,9 @@ class TimingTrain(AssemblyNode):
     twelve = TwelveToothWheel()
     bearings = TimingBearings()
     angle.drives(input.turn, offset=-270)
-    input.turn.drives(six.turn, law=lambda a, b: lambda t: -index_angle(t + 270) - 90)
+    input.turn.drives(
+        six.turn, law=lambda a, b: lambda t: -index_angle(t + 270) - 90
+    )
     six.turn.drives(twelve.turn, ratio=-0.5, offset=-45)
 
     def render(self):

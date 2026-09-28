@@ -2,6 +2,7 @@
 
 # Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
 from machinome.test import TestCase
+
 from .checks import sampled_poses
 from .head_bench import HeadBench
 
@@ -32,7 +33,9 @@ class HeadBenchTest(TestCase):
                         follower, 1.5, self.node.input, along=(0, 0, 1)
                     )
                 except AssertionError as error:
-                    raise AssertionError(f"{name}, phase {phase}: {error}") from error
+                    raise AssertionError(
+                        f"{name}, phase {phase}: {error}"
+                    ) from error
 
     def test_connected_solids(self):
         self.assertNoDisconnectedSolids(self.node)

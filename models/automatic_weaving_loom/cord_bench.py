@@ -1,10 +1,13 @@
-"""Fixture for measuring the flexible haul, return and winding geometry."""
+"""Fixture for measuring the flexible haul, return and winding
+geometry."""
 
 # Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
 import math
+
 from machinome.node import AssemblyNode
 from machinome.simulation import Driver
 from machinome.motion.ports import RotationalPort
+
 from .head import reaches
 from .cords import CordTransmission
 from .textile import WarpRollEnd, ClothWeb
@@ -20,14 +23,23 @@ class CordBench(AssemblyNode):
     cords = CordTransmission()
     warp = WarpRollEnd()
     cloth = ClothWeb()
-    angle.drives(cords.left.lift, law=lambda a, b: lambda t: reaches(t)[0] + 65)
-    angle.drives(cords.right.lift, law=lambda a, b: lambda t: 65 - reaches(t)[1])
+    angle.drives(
+        cords.left.lift, law=lambda a, b: lambda t: reaches(t)[0] + 65
+    )
+    angle.drives(
+        cords.right.lift, law=lambda a, b: lambda t: 65 - reaches(t)[1]
+    )
     angle.drives(cords.left.travel, law=lambda a, b: lambda t: reaches(t)[0])
     angle.drives(cords.right.travel, law=lambda a, b: lambda t: reaches(t)[1])
     angle.drives(cords.reed.lift, law=lambda a, b: reed_lift)
     angle.drives(
         winding,
-        law=lambda a, b: lambda t: index_angle(t) * 0.5 * 0.06 / 48 * 180 / math.pi,
+        law=lambda a, b: lambda t: index_angle(t)
+        * 0.5
+        * 0.06
+        / 48
+        * 180
+        / math.pi,
     )
     winding.drives(warp.unwind)
     winding.drives(cloth.wrap, ratio=-math.pi / 180, offset=-math.pi / 2)

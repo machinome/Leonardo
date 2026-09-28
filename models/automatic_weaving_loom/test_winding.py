@@ -1,9 +1,12 @@
-"""Contracts for the descending feed and lower four-wheel transmission."""
+"""Contracts for the descending feed and lower four-wheel
+transmission."""
 
 # Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
 import math
+
 import numpy as np
 from machinome.test import TestCase
+
 from .checks import sampled_poses
 from .winding import WindingBench, CENTERS, PITCH, RADIUS
 from .test_timing import marker_angle
@@ -15,7 +18,8 @@ class WindingBenchTest(TestCase):
     def test_feed_reaches_both_beams_through_physical_mates(self):
         self.assertTrue(
             hasattr(self.node, "winding"),
-            "Indexed cam, descending rack, four wheels and connecting belt are absent",
+            "Indexed cam, descending rack, four wheels and connecting "
+            "belt are absent",
         )
 
     def test_connected_solids(self):
@@ -29,10 +33,16 @@ class WindingBenchTest(TestCase):
         for time in np.linspace(0, 4, 49):
             self.node.set_state(phase=0, run=1, time=float(time))
             self.assertFreeWithin(
-                self.node.winding.rack, 0.1, self.node.train.twelve, along=(0, 0, 1)
+                self.node.winding.rack,
+                0.1,
+                self.node.train.twelve,
+                along=(0, 0, 1),
             )
             self.assertBlockedBeyond(
-                self.node.winding.rack, 0.7, self.node.train.twelve, along=(0, 0, 1)
+                self.node.winding.rack,
+                0.7,
+                self.node.train.twelve,
+                along=(0, 0, 1),
             )
 
     def test_rack_and_all_four_lower_gears_engage(self):
@@ -75,13 +85,21 @@ class WindingBenchTest(TestCase):
         for along in ((1, 0, 0), (0, 1, 0)):
             self.assertFreeWithin(w.rack, 0.1, w.bearings, along=along)
             self.assertBlockedBeyond(w.rack, 0.7, w.bearings, along=along)
-        for wheel in (w.rear_lower, w.rear_upper, w.front_upper, w.front_lower):
+        for wheel in (
+            w.rear_lower,
+            w.rear_upper,
+            w.front_upper,
+            w.front_lower,
+        ):
             for along in ((1, 0, 0), (0, 0, 1)):
                 self.assertFreeWithin(wheel, 0.1, w.bearings, along=along)
                 self.assertBlockedBeyond(wheel, 0.7, w.bearings, along=along)
 
-    def test_perforated_belt_is_continuous_and_its_holes_engage_both_sprockets(self):
-        # Flexible material is deliberately checked separately: whole-root
+    def test_perforated_belt_is_continuous_and_its_holes_engage_both_sprockets(
+        self,
+    ):
+        # Flexible material is deliberately checked separately:
+        # whole-root
         # rigid interference does not inspect the leather.
         w = self.node.winding
         for time in np.linspace(0, 4, 17):
@@ -93,7 +111,9 @@ class WindingBenchTest(TestCase):
                 for wheel in (w.rear_upper, w.front_upper):
                     self.assertNotIntersecting(leather, wheel)
             for wheel, outer in ((w.rear_upper, max), (w.front_upper, min)):
-                leather = outer(bridges, key=lambda part: part.mesh.bounds[:, 1].mean())
+                leather = outer(
+                    bridges, key=lambda part: part.mesh.bounds[:, 1].mean()
+                )
                 self.assertFreeWithin(wheel, 0.1, leather, axis=(1, 0, 0))
                 self.assertBlockedBeyond(wheel, 6, leather, axis=(1, 0, 0))
                 for band in (w.belt.left, w.belt.right):

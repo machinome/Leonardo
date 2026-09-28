@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
-"""Run every registered exhibit's browser check on an ephemeral local server."""
+"""Run every registered exhibit's browser check on an ephemeral local
+server."""
+
 # Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
 
 from functools import partial
@@ -19,7 +21,9 @@ class QuietHandler(SimpleHTTPRequestHandler):
 def main():
     catalogue, solid = read_catalogue()
     validate(catalogue, solid)
-    server = ThreadingHTTPServer(("127.0.0.1", 0), partial(QuietHandler, directory=str(ROOT)))
+    server = ThreadingHTTPServer(
+        ("127.0.0.1", 0), partial(QuietHandler, directory=str(ROOT))
+    )
     worker = Thread(target=server.serve_forever, daemon=True)
     worker.start()
     try:
@@ -29,8 +33,15 @@ def main():
             if not command:
                 raise ValueError(f"No browser check registered for {name}")
             print(f"Browser check: {name}", flush=True)
-            subprocess.run([sys.executable, *[arg.replace("{base_url}", base) for arg in command]],
-                           cwd=ROOT, check=True, timeout=model.get("browser_timeout", 180))
+            subprocess.run(
+                [
+                    sys.executable,
+                    *[arg.replace("{base_url}", base) for arg in command],
+                ],
+                cwd=ROOT,
+                check=True,
+                timeout=model.get("browser_timeout", 180),
+            )
     finally:
         server.shutdown()
         server.server_close()

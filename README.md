@@ -91,6 +91,17 @@ The sawmill's extra export is its frame study and cutting book. Its own
 `python models/hydraulic_sawmill/scripts/demo.py --build-only` builds both
 the working saw and that study in one command.
 
+For Python style, install the `dev` extra, then check all tracked Python
+files from the repository root:
+
+```sh
+git ls-files -z '*.py' | xargs -0 black --check
+git ls-files -z '*.py' | xargs -0 pycodestyle
+```
+
+Black uses 79 columns; comments and docstrings use 72. `setup.cfg` allows
+Black's extended-slice spacing and operator placement.
+
 Exports include their local viewer assets and a source archive of the
 committed gallery. Commit source changes before creating publication
 archives. Generated geometry, exports and inspection images are ignored.

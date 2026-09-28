@@ -1,7 +1,9 @@
-"""Reusable timber, heddles, reed, spool and textile from the gallery model.
+"""Reusable timber, heddles, reed, spool and textile from the gallery
+model.
 
 The reconstructed transmissions and gripping hardware live in timing.py,
-winding.py and head.py. The free weft span remains a schematic indicator.
+winding.py and head.py. The free weft span remains a schematic
+indicator.
 """
 
 # Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
@@ -12,6 +14,7 @@ from machinome.parameters import Length, Scalar, Count
 from machinome.motion.joints import Prismatic
 from machinome.motion.ports import TranslationalPort
 from machinome.math import sin, cos, sqrt, atan2
+
 from .timing import clip
 from .reeding import REED_TRAVEL
 
@@ -23,7 +26,10 @@ def box(x, y, z, at=(0, 0, 0)):
 def axle(radius, length, at=(0, 0, 0)):
     """Cylinder on X, centred on at."""
     return (
-        cq.Workplane("YZ").circle(radius).extrude(length / 2, both=True).translate(at)
+        cq.Workplane("YZ")
+        .circle(radius)
+        .extrude(length / 2, both=True)
+        .translate(at)
     )
 
 
@@ -69,7 +75,9 @@ class TimberFrame(CadQueryNode):
             pieces.append(box(18, 18, 12, (x, -35, 180)))
         for side in (-1, 1):
             guide = box(43, 16, 12, (side * 157.5, 30, self.guide_z))
-            guide = guide.cut(box(6.6, 7.6, 16, (side * 145, 30, self.guide_z)))
+            guide = guide.cut(
+                box(6.6, 7.6, 16, (side * 145, 30, self.guide_z))
+            )
             pieces.append(guide)
             pieces.append(
                 box(
@@ -95,9 +103,19 @@ class HeddleCage(CadQueryNode):
         for i in range(12):
             x = -69 + 6 * self.parity + 12 * i
             needle = box(0.9, 2, 64, (x, 0, 0))
-            eye = cq.Workplane("XZ").center(x, 0).circle(2.6).extrude(1, both=True)
+            eye = (
+                cq.Workplane("XZ")
+                .center(x, 0)
+                .circle(2.6)
+                .extrude(1, both=True)
+            )
             needle = needle.union(eye)
-            bore = cq.Workplane("XZ").center(x, 0).circle(1.5).extrude(4, both=True)
+            bore = (
+                cq.Workplane("XZ")
+                .center(x, 0)
+                .circle(1.5)
+                .extrude(4, both=True)
+            )
             frame = frame.union(needle.cut(bore))
         return frame
 
@@ -136,7 +154,8 @@ class CarrierArm(CadQueryNode):
 
     def render(self):
         arm = box(180, 8, 5, (self.side * 102.5, 0, 0))
-        # Interleaved fingers support the bobbin through handoff. Left outer
+        # Interleaved fingers support the bobbin through handoff. Left
+        # outer
         # fingers and right inner fingers can pass at the centre without
         # shared volume. The bobbin sits 0.3 mm above the finger tops.
         lanes = (-2.5, 2.5) if self.side < 0 else (-0.8, 0.8)
@@ -161,7 +180,9 @@ class WeftSpool(CadQueryNode):
             (-8, 6),
             (-12, 2),
         ]
-        body = cq.Workplane("XY").polyline(outline).close().extrude(3, both=True)
+        body = (
+            cq.Workplane("XY").polyline(outline).close().extrude(3, both=True)
+        )
         body = body.cut(box(14, 6, 4, (0, 0, 2)))
         return body.union(axle(2.5, 12, (0, 0, 0)))
 
@@ -172,12 +193,16 @@ def shuttle_x(angle):
     def rise(start, end):
         return (1 - cos(180 * clip((p - start) / (end - start), 0, 1))) / 2
 
-    # Smooth approaches with a 60-degree receiving/closing/releasing dwell.
-    return 130 * (-1 + rise(10, 60) + rise(120, 170) - rise(190, 240) - rise(300, 350))
+    # Smooth approaches with a 60-degree receiving/closing/releasing
+    # dwell.
+    return 130 * (
+        -1 + rise(10, 60) + rise(120, 170) - rise(190, 240) - rise(300, 350)
+    )
 
 
 def weft_selvedge(angle):
-    # Exchange the illustrated yarn's anchored edge during the closed shed.
+    # Exchange the illustrated yarn's anchored edge during the closed
+    # shed.
     s = sin(angle)
     return -72 * s / sqrt(s * s + 0.0025)
 
@@ -250,7 +275,9 @@ class ClothPick(MolejoNode):
     color = "#b95347"
 
     def render(self):
-        points = [(3 + 6 * i, 0, 1.2 * (-1) ** (i + self.parity)) for i in range(24)]
+        points = [
+            (3 + 6 * i, 0, 1.2 * (-1) ** (i + self.parity)) for i in range(24)
+        ]
         points.append((144, 0, 0))
         return Shape(
             Circle(0.42), [Spline(points)], path_samples=160, profile_samples=8

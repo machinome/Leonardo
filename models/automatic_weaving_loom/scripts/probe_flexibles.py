@@ -1,7 +1,10 @@
-"""Diagnostic inventory of operating-cord/spring contacts with rigid parts.
+"""Diagnostic inventory of operating-cord/spring contacts with rigid
+parts.
 
-Run from the gallery root with its Python environment. This intentionally
-reports termination contacts too; it is a locator, not an acceptance test.
+Run from the gallery root with its Python environment. This
+intentionally
+reports termination contacts too; it is a locator, not an acceptance
+test.
 """
 
 # Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
@@ -13,8 +16,11 @@ import numpy as np
 import trimesh
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[3]))
-from models.automatic_weaving_loom.model import AutomaticWeavingLoom
-from models.automatic_weaving_loom.checks import rigid_parts
+# Direct invocation needs the gallery root on sys.path first.
+from models.automatic_weaving_loom.model import (
+    AutomaticWeavingLoom,
+)  # noqa: E402
+from models.automatic_weaving_loom.checks import rigid_parts  # noqa: E402
 
 
 def main():
