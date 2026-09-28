@@ -58,3 +58,7 @@ mplayer _build/rehearsal.mp4 -sub _build/rehearsal.srt
 The same-basename SRT may also be discovered automatically by players. Disable
 subtitles there to assess the voice by itself. `description.md` owns credits;
 none are on screen. Public links remain unresolved and nothing is published.
+
+See [verification](verification.md) for encoded-media checks and listening limits,
+the [editable screenplay](episode.yaml), [production settings](production.yaml),
+and [upload description](description.md).
