@@ -1,0 +1,30 @@
+# Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
+format: machinome-visual-experiment/dark-source
+status: empirical-visual-test-not-a-format-proposal
+referenceEpisode: ../machinome-source-study/episode.yaml
+output: {width: 1920, height: 1080, fps: 30, durationSeconds: 28}
+palette: {background: "#111519", foreground: "#dbe2e7"}
+direction: >-
+  Pure source code, with no machine alongside it. Show the actual machinome
+  imports, assembly class, components and drive connections from the outset.
+  Hold completely still so the viewer can read. At the end, reveal only the
+  final two lines: a small typographic movement, not a performance of writing
+  the program. Use dark charcoal throughout, as a trial of the whole film's
+  requested dark direction. No progress bar, scrolling or idle cursor blink.
+narration: >-
+  A waterwheel. A saw. A carriage. In Machinome, I describe these parts in
+  Python, and write how they move together. Here, the wheel drives the
+  crankshaft. These are the actual instructions behind the model. Source
+  code you can read, test, and change. I can help write it. You decide
+  what to make.
+sourceCode:
+  imports:
+    file: ../../models/hydraulic_sawmill/model.py
+    lines: [4, 7]
+  architecture:
+    file: ../../models/hydraulic_sawmill/model.py
+    lines: [196, 206]
+  ending:
+    file: ../../models/hydraulic_sawmill/model.py
+    lines: [249, 250]
+endingMotion: {from: 23.8, to: 26.2}
