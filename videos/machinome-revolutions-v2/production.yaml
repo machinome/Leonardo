@@ -1,0 +1,90 @@
+# Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
+series: ""
+output: {width: 1920, height: 1080, fps: 30, durationSeconds: 360}
+model:
+  manifest: ../../export/hydraulic_sawmill/manifest.json
+  expectedDurationSeconds: 1460
+  timeMode: normalized-loop
+  sourceRevision: 844c723d81bc69d728b7d98e50e86c00829e2ec8
+  readiness: >-
+    Existing PEP 8 source and posed export. Editorial draft only; source-only
+    scenes, macro framing, photo and interactive capture need production work.
+audio:
+  provider: elevenlabs
+  model: eleven_v3
+  voice: cgSgspJ2msm6clMCkdW9
+  voiceLabel: Jessica
+  outputFormat: pcm_24000
+  voiceSettings: {stability: 0.5, similarity_boost: 0.75}
+  replacements: {}
+  direction: >-
+    Warm and curious, precise in the mechanical explanation. One machine
+    speaking about tools and human judgment, not claiming personhood.
+    Leave genuine time to inspect each relationship. No forced epic delivery.
+  pronunciation:
+    Machinome: >-
+      Explicit IPA dictionary məˈʃiːnoʊm; approved in full context in
+      ../machinome-pronunciation/phoneme.yaml. Do not revert to spelling aliases.
+    Leonardo da Vinci: Speak the full name, not Leonardo alone.
+    pawl: Rhymes with ball.
+  timing: >-
+    No audio generated for this draft. Six-minute slots are estimates.
+    Measure complete takes before fixing word highlights and mechanical beats.
+    Standard speech CLI does not yet forward phoneme dictionary locators.
+style:
+  background: "#111519"
+  foreground: "#dbe2e7"
+  accent: "#edaa7d"
+  fontFamily: DejaVu Sans, sans-serif
+sourceCode:
+  wheel-imports: {file: ../../models/hydraulic_sawmill/parts.py, lines: [8, 11]}
+  wheel-class: {file: ../../models/hydraulic_sawmill/parts.py, lines: [188, 208]}
+  mill-imports: {file: ../../models/hydraulic_sawmill/model.py, lines: [7, 10]}
+  mill-class: {file: ../../models/hydraulic_sawmill/model.py, lines: [366, 376]}
+  test-imports: {file: ../../models/hydraulic_sawmill/test_model.py, lines: [7, 10]}
+  test-class: {file: ../../models/hydraulic_sawmill/test_model.py, lines: [25, 26]}
+  stroke-test: {file: ../../models/hydraulic_sawmill/test_model.py, lines: [592, 597]}
+cameras:
+  whole: {position: [770, -1037, 824], target: [0, -20, 295], up: [0, 0, 1], fov: 37}
+  wheel: {position: [200, -445, 255], target: [0, -140, 120], up: [0, 0, 1], fov: 37}
+  crank: {position: [370, 800, 500], target: [0, 0, 315], up: [0, 0, 1], fov: 37}
+  saw: {position: [335, -470, 505], target: [0, 0, 415], up: [0, 0, 1], fov: 37}
+  linkage: {position: [390, 690, 520], target: [125, 0, 340], up: [0, 0, 1], fov: 37}
+  pawls: {position: [145, 410, 400], target: [135, 0, 332], up: [0, 0, 1], fov: 37}
+  rope-wide: {position: [-540, 830, 610], target: [-80, 0, 300], up: [0, 0, 1], fov: 37}
+  reduction: {position: [-590, 350, 425], target: [-305, 0, 315], up: [0, 0, 1], fov: 37}
+  mechanism: {position: [740, 940, 705], target: [0, 0, 280], up: [0, 0, 1], fov: 37}
+layers:
+  structure: [[Frame and guides, Fixed timber structure]]
+  foundation: [[Frame and guides, Foundation]]
+  water: [[Water drive, Water channel], [Water drive, Water surface]]
+  saw: [[Saw mechanism]]
+  feed: [[Feed mechanism]]
+  carriage: [[Timber carriage]]
+evidence:
+  brief: ./README.md
+  museum-record: ./research.md
+  model: ../../models/hydraulic_sawmill/model.py
+  parts: ../../models/hydraulic_sawmill/parts.py
+  tests: ../../models/hydraulic_sawmill/test_model.py
+  reconstruction: ../../models/hydraulic_sawmill/docs/reconstruction.md
+  transmission: ../../models/hydraulic_sawmill/docs/transmission-validation.md
+  carpentry-validation: ../../models/hydraulic_sawmill/docs/carpentry-validation.md
+  rope-drive: ../../models/hydraulic_sawmill/rope_drive.py
+  approved-study: ../machinome-syntax-study/README.md
+credits:
+  project: Leonardo da Vinci Gallery
+  creator: Vibecoded by Astra
+  copyright: Copyright (C) 2026 Luis Henrique Cassis Fagundes
+  license: AGPL-3.0-only
+  licenseFile: ../../LICENSE
+  museumPhoto:
+    object: Milan interpretative hydraulic saw model IGB-37, 1952–1953
+    source: https://www.museoscienza.org/besrv/sites/default/files/2019-11/sega-idraulica.jpg
+    researchCopy: ../../_reference/hydraulic_sawmill/milan-overall.jpg
+    rights: Unverified for publication; no licence inferred or image redistributed.
+release:
+  simulationUrl: null
+  sourceUrl: null
+  descriptionTemplate: ./description.md
+  publish: false

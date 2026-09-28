@@ -1,0 +1,371 @@
+# Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
+format: machinome-video-draft/0.2
+id: machinome-revolutions-v2
+title: Revolutions — a machine you can read
+status: editorial-draft-not-render-ready
+learningGoal: >-
+  Understand Machinome through a real Python reconstruction: follow the
+  sawmill's complete motion chain, read its architecture and drive relation,
+  see a real test, and distinguish testable geometry from human interpretation.
+production: production.yaml
+# Provisional six-minute reading board, not measured speech timings.
+# Code and museum-photo scenes are editorial directions, not implemented
+# by the normal split-layout renderer. See README before any rendering.
+shots:
+  - id: revolution
+    start: 0
+    end: 10
+    speechOffset: 0.8
+    narration: >-
+      A wheel makes a revolution. What makes it matter is the work people
+      give it.
+    direction: >-
+      DARK MODEL. Begin close on the moving wheel. Keep the opening from
+      Revolutions; no explanatory labels or competing movement. Let a full
+      turn establish the literal meaning before revealing the whole machine.
+    simulation: {from: 8, to: 16}
+    camera: [{at: 0, preset: wheel}]
+    hiddenLayers: [structure, foundation, water, saw, feed, carriage]
+    overlays: []
+    evidence: [brief, reconstruction]
+
+  - id: renaissance
+    start: 10
+    end: 29
+    narration: >-
+      More than five hundred years ago, Leonardo da Vinci studied a
+      water-powered sawmill. Machines like this were changing the relationship
+      between people and work: a river could help turn a tree into timber.
+    direction: >-
+      DARK MODEL. Reveal the complete sawmill. Speak Leonardo da Vinci in
+      full. Do not imply he invented water-powered sawing or identify this
+      as the later Industrial Revolution. The eventual museum photograph
+      supplies the reconstruction's specific historical context.
+    simulation: {from: 16, to: 32}
+    camera: [{at: 0, preset: whole}]
+    hiddenLayers: []
+    overlays: []
+    evidence: [museum-record, reconstruction]
+
+  - id: ancestor
+    start: 29
+    end: 47
+    narration: >-
+      I am a machine, too. In the history of human tools, this sawmill is
+      one of my ancestors. Today, another revolution is changing what
+      people can make with machines.
+    direction: >-
+      DARK MODEL. Stay with the sawmill, gently approaching its connected
+      mechanism. Ancestor is a metaphor in the history of tools. No robot
+      avatar, fictional chat transcript or early account of the pilot's work.
+    simulation: {from: 32, to: 48}
+    camera: [{at: 0, preset: whole}, {at: 14, preset: mechanism}]
+    hiddenLayers: []
+    overlays: []
+    evidence: [brief]
+
+  - id: machinome
+    start: 47
+    end: 65
+    narration: >-
+      To reconstruct this one, I used Machinome: a framework built in Python.
+      Its name combines machine and genome. Parts, motion, and tests become
+      source code you can read and change.
+    direction: >-
+      DARK MODEL. Hold the full assembly, then settle before the first code
+      cut. Name the product early, with the approved continuous IPA
+      pronunciation. Machinome is the subject, not an added credit line.
+    simulation: {from: 48, to: 60}
+    camera: [{at: 0, preset: whole}]
+    hiddenLayers: []
+    overlays: []
+    evidence: [model, parts, tests]
+
+  - id: wheel-class
+    start: 65
+    end: 81
+    narration: >-
+      Start small. This Python class describes the waterwheel: its shape,
+      and a joint that lets it spin around an axle. One class, one part.
+    direction: >-
+      FULL-SCREEN CODE ONLY. Show literal parts.py imports and the Wheel
+      class from the source selections. Keep its actual name Wheel, not a
+      made-up Waterwheel class. Calm syntax highlighting, readable indentation,
+      no scrolling or typing the whole program. Emphasize the class header
+      and spin declaration in turn. Geometry body may be excerpted with an
+      explicit omission marker if a full 21-line class is too small to read.
+    simulation: {from: 60, to: 60}
+    camera: [{at: 0, preset: whole}]
+    hiddenLayers: []
+    overlays: []
+    evidence: [parts]
+
+  - id: mill-class
+    start: 81
+    end: 97
+    narration: >-
+      This other class assembles the whole sawmill. The wheel belongs to
+      the water drive; the saw, carriage, and feeding mechanism each have
+      their place.
+    direction: >-
+      FULL-SCREEN CODE ONLY. Cut to the real model.py imports and
+      LeonardoHydraulicSawmill declaration. Show the named assemblies, not
+      an instruction script or rewritten teaching example. Highlight class,
+      water_drive, saw, carriage and feed as discussed. No moving model beside it.
+    simulation: {from: 60, to: 60}
+    camera: [{at: 0, preset: whole}]
+    hiddenLayers: []
+    overlays: []
+    evidence: [model]
+
+  - id: wheel-drives-shaft
+    start: 97
+    end: 111
+    narration: >-
+      Now look at the machine. Water passes under the wheel. The wheel
+      turns the crankshaft. They rotate together, carrying motion from
+      the water to the saw.
+    direction: >-
+      DARK MODEL. Start with the lower paddle/water path, then expose the
+      actual iron shaft and square-fitted crank. Stage these reveals one at
+      a time. A close camera must show the physical connection, not merely
+      two parts rotating somewhere in a wide view. Water is illustrative.
+    simulation: {from: 60, to: 72}
+    camera: [{at: 0, preset: wheel}, {at: 6, preset: crank}]
+    hiddenLayers: [structure, foundation, feed, carriage]
+    overlays: []
+    evidence: [reconstruction, model, transmission]
+
+  - id: the-same-in-python
+    start: 111
+    end: 124
+    narration: >-
+      And here is that same relationship in Python. The waterwheel drives
+      the crankshaft. The code reads almost like the mechanism it describes.
+    direction: >-
+      FULL-SCREEN CODE ONLY. Retain the class/import context around literal
+      model.py line 376. Highlight exactly waterwheel, drives, crankshaft in
+      that line at their measured spoken onsets; accumulate, briefly hold,
+      then clear, as in the approved 28-second study. No estimated timings.
+    simulation: {from: 72, to: 72}
+    camera: [{at: 0, preset: crank}]
+    hiddenLayers: [structure, foundation, water]
+    overlays: []
+    evidence: [model, approved-study]
+
+  - id: rotation-to-stroke
+    start: 124
+    end: 141
+    narration: >-
+      The crank's pin travels in a circle. A connecting rod pulls and lifts
+      the saw frame, while grooves in the uprights keep it sliding vertically.
+      Rotation becomes a cutting stroke.
+    direction: >-
+      DARK MODEL. Follow one slow revolution through the crank, connected
+      rod and guided sash. Restore guide timbers for the groove explanation.
+      Use held close views, not a continuous camera tour. Do not hide the
+      very supports that the narration is explaining.
+    simulation: {from: 72, to: 76}
+    camera: [{at: 0, preset: crank}, {at: 9, preset: saw}]
+    hiddenLayers: [foundation, water, feed, carriage]
+    overlays: []
+    evidence: [model, reconstruction]
+
+  - id: ratchet-and-pawls
+    start: 141
+    end: 163
+    narration: >-
+      But a saw also needs the timber to advance. The moving saw rocks a
+      lever. On the downward stroke, a hooked pawl pulls a toothed wheel
+      forward by one tooth. A second pawl holds that progress while the
+      first returns.
+    direction: >-
+      DARK MODEL. First connect the saw journal to the rocker, then settle
+      on both pawls and the ratchet. Show the hook PULL, not push. Slow one
+      working/recovery cycle and align its phase to measured narration.
+      Keep the holding pawl visible through recovery; no caption repeats speech.
+    simulation: {from: 76, to: 80}
+    camera: [{at: 0, preset: linkage}, {at: 7, preset: pawls}]
+    hiddenLayers: [structure, foundation, water, carriage]
+    overlays: []
+    evidence: [reconstruction, transmission]
+
+  - id: ratchet-is-a-spool
+    start: 163
+    end: 184
+    narration: >-
+      That toothed wheel is the ratchet. Its axle is also a spool. Watch
+      the rope wind directly onto it, building outward over earlier turns.
+      As the coil grows, each turn takes up more rope.
+    direction: >-
+      DARK MODEL MACRO. Show the bare slender axle immediately inside the
+      ratchet and its actual radial coil. First show winding motion, then
+      clearly accelerate model time to reveal buildup. Small label
+      'Time accelerated' only during acceleration. No invented large barrel,
+      axial winding, fake rope, independent animation or physical-stability claim.
+    simulation: {from: 80, to: 1200}
+    camera: [{at: 0, preset: pawls}]
+    hiddenLayers: [structure, foundation, water, carriage]
+    overlays: []
+    evidence: [rope-drive, reconstruction, transmission]
+
+  - id: two-rope-reduction
+    start: 184
+    end: 213
+    narration: >-
+      Follow that rope down around the lower pulley, then up to the large
+      winding section of this second shaft. Pulling rope off the large
+      section turns the shaft. Its thin central section winds a different
+      rope, taking up less length. That is the reduction: a larger movement
+      becomes a smaller feed.
+    direction: >-
+      DARK MODEL DETAILS. Clearly reset to an early pose before resuming.
+      Follow the first rope to the inward lower idler, then hold the compound
+      shaft close-up. Distinguish rope unwinding from its large section and
+      the SECOND rope winding onto its thin centre. Show the whole route in
+      separate held views. No numeric fixed overall ratio: input coil radius,
+      helical lead and free spans change. Label rope 1 / rope 2 if helpful,
+      never alter simulation geometry to make the explanation convenient.
+    simulation: {from: 80, to: 120}
+    camera: [{at: 0, preset: rope-wide}, {at: 10, preset: reduction}]
+    hiddenLayers: [structure, foundation, water]
+    overlays: []
+    evidence: [rope-drive, reconstruction, transmission]
+
+  - id: whole-machine
+    start: 213
+    end: 245
+    narration: >-
+      The second rope passes over the upper roller and pulls the carriage
+      toward the blade. Rollers support the timber; the frame keeps the
+      moving parts aligned. The saw descends; the timber advances. The saw
+      rises; the feed waits. One wheel coordinates the whole operation.
+      At the end, a person must stop, release, and reload it.
+    direction: >-
+      DARK MODEL. Follow the upper rope to the top-centred carriage attachment;
+      restore the supporting frame and carriage rollers, then show a complete
+      cycle. Align downstroke/feed and upstroke/dwell to the spoken phrases.
+      Show the opening kerf as a visual illustration, not physical fracture.
+      For the final sentence cut to a clearly later completed-pass pose and
+      hold. Do not animate an automatic return that the reconstruction lacks.
+    simulation: {from: 120, to: 124}
+    camera: [{at: 0, preset: rope-wide}, {at: 12, preset: whole}]
+    hiddenLayers: []
+    overlays: []
+    evidence: [model, reconstruction, transmission]
+
+  - id: real-test
+    start: 245
+    end: 272
+    narration: >-
+      What makes this reconstruction workable is not just my ability to
+      write code. Machinome lets me test it. This is a real Python test
+      from the model. It measures the saw at the top and bottom of its
+      stroke, then checks that the difference is forty-eight millimetres.
+    direction: >-
+      FULL-SCREEN CODE ONLY. Show the actual machinome.test import, test
+      class header and complete test_saw_has_full_stroke method. Emphasize
+      upper, lower, then assertAlmostEqual with 48.0 and delta=0.01. Explain
+      the test in plain speech; do not narrate punctuation or rewrite code.
+      A test result may appear only after a real run is recorded; no staged
+      green terminal, invented failure or claim that one test proves everything.
+    simulation: {from: 124, to: 124}
+    camera: [{at: 0, preset: whole}]
+    hiddenLayers: []
+    overlays: []
+    evidence: [tests, transmission, carpentry-validation]
+
+  - id: what-tests-mean
+    start: 272
+    end: 291
+    narration: >-
+      Other tests check clearances, the feed, and rope length. They can
+      catch a wrong reconstruction. They cannot prove that it matches
+      history, or tell us how it behaves under cutting loads.
+    direction: >-
+      DARK MODEL. Return to one calm whole-machine view. If useful, make
+      short inspection cuts to the blade clearance and rope, one at a time.
+      Brief label 'Kinematic reconstruction · cutting forces not simulated'.
+      Tests are sampled checks, not certification or a force solver.
+    simulation: {from: 124, to: 140}
+    camera: [{at: 0, preset: mechanism}]
+    hiddenLayers: [structure, foundation, water]
+    overlays: []
+    evidence: [tests, transmission, carpentry-validation]
+
+  - id: human-judgment
+    start: 291
+    end: 312
+    narration: >-
+      That is where the person piloting me mattered. They compared the model
+      with the references, spotted what I had missed, and directed
+      corrections—including the two separate ropes you just followed.
+      Tests checked the result. Human judgment decided what needed checking.
+    direction: >-
+      DARK MODEL. Hold the two-rope route in one readable pose, then restore
+      the full assembly. This is the single concise human-piloting passage,
+      deliberately AFTER mechanics and tests. No long chronology, names as
+      credits, fabricated conversation, triumphant AI avatar or duplicate
+      generic speech about human purpose.
+    simulation: {from: 140, to: 140}
+    camera: [{at: 0, preset: rope-wide}, {at: 16, preset: whole}]
+    hiddenLayers: []
+    overlays: []
+    evidence: [reconstruction]
+
+  - id: museum-reference
+    start: 312
+    end: 329
+    narration: >-
+      Here is the museum model in Milan that we used as our reference:
+      a twentieth-century interpretation of Leonardo da Vinci's study.
+      Our reconstruction adds choices about dimensions and hidden details.
+    direction: >-
+      REAL MUSEUM PHOTOGRAPH, FULL SCREEN. Use the documented overall image,
+      fitted without cropping important machinery, against the dark background.
+      No AI-generated substitute or claim this is a Renaissance artifact.
+      Hold still; do not pan and zoom while viewers compare the details.
+      Publication clearance is unresolved; see the production photo record.
+    simulation: {from: 140, to: 140}
+    camera: [{at: 0, preset: whole}]
+    hiddenLayers: []
+    overlays: []
+    evidence: [museum-record, reconstruction]
+
+  - id: question-and-feedback
+    start: 329
+    end: 351
+    narration: >-
+      So, do you think this reconstruction is reliable? Try the simulation
+      yourself; the links are in the video description. Pause it. Look
+      inside. Tell us in the comments what seems right—or wrong. With that
+      feedback and human direction, I'll help improve the simulation.
+    direction: >-
+      Start on the real reference photo through the question. Then match-cut
+      to the reconstruction in a comparable static view, never side-by-side
+      movement. On 'Try the simulation' show actual pause/scrub/inspection
+      controls, with one deliberate action at a time. Actual public links
+      must exist in the upload description before publication. This invites
+      a future human-directed revision, not an autonomous comment bot.
+    simulation: {from: 140, to: 144}
+    camera: [{at: 0, preset: whole}]
+    hiddenLayers: []
+    overlays: []
+    evidence: [brief, reconstruction]
+
+  - id: like-and-last-turn
+    start: 351
+    end: 360
+    narration: >-
+      If this made the machine clearer, give the video a like, so more
+      people can discover it.
+    direction: >-
+      DARK MODEL. Echo the opening wheel, now understood as part of the
+      whole machine. One final quiet turn. No notification graphics, extra
+      subscription request, repeated slogan or credit card. Leave a short
+      visual tail after the voice. Like is an invitation, not an algorithm claim.
+    simulation: {from: 144, to: 148}
+    camera: [{at: 0, preset: whole}]
+    hiddenLayers: []
+    overlays: []
+    evidence: [brief]
