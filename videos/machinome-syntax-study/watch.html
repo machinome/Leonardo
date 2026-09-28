@@ -17,7 +17,19 @@
   .note { color: #9aa8b4; font-size: 15px; }
 </style>
 <h1>A machine you can read</h1>
-<p>New 28-second segment · approved pronunciation · formatted source</p>
+<h2>New pronunciation audition</h2>
+<p>Play this audio first. It uses the actual narration paragraph, the same
+  Jessica voice, and an explicit pronunciation dictionary instead of a spelling
+  hint. Listen for one continuous “ma-SHEEN-ohm,” ending like <em>genome</em>,
+  with no separate “me.” Tell me in the conversation whether it is right.</p>
+<audio id="pronunciation" controls preload="metadata" src="pronunciation-phoneme.wav"
+  style="width:100%"></audio>
+<p><a href="pronunciation-phoneme.wav" download>Download new WAV</a> ·
+  <a href="pronunciation-phoneme.srt" download>Separate audio subtitles</a></p>
+<p class="note">The video below is unchanged and still has the previous pronunciation.
+  The new audio has not yet been fitted to its visual timing.</p>
+<h2>Current segment</h2>
+<p>28-second segment · narration-synced source highlights</p>
 <video id="film" controls preload="metadata" poster="opening.png" src="dark-source.mp4"></video>
 <button id="start">Play from beginning</button>
 <button id="replay">Replay the highlighted line</button>
@@ -31,6 +43,9 @@
 <p id="status" role="status"></p>
 <script>
   const film = document.querySelector('#film');
+  const pronunciation = document.querySelector('#pronunciation');
+  pronunciation.addEventListener('play', () => film.pause());
+  film.addEventListener('play', () => pronunciation.pause());
   async function playFrom(seconds) {
     try {
       film.currentTime = seconds;

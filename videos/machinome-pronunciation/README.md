@@ -6,7 +6,7 @@ with two occurrences of Machinome and a nearby “genome” for comparison.
 This is an isolated audition, not a supported Videomaker format or a change
 to the release film.
 
-The desired pronunciation is /məˈʃiːnoʊm/. The current speech key cannot
+The desired pronunciation is /məˈʃiːnoʊm/. At generation, the speech key could not
 create pronunciation dictionaries, so this sample uses the continuous
 spelling `Masheenome`, without a hyphen. The IPA remains an editorial
 target, not an applied phoneme rule. Captions retain `Machinome`.
@@ -26,3 +26,32 @@ ignored `.env`. Generated WAV, separate SRT and provenance stay in `_build/`.
 The WAV is the provider's complete 24 kHz mono PCM, without trimming,
 stretching, background sound or mastering. File properties and browser
 loading are verified; the pilot listened and approved the pronunciation.
+
+## Explicit phoneme audition
+
+The later full-paragraph spelling take was not approved: the pilot heard
+an unwanted final “me.” After the pilot enabled dictionary permission,
+`phoneme.yaml` generated a separate, unapproved take of the exact syntax-study
+narration, using Jessica / Eleven v3 and an IPA dictionary rule. No spelling
+substitution is sent. This remains an isolated production experiment, not a
+new stable Videomaker feature.
+
+```sh
+node generate.mjs /home/asa/devel/machinome/videomaker phoneme
+```
+
+The dictionary locator and rule hash are cached in `_build/phoneme/`, along
+with the request, alignment, complete WAV and separate SRT. An unchanged rerun
+reuses both dictionary and audio. Changed inputs are refused rather than
+silently reusing a stale take. One dictionary and one paid 300-character
+speech request were made on 28 September 2026; no permissions were changed
+by the script. The original approved standalone sample remains untouched.
+
+The new take is 23.6 seconds, mono 24 kHz PCM16. WAV SHA-256:
+`b61dc2bab1c168dfffb4644fac4d6407fff31d7a5ff081adfd2df444af511750`.
+It is copied to the existing syntax-study review server as
+`pronunciation-phoneme.wav` with its separate SRT. Refresh the same
+<http://127.0.0.1:8769/> and use the audio player above the unchanged video.
+The page prevents simultaneous video/audio playback. Browser playback,
+subtitle delivery, exact narration and cache reuse are checked; auditory
+pronunciation approval is still the pilot's, not inferred from API success.

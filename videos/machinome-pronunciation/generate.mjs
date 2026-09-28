@@ -13,10 +13,12 @@ const tool = resolve(process.argv[2]);
 const { parseSource } = await import(pathToFileURL(resolve(tool, 'src/episode.mjs')));
 const { pcmWav } = await import(pathToFileURL(resolve(tool, 'src/speech.mjs')));
 const { captionsFromAlignment, srt } = await import(pathToFileURL(resolve(tool, 'src/timeline.mjs')));
-const recipe = parseSource(await readFile(resolve(base, 'sample.yaml'), 'utf8'));
+const recipeName = process.argv[3] ?? 'sample';
+assert.match(recipeName, /^(sample|phoneme)$/);
+const recipe = parseSource(await readFile(resolve(base, `${recipeName}.yaml`), 'utf8'));
 assert.equal(recipe.format, 'machinome-audio-experiment/pronunciation');
 assert.ok(!/copyright|licen[cs]e|created by|made with/i.test(recipe.text));
-const build = resolve(base, '_build');
+const build = resolve(base, '_build', recipeName === 'sample' ? '.' : recipeName);
 await mkdir(build, { recursive: true });
 loadEnvFile(resolve(tool, '.env'));
 const key = process.env.ELEVENLABS_API_KEY;
@@ -39,14 +41,36 @@ async function request(path, body) {
   }
   return data;
 }
-// This key permits synthesis, not dictionary creation. A continuous spelling
-// is an audition only; the target IPA is editorial, not sent as a phoneme rule.
-const spokenText = recipe.text.replaceAll(
+// Preserve the original spelling audition; test explicit phonemes separately.
+const phonetic = recipe.pronunciation.method === 'phoneme-dictionary';
+assert.ok(phonetic || recipe.pronunciation.method === 'continuous-spelling-audition');
+let dictionary;
+if (phonetic) {
+  const rules = [{ type: 'phoneme', string_to_replace: recipe.pronunciation.word,
+    alphabet: recipe.pronunciation.alphabet, phoneme: recipe.pronunciation.phoneme }];
+  const rulesHash = hash(JSON.stringify(rules));
+  dictionary = await cached('dictionary.json');
+  if (!dictionary) {
+    const result = await request('pronunciation-dictionaries/add-from-rules', {
+      name: 'Machinome release pronunciation audition', rules,
+      description: 'Explicit English phonemes; pronunciation awaiting listening approval.',
+    });
+    assert.ok(result.id && result.version_id, 'Missing dictionary locator');
+    dictionary = { id: result.id, version_id: result.version_id, rules, rulesHash };
+    await json('dictionary.json', dictionary);
+    console.log('Pronunciation dictionary created successfully');
+  }
+  assert.equal(dictionary.rulesHash, rulesHash, 'Dictionary rules changed: refusing stale cache');
+}
+const spokenText = phonetic ? recipe.text : recipe.text.replaceAll(
   recipe.pronunciation.word, recipe.pronunciation.spokenAlias,
 );
 const body = {
   text: spokenText, model_id: recipe.audio.model,
   voice_settings: recipe.audio.voiceSettings, seed: 4217,
+  ...(phonetic ? { pronunciation_dictionary_locators: [{
+    pronunciation_dictionary_id: dictionary.id, version_id: dictionary.version_id,
+  }] } : {}),
 };
 const inputHash = hash(JSON.stringify({ body, voice: recipe.audio.voice, format: recipe.audio.outputFormat }));
 let record = await cached('sample.json');
@@ -59,7 +83,9 @@ if (!record) {
   const alignment = data.normalized_alignment ?? data.alignment;
   const cues = captionsFromAlignment(alignment);
   for (const cue of cues) {
-    cue.text = cue.text.replaceAll(recipe.pronunciation.spokenAlias, recipe.pronunciation.word);
+    if (!phonetic) {
+      cue.text = cue.text.replaceAll(recipe.pronunciation.spokenAlias, recipe.pronunciation.word);
+    }
   }
   const wav = pcmWav(Buffer.from(data.audio_base64, 'base64'), 24000);
   await writeFile(resolve(build, 'sample.wav'), wav);
@@ -70,5 +96,5 @@ if (!record) {
 }
 assert.equal(record.inputHash, inputHash, 'Sample inputs changed: refusing stale cache');
 assert.equal(hash(await readFile(resolve(build, 'sample.wav'))), record.wavSha256);
-await copyFile(resolve(base, 'listen.html'), resolve(build, 'index.html'));
+if (!phonetic) await copyFile(resolve(base, 'listen.html'), resolve(build, 'index.html'));
 console.log(JSON.stringify({ file: resolve(build, 'sample.wav'), seconds: record.durationSeconds, status: record.status }));
