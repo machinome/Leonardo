@@ -31,7 +31,7 @@ loading are verified; the pilot listened and approved the pronunciation.
 
 The later full-paragraph spelling take was not approved: the pilot heard
 an unwanted final “me.” After the pilot enabled dictionary permission,
-`phoneme.yaml` generated a separate, unapproved take of the exact syntax-study
+`phoneme.yaml` generated a separate take of the exact syntax-study
 narration, using Jessica / Eleven v3 and an IPA dictionary rule. No spelling
 substitution is sent. This remains an isolated production experiment, not a
 new stable Videomaker feature.
@@ -47,11 +47,11 @@ silently reusing a stale take. One dictionary and one paid 300-character
 speech request were made on 28 September 2026; no permissions were changed
 by the script. The original approved standalone sample remains untouched.
 
-The new take is 23.6 seconds, mono 24 kHz PCM16. WAV SHA-256:
+The pilot approved the full-context take and requested the 28-second rebuild.
+The approved take is 23.6 seconds, mono 24 kHz PCM16. WAV SHA-256:
 `b61dc2bab1c168dfffb4644fac4d6407fff31d7a5ff081adfd2df444af511750`.
-It is copied to the existing syntax-study review server as
-`pronunciation-phoneme.wav` with its separate SRT. Refresh the same
-<http://127.0.0.1:8769/> and use the audio player above the unchanged video.
-The page prevents simultaneous video/audio playback. Browser playback,
-subtitle delivery, exact narration and cache reuse are checked; auditory
-pronunciation approval is still the pilot's, not inferred from API success.
+It was auditioned on the existing syntax-study review page with separate
+audio subtitles. Browser playback, subtitle delivery, exact narration and
+cache reuse were checked. The pilot's listening approval, not API success,
+authorizes its use. That same <http://127.0.0.1:8769/> now serves the rebuilt
+video; the WAV remains available as `pronunciation-phoneme.wav`.

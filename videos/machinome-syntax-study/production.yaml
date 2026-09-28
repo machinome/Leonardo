@@ -14,10 +14,10 @@ audio:
   voiceLabel: Jessica
   outputFormat: pcm_24000
   voiceSettings: {stability: 0.5, similarity_boost: 0.75}
-  replacements: {Machinome: Masheenome}
+  replacements: {}
   direction: Warm, thoughtful feminine delivery, with clear continuous phrasing.
-  pronunciation: {Machinome: "Continuous /məˈʃiːnoʊm/, rhyming with genome; audition approved by pilot."}
-  timing: Use the generated character alignment for the three code highlights.
+  pronunciation: {Machinome: "Explicit IPA /məˈʃiːnoʊm/ dictionary; full-context take approved by pilot."}
+  timing: Import the approved phoneme audition with prepare-audio.mjs; use its character alignment.
 style:
   background: "#111519"
   foreground: "#dbe2e7"

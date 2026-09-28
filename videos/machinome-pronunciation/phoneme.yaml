@@ -1,6 +1,6 @@
 # Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
 format: machinome-audio-experiment/pronunciation
-status: awaiting-pilot-listening
+status: pronunciation-approved-by-pilot
 text: >-
   A waterwheel. A saw. A carriage. In Machinome, I describe these parts in
   Python, and write how they move together. Here, the waterwheel drives the
