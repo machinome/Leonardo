@@ -1,0 +1,56 @@
+# Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
+format: machinome-visual-experiment/dark-source
+status: empirical-word-emphasis-test-not-a-format-proposal
+referenceEpisode: ./episode.yaml
+output: {width: 1920, height: 1080, fps: 30, durationSeconds: 28}
+palette: {background: "#111519", foreground: "#dbe2e7"}
+direction: >-
+  Preserve the dark machine-source-machine edit. Show actual PEP 8 source,
+  with no concurrent mechanism or subtitles during the code scene.
+  Accumulate three restrained word highlights on the drive relationship
+  as each word is narrated, then return to normal syntax colors.
+  Only the final simulation lines type near the end.
+narration: >-
+  A waterwheel. A saw. A carriage. In Machinome, I describe these parts in
+  Python, and write how they move together. Here, the waterwheel drives the
+  crankshaft. These are the actual instructions behind the model. Source
+  code you can read, test, and change. I can help write it. You decide
+  what to make.
+sourceCode:
+  imports: {file: ../../models/hydraulic_sawmill/model.py, lines: [7, 10]}
+  architecture: {file: ../../models/hydraulic_sawmill/model.py, lines: [366, 376]}
+  ending: {file: ../../models/hydraulic_sawmill/model.py, lines: [473, 474]}
+emphasis:
+  snippet: architecture
+  line: 376
+  phrase: Here, the waterwheel drives the crankshaft.
+  words: [waterwheel, drives, crankshaft]
+  holdSeconds: 0.9
+endingMotion: {from: 16.5, to: 18.5}
+sequence:
+  - kind: machine
+    start: 0
+    end: 4.5
+    direction: The complete animated sawmill, with a fixed camera.
+    camera: [770, -1037, 824]
+    target: [0, -20, 295]
+    fov: 37
+    simulation: {from: 8, to: 12.5}
+    hidden: []
+  - kind: code
+    start: 4.5
+    end: 20.5
+    direction: Full-screen source, highlighted in sync with the spoken relationship.
+  - kind: machine
+    start: 20.5
+    end: 28
+    direction: Closer moving mechanism for the human-purpose closing.
+    camera: [740, 940, 705]
+    target: [0, 0, 280]
+    fov: 37
+    simulation: {from: 12.5, to: 20}
+    hidden:
+      - [Frame and guides, Fixed timber structure]
+      - [Frame and guides, Foundation]
+      - [Water drive, Water channel]
+      - [Water drive, Water surface]

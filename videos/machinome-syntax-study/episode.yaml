@@ -1,0 +1,26 @@
+# Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
+format: machinome-video-draft/0.2
+id: machinome-syntax-study
+title: A machine you can read
+status: release-film-segment-revision
+learningGoal: Let the audience hear and read the waterwheel drives crankshaft relationship.
+production: production.yaml
+shots:
+  - id: source
+    start: 0
+    end: 28
+    speechOffset: 0.8
+    narration: >-
+      A waterwheel. A saw. A carriage. In Machinome, I describe these parts in
+      Python, and write how they move together. Here, the waterwheel drives the
+      crankshaft. These are the actual instructions behind the model. Source
+      code you can read, test, and change. I can help write it. You decide
+      what to make.
+    direction: >-
+      Continuous narration for the experimental edit in visual.yaml:
+      moving machine, full-screen source with word-synced emphasis, moving machine.
+    simulation: {from: 8, to: 24}
+    camera: [{at: 0, preset: machine}]
+    hiddenLayers: []
+    overlays: []
+    evidence: [source, reconstruction]

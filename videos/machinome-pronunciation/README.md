@@ -1,7 +1,7 @@
 <!-- Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only. -->
 # Pronunciation audition
 
-Awaiting the pilot's approval. A 9.68-second Jessica / Eleven v3 sample,
+Approved by the pilot on 28 September 2026. A 9.68-second Jessica / Eleven v3 sample,
 with two occurrences of Machinome and a nearby “genome” for comparison.
 This is an isolated audition, not a supported Videomaker format or a change
 to the release film.
@@ -25,4 +25,4 @@ ignored `.env`. Generated WAV, separate SRT and provenance stay in `_build/`.
 
 The WAV is the provider's complete 24 kHz mono PCM, without trimming,
 stretching, background sound or mastering. File properties and browser
-loading are verified; pronunciation remains for the pilot to hear and ratify.
+loading are verified; the pilot listened and approved the pronunciation.
