@@ -1,12 +1,21 @@
 Revolutions — Machinome
 
-A wheel turns. A saw cuts. A carriage advances one small step.
-Five centuries after Leonardo studied water-powered saws, a person directs
-an AI tool to reconstruct one in source code.
+Machinome gives machines source code: parts, connections, motion and tests.
+This release film follows Leonardo's hydraulic sawmill through the voice of
+an AI tool that helped reconstruct it under human direction.
 
-Follow the waterwheel, crank, pulling pawl and two-rope feed, then see what
-Machinome means: a machine's parts, connections and motion described in
-code that people can inspect, change and test. Machine + genome.
+The wheel turns, the saw cuts, and two ropes draw the timber forward.
+Five centuries later, another kind of machine helps put those relationships
+into code that people can inspect, change and test. Machine + genome.
+The tools change. People choose the work.
+
+Chapters:
+00:00 Revolutions
+00:30 Water into work
+01:10 Source code for machines
+01:47 Human direction
+02:13 Building with AI
+02:36 What would you build?
 
 Explore the interactive sawmill: {{simulationUrl}}
 Read the model's source and licence: {{sourceUrl}}

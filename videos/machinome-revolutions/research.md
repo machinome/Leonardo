@@ -45,3 +45,14 @@ Authorship, copyright and gallery licensing come from the project's README,
 NOTICE and LICENSE. The upload description retains the recorded “Astra”
 attribution and identifies this film's script as AI-authored and its voice
 as synthetic. No separate licence is invented for the generated MP4.
+
+Publication check: the repository's actual origin is
+`git@github.com:LibreSolid/Leonardo.git`; its public address redirects to
+[machinome/Leonardo](https://github.com/machinome/Leonardo). Read-only
+`git ls-remote` reports public main at
+`cec7cf1a9e284887efa89477d136111f0679f428` (planning the loom reconstruction),
+which predates the sawmill used here. The public page for the filmed source
+commit `a01fb865426de9967f690b4a7a1230684eb1e523` returns 404. The intended
+repository therefore exists, but this does not establish public availability
+of the model in the film. Keep the current-source and simulation placeholders
+until those exact deliverables have verified addresses. Nothing was pushed.

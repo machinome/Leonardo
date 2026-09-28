@@ -33,6 +33,8 @@ Read [episode.yaml](episode.yaml) for narration beside each shot, and
 [production.yaml](production.yaml) for cameras, layers, voice and evidence.
 [description.md](description.md) carries attribution and upload copy.
 [research.md](research.md) records checked sources and editorial limits.
+[verification.md](verification.md) records the finished media checks and
+the remaining listening and publication-link review.
 Build output is ignored under `_build/`.
 
 The existing model export is pinned to
@@ -42,7 +44,7 @@ rehearsal predates both: its feed-on-return explanation and 296-second
 duration must not be reused. The present model feeds on the downstroke,
 then dwells while the blade and driving hook recover.
 
-The film uses a continuous excerpt from the middle of the actual course;
+The film follows the middle of the actual course, with edits and pauses;
 it does not reset the model, invent water physics, or add simulated sawdust.
 Hidden structural layers are explanatory reveals. Neither CAD nor the
 viewer is changed during production. AI involvement is part of the pilot's
