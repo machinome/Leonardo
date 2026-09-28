@@ -1,6 +1,6 @@
 # Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
 series: ""
-output: {width: 1920, height: 1080, fps: 30, durationSeconds: 360}
+output: {width: 1920, height: 1080, fps: 30, durationSeconds: 369}
 model:
   manifest: ../../export/hydraulic_sawmill/manifest.json
   expectedDurationSeconds: 1460
@@ -28,8 +28,8 @@ audio:
     Leonardo da Vinci: Speak the full name, not Leonardo alone.
     pawl: Rhymes with ball.
   timing: >-
-    No audio generated for this draft. Six-minute slots are estimates.
-    Measure complete takes before fixing word highlights and mechanical beats.
+    Full-script slots are estimates; rehearsal.yaml has a measured opening take.
+    Measure complete takes before fixing later word highlights and mechanical beats.
     Standard speech CLI does not yet forward phoneme dictionary locators.
 style:
   background: "#111519"
@@ -45,7 +45,8 @@ sourceCode:
   test-class: {file: ../../models/hydraulic_sawmill/test_model.py, lines: [25, 26]}
   stroke-test: {file: ../../models/hydraulic_sawmill/test_model.py, lines: [592, 597]}
 cameras:
-  whole: {position: [770, -1037, 824], target: [0, -20, 295], up: [0, 0, 1], fov: 37}
+  whole: {position: [948, -1273, 856], target: [0, -20, 205], up: [0, 0, 1], fov: 37}
+  whole-left: {position: [715, -1318, 849], target: [0, -20, 205], up: [0, 0, 1], fov: 37}
   wheel: {position: [200, -445, 255], target: [0, -140, 120], up: [0, 0, 1], fov: 37}
   crank: {position: [370, 800, 500], target: [0, 0, 315], up: [0, 0, 1], fov: 37}
   saw: {position: [335, -470, 505], target: [0, 0, 415], up: [0, 0, 1], fov: 37}

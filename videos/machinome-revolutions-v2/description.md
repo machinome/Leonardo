@@ -26,12 +26,13 @@ Fagundes's direction. Copyright (C) 2026 Luis Henrique Cassis Fagundes.
 Original gallery source is AGPL-3.0-only; see its LICENSE and NOTICE.
 Filmed model/source selection: 844c723d81bc69d728b7d98e50e86c00829e2ec8.
 
-AI-written narration and script; planned synthetic feminine narration is
-ElevenLabs Jessica / Eleven v3, with the pilot-approved Machinome pronunciation.
-Mechanical footage will use the actual model. The museum image is a photograph,
-not an AI-generated reconstruction. No music is planned. Subtitles will be
-provided separately, not burned into the film.
+AI-written narration and script; synthetic feminine narration uses ElevenLabs
+Jessica / Eleven v3, with the pilot-approved Machinome pronunciation.
+Mechanical footage uses the actual model. The planned museum image is a
+photograph, not an AI-generated reconstruction. No music is planned. Subtitles
+are provided separately, not burned into the film.
 
-Production note: this is the description draft for an unrendered script.
-Publication needs the real links, photograph clearance and final review.
-Nothing has been uploaded or published.
+Production note: the opening through the early like request has a 76.2-second
+rehearsal. The rest of the film, including the museum photograph, remains a
+script draft. Publication needs the real links, photograph clearance and
+final review. Nothing has been uploaded or published.

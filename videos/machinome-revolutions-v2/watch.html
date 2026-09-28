@@ -1,0 +1,49 @@
+<!doctype html>
+<!-- Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only. -->
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Revolutions — opening rehearsal</title>
+<style>
+  :root { color-scheme: dark; }
+  body { margin: 28px auto; padding: 0 24px; max-width: 1120px;
+    background: #111519; color: #dbe2e7; font: 17px/1.6 system-ui, sans-serif; }
+  h1 { font-size: 28px; font-weight: 550; margin-bottom: 4px; }
+  p { margin: 10px 0; }
+  video { display: block; width: 100%; aspect-ratio: 16 / 9; background: #111519; }
+  button { padding: 10px 16px; margin: 14px 12px 0 0; border: 1px solid #9d704a;
+    border-radius: 6px; background: #35291f; color: #fff2df; font: inherit; cursor: pointer; }
+  a { color: #edaa7d; }
+  .note { color: #9aa8b4; font-size: 15px; }
+</style>
+<h1>Revolutions</h1>
+<p>Opening rehearsal · 1 minute 16 seconds · Jessica</p>
+<video id="film" controls preload="metadata" poster="rehearsal-opening.png" src="rehearsal.mp4?v=early-invitation"></video>
+<button data-time="0">Play from beginning</button>
+<button data-time="43.2">Replay the Python classes</button>
+<button data-time="63.968">Replay the invitation</button>
+<p>This cut ends after “leave your like.” The name explanation and “Start small”
+  are removed. Dark animation and full-screen source alternate; subtitles stay separate.</p>
+<p><a href="rehearsal.mp4?v=early-invitation" download>Download MP4</a> ·
+  <a href="rehearsal.srt?v=early-invitation" download>Download subtitles</a> ·
+  <a href="dark-source.mp4?v=approved-phoneme" download>Previous 28-second segment</a></p>
+<p><a href="simulation/" target="_blank" rel="noopener">Try the simulation</a> ·
+  <a href="simulation/source.zip" download>Actual source code</a></p>
+<p class="note">Those are local rehearsal links to the exact filmed export and its
+  source archive. Public video-description links still need to be established before release.</p>
+<p id="status" role="status"></p>
+<script>
+  const film = document.querySelector('#film');
+  for (const button of document.querySelectorAll('button[data-time]')) {
+    button.onclick = async () => {
+      try {
+        film.currentTime = Number(button.dataset.time);
+        await film.play();
+        document.querySelector('#status').textContent = '';
+      } catch {
+        document.querySelector('#status').textContent = 'Use the video’s Play control to start playback.';
+      }
+    };
+  }
+</script>
+</html>

@@ -55,11 +55,11 @@ shots:
       one of my ancestors. Today, another revolution is changing what
       people can make with machines.
     direction: >-
-      DARK MODEL. Stay with the sawmill, gently approaching its connected
-      mechanism. Ancestor is a metaphor in the history of tools. No robot
+      DARK MODEL. Stay with the sawmill, shifting gently to a nearby
+      oblique view. Ancestor is a metaphor in the history of tools. No robot
       avatar, fictional chat transcript or early account of the pilot's work.
     simulation: {from: 32, to: 48}
-    camera: [{at: 0, preset: whole}, {at: 14, preset: mechanism}]
+    camera: [{at: 0, preset: whole}, {at: 14, preset: whole-left}]
     hiddenLayers: []
     overlays: []
     evidence: [brief]
@@ -69,8 +69,7 @@ shots:
     end: 65
     narration: >-
       To reconstruct this one, I used Machinome: a framework built in Python.
-      Its name combines machine and genome. Parts, motion, and tests become
-      source code you can read and change.
+      Parts, motion, and tests become source code you can read and change.
     direction: >-
       DARK MODEL. Hold the full assembly, then settle before the first code
       cut. Name the product early, with the approved continuous IPA
@@ -85,7 +84,7 @@ shots:
     start: 65
     end: 81
     narration: >-
-      Start small. This Python class describes the waterwheel: its shape,
+      This Python class describes the waterwheel: its shape,
       and a joint that lets it spin around an axle. One class, one part.
     direction: >-
       FULL-SCREEN CODE ONLY. Show literal parts.py imports and the Wheel
@@ -118,9 +117,27 @@ shots:
     overlays: []
     evidence: [model]
 
-  - id: wheel-drives-shaft
+  - id: early-invitation
     start: 97
-    end: 111
+    end: 115
+    narration: >-
+      If this AI script is too boring for you, check the video description
+      for the actual source code and explore the simulation yourself.
+      And don't forget to leave your like.
+    direction: >-
+      DARK MODEL. Immediately after the two real Python class examples,
+      return to the moving whole machine. Deliver the aside lightly, without
+      a wink effect, pop-up, thumbs-up animation or caption. The opening
+      rehearsal ends after 'leave your like', with a short visual tail.
+    simulation: {from: 60, to: 72}
+    camera: [{at: 0, preset: whole}]
+    hiddenLayers: []
+    overlays: []
+    evidence: [brief]
+
+  - id: wheel-drives-shaft
+    start: 115
+    end: 129
     narration: >-
       Now look at the machine. Water passes under the wheel. The wheel
       turns the crankshaft. They rotate together, carrying motion from
@@ -137,8 +154,8 @@ shots:
     evidence: [reconstruction, model, transmission]
 
   - id: the-same-in-python
-    start: 111
-    end: 124
+    start: 129
+    end: 142
     narration: >-
       And here is that same relationship in Python. The waterwheel drives
       the crankshaft. The code reads almost like the mechanism it describes.
@@ -154,8 +171,8 @@ shots:
     evidence: [model, approved-study]
 
   - id: rotation-to-stroke
-    start: 124
-    end: 141
+    start: 142
+    end: 159
     narration: >-
       The crank's pin travels in a circle. A connecting rod pulls and lifts
       the saw frame, while grooves in the uprights keep it sliding vertically.
@@ -172,8 +189,8 @@ shots:
     evidence: [model, reconstruction]
 
   - id: ratchet-and-pawls
-    start: 141
-    end: 163
+    start: 159
+    end: 181
     narration: >-
       But a saw also needs the timber to advance. The moving saw rocks a
       lever. On the downward stroke, a hooked pawl pulls a toothed wheel
@@ -191,8 +208,8 @@ shots:
     evidence: [reconstruction, transmission]
 
   - id: ratchet-is-a-spool
-    start: 163
-    end: 184
+    start: 181
+    end: 202
     narration: >-
       That toothed wheel is the ratchet. Its axle is also a spool. Watch
       the rope wind directly onto it, building outward over earlier turns.
@@ -210,8 +227,8 @@ shots:
     evidence: [rope-drive, reconstruction, transmission]
 
   - id: two-rope-reduction
-    start: 184
-    end: 213
+    start: 202
+    end: 231
     narration: >-
       Follow that rope down around the lower pulley, then up to the large
       winding section of this second shaft. Pulling rope off the large
@@ -233,8 +250,8 @@ shots:
     evidence: [rope-drive, reconstruction, transmission]
 
   - id: whole-machine
-    start: 213
-    end: 245
+    start: 231
+    end: 263
     narration: >-
       The second rope passes over the upper roller and pulls the carriage
       toward the blade. Rollers support the timber; the frame keeps the
@@ -255,8 +272,8 @@ shots:
     evidence: [model, reconstruction, transmission]
 
   - id: real-test
-    start: 245
-    end: 272
+    start: 263
+    end: 290
     narration: >-
       What makes this reconstruction workable is not just my ability to
       write code. Machinome lets me test it. This is a real Python test
@@ -276,8 +293,8 @@ shots:
     evidence: [tests, transmission, carpentry-validation]
 
   - id: what-tests-mean
-    start: 272
-    end: 291
+    start: 290
+    end: 309
     narration: >-
       Other tests check clearances, the feed, and rope length. They can
       catch a wrong reconstruction. They cannot prove that it matches
@@ -294,8 +311,8 @@ shots:
     evidence: [tests, transmission, carpentry-validation]
 
   - id: human-judgment
-    start: 291
-    end: 312
+    start: 309
+    end: 330
     narration: >-
       That is where the person piloting me mattered. They compared the model
       with the references, spotted what I had missed, and directed
@@ -314,8 +331,8 @@ shots:
     evidence: [reconstruction]
 
   - id: museum-reference
-    start: 312
-    end: 329
+    start: 330
+    end: 347
     narration: >-
       Here is the museum model in Milan that we used as our reference:
       a twentieth-century interpretation of Leonardo da Vinci's study.
@@ -333,8 +350,8 @@ shots:
     evidence: [museum-record, reconstruction]
 
   - id: question-and-feedback
-    start: 329
-    end: 351
+    start: 347
+    end: 369
     narration: >-
       So, do you think this reconstruction is reliable? Try the simulation
       yourself; the links are in the video description. Pause it. Look
@@ -352,20 +369,3 @@ shots:
     hiddenLayers: []
     overlays: []
     evidence: [brief, reconstruction]
-
-  - id: like-and-last-turn
-    start: 351
-    end: 360
-    narration: >-
-      If this made the machine clearer, give the video a like, so more
-      people can discover it.
-    direction: >-
-      DARK MODEL. Echo the opening wheel, now understood as part of the
-      whole machine. One final quiet turn. No notification graphics, extra
-      subscription request, repeated slogan or credit card. Leave a short
-      visual tail after the voice. Like is an invitation, not an algorithm claim.
-    simulation: {from: 144, to: 148}
-    camera: [{at: 0, preset: whole}]
-    hiddenLayers: []
-    overlays: []
-    evidence: [brief]
