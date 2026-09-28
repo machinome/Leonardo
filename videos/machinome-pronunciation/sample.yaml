@@ -1,0 +1,19 @@
+# Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
+format: machinome-audio-experiment/pronunciation
+status: awaiting-pronunciation-ratification
+text: >-
+  Machinome. Machine and genome. In Machinome, a machine becomes source code
+  you can read, test, and change.
+audio:
+  model: eleven_v3
+  voice: cgSgspJ2msm6clMCkdW9
+  voiceLabel: Jessica
+  outputFormat: pcm_24000
+  voiceSettings: {stability: 0.5, similarity_boost: 0.75}
+pronunciation:
+  word: Machinome
+  method: continuous-spelling-audition
+  spokenAlias: Masheenome
+  alphabet: ipa
+  phoneme: məˈʃiːnoʊm
+  intent: One continuous word; the stressed ending rhymes with genome.
