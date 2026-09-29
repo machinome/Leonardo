@@ -50,12 +50,14 @@ worksite stability, structural strength and lifting capacity are outside its sco
 
 ## Build and inspect
 
-Use Python 3.12 with the workspace's **Machinome 0.7.0**,
-**machinome-viewer 0.7.0** (API 27), CadQuery and molejo. The two 0.7.0
-packages are local release-state checkouts, not claimed to be published;
-the older published framework is insufficient. Individual machine validation
-records identify tested revisions. The [consolidation record](docs/consolidation.md)
-preserves the earlier environment history.
+Use Python 3.12 with the workspace's current editable Machinome and
+machinome-viewer checkouts, CadQuery and molejo. The sawmill uses frames and
+mates that reference existing child joints; installed distribution version
+labels alone do not identify that development API. Individual machine
+validation records identify tested content revisions, including the
+[sawmill refactor](models/hydraulic_sawmill/docs/mates-validation.md).
+The [consolidation record](docs/consolidation.md) preserves the earlier
+environment history.
 
 In the development workspace, from this repository root:
 
@@ -95,6 +97,7 @@ For Python style, install the `dev` extra, then check all tracked Python
 files from the repository root:
 
 ```sh
+python -m unittest test_style
 git ls-files -z '*.py' | xargs -0 black --check
 git ls-files -z '*.py' | xargs -0 pycodestyle
 ```

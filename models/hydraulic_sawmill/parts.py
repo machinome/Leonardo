@@ -6,7 +6,7 @@ import math
 
 import cadquery as cq
 from molejo import Shape, Circle, Polygon, Line, Arc, Helix, Spline, P
-from machinome.node import CadQueryNode, MolejoNode
+from machinome.node import CadQueryNode, Frame, MolejoNode
 from machinome.parameters import Length, Angle, Flag
 from machinome.motion.joints import Revolute, Orbit, Prismatic
 from machinome.motion.ports import TranslationalPort, RotationalPort
@@ -15,42 +15,27 @@ from .layout import (
     CRANK,
     ROD,
     SASH_HEIGHT,
-    TEETH,
     RATCHET_AXLE_RADIUS,
     ROPE_RADIUS,
     ROPE_PITCH_RADIUS,
-    RATCHET_ROOT,
-    RATCHET_TIP,
-    PAWL_LENGTH,
     ROCKER_LONG,
     TIE_LENGTH,
     ROCKER_BRANCH,
     LINK_Y,
     TIE_Y,
     PAWL_Y,
-    ROPE_Y,
-    RATCHET_X,
-    RATCHET_Z,
     TIMBER_LENGTH,
     CRADLE_X,
-    INITIAL_WRAP,
     DRUM_Y,
     ROD_Y,
     CRANK_Y,
     ROPE_ANCHOR_Z,
     ANCHOR_LOCAL_X,
     FEED_OFFSET_Y,
-    CARRIAGE_ROPE_Y,
-    FRAME_END,
-    UPPER_X,
     UPPER_Z,
     UPPER_RADIUS,
-    REDUCER_X,
-    REDUCER_Z,
     REDUCER_RADIUS,
     HAUL_RADIUS,
-    IDLER_X,
-    IDLER_Z,
     IDLER_RADIUS,
     DRIVE_START_Y,
     LARGE_START_Y,
@@ -62,14 +47,8 @@ from .layout import (
     HAUL_INITIAL,
 )
 from .rope_drive import (
-    GEAR_PHASE,
     INPUT_PHASE,
     HAUL_PHASE,
-    GEAR_CONTACT,
-    IDLER_IN,
-    IDLER_OUT,
-    INPUT_CONTACT,
-    IDLER_SWEEP,
     UPPER_EXIT,
     HAUL_CONTACT,
     GEAR_TIE_PHASE,
@@ -79,7 +58,7 @@ from .rope_drive import (
     DRIVE_BEND_PORTS,
     IDLER_OUT_PHASE,
 )
-from .kinematics import SHORT_ARM, START_CONTACT, HOLD_LENGTH, HOLD_X, HOLD_Z
+from .kinematics import SHORT_ARM, START_CONTACT, HOLD_LENGTH
 
 IRON = "#39464B"
 
@@ -186,6 +165,7 @@ class WaterSurface(CadQueryNode):
 
 
 class Wheel(CadQueryNode):
+    hub = Frame(z=(0, 1, 0), x=(1, 0, 0))
     color = "#B78549"
     spin = Revolute(axis=(0, 1, 0))
 
@@ -209,6 +189,7 @@ class Wheel(CadQueryNode):
 
 
 class Crankshaft(CadQueryNode):
+    bearing = Frame(z=(0, 1, 0), x=(1, 0, 0))
     color = IRON
     spin = Revolute(axis=(0, 1, 0))
 
@@ -227,6 +208,7 @@ class Crankshaft(CadQueryNode):
 
 
 class Crank(CadQueryNode):
+    shaft_bore = Frame(z=(0, 1, 0), x=(1, 0, 0))
     color = IRON
     spin = Revolute(axis=(0, 1, 0))
 
@@ -238,6 +220,7 @@ class Crank(CadQueryNode):
 
 
 class CrankRetainer(CadQueryNode):
+    shaft_bore = Frame(z=(0, 1, 0), x=(1, 0, 0))
     color = IRON
     spin = Revolute(axis=(0, 1, 0))
 
@@ -247,6 +230,7 @@ class CrankRetainer(CadQueryNode):
 
 
 class ConnectingRod(CadQueryNode):
+    big_end = Frame()
     color = IRON
     lean = Revolute(axis=(0, 1, 0))
     orbit = Orbit(axis=(0, 1, 0), at=(0, 0, -CRANK))
@@ -303,6 +287,7 @@ class SawBlade(CadQueryNode):
 
 
 class BladeClamp(CadQueryNode):
+    blade_pin = Frame()
     color = IRON
     upper = Flag(False)
 
@@ -328,6 +313,7 @@ class BladeClamp(CadQueryNode):
 
 
 class TensionNut(CadQueryNode):
+    seat = Frame()
     color = IRON
 
     def render(self):
@@ -474,6 +460,7 @@ class UncutTimber(MolejoNode):
     The conservative 56 mm height stays inside the bark outline.
     """
 
+    start = Frame()
     color = "#745238"
     kerf = Length(3.2, min=2, max=5)
     remaining = TranslationalPort(unit="mm")
@@ -497,6 +484,7 @@ class UncutTimber(MolejoNode):
 
 
 class RatchetDrum(CadQueryNode):
+    bearing = Frame(z=(0, 1, 0), x=(1, 0, 0))
     color = IRON
     spin = Revolute(axis=(0, 1, 0))
 
@@ -533,6 +521,7 @@ class RatchetDrum(CadQueryNode):
 
 
 class Rocker(CadQueryNode):
+    pivot = Frame(z=(0, 1, 0), x=(1, 0, 0))
     color = IRON
     turn = Revolute(axis=(0, 1, 0))
 
@@ -579,6 +568,7 @@ class Rocker(CadQueryNode):
 
 
 class FeedTie(CadQueryNode):
+    saw_pin = Frame(z=(0, 1, 0), x=(1, 0, 0))
     color = IRON
     turn = Revolute(axis=(0, 1, 0))
     rise = Prismatic(axis=(0, 0, 1))
@@ -588,6 +578,7 @@ class FeedTie(CadQueryNode):
 
 
 class DrivingPawl(CadQueryNode):
+    pivot = Frame(z=(0, 1, 0), x=(1, 0, 0))
     color = IRON
     turn = Revolute(axis=(0, 1, 0))
     shift_x = Prismatic(axis=(1, 0, 0))
@@ -601,6 +592,7 @@ class DrivingPawl(CadQueryNode):
 
 
 class HoldingPawl(CadQueryNode):
+    pivot = Frame(z=(0, 1, 0), x=(1, 0, 0))
     color = IRON
     turn = Revolute(axis=(0, 1, 0))
 
@@ -619,6 +611,7 @@ class FixedPins(CadQueryNode):
     z = Length()
     journal_y = Length(LINK_Y)
     head_offset = Length(5)
+    journal = Frame(at=(x, journal_y, z), z=(0, 1, 0), x=(1, 0, 0))
 
     def render(self):
         lo, hi = FEED_OFFSET_Y - 126, self.journal_y + self.head_offset
@@ -630,6 +623,7 @@ class FixedPins(CadQueryNode):
 
 
 class UpperRoller(CadQueryNode):
+    bore = Frame(z=(0, 1, 0), x=(1, 0, 0))
     color = IRON
     spin = Revolute(axis=(0, 1, 0))
 
@@ -638,6 +632,7 @@ class UpperRoller(CadQueryNode):
 
 
 class ReductionShaft(CadQueryNode):
+    bearing = Frame(z=(0, 1, 0), x=(1, 0, 0))
     color = IRON
     spin = Revolute(axis=(0, 1, 0))
 
@@ -669,6 +664,7 @@ class ReductionShaft(CadQueryNode):
 
 
 class UpperPin(CadQueryNode):
+    journal = Frame(z=(0, 1, 0), x=(1, 0, 0))
     color = IRON
 
     def render(self):
@@ -680,6 +676,7 @@ class UpperPin(CadQueryNode):
 
 
 class DriveIdler(CadQueryNode):
+    bore = Frame(z=(0, 1, 0), x=(1, 0, 0))
     color = IRON
     spin = Revolute(axis=(0, 1, 0))
 
@@ -691,6 +688,7 @@ class DriveIdler(CadQueryNode):
 
 
 class IdlerPin(CadQueryNode):
+    journal = Frame(at=(0, IDLER_Y, 0), z=(0, 1, 0), x=(1, 0, 0))
     color = IRON
 
     def render(self):
@@ -707,6 +705,7 @@ class DrumTie(CadQueryNode):
     """Through-bore rope termination; knot shown as a compact
     envelope."""
 
+    shaft = Frame(z=(0, 1, 0), x=(1, 0, 0))
     color = "#D3B989"
     spin = Revolute(axis=(0, 1, 0))
     radius = Length()
@@ -749,6 +748,7 @@ class HaulRope(MolejoNode):
 
 
 class HaulSpan(MolejoNode):
+    start = Frame()
     color = "#D3B989"
     lane = TranslationalPort(unit="mm")
 

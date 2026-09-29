@@ -4,12 +4,12 @@
 from math import pi
 
 from machinome.math import sin, cos
-from machinome.node import AssemblyNode
+from machinome.node import AssemblyNode, Frame
 from machinome.parameters import Length, Angle
 from machinome.motion.joints import Prismatic, Revolute
 from machinome.motion.ports import RotationalPort, Time
 
-from .frame import Frame
+from .frame import MillStructure
 from .parts import (
     WaterChannel,
     WaterSurface,
@@ -51,7 +51,6 @@ from .parts import (
 from .layout import (
     CRANK,
     AXLE_Z,
-    LINK_Y,
     TIE_Y,
     PAWL_Y,
     RATCHET_X,
@@ -60,7 +59,6 @@ from .layout import (
     ROCKER_Z,
     ROPE_Y,
     ANCHOR_X,
-    INITIAL_WRAP,
     ROPE_PITCH_RADIUS,
     TIMBER_LENGTH,
     CARRIAGE_START,
@@ -68,9 +66,6 @@ from .layout import (
     INPUT_RESERVE,
     ROD_Y,
     ROPE_ANCHOR_Z,
-    FEED_OFFSET_Y,
-    BEARING_Y,
-    DRUM_Y,
     UPPER_X,
     UPPER_Z,
     UPPER_RADIUS,
@@ -83,7 +78,6 @@ from .layout import (
     IDLER_RADIUS,
     DRIVE_START_Y,
     LARGE_START_Y,
-    IDLER_Y,
     HAUL_TIE_Y,
     HAUL_INITIAL,
 )
@@ -92,10 +86,8 @@ from .rope_drive import (
     PASS_SECONDS,
     shaft_angle,
     carriage_from_shaft,
-    GEAR_PHASE,
     INPUT_PHASE,
     HAUL_PHASE,
-    GEAR_CONTACT,
     INPUT_CONTACT,
     HAUL_CONTACT,
     UPPER_EXIT,
@@ -120,7 +112,6 @@ from .kinematics import (
     clip01,
     HOLD_X,
     HOLD_Z,
-    carriage_advance,
 )
 
 
@@ -133,17 +124,22 @@ def uncut_profile(advance):
 
 
 class BladeAttachments(AssemblyNode):
+    """Pinned blade ends and the nut seated on the upper clamp."""
+
+    lower_hole = Frame(at=(0, 0, 15))
+    upper_hole = Frame(at=(0, 0, 285), z=(0, 0, -1), x=(-1, 0, 0))
+    nut_seat = Frame(at=(0, 0, 305.2))
     lower = BladeClamp()
     upper = BladeClamp(upper=True)
     nut = TensionNut()
 
-    def render(self):
-        self.lower.translate([0, 0, 15])
-        self.upper.rotate(180, [0, 1, 0]).translate([0, 0, 285])
-        self.nut.translate([0, 0, 305.2])
+    lower_attachment = lower.blade_pin.on(lower_hole)
+    upper_attachment = upper.blade_pin.on(upper_hole)
+    tensioner = nut.seat.on(nut_seat)
 
 
 class SawSash(AssemblyNode):
+    guide = Frame()
     rise = Prismatic(axis=(0, 0, 1))
     frame = SashWood()
     blade = SawBlade()
@@ -153,16 +149,19 @@ class SawSash(AssemblyNode):
 
 class Timber(AssemblyNode):
     kerf = Length(3.2, min=2, max=5)
+    kerf_start = Frame(
+        at=(-TIMBER_LENGTH / 2, kerf / 2, 408.2),
+        z=(0, -1, 0),
+        x=(1, 0, 0),
+    )
     log_left = LogHalf(positive=True, kerf=kerf, name="Left timber half")
     log_right = LogHalf(positive=False, kerf=kerf, name="Right timber half")
     uncut = UncutTimber(kerf=kerf, name="Uncut wood at the kerf")
     grain_left = EndGrain(positive=True, kerf=kerf).repeat(2)
     grain_right = EndGrain(positive=False, kerf=kerf).repeat(2)
+    uncut_insert = uncut.start.on(kerf_start)
 
     def render(self):
-        self.uncut.rotate(90, [1, 0, 0]).translate(
-            [-TIMBER_LENGTH / 2, self.kerf / 2, 408.2]
-        )
         for grains in (self.grain_left, self.grain_right):
             grains[0].translate([TIMBER_LENGTH / 2 + 0.2, 0, 408.2])
             grains[1].rotate(180, [0, 0, 1]).translate(
@@ -184,6 +183,7 @@ class RunningGear(AssemblyNode):
 
 
 class TimberCarriage(AssemblyNode):
+    rail_datum = Frame()
     kerf = Length(3.2, min=2, max=5)
     feed = Prismatic(axis=(1, 0, 0))
     bed = CarriageBed(kerf=kerf, name="Bed and slotted log cradles")
@@ -195,6 +195,10 @@ class TimberCarriage(AssemblyNode):
 
 
 class WaterDrive(AssemblyNode):
+    """Wheel, shaft and crank share the same bearing line."""
+
+    main_bearing = Frame(at=(0, 0, AXLE_Z), z=(0, 1, 0), x=(1, 0, 0))
+    wheel_seat = Frame(at=(0, -151, AXLE_Z), z=(0, 1, 0), x=(1, 0, 0))
     channel = WaterChannel(name="Water channel")
     water = WaterSurface(name="Water surface")
     waterwheel = Wheel(name="Undershot waterwheel")
@@ -202,23 +206,29 @@ class WaterDrive(AssemblyNode):
     crank = Crank(name="Square-bored crank")
     crank_retainer = CrankRetainer(name="Crank retaining washer")
 
-    def render(self):
-        self.waterwheel.translate([0, -151, AXLE_Z])
-        self.crankshaft.translate([0, 0, AXLE_Z])
-        self.crank.translate([0, 0, AXLE_Z])
-        self.crank_retainer.translate([0, 0, AXLE_Z])
+    wheel_mount = waterwheel.hub.on(wheel_seat, waterwheel.spin)
+    shaft_mount = crankshaft.bearing.on(main_bearing, crankshaft.spin)
+    crank_mount = crank.shaft_bore.on(main_bearing, crank.spin)
+    retainer_mount = crank_retainer.shaft_bore.on(
+        main_bearing, crank_retainer.spin
+    )
 
 
 class SawMechanism(AssemblyNode):
+    """The crank's top position and the sash's guide datum."""
+
+    base = Frame()
+    crank_top = Frame(at=(0, ROD_Y, CRANK))
+    sash_guide = Frame(x=(-1, 0, 0))
     connecting_rod = ConnectingRod(name="Connecting rod")
     sash = SawSash(name="Guided saw sash")
 
-    def render(self):
-        self.connecting_rod.translate([0, ROD_Y, AXLE_Z + CRANK])
-        self.sash.rotate(180, [0, 0, 1]).translate([0, 0, AXLE_Z])
+    rod_mount = connecting_rod.big_end.on(crank_top)
+    sash_mount = sash.guide.on(sash_guide, sash.rise)
 
 
 class DrumWinding(AssemblyNode):
+    start = Frame()
     radius = Length()
     phase = Angle()
     shift = Prismatic(axis=(0, 1, 0))
@@ -229,12 +239,14 @@ class DrumWinding(AssemblyNode):
 
 
 class DriveLine(AssemblyNode):
+    shaft = Frame(at=(0, -DRIVE_START_Y, 0), z=(0, 1, 0), x=(1, 0, 0))
     shift_x = Prismatic(axis=(1, 0, 0))
     shift_z = Prismatic(axis=(0, 0, 1))
     rope = DriveRope(name="Drive rope around lower idler")
 
 
 class RadialWinding(AssemblyNode):
+    shaft = Frame(z=(0, 1, 0), x=(1, 0, 0))
     spin = Revolute(axis=(0, 1, 0))
     rope = RadialWindingRope(name="Radially stacked ratchet rope")
 
@@ -249,6 +261,7 @@ class RadialWinding(AssemblyNode):
 
 
 class HaulingLine(AssemblyNode):
+    anchor = Frame()
     shift = Prismatic(axis=(1, 0, 0))
     rope = HaulRope(name="Top-centred carriage rope")
 
@@ -282,6 +295,29 @@ def drive_ports(line):
 
 
 class FeedMechanism(AssemblyNode):
+    """Fixed journals locate the links; drum seats locate the ropes."""
+
+    base = Frame()
+    ratchet_bearing = Frame(
+        at=(RATCHET_X, 0, RATCHET_Z), z=(0, 1, 0), x=(1, 0, 0)
+    )
+    reduction_bearing = Frame(
+        at=(REDUCER_X, 0, REDUCER_Z), z=(0, 1, 0), x=(1, 0, 0)
+    )
+    saw_journal = Frame(at=(0, TIE_Y, AXLE_Z), z=(0, 1, 0), x=(1, 0, 0))
+    pawl_plane = Frame(at=(0, PAWL_Y, 0), z=(0, 1, 0), x=(1, 0, 0))
+    carriage_knot = Frame(at=(ANCHOR_X, ROPE_Y, ROPE_ANCHOR_Z))
+    upper_exit = Frame(at=(UPPER_EXIT[0], ROPE_Y, UPPER_EXIT[1]))
+    reserve_start = Frame(
+        at=(INPUT_CONTACT[0], LARGE_START_Y, INPUT_CONTACT[1])
+    )
+    takeup_start = Frame(
+        at=(
+            HAUL_CONTACT[0],
+            HAUL_TIE_Y + WIND_PITCH * HAUL_INITIAL,
+            HAUL_CONTACT[1],
+        )
+    )
     feed_drum = RatchetDrum(name="Ratchet and slender winding axle")
     rocker = Rocker(name="Feed rocker")
     feed_tie = FeedTie(name="Saw-to-rocker tie")
@@ -333,44 +369,47 @@ class FeedMechanism(AssemblyNode):
         name="Central-shaft rope tie",
     )
 
+    ratchet_mount = feed_drum.bearing.on(ratchet_bearing, feed_drum.spin)
+    rocker_mount = rocker.pivot.on(rocker_pin.journal, rocker.turn)
+    tie_mount = feed_tie.saw_pin.on(saw_journal)
+    pawl_mount = pawl.pivot.on(pawl_plane)
+    holding_mount = holding_pawl.pivot.on(
+        holding_pin.journal, holding_pawl.turn
+    )
+    roller_mount = upper_roller.bore.on(upper_pin.journal, upper_roller.spin)
+    reduction_mount = reduction_shaft.bearing.on(
+        reduction_bearing, reduction_shaft.spin
+    )
+    idler_mount = drive_idler.bore.on(idler_pin.journal, drive_idler.spin)
+    haul_mount = haul.anchor.on(carriage_knot, haul.shift)
+    span_mount = haul_span.start.on(upper_exit)
+    drive_mount = drive_line.shaft.on(ratchet_bearing)
+    winding_mount = winding.shaft.on(ratchet_bearing, winding.spin)
+    reserve_mount = reserve.start.on(reserve_start, reserve.shift)
+    takeup_mount = takeup.start.on(takeup_start, takeup.shift)
+    gear_knot = gear_tie.shaft.on(ratchet_bearing, gear_tie.spin)
+    input_knot = input_tie.shaft.on(reduction_bearing, input_tie.spin)
+    haul_knot = haul_tie.shaft.on(reduction_bearing, haul_tie.spin)
+
     def render(self):
-        self.feed_drum.translate([RATCHET_X, 0, RATCHET_Z])
-        self.rocker.translate([ROCKER_X, LINK_Y, ROCKER_Z])
-        self.feed_tie.translate([0, TIE_Y, AXLE_Z])
-        self.pawl.translate([0, PAWL_Y, 0])
-        self.holding_pawl.translate([HOLD_X, PAWL_Y, HOLD_Z])
-        self.upper_roller.translate([UPPER_X, ROPE_Y, UPPER_Z])
+        # Fixed axles establish the journals their moving mates use.
         self.upper_pin.translate([UPPER_X, ROPE_Y, UPPER_Z])
-        self.reduction_shaft.translate([REDUCER_X, 0, REDUCER_Z])
-        self.drive_idler.translate([IDLER_X, IDLER_Y, IDLER_Z])
         self.idler_pin.translate([IDLER_X, 0, IDLER_Z])
-        self.haul.translate([ANCHOR_X, ROPE_Y, ROPE_ANCHOR_Z])
-        self.haul_span.translate([UPPER_EXIT[0], ROPE_Y, UPPER_EXIT[1]])
-        self.drive_line.translate([RATCHET_X, DRIVE_START_Y, RATCHET_Z])
-        self.winding.translate([RATCHET_X, 0, RATCHET_Z])
-        self.reserve.translate(
-            [INPUT_CONTACT[0], LARGE_START_Y, INPUT_CONTACT[1]]
-        )
-        self.takeup.translate(
-            [
-                HAUL_CONTACT[0],
-                HAUL_TIE_Y + WIND_PITCH * HAUL_INITIAL,
-                HAUL_CONTACT[1],
-            ]
-        )
-        self.gear_tie.translate([RATCHET_X, 0, RATCHET_Z])
-        for tie in (self.input_tie, self.haul_tie):
-            tie.translate([REDUCER_X, 0, REDUCER_Z])
 
 
 class LeonardoHydraulicSawmill(AssemblyNode):
     kerf = Length(3.2, min=2, max=5)
     time = Time(loop=PASS_SECONDS)
-    frame = Frame(name="Frame and guides")
+    frame = MillStructure(name="Frame and guides")
     water_drive = WaterDrive(name="Water drive")
     saw = SawMechanism(name="Saw mechanism")
     carriage = TimberCarriage(kerf=kerf, name="Timber carriage")
     feed = FeedMechanism(name="Feed mechanism")
+    saw_mount = saw.base.on(frame.saw_station)
+    carriage_mount = carriage.rail_datum.on(
+        frame.carriage_entry, carriage.feed
+    )
+    feed_mount = feed.base.on(frame.feed_station)
     cycle = RotationalPort(unit="deg")
     cycle.drives(water_drive.waterwheel.spin)
     water_drive.waterwheel.spin.drives(water_drive.crankshaft.spin)
@@ -465,10 +504,6 @@ class LeonardoHydraulicSawmill(AssemblyNode):
         ),
         law=lambda a, b: haul_profile,
     )
-
-    def render(self):
-        self.carriage.translate([CARRIAGE_START, 0, 0]).rotate(180, [0, 0, 1])
-        self.feed.rotate(180, [0, 0, 1]).translate([0, FEED_OFFSET_Y, 0])
 
     def simulate(self):
         self.cycle = PASS_ANGLE * clip01(self.time / PASS_SECONDS)

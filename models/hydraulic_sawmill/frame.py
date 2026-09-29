@@ -2,13 +2,14 @@
 
 # Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
 import cadquery as cq
-from machinome.node import AssemblyNode, CadQueryNode
+from machinome.node import AssemblyNode, CadQueryNode, Frame
 from machinome.parameters import Count
 from machinome.simulation import Driver, Instruction
 
 from .carpentry import MEMBERS, PEGS
 from .erection import STAGES, displacement, peg_displacement
 from .parts import Foundation
+from .layout import AXLE_Z, CARRIAGE_START, FEED_OFFSET_Y
 
 
 def feature_shape(feature):
@@ -95,7 +96,12 @@ class TimberStand(AssemblyNode):
     ]
 
 
-class Frame(AssemblyNode):
+class MillStructure(AssemblyNode):
+    """Stationary timberwork and the stations it supports."""
+
+    saw_station = Frame(at=(0, 0, AXLE_Z))
+    carriage_entry = Frame(at=(-CARRIAGE_START, 0, 0), x=(-1, 0, 0))
+    feed_station = Frame(at=(0, FEED_OFFSET_Y, 0), x=(-1, 0, 0))
     foundation = Foundation(name="Foundation")
     timber_structure = TimberStand(name="Fixed timber structure")
 
@@ -105,7 +111,7 @@ class FrameCarpentry(AssemblyNode):
     order."""
 
     disassembly = Driver(default=0, range=(0, 11), unit="stage")
-    frame = Frame(name="Buildable sawmill frame")
+    frame = MillStructure(name="Buildable sawmill frame")
     instructions = {
         f"{i:02d} · {label}": Instruction({"disassembly": i}, duration=2)
         for i, label in enumerate(STAGES)

@@ -116,13 +116,15 @@ The [previous validation](docs/validation.md) records the superseded four-turn e
 
 ## Reproduce the evidence
 
-Use the workspace’s **Machinome 0.7.0** and **machinome-viewer 0.7.0**
-(viewer API 27). These local release-state packages are not claimed to be
-published; the older published 0.6.0 package is insufficient.
-Exact dependency revisions are recorded in the validation certificate.
+Use the workspace's current development checkouts, including support for
+mates that reference an existing child joint. Package version labels alone
+do not identify that capability. Exact tested revisions are recorded in the
+[placement-refactor evidence](docs/mates-validation.md). Install the
+gallery's `dev` extra for the PEP 8 test.
 
 ```sh
 machinome build hydraulic_sawmill
+python -m unittest test_style
 machinome test hydraulic_sawmill --faceted
 machinome test hydraulic_sawmill --exact
 machinome test hydraulic_sawmill --set kerf=2 --exact
@@ -140,6 +142,27 @@ The finite browser script serves its own temporary localhost server unless
 `--url` supplies one. Exports contain committed source: regenerate after
 committing source changes. Generated meshes, research downloads and browser
 batches are ignored; a small selected [evidence set](docs/evidence/) is tracked.
+
+## Reading the assembly code
+
+`MillStructure` names the stationary timberwork, leaving `Frame` for a
+Machinome attachment coordinate system. Its saw station, carriage entry and
+feed station place the major assemblies with `.on()` mates. Parts declare
+their own bores, pivots and journals; for example:
+
+```python
+rocker_mount = rocker.pivot.on(rocker_pin.journal, rocker.turn)
+roller_mount = upper_roller.bore.on(upper_pin.journal, upper_roller.spin)
+```
+
+These mates preserve the existing joints and motion laws. Fixed axle
+placements and repeated wheels still use short placement loops where the
+current interface needs them. Rope profiles retain the coordinates that
+describe their changing shape.
+
+The normal sawmill test run includes PEP 8 checks for its Python sources.
+`python -m unittest test_style` checks every gallery Python source, including
+new files, using the repository's 79-column code and 72-column prose limits.
 
 Primary reference: [Milan museum hydraulic saw](https://www.museoscienza.org/en/collections/objects/hydraulic-saw).
 The [detailed catalogue](https://collezioni-online.museoscienza.org/detail/IT-MUST-NTR001-008357/sega-idraulica)

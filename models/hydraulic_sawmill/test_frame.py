@@ -4,7 +4,7 @@
 from machinome.test import TestCase
 import numpy as np
 
-from .frame import Frame, FrameCarpentry
+from .frame import MillStructure, FrameCarpentry
 
 
 def leaves(node):
@@ -15,8 +15,8 @@ def leaves(node):
             yield from leaves(child)
 
 
-class FrameTest(TestCase):
-    node = Frame
+class MillStructureTest(TestCase):
+    node = MillStructure
 
     def test_fixed_frame_is_individual_cut_timbers(self):
         stand = self.node.timber_structure

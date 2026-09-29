@@ -1,5 +1,6 @@
 # Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
 import math
+from pathlib import Path
 
 import numpy as np
 import trimesh
@@ -24,6 +25,11 @@ class BearingJournalProbe(CadQueryNode):
 
 class LeonardoHydraulicSawmillTest(TestCase):
     node = LeonardoHydraulicSawmill
+
+    def test_python_sources_follow_pep8(self):
+        from test_style import check_python_style
+
+        check_python_style(Path(__file__).resolve().parent)
 
     @staticmethod
     def fixture_parts(fixture):
