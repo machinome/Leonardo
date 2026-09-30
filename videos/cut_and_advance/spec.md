@@ -215,7 +215,7 @@ class Feed(Chapter):
                       cues=[Cue(0, Title("Pull · one tooth", position="top"), until=lines.spoken("On the return")),
                             Cue(lines.spoken("the driving pawl"),
                                 Ring(Mill.feed.pawl, enter=("draw", 0.8), leave=("fade", 0.4)),
-                                Label(Mill.feed.pawl, "Driving pawl", offset=(0.12, -0.08), enter=("fade", 0.4)),
+                                Label(Mill.feed.pawl, "Driving pawl", offset=(-0.16, -0.12), enter=("fade", 0.4)),
                                 mill.highlight(Mill.feed.pawl, Mill.feed.feed_drum, others="ghost"),
                                 until=lines.spoken("On the return")),
                             Cue(lines.spoken("On the return"), Title("Return · hold", position="top"), until=lines.end(plus=0.8)),
