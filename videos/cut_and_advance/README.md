@@ -1,11 +1,16 @@
 <!-- Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only. -->
 # Cut and Advance
 
-The first film of this project declared in Python: `movie.py` is the whole
-screenplay, `spec.md` says what each shot was written to prove, and
-`description.md` is the draft of the upload description that carries the
-attribution the film's frames do not. It is the validation film of
-Videomaker's declarative-python campaign, produced on 30 September 2026.
+A film of this project declared in Python and drawn by its own template:
+`movie.py` is the whole screenplay, `stage.tsx` and `stage.css` are the
+look (the sets `Leonardo` and `LeonardoSplit`, the two-jobs card), `spec.md`
+says what each shot was written to prove, and `description.md` is the draft
+of the upload description that carries the attribution the film's frames do
+not. Version 2, produced on 30 September 2026, is the validation film of
+Videomaker's react-stage campaign: nothing on screen is drawn by the tool's
+page; the template owns it, masthead included, and there is no progress
+rule. Version 1, the same day, was the first film declared in Python on the
+tool's old fixed page.
 
 The movie is declared in the project's `pyproject.toml` under
 `[tool.machinome.movies]` as `cut_and_advance`. It films the posed sawmill
@@ -27,16 +32,21 @@ node bin/videomaker.mjs render   <this project>/videos/cut_and_advance/_build/mo
 ```
 
 `evaluate` writes `_build/movie.json`, the data document the tool reads;
-`check` writes `_build/movie-resolved.json`, the same document with every
-spoken anchor resolved against the cached takes to seconds on the frame
-grid. Both are build products, ignored by Git; `movie.py` is the source.
+`check` bundles `stage.tsx` with the tool's stage runtime into
+`_build/stage/` and type-checks it, then writes `_build/movie-resolved.json`,
+the same document with every spoken anchor resolved against the cached takes
+to seconds on the frame grid. Both are build products, ignored by Git; `movie.py` is the source.
 Render at the movie's own frame rate: a quick render at another rate may
 be refused, since the film is a whole number of frames on its own grid.
 
 ## What came out
 
-Five chapters, eleven shots, 58.97 s at 1920×1080 and 30 fps; the narrator
-sets the pace and every cut follows her. The takes measured 5.68, 12.64,
-11.76, 11.76 and 10.32 s. `_build/rehearsal.mp4` with `rehearsal.srt` beside
-it, `storyboard.jpg`, `preview/report.json` and `rehearsal-manifest.json`
-are the evidence; findings went to Videomaker's `workflow/warts.md`.
+Five chapters, twelve shots, 58.97 s at 1920×1080 and 30 fps; the narrator
+sets the pace and every cut follows her. The five takes of version 1 were
+reused (5.68, 12.64, 11.76, 11.76 and 10.32 s); nothing was bought. Source is
+shown beside the model in three chapters, its tokens lit as the narrator
+speaks them while the same parts highlight in the model. `_build/rehearsal.mp4`
+with `rehearsal.srt` beside it, `storyboard.jpg`, `preview/report.json`, the
+review pack under `review-packs/` and `rehearsal-manifest.json` (which
+records the stage bundle's hash) are the evidence; findings went to
+Videomaker's `workflow/warts.md`.
