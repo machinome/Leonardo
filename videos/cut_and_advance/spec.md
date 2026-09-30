@@ -68,12 +68,12 @@ rotation into the saw's stroke."*
    carriage; model 440 → 444. Until spoken "In the model".
 4. `coupling` — set `paper-split`: left, the source lines 413–415 of
    `models/hydraulic_sawmill/model.py` typed through line 415 in the first
-   1.2 s; right, the same view. Dissolve in over 0.6 s. One cue at spoken
+   0.6 s; right, the same view. Dissolve in over 0.6 s. One cue at spoken
    "waterwheel" highlights the undershot waterwheel with others ghosted and
    lights `waterwheel` in the source; at spoken "drives" lights `drives`; at
    spoken "crankshaft" the highlight moves to the keyed crankshaft and
    `crankshaft` lights; the marks clear 0.9 s after the phrase ends. Until
-   spoken "A crank".
+   the phrase "drives the crankshaft" ends plus 0.9 s.
 5. `stroke` — set `paper`, camera `drive` moving to `whole-near` with
    `smooth` easing; wipe in from the right over 0.6 s; an arrow "Connecting
    rod" draws on at spoken "connecting rod" and fades out 0.4 s before the
@@ -191,8 +191,8 @@ class Drive(Chapter):
     code = Source.panel(Sawmill.coupling)
     wheel = Shot(Paper, {Paper.stage: mill}, until=lines.spoken("In the model"), model=Sawmill.run(440, 444))
     coupling_shot = Shot(PaperSplit, {PaperSplit.left: code, PaperSplit.right: mill},
-                         until=lines.spoken("A crank"), transition=Dissolve(0.6), model=Sawmill.run(444, 450),
-                         cues=[Cue(0, code.type(through_line=415, over=1.2)),
+                         until=lines.spoken_end("drives the crankshaft", plus=0.9), transition=Dissolve(0.6), model=Sawmill.run(444, 450),
+                         cues=[Cue(0, code.type(through_line=415, over=0.6)),
                                Cue(lines.spoken("waterwheel"), mill.highlight(Mill.water_drive.waterwheel, others="ghost"),
                                    until=lines.spoken("crankshaft")),
                                Cue(lines.spoken("crankshaft"), mill.highlight(Mill.water_drive.crankshaft, others="ghost"),
@@ -235,9 +235,10 @@ class Ropes(Chapter):
                            enter=("fade", 0.4), leave=("fade", 0.4)), until=lines.spoken("and the carriage")),
                        Cue(lines.spoken("rope two"), Label(Mill.feed.takeup, "Rope 2", offset=(0.12, -0.12),
                            enter=("fade", 0.4), leave=("fade", 0.4)), until=lines.spoken("and the carriage"))])
-    carriage_shot = Shot(Paper, {Paper.stage: View(Sawmill, camera=Sawmill.whole_near, hide=[Sawmill.structure, Sawmill.water])},
+    wide = View(Sawmill, camera=Sawmill.whole_near, hide=[Sawmill.structure, Sawmill.water])
+    carriage_shot = Shot(Paper, {Paper.stage: wide},
                          until=lines.end(plus=0.6), transition=Dissolve(0.6), model=Sawmill.run(448, 454),
-                         cues=[Cue(0, View.highlight(Mill.carriage, others="dim"), until=lines.end(plus=0.6))])
+                         cues=[Cue(0, wide.highlight(Mill.carriage, others="dim"), until=lines.end(plus=0.6))])
 
 class Closing(Chapter):
     lines = Narration("Cut. Advance. Cut. Advance. The linkage sets the rhythm. "
