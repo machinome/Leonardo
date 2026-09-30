@@ -131,7 +131,7 @@ Explore the interactive model, linked in the description."*
 
 ## The Python source
 
-The target `videos/cut-and-advance/movie.py`, as far as this specification
+The target `videos/cut_and_advance/movie.py`, as far as this specification
 can write it before the API exists. The `declarative-movie` change must make
 a source of this shape evaluate; where it changes a spelling, this file is
 updated with it and the change says why.
@@ -144,26 +144,30 @@ from machinome_movie import (Movie, Chapter, Shot, Narration, Cue, Camera,
     Credits, Release, Evidence)
 from models.hydraulic_sawmill.model import LeonardoHydraulicSawmill as Mill
 
-# The mill before the camera: reusable by any movie of this project.
-sawmill = Loop(Mill, export="../../export/hydraulic_sawmill",
-               marks={"pull_start": 436, "return_start": 438, "cycle_end": 440},
-               readiness="Posed sawmill export; forces and material removal are not simulated.")
-whole = Camera(position=(900, -1400, 1000), target=(0, 0, 250), fov=37)
-whole_near = Camera(position=(740, -1170, 870), target=(0, 0, 250), fov=37)
-title_wide = Camera(position=(1450, -2250, 1460), target=(0, 0, 650), fov=37)
-title_near = Camera(position=(1350, -2100, 1375), target=(0, 0, 650), fov=37)
-pawls = Camera(position=(145, 410, 400), target=(135, 0, 332), fov=37)
-rope_wide = Camera(position=(-540, 830, 610), target=(-80, 0, 300), fov=35)
-reduction_rolled = Camera(position=(-590, 350, 425), target=(-305, 0, 315), up=(0.15, 0, 1), fov=42)
-drive = Camera(position=(660, -1125, 455), target=(0, -135, 145), fov=37)
-structure = Layer(Mill.frame.timber_structure)
-foundation = Layer(Mill.frame.foundation)
-water = Layer(Mill.water_drive.channel, Mill.water_drive.water)
-carriage = Layer(Mill.carriage)
-coupling = Source("../../models/hydraulic_sawmill/model.py", lines=(413, 415))
-isometric = Still("media/sawmill-isometric.png",
-                  credit="Leonardo project render of the reconstructed sawmill",
-                  rights="Project-owned reconstruction render, AGPL-3.0-only", upscale=1.85)
+# The mill before the camera: the posed loop with its marks, cameras, layers,
+# source excerpts and pictures. Reusable by any movie of this project.
+class Sawmill(Loop):
+    model = Mill
+    export = "../../export/hydraulic_sawmill"
+    marks = {"pull_start": 436, "return_start": 438, "cycle_end": 440}
+    readiness = "Posed sawmill export; forces and material removal are not simulated."
+    whole = Camera(position=(900, -1400, 1000), target=(0, 0, 250), fov=37)
+    whole_near = Camera(position=(740, -1170, 870), target=(0, 0, 250), fov=37)
+    title_wide = Camera(position=(1450, -2250, 1460), target=(0, 0, 650), fov=37)
+    title_near = Camera(position=(1350, -2100, 1375), target=(0, 0, 650), fov=37)
+    pawls = Camera(position=(145, 410, 400), target=(135, 0, 332), fov=37)
+    rope_wide = Camera(position=(-540, 830, 610), target=(-80, 0, 300), fov=35)
+    reduction_rolled = Camera(position=(-590, 350, 425), target=(-305, 0, 315), up=(0.15, 0, 1), fov=42)
+    drive = Camera(position=(660, -1125, 455), target=(0, -135, 145), fov=37)
+    structure = Layer(Mill.frame.timber_structure)
+    foundation = Layer(Mill.frame.foundation)
+    water = Layer(Mill.water_drive.channel, Mill.water_drive.water)
+    carriage = Layer(Mill.carriage)
+    coupling = Source("../../models/hydraulic_sawmill/model.py", lines=(413, 415))
+    isometric = Still("media/sawmill-isometric.png",
+                      credit="Leonardo project render of the reconstructed sawmill",
+                      rights="Project-owned reconstruction render, AGPL-3.0-only", upscale=1.85)
+
 jessica = Narrator(provider="elevenlabs", model="eleven_v3", voice="cgSgspJ2msm6clMCkdW9",
                    label="Jessica", output="pcm_24000",
                    settings={"stability": 0.5, "similarity_boost": 0.75},
@@ -171,23 +175,23 @@ jessica = Narrator(provider="elevenlabs", model="eleven_v3", voice="cgSgspJ2msm6
 
 class Question(Chapter):
     lines = Narration("A waterwheel can move a saw. But how does it feed the log forward at just the right moment?")
-    mill = View(sawmill, camera=title_wide)
+    mill = View(Sawmill, camera=Sawmill.title_wide)
     hook = Shot(Paper, {Paper.stage: mill}, until=lines.spoken("But"), fade_in=FadeIn(1.0),
-                model=sawmill.run(428, 436),
-                cues=[Cue(0, mill.move(title_near, ease="out", until=lines.spoken("But")))])
+                model=Sawmill.run(428, 436),
+                cues=[Cue(0, mill.move(Sawmill.title_near, ease="out", until=lines.spoken("But")))])
     question = Shot(Paper, {Paper.stage: mill}, until=lines.end(plus=0.8),
-                    model=sawmill.run(436, 440),
+                    model=Sawmill.run(436, 440),
                     cues=[Cue(0, Title("CUT AND ADVANCE", subtitle="One wheel, two jobs",
                                        enter=0.6, leave=0.6), until=lines.end())])
 
 class Drive(Chapter):
     lines = Narration("Water passes beneath the wheel and turns a shaft. In the model, the waterwheel "
                       "drives the crankshaft. A crank and a connecting rod turn that rotation into the saw's stroke.")
-    mill = View(sawmill, camera=drive, hide=[structure, foundation, carriage])
-    code = Source.panel(coupling)
-    wheel = Shot(Paper, {Paper.stage: mill}, until=lines.spoken("In the model"), model=sawmill.run(440, 444))
+    mill = View(Sawmill, camera=Sawmill.drive, hide=[Sawmill.structure, Sawmill.foundation, Sawmill.carriage])
+    code = Source.panel(Sawmill.coupling)
+    wheel = Shot(Paper, {Paper.stage: mill}, until=lines.spoken("In the model"), model=Sawmill.run(440, 444))
     coupling_shot = Shot(PaperSplit, {PaperSplit.left: code, PaperSplit.right: mill},
-                         until=lines.spoken("A crank"), transition=Dissolve(0.6), model=sawmill.run(444, 450),
+                         until=lines.spoken("A crank"), transition=Dissolve(0.6), model=Sawmill.run(444, 450),
                          cues=[Cue(0, code.type(through_line=415, over=1.2)),
                                Cue(lines.spoken("waterwheel"), mill.highlight(Mill.water_drive.waterwheel, others="ghost"),
                                    until=lines.spoken("crankshaft")),
@@ -196,17 +200,17 @@ class Drive(Chapter):
                                Cue(lines.spoken("the waterwheel drives the crankshaft"),
                                    code.emphasize("waterwheel", "drives", "crankshaft", hold=0.9))])
     stroke = Shot(Paper, {Paper.stage: mill}, until=lines.end(plus=0.6), transition=Wipe(0.6, direction="right"),
-                  model=sawmill.run(450, 456),
-                  cues=[Cue(0, mill.move(whole_near, ease="smooth", until=lines.end())),
+                  model=Sawmill.run(450, 456),
+                  cues=[Cue(0, mill.move(Sawmill.whole_near, ease="smooth", until=lines.end())),
                         Cue(lines.spoken("connecting rod"), Arrow(Mill.saw.connecting_rod, "Connecting rod",
                             place=(0.2, 0.25), enter=("draw", 0.8), leave=("fade", 0.4)), until=lines.end(plus=0.6))])
 
 class Feed(Chapter):
     lines = Narration("Watch the timber. On the cutting stroke the rocker pulls a hook, the driving pawl, "
                       "and the ratchet turns one tooth. On the return, a holding pawl keeps that progress.")
-    mill = View(sawmill, camera=pawls, hide=[structure, foundation, water, carriage])
+    mill = View(Sawmill, camera=Sawmill.pawls, hide=[Sawmill.structure, Sawmill.foundation, Sawmill.water, Sawmill.carriage])
     pawls_shot = Shot(Paper, {Paper.stage: mill}, until=lines.end(plus=0.8),
-                      model=sawmill.keys({0: "pull_start", lines.spoken("On the return"): ("return_start", "out"),
+                      model=Sawmill.keys({0: "pull_start", lines.spoken("On the return"): ("return_start", "out"),
                                           lines.end(plus=0.8): "cycle_end"}),
                       cues=[Cue(0, Title("Pull · one tooth", position="top"), until=lines.spoken("On the return")),
                             Cue(lines.spoken("the driving pawl"),
@@ -224,31 +228,31 @@ class Feed(Chapter):
 class Ropes(Chapter):
     lines = Narration("Two ropes share one winding shaft. Rope one unwinds from the large drum while rope two "
                       "winds onto the thin section, and the carriage moves the timber into the blade.")
-    mill = View(sawmill, camera=rope_wide, hide=[structure, foundation, water])
-    shaft = Shot(Paper, {Paper.stage: mill}, until=lines.spoken("and the carriage"), model=sawmill.run(440, 448),
-                 cues=[Cue(0, mill.move(reduction_rolled, ease="smooth", until=lines.spoken("and the carriage"))),
+    mill = View(Sawmill, camera=Sawmill.rope_wide, hide=[Sawmill.structure, Sawmill.foundation, Sawmill.water])
+    shaft = Shot(Paper, {Paper.stage: mill}, until=lines.spoken("and the carriage"), model=Sawmill.run(440, 448),
+                 cues=[Cue(0, mill.move(Sawmill.reduction_rolled, ease="smooth", until=lines.spoken("and the carriage"))),
                        Cue(lines.spoken("Rope one"), Label(Mill.feed.reserve, "Rope 1", offset=(0, -0.15),
                            enter=("fade", 0.4), leave=("fade", 0.4)), until=lines.spoken("and the carriage")),
                        Cue(lines.spoken("rope two"), Label(Mill.feed.takeup, "Rope 2", offset=(0.12, -0.12),
                            enter=("fade", 0.4), leave=("fade", 0.4)), until=lines.spoken("and the carriage"))])
-    carriage_shot = Shot(Paper, {Paper.stage: View(sawmill, camera=whole_near, hide=[structure, water])},
-                         until=lines.end(plus=0.6), transition=Dissolve(0.6), model=sawmill.run(448, 454),
+    carriage_shot = Shot(Paper, {Paper.stage: View(Sawmill, camera=Sawmill.whole_near, hide=[Sawmill.structure, Sawmill.water])},
+                         until=lines.end(plus=0.6), transition=Dissolve(0.6), model=Sawmill.run(448, 454),
                          cues=[Cue(0, View.highlight(Mill.carriage, others="dim"), until=lines.end(plus=0.6))])
 
 class Closing(Chapter):
     lines = Narration("Cut. Advance. Cut. Advance. The linkage sets the rhythm. "
                       "Explore the interactive model, linked in the description.")
-    mill = View(sawmill, camera=whole_near)
-    rhythm = Shot(Paper, {Paper.stage: mill}, until=lines.spoken("The linkage"), model=sawmill.run(448, 456),
+    mill = View(Sawmill, camera=Sawmill.whole_near)
+    rhythm = Shot(Paper, {Paper.stage: mill}, until=lines.spoken("The linkage"), model=Sawmill.run(448, 456),
                   cues=[Cue(0, Title("Cut. Advance. Cut. Advance.", position="top", reveal=Reveal.spoken()),
                             until=lines.spoken("The linkage"))])
-    still = Shot(Paper, {Paper.stage: mill}, until=lines.spoken("Explore"), model=sawmill.run(456, 460),
-                 cues=[Cue(0, isometric.show(area="frame", fit="contain", enter=0.5, leave=0.5,
+    still = Shot(Paper, {Paper.stage: mill}, until=lines.spoken("Explore"), model=Sawmill.run(456, 460),
+                 cues=[Cue(0, Sawmill.isometric.show(area="frame", fit="contain", enter=0.5, leave=0.5,
                                              view=[(0, (0.5, 0.5), 1.0), (lines.spoken("Explore", plus=-0.5), (0.5, 0.42), 1.4, "in-out")]),
                            until=lines.spoken("Explore"))])
     invitation = Shot(Paper, {Paper.stage: mill}, until=lines.end(plus=1.2), fade_out=FadeOut(1.2),
-                      model=sawmill.run(460, 462),
-                      cues=[Cue(0, mill.move(whole, ease="in-out", until=lines.end()))])
+                      model=Sawmill.run(460, 462),
+                      cues=[Cue(0, mill.move(Sawmill.whole, ease="in-out", until=lines.end()))])
 
 class CutAndAdvance(Movie):
     title = "Cut and Advance"
@@ -288,8 +292,8 @@ From the videomaker repository's campaign worktree, with the workspace venv:
 
 ```sh
 .venv/bin/python -m machinome_movie evaluate projects/Leonardo cut_and_advance
-node bin/videomaker.mjs speech  projects/Leonardo/videos/cut-and-advance/_build/movie.json
-node bin/videomaker.mjs check   projects/Leonardo/videos/cut-and-advance/_build/movie.json --viewer machinome-viewer/machinome_viewer/widget/dist/machinome-viewer.js
+node bin/videomaker.mjs speech  projects/Leonardo/videos/cut_and_advance/_build/movie.json
+node bin/videomaker.mjs check   projects/Leonardo/videos/cut_and_advance/_build/movie.json --viewer machinome-viewer/machinome_viewer/widget/dist/machinome-viewer.js
 node bin/videomaker.mjs preview …/_build/movie.json --viewer …
 node bin/videomaker.mjs render  …/_build/movie.json --viewer …
 ```
