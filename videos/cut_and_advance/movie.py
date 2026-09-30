@@ -51,7 +51,7 @@ class Drive(Chapter):
     mill = View(Sawmill, camera=Sawmill.drive, hide=[Sawmill.structure, Sawmill.foundation, Sawmill.carriage])
     code = Source.panel(Sawmill.coupling)
     wheel = Shot(Paper, {Paper.stage: mill}, until=lines.spoken("In the model"), model=Sawmill.run(440, 444))
-    coupling_shot = Shot(PaperSplit, {PaperSplit.left: code, PaperSplit.right: mill},
+    coupling = Shot(PaperSplit, {PaperSplit.left: code, PaperSplit.right: mill},
                          until=lines.spoken_end("drives the crankshaft", plus=0.9), transition=Dissolve(0.6), model=Sawmill.run(444, 450),
                          cues=[Cue(0, code.type(through_line=415, over=0.6)),
                                Cue(lines.spoken("waterwheel"), mill.highlight(Mill.water_drive.waterwheel, others="ghost"),
@@ -70,7 +70,7 @@ class Feed(Chapter):
     lines = Narration("Watch the timber. On the cutting stroke the rocker pulls a hook, the driving pawl, "
                       "and the ratchet turns one tooth. On the return, a holding pawl keeps that progress.")
     mill = View(Sawmill, camera=Sawmill.pawls, hide=[Sawmill.structure, Sawmill.foundation, Sawmill.water, Sawmill.carriage])
-    pawls_shot = Shot(Paper, {Paper.stage: mill}, until=lines.end(plus=0.8),
+    pawls = Shot(Paper, {Paper.stage: mill}, until=lines.end(plus=0.8),
                       model=Sawmill.keys({0: "pull_start", lines.spoken("On the return"): ("return_start", "out"),
                                           lines.end(plus=0.8): "cycle_end"}),
                       cues=[Cue(0, Title("Pull · one tooth", position="top"), until=lines.spoken("On the return")),
@@ -97,7 +97,7 @@ class Ropes(Chapter):
                        Cue(lines.spoken("rope two"), Label(Mill.feed.takeup, "Rope 2", offset=(0.12, -0.12),
                            enter=("fade", 0.4), leave=("fade", 0.4)), until=lines.spoken("and the carriage"))])
     wide = View(Sawmill, camera=Sawmill.whole_near, hide=[Sawmill.structure, Sawmill.water])
-    carriage_shot = Shot(Paper, {Paper.stage: wide},
+    carriage = Shot(Paper, {Paper.stage: wide},
                          until=lines.end(plus=0.6), transition=Dissolve(0.6), model=Sawmill.run(448, 454),
                          cues=[Cue(0, wide.highlight(Mill.carriage, others="dim"), until=lines.end(plus=0.6))])
 
