@@ -15,7 +15,7 @@ class Sawmill(Loop):
     whole_near = Camera(position=(740, -1170, 870), target=(0, 0, 250), fov=37)
     title_wide = Camera(position=(1450, -2250, 1460), target=(0, 0, 650), fov=37)
     title_near = Camera(position=(1350, -2100, 1375), target=(0, 0, 650), fov=37)
-    pawls = Camera(position=(145, 410, 400), target=(135, 0, 332), fov=37)
+    pawls = Camera(position=(145, 410, 400), target=(135, 0, 332), fov=46)   # wide enough for the split's container
     rope_wide = Camera(position=(-540, 830, 610), target=(-80, 0, 300), fov=35)
     reduction_rolled = Camera(position=(-590, 350, 425), target=(-305, 0, 315), up=(0.15, 0, 1), fov=42)
     drive = Camera(position=(660, -1125, 455), target=(0, -135, 145), fov=37)
@@ -33,7 +33,8 @@ class Sawmill(Loop):
 # The film's template, drawn by stage.tsx beside this file.
 class Leonardo(Set):
     module = "stage.tsx"
-    series = "LEONARDO · HOW IT WORKS"      # a prop the template reads
+    series = "LEONARDO · HOW IT WORKS"      # props the template's masthead reads
+    brand = "MACHINOME"
     stage = Slot()
     plate = Slot()
     headline = Slot()
@@ -56,7 +57,7 @@ jessica = Narrator(provider="elevenlabs", model="eleven_v3", voice="cgSgspJ2msm6
 class Question(Chapter):
     lines = Narration("A waterwheel can move a saw. But how does it feed the log forward at just the right moment?")
     mill = View(Sawmill, camera=Sawmill.title_wide)
-    jobs = Jobs(jobs=["Move the saw", "Feed the log"])
+    jobs = Jobs(jobs=[{"key": "saw", "text": "Move the saw"}, {"key": "log", "text": "Feed the log"}])
     title = Title("CUT AND ADVANCE", subtitle="One wheel, two jobs")
     hook = Shot(Leonardo, {Leonardo.stage: mill, Leonardo.aside: jobs}, until=lines.spoken("But"),
                 fade_in=FadeIn(1.0), model=Sawmill.run(428, 436),
@@ -120,7 +121,7 @@ class Feed(Chapter):
                              code.emphasize(("holding pawl", "feed.holding_pawl.turn"), hold=0.6)),
                          Cue(lines.spoken("a holding pawl"),
                              mill.ring(Mill.feed.holding_pawl, enter=("draw", 0.8)),
-                             mill.label(Mill.feed.holding_pawl, "Holding pawl", offset=(0.15, 0.1), enter=("fade", 0.4)),
+                             mill.label(Mill.feed.holding_pawl, "Holding pawl", offset=(-0.22, 0.14), enter=("fade", 0.4)),
                              mill.highlight(Mill.feed.holding_pawl, others="dim"),
                              until=lines.end(plus=1.5))])
 

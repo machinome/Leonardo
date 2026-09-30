@@ -53,8 +53,9 @@ cutting simulated; a reconstruction, not an artifact.
 film's look, written by the project:
 
 - **`Leonardo`**, the root set: paper background from the movie's style; a
-  masthead of the series label at the top left and the word MACHINOME at the
-  top right, small, in the accent colour, drawn inside `Chrome` so it stays
+  masthead of the series label at the top left, in the accent colour, and
+  the brand at the top right, muted, both props of the set (`series`,
+  `brand`), drawn inside `Chrome` so it stays
   above pictures and transitions; no rule, no bar, no progress. Slots:
   `stage` (the whole picture below the masthead), `plate` (over the stage,
   for a picture), `headline` (a band at the top of the stage, for a title),
@@ -62,8 +63,9 @@ film's look, written by the project:
 - **`LeonardoSplit`**, derived: the same masthead; slots `left` (a source
   container, about half the width), `right` (the model), `headline`.
 - **`Jobs`**, the project element: a card listing the two jobs, "Move the
-  saw" and "Feed the log"; its action `light(job)` fills one line with the
-  accent colour while the cue lasts.
+  saw" and "Feed the log", each a `{key, text}` of its `jobs` prop; its action
+  `light(job)` names a key and fills that line with the accent colour while
+  the cue lasts.
 
 ## Shot list
 
@@ -212,7 +214,8 @@ class Sawmill(Loop):
 # The film's template, drawn by stage.tsx beside this file.
 class Leonardo(Set):
     module = "stage.tsx"
-    series = "LEONARDO · HOW IT WORKS"      # a prop the template reads
+    series = "LEONARDO · HOW IT WORKS"      # props the template's masthead reads
+    brand = "MACHINOME"
     stage = Slot()
     plate = Slot()
     headline = Slot()
@@ -235,7 +238,7 @@ jessica = Narrator(provider="elevenlabs", model="eleven_v3", voice="cgSgspJ2msm6
 class Question(Chapter):
     lines = Narration("A waterwheel can move a saw. But how does it feed the log forward at just the right moment?")
     mill = View(Sawmill, camera=Sawmill.title_wide)
-    jobs = Jobs(jobs=["Move the saw", "Feed the log"])
+    jobs = Jobs(jobs=[{"key": "saw", "text": "Move the saw"}, {"key": "log", "text": "Feed the log"}])
     title = Title("CUT AND ADVANCE", subtitle="One wheel, two jobs")
     hook = Shot(Leonardo, {Leonardo.stage: mill, Leonardo.aside: jobs}, until=lines.spoken("But"),
                 fade_in=FadeIn(1.0), model=Sawmill.run(428, 436),
