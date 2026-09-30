@@ -72,8 +72,8 @@ rotation into the saw's stroke."*
    "waterwheel" highlights the undershot waterwheel with others ghosted and
    lights `waterwheel` in the source; at spoken "drives" lights `drives`; at
    spoken "crankshaft" the highlight moves to the keyed crankshaft and
-   `crankshaft` lights; the marks clear 0.9 s after the phrase ends. Until
-   the phrase "drives the crankshaft" ends plus 0.9 s.
+   `crankshaft` lights; the marks clear 0.6 s after the phrase ends. Until
+   the phrase "drives the crankshaft" ends plus 0.6 s.
 5. `stroke` — set `paper`, camera `drive` moving to `whole-near` with
    `smooth` easing; wipe in from the right over 0.6 s; an arrow "Connecting
    rod" draws on at spoken "connecting rod" and fades out 0.4 s before the
@@ -179,7 +179,7 @@ class Question(Chapter):
     hook = Shot(Paper, {Paper.stage: mill}, until=lines.spoken("But"), fade_in=FadeIn(1.0),
                 model=Sawmill.run(428, 436),
                 cues=[Cue(0, mill.move(Sawmill.title_near, ease="out", until=lines.spoken("But")))])
-    question = Shot(Paper, {Paper.stage: mill}, until=lines.end(plus=0.8),
+    question = Shot(Paper, {Paper.stage: mill}, until=lines.end(plus=1.2),
                     model=Sawmill.run(436, 440),
                     cues=[Cue(0, Title("CUT AND ADVANCE", subtitle="One wheel, two jobs",
                                        enter=0.6, leave=0.6), until=lines.end())])
@@ -196,34 +196,34 @@ class Drive(Chapter):
                                Cue(lines.spoken("waterwheel"), mill.highlight(Mill.water_drive.waterwheel, others="ghost"),
                                    until=lines.spoken("crankshaft")),
                                Cue(lines.spoken("crankshaft"), mill.highlight(Mill.water_drive.crankshaft, others="ghost"),
-                                   until=lines.spoken_end("drives the crankshaft", plus=0.9)),
+                                   until=lines.spoken_end("drives the crankshaft", plus=0.6)),
                                Cue(lines.spoken("the waterwheel drives the crankshaft"),
-                                   code.emphasize("waterwheel", "drives", "crankshaft", hold=0.9))])
-    stroke = Shot(Paper, {Paper.stage: mill}, until=lines.end(plus=0.6), transition=Wipe(0.6, direction="right"),
+                                   code.emphasize("waterwheel", "drives", "crankshaft", hold=0.6))])
+    stroke = Shot(Paper, {Paper.stage: mill}, until=lines.end(plus=1.2), transition=Wipe(0.6, direction="right"),
                   model=Sawmill.run(450, 456),
                   cues=[Cue(0, mill.move(Sawmill.whole_near, ease="smooth", until=lines.end())),
                         Cue(lines.spoken("connecting rod"), Arrow(Mill.saw.connecting_rod, "Connecting rod",
-                            place=(0.2, 0.25), enter=("draw", 0.8), leave=("fade", 0.4)), until=lines.end(plus=0.6))])
+                            place=(0.2, 0.25), enter=("draw", 0.8), leave=("fade", 0.4)), until=lines.end(plus=1.2))])
 
 class Feed(Chapter):
     lines = Narration("Watch the timber. On the cutting stroke the rocker pulls a hook, the driving pawl, "
                       "and the ratchet turns one tooth. On the return, a holding pawl keeps that progress.")
     mill = View(Sawmill, camera=Sawmill.pawls, hide=[Sawmill.structure, Sawmill.foundation, Sawmill.water, Sawmill.carriage])
-    pawls = Shot(Paper, {Paper.stage: mill}, until=lines.end(plus=0.8),
+    pawls = Shot(Paper, {Paper.stage: mill}, until=lines.end(plus=1.5),
                       model=Sawmill.keys({0: "pull_start", lines.spoken("On the return"): ("return_start", "out"),
-                                          lines.end(plus=0.8): "cycle_end"}),
+                                          lines.end(plus=1.5): "cycle_end"}),
                       cues=[Cue(0, Title("Pull · one tooth", position="top"), until=lines.spoken("On the return")),
                             Cue(lines.spoken("the driving pawl"),
                                 Ring(Mill.feed.pawl, enter=("draw", 0.8), leave=("fade", 0.4)),
                                 Label(Mill.feed.pawl, "Driving pawl", offset=(-0.16, -0.12), enter=("fade", 0.4)),
                                 mill.highlight(Mill.feed.pawl, Mill.feed.feed_drum, others="ghost"),
                                 until=lines.spoken("On the return")),
-                            Cue(lines.spoken("On the return"), Title("Return · hold", position="top"), until=lines.end(plus=0.8)),
+                            Cue(lines.spoken("On the return"), Title("Return · hold", position="top"), until=lines.end(plus=1.5)),
                             Cue(lines.spoken("a holding pawl"),
                                 Ring(Mill.feed.holding_pawl, enter=("draw", 0.8)),
                                 Label(Mill.feed.holding_pawl, "Holding pawl", offset=(0.12, 0.08), enter=("fade", 0.4)),
                                 mill.highlight(Mill.feed.holding_pawl, others="dim"),
-                                until=lines.end(plus=0.8))])
+                                until=lines.end(plus=1.5))])
 
 class Ropes(Chapter):
     lines = Narration("Two ropes share one winding shaft. Rope one unwinds from the large drum while rope two "
@@ -237,8 +237,8 @@ class Ropes(Chapter):
                            enter=("fade", 0.4), leave=("fade", 0.4)), until=lines.spoken("and the carriage"))])
     wide = View(Sawmill, camera=Sawmill.whole_near, hide=[Sawmill.structure, Sawmill.water])
     carriage = Shot(Paper, {Paper.stage: wide},
-                         until=lines.end(plus=0.6), transition=Dissolve(0.6), model=Sawmill.run(448, 454),
-                         cues=[Cue(0, wide.highlight(Mill.carriage, others="dim"), until=lines.end(plus=0.6))])
+                         until=lines.end(plus=1.2), transition=Dissolve(0.6), model=Sawmill.run(448, 454),
+                         cues=[Cue(0, wide.highlight(Mill.carriage, others="dim"), until=lines.end(plus=1.2))])
 
 class Closing(Chapter):
     lines = Narration("Cut. Advance. Cut. Advance. The linkage sets the rhythm. "
@@ -251,7 +251,7 @@ class Closing(Chapter):
                  cues=[Cue(0, Sawmill.isometric.show(area="frame", fit="contain", enter=0.5, leave=0.5,
                                              view=[(0, (0.5, 0.5), 1.0), (lines.spoken("Explore", plus=-0.5), (0.5, 0.42), 1.4, "in-out")]),
                            until=lines.spoken("Explore"))])
-    invitation = Shot(Paper, {Paper.stage: mill}, until=lines.end(plus=1.2), fade_out=FadeOut(1.2),
+    invitation = Shot(Paper, {Paper.stage: mill}, until=lines.end(plus=1.6), fade_out=FadeOut(1.2),
                       model=Sawmill.run(460, 462),
                       cues=[Cue(0, mill.move(Sawmill.whole, ease="in-out", until=lines.end()))])
 
