@@ -33,7 +33,7 @@ cutting simulated; a reconstruction, not an artifact.
 | **The project's template owns the screen**: a root set `Leonardo` written in the project's `stage.tsx`, drawing its own masthead and nothing the film did not ask for; no progress rule anywhere | whole film |
 | **A derived set inherits the chrome, not the layout**: `LeonardoSplit` keeps the masthead and lays out two containers | `coupling`, `pawls`, `holding`, `shaft` |
 | **Source beside the model in two containers**, typed on cue, spoken words lighting tokens while the same parts highlight in the model beside it | `coupling`, `pawls`, `holding`, `shaft` |
-| Emphasis pairs a spoken concept with a source token that spells it differently, on any line of the excerpt | `pawls` (*the driving pawl* → `feed.pawl.turn`), `shaft` (*Rope one* → `feed.reserve.shift`) |
+| Emphasis pairs a spoken concept with a source token that spells it differently, on any line of the excerpt; a word inside a dotted path is a token, and a repeated token is chosen by line | `pawls` (*the driving pawl* → `feed.pawl.turn`), `shaft` (*Rope one* → `feed.reserve.shift`), `coupling` (`waterwheel`, `drives`, `crankshaft` on line 415) |
 | **A project element**: `Jobs`, the two-jobs card, declared in Python with a typed action and drawn by the project's component, lit on cue in step with the model | `hook`, `question` |
 | A title element placed in a slot of the template, shown with fades and a subtitle | `question` |
 | A title revealed word by word as spoken | `rhythm` |
@@ -261,7 +261,7 @@ class Drive(Chapter):
                           Cue(lines.spoken("crankshaft"), mill.highlight(Mill.water_drive.crankshaft, others="ghost"),
                               until=lines.spoken_end("drives the crankshaft", plus=0.6)),
                           Cue(lines.spoken("the waterwheel drives the crankshaft"),
-                              code.emphasize("waterwheel", "drives", "crankshaft", hold=0.6))])
+                              code.emphasize("waterwheel", "drives", "crankshaft", line=415, hold=0.6))])
     stroke = Shot(Leonardo, {Leonardo.stage: mill}, until=lines.end(plus=1.2), transition=Wipe(0.6, direction="right"),
                   model=Sawmill.run(450, 456),
                   cues=[Cue(0, mill.move(Sawmill.whole_near, ease="smooth", until=lines.end())),
@@ -380,7 +380,8 @@ parameters; an `Element` instance's keyword arguments as its props and its
 declared actions as methods; `Title` and `Picture` as elements placed in
 slots, with `show`; marks (`ring`, `label`, `arrow`) as methods of the view
 they point into; `emphasize` taking a word or a `(spoken, token)` pair, on
-any line; `Style` on the movie; empty slots allowed; a source panel and a
+any line, a dot being a token boundary, with `line=` when a token repeats in
+the excerpt; `Style` on the movie; empty slots allowed; a source panel and a
 view keeping their state across a cut in their chapter.
 
 ## How it is produced
