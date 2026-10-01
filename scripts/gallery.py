@@ -121,7 +121,8 @@ def run_models(command, names, catalogue, kernel):
         subprocess.run(args, cwd=ROOT, env=env, check=True)
         if command == "export":
             # A git archive contains committed source, never ignored or
-            # private files.
+            # private files. The revision the export was made from is in
+            # the manifest itself (machinome records it as `source`).
             destination = ROOT / "export" / name
             subprocess.run(
                 [
@@ -135,10 +136,6 @@ def run_models(command, names, catalogue, kernel):
                 cwd=ROOT,
                 check=True,
             )
-            revision = subprocess.check_output(
-                ["git", "rev-parse", "HEAD"], cwd=ROOT, text=True
-            )
-            (destination / "source-revision.txt").write_text(revision)
 
 
 def main():
