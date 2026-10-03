@@ -57,3 +57,12 @@ This ends the movie. There's one final feedback:
 
 The narration moods have big gaps. The narration model can make emotion, but they are making contextless disconnected emotions.
 We need continuation, I think this needs to be one continual narration from start to end, so model can properly build it.
+
+
+---
+
+amendments after hearing narration:
+
+"five hundred years" => five centuries
+
+"This is all open source!" -> you skipped "And the best part is: this is all open source!"

@@ -13,11 +13,18 @@ test('exactly one performance, with the reviewed opening, entrance, list and clo
     'From Machinome dot node import...',
     'This is Machinome, the open source CAD framework for building machines...',
     'The waterwheel spin drives the crankshaft.',
-    'This is all open source! OpenSCAD, SolidPython, OCCT, CadQuery, Build123d, FreeCAD, JSCAD and so many others...',
+    'And the best part is: this is all open source! OpenSCAD, SolidPython, OCCT, CadQuery, Build123d, FreeCAD, JSCAD and so many others...',
     "The wheel makes revolutions, and humans build their own. I'm Machinome.",
   ]) assert.ok(text.includes(phrase), phrase);
   assert.ok(text.endsWith('What do you want to build next?'));
   assert.ok(text.indexOf("This video's source code") < text.indexOf("And here's the code of this exact scene"));
+});
+
+test('the listening-review amendments are preserved exactly', () => {
+  const text = verifyInput(input);
+  assert.ok(text.includes('Five centuries ago, Leonardo da Vinci'));
+  assert.ok(!/five hundred years/i.test(text));
+  assert.equal(text.split('And the best part is: this is all open source!').length, 2);
 });
 
 test('splitting into a second synthesis chapter is refused', () => {

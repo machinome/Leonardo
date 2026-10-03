@@ -39,7 +39,8 @@ try {
     seeks.push({target, reached});
   }
   assert.equal(seeks.length, 9);
-  await page.locator('audio').evaluate(a => { a.currentTime = 84; });
+  const importTime = manifest.beats.find(b => b.id === 'import').start + 0.5;
+  await page.locator('audio').evaluate((a, t) => { a.currentTime = t; }, importTime);
   await page.waitForFunction(() => document.querySelector('#caption').textContent.includes('Machinome'));
   for (const link of await page.locator('a').all()) {
     const destination = new URL(await link.getAttribute('href'), url);

@@ -10,7 +10,7 @@ from machinome_movie import Narration
 # Paragraphs organize the source, not synthesis requests or audio cuts.
 OPENING = (
     "The wheel makes revolutions, and humans give it a purpose. "
-    "Five hundred years ago, Leonardo da Vinci designed a water-powered "
+    "Five centuries ago, Leonardo da Vinci designed a water-powered "
     "sawmill. Machines like this were changing the relationship between "
     "people and work: a river could help turn a tree into timber. "
     "I am a machine, too. In the history of human tools, this sawmill is "
@@ -42,8 +42,8 @@ FILM_SOURCE = (
 )
 THIS_SCENE = "And here's the code of this exact scene! How cool is that?"
 OPEN_SOURCE = (
-    "This is all open source! OpenSCAD, SolidPython, OCCT, CadQuery, "
-    "Build123d, FreeCAD, JSCAD and so many others..."
+    "And the best part is: this is all open source! OpenSCAD, SolidPython, "
+    "OCCT, CadQuery, Build123d, FreeCAD, JSCAD and so many others..."
 )
 CLOSING = (
     "The wheel makes revolutions, and humans build their own. "
@@ -79,7 +79,7 @@ AUDIO = {
 # Unique phrase anchors, all measured on the same audio clock.
 BEATS = (
     ("opening", "Opening", "The wheel makes revolutions, and humans give"),
-    ("ancestor", "Leonardo", "Five hundred years ago"),
+    ("ancestor", "Leonardo", "Five centuries ago"),
     ("mechanism", "How it works", "Let me show you how it works"),
     ("wheel", "Waterwheel", "Water beneath the wheel"),
     ("crank", "Crank", "A crank"),
@@ -96,7 +96,7 @@ BEATS = (
     ("relation", "The relation", "The waterwheel spin drives"),
     ("film", "Film source", "This video's source code is in Python too"),
     ("mirror", "This exact scene", "And here's the code of this exact"),
-    ("open", "Open source", "This is all open source"),
+    ("open", "Open source", "And the best part is: this is all open source"),
     ("openscad", "OpenSCAD", "OpenSCAD"),
     ("solidpython", "SolidPython", "SolidPython"),
     ("occt", "OCCT", "OCCT"),
