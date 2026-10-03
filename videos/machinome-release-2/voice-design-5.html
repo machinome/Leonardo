@@ -1,0 +1,59 @@
+<!doctype html>
+<!-- Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only. -->
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Machinome · Same line, C3 and Jessica</title>
+  <style>
+    :root { color-scheme:dark; font-family:system-ui,sans-serif; background:#101419; color:#eee9df; }
+    body { max-width:690px; margin:0 auto; padding:32px 20px; line-height:1.55; }
+    h1 { font-size:1.75rem; } h2 { font-size:1.1rem; margin:0; }
+    blockquote { margin:24px 0; padding-left:18px; border-left:3px solid #ef9a50; font-size:1.1rem; }
+    section { padding:18px; margin:16px 0; background:#1b222b; border-radius:10px; }
+    section p { color:#b7bec7; margin:6px 0 14px; } .reference { border:1px solid #69503c; }
+    audio { width:100%; display:block; } a { color:#efb57e; }
+    .note { color:#b7bec7; font-size:.9rem; } .download { display:inline-block; margin-top:8px; font-size:.85rem; }
+  </style>
+</head>
+<body>
+  <h1>Design 5 · Same line, same C3 voice</h1>
+  <p>The original comparison words are restored. Five C3 readings, with the C3 sample you chose and Jessica alongside.</p>
+  <blockquote id="transcript">I'm Machinome, and my purpose is to enable all machines to be open source. What do you want to build next?</blockquote>
+  <section class="reference"><h2>C3 · Your selected reference</h2><p>The unchanged recording from design 3, proposal 2.</p>
+    <audio data-id="reference" controls preload="metadata" aria-label="Selected C3 unchanged reference" src="_build/voice-design-3/D3-2/natural-confident.mp3"></audio>
+  </section>
+  <section class="reference"><h2>Jessica · Same words</h2><p>A fresh, untagged reading—not a crop of the film. Same synthesis settings as C3's natural baseline below.</p>
+    <audio data-id="jessica" controls preload="metadata" aria-label="Jessica same-line reference" src="_build/voice-design-5/jessica/closing.mp3"></audio>
+    <a class="download" href="_build/voice-design-5/jessica/closing.mp3" download="machinome-jessica-reference.mp3">Download Jessica</a>
+  </section>
+  <section><h2>1 · Natural baseline</h2><p>No emotion tags; let the voice read the line.</p>
+    <audio data-id="D5-1" data-new controls preload="metadata" aria-label="C3 variation 1" src="_build/voice-design-5/D5-1/closing.mp3"></audio>
+    <a class="download" href="_build/voice-design-5/D5-1/closing.mp3" download="machinome-design5-1.mp3">Download 1</a>
+  </section>
+  <section><h2>2 · Easy confidence</h2><p>A clear purpose, said straightforwardly.</p>
+    <audio data-id="D5-2" data-new controls preload="metadata" aria-label="C3 variation 2" src="_build/voice-design-5/D5-2/closing.mp3"></audio>
+    <a class="download" href="_build/voice-design-5/D5-2/closing.mp3" download="machinome-design5-2.mp3">Download 2</a>
+  </section>
+  <section><h2>3 · Warm invitation</h2><p>A capable collaborator inviting you to build.</p>
+    <audio data-id="D5-3" data-new controls preload="metadata" aria-label="C3 variation 3" src="_build/voice-design-5/D5-3/closing.mp3"></audio>
+    <a class="download" href="_build/voice-design-5/D5-3/closing.mp3" download="machinome-design5-3.mp3">Download 3</a>
+  </section>
+  <section><h2>4 · Genuine interest</h2><p>Curious about the possibilities and your answer.</p>
+    <audio data-id="D5-4" data-new controls preload="metadata" aria-label="C3 variation 4" src="_build/voice-design-5/D5-4/closing.mp3"></audio>
+    <a class="download" href="_build/voice-design-5/D5-4/closing.mp3" download="machinome-design5-4.mp3">Download 4</a>
+  </section>
+  <section><h2>5 · A little more energy</h2><p>Enjoy the possibilities with more forward energy.</p>
+    <audio data-id="D5-5" data-new controls preload="metadata" aria-label="C3 variation 5" src="_build/voice-design-5/D5-5/closing.mp3"></audio>
+    <a class="download" href="_build/voice-design-5/D5-5/closing.mp3" download="machinome-design5-5.mp3">Download 5</a>
+  </section>
+  <p class="note">Labels describe direction, not a quality judgment. All samples use the same words. No new voice designs, effects or film changes.</p>
+  <p><a href="voice-design-3.html">Design 3</a> · <a href="voice-design-4.html">Design 4 · different-text experiment</a> · <a href="index.html">The film</a></p>
+  <script>
+    const players = [...document.querySelectorAll('audio')];
+    for (const player of players) player.addEventListener('play', () => {
+      for (const other of players) if (other !== player) other.pause();
+    });
+  </script>
+</body>
+</html>

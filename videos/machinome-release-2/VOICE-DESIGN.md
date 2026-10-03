@@ -2,7 +2,82 @@
 
 Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
 
+## Round 5 — correction: same line, C3 tone, Jessica benchmark
+
+The pilot clarified that “pick from the video script” meant understand its
+mood, not change the audition words. Round 4 changed the line and prevented
+direct comparison. It remains as historical evidence, not an accepted
+comparison or a new audition-text requirement. C3's androgynous tone is still
+the selected reference. Jessica has a delivery quality the pilot prefers;
+the exact reason is not established by these technical checks.
+
+**Keep the comparison text fixed in future voice rounds unless the pilot
+explicitly changes it.** Use the script to inform delivery, not to substitute
+new words. The line, including punctuation, is:
+
+> I'm Machinome, and my purpose is to enable all machines to be open source.
+> What do you want to build next?
+
+[Listen to design 5](voice-design-5.html). It presents the unchanged selected
+C3 recording from design 3 first, a fresh Jessica reading of the same words,
+then five new C3 readings. These return to a small performance space: an
+untagged natural baseline, easy confidence, a warm invitation, genuine
+interest, and a little more energy. The interpretation of the film's mood is
+a capable, engaged collaborator enjoying the possibilities and inviting the
+listener to make something. This is an artistic hypothesis, not an assertion
+that the assistant has heard or diagnosed Jessica's advantage.
+
+The five C3 readings retain saved identity `JoOLJ0OHRwCg8Ydjc4IF` and all
+design-3 synthesis settings. Each has zero or one short direction cue for
+the entire line, with no mood switches, profoundness or solemnity. Same
+model, seed, speed, stability and similarity; no redesign or remix. The
+pronunciation alias remains exactly as it was in the selected reference.
+
+Jessica uses the film's existing voice ID `cgSgspJ2msm6clMCkdW9`. Her fresh
+reading and C3's untagged baseline use identical request bodies, differing
+only in the voice endpoint. It is clearly labelled as a fresh same-line
+control, not a crop of the film or a recreation of its continuous delivery.
+No Jessica traits are represented as transferred into C3. Naturalness,
+cadence, warmth and perceived tone remain the pilot's listening judgment.
+
+Six short TTS requests total: five C3 readings and one Jessica control.
+No new voice-library entries, effects, cuts, pitch processing or
+post-production time changes. The original selected C3 is reused byte for
+byte. The film, approved narration and previous rounds remain untouched.
+
+[Generation](voice-design-5.mjs) and [verification](check-voice-design-5.mjs)
+retain source and safeguards in this repository; ignored
+`_build/voice-design-5/` holds raw receipts, audio, character alignments,
+voice IDs, hashes and the comparison manifest. No automatic paid retries.
+
+```sh
+node videos/machinome-release-2/voice-design-5.mjs /home/asa/devel/machinome/videomaker --check
+# Initial creation: five C3 readings and one matched Jessica reference.
+node videos/machinome-release-2/voice-design-5.mjs /home/asa/devel/machinome/videomaker --generate
+# Cache-only and browser verification, review server on port 8782:
+node videos/machinome-release-2/voice-design-5.mjs /home/asa/devel/machinome/videomaker
+node videos/machinome-release-2/check-voice-design-5.mjs /home/asa/devel/machinome/videomaker
+```
+
+The Videomaker skill supplies preservation and listening-review discipline;
+Context7 supplied current TTS guidance. API semantics remain those recorded
+in round 3; the comparison changes neither model nor provider.
+
+Verified on 3 October 2026: C3 variations 1–5 run 10.37, 9.87, 10.11,
+10.53 and 10.03 seconds; the fresh Jessica control runs 8.36 seconds.
+All six new files fully decode and their returned alignments retain the
+same closing words. Exact-string checks preserve the design-3 text and
+pronunciation; request checks pin C3's identity/settings and match Jessica's
+request to the untagged C3 baseline. All seven players pass playback,
+seeking, byte-range delivery, mutual pause, download/navigation links and
+390-pixel layout without browser errors. Cache verification makes no
+provider calls. The film, script, approved narration and prior samples keep
+their hashes. These measurements do not establish which delivery feels best.
+
 ## Round 4 — C3 chosen, five performance directions
+
+Subsequent pilot review rejected the change of audition line. The script
+was intended as mood input. Round 5 restores the original comparison text.
 
 The pilot likes C3 in design 3 (proposal 2, saved voice
 `JoOLJ0OHRwCg8Ydjc4IF`). The voice tone is good; emotion still needs work.
