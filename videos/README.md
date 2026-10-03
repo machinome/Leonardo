@@ -9,7 +9,8 @@ with the sawmill, its real Python source, the film's own source and the
 open-source technology wheel. It has a narrated first review cut.
 
 [Proposal 2](machinome-release-2/README.md) has a revised, **single-take
-narration** ready for listening (2:19.44), the original brief, the pilot's
+narration** ready for listening (2:16.40, including the two listening-review
+amendments), the original brief, the pilot's
 [review of proposal 1](machinome-release-review-1.md), and the continuity
 assessment. Its visual second cut has not been rendered. The review
 supersedes the original brief where it changes it; both human-written records

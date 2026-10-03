@@ -8,8 +8,12 @@ Assessed 3 October 2026 against proposal 1 at Leonardo
 This is a recommendation, not an implemented tool change or listening test.
 
 Implementation update: the pilot accepted the one-take approach and its
-trade-off. The revised script was generated in one request on 3 October 2026:
-1,694 characters, 139.44 seconds, 29 measured anchors. See [README.md](README.md)
+trade-off. The first revised script was generated in one request on 3 October
+2026: 1,694 characters, 139.44 seconds, 29 measured anchors. After listening,
+the pilot corrected "five hundred years" to "five centuries" and restored
+"And the best part is: this is all open source!". A new single request made
+the current 1,712-character, 136.40-second take, retaining the earlier audio.
+See [README.md](README.md)
 for the listening copy and reproduction. The assessment below is retained as
 the decision's original evidence; its "no new speech" statement describes
 that assessment, not the subsequent production step. Listening review is

@@ -47,6 +47,7 @@
     <a href="narration.py">Python source</a>
     <a href="review-1.md">Your review</a>
     <a href="_build/narration-manifest.json">Timing and provenance</a>
+    <a href="_build/audio/continuous-6d2c9a8fee79feb7.wav">Previous take</a>
   </div>
   <h2>The script</h2>
   <div id="script"></div>
@@ -63,6 +64,8 @@
         if (!response.ok) throw new Error('Missing ' + name);
         return response.json();
       }));
+      player.src = '_build/narration.wav?sha256=' + manifest.sha256;
+      player.load();
       const duration = `${Math.floor(manifest.duration / 60)}:${(manifest.duration % 60).toFixed(2).padStart(5, '0')}`;
       status.textContent = `${duration} · One provider request · ${manifest.characters.toLocaleString()} characters · Raw, uncut take`;
       const navigation = new Set(['opening', 'mechanism', 'research', 'import', 'film', 'mirror', 'open', 'return', 'question']);
