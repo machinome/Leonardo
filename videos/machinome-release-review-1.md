@@ -66,3 +66,7 @@ amendments after hearing narration:
 "five hundred years" => five centuries
 
 "This is all open source!" -> you skipped "And the best part is: this is all open source!"
+
+---
+
+one detail I forgot to mention: after the museum pic, also put python logo on the flow.

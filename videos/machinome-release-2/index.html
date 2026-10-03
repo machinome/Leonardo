@@ -1,100 +1,35 @@
 <!doctype html>
 <!-- Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only. -->
 <html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Machinome · One continuing voice</title>
-  <link rel="icon" href="data:,">
-  <style>
-    :root { color-scheme: dark; background: #101419; color: #eeeae3; font-family: system-ui, sans-serif; }
-    * { box-sizing: border-box; }
-    body { max-width: 970px; margin: auto; padding: 52px 28px 64px; }
-    .eyebrow { color: #e9b778; text-transform: uppercase; font: 12px monospace; letter-spacing: .2em; }
-    h1 { font-size: clamp(30px, 5vw, 53px); line-height: 1.05; letter-spacing: -.035em; font-weight: 500; margin: 24px 0 18px; }
-    .intro { color: #aeb9c2; max-width: 630px; line-height: 1.6; }
-    .player { margin: 32px 0 28px; border: 1px solid #343b43; padding: 24px; border-radius: 12px; background: #171c23; }
-    audio { width: 100%; }
-    #status { color: #aeb9c2; font: 12px monospace; line-height: 1.8; }
-    #caption { min-height: 3.6em; line-height: 1.6; font-size: 19px; margin: 24px 0 6px; color: #e9b778; }
-    #navigation { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 22px; }
-    button { color: #eeeae3; background: #202832; border: 1px solid #434c57; border-radius: 6px; padding: 10px 12px; cursor: pointer; font: inherit; font-size: 13px; }
-    button:hover, button:focus-visible { border-color: #e9b778; color: #e9b778; }
-    .links { display: flex; flex-wrap: wrap; gap: 12px 24px; line-height: 1.5; }
-    a { color: #e9b778; text-underline-offset: 4px; }
-    h2 { font-size: 21px; font-weight: 500; margin-top: 42px; }
-    #script { color: #d7d9dc; max-width: 730px; line-height: 1.8; }
-    #script p { margin: 0 0 20px; }
-    .note { color: #8e9aa5; font-size: 13px; line-height: 1.7; margin-top: 36px; }
-    @media (max-width: 520px) { body { padding: 28px 18px; } .player { padding: 16px; } #caption { font-size: 17px; min-height: 5.4em; } }
-  </style>
-</head>
-<body>
-  <div class="eyebrow">Machinome release · proposal 2 · audio review</div>
-  <h1>One continuing voice.</h1>
-  <p class="intro">The complete revised narration, generated in one performance.
-    No stitched scenes, inserted pauses, or music. Listen through once to judge
-    the emotional arc; the chapter buttons are navigation, not audio edits.</p>
-  <section class="player" aria-label="Continuous narration">
-    <p id="status" role="status">Loading the measured take…</p>
-    <audio controls preload="metadata" src="_build/narration.wav" aria-label="Play the complete continuous narration"></audio>
-    <p id="caption" aria-label="Current narration caption">Press play to hear the complete take.</p>
-    <nav id="navigation" aria-label="Jump to a passage"></nav>
-  </section>
-  <div class="links">
-    <a href="_build/narration.wav" download>Lossless WAV</a>
-    <a href="_build/captions.srt" download>Timed subtitles</a>
-    <a href="narration.py">Python source</a>
-    <a href="review-1.md">Your review</a>
-    <a href="_build/narration-manifest.json">Timing and provenance</a>
-    <a href="_build/audio/continuous-6d2c9a8fee79feb7.wav">Previous take</a>
-  </div>
-  <h2>The script</h2>
-  <div id="script"></div>
-  <p class="note">Jessica · Eleven v3 · AI-generated narration. This is the audio-first
-    review, not the second film render. All times here are relative to the raw take;
-    the opening wheel's silent lead-in has not been added.</p>
-  <script type="module">
-    const player = document.querySelector('audio');
-    const status = document.querySelector('#status');
-    const caption = document.querySelector('#caption');
-    try {
-      const [manifest, captions] = await Promise.all(['narration-manifest.json', 'captions.json'].map(async name => {
-        const response = await fetch('_build/' + name);
-        if (!response.ok) throw new Error('Missing ' + name);
-        return response.json();
-      }));
-      player.src = '_build/narration.wav?sha256=' + manifest.sha256;
-      player.load();
-      const duration = `${Math.floor(manifest.duration / 60)}:${(manifest.duration % 60).toFixed(2).padStart(5, '0')}`;
-      status.textContent = `${duration} · One provider request · ${manifest.characters.toLocaleString()} characters · Raw, uncut take`;
-      const navigation = new Set(['opening', 'mechanism', 'research', 'import', 'film', 'mirror', 'open', 'return', 'question']);
-      for (const beat of manifest.beats.filter(b => navigation.has(b.id))) {
-        const button = document.createElement('button');
-        button.textContent = beat.label;
-        button.dataset.time = String(Math.max(0, beat.start - 0.15));
-        button.addEventListener('click', () => {
-          player.currentTime = Number(button.dataset.time);
-          player.play().catch(error => { status.textContent = error.message; });
-        });
-        document.querySelector('#navigation').append(button);
-      }
-      const sections = ['opening', 'wheel', 'research', 'import', 'film', 'mirror', 'open', 'return'];
-      const boundaries = sections.map(id => manifest.text.indexOf(manifest.beats.find(b => b.id === id).phrase));
-      for (let i = 0; i < boundaries.length; i++) {
-        const paragraph = manifest.text.slice(boundaries[i], boundaries[i + 1] ?? manifest.text.length).trim();
-        const p = document.createElement('p');
-        p.textContent = paragraph;
-        document.querySelector('#script').append(p);
-      }
-      const updateCaption = () => {
-        const cue = captions.find(c => player.currentTime >= c.start && player.currentTime < c.end);
-        caption.textContent = cue?.text ?? '\u00a0';
-      };
-      player.addEventListener('timeupdate', updateCaption);
-      player.addEventListener('seeked', updateCaption);
-      document.body.dataset.ready = 'true';
-    } catch (error) { status.textContent = error.message; }
-  </script>
-</body>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Revolutions — second cut</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#101419;color:#eeeae3;font:16px/1.6 system-ui,sans-serif}
+main{max-width:1600px;margin:auto;padding:28px 28px 60px}header{display:flex;justify-content:space-between;align-items:baseline;gap:24px}
+h1{font-size:28px;letter-spacing:-.04em;font-weight:500;margin:0}header p,footer{color:#aab6c0;font-size:14px}
+video{display:block;width:100%;background:#080b0e;margin-top:12px;border:1px solid #26313b}
+nav,.links{display:flex;flex-wrap:wrap;gap:10px;margin:18px 0}button{color:#eeeae3;background:#1c242c;border:1px solid #3c4954;border-radius:4px;padding:9px 14px;font:inherit;cursor:pointer}
+button:hover,button:focus-visible{border-color:#e9b778;color:#e9b778}a{color:#e9b778}.links{gap:22px}footer{margin-top:24px}
+@media(max-width:650px){main{padding:18px 12px}header{display:block}button{font-size:13px}}
+</style>
+<main>
+<header><h1>Revolutions</h1><p>Machinome release · cut 2 · 2:22 · one continuous voice</p></header>
+<video controls preload="metadata" poster="_build/thumbnail.png" src="_build/rehearsal.mp4">
+<track kind="subtitles" srclang="en" label="English" src="_build/rehearsal.vtt">
+<a href="_build/rehearsal.mp4">Download the film</a>
+</video>
+<nav aria-label="Review moments">
+<button data-time="0">The wheel</button><button data-time="30.2">How it works</button>
+<button data-time="75">Drawing → photo → Python</button><button data-time="82.7">Machinome</button>
+<button data-time="98.1">Film source</button><button data-time="108.1">This exact scene</button>
+<button data-time="112.875">Open source</button><button data-time="125.4">OpenSpec</button>
+<button data-time="127.75">Purpose</button>
+</nav>
+<div class="links"><a href="_build/rehearsal.mp4" download>Download MP4</a><a href="_build/rehearsal.srt" download>Subtitles</a><a href="movie.py">Python film source</a><a href="DIRECTION.md">Visual direction</a><a href="description.md">Description draft</a><a href="narration.html">Approved raw narration</a></div>
+<footer>Local review copy. Uses the approved performance unchanged as its source; the film adds the silent lead-in and a level-normalized mix. Historical-image reuse rights and public-release checks remain open. Nothing is uploaded.</footer>
+</main>
+<script>
+const video=document.querySelector('video');
+for(const button of document.querySelectorAll('[data-time]'))button.addEventListener('click',()=>{video.currentTime=Number(button.dataset.time);video.play().catch(()=>{});});
+</script>
 </html>
