@@ -1,0 +1,56 @@
+<!doctype html>
+<!-- Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only. -->
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Machinome · Five variations from J1</title>
+  <style>
+    :root { color-scheme:dark; font-family:system-ui,sans-serif; background:#101419; color:#eee9df; }
+    body { max-width:670px; margin:0 auto; padding:32px 20px; line-height:1.55; }
+    h1 { font-size:1.75rem; } h2 { font-size:1.1rem; margin:0; }
+    blockquote { margin:24px 0; padding-left:18px; border-left:3px solid #ef9a50; font-size:1.1rem; }
+    section { padding:18px; margin:16px 0; background:#1b222b; border-radius:10px; }
+    section p { color:#b7bec7; margin:6px 0 14px; } .reference { border:1px solid #69503c; }
+    audio { width:100%; display:block; } a { color:#efb57e; }
+    .note { color:#b7bec7; font-size:.9rem; } .download { display:inline-block; margin-top:8px; font-size:.85rem; }
+  </style>
+</head>
+<body>
+  <h1>Design 7 · Five variations from J1</h1>
+  <p>The direction: a little less feminine, a little more excited. Still close to J1. Same words throughout.</p>
+  <blockquote id="transcript">I'm Machinome, and my purpose is to enable all machines to be open source. What do you want to build next?</blockquote>
+  <section class="reference"><h2>J1 · Original reference</h2><p data-duration="8.4375">8.44 seconds · Your selected recording, unchanged.</p>
+    <audio data-id="reference" controls preload="metadata" aria-label="Original J1 reference" src="_build/voice-design-6/J1.mp3"></audio>
+  </section>
+  <section><h2>J1-A</h2><p data-duration="8.751">8.75 seconds</p>
+    <audio data-id="J1-A" data-new controls preload="metadata" aria-label="J1 variation A" src="_build/voice-design-7/J1-A.mp3"></audio>
+    <a class="download" href="_build/voice-design-7/J1-A.mp3" download="machinome-J1-A.mp3">Download A</a>
+  </section>
+  <section><h2>J1-B</h2><p data-duration="7.967313">7.97 seconds</p>
+    <audio data-id="J1-B" data-new controls preload="metadata" aria-label="J1 variation B" src="_build/voice-design-7/J1-B.mp3"></audio>
+    <a class="download" href="_build/voice-design-7/J1-B.mp3" download="machinome-J1-B.mp3">Download B</a>
+  </section>
+  <section><h2>J1-C</h2><p data-duration="7.888938">7.89 seconds</p>
+    <audio data-id="J1-C" data-new controls preload="metadata" aria-label="J1 variation C" src="_build/voice-design-7/J1-C.mp3"></audio>
+    <a class="download" href="_build/voice-design-7/J1-C.mp3" download="machinome-J1-C.mp3">Download C</a>
+  </section>
+  <section><h2>J1-D</h2><p data-duration="7.810563">7.81 seconds</p>
+    <audio data-id="J1-D" data-new controls preload="metadata" aria-label="J1 variation D" src="_build/voice-design-7/J1-D.mp3"></audio>
+    <a class="download" href="_build/voice-design-7/J1-D.mp3" download="machinome-J1-D.mp3">Download D</a>
+  </section>
+  <section><h2>J1-E</h2><p data-duration="8.359125">8.36 seconds</p>
+    <audio data-id="J1-E" data-new controls preload="metadata" aria-label="J1 variation E" src="_build/voice-design-7/J1-E.mp3"></audio>
+    <a class="download" href="_build/voice-design-7/J1-E.mp3" download="machinome-J1-E.mp3">Download E</a>
+  </section>
+  <p class="note">All five are within the existing 8.78-second ceiling, anchored to Jessica's 8.36 seconds. Original provider audio: no playback acceleration, pitch filters or editing.</p>
+  <p class="note">A uses the initial gentle direction; B–E add tighter pacing cues. Timing and playback are checked; tone and excitement are for you to judge. The film remains unchanged.</p>
+  <p><a href="voice-design-6.html">J1 and Jessica comparison</a> · <a href="index.html">The film</a></p>
+  <script>
+    const players = [...document.querySelectorAll('audio')];
+    for (const player of players) player.addEventListener('play', () => {
+      for (const other of players) if (other !== player) other.pause();
+    });
+  </script>
+</body>
+</html>

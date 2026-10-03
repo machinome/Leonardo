@@ -2,6 +2,80 @@
 
 Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
 
+## Round 7 — five small variations from J1
+
+The pilot selected round 6's J1 as the next reference: “A bit more less
+feminine, and a bit more excited,” then specified five variations. This is
+a refinement of J1, not a return to C3 and not a final production-voice
+selection. The comparison line and pronunciation alias remain unchanged.
+
+[Listen to design 7](voice-design-7.html). The page presents original J1
+byte for byte, followed by J1-A through J1-E. Each new design is conditioned
+on the actual J1 audio (`YGtltqiF9TGj7nEE9dIi`), not merely its written
+description. The intended change is a slightly firmer, rounder, more
+androgynous timbre with modest excitement and natural confidence, retaining
+the clear edge and comfortable pitch. There is no deep/profound direction.
+
+Jessica remains the pacing anchor: 8.359184 seconds, with the existing
+8.7771432-second ceiling. The allowance is not recalculated from J1's
+8.437500 seconds. No audio is accelerated, pitch-filtered, cut or processed.
+
+The provider returns three previews per design request. Two initial requests
+yielded six previews, but only one passed the duration gate. Those responses
+are preserved. Two further requests explicitly direct excitement through
+forward momentum, short vowels and brief pauses, targeting 7.8–8.2 seconds;
+prompt strength changes from 0.35 to 0.45. Both prompts retain J1 as the
+audio reference, with model `eleven_ttv_v3` and guidance 2. No failed request
+was retried. Four paid requests total, twelve returned previews.
+
+Selection is mechanical, not an invented listening judgment: take the first
+five passing previews in batch/response order. Five over-limit previews
+remain excluded; two additional passing previews remain as spares. No more
+requests or permanent voice-library entries are needed for this audition.
+
+| Sample | Raw duration | Provider preview | Direction |
+| --- | --- | --- | --- |
+| J1 reference | 8.437500 s | Round 6 J1 | Unchanged |
+| J1-A | 8.751000 s | B2-2 | Initial gentle refinement |
+| J1-B | 7.967313 s | B3-1 | Firmer pacing cues |
+| J1-C | 7.888938 s | B3-2 | Firmer pacing cues |
+| J1-D | 7.810563 s | B3-3 | Firmer pacing cues |
+| J1-E | 8.359125 s | B4-1 | Firmer pacing cues |
+
+[Generation source](voice-design-7.mjs) and
+[verification source](check-voice-design-7.mjs) retain the exact prompts,
+seeds, reference hashes and timing rules. Ignored `_build/voice-design-7/`
+holds every raw response, attempt marker, generated ID, MP3, manifest and
+player report. Receipt caching prevents duplicate purchases; default mode
+is cache-only. Current reference-audio semantics were checked using
+Context7 against the [official design endpoint](https://elevenlabs.io/docs/api-reference/text-to-voice/design).
+
+```sh
+node videos/machinome-release-2/voice-design-7.mjs /home/asa/devel/machinome/videomaker --check
+# Already generated: reuse cached batches and assemble the same five samples.
+node videos/machinome-release-2/voice-design-7.mjs /home/asa/devel/machinome/videomaker
+node videos/machinome-release-2/check-voice-design-7.mjs /home/asa/devel/machinome/videomaker
+```
+
+Individual initial requests used `--generate 1` through `--generate 4`.
+They now reuse their receipts. A fifth reserve is guarded against purchase
+when five passing previews already exist; it was not used.
+
+The Videomaker skill supplies media preservation and honest inspection
+limits. These are voice-design previews, not ordinary TTS or a replacement
+full narration. Timing alone cannot establish excitement, perceived gender,
+naturalness or spoken accuracy; listening remains the pilot's decision.
+The film, approved narration, code scenes and earlier auditions stay intact.
+
+Verified on 3 October 2026: all twelve raw MP3s fully decode. Request and
+response text preserve the exact comparison line; each request uses J1's
+pinned bytes. The five offered samples pass the unchanged timing ceiling.
+All six players pass playback, seeking, byte-range delivery, mutual pause,
+duration-display checks, links and 390-pixel layout without browser errors.
+Excluded previews have no player or download link. Cache-only assembly makes
+no provider request. Protected film, narration, source and earlier-audio
+hashes match. No auditory assessment is claimed.
+
 ## Round 6 — restart from Jessica; pacing is a gate
 
 The pilot rejected the C3 line of development: the performance feels sleepy
