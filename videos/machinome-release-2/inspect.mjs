@@ -26,11 +26,12 @@ const directory=resolve(base,'_build/inspection');
 await mkdir(directory,{recursive:true});
 const result=await browserSession(film,viewer,1280,[],async({page,pose})=>{
   const frames=[];
-  for(const id of ['revolution','water','crank','feed-motion','transmission','document','photograph','python-language','face-reveal','behind-the-film','mirror','open-source','wheel-returns','invitation']){
-    const shot=shots.find(s=>s.id===id);
-    const t=shot.start+(shot.end-shot.start)*.72;
+  for(const id of ['revolution','water','crank','feed-motion','transmission','document','photograph','python-language','face-reveal','behind-the-film','mirror','open-source','openspec-arrival','open-wheel-spinning','wheel-returns','invitation']){
+    const extra={'openspec-arrival':125.5,'open-wheel-spinning':127.4};
+    const shot=shots.find(s=>s.id===(id in extra?'open-source':id));
+    const t=extra[id]??shot.start+(shot.end-shot.start)*.72;
     await pose(t);
-    const boxes=await page.evaluate(()=>[...document.querySelectorAll('.listing,.listing pre,.tech-label,.wordmark,.question')].map(e=>{
+    const boxes=await page.evaluate(()=>[...document.querySelectorAll('.listing,.listing pre,.tech-label,.incoming,.wordmark,.question')].map(e=>{
       const r=e.getBoundingClientRect();return {text:e.textContent,box:{x:r.x,y:r.y,w:r.width,h:r.height},width:e instanceof HTMLElement?e.clientWidth:0,scrollWidth:e.scrollWidth,digest:e.dataset.sourceSha256};
     }));
     for(const e of boxes){const b=e.box;assert.ok(b.x>=-1&&b.y>=-1&&b.x+b.w<=1281&&b.y+b.h<=721,`${id}: content outside frame`);if(e.width)assert.ok(e.scrollWidth<=e.width+1,`${id}: overflow`);if(e.digest)assert.equal(e.digest,digest);}
@@ -43,4 +44,4 @@ const result=await browserSession(film,viewer,1280,[],async({page,pose})=>{
   return {frames,filmSourceSha256:digest};
 });
 await writeFile(resolve(directory,'report.json'),JSON.stringify(result,null,2)+'\n');
-console.log('One take; one highlight; exact paired cameras; still opening; literal source; 14 replay-identical compositions.');
+console.log('One take; one highlight; exact paired cameras; still opening; literal source; 16 replay-identical compositions.');

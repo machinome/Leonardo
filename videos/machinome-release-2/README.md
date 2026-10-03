@@ -2,9 +2,9 @@
 
 Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
 
-Status: ratified for production on 3 October 2026. Visual build and verification
-are in progress; no finished video is claimed until VERIFICATION.md records
-the encoded artifact and its checksum.
+Status: built and verified on 3 October 2026. The completed cut is
+1920×1080, 24 fps, 141.75 seconds, with the approved single narration.
+[Verification](VERIFICATION.md) records the encoded artifact and checksum.
 
 - [Local video player](index.html) · [MP4](_build/rehearsal.mp4).
 - [Approved raw narration](narration.html) · [lossless take](_build/approved-narration.wav).
@@ -14,6 +14,9 @@ the encoded artifact and its checksum.
   of the canonical human records in the parent directory.
 - [Narration history and trade-off](NARRATION.md).
 - [First proposal](../machinome-release-1/README.md), preserved unchanged.
+
+With the review server running, open <http://127.0.0.1:8782/>. The player
+offers optional subtitles and seeks to each major sequence.
 
 The pilot ratified the corrected single narration and added the Python logo
 after the museum photograph. The later clarification explicitly chose
@@ -45,10 +48,15 @@ node /home/asa/devel/machinome/videomaker/bin/videomaker.mjs check videos/machin
 node /home/asa/devel/machinome/videomaker/bin/videomaker.mjs preview videos/machinome-release-2/_build/movie.json --viewer /home/asa/devel/machinome/machinome-viewer/machinome_viewer/widget/dist/machinome-viewer.js --width 1280
 node videos/machinome-release-2/inspect.mjs /home/asa/devel/machinome/videomaker /home/asa/devel/machinome/machinome-viewer/machinome_viewer/widget/dist/machinome-viewer.js
 node /home/asa/devel/machinome/videomaker/bin/videomaker.mjs render videos/machinome-release-2/_build/movie.json --viewer /home/asa/devel/machinome/machinome-viewer/machinome_viewer/widget/dist/machinome-viewer.js
-ffmpeg -y -i videos/machinome-release-2/_build/rehearsal.srt videos/machinome-release-2/_build/rehearsal.vtt
+node videos/machinome-release-2/postflight.mjs
 python videos/machinome-revolutions-v2/serve-review.py --port 8782 --directory videos/machinome-release-2
 node videos/machinome-release-2/check-player.mjs /home/asa/devel/machinome/videomaker
 ```
+
+The server stays in the foreground; run the player check in another terminal.
+Postflight verifies the encoded MP4 and unchanged narration input, produces
+WebVTT, and decodes 34 review frames. Its report deliberately leaves visual
+judgment to the reviewer; the completed inspection is in VERIFICATION.md.
 
 The commands above cannot purchase speech. Do not use build or regenerate
 the ratified take. finish.mjs restores the original voice-setting property

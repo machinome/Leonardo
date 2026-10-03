@@ -16,8 +16,10 @@ the current 1,712-character, 136.40-second take, retaining the earlier audio.
 See [README.md](README.md)
 for the listening copy and reproduction. The assessment below is retained as
 the decision's original evidence; its "no new speech" statement describes
-that assessment, not the subsequent production step. Listening review is
-still pending; no dependency was changed.
+that assessment, not the subsequent production step. The pilot subsequently
+ratified the corrected performance and requested the video build. The film
+reuses those exact cached bytes; the unmastered listening copy is now at
+[narration.html](narration.html). No dependency was changed.
 
 ## What produced the discontinuity
 
