@@ -1,0 +1,44 @@
+/* Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only. */
+.exhibition { position:absolute; inset:0; background:#101419; color:#eeeae3; font-family:'Space Grotesk',sans-serif; }
+.model-stage { left:0; top:5%; width:100%; height:90%; }
+.heading-stage { left:6%; top:5%; width:88%; height:12%; z-index:3; }
+.note-stage { left:6%; top:91%; width:88%; height:5%; z-index:3; }
+.graphic-stage { inset:0; width:100%; height:100%; }
+.card { font-size:2.25vw; line-height:1.2; letter-spacing:-.035em; }
+.card.small { font-size:1.05vw; color:#aeb8c1; letter-spacing:.03em; text-align:center; }
+.eyebrow { font-family:'IBM Plex Mono',monospace; color:#e9b778; font-size:.8vw; letter-spacing:.18em; margin-bottom:.6vw; }
+.split-model { left:53%; top:5%; width:47%; height:90%; }
+.source-imports { left:5%; top:34%; width:49%; height:10%; }
+.source-relationship { left:5%; top:46%; width:49%; height:20%; }
+.source-imports,.source-relationship {
+  --vm-source-size:1.15vw; --vm-source-line:1.9;
+  --vm-source-color:#e5e9ee; --vm-source-padding:0;
+  --vm-source-rule:none; --vm-source-file-size:.72vw;
+  --vm-source-file-color:#80909f; --vm-source-file-gap:1.4vw;
+  --vm-source-cursor-color:#e9b778;
+}
+.vm-source-code { font-family:'IBM Plex Mono',monospace!important; white-space:pre-wrap!important; overflow-wrap:anywhere; }
+.vm-source-code .hljs-keyword { color:#c6a4e8; }
+.vm-source-code .hljs-title,.vm-source-code .hljs-built_in { color:#9ccdd0; }
+.vm-source-code mark.spoken { color:inherit; background:#70533088; border-bottom:2px solid #e9b778; }
+.film-source { left:10%; top:23%; width:80%; height:69%; }
+.listing { width:100%; height:100%; box-sizing:border-box; }
+.listing-file { color:#8796a4; font-family:'IBM Plex Mono',monospace; font-size:.9vw; margin-bottom:1.4vw; }
+.listing pre { margin:0; font:1.3vw/1.52 'IBM Plex Mono',monospace; color:#dce3e9; white-space:pre-wrap; }
+.listing pre>div { min-height:1.7vw; padding:0 .5vw; border-left:2px solid transparent; }
+.listing .lit-line { background:#493b2780; border-color:#e9b778; }
+.line-number { display:inline-block; width:2.9vw; color:#62717e; user-select:none; }
+.keyword { color:#c6a4e8; }
+.string { color:#e9b778; }
+.constellation,.signature { position:absolute; inset:0; }
+.constellation-title { position:absolute; top:6%; width:100%; text-align:center; font-size:2.4vw; letter-spacing:.16em; font-weight:500; }
+.spokes { position:absolute; inset:0; width:100%; height:100%; }
+.tech-label { font:28px 'Space Grotesk',sans-serif; fill:#eeeae3; }
+.tech-note { font:16px 'IBM Plex Mono',monospace; fill:#aab6c0; }
+.hub-mark { position:absolute; width:8%; left:46%; top:43.6%; }
+.hub-mark svg { width:100%; height:auto; display:block; }
+.constellation-subtitle { position:absolute; bottom:5%; width:100%; text-align:center; color:#aeb8c1; font-size:1.2vw; }
+.wordmark { position:absolute; left:25%; top:34%; width:50%; }
+.wordmark svg { width:100%; height:auto; display:block; }
+.signature-tagline { position:absolute; top:52%; width:100%; text-align:center; font-size:1.55vw; color:#aeb8c1; }
+.question { position:absolute; top:74%; width:100%; text-align:center; font-size:2.6vw; letter-spacing:-.035em; }

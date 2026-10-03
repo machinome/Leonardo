@@ -1,0 +1,39 @@
+<!doctype html>
+<!-- Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only. -->
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Revolutions — first proposal</title>
+<style>
+  *{box-sizing:border-box}body{margin:0;background:#101419;color:#eeeae3;font:16px/1.6 system-ui,sans-serif}
+  main{max-width:1360px;margin:0 auto;padding:32px 28px 64px}header{display:flex;align-items:baseline;justify-content:space-between;gap:24px}
+  h1{font-size:27px;letter-spacing:-.04em;font-weight:500;margin:0}header p{color:#9ca9b4;font-size:13px}
+  video{display:block;width:100%;background:#080b0e;margin-top:16px;border:1px solid #26313b}
+  nav{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0}button{color:#eeeae3;background:#1c242c;border:1px solid #3c4954;border-radius:4px;padding:9px 14px;font:inherit;cursor:pointer}
+  button:hover,button:focus-visible{border-color:#e9b778;color:#e9b778}a{color:#e9b778}p{max-width:850px}footer{margin-top:28px;color:#aab6c0;font-size:14px}.links{display:flex;flex-wrap:wrap;gap:22px}
+  @media(max-width:650px){main{padding:18px 12px}header{display:block}h1{font-size:24px}button{font-size:13px}}
+</style>
+<main>
+  <header><h1>Revolutions</h1><p>Machinome release · proposal 1 · 2:20</p></header>
+  <video controls preload="metadata" poster="_build/thumbnail.png" src="_build/rehearsal.mp4">
+    <track kind="subtitles" srclang="en" label="English" src="_build/rehearsal.vtt">
+    <a href="_build/rehearsal.mp4">Download the film</a>
+  </video>
+  <nav aria-label="Review moments">
+    <button data-time="0">The ancestor</button>
+    <button data-time="26.916667">How it works</button>
+    <button data-time="83.625">The machine's source</button>
+    <button data-time="94.333333">The film's source</button>
+    <button data-time="103.791667">This exact scene</button>
+    <button data-time="109.166667">The open wheel</button>
+    <button data-time="122.041667">Intention</button>
+  </nav>
+  <p>A machine meets its ancestor, explains how it works, and opens its own source. Dark ground, warm timber, a continuous camera journey, and Machinome speaking as the framework, foundry, agent and film.</p>
+  <div class="links"><a href="DIRECTION.md">Visual direction</a><a href="movie.py">Python film source</a><a href="_build/storyboard.jpg">Storyboard</a><a href="_build/rehearsal.mp4" download>Download MP4</a><a href="_build/rehearsal.srt" download>Subtitles</a><a href="description.md">Description draft</a></div>
+  <footer>First proposal. Voice only; sound design and a listening review remain. This local player does not publish the film.</footer>
+</main>
+<script>
+  const video=document.querySelector('video');
+  for(const button of document.querySelectorAll('[data-time]'))button.addEventListener('click',()=>{video.currentTime=Number(button.dataset.time);video.play().catch(()=>{});});
+</script>
+</html>

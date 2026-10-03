@@ -2,15 +2,22 @@
 
 Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
 
-The only active video on `main` is the Machinome release film,
-[Revolutions](machinome-revolutions-v2/README.md). Its screenplay opens with
-“A wheel makes a revolution,” followed by “More than five hundred years ago,
-Leonardo da Vinci studied a machine.” Continue production in that directory;
-the full film is still a draft, with an existing opening rehearsal.
+The current release-film proposal is
+[Revolutions — proposal 1](machinome-release-1/README.md), following the
+pilot's `machinome-release.md` brief: a dark, continuous camera encounter
+with the sawmill, its real Python source, the film's own source and the
+open-source technology wheel. It has a narrated first review cut.
 
-`episode.yaml` owns narration and shot directions; `production.yaml` owns
-settings and evidence. Generated media and cached speech stay in the episode's
-ignored `_build/` directory, outside Git.
+The earlier [Revolutions study](machinome-revolutions-v2/README.md) remains
+available. Its screenplay opens with
+“A wheel makes a revolution,” followed by “More than five hundred years ago,
+Leonardo da Vinci studied a machine.” It retains its earlier full-film
+draft and opening rehearsal; new proposal work is in `machinome-release-1/`.
+
+The current proposal uses `movie.py` for narration, shots and production
+declarations, with its own stage and visual-direction document. The earlier
+study uses `episode.yaml` and `production.yaml`. Generated media and cached
+speech stay in each film's ignored `_build/` directory, outside Git.
 
 All earlier films, alternate versions, pronunciation trials and tool demos
 are preserved on the local `video-experiments` branch, including sources
