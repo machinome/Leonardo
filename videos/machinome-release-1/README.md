@@ -14,6 +14,7 @@ with warm timber, amber attention and real Python source.
 - [Film declarations and narration](movie.py)
 - [Stage](stage.jsx) · [stage styling](stage.css)
 - [Upload-description draft](description.md)
+- [Final encode verification](VERIFICATION.md)
 
 The declarations target 1920×1080 at 24 fps. The first review encode is
 1280×720 at the same frame rate, with complete narration and no burned
