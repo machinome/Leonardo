@@ -1,0 +1,56 @@
+<!doctype html>
+<!-- Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only. -->
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Machinome · C3, five performances</title>
+  <style>
+    :root { color-scheme:dark; font-family:system-ui,sans-serif; background:#101419; color:#eee9df; }
+    body { max-width:690px; margin:0 auto; padding:32px 20px; line-height:1.55; }
+    h1 { font-size:1.75rem; } h2 { font-size:1.1rem; margin:0; }
+    blockquote { margin:24px 0; padding-left:18px; border-left:3px solid #ef9a50; }
+    section, details { padding:18px; margin:16px 0; background:#1b222b; border-radius:10px; }
+    section p { color:#b7bec7; margin:6px 0 14px; }
+    summary { cursor:pointer; } details[open] summary { margin-bottom:12px; }
+    audio { width:100%; display:block; } a { color:#efb57e; }
+    .note { color:#b7bec7; font-size:.9rem; } .download { display:inline-block; margin-top:8px; font-size:.85rem; }
+  </style>
+</head>
+<body>
+  <h1>Design 4 · One voice, five performances</h1>
+  <p>C3—the second proposal in design 3. Its saved voice identity stays fixed. These readings explore different ways of delivering the same passage from the video.</p>
+  <blockquote id="transcript">With Machinome, machines can have a source code. This video's source code is in Python too. A scene, a camera, a voice. The words I say tell the camera when to move. And here's the code of this exact scene! How cool is that? And the best part is: this is all open source!</blockquote>
+  <section aria-labelledby="d41"><h2 id="d41">1 · A spark of excitement</h2><p>Engaged explanation, then a lift of delight at the reveal.</p>
+    <audio data-new="D4-1" controls preload="metadata" aria-label="Design 4 proposal 1" src="_build/voice-design-4/D4-1/performance.mp3"></audio>
+    <a class="download" href="_build/voice-design-4/D4-1/performance.mp3" download="machinome-design4-1.mp3">Download 1</a>
+  </section>
+  <section aria-labelledby="d42"><h2 id="d42">2 · Discovering it together</h2><p>Curiosity becomes a small discovery shared with the listener.</p>
+    <audio data-new="D4-2" controls preload="metadata" aria-label="Design 4 proposal 2" src="_build/voice-design-4/D4-2/performance.mp3"></audio>
+    <a class="download" href="_build/voice-design-4/D4-2/performance.mp3" download="machinome-design4-2.mp3">Download 2</a>
+  </section>
+  <section aria-labelledby="d43"><h2 id="d43">3 · Warm conviction</h2><p>Assured, approachable and glad to share what this makes possible.</p>
+    <audio data-new="D4-3" controls preload="metadata" aria-label="Design 4 proposal 3" src="_build/voice-design-4/D4-3/performance.mp3"></audio>
+    <a class="download" href="_build/voice-design-4/D4-3/performance.mp3" download="machinome-design4-3.mp3">Download 3</a>
+  </section>
+  <section aria-labelledby="d44"><h2 id="d44">4 · A knowing smile</h2><p>Gentle playfulness in the video explaining its own source code.</p>
+    <audio data-new="D4-4" controls preload="metadata" aria-label="Design 4 proposal 4" src="_build/voice-design-4/D4-4/performance.mp3"></audio>
+    <a class="download" href="_build/voice-design-4/D4-4/performance.mp3" download="machinome-design4-4.mp3">Download 4</a>
+  </section>
+  <section aria-labelledby="d45"><h2 id="d45">5 · Understated confidence</h2><p>Plainspoken and self-assured, with a little dry amusement.</p>
+    <audio data-new="D4-5" controls preload="metadata" aria-label="Design 4 proposal 5" src="_build/voice-design-4/D4-5/performance.mp3"></audio>
+    <a class="download" href="_build/voice-design-4/D4-5/performance.mp3" download="machinome-design4-5.mp3">Download 5</a>
+  </section>
+  <details><summary>The C3 reading you liked · closing lines from design 3</summary>
+    <audio controls preload="metadata" aria-label="Selected C3 previous reading" src="_build/voice-design-3/D3-2/natural-confident.mp3"></audio>
+  </details>
+  <p class="note">Labels describe the intended performances. AI-generated audio, same voice and synthesis settings, no added effects. Your script and the film are unchanged.</p>
+  <p><a href="voice-design-3.html">Design 3</a> · <a href="index.html">The film</a></p>
+  <script>
+    const players = [...document.querySelectorAll('audio')];
+    for (const player of players) player.addEventListener('play', () => {
+      for (const other of players) if (other !== player) other.pause();
+    });
+  </script>
+</body>
+</html>

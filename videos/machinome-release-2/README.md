@@ -15,7 +15,7 @@ restores complete classes and keeps the self-narration inside its source.
 - [Original brief](brief.md) and [review](review-1.md), verbatim snapshots
   of the canonical human records in the parent directory.
 - [Narration history and trade-off](NARRATION.md).
-- [Voice design 3: natural and confident](voice-design-3.html) · [design 2](voice-design-2.html) · [first auditions](voice-design-1.html) · [voice direction](VOICE-DESIGN.md); selection pending, film unchanged.
+- [Voice design 4: five C3 performances](voice-design-4.html) · [design 3](voice-design-3.html) · [voice direction and earlier rounds](VOICE-DESIGN.md); C3 chosen for refinement, performance selection pending, film unchanged.
 - [First proposal](../machinome-release-1/README.md), preserved unchanged.
 
 With the review server running, open <http://127.0.0.1:8782/>. The player

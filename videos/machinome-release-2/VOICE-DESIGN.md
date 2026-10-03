@@ -2,6 +2,76 @@
 
 Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
 
+## Round 4 — C3 chosen, five performance directions
+
+The pilot likes C3 in design 3 (proposal 2, saved voice
+`JoOLJ0OHRwCg8Ydjc4IF`). The voice tone is good; emotion still needs work.
+The brief asks for five variations, including more excitement but not only
+excitement, using the video script. This selects C3 for continued refinement,
+not a final emotional treatment or permission to replace the film narration.
+
+[Listen to design 4](voice-design-4.html). The five directions are:
+
+1. A spark of excitement: engaged explanation, delighted reveal.
+2. Discovering it together: curiosity and shared discovery.
+3. Warm conviction: approachable, confident and inviting.
+4. A knowing smile: gentle playfulness in the self-reference.
+5. Understated confidence: plainspoken, with a little dry amusement.
+
+The 271-character excerpt is a contiguous, verbatim passage from the approved
+video narration input, beginning “With Machinome, machines can have a source
+code.” and ending “And the best part is: this is all open source!” It includes
+the Python scene/camera/voice explanation, the self-referential code reveal
+and “How cool is that?” No new spoken copy is authored for this audition.
+The existing `mah-SHEEN-ohm` speech alias is the sole spelling substitution.
+The page displays the exact written script. Source file hashes and extraction
+offsets are recorded with the results.
+
+Vocal identity and performance direction are separated: all five use the
+same saved C3 ID, Eleven v3, Natural stability 0.5, similarity 0.75, style 0,
+speed 1.05 and seed 20261003 from design 3. Only three short delivery tags
+change, placed at the explanation, reveal and open-source payoff. The intent
+is a natural emotional progression, without returning to solemnity or
+profoundness. Tags are instructions, not additional spoken lines. The model
+can still vary perceived timbre with emotion; fixed voice identity is the
+technical constraint, and the pilot judges the result by listening.
+
+Exactly five short TTS requests, one complete reading each; no new voice is
+created, redesigned or remixed. The samples receive no pitch processing,
+effects, edits or post-production time changes. The prior C3 closing sample
+is retained on the comparison page as a reference on its original words.
+
+[Generation source](voice-design-4.mjs) and
+[verification source](check-voice-design-4.mjs) keep this project-owned.
+Ignored `_build/voice-design-4/` retains raw responses, request hashes,
+voice IDs, audio hashes and character alignments. Cache-only reuse contacts
+no provider; unresolved request markers prevent duplicate paid attempts.
+
+```sh
+node videos/machinome-release-2/voice-design-4.mjs /home/asa/devel/machinome/videomaker --check
+# Initial creation: five short readings of the existing selected voice.
+node videos/machinome-release-2/voice-design-4.mjs /home/asa/devel/machinome/videomaker --generate
+# Cache-only and browser verification (review server on port 8782):
+node videos/machinome-release-2/voice-design-4.mjs /home/asa/devel/machinome/videomaker
+node videos/machinome-release-2/check-voice-design-4.mjs /home/asa/devel/machinome/videomaker
+```
+
+The Videomaker skill keeps the existing film and narration untouched and
+separates technical validation from listening judgment. Current audio-tag
+guidance was checked through Context7 against the
+[official TTS guide](https://elevenlabs.io/docs/eleven-creative/playground/text-to-speech).
+
+Verified on 3 October 2026: the five readings run 25.97, 25.08, 25.73,
+25.73 and 27.17 seconds. Each fully decodes and its returned alignment
+retains the script words. Request checks confirm one voice ID, identical
+model/settings/seed and identical words after removing direction tags.
+The six players (five new readings plus the selected reference) pass
+playback, seeking, byte ranges, mutual pause, download/navigation links and
+390-pixel layout with no browser errors. The page transcript equals the
+selected script passage exactly. Cache-only verification made no requests;
+hashes preserve source files, the film, full narration and design-3 samples.
+Emotional effectiveness and perceived voice continuity await pilot listening.
+
 ## Round 3 — existing voices, natural and confident readings
 
 The pilot could not assess the voices because the cadence and emotion were
