@@ -1,0 +1,56 @@
+<!doctype html>
+<!-- Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only. -->
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Machinome · Five variations on C</title>
+  <style>
+    :root { color-scheme:dark; font-family:system-ui,sans-serif; background:#101419; color:#eee9df; }
+    body { max-width:650px; margin:0 auto; padding:32px 20px; line-height:1.55; }
+    h1 { font-size:1.75rem; } h2 { font-size:1.1rem; margin:0; }
+    blockquote { margin:24px 0; padding-left:18px; border-left:3px solid #ef9a50; font-size:1.1rem; }
+    section, details { padding:18px; margin:16px 0; background:#1b222b; border-radius:10px; }
+    section p { margin:5px 0 14px; color:#b7bec7; }
+    summary { cursor:pointer; } details[open] summary { margin-bottom:15px; }
+    audio { width:100%; display:block; } a { color:#efb57e; }
+    .note { color:#b7bec7; font-size:.9rem; } .download { display:inline-block; margin-top:8px; font-size:.85rem; }
+  </style>
+</head>
+<body>
+  <h1>Five variations on C</h1>
+  <p>Less solemn. More alive to the pleasure of making things.</p>
+  <blockquote>I'm Machinome, and my purpose is to enable all machines to be open source. What do you want to build next?</blockquote>
+  <details><summary>Original C — reference</summary>
+    <audio controls preload="metadata" aria-label="Original C reference" src="_build/voice-design-1/voice-C.mp3"></audio>
+  </details>
+  <section aria-labelledby="c1"><h2 id="c1">C1 · At the workbench</h2><p>Conversational and easy.</p>
+    <audio controls preload="metadata" aria-label="C1 At the workbench" src="_build/voice-design-2/C1/preview-1.mp3"></audio>
+    <a class="download" href="_build/voice-design-2/C1/preview-1.mp3" download="machinome-C1.mp3">Download C1</a>
+  </section>
+  <section aria-labelledby="c2"><h2 id="c2">C2 · A spark of curiosity</h2><p>Brighter, with a little more energy.</p>
+    <audio controls preload="metadata" aria-label="C2 A spark of curiosity" src="_build/voice-design-2/C2/preview-1.mp3"></audio>
+    <a class="download" href="_build/voice-design-2/C2/preview-1.mp3" download="machinome-C2.mp3">Download C2</a>
+  </section>
+  <section aria-labelledby="c3"><h2 id="c3">C3 · Clear thinking</h2><p>Clean, precise and quietly alert.</p>
+    <audio controls preload="metadata" aria-label="C3 Clear thinking" src="_build/voice-design-2/C3/preview-1.mp3"></audio>
+    <a class="download" href="_build/voice-design-2/C3/preview-1.mp3" download="machinome-C3.mp3">Download C3</a>
+  </section>
+  <section aria-labelledby="c4"><h2 id="c4">C4 · A little play</h2><p>A subtle smile and a playful invitation.</p>
+    <audio controls preload="metadata" aria-label="C4 A little play" src="_build/voice-design-2/C4/preview-1.mp3"></audio>
+    <a class="download" href="_build/voice-design-2/C4/preview-1.mp3" download="machinome-C4.mp3">Download C4</a>
+  </section>
+  <section aria-labelledby="c5"><h2 id="c5">C5 · Build with me</h2><p>Warm, approachable and collaborative.</p>
+    <audio controls preload="metadata" aria-label="C5 Build with me" src="_build/voice-design-2/C5/preview-1.mp3"></audio>
+    <a class="download" href="_build/voice-design-2/C5/preview-1.mp3" download="machinome-C5.mp3">Download C5</a>
+  </section>
+  <p class="note">Labels describe the intended directions. All five use C's actual audio as a reference, with gender neutrality retained in the prompt. AI-generated samples, no added effects. The film is unchanged.</p>
+  <p><a href="voice-design-1.html">First auditions</a> · <a href="index.html">The film</a></p>
+  <script>
+    const players = [...document.querySelectorAll('audio')];
+    for (const player of players) player.addEventListener('play', () => {
+      for (const other of players) if (other !== player) other.pause();
+    });
+  </script>
+</body>
+</html>
