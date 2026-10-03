@@ -8,11 +8,12 @@ pilot's [original brief](machinome-release.md): a dark, continuous camera encoun
 with the sawmill, its real Python source, the film's own source and the
 open-source technology wheel. It has a narrated first review cut.
 
-[Proposal 2](machinome-release-2/README.md) currently holds the original
-brief, the pilot's [review of proposal 1](machinome-release-review-1.md),
-and the technical assessment of continuous narration. It has not been
-rendered. The review supersedes the original brief where it changes it;
-both human-written records are preserved verbatim.
+[Proposal 2](machinome-release-2/README.md) has a revised, **single-take
+narration** ready for listening (2:19.44), the original brief, the pilot's
+[review of proposal 1](machinome-release-review-1.md), and the continuity
+assessment. Its visual second cut has not been rendered. The review
+supersedes the original brief where it changes it; both human-written records
+are preserved verbatim.
 
 The earlier [Revolutions study](machinome-revolutions-v2/README.md) remains
 available. Its screenplay opens with

@@ -115,7 +115,7 @@ BEATS = (
 
 
 def document():
-    """Speech-only input, not a claim to be a complete movie document."""
+    """Speech-only input; the complete movie is a separate document."""
     return {
         "format": "machinome-release-narration/1",
         "audio": AUDIO,

@@ -7,6 +7,14 @@ Assessed 3 October 2026 against proposal 1 at Leonardo
 `a2b770d919faf150b57a92e3bbadaf8c91b57647`.
 This is a recommendation, not an implemented tool change or listening test.
 
+Implementation update: the pilot accepted the one-take approach and its
+trade-off. The revised script was generated in one request on 3 October 2026:
+1,694 characters, 139.44 seconds, 29 measured anchors. See [README.md](README.md)
+for the listening copy and reproduction. The assessment below is retained as
+the decision's original evidence; its "no new speech" statement describes
+that assessment, not the subsequent production step. Listening review is
+still pending; no dependency was changed.
+
 ## What produced the discontinuity
 
 The pilot reports disconnected moods. The generation records establish a
