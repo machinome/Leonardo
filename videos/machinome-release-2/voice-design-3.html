@@ -1,0 +1,48 @@
+<!doctype html>
+<!-- Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only. -->
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Machinome · Voice design 3</title>
+  <style>
+    :root { color-scheme:dark; font-family:system-ui,sans-serif; background:#101419; color:#eee9df; }
+    body { max-width:650px; margin:0 auto; padding:32px 20px; line-height:1.55; }
+    h1 { font-size:1.75rem; } h2 { font-size:1.1rem; margin:0 0 14px; }
+    blockquote { margin:24px 0; padding-left:18px; border-left:3px solid #ef9a50; font-size:1.1rem; }
+    section { padding:18px; margin:16px 0; background:#1b222b; border-radius:10px; }
+    details { margin-top:12px; border-top:1px solid #35404e; padding-top:12px; }
+    summary { cursor:pointer; font-size:.9rem; color:#b7bec7; } details[open] summary { margin-bottom:12px; }
+    audio { width:100%; display:block; } a { color:#efb57e; }
+    .note { color:#b7bec7; font-size:.9rem; } .download { display:inline-block; margin-top:8px; font-size:.85rem; }
+  </style>
+</head>
+<body>
+  <h1>Design 3 · Natural and confident</h1>
+  <p>Three existing voices. Fresh readings with the same straightforward, conversational direction.</p>
+  <blockquote>I'm Machinome, and my purpose is to enable all machines to be open source. What do you want to build next?</blockquote>
+  <section aria-labelledby="d31"><h2 id="d31">1 · Voice C1</h2>
+    <audio data-new="D3-1" controls preload="metadata" aria-label="Design 3 proposal 1" src="_build/voice-design-3/D3-1/natural-confident.mp3"></audio>
+    <a class="download" href="_build/voice-design-3/D3-1/natural-confident.mp3" download="machinome-design3-1.mp3">Download 1</a>
+    <details><summary>Compare the previous C1 reading</summary><audio controls preload="metadata" aria-label="Previous C1" src="_build/voice-design-2/C1/preview-1.mp3"></audio></details>
+  </section>
+  <section aria-labelledby="d32"><h2 id="d32">2 · Voice C3</h2>
+    <audio data-new="D3-2" controls preload="metadata" aria-label="Design 3 proposal 2" src="_build/voice-design-3/D3-2/natural-confident.mp3"></audio>
+    <a class="download" href="_build/voice-design-3/D3-2/natural-confident.mp3" download="machinome-design3-2.mp3">Download 2</a>
+    <details><summary>Compare the previous C3 reading</summary><audio controls preload="metadata" aria-label="Previous C3" src="_build/voice-design-2/C3/preview-1.mp3"></audio></details>
+  </section>
+  <section aria-labelledby="d33"><h2 id="d33">3 · Voice C5</h2>
+    <audio data-new="D3-3" controls preload="metadata" aria-label="Design 3 proposal 3" src="_build/voice-design-3/D3-3/natural-confident.mp3"></audio>
+    <a class="download" href="_build/voice-design-3/D3-3/natural-confident.mp3" download="machinome-design3-3.mp3">Download 3</a>
+    <details><summary>Compare the previous C5 reading</summary><audio controls preload="metadata" aria-label="Previous C5" src="_build/voice-design-2/C5/preview-1.mp3"></audio></details>
+  </section>
+  <p class="note">AI-generated auditions · Existing voice identities, not remixes · Natural/confident direction, no profound or solemn cues · Film unchanged.</p>
+  <p><a href="voice-design-2.html">Design 2</a> · <a href="voice-design-1.html">Design 1</a> · <a href="index.html">The film</a></p>
+  <script>
+    const players = [...document.querySelectorAll('audio')];
+    for (const player of players) player.addEventListener('play', () => {
+      for (const other of players) if (other !== player) other.pause();
+    });
+  </script>
+</body>
+</html>

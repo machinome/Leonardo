@@ -2,6 +2,75 @@
 
 Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
 
+## Round 3 — existing voices, natural and confident readings
+
+The pilot could not assess the voices because the cadence and emotion were
+wrong. The new instruction removes profoundness from the emotion, asks for
+natural confidence, preserves the voices and requests three proposals.
+
+[Listen to design 3](voice-design-3.html). C1, C3 and C5 were carried forward
+as a spread across round 2, not as an unperformed quality ranking. Proposal 1
+is C1, proposal 2 is C3, proposal 3 is C5. Their former readings are available
+under each new sample for direct comparison.
+
+This pass changes the method: it saves each existing `generated_voice_id`
+as a private, reusable audition voice in ElevenLabs, then synthesizes a new
+closing performance through that same voice's TTS endpoint. There is no
+voice design/remix request and no reference-audio reconditioning. Saving
+three candidates preserves their identities for this comparison; it does
+not ratify any candidate as the final Machinome voice. They occupy three
+voice-library slots and have not been shared or published.
+
+All three get the identical performance request: Eleven v3, stability 0.5
+(Natural), similarity 0.75, style 0, speed 1.05, and one seed. The opening
+direction is `[conversational, confident]`; the final question is
+`[friendly, direct]`. There are no profound, solemn, slow, whispered or
+theatrical cues, and no ellipses. The same closing words and approved
+pronunciation alias remain. The 1.05 speed is a synthesis setting, not
+post-production acceleration. MP3s are retained exactly as received, with
+no edits, pitch changes or effects.
+
+Sources: [generation](voice-design-3.mjs) and [verification](check-voice-design-3.mjs).
+Each candidate's saved-voice receipt, speech receipt, voice binding, audio
+hash and character alignment live in ignored `_build/voice-design-3/`.
+Request markers prevent duplicate voice creation or ambiguous paid retries;
+cache-only reuse does not contact the provider.
+
+```sh
+node videos/machinome-release-2/voice-design-3.mjs /home/asa/devel/machinome/videomaker --check
+# Initial creation: save three existing audition voices and buy three short readings.
+node videos/machinome-release-2/voice-design-3.mjs /home/asa/devel/machinome/videomaker --generate
+# Cache-only verification, with the existing review server on port 8782:
+node videos/machinome-release-2/voice-design-3.mjs /home/asa/devel/machinome/videomaker
+node videos/machinome-release-2/check-voice-design-3.mjs /home/asa/devel/machinome/videomaker
+```
+
+Current contracts were checked through Context7 and the official
+[save-voice endpoint](https://elevenlabs.io/docs/api-reference/text-to-voice/create/),
+[TTS with timing](https://elevenlabs.io/docs/api-reference/text-to-speech/convert-with-timestamps)
+and [performance guidance](https://elevenlabs.io/docs/overview/capabilities/text-to-speech/best-practices).
+The Videomaker skill governs private credentials, preserved audio and
+technical versus listening review. Short samples can still vary in delivery;
+the pilot's listening judgment remains the selection gate.
+
+Saved candidate bindings (private account resources, not public voice links):
+
+| Proposal | Existing voice | Saved voice ID | New duration |
+| --- | --- | --- | --- |
+| 1 | C1 | `jtlpSHajhD6dVHux60yP` | 8.36 s |
+| 2 | C3 | `JoOLJ0OHRwCg8Ydjc4IF` | 10.19 s |
+| 3 | C5 | `isdFxhGsw3B4F21g7smQ` | 8.75 s |
+
+Verified on 3 October 2026: the returned saved IDs match the requested
+preview identities and the IDs used for TTS. All three audio files fully
+decode, their returned character alignments retain the closing words, and
+all three requests use identical performance controls. The six-player
+browser comparison passes playback, seeking, byte ranges, mutual pause,
+links and 390-pixel layout with no browser errors. Cache-only replay makes
+no provider requests. Hashes confirm the film, full narration, original C
+and all five design-2 samples remain unchanged. Duration and alignment are
+technical evidence, not a claim to have listened to the result.
+
 ## Round 2 — five variations around C
 
 The pilot chose C as the starting point, rejected the heavy profoundness,
