@@ -6,6 +6,7 @@ import json
 from pathlib import Path
 
 from machinome_movie import Narration
+from scene_source import scene_narration
 
 # Paragraphs organize the source, not synthesis requests or audio cuts.
 OPENING = (
@@ -17,9 +18,9 @@ OPENING = (
     "one of my ancestors. Let me show you how it works."
 )
 MECHANISM = (
-    "Water beneath the wheel turns this shaft. A crank and connecting "
-    "rod turn that rotation into the saw's up-and-down stroke. "
-    "But the timber has to move, too. On the cutting stroke, this long "
+    "Water beneath the wheel turns this shaft. "
+    + scene_narration("CrankStroke")
+    + " But the timber has to move, too. On the cutting stroke, this long "
     "lever pulls a pawl across one tooth of a ratchet. A second pawl "
     "holds that progress while the first returns. That small step winds "
     "a rope onto this axle. Follow it down, and across. It turns a "
@@ -40,7 +41,7 @@ FILM_SOURCE = (
     "This video's source code is in Python too. A scene, a camera, a "
     "voice. The words I say tell the camera when to move."
 )
-THIS_SCENE = "And here's the code of this exact scene! How cool is that?"
+THIS_SCENE = scene_narration("ThisScene")
 OPEN_SOURCE = (
     "And the best part is: this is all open source! OpenSCAD, SolidPython, "
     "OCCT, CadQuery, Build123d, FreeCAD, JSCAD and so many others..."

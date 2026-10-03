@@ -1,7 +1,5 @@
 """Revolutions — the ratified second cut, one voice and one machine."""
 # Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
-import ast
-import hashlib
 from pathlib import Path
 
 from machinome_movie import (
@@ -10,7 +8,8 @@ from machinome_movie import (
     Release, Set, Shot, Slot, Source, Still, Style, Title, View, evaluate, write,
 )
 from models.hydraulic_sawmill.model import LeonardoHydraulicSawmill as Mill
-from narration import AUDIO, THIS_SCENE, lines
+from narration import AUDIO, lines
+from scene_source import excerpt
 
 HERE = Path(__file__).resolve().parent
 BRAND = HERE.parent / 'machinome-release-1/assets'
@@ -100,46 +99,43 @@ class Sawmill(Loop):
                    rights=None, upscale=1.5)
 
 
-def excerpt(name):
-    """Literal executable source, never a rewritten pseudo-code subtitle."""
-    source = Path(__file__).read_text()
-    tree = ast.parse(source)
-    node = next(n for n in ast.walk(tree)
-                if isinstance(n, (ast.FunctionDef, ast.ClassDef)) and n.name == name)
-    code = '\n'.join(source.splitlines()[node.lineno - 1:node.end_lineno])
-    return dict(code=code, file=f'movie.py / {name}',
-                digest=hashlib.sha256(source.encode()).hexdigest())
-
-
-def demonstrate_crank(view):
-    return Shot(
-        Mechanism, {Mechanism.stage: view},
-        until=lines.spoken('But the timber'),
-        model=Sawmill.run(424, 432),
-        cues=[
-            Cue(0, view.move(Sawmill.saw,
-                until=lines.spoken("the saw's up-and-down stroke"))),
-            Cue(lines.spoken('A crank'),
-                view.highlight(Mill.water_drive.crank, others='keep'),
-                until=lines.spoken('connecting rod', plus=-0.12)),
-            Cue(lines.spoken('connecting rod'),
-                view.highlight(Mill.saw.connecting_rod, others='keep'),
-                until=lines.spoken('turn that rotation', plus=-0.1)),
-            Cue(lines.spoken("the saw's up-and-down stroke"),
-                view.highlight(Mill.saw.sash, others='keep'),
-                until=lines.spoken('But the timber', plus=-0.2)),
-        ],
+class CrankStroke:
+    narration = (
+        "A crank and connecting rod turn that rotation "
+        "into the saw's up-and-down stroke."
     )
+    view = View(Sawmill, camera=Sawmill.rear,
+                hide=[Sawmill.drive_context])
+    stroke = lines.spoken("the saw's up-and-down stroke")
+    end = lines.spoken("But the timber")
+    shot = Shot(
+        Mechanism, {Mechanism.stage: view},
+        until=end, model=Sawmill.run(424, 432),
+        cues=[
+            Cue(0, view.move(Sawmill.saw, until=stroke)),
+            Cue(lines.spoken("A crank"),
+                view.highlight(Mill.water_drive.crank, others="keep"),
+                until=lines.spoken("connecting rod", plus=-0.12)),
+            Cue(lines.spoken("connecting rod"),
+                view.highlight(Mill.saw.connecting_rod, others="keep"),
+                until=lines.spoken("turn that rotation", plus=-0.1)),
+            Cue(stroke, view.highlight(Mill.saw.sash, others="keep"),
+                until=lines.spoken("But the timber", plus=-0.2)),
+        ])
 
 
-def this_exact_scene(code):
-    narration = THIS_SCENE  # "And here's the code of this exact scene! How cool is that?"
-    return Shot(
+class ThisScene:
+    narration = "And here's the code of this exact scene! How cool is that?"
+    code = Listing(**excerpt("ThisScene"))
+    end = lines.spoken("And the best part")
+
+    shot = Shot(
         SourceRoom, {SourceRoom.code: code},
-        until=lines.spoken('And the best part'),
-        model=Sawmill.run(484, 488),
-        cues=[Cue(lines.spoken(narration), code.focus(token='narration'),
-                  until=lines.spoken('And the best part'))],
+        until=end, model=Sawmill.run(484, 488),
+        cues=[
+            Cue(lines.spoken(narration),
+                code.focus(token=narration), until=end),
+        ],
     )
 
 
@@ -153,7 +149,7 @@ class Continuous(Chapter):
     wheel = View(Sawmill, camera=Sawmill.wheel, hide=[Sawmill.not_wheel])
     mill = View(Sawmill, camera=Sawmill.wheel)
     ghost = View(Sawmill, camera=Sawmill.rear)
-    drive = View(Sawmill, camera=Sawmill.rear, hide=[Sawmill.drive_context])
+    drive = CrankStroke.view
     feed = View(Sawmill, camera=Sawmill.saw, hide=[Sawmill.feed_context])
     ropes = View(Sawmill, camera=Sawmill.pawls, hide=[Sawmill.rope_context])
     returned = View(Sawmill, camera=Sawmill.wheel, hide=[Sawmill.not_wheel])
@@ -168,8 +164,8 @@ class Continuous(Chapter):
                        tagline='Python', question='', compact=True)
     imports = Source.panel(Sawmill.imports)
     assembly = Source.panel(Sawmill.assembly)
-    film_code = Listing(**excerpt('demonstrate_crank'))
-    mirror_code = Listing(**excerpt('this_exact_scene'))
+    film_code = Listing(**excerpt('CrankStroke'))
+    mirror_code = ThisScene.code
     ecosystem = Constellation(
         names=['Three.js', 'OpenSCAD', 'SolidPython', 'OCCT', 'CadQuery', 'Build123d', 'FreeCAD', 'JSCAD'],
         driver='OpenSpec', mark=(BRAND / 'mark-white.svg').read_text(),
@@ -203,7 +199,7 @@ class Continuous(Chapter):
         ])
     # This real shot is the source revealed later. Add the synchronized context
     # plate in the document finishing pass; its camera duplicates this view.
-    crank = demonstrate_crank(drive)
+    crank = CrankStroke.shot
     feed_motion = Shot(Mechanism, {Mechanism.ghost: ghost, Mechanism.stage: feed, Mechanism.note: limits},
         until=lines.spoken('That small step'), model=Sawmill.run(432, 440), cues=[
             Cue(0, feed.move(Sawmill.pawls, until=lines.spoken('On the cutting stroke')),
@@ -271,10 +267,13 @@ class Continuous(Chapter):
         ])
     behind_the_film = Shot(SourceRoom, {SourceRoom.code: film_code},
         until=lines.spoken("And here's the code"), model=Sawmill.run(480, 484), transition=Dissolve(0.35), cues=[
-            Cue(lines.spoken('a camera'), film_code.focus(token='view.move'), until=lines.spoken('The words I say')),
-            Cue(lines.spoken('The words I say'), film_code.focus(token='lines.spoken'), until=lines.spoken("And here's the code")),
+            Cue(lines.spoken('A scene'), film_code.focus(token='shot = Shot('), until=lines.spoken('a camera')),
+            Cue(lines.spoken('a camera'), film_code.focus(token='view = View('), until=lines.spoken('a voice')),
+            Cue(lines.spoken('a voice'), film_code.focus(token='A crank and connecting rod'), until=lines.spoken('The words I say')),
+            Cue(lines.spoken('The words I say'), film_code.focus(token='stroke = lines.spoken('), until=lines.spoken('tell the camera')),
+            Cue(lines.spoken('tell the camera'), film_code.focus(token='view.move('), until=lines.spoken("And here's the code")),
         ])
-    mirror = this_exact_scene(mirror_code)
+    mirror = ThisScene.shot
     open_source = Shot(Exhibition, {Exhibition.graphic: ecosystem},
         until=lines.spoken(RETURN), model=Sawmill.run(488, 492), transition=Dissolve(0.4), cues=[
             Cue(0, ecosystem.hub(), until=lines.spoken(RETURN)),

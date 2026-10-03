@@ -26,15 +26,33 @@ const directory=resolve(base,'_build/inspection');
 await mkdir(directory,{recursive:true});
 const result=await browserSession(film,viewer,1280,[],async({page,pose})=>{
   const frames=[];
-  for(const id of ['revolution','water','crank','feed-motion','transmission','document','photograph','python-language','face-reveal','behind-the-film','mirror','open-source','openspec-arrival','open-wheel-spinning','wheel-returns','invitation']){
-    const extra={'openspec-arrival':125.5,'open-wheel-spinning':127.4};
+  const extra={'openspec-arrival':125.5,'open-wheel-spinning':127.4};
+  const cases=['revolution','water','crank','feed-motion','transmission','document','photograph','python-language','face-reveal','behind-the-film','mirror','open-source','openspec-arrival','open-wheel-spinning','wheel-returns','invitation'].map(id=>{
     const shot=shots.find(s=>s.id===(id in extra?'open-source':id));
-    const t=extra[id]??shot.start+(shot.end-shot.start)*.72;
+    return {id,shot,time:extra[id]??shot.start+(shot.end-shot.start)*.72};
+  });
+  const sourceShot=shots.find(s=>s.id==='behind-the-film');
+  for(const [i,cue] of sourceShot.cues.entries())cases.push({
+    id:`source-focus-${i+1}`,shot:sourceShot,
+    time:sourceShot.start+(cue.at+cue.until)/2,
+    token:cue.actions[0].params.token,
+  });
+  for(const {id,shot,time:t,token} of cases){
     await pose(t);
     const boxes=await page.evaluate(()=>[...document.querySelectorAll('.listing,.listing pre,.tech-label,.incoming,.wordmark,.question')].map(e=>{
       const r=e.getBoundingClientRect();return {text:e.textContent,box:{x:r.x,y:r.y,w:r.width,h:r.height},width:e instanceof HTMLElement?e.clientWidth:0,scrollWidth:e.scrollWidth,digest:e.dataset.sourceSha256};
     }));
     for(const e of boxes){const b=e.box;assert.ok(b.x>=-1&&b.y>=-1&&b.x+b.w<=1281&&b.y+b.h<=721,`${id}: content outside frame`);if(e.width)assert.ok(e.scrollWidth<=e.width+1,`${id}: overflow`);if(e.digest)assert.equal(e.digest,digest);}
+    if(['behind-the-film','mirror'].includes(shot.id)){
+      const listing=await page.evaluate(()=>({
+        text:document.querySelector('.listing pre').textContent,
+        focus:[...document.querySelectorAll('.listing .lit-line')].map(e=>e.textContent),
+      }));
+      assert.ok(listing.text.includes(shot.id==='mirror'?'class ThisScene:':'class CrankStroke:'));
+      assert.equal(listing.focus.length,1,`${id}: one expressive line at a time`);
+      if(shot.id==='mirror')assert.ok(listing.focus[0].includes("And here's the code of this exact scene! How cool is that?"));
+      if(token)assert.ok(listing.focus[0].includes(token),`${id}: wrong line highlighted`);
+    }
     const first=await page.screenshot();
     await pose(.8);await pose(t);
     assert.ok(first.equals(await page.screenshot()),`${id}: replay differs`);
@@ -44,4 +62,4 @@ const result=await browserSession(film,viewer,1280,[],async({page,pose})=>{
   return {frames,filmSourceSha256:digest};
 });
 await writeFile(resolve(directory,'report.json'),JSON.stringify(result,null,2)+'\n');
-console.log('One take; one highlight; exact paired cameras; still opening; literal source; 16 replay-identical compositions.');
+console.log('One take; one highlight; exact paired cameras; still opening; complete scene classes; 21 replay-identical compositions.');

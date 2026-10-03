@@ -5,6 +5,8 @@ Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
 Status: built and verified on 3 October 2026. The completed cut is
 1920×1080, 24 fps, 141.75 seconds, with the approved single narration.
 [Verification](VERIFICATION.md) records the encoded artifact and checksum.
+The subsequent [code-scene revision](CODE-REVISION.md) restores complete
+classes and keeps the self-narration inside its actual source.
 
 - [Local video player](index.html) · [MP4](_build/rehearsal.mp4).
 - [Approved raw narration](narration.html) · [lossless take](_build/approved-narration.wav).
@@ -44,6 +46,7 @@ node videos/machinome-release-2/prepare.mjs
 PYTHONPATH=. /home/asa/devel/machinome/.venv/bin/python videos/machinome-release-2/movie.py
 node videos/machinome-release-2/finish.mjs /home/asa/devel/machinome/videomaker
 node --test videos/machinome-release-2/speech.test.mjs
+/home/asa/devel/machinome/.venv/bin/python videos/machinome-release-2/test_code_scenes.py
 node /home/asa/devel/machinome/videomaker/bin/videomaker.mjs check videos/machinome-release-2/_build/movie.json --viewer /home/asa/devel/machinome/machinome-viewer/machinome_viewer/widget/dist/machinome-viewer.js
 node /home/asa/devel/machinome/videomaker/bin/videomaker.mjs preview videos/machinome-release-2/_build/movie.json --viewer /home/asa/devel/machinome/machinome-viewer/machinome_viewer/widget/dist/machinome-viewer.js --width 1280
 node videos/machinome-release-2/inspect.mjs /home/asa/devel/machinome/videomaker /home/asa/devel/machinome/machinome-viewer/machinome_viewer/widget/dist/machinome-viewer.js
@@ -62,6 +65,12 @@ The commands above cannot purchase speech. Do not use build or regenerate
 the ratified take. finish.mjs restores the original voice-setting property
 order (the existing cache hashes JSON order), sets the continuous model
 clock and measured pawl phases, and preserves the raw listening assets.
+
+`CrankStroke` and `ThisScene` in movie.py own the literal narration they
+show. scene_source.py reads these declarations without executing the movie;
+narration.py includes those words in the one continuous performance. The
+same reader extracts the complete classes for the source panels. The
+source tests verify this link and the exact approved script.
 
 ## Boundaries
 

@@ -28,10 +28,21 @@ labels. No explanatory headline competes with Machinome's first appearance.
 The import precedes a real, revision-pinned class with its declarations,
 mounts and drive relationship. Spoken identifiers illuminate that relationship.
 
-The film-source scene shows a literal function that directs an earlier
-simulation shot, including camera movement and individual highlights. Only
-the next scene shows its own literal directing function and narration. Each
-listing is AST-extracted from movie.py with the file's checksum.
+The film-source scene shows the complete `CrankStroke` class that directs
+the earlier simulation shot: its narration, view, spoken camera anchor and
+individual highlights. Attention moves through the shot, camera, voice,
+spoken anchor and camera move as those ideas are spoken. Only the next
+scene reveals its own complete `ThisScene` class, with the full literal
+“And here's the code of this exact scene! How cool is that?” highlighted
+inside it. No detached punchline and no narration alias disguised by a comment.
+
+This restores the class context at the pilot's request after viewing cut 2.
+Both listings are AST-extracted from movie.py with the file's checksum. The
+same AST reader takes their literal narration into the single continuous
+script, without executing the movie or creating extra synthesis chapters.
+These are ordinary Python organizational classes whose views and shots the
+one `Continuous` chapter uses; no new Videomaker API is invented. The approved
+performance, scene timing and shared stage remain unchanged.
 
 M appears first. Three.js begins the clockwise technology ring; the spoken
 names arrive on their measured words. OpenSpec flows from the right, strikes
