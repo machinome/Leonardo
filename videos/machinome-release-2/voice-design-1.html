@@ -1,0 +1,43 @@
+<!doctype html>
+<!-- Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only. -->
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Machinome · Voice auditions</title>
+  <style>
+    :root { color-scheme:dark; font-family:system-ui,sans-serif; background:#101419; color:#eee9df; }
+    body { max-width:650px; margin:0 auto; padding:32px 20px; line-height:1.55; }
+    h1 { font-size:1.75rem; } h2 { font-size:1.1rem; margin:0 0 10px; }
+    blockquote { margin:24px 0; padding-left:18px; border-left:3px solid #ef9a50; font-size:1.2rem; }
+    section { padding:18px; margin:16px 0; background:#1b222b; border-radius:10px; }
+    audio { width:100%; display:block; } a { color:#efb57e; }
+    .note { color:#b7bec7; font-size:.9rem; } .download { display:inline-block; margin-top:8px; font-size:.85rem; }
+  </style>
+</head>
+<body>
+  <h1>A voice from the source</h1>
+  <p>Three original voice candidates. The direction: gender-neutral, profound, close and quietly alive.</p>
+  <blockquote>I'm Machinome, and my purpose is to enable all machines to be open source. What do you want to build next?</blockquote>
+  <section aria-labelledby="voice-a"><h2 id="voice-a">A</h2>
+    <audio controls preload="metadata" aria-label="Voice A" src="_build/voice-design-1/voice-A.mp3"></audio>
+    <a class="download" href="_build/voice-design-1/voice-A.mp3" download>Download A</a>
+  </section>
+  <section aria-labelledby="voice-b"><h2 id="voice-b">B</h2>
+    <audio controls preload="metadata" aria-label="Voice B" src="_build/voice-design-1/voice-B.mp3"></audio>
+    <a class="download" href="_build/voice-design-1/voice-B.mp3" download>Download B</a>
+  </section>
+  <section aria-labelledby="voice-c"><h2 id="voice-c">C</h2>
+    <audio controls preload="metadata" aria-label="Voice C" src="_build/voice-design-1/voice-C.mp3"></audio>
+    <a class="download" href="_build/voice-design-1/voice-C.mp3" download>Download C</a>
+  </section>
+  <p class="note">AI-generated auditions · No added effects · No voice chosen yet · The current film is unchanged.</p>
+  <p><a href="index.html">Back to the film</a></p>
+  <script>
+    const players = [...document.querySelectorAll('audio')];
+    for (const player of players) player.addEventListener('play', () => {
+      for (const other of players) if (other !== player) other.pause();
+    });
+  </script>
+</body>
+</html>
