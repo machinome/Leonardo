@@ -2,7 +2,12 @@
 
 Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
 
-Production sources: Leonardo commit `48484b56e40c`.
+This records the initial second cut. The completed class-context correction,
+current MP4 checksum and incremental-render evidence are in
+[CODE-REVISION.md](CODE-REVISION.md). The initial artifact and its decoded
+frames/player evidence are preserved in `_build/before-code-revision-20261003/`.
+
+Initial production sources: Leonardo commit `48484b56e40c`.
 Videomaker: `a2b770d919faf150b57a92e3bbadaf8c91b57647`.
 Viewer: API 29, explicit workspace bundle.
 Model/export revision: `5b2366460ad3ab20e3cf2682a6ed7b7ec1963e15`.
@@ -45,8 +50,9 @@ or weakened, and no dependency was patched.
 
 ## Encoded artifact
 
-Completed on 3 October 2026: `_build/rehearsal.mp4` is the full narrated cut,
-despite the tool's generic output filename.
+Completed on 3 October 2026: the original full narrated cut, now preserved
+as `_build/before-code-revision-20261003/rehearsal.mp4`, despite the tool's
+generic output filename. The hash below belongs to that original cut.
 
 - SHA-256: `a11d511ae4652cdca84e61178e45eba187af006e6100f4f02b2d789ecf9bbdd8`.
 - 1920×1080, 24 fps, 3,402 frames, 141.75 seconds; 20,188,502 bytes.

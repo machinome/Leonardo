@@ -1,4 +1,4 @@
-"""Read the actual scene classes for their words and on-screen source."""
+"""Read scene classes for their words and on-screen source."""
 # Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
 
 import ast
@@ -17,7 +17,7 @@ def scene_source(name):
 
 
 def scene_narration(name):
-    """The literal in the shown class feeds the single continuous take."""
+    """The class's literal feeds the single continuous take."""
     _, node = scene_source(name)
     for statement in node.body:
         if isinstance(statement, ast.Assign) and any(
@@ -31,7 +31,7 @@ def scene_narration(name):
 
 
 def excerpt(name):
-    """Return the complete class, never a rewritten display-only example."""
+    """Return the complete class, not a display-only example."""
     source, node = scene_source(name)
     return dict(
         code="\n".join(source.splitlines()[node.lineno - 1:node.end_lineno]),

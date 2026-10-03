@@ -44,10 +44,46 @@ elements and the two source shots' focus cues, gives exact deep equality.
 Narration, timings, camera and model requests, every other scene and all
 shared stage/style data are unchanged. No dependency or model was edited.
 
-## Rebuild evidence
+## Completed rebuild
 
-Pending final render. The original MP4, manifest, movie document and
-subtitles are preserved under `_build/before-code-revision-20261003/`.
-The render uses Videomaker's shot cache; changed shots and any following
-shot that composites one of them must be captured again. Shared stage
-changes would invalidate all shots, so the stage is intentionally unchanged.
+Rendered and verified on 3 October 2026 from production commit
+`8bc6a70a2ca7936fb5259a91e4a517b051e54d3f`.
+Current output: `_build/rehearsal.mp4`, 20,246,699 bytes, SHA-256
+`18b0830df9c442cb23ff8d19794d721afdc603e1aad9dc04431e43555dc9be3f`.
+The format remains 1920×1080, 24 fps, 3,402 frames, 141.75 seconds.
+
+Videomaker's incremental render reused **14 of 17 shots**, 2,690 frames.
+It recaptured only `behind-the-film` (240 frames), `mirror` (115) and
+`open-source` (357), whose incoming dissolve contains the outgoing mirror.
+The 14 reused shots retain their exact previous keys and cache generations;
+the common key and both shared stage hashes are unchanged. This proves the
+partial-rebuild behavior on this film, not just from the documentation.
+
+The approved raw narration hash is unchanged. Independently extracting the
+AAC packets from the previous and new MP4 gives the same SHA-256:
+`bf1ba381899498f5107695085adc9153cef4c0b37ca346ca462895c0bc7edae0`.
+No listening reapproval or paid generation was needed; no new independent
+listening review is claimed. All 51 external captions keep their exact text
+and +3-second offset from the approved performance.
+
+The final native preview passes, as do postflight and all nine player
+seek/play checks, subtitle loading, byte-range delivery, links and desktop/
+narrow layouts. Six source tests, five speech tests and PEP 8 checks for
+the new source-reader/test modules pass. The final follow-up commit only
+shortens three reader docstrings and records this evidence; it changes no
+movie input.
+
+Inspected full-resolution frames decoded from the new MP4: the complete
+classes at 101 and 109.5 seconds, then each of the five source highlights
+and the punchline. Additional decoded samples are in
+`_build/encoded-code-revision/frame-01.png` through `frame-06.png`, selected
+at zero-based frame indices 2455, 2481, 2504, 2530, 2570 and 2676.
+Every sample keeps the complete class context visible, and the last shows
+the full literal narration still highlighted at 111.5 seconds.
+The native encoded review pack also completes at
+`_build/review-packs/f8a113c9ff58-18b0830df9c4-0d3e0e1a-e209-47d1-93c4-ee2138dc1657/`.
+
+The original MP4, manifest, movie document, subtitles, decoded-frame set
+and player evidence remain under `_build/before-code-revision-20261003/`.
+Nothing was published. The original image-rights, public-link, tool-licence
+and provenance publication checks remain unchanged.

@@ -4,9 +4,9 @@ Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
 
 Status: built and verified on 3 October 2026. The completed cut is
 1920×1080, 24 fps, 141.75 seconds, with the approved single narration.
-[Verification](VERIFICATION.md) records the encoded artifact and checksum.
-The subsequent [code-scene revision](CODE-REVISION.md) restores complete
-classes and keeps the self-narration inside its actual source.
+[Verification](VERIFICATION.md) records the initial cut. The completed
+[code-scene revision](CODE-REVISION.md) records the current checksum,
+restores complete classes and keeps the self-narration inside its source.
 
 - [Local video player](index.html) · [MP4](_build/rehearsal.mp4).
 - [Approved raw narration](narration.html) · [lossless take](_build/approved-narration.wav).
