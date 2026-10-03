@@ -31,7 +31,7 @@ pulley_block = "models.pulley_block.model:PulleyBlock"
 swivel_crane = "models.swivel_crane.model:SwivelCrane"
 
 [tool.machinome-studio]
-profile = "builder"
+profile = "openspec"
 
 [build-system]
 requires = ["setuptools>=77"]
