@@ -2,6 +2,81 @@
 
 Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
 
+## Round 6 — restart from Jessica; pacing is a gate
+
+The pilot rejected the C3 line of development: the performance feels sleepy
+and tedious, with an unacceptable length penalty. The new direction is to
+start from Jessica and make the voice queer/androgynous. C3 is no longer the
+starting point. The comparison line remains fixed.
+
+The timing complaint is supported by round 5: Jessica is 8.359184 seconds,
+while C3's five readings are 9.874286–10.527347 seconds, 18.1–25.9% longer;
+their mean is 10.182531 seconds, 21.8% longer. These are measured sample
+differences, not a measured full-film duration forecast. Earlier rounds
+over-focused on emotional tags without enforcing a pacing requirement.
+
+[Listen to design 6](voice-design-6.html). A single Voice Design request uses
+the actual round-5 Jessica MP3 as `reference_audio_base64`. The target keeps
+its brisk connected speech, brief pauses, expressive movement and alert
+delivery, changing the timbre toward gender ambiguity. The prompt does not
+equate queerness with bass, weight, slowness or solemnity; it stays near the
+reference pitch area with balanced bright/rounded resonance. This is the
+requested vocal aesthetic, not a claim about anyone's identity.
+
+The same 110-character spoken comparison line and pronunciation alias are
+supplied unchanged. Model `eleven_ttv_v3`, prompt strength 0.35, guidance 2;
+no C3 audio, reference ID or emotional tags enter the request. The original
+Jessica clip is reused byte for byte on the listening page.
+
+A 5% maximum duration overrun was declared before generation: 8.7771432
+seconds for this clip. The three returned raw previews are measured and
+filtered against that unchanged ceiling:
+
+| Sample | Duration | Against Jessica | Audition status |
+| --- | --- | --- | --- |
+| Jessica | 8.359184 s | Reference | Unchanged input |
+| J1 | 8.437500 s | +0.9% | Offered for listening |
+| J2 | 8.672625 s | +3.7% | Offered for listening |
+| J3 | 8.907750 s | +6.6% | Retained, excluded for exceeding the gate |
+
+The over-limit preview is not accelerated, edited or relabelled a pass.
+The whole response is retained, and the two passing candidates are offered
+without another paid generation or changing the ceiling. The full media
+remain in ignored `_build/voice-design-6/`, including the rejected J3.
+No preview is promoted to a permanent voice-library entry yet.
+
+Duration is only a gate: it does not establish exact prosody, engagement,
+spoken accuracy or perceived androgyny. The pilot must hear the result. A
+selected preview must subsequently pass the same-line ordinary-TTS test,
+and the full continuous narration must be measured before replacing the
+film's audio; a voice-design preview alone is not a production pacing promise.
+
+[Generation source](voice-design-6.mjs) and
+[verification source](check-voice-design-6.mjs) record the prompt, reference
+hash, response, generated IDs and timing comparison. Sources and all prior
+audio remain intact. The Videomaker skill governs preservation and limits of
+technical validation. Current reference-audio semantics were checked through
+Context7 against the [official design endpoint](https://elevenlabs.io/docs/api-reference/text-to-voice/design).
+
+```sh
+node videos/machinome-release-2/voice-design-6.mjs /home/asa/devel/machinome/videomaker --check
+# First generation only: one paid request, three returned previews.
+node videos/machinome-release-2/voice-design-6.mjs /home/asa/devel/machinome/videomaker --generate
+# Cache-only verification and player check, review server on port 8782:
+node videos/machinome-release-2/voice-design-6.mjs /home/asa/devel/machinome/videomaker
+node videos/machinome-release-2/check-voice-design-6.mjs /home/asa/devel/machinome/videomaker
+```
+
+Verified on 3 October 2026: all three returned MP3s fully decode; provider
+request/response text matches the unchanged comparison line and alias.
+The input hash is Jessica's exact cached recording. The accepted/rejected
+partition is checked against the unchanged 5% threshold, and J3 has no
+player or download link on the listening page. All three offered players
+(Jessica, J1, J2) pass playback, seeking, byte ranges, mutual pause, links,
+displayed-duration checks and 390-pixel layout without browser errors.
+Cache reuse made no further request. Film, narration, script and earlier
+audio hashes remain unchanged. Listening selection is pending.
+
 ## Round 5 — correction: same line, C3 tone, Jessica benchmark
 
 The pilot clarified that “pick from the video script” meant understand its
