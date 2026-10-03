@@ -168,7 +168,7 @@ shots:
     camera: [{at: 0, preset: crank}]
     hiddenLayers: [structure, foundation, water]
     overlays: []
-    evidence: [model, approved-study]
+    evidence: [model, brief]
 
   - id: rotation-to-stroke
     start: 142

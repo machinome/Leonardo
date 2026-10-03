@@ -24,7 +24,8 @@ audio:
   pronunciation:
     Machinome: >-
       Explicit IPA dictionary məˈʃiːnoʊm; approved in full context in
-      ../machinome-pronunciation/phoneme.yaml. Do not revert to spelling aliases.
+      ./pronunciation.json. The approval trial is preserved on video-experiments
+      in videos/machinome-pronunciation/phoneme.yaml. Do not revert to spelling aliases.
     Leonardo da Vinci: Speak the full name, not Leonardo alone.
     pawl: Rhymes with ball.
   timing: >-
@@ -72,7 +73,6 @@ evidence:
   transmission: ../../models/hydraulic_sawmill/docs/transmission-validation.md
   carpentry-validation: ../../models/hydraulic_sawmill/docs/carpentry-validation.md
   rope-drive: ../../models/hydraulic_sawmill/rope_drive.py
-  approved-study: ../machinome-syntax-study/README.md
 credits:
   project: Leonardo da Vinci Gallery
   creator: Vibecoded by Astra

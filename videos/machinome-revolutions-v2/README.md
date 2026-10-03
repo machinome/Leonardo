@@ -1,11 +1,20 @@
 <!-- Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only. -->
-# Revolutions, second script direction
+# Revolutions — active Machinome release film
 
 Script commissioned on 28 September 2026. The opening through the early
 invitation now has a rehearsal; the rest remains an unrendered editorial draft.
 `episode.yaml` is the narration authority, with visual directions beside each
 passage. `production.yaml` selects real source, model, voice and evidence.
-The previous films and approved 28-second syntax study remain unchanged.
+This is the only active video on `main`. The previous films, alternate script
+and approved 28-second syntax study are preserved on `video-experiments`.
+
+The 3 October 2026 branch cleanup preserves the narration and existing rehearsal
+bytes. Current production preflight finds that this draft still pins
+`844c723d81bc69d728b7d98e50e86c00829e2ec8`, while the local export records
+`5b2366460ad3ab20e3cf2682a6ed7b7ec1963e15`. Before building the next cut,
+reconcile the source excerpts and model timing with the chosen export, then
+update the pin and validate them together. The cleanup does not certify the
+old draft against the newer model.
 
 The pilot's new order is the spine: revolution and ancestor; Machinome and
 Python; the waterwheel class and whole mill class; observe a physical drive
@@ -99,6 +108,9 @@ project-owned empirical adapter: it reuses Videomaker's source pinning,
 timeline/camera mapping, speech mixing, subtitles and dark code stage, with
 the real viewer. Nothing about the mechanical simulation is reimplemented.
 It is not a supported new Videomaker format or an executable screenplay.
+`pronunciation.json` preserves the already-approved provider dictionary ID,
+version and IPA rule so this film does not depend on the archived trial.
+It contains no API key; the existing cached take remains reusable.
 
 ```sh
 node rehearse.mjs /home/asa/devel/machinome/videomaker speech
@@ -126,8 +138,8 @@ Videomaker tests pass. Audio validation covers the cached waveform, provider
 alignment and complete timing; it is not a listening review of the new take.
 
 Generated media, raw speech/alignment, separate SRT, previews and provenance
-are under `_build/rehearsal/`. The existing port 8769 review server receives
-the new MP4, SRT and `watch.html`; the previous 28-second video stays available.
+are under `_build/rehearsal/`. The opening MP4, SRT and `watch.html` can now
+be served from this episode's own `_build/rehearsal/` directory.
 Its local `simulation/` link points to the pinned export and its source ZIP.
 Those local rehearsal links do not settle the public release destinations.
 No museum image appears in this opening, so its publication-rights gate
@@ -151,13 +163,19 @@ or the viewer. To reopen the review after the server has stopped:
 
 ```sh
 python serve-review.py --port 8769 \
-  --directory ../machinome-syntax-study/_build
+  --directory _build/rehearsal
 ```
 
-The review files are copies of this episode's MP4, same-basename SRT,
-`revolution.png` as `rehearsal-opening.png`, and `watch.html` as `index.html`.
-The served `simulation` symlink points to `../../export/hydraulic_sawmill`
-from this episode directory. Do not publish these local links as release URLs.
+To prepare that directory from this episode directory:
+
+```sh
+cp watch.html _build/rehearsal/index.html
+cp _build/rehearsal/revolution.png _build/rehearsal/rehearsal-opening.png
+ln -s ../../../../export/hydraulic_sawmill _build/rehearsal/simulation
+```
+
+The MP4 and same-basename SRT already live there. Create the simulation link
+only when absent. Do not publish these local links as release URLs.
 
 Artifact SHA-256:
 

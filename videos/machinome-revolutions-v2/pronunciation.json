@@ -1,0 +1,13 @@
+{
+  "id": "a0DE9zcAKBZxde7BDjmt",
+  "version_id": "EVJOV8BrCYZw3byngo6s",
+  "rules": [
+    {
+      "type": "phoneme",
+      "string_to_replace": "Machinome",
+      "alphabet": "ipa",
+      "phoneme": "məˈʃiːnoʊm"
+    }
+  ],
+  "rulesHash": "ac970fe872b3c1a4a35dc74f5d9202a70abb8adba67eba7c81b349137645f285"
+}

@@ -30,9 +30,6 @@ rack_and_pinion = "models.rack_and_pinion.model:RackAndPinion"
 pulley_block = "models.pulley_block.model:PulleyBlock"
 swivel_crane = "models.swivel_crane.model:SwivelCrane"
 
-[tool.machinome.movies]
-cut_and_advance = "videos.cut_and_advance.movie:CutAndAdvance"
-
 [tool.machinome-studio]
 profile = "builder"
 
