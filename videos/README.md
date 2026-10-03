@@ -2,11 +2,17 @@
 
 Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
 
-The current release-film proposal is
+The current rendered release-film proposal is
 [Revolutions — proposal 1](machinome-release-1/README.md), following the
-pilot's `machinome-release.md` brief: a dark, continuous camera encounter
+pilot's [original brief](machinome-release.md): a dark, continuous camera encounter
 with the sawmill, its real Python source, the film's own source and the
 open-source technology wheel. It has a narrated first review cut.
+
+[Proposal 2](machinome-release-2/README.md) currently holds the original
+brief, the pilot's [review of proposal 1](machinome-release-review-1.md),
+and the technical assessment of continuous narration. It has not been
+rendered. The review supersedes the original brief where it changes it;
+both human-written records are preserved verbatim.
 
 The earlier [Revolutions study](machinome-revolutions-v2/README.md) remains
 available. Its screenplay opens with
