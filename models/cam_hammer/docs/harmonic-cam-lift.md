@@ -75,8 +75,8 @@ before the oracle was strengthened to use the exact former clip algebra.
 Commands:
 
 ```sh
-SOLID_TEST_KERNEL=faceted machinome test cam_hammer --faceted
-SOLID_TEST_KERNEL=exact machinome test cam_hammer --exact
+SOLID_TEST_ENGINE=mesh machinome test cam_hammer --mesh
+SOLID_TEST_ENGINE=brep machinome test cam_hammer --brep
 machinome build cam_hammer
 ```
 

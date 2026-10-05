@@ -7,7 +7,9 @@ from math import pi
 import cadquery as cq
 from molejo import Shape, Circle, Line, Arc, P
 from machinome.math import cos
-from machinome.node import AssemblyNode, CadQueryNode, MolejoNode
+from machinome.node.assembly import AssemblyNode
+from machinome.node.cadquery import CadQueryNode
+from machinome.node.molejo import MolejoNode
 from machinome.motion.joints import Prismatic, Revolute
 from machinome.motion.ports import TranslationalPort
 from machinome.simulation import Driver, Instruction

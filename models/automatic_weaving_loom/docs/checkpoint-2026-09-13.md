@@ -105,10 +105,10 @@ directly under pytest: use `machinome test`, which instantiates their node.
 From the Leonardo root, with `../../.venv/bin` on PATH:
 
 ```sh
-SOLID_BUILD_DIR=_build/loom-seconds-18 PYTHONUNBUFFERED=1 machinome test automatic_weaving_loom --exact
-SOLID_BUILD_DIR=_build/loom-seconds-16 PYTHONUNBUFFERED=1 machinome test automatic_weaving_loom --set shed_lift=16 --exact
-SOLID_BUILD_DIR=_build/loom-seconds-20 PYTHONUNBUFFERED=1 machinome test automatic_weaving_loom --set shed_lift=20 --exact
-SOLID_BUILD_DIR=_build/loom-final-fixtures PYTHONUNBUFFERED=1 machinome test models/automatic_weaving_loom/head_bench.py --exact
+SOLID_BUILD_DIR=_build/loom-seconds-18 PYTHONUNBUFFERED=1 machinome test automatic_weaving_loom --brep
+SOLID_BUILD_DIR=_build/loom-seconds-16 PYTHONUNBUFFERED=1 machinome test automatic_weaving_loom --set shed_lift=16 --brep
+SOLID_BUILD_DIR=_build/loom-seconds-20 PYTHONUNBUFFERED=1 machinome test automatic_weaving_loom --set shed_lift=20 --brep
+SOLID_BUILD_DIR=_build/loom-final-fixtures PYTHONUNBUFFERED=1 machinome test models/automatic_weaving_loom/head_bench.py --brep
 ```
 
 Each root path above is distinct. The head's exact cam-contact check can take

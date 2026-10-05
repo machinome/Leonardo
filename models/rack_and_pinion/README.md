@@ -77,10 +77,10 @@ From the gallery root, with the environment in the root README activated:
 
 ```sh
 machinome build rack_and_pinion
-SOLID_BUILD_DIR=_build/rack_tests machinome test rack_and_pinion --faceted
-SOLID_BUILD_DIR=_build/rack_tests machinome test rack_and_pinion --exact
-SOLID_BUILD_DIR=_build/rack_25 machinome test rack_and_pinion --exact --set module=2.5
-SOLID_BUILD_DIR=_build/rack_35 machinome test rack_and_pinion --exact --set module=3.5
+SOLID_BUILD_DIR=_build/rack_tests machinome test rack_and_pinion --mesh
+SOLID_BUILD_DIR=_build/rack_tests machinome test rack_and_pinion --brep
+SOLID_BUILD_DIR=_build/rack_25 machinome test rack_and_pinion --brep --set module=2.5
+SOLID_BUILD_DIR=_build/rack_35 machinome test rack_and_pinion --brep --set module=3.5
 python scripts/gallery.py export rack_and_pinion
 python models/rack_and_pinion/scripts/check_browser.py
 python scripts/check_browsers.py

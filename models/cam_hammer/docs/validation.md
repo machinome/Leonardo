@@ -118,12 +118,12 @@ no new red-first history is claimed for those unchanged exhibits.
 From the gallery root in the installed environment:
 
 ```sh
-SOLID_BUILD_DIR=_build/cam_hammer_tests machinome test cam_hammer --faceted
-SOLID_BUILD_DIR=_build/cam_hammer_16 machinome test cam_hammer --faceted --set lift_angle=16
-SOLID_BUILD_DIR=_build/cam_hammer_20 machinome test cam_hammer --faceted --set lift_angle=20
-SOLID_BUILD_DIR=_build/cam_hammer_tests machinome test cam_hammer --exact
-SOLID_BUILD_DIR=_build/cam_hammer_16 machinome test cam_hammer --exact --set lift_angle=16
-SOLID_BUILD_DIR=_build/cam_hammer_20 machinome test cam_hammer --exact --set lift_angle=20
+SOLID_BUILD_DIR=_build/cam_hammer_tests machinome test cam_hammer --mesh
+SOLID_BUILD_DIR=_build/cam_hammer_16 machinome test cam_hammer --mesh --set lift_angle=16
+SOLID_BUILD_DIR=_build/cam_hammer_20 machinome test cam_hammer --mesh --set lift_angle=20
+SOLID_BUILD_DIR=_build/cam_hammer_tests machinome test cam_hammer --brep
+SOLID_BUILD_DIR=_build/cam_hammer_16 machinome test cam_hammer --brep --set lift_angle=16
+SOLID_BUILD_DIR=_build/cam_hammer_20 machinome test cam_hammer --brep --set lift_angle=20
 python scripts/gallery.py test hydraulic_sawmill automatic_weaving_loom --kernel faceted
 python scripts/gallery.py test hydraulic_sawmill automatic_weaving_loom --kernel exact
 python scripts/gallery.py build

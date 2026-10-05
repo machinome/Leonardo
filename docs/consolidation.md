@@ -68,7 +68,7 @@ The refactored source and registry passed on 12 September 2026:
 
 Commands: `python scripts/gallery.py test`, `python scripts/gallery.py
 export`, `python scripts/check_browsers.py`, and `machinome test
-hydraulic_sawmill --exact --set kerf=2 --set paddles=24`, from the root with
+hydraulic_sawmill --brep --set kerf=2 --set paddles=24`, from the root with
 the workspace environment activated. Raw logs are local under `_evidence/`.
 
 Fresh OpenSCAD images were inspected at sawmill times 0.065 (isometric) and

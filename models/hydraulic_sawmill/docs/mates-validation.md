@@ -92,8 +92,8 @@ From the gallery root, with its development environment active:
 ```sh
 python -m unittest test_style
 black --check test_style.py models/hydraulic_sawmill
-machinome test hydraulic_sawmill --exact
-machinome test models/hydraulic_sawmill/frame.py --exact
+machinome test hydraulic_sawmill --brep
+machinome test models/hydraulic_sawmill/frame.py --brep
 python models/hydraulic_sawmill/scripts/readouts.py --check
 python scripts/gallery.py check
 python scripts/gallery.py export hydraulic_sawmill

@@ -6,7 +6,7 @@ import numpy as np
 import trimesh
 
 from machinome.test import TestCase, testing_steps
-from machinome.node import CadQueryNode
+from machinome.node.cadquery import CadQueryNode
 
 from .model import LeonardoHydraulicSawmill
 from .rope_drive import PASS_SECONDS, PASS_TURNS

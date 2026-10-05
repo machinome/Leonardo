@@ -11,7 +11,8 @@ construction.
 import math
 
 from molejo import Shape, Circle, Polygon, Line, Arc, P
-from machinome.node import AssemblyNode, MolejoNode
+from machinome.node.assembly import AssemblyNode
+from machinome.node.molejo import MolejoNode
 from machinome.parameters import Count
 from machinome.motion.joints import Free, Prismatic
 from machinome.motion.ports import RotationalPort, TranslationalPort

@@ -5,7 +5,8 @@ transmissions."""
 import math
 
 from machinome_mechanics import rolling_travel
-from machinome.node import AssemblyNode, CadQueryNode
+from machinome.node.assembly import AssemblyNode
+from machinome.node.cadquery import CadQueryNode
 from machinome.parameters import Length
 from machinome.motion.ports import RotationalPort, Time
 from machinome.simulation import Driver, Instruction

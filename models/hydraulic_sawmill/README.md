@@ -125,11 +125,11 @@ gallery's `dev` extra for the PEP 8 test.
 ```sh
 machinome build hydraulic_sawmill
 python -m unittest test_style
-machinome test hydraulic_sawmill --faceted
-machinome test hydraulic_sawmill --exact
-machinome test hydraulic_sawmill --set kerf=2 --exact
-machinome test hydraulic_sawmill --set kerf=5 --exact
-machinome test models/hydraulic_sawmill/frame.py --exact
+machinome test hydraulic_sawmill --mesh
+machinome test hydraulic_sawmill --brep
+machinome test hydraulic_sawmill --set kerf=2 --brep
+machinome test hydraulic_sawmill --set kerf=5 --brep
+machinome test models/hydraulic_sawmill/frame.py --brep
 python models/hydraulic_sawmill/scripts/readouts.py --check
 machinome snapshot hydraulic_sawmill -o models/hydraulic_sawmill/docs/evidence/transmission-isometric.png --autocenter --viewall --time 0 --imgsize 1400x1000
 python scripts/gallery.py check

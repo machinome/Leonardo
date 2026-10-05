@@ -155,10 +155,10 @@ From the Leonardo repository root in the configured workspace environment:
 
 ```sh
 python models/hydraulic_sawmill/scripts/demo.py --build-only
-machinome test models/hydraulic_sawmill/frame.py --faceted
-machinome test hydraulic_sawmill --faceted
-machinome test models/hydraulic_sawmill/frame.py --exact
-machinome test hydraulic_sawmill --exact
+machinome test models/hydraulic_sawmill/frame.py --mesh
+machinome test hydraulic_sawmill --mesh
+machinome test models/hydraulic_sawmill/frame.py --brep
+machinome test hydraulic_sawmill --brep
 ```
 
 The finite build writes the working export, the frame study at

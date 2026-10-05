@@ -137,12 +137,12 @@ From the repository root, with the workspace environment activated and
 
 ```sh
 machinome build hydraulic_sawmill
-machinome test models/hydraulic_sawmill/frame.py --faceted
-machinome test models/hydraulic_sawmill/frame.py --exact
-machinome test hydraulic_sawmill --faceted
-machinome test hydraulic_sawmill --exact
-machinome test hydraulic_sawmill --set kerf=2 --exact
-machinome test hydraulic_sawmill --set kerf=5 --exact
+machinome test models/hydraulic_sawmill/frame.py --mesh
+machinome test models/hydraulic_sawmill/frame.py --brep
+machinome test hydraulic_sawmill --mesh
+machinome test hydraulic_sawmill --brep
+machinome test hydraulic_sawmill --set kerf=2 --brep
+machinome test hydraulic_sawmill --set kerf=5 --brep
 python models/hydraulic_sawmill/scripts/readouts.py --check
 python models/hydraulic_sawmill/scripts/demo.py --build-only
 python models/hydraulic_sawmill/scripts/check-frame-browser.py

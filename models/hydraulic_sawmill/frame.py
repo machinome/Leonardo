@@ -2,7 +2,9 @@
 
 # Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
 import cadquery as cq
-from machinome.node import AssemblyNode, CadQueryNode, Frame
+from machinome.node.assembly import AssemblyNode
+from machinome.node.cadquery import CadQueryNode
+from machinome.node.frames import Frame
 from machinome.parameters import Count
 from machinome.simulation import Driver, Instruction
 

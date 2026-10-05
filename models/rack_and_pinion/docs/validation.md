@@ -125,10 +125,10 @@ authored solids. All comparisons use zero volume epsilon.
 Activate the documented environment and run from the gallery root:
 
 ```sh
-SOLID_BUILD_DIR=_build/rack_tests machinome test rack_and_pinion --faceted
-SOLID_BUILD_DIR=_build/rack_tests machinome test rack_and_pinion --exact
-SOLID_BUILD_DIR=_build/rack_25 machinome test rack_and_pinion --exact --set module=2.5
-SOLID_BUILD_DIR=_build/rack_35 machinome test rack_and_pinion --exact --set module=3.5
+SOLID_BUILD_DIR=_build/rack_tests machinome test rack_and_pinion --mesh
+SOLID_BUILD_DIR=_build/rack_tests machinome test rack_and_pinion --brep
+SOLID_BUILD_DIR=_build/rack_25 machinome test rack_and_pinion --brep --set module=2.5
+SOLID_BUILD_DIR=_build/rack_35 machinome test rack_and_pinion --brep --set module=3.5
 python scripts/gallery.py check
 python scripts/gallery.py build
 python scripts/gallery.py export

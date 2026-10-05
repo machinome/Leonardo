@@ -100,8 +100,8 @@ Use the gallery's documented post-0.6 machinome environment and local
 viewer API 7. From the gallery root, with `../../.venv` activated:
 
 ```sh
-SOLID_BUILD_DIR=_build/pulley_tests machinome test pulley_block --faceted
-SOLID_BUILD_DIR=_build/pulley_exact machinome test pulley_block --exact
+SOLID_BUILD_DIR=_build/pulley_tests machinome test pulley_block --mesh
+SOLID_BUILD_DIR=_build/pulley_exact machinome test pulley_block --brep
 python scripts/gallery.py build pulley_block
 python scripts/gallery.py export pulley_block
 python models/pulley_block/scripts/check_browser.py

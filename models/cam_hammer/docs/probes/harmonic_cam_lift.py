@@ -3,7 +3,7 @@
 import math
 
 from machinome.core.expressions import parse, render
-from machinome.scad_expression import get_animation_time
+from machinome.expression_graph import get_animation_time
 
 from models.cam_hammer.kinematics import cam_outline, lift_envelope
 from models.cam_hammer.model import CamHammer

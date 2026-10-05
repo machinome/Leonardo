@@ -83,8 +83,8 @@ From the gallery repository root, using its documented development environment:
 ```sh
 source ../../.venv/bin/activate
 machinome build swivel_crane
-machinome test swivel_crane --faceted
-machinome test swivel_crane --exact
+machinome test swivel_crane --mesh
+machinome test swivel_crane --brep
 python scripts/gallery.py export swivel_crane
 python models/swivel_crane/scripts/check_browser.py
 python -m http.server 8769 --bind 127.0.0.1

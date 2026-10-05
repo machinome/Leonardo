@@ -74,10 +74,10 @@ holding torque or stable contact under load.
 Commands from the gallery root, using the workspace environment:
 
 ```sh
-machinome test hydraulic_sawmill --faceted
-machinome test hydraulic_sawmill --exact
-machinome test hydraulic_sawmill --set kerf=2 --exact
-machinome test hydraulic_sawmill --set kerf=5 --exact
+machinome test hydraulic_sawmill --mesh
+machinome test hydraulic_sawmill --brep
+machinome test hydraulic_sawmill --set kerf=2 --brep
+machinome test hydraulic_sawmill --set kerf=5 --brep
 python models/hydraulic_sawmill/scripts/readouts.py --check
 python scripts/gallery.py check
 ```

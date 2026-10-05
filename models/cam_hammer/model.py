@@ -4,7 +4,9 @@ drop."""
 # Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
 import cadquery as cq
 
-from machinome.node import AssemblyNode, CadQueryNode, FusionNode
+from machinome.node.assembly import AssemblyNode
+from machinome.node.cadquery import CadQueryNode
+from machinome.node.fusion import FusionNode
 from machinome.parameters import Angle
 from machinome.motion.joints import Revolute
 from machinome.motion.ports import RotationalPort

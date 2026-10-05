@@ -11,7 +11,9 @@ import math
 
 import cadquery as cq
 from molejo import Shape, Circle, Line, Arc, P
-from machinome.node import AssemblyNode, CadQueryNode, MolejoNode
+from machinome.node.assembly import AssemblyNode
+from machinome.node.cadquery import CadQueryNode
+from machinome.node.molejo import MolejoNode
 from machinome.parameters import Scalar, Length
 from machinome.motion.joints import Revolute, Prismatic
 from machinome.motion.ports import TranslationalPort

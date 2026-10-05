@@ -5,7 +5,9 @@ import math
 
 import cadquery as cq
 from molejo import Shape, Polygon, Line, Wrap
-from machinome.node import AssemblyNode, CadQueryNode, MolejoNode
+from machinome.node.assembly import AssemblyNode
+from machinome.node.cadquery import CadQueryNode
+from machinome.node.molejo import MolejoNode
 from machinome.parameters import Flag
 from machinome.motion.joints import Revolute, Prismatic, Free
 from machinome.motion.ports import RotationalPort, TranslationalPort

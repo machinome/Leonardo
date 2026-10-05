@@ -156,8 +156,8 @@ for phase in (0, 90, 180):
 Activate the documented environment and run from the gallery root:
 
 ```sh
-SOLID_BUILD_DIR=_build/pulley_tests machinome test pulley_block --faceted
-SOLID_BUILD_DIR=_build/pulley_exact machinome test pulley_block --exact
+SOLID_BUILD_DIR=_build/pulley_tests machinome test pulley_block --mesh
+SOLID_BUILD_DIR=_build/pulley_exact machinome test pulley_block --brep
 python scripts/gallery.py check
 python scripts/gallery.py build
 python scripts/gallery.py export

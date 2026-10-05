@@ -174,12 +174,12 @@ use their own `_build/loom-gallery-regression-<model>` directories.
 Reproduction commands, from the gallery root with the workspace environment:
 
 ```sh
-SOLID_BUILD_DIR=_build/loom-reed-fix machinome test automatic_weaving_loom --faceted
-SOLID_BUILD_DIR=_build/loom-reed-16 machinome test automatic_weaving_loom --set shed_lift=16 --faceted
-SOLID_BUILD_DIR=_build/loom-reed-20 machinome test automatic_weaving_loom --set shed_lift=20 --faceted
-SOLID_BUILD_DIR=_build/loom-reed-fix machinome test automatic_weaving_loom --exact
-SOLID_BUILD_DIR=_build/loom-reed-16 machinome test automatic_weaving_loom --set shed_lift=16 --exact
-SOLID_BUILD_DIR=_build/loom-reed-20 machinome test automatic_weaving_loom --set shed_lift=20 --exact
+SOLID_BUILD_DIR=_build/loom-reed-fix machinome test automatic_weaving_loom --mesh
+SOLID_BUILD_DIR=_build/loom-reed-16 machinome test automatic_weaving_loom --set shed_lift=16 --mesh
+SOLID_BUILD_DIR=_build/loom-reed-20 machinome test automatic_weaving_loom --set shed_lift=20 --mesh
+SOLID_BUILD_DIR=_build/loom-reed-fix machinome test automatic_weaving_loom --brep
+SOLID_BUILD_DIR=_build/loom-reed-16 machinome test automatic_weaving_loom --set shed_lift=16 --brep
+SOLID_BUILD_DIR=_build/loom-reed-20 machinome test automatic_weaving_loom --set shed_lift=20 --brep
 SOLID_BUILD_DIR=_build/loom-reed-delivery machinome build automatic_weaving_loom
 python scripts/gallery.py export automatic_weaving_loom
 python scripts/gallery.py check
@@ -188,7 +188,7 @@ python models/automatic_weaving_loom/scripts/check_studio_time.py --base-url htt
 ```
 
 Each fixture is checked with `machinome test models/automatic_weaving_loom/<fixture>.py
---exact` (and `--faceted` during development), where `<fixture>` is `timing`,
+--brep` (and `--mesh` during development), where `<fixture>` is `timing`,
 `winding`, `head_bench`, `grip_bench` or `cord_bench`.
 
 Every configuration has a separate build directory. Do not publish a build

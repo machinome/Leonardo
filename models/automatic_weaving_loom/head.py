@@ -14,7 +14,10 @@ details.
 # Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
 import cadquery as cq
 from molejo import Shape, Polygon, Spline, P
-from machinome.node import AssemblyNode, CadQueryNode, FusionNode, MolejoNode
+from machinome.node.assembly import AssemblyNode
+from machinome.node.cadquery import CadQueryNode
+from machinome.node.fusion import FusionNode
+from machinome.node.molejo import MolejoNode
 from machinome.parameters import Length, Scalar, Count
 from machinome.motion.joints import Revolute, Prismatic
 from machinome.motion.ports import RotationalPort, TranslationalPort

@@ -82,10 +82,10 @@ motion API and separate viewer, not solely published machinome 0.6.0.
 
 ```sh
 machinome build cam_hammer
-SOLID_BUILD_DIR=_build/cam_hammer_tests machinome test cam_hammer --faceted
-SOLID_BUILD_DIR=_build/cam_hammer_tests machinome test cam_hammer --exact
-SOLID_BUILD_DIR=_build/cam_hammer_16 machinome test cam_hammer --exact --set lift_angle=16
-SOLID_BUILD_DIR=_build/cam_hammer_20 machinome test cam_hammer --exact --set lift_angle=20
+SOLID_BUILD_DIR=_build/cam_hammer_tests machinome test cam_hammer --mesh
+SOLID_BUILD_DIR=_build/cam_hammer_tests machinome test cam_hammer --brep
+SOLID_BUILD_DIR=_build/cam_hammer_16 machinome test cam_hammer --brep --set lift_angle=16
+SOLID_BUILD_DIR=_build/cam_hammer_20 machinome test cam_hammer --brep --set lift_angle=20
 python scripts/gallery.py export cam_hammer
 python models/cam_hammer/scripts/check_browser.py
 python -m http.server 8769 --bind 127.0.0.1

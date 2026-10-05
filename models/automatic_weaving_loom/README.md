@@ -130,15 +130,15 @@ not additional gallery models.
 ## Verification and limits
 
 ```sh
-machinome test automatic_weaving_loom --faceted
-machinome test automatic_weaving_loom --exact
-machinome test automatic_weaving_loom --exact --set shed_lift=16
-machinome test automatic_weaving_loom --exact --set shed_lift=20
-machinome test models/automatic_weaving_loom/timing.py --exact
-machinome test models/automatic_weaving_loom/winding.py --exact
-machinome test models/automatic_weaving_loom/head_bench.py --exact
-machinome test models/automatic_weaving_loom/grip_bench.py --exact
-machinome test models/automatic_weaving_loom/cord_bench.py --exact
+machinome test automatic_weaving_loom --mesh
+machinome test automatic_weaving_loom --brep
+machinome test automatic_weaving_loom --brep --set shed_lift=16
+machinome test automatic_weaving_loom --brep --set shed_lift=20
+machinome test models/automatic_weaving_loom/timing.py --brep
+machinome test models/automatic_weaving_loom/winding.py --brep
+machinome test models/automatic_weaving_loom/head_bench.py --brep
+machinome test models/automatic_weaving_loom/grip_bench.py --brep
+machinome test models/automatic_weaving_loom/cord_bench.py --brep
 python models/automatic_weaving_loom/scripts/inspect_demo.py
 ```
 

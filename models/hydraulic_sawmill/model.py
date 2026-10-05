@@ -4,7 +4,8 @@
 from math import pi
 
 from machinome.math import sin, cos
-from machinome.node import AssemblyNode, Frame
+from machinome.node.assembly import AssemblyNode
+from machinome.node.frames import Frame
 from machinome.parameters import Length, Angle
 from machinome.motion.joints import Prismatic, Revolute
 from machinome.motion.ports import RotationalPort, Time
