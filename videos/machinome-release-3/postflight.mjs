@@ -35,6 +35,8 @@ for(let i=0;i<raw.length;i++){
 execFileSync('ffmpeg',['-v','error','-y','-i',resolve(build,'rehearsal.srt'),resolve(build,'rehearsal.vtt')]);
 const directory=resolve(build,'encoded');await mkdir(directory,{recursive:true});
 const inspected=await json('inspection/report.json');
+try{inspected.samples.push(...(await json('inspection/ending-report.json')).samples);}
+catch(error){if(error.code!=='ENOENT')throw error;}
 const indices=[...new Set(inspected.samples.map(s=>Math.round(s.time*24)))].sort((a,b)=>a-b);
 const filter=indices.map(i=>`eq(n,${i})`).join('+');
 execFileSync('ffmpeg',['-v','error','-y','-i',mp4,'-vf',`select='${filter}'`,'-fps_mode','vfr',resolve(directory,'frame-%03d.png')]);
@@ -51,4 +53,4 @@ const report={status:'decoded; visual and listening reviews separate',outputSha2
   audio:{codec:audio.codec_name,sampleRate:audio.sample_rate,channels:audio.channels,sourceSha256:take.sha256,offset:3},
   captions:captions.length,frames};
 await writeFile(resolve(directory,'index.json'),JSON.stringify(report,null,2)+'\n');
-console.log(`Encoded 1080p/24, ${video.nb_frames} frames, one Jessica take at +3 s, ${captions.length} shifted captions; ${frames.length} MP4-decoded review frames.`);
+console.log(`Encoded 1080p/24, ${video.nb_frames} frames, cached Jessica narration at +3 s, ${captions.length} shifted captions; ${frames.length} MP4-decoded review frames.`);

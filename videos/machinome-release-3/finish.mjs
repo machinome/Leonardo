@@ -4,6 +4,7 @@ import assert from 'node:assert/strict';
 import {readFile,writeFile} from 'node:fs/promises';
 import {resolve,dirname} from 'node:path';
 import {fileURLToPath,pathToFileURL} from 'node:url';
+import {wheelAngle} from './ending-motion.mjs';
 const base=dirname(fileURLToPath(import.meta.url));
 assert.ok(process.argv[2],'Pass Videomaker checkout.');
 const tool=resolve(process.argv[2]);
@@ -90,10 +91,33 @@ chapter.elements['returned-mill']=chapter.elements.returnedMill;
 delete chapter.elements.returnedMill;
 two.places.stage='returned-mill';
 for(const cue of two.cues)for(const action of cue.actions)action.element='returned-mill';
+// The graphic remains a live layer over the real wheel during the handoff.
+// A continued outgoing custom action would clamp progress at the old cut.
+// This incoming instance instead carries the same absolute drive elapsed time.
+const open=chapter.shots.find(s=>s.id==='open-source');
+const openTimed=measured.chapters[0].shots.find(s=>s.id==='open-source');
+const driveStart=openTimed.start+openTimed.cues.find(c=>c.actions.some(a=>a.action==='drive')).at;
+const returned=chapter.shots.find(s=>s.id==='wheel-returns');
+const returnTimed=measured.chapters[0].shots.find(s=>s.id==='wheel-returns');
+const handoffDuration=returned.transition.duration;
+const offset=returnTimed.start-driveStart;
+chapter.elements['handoff-ecosystem']=structuredClone(chapter.elements.ecosystem);
+Object.assign(chapter.elements['handoff-ecosystem'].props,{timeOffset:offset,fadeDuration:handoffDuration});
+returned.places.graphic='handoff-ecosystem';
+delete returned.transition;
+returned.cues=[{at:0,until:returned.until,actions:[
+  {element:'handoff-ecosystem',action:'drive',params:{}},
+  ...chapter.elements.ecosystem.props.names.map(name=>({element:'handoff-ecosystem',action:'reveal',params:{name}})),
+]}];
+const duration=returnTimed.end-returnTimed.start,frames=Math.round(duration*doc.output.fps);
+returned.model={keys:Array.from({length:frames+1},(_,i)=>{
+  const at=i/doc.output.fps;
+  return {at:i===frames?returned.until:at,seconds:500+wheelAngle(offset+at,chapter.elements.ecosystem.props)/90};
+})};
 await writeFile(file,JSON.stringify(doc,null,2)+'\n');
 const {captionsFromAlignment,srt}=await import(pathToFileURL(resolve(tool,'src/timeline.mjs')));
 await writeFile(resolve(base,'_build/raw-narration.wav'),await readFile(take.file));
 const rawCaptions=captionsFromAlignment(take.alignment);
 await writeFile(resolve(base,'_build/raw-captions.json'),JSON.stringify(rawCaptions,null,2)+'\n');
 await writeFile(resolve(base,'_build/raw-captions.srt'),srt(rawCaptions));
-console.log('One Jessica take; 3-second silent start; continuous orbit; word blinks; 13 test poses.');
+console.log('Cached Jessica performance with one name pickup; continuous orbit; word blinks; 13 test poses; phase-locked accelerating wheel handoff.');

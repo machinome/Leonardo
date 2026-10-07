@@ -54,6 +54,7 @@ export async function main(args) {
   const {captionsFromAlignment, srt} = await import(pathToFileURL(resolve(tool, 'src/timeline.mjs')));
   const input = JSON.parse(await readFile(resolve(build, 'narration-input.json'), 'utf8'));
   const text = verifyInput(input);
+  assert.ok(!text.includes('Manifold 3D'), 'This revision preserves the approved take with a name pickup. Use pickup-manifold.mjs; do not regenerate the full narration.');
   const dictionary = JSON.parse(await readFile(resolve(base, input.pronunciation), 'utf8'));
   assert.equal(dictionary.rules[0].phoneme, 'məˈʃiːnoʊm');
   const film = {...input, paths: {build}};

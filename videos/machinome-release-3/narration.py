@@ -1,4 +1,4 @@
-"""The third cut's complete script, performed as one Jessica narration."""
+"""The complete script: approved Jessica narration with one name pickup."""
 
 # Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
 
@@ -8,7 +8,7 @@ from pathlib import Path
 from machinome_movie import Narration
 from scene_source import scene_narration
 
-# Paragraphs organize the source, not synthesis requests or audio cuts.
+# Paragraphs organize the source. pickup-manifold.mjs reuses the approved audio.
 OPENING = (
     "The wheel makes revolutions, and humans give it a purpose. "
     "Five centuries ago, Leonardo da Vinci designed a water-powered "
@@ -51,7 +51,7 @@ FILM_SOURCE = (
 )
 THIS_SCENE = scene_narration("ThisScene")
 OPEN_SOURCE = (
-    "And the best part is: this is all open source! Three.js, OpenSCAD, "
+    "And the best part is: this is all open source! Manifold 3D, OpenSCAD, "
     "SolidPython, OCCT, CadQuery, Build123d, FreeCAD, JSCAD, OpenSpec, "
     "and so many others..."
 )
@@ -110,7 +110,7 @@ BEATS = (
     ("film", "Film source", "This video's source code is in Python too"),
     ("mirror", "This exact scene", "And here's the code of this exact"),
     ("open", "Open source", "And the best part is: this is all open source"),
-    ("threejs", "Three.js", "Three.js"),
+    ("manifold3d", "manifold3d", "Manifold 3D"),
     ("openscad", "OpenSCAD", "OpenSCAD"),
     ("solidpython", "SolidPython", "SolidPython"),
     ("occt", "OCCT", "OCCT"),

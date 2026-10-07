@@ -9,10 +9,10 @@ This is project-owned film production; it changes no mechanical model,
 framework, viewer or production-tool behavior.
 
 Keep the charcoal stage, three-second held/accelerating opening, mechanism
-lesson, complete film-source classes and closing question. Jessica performs
-the revised script in one new continuous take. The additional testing
-passage, Three.js and OpenSpec require new speech. The old take remains in
-cut 2. Generated speech is not described as listening-approved.
+lesson, complete film-source classes and closing question. Jessica performed
+the initial cut-3 script in one new continuous take, adding the testing
+passage and technology names. The pilot subsequently approved that cut and
+requested the bounded refinement below. The old take remains in cut 2.
 
 The opening camera follows one parametric orbit from the wheel-axis view
 to the existing rear view. One ease governs its entire path; dense linear
@@ -39,14 +39,25 @@ that `@testing_steps(13, end=4)` repeats the test at thirteen instants across
 the first four seconds. Hold those sampled poses during the explanation.
 Say explicitly that sampled checks do not prove every intervening instant.
 
-Keep the full `CrankStroke` and `ThisScene` classes. Three.js arrives when
-spoken, followed clockwise by the existing CAD names. OpenSpec is spoken
+Keep the full `CrankStroke` and `ThisScene` classes. `manifold3d` arrives when
+“Manifold 3D” is spoken, followed clockwise by the existing CAD names. OpenSpec is spoken
 before “and so many others”; it enters from the right on a level watercourse,
 travels just above the blue line, hits the wheel's lower edge, and continues
 left offscreen. The wheel starts accelerating when OpenSpec reaches it.
 The pilot's follow-up explicitly wants contact and permits overlap: the
 text baseline is 820 on the 1080-high stage, above the line at 835, replacing
-the initial cut's separated baseline at 970. Narration and timing stay fixed.
+the initial cut's separated baseline at 970.
+
+The next pilot refinement replaces Three.js with manifold3d so the eight
+spokes all name model-layer technologies. Keep the approved Jessica take
+except for this name pickup, retaining the overall timing. OpenSpec enters
+slowly enough to read, then accelerates toward and beyond the contact at
+two seconds. The graphic wheel and physical waterwheel share one accelerating
+angle function and matching spoke phase through the entire 1.25-second
+crossfade. The graphic must not freeze when the physical wheel appears.
+Use the approved orange symbol at the hub and orange wordmark at the end.
+Reuse verified cached frames and audio wherever possible; retain the
+preceding master and record exactly which segments changed.
 
 The operator description retains attribution and the actual production
 record. Sources and output remain local; publication is not part of this

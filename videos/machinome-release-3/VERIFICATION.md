@@ -6,7 +6,7 @@ Production date: 7 October 2026. The pilot commissioned cut 3 from
 `review-2.md`, chose Jessica, and removed the opening “AI content” label.
 The first two cuts, their narration and their exports remain unchanged.
 
-## Source and checks
+## Initial cut: source and checks
 
 The isolated model export records Leonardo source
 `94a8562cc70e96de0cad1b85a4a7c1e092d2ed5c`.
@@ -131,12 +131,73 @@ inspected: the text travels above the line, overlaps the lower wheel edge,
 then continues left while the wheel turns. The player again passes all
 14 seeks, 67 subtitle cues, links, range delivery and both viewport checks.
 
+## Model-layer ending refinement
+
+The pilot next requested manifold3d instead of Three.js, slower then
+accelerating OpenSpec, uninterrupted accelerating rotation with all eight
+spokes aligned through the wheel handoff, and orange identity assets.
+These changes remain in cut 3. No mechanical source, test, framework,
+viewer or Videomaker source was changed.
+
+The current master is 21,950,624 bytes, with SHA-256
+`9d1545e1d7142eb4b543be508fc91bcff748ce0782ad24d7982f65a8b33f2fa2`.
+It retains 4,364 frames, 1920×1080, 24 fps and 181.833333 seconds.
+The stage bundle is
+`60442b4b17e38d40fc094a26d9de83f204d54eae7656c720ff717196c6c2320b`;
+the CSS hash is unchanged.
+
+`render-refinement.mjs` verifies all 4,364 approved source PNG checksums
+and every unchanged prefix frame request. It reuses the first 3,566 frames
+(81.71%) and captures only the final 798, starting at 148.583333 seconds.
+Nine fresh prefix samples match the approved PNGs byte for byte. The prior
+MP4, manifest, narration and alignment remain under
+`_build/model-layer-refinement/`. The current manifest records the exact
+source chain and mixed capture origins; it does not forge native cache
+hits. The assembled film is encoded from these lossless frames.
+
+One 35-character Jessica / Eleven v3 request supplied the context
+“Manifold 3D, OpenSCAD, SolidPython.” Only the first name is used; OpenSCAD,
+SolidPython and the rest retain the approved performance. The splice
+occupies raw seconds 149.500–151.335 (film seconds 152.500–154.335).
+The 1.320-second pickup, 0.128-second leading pause and 0.387-second
+trailing pause fill the original 1.835-second slot exactly. Four-ms edge
+ramps in the pauses avoid abrupt joins. Prefix and suffix PCM checksums
+prove all other source samples unchanged. No speech was time-stretched;
+the duration delta is zero. The final AAC track is encoded from the cached
+edited take, not copied from the previous master.
+Edited narration SHA-256:
+`5ee5bcd3d5f03f8ca02f0dbd0667f964c65f42d763da1ec6819cf30910ccea50`.
+It remains 176.48 seconds with 67 captions and 33 navigation beats.
+
+The old handoff froze because outgoing custom-action progress clamped at
+the shot boundary. The incoming shot now carries a live graphic overlay
+with the same elapsed drive time. Its opaque charcoal background fades
+over the physical wheel for 1.25 seconds. The graphic and physical wheel
+share the same accelerating angle function, with physical poses sampled
+at every output frame. All 31 frame-grid phase checks across the handoff
+pass within 0.0000001 degree. OpenSpec's horizontal travel accelerates;
+its two-second arrival is at x=960, baseline 820, above the waterline at 835.
+The recorded browser observations from those 31 captured frames also show
+strictly increasing angular speed and monotonically falling graphic opacity.
+
+The native check passes. Fourteen fresh ending samples pass exact pixel
+replay, including approach, contact, six handoff positions and the closing
+wordmark. Postflight passes against the actual MP4, checks all captions and
+audio provenance, and decodes 56 review frames. Full-size decoded frames
+confirm the name replacement, orange hub, readable approach, wheel contact,
+matching spoke positions during the dissolve and orange closing wordmark.
+The player passes all 14 seeks, 67 subtitle cues, range delivery, links and
+both viewport checks. The earlier 43 exact B-rep tests remain applicable;
+no mechanical code changed and those tests were not rerun for this edit.
+The native decoded-video review pack was regenerated for the current master
+under `_build/review-packs/`.
+
 ## Review limits
 
-No independent listening review is claimed for the new performance.
-Text, character alignment, signal and playback checks do not replace the
-pilot's listening judgment. The earlier Jessica take's approval belongs to
-cut 2, not this new recording.
+The pilot approved the preceding cut-3 performance. No independent
+listening approval is claimed for the new single-name pickup. Text,
+character alignment, signal and playback checks do not replace the
+pilot's listening judgment.
 
 The Commons image is recorded with the source's public-domain statement.
 The museum photograph and previous manuscript scan are absent. The gallery

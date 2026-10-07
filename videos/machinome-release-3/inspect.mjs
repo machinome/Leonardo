@@ -16,7 +16,8 @@ assert.equal(film.chapters.length,1);
 assert.equal(film.chapters[0].speechOffset,3);
 assert.ok(!JSON.stringify(film.chapters).includes('AI content'));
 assert.ok(!JSON.stringify(film.stills).includes('museum'));
-assert.ok(film.chapters[0].narration.includes('Three.js'));
+assert.ok(film.chapters[0].narration.includes('Manifold 3D'));
+assert.ok(!film.chapters[0].narration.includes('Three.js'));
 assert.ok(film.chapters[0].narration.includes('OpenSpec, and so many others'));
 const orbit=shots.find(s=>s.id==='ancestor');
 const cameraCues=orbit.cues.filter(c=>c.actions.some(a=>a.action==='move'));
@@ -55,12 +56,16 @@ for(const [i,cue]of testing.cues.entries())if(cue.actions.some(a=>a.action==='bl
   cases.push({id:`test-blink-${i}`,time:testing.start+(cue.at+cue.until)/2,
     token:cue.actions.find(a=>a.action==='blink').params.token});
 const open=shots.find(s=>s.id==='open-source'),drive=open.cues.find(c=>c.actions.some(a=>a.action==='drive'));
-for(const d of [.15,.75,1.5,2.5,3.2])cases.push({id:`openspec-${d}`,time:open.start+drive.at+d});
+for(const d of [.15,.75,2,2.5,3.2])cases.push({id:`openspec-${d}`,time:open.start+drive.at+d});
+const returned=shots.find(s=>s.id==='wheel-returns');
+for(const d of [0,.25,.625,1,1.25,1.5])cases.push({id:`handoff-${d}`,time:returned.start+d});
 const results=await browserSession(film,viewer,1280,[],async({page,pose})=>{
   const samples=[];
-  for(const item of cases.filter(item=>!process.argv[4]||item.id.includes(process.argv[4]))){
+  for(const item of cases.filter(item=>!process.argv[4]||(process.argv[4]==='ending'
+    ? /^(open-source|openspec-|handoff-|wheel-returns|invitation)/.test(item.id)
+    : item.id.includes(process.argv[4])))){
     const t=Math.min(film.output.durationSeconds-1/fps,Math.round(item.time*fps)/fps);
-    await pose(t);
+    const posed=await pose(t);
     const report=await page.evaluate(()=>({
       blinks:[...document.querySelectorAll('.blink-token')].map(e=>e.textContent),
       texts:[...document.querySelectorAll('.listing,.listing pre,.wordmark,.question')].map(e=>{
@@ -82,14 +87,15 @@ const results=await browserSession(film,viewer,1280,[],async({page,pose})=>{
     }
     for(const b of report.incoming){
       assert.equal(b.y,'820');assert.equal(b.aboveWater,true,'OpenSpec must travel above the blue line');
-      if(item.id==='openspec-1.5')assert.equal(b.hitsWheel,true,'OpenSpec must contact the wheel');
+      if(item.id==='openspec-2')assert.equal(b.hitsWheel,true,'OpenSpec must contact the wheel');
     }
     const first=await page.screenshot();await pose(.8);await pose(t);
     assert.ok(first.equals(await page.screenshot()),`${item.id}: replay differs`);
     await writeFile(resolve(directory,item.id+'.png'),first);
-    samples.push({...item,time:t,sha256:hash(first),report});
+    samples.push({...item,time:t,sha256:hash(first),report,
+      motion:Object.fromEntries(Object.entries(posed.observed.elements).filter(([,e])=>e.rotation!==undefined))});
   }
   return {samples};
 });
-await writeFile(resolve(directory,process.argv[4]?'partial-report.json':'report.json'),JSON.stringify({status:'passed; visual inspection separate',...results},null,2)+'\n');
+await writeFile(resolve(directory,process.argv[4]==='ending'?'ending-report.json':process.argv[4]?'partial-report.json':'report.json'),JSON.stringify({status:'passed; visual inspection separate',...results},null,2)+'\n');
 console.log(`${results.samples.length} replay-identical samples; one orbit; isolated source and part highlights; horizontal OpenSpec path.`);

@@ -12,7 +12,7 @@ from narration import AUDIO, lines
 from scene_source import excerpt, model_excerpt
 
 HERE = Path(__file__).resolve().parent
-BRAND = HERE.parent / 'machinome-release-1/assets'
+BRAND = HERE / 'assets'
 RETURN = 'The wheel makes revolutions, and humans build'
 
 
@@ -150,8 +150,8 @@ class ThisScene:
 
 
 def technology_cues(element):
-    return [Cue(lines.spoken(name), element.reveal(name=name), until=lines.spoken(RETURN))
-            for name in ['Three.js', 'OpenSCAD', 'SolidPython', 'OCCT', 'CadQuery', 'Build123d', 'FreeCAD', 'JSCAD']]
+    return [Cue(lines.spoken('Manifold 3D' if name == 'manifold3d' else name), element.reveal(name=name), until=lines.spoken(RETURN))
+            for name in ['manifold3d', 'OpenSCAD', 'SolidPython', 'OCCT', 'CadQuery', 'Build123d', 'FreeCAD', 'JSCAD']]
 
 
 def relation_blinks(element):
@@ -184,11 +184,11 @@ class Continuous(Chapter):
     film_code = Listing(**excerpt('CrankStroke'))
     mirror_code = ThisScene.code
     ecosystem = Constellation(
-        names=['Three.js', 'OpenSCAD', 'SolidPython', 'OCCT', 'CadQuery', 'Build123d', 'FreeCAD', 'JSCAD'],
-        driver='OpenSpec', mark=(BRAND / 'mark-white.svg').read_text(),
-        title='OPEN SOURCE', arrival=1.5, acceleration=1.5, rate=26.0,
+        names=['manifold3d', 'OpenSCAD', 'SolidPython', 'OCCT', 'CadQuery', 'Build123d', 'FreeCAD', 'JSCAD'],
+        driver='OpenSpec', mark=(BRAND / 'mark-orange.svg').read_text(),
+        title='OPEN SOURCE', arrival=2.0, angularAcceleration=26.0, entrySpeedFraction=0.12, timeOffset=0.0, fadeDuration=0.0,
     )
-    signature = Signature(svg=(BRAND / 'wordmark-white.svg').read_text(),
+    signature = Signature(svg=(BRAND / 'wordmark-orange.svg').read_text(),
                           tagline='Source code for machines.',
                           question='What do you want to build next?', compact=False)
 

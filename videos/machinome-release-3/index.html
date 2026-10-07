@@ -20,12 +20,12 @@ button:hover,button:focus-visible{border-color:#e9b778;color:#e9b778}a{color:#e9
 </video>
 <nav aria-label="Review moments"></nav>
 <div class="links"><a href="_build/rehearsal.mp4" download>Download MP4</a><a href="_build/rehearsal.srt" download>Subtitles</a><a href="movie.py">Python film source</a><a href="DIRECTION.md">Visual direction</a><a href="description.md">Description draft</a><a href="_build/raw-narration.wav">Raw narration</a></div>
-<footer>Local third-cut review. One new continuous Jessica performance, with a three-second lead-in and optional subtitles.</footer>
+<footer>Local third-cut review. Jessica narration with a short Manifold 3D pickup, a three-second lead-in and optional subtitles.</footer>
 </main>
 <script type="module">
 const video=document.querySelector('video');
 const manifest=await fetch('_build/narration-manifest.json').then(r=>r.json());
-const wanted=new Set(['ancestor','mechanism','research','import','relation','testing','steps','film','mirror','open','threejs','openspec','purpose']);
+const wanted=new Set(['ancestor','mechanism','research','import','relation','testing','steps','film','mirror','open','manifold3d','openspec','purpose']);
 for(const beat of [{id:'start',label:'The wheel',start:-3},...manifest.beats.filter(b=>wanted.has(b.id))]){
   const button=document.createElement('button');button.textContent=beat.label;
   button.dataset.time=String(beat.start+3);

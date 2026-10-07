@@ -1,6 +1,7 @@
 // Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
 import React from 'react';
 import {Slot, defineElement, defineSet, useReport} from 'videomaker/stage';
+import {wheelAngle,driverX} from './ending-motion.mjs';
 import './stage.css';
 import './_build/fonts.css';
 
@@ -54,13 +55,14 @@ function Signature({state}){
   </div>;
 }
 function Constellation({state}){
-  const {names,mark,title,driver,arrival,acceleration,rate}=state.props;
+  const {names,mark,title,driver,timeOffset=0,fadeDuration=0}=state.props;
   const reveal=name=>state.actions.find(a=>a.action==='reveal'&&a.params.name===name);
   const drive=state.actions.find(a=>a.action==='drive');
-  const dt=Math.max(0,elapsed(drive)-arrival);
-  const rotation=dt<acceleration?rate*dt*dt/(2*acceleration):rate*(dt-acceleration/2);
-  useReport({rotation,visible:names.filter(n=>reveal(n)),driver});
-  return <div className="constellation">
+  const driverElapsed=elapsed(drive)+timeOffset;
+  const rotation=wheelAngle(driverElapsed,state.props),x=driverX(driverElapsed,state.props);
+  const opacity=fadeDuration?1-smooth(elapsed(drive)/fadeDuration):1;
+  useReport({rotation,driverElapsed,driverX:x,opacity,visible:names.filter(n=>reveal(n)),driver});
+  return <div className="constellation" style={fadeDuration?{background:'#101419',opacity}:undefined}>
     <div className="graph-title">{title}</div>
     <svg viewBox="0 0 1920 1080" className="spokes">
       <path d="M1920 835 H0" fill="none" stroke="#79a7b9" strokeWidth="2" opacity={drive?.45:0}/>
@@ -68,7 +70,7 @@ function Constellation({state}){
         <circle cx="960" cy="540" r="275" fill="none" stroke="#8c9ba8" strokeWidth="1" opacity=".22"/>
         {names.map((name,i)=>{
           const a=-Math.PI/2+i*Math.PI/4, r=reveal(name);
-          const opacity=r?smooth(elapsed(r)/.35):0;
+          const opacity=timeOffset?1:r?smooth(elapsed(r)/.35):0;
           const x=960+Math.cos(a)*275,y=540+Math.sin(a)*275;
           return <g key={name} opacity={opacity}>
             <line x1={960+Math.cos(a)*110} y1={540+Math.sin(a)*110} x2={x} y2={y} stroke="#e9b778" strokeWidth="2"/>
@@ -80,7 +82,7 @@ function Constellation({state}){
         })}
       </g>
       {drive&&<text className="incoming" textAnchor="middle"
-        x={1830-870*elapsed(drive)/arrival} y={820}>{driver}</text>}
+        x={x} y={820}>{driver}</text>}
     </svg>
     <div className="hub-mark" dangerouslySetInnerHTML={{__html:mark}}/>
   </div>;
