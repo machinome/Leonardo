@@ -32,8 +32,49 @@ No earlier source frames are relabelled as cache hits.
 ## Validation status
 
 Native document, source-pin and layout check passes. The drawing stays
-within its declared 1.5× enlargement allowance. Browser, final encode and
-player evidence will be recorded after their checks complete.
+within its declared 1.5× enlargement allowance. Native preview passes
+131 sample images and 302 posed frames, including 19 physical-highlight
+proofs, 10 transition/fade proofs and exact replay. The project inspection
+passes 63 replay-identical samples and checks every output frame for
+non-accumulating source and part highlights. Paired views share camera and
+model state; the initial analytic orbit remains continuous.
+
+All eight CAD spokes are present. The seven supporting names use a common
+accelerating horizontal path, with three-second first contact above the blue
+line. Every name has a contact sample. Every output frame across the
+1.25-second handoff matches the physical and graphic angle within 1e-7
+degree, with strictly increasing angular speed. Full-size browser samples
+were inspected for source spacing, all eight technologies, stream contact,
+half-faded matching spokes and the complete orange closing card with URL.
+
+The fresh raw audio decodes completely: mean −20.0 dBFS, peak −0.4 dBFS.
+The raw pause is measured at 169.696–170.871 seconds, approximately
+172.696–173.871 in the film. The final question starts at 184.622 seconds
+in the film. See `_build/audio-evidence.json` for alignment and signal evidence.
+
+Stage JavaScript SHA-256:
+`c9b04d3234c5c316cc617550ea77f301dac7404f602e2265821ae10a0e843034`.
+Stage CSS SHA-256:
+`5331eab4b6820d2e5e5043df00393ffc0de62ebecca148db5ee7679a201884b6`.
+
+The full render completed from project head
+`c603a2a000910616cfdf6f1e7f8cc1ea47eb8d77`. Only unrelated pilot notes
+were untracked at capture start. The native capture recorded 4,537 fresh
+frames and retained its per-shot retry cache. The MP4 is 22,585,897 bytes,
+1920×1080 at 24 fps, with stereo AAC at 48 kHz. MP4 SHA-256:
+`9df27a344982571a1c3cf9140fc4147b797f185b4ac46b469dee9e17b55a67c4`.
+
+Postflight verifies the complete unedited narration source at +3 seconds,
+all 67 shifted caption cues, the frame count and encoded duration. All
+four MP4-decoded contact sheets were visually inspected, plus full-size
+test, half-dissolve and closing frames. Encoded audio decodes completely;
+mean −20.2 dBFS and peak −1.3 dBFS. This is not a listening review.
+
+The local player at http://127.0.0.1:8784/ passes all 15 navigation seeks,
+67 WebVTT cues, HTTP 206 byte ranges, source/download links, desktop and
+390-pixel layouts with no page errors or horizontal overflow. Both player
+screenshots were inspected. The review pack is retained under
+`_build/review-packs/beede77936f0-9df27a344982-82eebe54-f6bb-40de-9951-c114e08657d2`.
 
 Release-3's delivered MP4 remains SHA-256
 `9d1545e1d7142eb4b543be508fc91bcff748ce0782ad24d7982f65a8b33f2fa2`.

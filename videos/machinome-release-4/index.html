@@ -25,7 +25,7 @@ button:hover,button:focus-visible{border-color:#e9b778;color:#e9b778}a{color:#e9
 <script type="module">
 const video=document.querySelector('video');
 const manifest=await fetch('_build/narration-manifest.json').then(r=>r.json());
-const wanted=new Set(['ancestor','mechanism','research','import','relation','testing','steps','film','mirror','open','cad','stream','purpose']);
+const wanted=new Set(['ancestor','mechanism','research','import','relation','testing','steps','film','mirror','open','cad','stream','purpose','question']);
 for(const beat of [{id:'start',label:'The wheel',start:-3},...manifest.beats.filter(b=>wanted.has(b.id))]){
   const button=document.createElement('button');button.textContent=beat.label;
   button.dataset.time=String(beat.start+3);
