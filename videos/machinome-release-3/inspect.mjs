@@ -68,12 +68,11 @@ const results=await browserSession(film,viewer,1280,[],async({page,pose})=>{
           width:e.clientWidth,scroll:e.scrollWidth,digest:e.dataset.sourceSha256};
       }),
       incoming:[...document.querySelectorAll('.incoming')].map(e=>{
-        const b=e.getBoundingClientRect();
-        const overlaps=[...document.querySelectorAll('.tech-label')].some(label=>{
-          const r=label.getBoundingClientRect();
-          return b.left<r.right&&b.right>r.left&&b.top<r.bottom&&b.bottom>r.top;
-        });
-        return {text:e.textContent,x:e.getAttribute('x'),y:e.getAttribute('y'),overlaps};
+        const b=e.getBBox();
+        const dx=Math.max(b.x-960,0,960-b.x-b.width);
+        const dy=Math.max(b.y-540,0,540-b.y-b.height);
+        return {text:e.textContent,x:e.getAttribute('x'),y:e.getAttribute('y'),
+          aboveWater:b.y+b.height<835,hitsWheel:dx*dx+dy*dy<=275*275};
       }),
     }));
     if('token'in item)assert.deepEqual(report.blinks,item.token?[item.token]:[],item.id);
@@ -81,7 +80,10 @@ const results=await browserSession(film,viewer,1280,[],async({page,pose})=>{
       assert.ok(b.x>=-1&&b.y>=-1&&b.x+b.w<=1281&&b.y+b.h<=721,`${item.id}: text outside frame`);
       if(b.width)assert.ok(b.scroll<=b.width+1,`${item.id}: source overflow`);
     }
-    for(const b of report.incoming){assert.equal(b.y,'970');assert.equal(b.overlaps,false,'OpenSpec overlaps a wheel label');}
+    for(const b of report.incoming){
+      assert.equal(b.y,'820');assert.equal(b.aboveWater,true,'OpenSpec must travel above the blue line');
+      if(item.id==='openspec-1.5')assert.equal(b.hitsWheel,true,'OpenSpec must contact the wheel');
+    }
     const first=await page.screenshot();await pose(.8);await pose(t);
     assert.ok(first.equals(await page.screenshot()),`${item.id}: replay differs`);
     await writeFile(resolve(directory,item.id+'.png'),first);

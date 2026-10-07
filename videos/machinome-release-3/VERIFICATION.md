@@ -56,9 +56,9 @@ captured joints and full-pass checks. No mechanical source or test was
 changed. Command: `machinome test hydraulic_sawmill --brep`; full output:
 `_build/model-test.log`.
 
-## Delivered encode and player
+## Original full encode and player
 
-The full render completed successfully from production head
+The original full render completed successfully from production head
 `94de28345e50a2ec6f019037fd477815d9eaad7e`. The delivered local artifact is
 `_build/rehearsal.mp4`: 21,804,744 bytes, H.264, 1920×1080, 24 fps,
 4,364 frames, 181.833333 seconds. Its SHA-256 is
@@ -94,6 +94,42 @@ The recorded `releaseReady: false` is preserved: public URLs are unresolved,
 the model export records a dirty tree, and unrelated project notes and
 Videomaker working files existed at render time. These are not silently
 cleared or represented as clean-source publication evidence.
+
+## OpenSpec contact correction
+
+After reviewing the original cut, the pilot requested one correction in
+`machinome-release-3`: OpenSpec must travel above the blue line and hit the
+wheel, with overlap permitted. Only its baseline changes, from 970 to 820;
+the waterline stays at 835. The earlier no-overlap decision above is
+superseded. Five new browser samples pass exact replay, all stay above the
+line, and the arrival sample intersects the wheel's lower edge. The contact
+frame was inspected visually. Narration, captions, motion, timing and all
+other stage code remain unchanged.
+
+The partial production uses `patch-openspec.mjs`, scoped to this exact
+approved master and one-line source change. It verifies all 4,364 original
+PNG checksums, captures only frames 3914–4028 (163.083333–167.875 seconds),
+and reuses the other 4,249 lossless source frames. Nine fresh browser samples
+outside that interval, including both boundary frames, match the originals
+byte for byte. The existing AAC track is copied, not synthesized or
+re-encoded. The original MP4 and manifest remain recoverable under
+`_build/openspec-contact-patch/`; the new manifest explicitly identifies the
+mixed capture origins rather than pretending that a native cache hit occurred.
+
+The corrected master is 21,818,327 bytes, with SHA-256
+`2be35f56bb2993b7c0d0bd2530325f56699f33e419ac3b9b5a5628553103a1c6`.
+It keeps 4,364 frames, 1920×1080, 24 fps and 181.833333 seconds. Both versions'
+copied AAC payload hashes are
+`853734d485c12d14d466be84182b2faed779693c43486e61f414a32ed0368065`.
+The corrected stage bundle is
+`e1b9e8d9ce2c96fbb42b40c1615433f578782112752841918fbbe4db30acc703`;
+CSS and other served assets match the original exactly.
+
+Postflight passes again, decoding 49 samples from the corrected MP4.
+Full-size decoded frames before contact, at contact and after contact were
+inspected: the text travels above the line, overlaps the lower wheel edge,
+then continues left while the wheel turns. The player again passes all
+14 seeks, 67 subtitle cues, links, range delivery and both viewport checks.
 
 ## Review limits
 

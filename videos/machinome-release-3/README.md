@@ -25,8 +25,9 @@ The opening orbit is one sampled parametric curve. Code blinks use the
 measured start and end of each word and never highlight `water_drive`.
 The new scene shows the existing blade-clearance test and thirteen sampled
 poses. The requested Commons drawing replaces both prior historical-image
-shots. OpenSpec crosses the frame horizontally and sets the graphic wheel
-moving as it passes underneath.
+shots. OpenSpec crosses the frame horizontally just above the blue line,
+contacting the wheel's lower edge as it starts to turn. This incorporates
+the pilot's follow-up correction within cut 3; the narration is unchanged.
 
 ## Reproduce
 
@@ -49,6 +50,16 @@ The review server stays in the foreground. In another terminal, run
 Launch the production commands in the listed order: loading a film writes
 its resolved document, so simultaneous command startup can contend on its
 temporary output file.
+
+The OpenSpec-only correction used `patch-openspec.mjs <videomaker> <viewer>`
+instead of recapturing the full movie. It accepts only the hash-verified
+original cut-3 master, verifies the one-line stage change and all cached
+source frames, and captures 115 frames from the entrance through the outgoing
+transition. It assembles those with the 4,249 unchanged original PNGs and
+copies the original AAC track into the new encode. The original MP4 and
+manifest remain under `_build/openspec-contact-patch/`; its manifest records
+the mixed capture origins explicitly, without overriding native cache keys.
+The ordinary reproduction commands above also produce the corrected stage.
 
 These commands reuse cached speech. To deliberately generate a revised take,
 first evaluate `narration.py`, then call `speech.mjs <videomaker> --check`,

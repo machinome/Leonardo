@@ -42,8 +42,11 @@ Say explicitly that sampled checks do not prove every intervening instant.
 Keep the full `CrankStroke` and `ThisScene` classes. Three.js arrives when
 spoken, followed clockwise by the existing CAD names. OpenSpec is spoken
 before “and so many others”; it enters from the right on a level watercourse,
-passes beneath the wheel, and continues left offscreen. The wheel starts
-accelerating when OpenSpec reaches it. Nothing rises through its centre.
+travels just above the blue line, hits the wheel's lower edge, and continues
+left offscreen. The wheel starts accelerating when OpenSpec reaches it.
+The pilot's follow-up explicitly wants contact and permits overlap: the
+text baseline is 820 on the 1080-high stage, above the line at 835, replacing
+the initial cut's separated baseline at 970. Narration and timing stay fixed.
 
 The operator description retains attribution and the actual production
 record. Sources and output remain local; publication is not part of this
