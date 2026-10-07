@@ -1,0 +1,13 @@
+{
+  "voiceId": "GDzHdQOi6jjf8zaXhCYD",
+  "publicOwnerId": "4a19cd68f5f2e5172b5eddbfaafdb226726e0b4035e27e952df6bbac94b8aada",
+  "name": "Raquel - Expressive and Energetic",
+  "locale": "pt-BR",
+  "accent": "brazilian",
+  "source": "ElevenLabs Voice Library API",
+  "retrievedAt": "2026-10-07T14:06:38.111Z",
+  "preview": "https://storage.googleapis.com/eleven-public-prod/database/user/t1nBFVlw8ahi8WVJ0bXtyohGNAI2/voices/GDzHdQOi6jjf8zaXhCYD/LCt0ufE4oVO5zb1QbhsQ.mp3",
+  "englishPreview": "https://storage.googleapis.com/eleven-public-prod/database/user/t1nBFVlw8ahi8WVJ0bXtyohGNAI2/voices/GDzHdQOi6jjf8zaXhCYD/4ec7ecde-b044-4980-a623-51809a4865d3.mp3",
+  "accountStatus": "not added: configured key lacks voices_write",
+  "selection": "Native Brazilian Portuguese requested by the pilot; listening review pending."
+}
