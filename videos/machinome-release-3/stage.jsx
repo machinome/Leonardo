@@ -80,7 +80,7 @@ function Constellation({state}){
         })}
       </g>
       {drive&&<text className="incoming" textAnchor="middle"
-        x={1830-870*elapsed(drive)/arrival} y={885}>{driver}</text>}
+        x={1830-870*elapsed(drive)/arrival} y={970}>{driver}</text>}
     </svg>
     <div className="hub-mark" dangerouslySetInnerHTML={{__html:mark}}/>
   </div>;

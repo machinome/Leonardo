@@ -67,14 +67,21 @@ const results=await browserSession(film,viewer,1280,[],async({page,pose})=>{
         const r=e.getBoundingClientRect();return {text:e.textContent,x:r.x,y:r.y,w:r.width,h:r.height,
           width:e.clientWidth,scroll:e.scrollWidth,digest:e.dataset.sourceSha256};
       }),
-      incoming:[...document.querySelectorAll('.incoming')].map(e=>({text:e.textContent,x:e.getAttribute('x'),y:e.getAttribute('y')})),
+      incoming:[...document.querySelectorAll('.incoming')].map(e=>{
+        const b=e.getBoundingClientRect();
+        const overlaps=[...document.querySelectorAll('.tech-label')].some(label=>{
+          const r=label.getBoundingClientRect();
+          return b.left<r.right&&b.right>r.left&&b.top<r.bottom&&b.bottom>r.top;
+        });
+        return {text:e.textContent,x:e.getAttribute('x'),y:e.getAttribute('y'),overlaps};
+      }),
     }));
     if('token'in item)assert.deepEqual(report.blinks,item.token?[item.token]:[],item.id);
     for(const b of report.texts){
       assert.ok(b.x>=-1&&b.y>=-1&&b.x+b.w<=1281&&b.y+b.h<=721,`${item.id}: text outside frame`);
       if(b.width)assert.ok(b.scroll<=b.width+1,`${item.id}: source overflow`);
     }
-    for(const b of report.incoming)assert.equal(b.y,'885');
+    for(const b of report.incoming){assert.equal(b.y,'970');assert.equal(b.overlaps,false,'OpenSpec overlaps a wheel label');}
     const first=await page.screenshot();await pose(.8);await pose(t);
     assert.ok(first.equals(await page.screenshot()),`${item.id}: replay differs`);
     await writeFile(resolve(directory,item.id+'.png'),first);
