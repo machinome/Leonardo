@@ -12,7 +12,9 @@ artifact identity are recorded in [VERIFICATION.md](VERIFICATION.md).
 - [Film source](movie.py) · [narration](narration.py).
 - [Direction](DIRECTION.md) · [description draft](description.md).
 
-The movie uses 1920×1080 at 24 fps. One new Jessica / Eleven v3 take
+The completed movie runs 3:01.833 at 1920×1080 and 24 fps (21.8 MB).
+Its local review player is at <http://127.0.0.1:8783/> while the review
+server is running. One new Jessica / Eleven v3 take
 includes the real testing example, Three.js and OpenSpec. Its raw WAV,
 provider receipt and character alignment are retained under ignored
 `_build/`; the render adds a three-second lead-in and closing hold.
@@ -41,6 +43,12 @@ node /home/asa/devel/machinome/videomaker/bin/videomaker.mjs render videos/machi
 node videos/machinome-release-3/postflight.mjs
 python videos/machinome-revolutions-v2/serve-review.py --port 8783 --directory videos/machinome-release-3
 ```
+
+The review server stays in the foreground. In another terminal, run
+`node videos/machinome-release-3/check-player.mjs /home/asa/devel/machinome/videomaker`.
+Launch the production commands in the listed order: loading a film writes
+its resolved document, so simultaneous command startup can contend on its
+temporary output file.
 
 These commands reuse cached speech. To deliberately generate a revised take,
 first evaluate `narration.py`, then call `speech.mjs <videomaker> --check`,
