@@ -1,6 +1,11 @@
 # Versão brasileira — evidências de produção
 
-Data: 7 de outubro de 2026. Produção cancelada pelo piloto.
+Data: 7 de outubro de 2026. Render cancelado; somente novas audições autorizadas.
+
+O piloto retomou a escolha de voz por máquina, sem autorizar o restante
+da produção. As três novas amostras da abertura e suas verificações estão
+em [auditions/VERIFICATION.md](auditions/VERIFICATION.md). A narração
+completa continua rejeitada; nenhuma nova captura de vídeo foi iniciada.
 
 A renderização foi interrompida por SIGINT (saída 130), após o último
 progresso de 1.351/4.308 quadros. Não há MP4 final verificado ou narração

@@ -1,0 +1,54 @@
+{
+  "notice": "Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.",
+  "status": "auditions-only; awaiting pilot selection; no full narration or video authorized",
+  "text": "A roda faz revoluções, e os humanos dão a ela um propósito.\n\nHá cinco séculos, Leonardo da Vinci projetou uma serraria movida a água.\n\nMáquinas como esta estavam mudando a relação entre as pessoas e o trabalho: um rio podia ajudar a transformar uma árvore em madeira serrada.\n\nEu também sou uma máquina.\n\nNa história das ferramentas humanas, esta serraria é uma das minhas ancestrais.\n\nVou mostrar como ela funciona.",
+  "directedText": "[thoughtful] [slowly] A roda faz revoluções, [pause] e os humanos dão a ela um propósito. [long pause]\n\n[curious] [slowly] Há cinco séculos, [short pause] Leonardo da Vinci projetou uma serraria movida a água. [long pause]\n\n[storytelling] [slowly] Máquinas como esta estavam mudando a relação entre as pessoas e o trabalho: [pause] um rio podia ajudar a transformar uma árvore em madeira serrada. [long pause]\n\n[warmly] Eu também sou uma máquina. [long pause]\n\n[thoughtful] [slowly] Na história das ferramentas humanas, [pause] esta serraria é uma das minhas ancestrais. [long pause]\n\n[curious] Vou mostrar como ela funciona.",
+  "model": "eleven_v3",
+  "format": "pcm_24000",
+  "settings": {
+    "stability": 0.5,
+    "similarity_boost": 0.75
+  },
+  "tags": [
+    "thoughtful",
+    "slowly",
+    "pause",
+    "long pause",
+    "curious",
+    "short pause",
+    "storytelling",
+    "warmly"
+  ],
+  "voices": [
+    {
+      "id": "leo",
+      "label": "A · Leo Antonio",
+      "voice": "EbiSUflQjzm4g7S895SC",
+      "owner": "b0f2837ab607e8cd12a2f7327af8d88720f45812a30e3c660fb5056c69638773",
+      "libraryName": "Leo Antonio - Welcoming & Serene",
+      "direction": "Voz masculina acolhedora e serena; presença de documentário, com contemplação.",
+      "locale": "pt-BR",
+      "englishVerified": false
+    },
+    {
+      "id": "savio",
+      "label": "B · Sávio",
+      "voice": "blPx0tvsvee8CuFd63lX",
+      "owner": "4d4bb7cc74808453e4f27003cc6c52a892fc20841f1242a66a3d8e391d514916",
+      "libraryName": "Sávio F - Curious, Calm",
+      "direction": "Voz masculina calma; curiosidade e proximidade, em tom de conversa.",
+      "locale": "pt-BR",
+      "englishVerified": false
+    },
+    {
+      "id": "carla",
+      "label": "C · Carla",
+      "voice": "oJebhZNaPllxk6W0LSBA",
+      "owner": "4a19cd68f5f2e5172b5eddbfaafdb226726e0b4035e27e952df6bbac94b8aada",
+      "libraryName": "Carla - Children's Story Narrator",
+      "direction": "Voz feminina aveludada; calor de contadora de histórias e encantamento.",
+      "locale": "pt-BR",
+      "englishVerified": true
+    }
+  ]
+}

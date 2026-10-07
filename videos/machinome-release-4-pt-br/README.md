@@ -18,14 +18,16 @@ a marca laranja, o texto final ampliado e a URL do framework.
 [Direção](DIRECTION.md) e [verificação](VERIFICATION.md) registram as
 escolhas e os limites. Nada publicado.
 
-Estado atual: produção automática cancelada pelo piloto em 7 de outubro
-de 2026. Ele fará a narração portuguesa pessoalmente. A voz gerada foi
-rejeitada por ritmo rápido, pouca emoção e falta de pausas entre frases.
-A renderização foi interrompida; não há master português aprovado, e o
-servidor de revisão está fechado. Fontes, tomadas e cache foram preservados.
-Não gerar voz nem reiniciar a captura sem uma nova instrução do piloto.
-Os comandos abaixo são registro de reprodução, não uma fila de trabalho.
-O corte 4 em inglês permanece inalterado.
+Estado atual: retomada somente das [audições da abertura](auditions/README.md).
+Após cancelar a produção, o piloto decidiu manter uma voz de máquina e
+pediu opções com mais emoção e pausas entre frases. A tomada com Raquel
+foi rejeitada; não há voz escolhida ou master português aprovado.
+O novo reprodutor de áudio fica em http://127.0.0.1:8785/auditions/.
+
+A renderização continua interrompida. Primeiro escolher voz/interpretação;
+depois aprovar a narração completa; somente então renderizar. Fontes,
+tomadas e cache foram preservados. Os comandos abaixo são registro de
+reprodução, não uma fila de trabalho. O inglês permanece inalterado.
 
 ## Reproduzir
 

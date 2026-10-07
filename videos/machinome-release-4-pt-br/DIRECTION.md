@@ -1,5 +1,16 @@
 # Versão brasileira — direção
 
+## Retomada somente das audições — 7 de outubro de 2026
+
+O piloto decidiu manter a narração por máquina: o personagem pode dizer
+“Eu também sou uma máquina”, mas ele próprio não. A nova autorização é
+comparar opções de voz, com mais emoção e pausas, apenas na abertura,
+até antes de mostrar as peças. Ver `auditions/`.
+
+Não retomar a tomada completa nem o render. Primeiro o piloto escolhe a
+voz e a interpretação; depois aprova a narração inteira; somente após
+essa aprovação há autorização para renderizar o vídeo.
+
 ## Cancelamento — 7 de outubro de 2026
 
 O piloto cancelou esta produção e fará a narração em português pessoalmente.

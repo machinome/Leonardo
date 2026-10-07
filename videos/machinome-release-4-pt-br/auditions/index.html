@@ -1,0 +1,42 @@
+<!doctype html>
+<!-- Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only. -->
+<html lang="pt-BR">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Machinome — escolha da voz brasileira</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#101419;color:#eeeae3;font:17px/1.65 system-ui,sans-serif}
+main{max-width:1080px;margin:auto;padding:42px 28px 70px}h1{font-size:36px;line-height:1.15;font-weight:550;letter-spacing:-.035em;margin:8px 0 18px}h2{font-size:23px;margin:0 0 10px}
+.eyebrow{color:#ed704c;letter-spacing:.14em;text-transform:uppercase;font-size:12px}.intro{max-width:800px;color:#bcc7cf}.gate{padding:15px 20px;border-left:3px solid #ed704c;background:#1b242c;margin:24px 0 30px}
+#voices{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}article{padding:22px;background:#192128;border:1px solid #34404b;border-radius:10px;min-width:0}article p{font-size:15px;color:#bcc7cf;min-height:98px}audio{display:block;width:100%;margin:22px 0 12px}a{color:#f0b789}small{display:block;color:#aab8c2;font-size:13px}.downloads{display:flex;gap:16px;font-size:13px;margin-top:12px}
+details{margin-top:30px;border-top:1px solid #34404b;padding-top:20px}summary{cursor:pointer;font-weight:600}#script{white-space:pre-line;max-width:790px;color:#d5dce1}footer{margin-top:35px;color:#93a3af;font-size:13px}
+@media(max-width:800px){#voices{grid-template-columns:1fr}article p{min-height:0}main{padding:24px 16px 45px}h1{font-size:30px}}
+</style>
+<main>
+<div class="eyebrow">Machinome · português brasileiro · só áudio</div>
+<h1>Uma máquina reconhece sua ancestral.</h1>
+<p class="intro">Três vozes, o mesmo trecho. Uma leitura mais contemplativa, com curiosidade, calor e espaço entre as frases. Todas param em “Vou mostrar como ela funciona”, antes da explicação das peças.</p>
+<p class="gate">Escolha a voz e a interpretação no chat: <strong>A, B ou C</strong>. Depois você aprova a narração completa. Nenhum vídeo será renderizado antes dessa aprovação.</p>
+<section id="voices" aria-label="Opções de voz"><p>Carregando as audições…</p></section>
+<details><summary>Texto idêntico nas três opções</summary><p id="script"></p></details>
+<footer>Descrições indicam a direção pretendida, baseada na biblioteca de vozes. A escolha depende da sua escuta. Comparações com volume normalizado; sem mudança de velocidade ou pausas inseridas. <a href="README.md">Registro da produção</a>.</footer>
+</main>
+<script type="module">
+const data=await fetch('../_build/auditions-1/manifest.json').then(r=>{if(!r.ok)throw Error('Audições ainda indisponíveis');return r.json()});
+const container=document.querySelector('#voices');container.replaceChildren();
+document.querySelector('#script').textContent=data.text;
+for(const v of data.voices){
+  const card=document.createElement('article');card.id=v.id;
+  const title=document.createElement('h2');title.textContent=v.label;
+  const direction=document.createElement('p');direction.textContent=v.direction;
+  const audio=document.createElement('audio');audio.controls=true;audio.preload='metadata';audio.src=v.mp3;
+  audio.setAttribute('aria-label',`Ouvir ${v.label}`);
+  audio.addEventListener('play',()=>document.querySelectorAll('audio').forEach(other=>{if(other!==audio)other.pause()}));
+  const duration=document.createElement('small');duration.textContent=`${v.duration.toFixed(1).replace('.',',')} segundos · Português (Brasil)`;
+  const downloads=document.createElement('div');downloads.className='downloads';
+  for(const [label,href] of [['Baixar MP3',v.mp3],['WAV original',v.wav]]){
+    const a=document.createElement('a');a.textContent=label;a.href=href;a.download='';downloads.append(a);
+  }
+  card.append(title,direction,audio,duration,downloads);container.append(card);
+}
+</script>
+</html>
