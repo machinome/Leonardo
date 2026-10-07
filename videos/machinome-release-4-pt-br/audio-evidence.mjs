@@ -13,7 +13,7 @@ const bytes=await readFile(take.cacheFile);
 assert.equal(createHash('sha256').update(bytes).digest('hex'),take.sha256);
 assert.equal(take.generation,'one-provider-request');
 assert.deepEqual(take.edits,[]);
-assert.equal(record.request.text.includes('aberto...\n\nA roda'),true);
+assert.equal(record.request.text.includes('aberto... [long pause]\n\nA roda'),true);
 assert.equal(record.request.text.includes('O que VOCÊ quer construir agora?'),true);
 const alignment=record.alignment,text=alignment.characters.join('');
 const span=phrase=>{
@@ -22,12 +22,16 @@ const span=phrase=>{
     end:alignment.character_end_times_seconds[start+phrase.length-1]};
 };
 const tools=span('aberto...'),next=span('A roda faz revoluções, e os humanos constroem'),you=span('VOCÊ');
-const check=spawnSync('ffmpeg',['-hide_banner','-ss',String(tools.start),'-t',String(next.start-tools.start+.2),
+// Alignment can assign the beginning of a vowel to its preceding silence.
+// Decode through the first two words so silencedetect sees the actual end;
+// do not truncate the detection window at an estimated speech onset.
+const nextWords=span('A roda');
+const check=spawnSync('ffmpeg',['-hide_banner','-ss',String(tools.start),'-t',String(nextWords.end-tools.start),
   '-i',take.cacheFile,'-af','silencedetect=noise=-42dB:d=0.15','-f','null','-'],{encoding:'utf8'});
 assert.equal(check.status,0);
 const intervals=[...check.stderr.matchAll(/silence_end: ([\d.]+) \| silence_duration: ([\d.]+)/g)]
   .map(m=>({start:tools.start+Number(m[1])-Number(m[2]),end:tools.start+Number(m[1]),duration:Number(m[2])}));
-const pause=intervals.find(p=>p.end>=next.start-.1&&p.end<=next.start+.2);
+const pause=intervals.find(p=>p.start>=tools.end-.1&&p.end>=next.start-.1&&p.end<=nextWords.end);
 assert.ok(pause&&pause.duration>=.7,'The requested deliberate pause must be present in the audio.');
 const report={status:'signal and alignment checked; listening review remains',sha256:take.sha256,
   generation:take.generation,edits:take.edits,duration:take.duration,tools,next,you,pause,thresholdDb:-42};

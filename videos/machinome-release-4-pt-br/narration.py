@@ -78,7 +78,7 @@ AUDIO = {
     "outputFormat": "pcm_24000",
     "voiceSettings": {"stability": 0.5, "similarity_boost": 0.75},
     # Restore the delivery break normalized out by Narration.
-    "replacements": {"aberto... A roda": "aberto...\n\nA roda"},
+    "replacements": {"aberto... A roda": "aberto... [long pause]\n\nA roda"},
 }
 
 BEATS = (

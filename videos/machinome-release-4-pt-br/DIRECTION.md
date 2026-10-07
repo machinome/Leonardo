@@ -39,6 +39,14 @@ As reticências, parágrafos e maiúsculas seguem a
 [orientação de voz do provedor](https://elevenlabs.io/docs/overview/capabilities/text-to-speech/best-practices).
 Verificar a pausa medida; não confundir alinhamento com escuta humana.
 
+A primeira gravação produziu apenas 0,373 segundo de pausa no fechamento.
+Ela permanece no cache. Uma segunda gravação completa usa a instrução
+`[long pause]`, documentada para Eleven v3 pelo
+[suporte oficial](https://help.elevenlabs.io/hc/en-us/articles/24352686926609-Do-pauses-and-SSML-phoneme-tags-work-with-the-API).
+A instrução não vira legenda: somente seus caracteres são omitidos do
+alinhamento, sem modificar os tempos de nenhuma palavra. A resposta
+original do provedor é conservada. Não se insere silêncio no WAV.
+
 Reutilizar a exportação mecânica, imagem histórica, marcas, logotipo Python,
 fontes e dicionário existentes, sem modificar os cortes anteriores.
 O texto novo exige temporização e captura próprias. Não reutilizar quadros

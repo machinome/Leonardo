@@ -18,11 +18,10 @@ a marca laranja, o texto final ampliado e a URL do framework.
 [Direção](DIRECTION.md) e [verificação](VERIFICATION.md) registram as
 escolhas e os limites. Nada publicado.
 
-Estado atual: os 17 planos compilam e o roteiro passa a verificação de
-35 âncoras únicas. Áudio e renderização ainda não foram executados:
-adicionar Raquel à conta exige a permissão `voices_write`, ausente na
-chave configurada. Os links de mídia acima são os destinos previstos,
-não arquivos já entregues. O [inglês está pronto](http://127.0.0.1:8784/).
+Estado atual: acesso à voz liberado e Raquel adicionada à conta.
+Os 17 planos compilam e o roteiro passa a verificação de 35 âncoras únicas.
+A narração e a prévia estão em produção; a entrega final será registrada
+após a captura e verificação do MP4. O [inglês está pronto](http://127.0.0.1:8784/).
 
 ## Reproduzir
 
@@ -30,6 +29,7 @@ A partir da raiz do repositório Leonardo, com o ambiente existente:
 
 ```sh
 node videos/machinome-release-4-pt-br/prepare.mjs
+node videos/machinome-release-4-pt-br/speech-test.mjs
 PYTHONPATH=. /home/asa/devel/machinome/.venv/bin/python videos/machinome-release-4-pt-br/narration.py
 node videos/machinome-release-4-pt-br/speech.mjs /home/asa/devel/machinome/videomaker
 node videos/machinome-release-4-pt-br/audio-evidence.mjs

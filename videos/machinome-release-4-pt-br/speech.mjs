@@ -39,6 +39,24 @@ export function resolveBeats(alignment, beats, duration) {
   });
 }
 
+export function spokenAlignment(alignment) {
+  if (!alignment?.characters) return null;
+  // A delivery tag is not a caption. Remove only this known instruction,
+  // retaining every spoken character's exact provider timestamps. Audio is
+  // never trimmed, padded or stitched; the full raw response is retained.
+  const tag = Array.from('[long pause]');
+  const result = {characters: [], character_start_times_seconds: [],
+    character_end_times_seconds: []};
+  for (let i = 0; i < alignment.characters.length; i++) {
+    if (alignment.characters.slice(i, i + tag.length).join('') === tag.join('')) {
+      i += tag.length - 1;
+      continue;
+    }
+    for (const key of Object.keys(result)) result[key].push(alignment[key][i]);
+  }
+  return result;
+}
+
 async function optionalJSON(path) {
   try { return JSON.parse(await readFile(path, 'utf8')); }
   catch (error) { if (error.code !== 'ENOENT') throw error; return null; }
@@ -65,7 +83,7 @@ export async function main(args) {
     pronunciation_dictionary_id: dictionary.id, version_id: dictionary.version_id,
   }]};
   assert.ok(!request.previous_text && !request.next_text);
-  assert.ok(request.text.includes('aberto...\n\nA roda'));
+  assert.ok(request.text.includes('aberto... [long pause]\n\nA roda'));
   const productionRequestHash = hash(JSON.stringify({request, voice: input.audio.voice, format: entry.format}));
   console.log(`One ${text.length}-character request; ${input.beats.length} unique beats; Raquel / eleven_v3.`);
   if (args[1] === '--check') return;
@@ -109,7 +127,7 @@ export async function main(args) {
     const pcm = Buffer.from(data.audio_base64, 'base64');
     const wav = pcmWav(pcm, 24000);
     const canonical = value => value.replace(/\s+/gu, ' ').trim();
-    const alignment = [data.normalized_alignment, data.alignment].find(a =>
+    const alignment = [data.normalized_alignment, data.alignment].map(spokenAlignment).find(a =>
       a?.characters && canonical(a.characters.join('')) === canonical(text));
     assert.ok(alignment, 'Provider text differs from the script; response retained, no retry.');
     validateAlignment(alignment, 'continuous');
@@ -119,7 +137,8 @@ export async function main(args) {
     await writeFile(entry.file, wav, {flag: 'wx'});
     record = {cache: entry.cache, voice: input.audio.voice, model: input.audio.model,
       format: entry.format, request, productionRequestHash, pronunciation: dictionary,
-      alignment, sha256: hash(wav), duration, requestId: receipt.requestId,
+      alignment, alignmentPolicy: 'known delivery tag omitted; word timestamps unchanged',
+      sha256: hash(wav), duration, requestId: receipt.requestId,
       generatedAt: receipt.generatedAt, source: 'one-provider-request'};
     await writeFile(entry.meta, JSON.stringify(record, null, 2) + '\n', {flag: 'wx'});
   }
