@@ -18,10 +18,14 @@ a marca laranja, o texto final ampliado e a URL do framework.
 [Direção](DIRECTION.md) e [verificação](VERIFICATION.md) registram as
 escolhas e os limites. Nada publicado.
 
-Estado atual: acesso à voz liberado e Raquel adicionada à conta.
-Os 17 planos compilam e o roteiro passa a verificação de 35 âncoras únicas.
-A narração e a prévia estão em produção; a entrega final será registrada
-após a captura e verificação do MP4. O [inglês está pronto](http://127.0.0.1:8784/).
+Estado atual: produção automática cancelada pelo piloto em 7 de outubro
+de 2026. Ele fará a narração portuguesa pessoalmente. A voz gerada foi
+rejeitada por ritmo rápido, pouca emoção e falta de pausas entre frases.
+A renderização foi interrompida; não há master português aprovado, e o
+servidor de revisão está fechado. Fontes, tomadas e cache foram preservados.
+Não gerar voz nem reiniciar a captura sem uma nova instrução do piloto.
+Os comandos abaixo são registro de reprodução, não uma fila de trabalho.
+O corte 4 em inglês permanece inalterado.
 
 ## Reproduzir
 

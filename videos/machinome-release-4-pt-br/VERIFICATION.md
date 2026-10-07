@@ -1,6 +1,12 @@
 # Versão brasileira — evidências de produção
 
-Data: 7 de outubro de 2026. Captura final em preparação.
+Data: 7 de outubro de 2026. Produção cancelada pelo piloto.
+
+A renderização foi interrompida por SIGINT (saída 130), após o último
+progresso de 1.351/4.308 quadros. Não há MP4 final verificado ou narração
+aprovada. O piloto rejeitou o ritmo e a expressividade da voz e decidiu
+narrar pessoalmente. Servidor português fechado; fontes e caches mantidos.
+Os resultados técnicos abaixo não constituem aprovação da performance.
 
 ## Voz e gravação
 

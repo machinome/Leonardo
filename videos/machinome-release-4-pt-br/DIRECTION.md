@@ -1,5 +1,14 @@
 # Versão brasileira — direção
 
+## Cancelamento — 7 de outubro de 2026
+
+O piloto cancelou esta produção e fará a narração em português pessoalmente.
+Rejeitou a voz gerada: rápida demais, sem a emoção e as pausas desejadas.
+O render foi abortado, sem apagar os fontes ou caches. Não há aprovação
+da narração. Não retomar geração ou renderização sem nova instrução.
+Em qualquer eventual retomada, a aprovação explícita da narração completa
+deve preceder a renderização do vídeo. A direção abaixo é histórica.
+
 A comissão é a versão brasileira do corte 4, não uma alteração do inglês.
 O piloto escolheu uma voz nativa brasileira. Raquel — Expressive and
 Energetic — foi selecionada na biblioteca do ElevenLabs, identificada como
