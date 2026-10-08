@@ -1,13 +1,13 @@
 // Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
 import React from 'react';
 import {Slot, defineElement, defineSet, useReport} from 'videomaker/stage';
-import {wheelAngle,driverX} from './ending-motion.mjs';
+import {wheelAngle,driverX,approachScale,logoScale} from './ending-motion.mjs';
 import './stage.css';
 import './_build/fonts.css';
 
 const sets={
   exhibition:['ghost','backdrop','stage','graphic','heading','note','veil'],
-  mechanism:['ghost','stage','note'], archive:['picture','note'],
+  mechanism:['backdrop','plate','ghost','stage','note'], archive:['picture','note'],
   workbench:['stage','imports','code'], 'source-room':['code'],
   'test-bench':['stage','code','note'],
 };
@@ -24,16 +24,23 @@ function syntax(line){
 function Listing({state}){
   const token=state.actions.find(a=>a.action==='focus')?.params.token;
   const blink=state.actions.find(a=>a.action==='blink')?.params;
+  const all=state.actions.find(a=>a.action==='blink-all')?.params.token;
   const typing=state.actions.find(a=>a.action==='write');
-  // Before its typing cue, this panel is empty; other listings start complete.
-  const progress=typing?.progress??(state.props.file.endsWith('/model.py')&&
-    !state.actions.some(a=>a.action==='blink')?null:1);
-  // The persistent typed amount is supplied as an explicit cue by finish.mjs.
   const reveal=state.actions.find(a=>a.action==='complete');
-  const shown=progress===null?(reveal?state.props.code:''):
-    state.props.code.slice(0,Math.ceil(state.props.code.length*progress));
-  useReport({sourceSha256:state.props.digest,text:shown,blink:blink??null});
+  const progress=typing?.progress??(reveal||!state.props.initiallyEmpty?1:0);
+  const shown=state.props.code.slice(0,Math.ceil(state.props.code.length*progress));
+  useReport({sourceSha256:state.props.digest,text:shown,blink:blink??null,all:all??null});
   const renderLine=(line,i)=>{
+    if(all){
+      const matches=[...line.matchAll(/[A-Za-z_][A-Za-z_0-9]*/g)].filter(m=>m[0]===all);
+      let end=0;const pieces=[];
+      for(const match of matches){
+        pieces.push(<React.Fragment key={match.index}>{syntax(line.slice(end,match.index))}
+          <mark className="blink-token">{match[0]}</mark></React.Fragment>);
+        end=match.index+match[0].length;
+      }
+      return <>{pieces}{syntax(line.slice(end))}</>;
+    }
     if(!blink||state.props.numbers[i]!==blink.line)return syntax(line);
     let at=-1;
     for(let n=0;n<=blink.occurrence;n++)at=line.indexOf(blink.token,at+1);
@@ -49,11 +56,18 @@ function Listing({state}){
 function Signature({state}){
   const p=state.actions.find(a=>a.action==='enter');
   const opacity=p?smooth(p.progress):1;
-  useReport({opacity});
+  const approach=state.actions.find(a=>a.action==='approach');
+  const scale=approach?logoScale(approach.progress):1;
+  const link=state.actions.find(a=>a.action==='link');
+  const linkOpacity=link?smooth(link.progress):state.actions.some(a=>a.action==='linked')?1:0;
+  useReport({opacity,scale,linkOpacity});
   return <div className={'signature'+(state.props.compact?' compact':'')} style={{opacity}}>
-    <div className="wordmark" dangerouslySetInnerHTML={{__html:state.props.svg}}/>
-    <div className="tagline">{state.props.tagline}</div>
-    {state.props.url&&<div className="repository-url">{state.props.url}</div>}
+    <div className="logo-approach" style={{position:'absolute',inset:0,
+      transform:`scale(${scale})`,transformOrigin:'50% 50%'}}>
+      <div className="wordmark" dangerouslySetInnerHTML={{__html:state.props.svg}}/>
+    </div>
+    {state.props.tagline&&<div className="tagline">{state.props.tagline}</div>}
+    {state.props.url&&<div className="repository-url" style={{opacity:linkOpacity}}>{state.props.url}</div>}
     {state.props.question&&<div className="question" style={{opacity:p?smooth(elapsed(p)/.65):0}}>{state.props.question}</div>}
   </div>;
 }
@@ -71,7 +85,7 @@ function Constellation({state}){
   const driverElapsed=elapsed(drive)+timeOffset;
   const rotation=wheelAngle(driverElapsed,state.props);
   const approach=state.actions.find(a=>a.action==='approach');
-  const scale=approach?.18+.82*smooth(approach.progress):1;
+  const scale=approach?approachScale(approach.progress):1;
   const positions=drivers.map((name,i)=>({name,x:driverX(driverElapsed-i*stagger,state.props)}));
   const opacity=fadeDuration?1-smooth(elapsed(drive)/fadeDuration):1;
   const streamOpacity=drive?1-smooth((driverElapsed-streamDuration+.15)/.15):0;
@@ -106,4 +120,5 @@ function Constellation({state}){
 defineElement({kind:'listing',component:Listing});
 defineElement({kind:'signature',component:Signature});
 defineElement({kind:'curtain',component:Curtain});
+defineElement({kind:'shade',component:()=> <div style={{position:'absolute',inset:0,background:'#101419'}}/>});
 defineElement({kind:'constellation',component:Constellation});

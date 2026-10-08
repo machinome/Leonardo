@@ -20,12 +20,16 @@ The standard check passes, including the drawing's peak enlargement of
 3.36 against its explicit 3.4 allowance. This is the requested close crop of
 the existing 1000×1000 image, not a higher-resolution replacement. The movie
 reuses the existing cut-3 export.
-`inspect-preview.mjs` passes 34 browser frame/cue checks: five opening fade
-positions and a later orbit frame, manuscript coverage
-and source-label placement, code bounds, seven enumeration tokens and four
-meta-scene tokens, returning-pawl highlight, stream/wheel overlap, four zoom
-positions, three logo-fade positions, and absence of the closing question.
-Screenshots of the manuscript, code, overlap, zoom and logo were inspected.
+`inspect-preview.mjs` passes 57 browser frame/cue checks: five positions each
+for the opening and 32s fades, a later orbit frame, manuscript coverage and
+edge-aligned source plate, code bounds, two five-sample typing passes, seven
+enumeration cues and four meta-scene tokens, returning-pawl and complete-rope
+highlights, circle easing, stream/wheel overlap, four hub-zoom positions, five
+logo-approach positions, four URL-fade positions, and no closing question.
+At each typing onset the incoming source state is checked, because the live
+player still displays the outgoing composed transition; the remaining eight
+typing samples check actual browser text. Screenshots of the fades,
+manuscript, code, rope, easing, overlap, zoom and logo were inspected.
 No page errors were reported. `git diff --check` passes.
 
 Opening-reveal correction: the original `Dissolve(1.2)` was present in the
@@ -40,6 +44,15 @@ fades its opaque background plate too. A pixel comparison that hides the old
 wheel at the orbit midpoint failed before that fix and passes afterward.
 Opening fade and orbit screenshots were inspected. This is an episode edit,
 not a general live-player dissolve fix; no narration was regenerated.
+
+The follow-up 32s fade similarly failed a midpoint half-opacity assertion
+before its edit. It now uses a 1.2-second live reframe starting at 32.458s.
+The outgoing full machine, incoming drive and faint context share camera and
+model time; a fading dark plate covers the old full machine. Hiding that
+base after the fade makes no pixel difference. The highlighted second rope
+now includes its central take-up, upper-roller span and carriage haul; the
+browser image shows the highlight reaching the timber cart. The source plate
+names Wikimedia Commons and touches both the right and bottom edges.
 
 Key locations in the revised film:
 
@@ -64,18 +77,30 @@ The graphic and physical wheel phases are checked against the same motion law.
 
 The camera moves directly towards the hub from 177.958 (“and humans”) to
 179.833 (end of “their own”), with a dark fade over its last half-second.
-The wheel is entirely gone before the boundary. The logo starts at zero
-opacity at that boundary and fades in over approximately 0.8 seconds.
-These actions are visible and checked in the live player.
+The wheel is entirely gone before the boundary. Following the pilot's latest
+direction, the logo does not fade: it approaches from the screen-centre
+vanishing point at constant opacity, growing from 0.002 to full scale over
+1.2 seconds. A constant-opacity/scale assertion failed against the earlier
+fade and passes now. The logo settles around 181.03s; the URL fades in at
+181.83–182.83s, below it and about 18% wider. The URL is outside the logo's
+transformed layer; its width stays fixed throughout the approach and fade.
+No tagline remains. These actions
+are visible and checked in the live player.
 
-The circle's approach ends at the first technology's measured onset.
+The circle's cubic ease-out advances promptly and ends at the first
+technology's measured onset (scale 0.523 at 150.17s).
 The enumeration is 12.375 seconds, down from 41.708. Its token flashes use
 recorded first-word start/end times,
-displayed on the movie's 24 fps grid. Cue readback matches the intended
-token in the actual browser.
+displayed on the movie's 24 fps grid. The real CrankStroke source now inlines
+its stroke and end anchors; all four `Cue` calls, all three `highlight`
+calls and all eight `spoken` calls flash on their respective words. Browser
+readback checks both the exact token and occurrence count. Testing source
+types from 105 to 110s, as clarified by the pilot; film source types from
+131.083 to 133.083s. Both reveal exact prefixes of the real source and finish
+with the complete source. No narration or duration changed for this review.
 
 Limits: the live player approximates composed dissolves as midpoint cuts;
-this applies to the other scene joins, not the opening reframe or the custom
+this applies to the other scene joins, not the two live reframes or the custom
 closing actions above.
 This run verified those joins' declared timings, not final blended pixels.
 The provider assigned only 10 ms to “crankshaft” and 4 ms to the following

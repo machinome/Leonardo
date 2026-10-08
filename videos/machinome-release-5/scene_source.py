@@ -32,7 +32,7 @@ def scene_narration(name):
     raise ValueError(f"Scene needs literal narration: {name}")
 
 
-def excerpt(name):
+def excerpt(name, *, type_in=False):
     """Return the complete class, not a display-only example."""
     source, node = scene_source(name)
     return dict(
@@ -40,10 +40,11 @@ def excerpt(name):
         file=f"movie.py / {name}",
         digest=hashlib.sha256(source.encode()).hexdigest(),
         numbers=list(range(node.lineno, node.end_lineno + 1)),
+        initiallyEmpty=type_in,
     )
 
 
-def model_excerpt(relative, ranges):
+def model_excerpt(relative, ranges, *, type_in=False):
     """Read exact committed project source, retaining original line numbers."""
     root = Path(__file__).resolve().parents[2]
     source = (root / relative).read_bytes()
@@ -59,6 +60,7 @@ def model_excerpt(relative, ranges):
         file=relative,
         digest=hashlib.sha256(source).hexdigest(),
         numbers=numbers,
+        initiallyEmpty=type_in,
     )
 
 

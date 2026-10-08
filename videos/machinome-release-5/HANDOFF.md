@@ -20,14 +20,25 @@ Do not render an MP4 without the pilot's direction.
 
 ## What remains for review
 
-The pilot has not yet approved this revision or listened to its new performance.
-Review the full-frame manuscript reveal and bottom-right source label, shorter
-code enumeration, token flashes, faster stream overlapping the physical wheel,
-short pause, and closing zoom on “and humans”. The wheel disappears by the end
-of “their own”, then the logo fades in. The closing question remains speech
-only. The opening machine reveal now fades in from 7.29s to 8.49s while the
-wheel stays fully visible. No MP4 has been rendered. Thirty-four live browser
-checks pass, including absence of a duplicate wheel during the later orbit.
+The pilot has reviewed the earlier cut-5 changes and confirmed the opening
+fade worked. This latest batch awaits their viewing: a matching fade at 32.46s,
+the complete second rope highlighted up to the cart, the source plate flush
+right/bottom and naming Wikimedia Commons, testing code typed over 105–110s
+(explicitly clarified), and film source typed over 131.08–133.08s. CrankStroke's
+stroke/end anchors are inline in its actual source; all `Cue`, `highlight`,
+and `spoken` identifiers flash as groups on their respective spoken words.
+The open-source circle now approaches with cubic ease-out.
+
+The latest instruction supersedes the former closing logo fade: after the
+wheel disappears at the end of “their own”, the logo approaches from the
+screen centre at constant opacity over 1.2s, as if the camera continued
+through the wheel hole. It settles, then the GitHub address fades in beneath
+it (2–3s after the closing shot starts), about 18% wider than the logo. The
+address is outside the zooming layer and never scales; the pilot explicitly
+asked for its later fade only.
+There is no tagline or drawn question. Fifty-seven live browser checks pass,
+including no duplicate wheels and the new code/ending behavior. Screenshots
+were inspected. No MP4 rendered and no narration regenerated for this batch.
 
 The live player still shows composed dissolves as cuts at their midpoint.
 Cut 5 declares a 1.8-second transition starting on “With Machinome” and a
@@ -35,12 +46,13 @@ Cut 5 declares a 1.8-second transition starting on “With Machinome” and a
 player cannot demonstrate their final blended appearance. The pilot was
 told this limitation during work. Do not claim the crossfades were visually
 reviewed as rendered, or silently expand this into a Videomaker change.
-The opening reveal now uses a supported live reframe, with the complete
+The opening reveal uses a supported live reframe, with the complete
 incoming view (including its opaque background) fading over a shared wheel.
-The wheel/stream overlap and ending zoom/fade use project-owned live actions.
+The 32s reveal also uses a live reframe and an opaque incoming plate. The
+wheel/stream overlap, approaching logo and URL fade use project-owned actions.
 These have been inspected in the browser. This is not a tool-wide dissolve fix.
 
-This revision's narration was generated once. `speech.mjs` retains the provider
+The current narration was generated once in the earlier review. `speech.mjs` retains the provider
 original and inserts a documented 1.2-second silence before the return
 line, shifting alignment with it. `finish.mjs` must follow a fresh movie
 evaluation; it adjusts the document, then mixes cached speech with the

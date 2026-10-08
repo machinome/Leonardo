@@ -30,6 +30,8 @@ class Exhibition(Set):
 
 class Mechanism(Set):
     module = 'stage.jsx'
+    backdrop = Slot()
+    plate = Slot()
     ghost = Slot()
     stage = Slot()
     note = Slot()
@@ -64,6 +66,7 @@ class Listing(Element):
     module = 'stage.jsx'
     focus = Action(token=str)
     blink = Action(token=str, line=int, occurrence=int)
+    blink_all = Action(token=str)
     write = Action()
     complete = Action()
 
@@ -79,6 +82,13 @@ class Constellation(Element):
 class Signature(Element):
     module = 'stage.jsx'
     enter = Action()
+    approach = Action()
+    link = Action()
+    linked = Action()
+
+
+class Shade(Element):
+    module = 'stage.jsx'
 
 
 class Curtain(Element):
@@ -126,26 +136,28 @@ class CrankStroke:
     )
     view = View(Sawmill, camera=Sawmill.rear,
                 hide=[Sawmill.drive_context])
-    stroke = lines.spoken("the saw's up-and-down stroke")
-    end = lines.spoken("But the timber")
     shot = Shot(
         Mechanism, {Mechanism.stage: view},
-        until=end, model=Sawmill.run(424, 432),
+        until=lines.spoken("But the timber"),
+        model=Sawmill.run(424, 432),
         cues=[
-            Cue(0, view.move(Sawmill.saw, until=stroke)),
+            Cue(0, view.move(Sawmill.saw,
+                until=lines.spoken("the saw's up-and-down stroke"))),
             Cue(lines.spoken("A crank"),
                 view.highlight(Mill.water_drive.crank, others="keep"),
                 until=lines.spoken("connecting rod", plus=-0.12)),
             Cue(lines.spoken("connecting rod"),
                 view.highlight(Mill.saw.connecting_rod, others="keep"),
                 until=lines.spoken("turn that rotation", plus=-0.1)),
-            Cue(stroke, view.highlight(Mill.saw.sash, others="keep"),
+            Cue(lines.spoken("the saw's up-and-down stroke"),
+                view.highlight(Mill.saw.sash, others="keep"),
                 until=lines.spoken("But the timber", plus=-0.2)),
         ])
 
 
 def source_cues(element, scene, entries):
     return [Cue(lines.spoken(phrase),
+                element.blink_all(token=token) if row is None else
                 element.blink(token=token, line=token_line(scene, row, token), occurrence=0),
                 until=lines.spoken_end(phrase))
             for phrase, row, token in entries]
@@ -187,6 +199,7 @@ class Continuous(Chapter):
     wheel = View(Sawmill, camera=Sawmill.wheel, hide=[Sawmill.not_wheel])
     mill = View(Sawmill, camera=Sawmill.wheel)
     ghost = View(Sawmill, camera=Sawmill.rear)
+    shade = Shade()
     drive = CrankStroke.view
     feed = View(Sawmill, camera=Sawmill.saw, hide=[Sawmill.feed_context])
     ropes = View(Sawmill, camera=Sawmill.pawls, hide=[Sawmill.rope_context])
@@ -195,16 +208,16 @@ class Continuous(Chapter):
     identity = Title('Hydraulic sawmill', subtitle='LEONARDO DA VINCI')
     limits = Title('Reconstructed motion · forces and cutting not simulated')
     drawing = Picture(Sawmill.drawing, fit='cover')
-    drawing_source = Title('Source: Codex Atlanticus · 1078r')
+    drawing_source = Title('Source: Codex Atlanticus 1078r · Wikimedia Commons')
     python = Signature(svg=(HERE.parent / 'machinome-release-2/assets/python-logo.svg').read_text(),
                        tagline='Python', url='', question='', compact=True)
     imports = Source.panel(Sawmill.imports)
-    assembly = Listing(**model_excerpt('models/hydraulic_sawmill/model.py', [(401, 417)]))
+    assembly = Listing(**model_excerpt('models/hydraulic_sawmill/model.py', [(401, 417)], type_in=True))
     tests = Listing(**model_excerpt('models/hydraulic_sawmill/test_model.py',
-                                   [(8, 8), (25, 27), (604, 612)]))
+                                   [(8, 8), (25, 27), (604, 612)], type_in=True))
     test_view = View(Sawmill, camera=Sawmill.test, hide=[Sawmill.test_context])
     test_note = Title('13 sampled positions · 0–4 seconds')
-    film_code = Listing(**excerpt('CrankStroke'))
+    film_code = Listing(**excerpt('CrankStroke', type_in=True))
     mirror_code = ThisScene.code
     ecosystem = Constellation(
         names=['OpenSCAD', 'SolidPython', 'CadQuery', 'Build123d', 'FreeCAD', 'JSCAD', 'OCCT', 'Trimesh'],
@@ -214,7 +227,7 @@ class Continuous(Chapter):
         angularAcceleration=7.0, entrySpeedFraction=0.65, timeOffset=0.0, fadeDuration=0.0,
     )
     signature = Signature(svg=(BRAND / 'wordmark-orange.svg').read_text(),
-                          tagline='Source code for machines.',
+                          tagline='',
                           url='https://github.com/machinome/machinome/',
                           question='', compact=False)
 
@@ -231,9 +244,11 @@ class Continuous(Chapter):
             # finish.mjs samples one continuous orbit on the measured take.
             Cue(lines.spoken('designed'), mill.move(Sawmill.rear, until=lines.spoken('Water beneath'))),
         ])
-    water = Shot(Mechanism, {Mechanism.ghost: ghost, Mechanism.stage: drive, Mechanism.note: limits},
-        until=lines.spoken('A crank'), model=Sawmill.run(424, 428), cues=[
+    water = Shot(Mechanism, {Mechanism.backdrop: mill, Mechanism.plate: shade,
+                            Mechanism.ghost: ghost, Mechanism.stage: drive, Mechanism.note: limits},
+        until=lines.spoken('A crank'), model=Sawmill.run(424, 428), transition=Reframe(1.2), cues=[
             Cue(0, drive.move(Sawmill.crank, until=lines.spoken('turns this shaft')),
+                mill.move(Sawmill.crank, until=lines.spoken('turns this shaft')),
                 ghost.move(Sawmill.crank, until=lines.spoken('turns this shaft'))),
             Cue(lines.spoken('the wheel turns'), drive.highlight(Mill.water_drive.waterwheel, others='keep'),
                 until=lines.spoken('this shaft', plus=-0.12)),
@@ -282,7 +297,8 @@ class Continuous(Chapter):
         until=lines.spoken('One wheel'), model=Sawmill.run(452, 460), cues=[
             Cue(0, ropes.move(Sawmill.carriage, until=lines.spoken('towards the blade')),
                 ghost.move(Sawmill.carriage, until=lines.spoken('towards the blade'))),
-            Cue(lines.spoken('The second rope'), ropes.highlight(Mill.feed.haul_span, others='keep'),
+            Cue(lines.spoken('The second rope'),
+                ropes.highlight(Mill.feed.takeup, Mill.feed.haul_span, Mill.feed.haul, others='keep'),
                 until=lines.spoken('draws the timber', plus=-0.1)),
             Cue(lines.spoken('draws the timber'), ropes.highlight(Mill.carriage.timber, others='keep'),
                 until=lines.spoken('towards the blade')),
@@ -311,6 +327,8 @@ class Continuous(Chapter):
                                TestBench.note: test_note},
         until=lines.spoken("This video's source code"), model=Sawmill.run(0, 4),
         transition=Dissolve(1.8), cues=[
+            Cue(0.875, tests.write(), until=5.875),
+            Cue(5.875, tests.complete(), until=lines.spoken("This video's source code")),
             Cue(lines.spoken('This test checks'), tests.blink(token='test_blade_clears_both_log_halves', line=606, occurrence=0),
                 until=lines.spoken_end('This test checks')),
             Cue(lines.spoken('the blade does not'), test_view.highlight(Mill.saw.sash.blade, others='keep'),
@@ -331,15 +349,17 @@ class Continuous(Chapter):
         ])
     behind_the_film = Shot(SourceRoom, {SourceRoom.code: film_code},
         until=lines.spoken("And here's the code"), model=Sawmill.run(480, 484), transition=Dissolve(0.9),
-        cues=source_cues(film_code, 'CrankStroke', [
+        cues=[Cue(0, film_code.write(), until=2),
+              Cue(2, film_code.complete(), until=lines.spoken("And here's the code")),
+              *source_cues(film_code, 'CrankStroke', [
                 ('narration, a camera', 'narration =', 'narration'),
                 ('camera, a shot', 'view = View', 'camera'),
                 ('shot. Cues', 'shot =', 'shot'),
-                ('Cues move', 'cues=[', 'cues'),
+                ('Cues move', None, 'Cue'),
                 ('move the camera', 'Cue(0,', 'move'),
-                ('highlight the saw', 'Cue(stroke,', 'highlight'),
-                ('spoken words', 'stroke =', 'spoken'),
-            ]))
+                ('highlight the saw', None, 'highlight'),
+                ('spoken words', None, 'spoken'),
+            ])])
     mirror = ThisScene.shot
     open_source = Shot(Exhibition, {Exhibition.graphic: ecosystem},
         until=lines.spoken(HANDOFF), model=Sawmill.run(488, 492), transition=Dissolve(0.4), cues=[
@@ -358,7 +378,9 @@ class Continuous(Chapter):
         ])
     invitation = Shot(Exhibition, {Exhibition.graphic: signature}, until=lines.end(plus=2.5),
         model=Sawmill.run(496, 504), fade_out=FadeOut(0.7), cues=[
-            Cue(0, signature.enter(), until=0.8)])
+            Cue(0, signature.approach(), until=1.2),
+            Cue(2, signature.link(), until=3),
+            Cue(3, signature.linked(), until=lines.end(plus=2.5))])
 
 
 class Revolutions(Movie):

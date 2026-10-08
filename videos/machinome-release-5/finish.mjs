@@ -30,6 +30,7 @@ for(const id of ['behind-the-film','mirror']){
   const shot=chapter.shots.find(s=>s.id===id);
   const timed=measured.chapters[0].shots.find(s=>s.id===id);
   for(const cue of shot.cues){
+    if(!cue.actions.some(a=>['blink','blink-all'].includes(a.action)))continue;
     const phrase=cue.at.spoken;
     if(id==='mirror'&&!phrase.startsWith('code of'))continue;
     const index=alignedText.indexOf(phrase);

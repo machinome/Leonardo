@@ -49,7 +49,9 @@ release brief and subsequent direction. The first-person narrator is
 Machinome as a fictional composite character: the tools, framework,
 foundry and AI agent. The reconstruction and research claims refer to
 the project's recorded work, not to new historical research by a person
-speaking in the film. Narration uses Jessica through ElevenLabs, with one fresh full-script performance for release candidate 4.
+speaking in the film. Narration uses Jessica through ElevenLabs. The current
+cut-5 performance includes a documented 1.2-second inserted pause before the
+returning wheel line; spoken audio is not stretched or truncated.
 
 Machinome identity assets are the approved brand/v1 orange symbol and
 wordmark, used unchanged. Artwork and trademark permissions are separate

@@ -4,7 +4,7 @@ import assert from 'node:assert/strict';
 import {readFile,mkdir,writeFile} from 'node:fs/promises';
 import {resolve,dirname} from 'node:path';
 import {fileURLToPath,pathToFileURL} from 'node:url';
-import {driverX,wheelAngle} from './ending-motion.mjs';
+import {driverX,wheelAngle,approachScale} from './ending-motion.mjs';
 const base=dirname(fileURLToPath(import.meta.url));
 const tool=resolve(process.argv[2]);
 const origin=process.argv[3]??'http://127.0.0.1:8785';
@@ -52,6 +52,30 @@ try{
     await page.locator('iframe').screenshot({path:resolve(output,`opening-reveal-${offset}.png`)});
     checks.push({id:'opening-reveal',time,opacity,wheelOpacity});
   }
+  const water=doc.chapters[0].shots.find(s=>s.id==='water');
+  await seek(water.start+.6);
+  const waterOpacity=await page.evaluate(()=>{
+    const w=document.querySelector('iframe').contentWindow;
+    return Number(w.getComputedStyle(w.document.querySelector('[data-element="continuous.drive"]')).opacity);
+  });
+  assert.ok(Math.abs(waterOpacity-.5)<.06,'The 32-second change must fade in live');
+  assert.equal(water.transition.kind,'reframe');
+  for(const offset of [0,.3,.6,.9,1.25]){
+    await seek(water.start+offset);
+    const frame=await (await fetch(`${origin}/frame?t=${water.start+offset}`)).json();
+    assert.deepEqual(frame.elements['continuous.mill'].view,frame.elements['continuous.drive'].view);
+    assert.equal(frame.elements['continuous.mill'].time,frame.elements['continuous.drive'].time);
+    if(offset===1.25){
+      const withBase=await page.locator('iframe').screenshot();
+      await page.evaluate(()=>document.querySelector('iframe').contentDocument
+        .querySelector('[data-element="continuous.mill"]').style.visibility='hidden');
+      assert.ok(withBase.equals(await page.locator('iframe').screenshot()),'The earlier full machine must be covered after the fade');
+      await page.evaluate(()=>document.querySelector('iframe').contentDocument
+        .querySelector('[data-element="continuous.mill"]').style.visibility='');
+    }
+    await page.locator('iframe').screenshot({path:resolve(output,`mechanism-fade-${offset}.png`)});
+    checks.push({id:'mechanism-fade',time:water.start+offset});
+  }
   for(const id of ['ancestor','document','behind-the-film','mirror','open-source','wheel-returns','invitation']){
     const shot=shots.find(s=>s.id===id);
     for(const fraction of id==='document'||id==='open-source'?[.05,.8]:[.5]){
@@ -84,8 +108,10 @@ try{
         });
         assert.ok(picture.image.left<=0.5&&picture.image.top<=0.5&&picture.image.right>=picture.width-.5&&picture.image.bottom>=picture.height-.5,
           'The manuscript covers every edge of the video');
-        assert.equal(picture.text,'Source: Codex Atlanticus · 1078r');
-        assert.ok(picture.note.left>picture.width/2&&picture.note.top>picture.height*.85);
+        assert.equal(picture.text,'Source: Codex Atlanticus 1078r · Wikimedia Commons');
+        assert.ok(picture.note.left>picture.width*.3&&picture.note.top>picture.height*.85);
+        assert.ok(Math.abs(picture.note.right-picture.width)<.6&&Math.abs(picture.note.bottom-picture.height)<.6,
+          'The source plate touches the right and bottom edges');
         assert.notEqual(picture.background,'rgba(0, 0, 0, 0)');
       }
       checks.push({id,time,overflow});
@@ -93,6 +119,42 @@ try{
   }
   const source=doc.chapters[0].shots.find(s=>s.id==='behind-the-film');
   assert.ok(source.end-source.start<18,'The enumeration must stay brief');
+  const code=doc.chapters[0].elements['film-code'].props.code;
+  assert.ok(!/^\s*(stroke|end)\s*=/m.test(code),'Speech anchors are inline in the actual shot and cues');
+  for(const [id,element,from,to] of [
+    ['testing','tests',105,110],['behind-the-film','film-code',source.start,source.start+2],
+  ]){
+    const full=doc.chapters[0].elements[element].props.code;
+    let prior=-1;
+    for(const fraction of [0,.25,.5,.75,1]){
+      const time=from+(to-from)*fraction;
+      await seek(time);
+      // The live player's composed dissolve still displays the outgoing shot
+      // at the exact onset. Check the incoming source state there, then its DOM.
+      if(fraction===0){
+        const frame=await (await fetch(`${origin}/frame?t=${time}`)).json();
+        const state=frame.elements[`continuous.${element}`];
+        assert.equal(state.props.initiallyEmpty,true);
+        assert.ok((state.actions.find(a=>a.action==='write')?.progress??0)<.01);
+        prior=0;
+        checks.push({id:`${id}-typing`,time,characters:0,stateOnly:true});
+        continue;
+      }
+      const shown=await page.evaluate(element=>{
+        const pre=document.querySelector('iframe').contentDocument
+          .querySelector(`[data-element="continuous.${element}"] pre`).cloneNode(true);
+        pre.querySelectorAll('.line-number').forEach(el=>el.remove());
+        return [...pre.children].map(el=>el.textContent).join('\n');
+      },element);
+      assert.ok(shown.length>prior,'Source typing progresses at every sample');
+      assert.ok(full.startsWith(shown),'Typing reveals the actual source without rewriting it');
+      prior=shown.length;
+      if(fraction===0)assert.ok(shown.length<=1);
+      if(fraction===1)assert.equal(shown,full);
+      if(fraction===.5)await page.locator('iframe').screenshot({path:resolve(output,`${id}-typing.png`)});
+      checks.push({id:`${id}-typing`,time,characters:shown.length});
+    }
+  }
   const feed=doc.chapters[0].shots.find(s=>s.id==='feed-motion');
   const meta=JSON.parse(await readFile(resolve(base,'_build/narration-manifest.json')));
   const take=JSON.parse(await readFile(meta.cacheFile+'.json'));
@@ -114,10 +176,32 @@ try{
   await seek(feed.start+(firstReturn.at+firstReturn.until)/2);
   await page.locator('iframe').screenshot({path:resolve(output,'returning-pawl.png')});
   checks.push({id:'returning-pawl',time:feed.start+firstReturn.at});
+  const rope=doc.chapters[0].shots.find(s=>s.id==='consequence');
+  const ropeCue=rope.cues.find(c=>c.actions.some(a=>a.action==='highlight'));
+  assert.deepEqual(ropeCue.actions[0].parts,[
+    ['Feed mechanism','Central small-radius take-up'],
+    ['Feed mechanism','Upper roller to thin shaft'],
+    ['Feed mechanism','Carriage haul'],
+  ]);
+  await seek(rope.start+(ropeCue.at+ropeCue.until)/2);
+  await page.locator('iframe').screenshot({path:resolve(output,'complete-second-rope.png')});
+  checks.push({id:'complete-second-rope',time:rope.start+ropeCue.at,parts:ropeCue.actions[0].parts});
   const open=doc.chapters[0].shots.find(s=>s.id==='open-source');
   const returned=doc.chapters[0].shots.find(s=>s.id==='wheel-returns');
   const props=doc.chapters[0].elements.ecosystem.props;
   const driveStart=open.start+open.cues.find(c=>c.actions.some(a=>a.action==='drive')).at;
+  const approachTime=open.start+1.5;
+  await seek(approachTime);
+  const approachFrame=await (await fetch(`${origin}/frame?t=${approachTime}`)).json();
+  const approach=approachFrame.elements['continuous.ecosystem'].actions.find(a=>a.action==='approach');
+  const scale=await page.evaluate(()=>{
+    const w=document.querySelector('iframe').contentWindow;
+    return new w.DOMMatrix(w.getComputedStyle(w.document.querySelector('.constellation')).transform).a;
+  });
+  assert.ok(Math.abs(scale-approachScale(approach.progress))<.0001,'The approach uses the authored ease-out curve');
+  assert.ok(scale>.5,'The circle advances promptly from the distance');
+  await page.locator('iframe').screenshot({path:resolve(output,'open-source-ease-out.png')});
+  checks.push({id:'open-source-ease-out',time:approachTime,scale});
   const speechEnd=endOf('a stream of open source tools');
   assert.ok(returned.start<driveStart+6*props.stagger,'The handoff starts before the last tool is released');
   assert.ok(Math.abs(driveStart+props.streamDuration-speechEnd)<.001,'The stream ends with the spoken phrase');
@@ -156,22 +240,56 @@ try{
     await page.locator('iframe').screenshot({path:resolve(output,`wheel-zoom-${fraction}.png`)});
     checks.push({id:'wheel-zoom',time,distance,opacity});
   }
-  for(const offset of [0,.4,.9]){
+  let previousLogoScale=-1;
+  let fixedUrlWidth;
+  for(const offset of [0,.3,.6,.9,1.25]){
     await seek(invitation.start+offset);
-    const opacity=await page.evaluate(()=>Number(getComputedStyle(document.querySelector('iframe').contentDocument.querySelector('.signature')).opacity));
-    if(offset===0)assert.equal(opacity,0);
-    else if(offset===.4)assert.ok(opacity>.4&&opacity<.6);
-    else assert.equal(opacity,1);
-    await page.locator('iframe').screenshot({path:resolve(output,`logo-fade-${offset}.png`)});
-    checks.push({id:'logo-fade',time:invitation.start+offset,opacity});
+    const {opacity,scale,urlWidth}=await page.evaluate(()=>{
+      const w=document.querySelector('iframe').contentWindow;
+      const style=w.getComputedStyle(w.document.querySelector('.signature'));
+      const motion=w.getComputedStyle(w.document.querySelector('.logo-approach'));
+      return {opacity:Number(style.opacity),scale:new w.DOMMatrix(motion.transform).a,
+        urlWidth:w.document.querySelector('.repository-url').getBoundingClientRect().width};
+    });
+    fixedUrlWidth??=urlWidth;
+    assert.equal(urlWidth,fixedUrlWidth,'The address never scales with the approaching logo');
+    assert.equal(opacity,1,'The logo approaches from the distance, without an opacity fade');
+    assert.ok(scale>previousLogoScale,'The logo keeps approaching until it settles');
+    previousLogoScale=scale;
+    if(offset===0)assert.ok(scale<.01,'The logo starts at the wheel-centre vanishing point');
+    else if(offset===.6)assert.ok(scale>.45&&scale<.55);
+    else if(offset===1.25)assert.equal(scale,1);
+    await page.locator('iframe').screenshot({path:resolve(output,`logo-approach-${offset}.png`)});
+    checks.push({id:'logo-approach',time:invitation.start+offset,opacity,scale});
+  }
+  for(const offset of [1.25,2,2.5,3.1]){
+    await seek(invitation.start+offset);
+    const result=await page.evaluate(()=>{
+      const w=document.querySelector('iframe').contentWindow,d=w.document;
+      const url=d.querySelector('.repository-url');
+      return {opacity:Number(w.getComputedStyle(url).opacity),urlWidth:url.getBoundingClientRect().width,
+        logoWidth:d.querySelector('.wordmark').getBoundingClientRect().width,tagline:!!d.querySelector('.tagline')};
+    });
+    assert.equal(result.tagline,false);
+    if(offset<=2)assert.ok(result.opacity<.01,'Only the logo appears first');
+    else if(offset===2.5)assert.ok(result.opacity>.4&&result.opacity<.6);
+    else assert.equal(result.opacity,1);
+    assert.equal(result.urlWidth,fixedUrlWidth,'The address fades at a fixed size');
+    assert.ok(result.urlWidth>result.logoWidth&&result.urlWidth<result.logoWidth*1.2,'GitHub address is slightly wider than the logo');
+    await page.locator('iframe').screenshot({path:resolve(output,`github-fade-${offset}.png`)});
+    checks.push({id:'github-fade',time:invitation.start+offset,...result});
   }
   for(const id of ['behind-the-film','mirror']){
     const shot=doc.chapters[0].shots.find(s=>s.id===id);
     for(const cue of shot.cues){
-      const action=cue.actions.find(a=>a.action==='blink');if(!action)continue;
+      const action=cue.actions.find(a=>['blink','blink-all'].includes(a.action));if(!action)continue;
       await seek(shot.start+(cue.at+cue.until)/2);
       const tokens=await page.evaluate(()=>[...document.querySelector('iframe').contentDocument.querySelectorAll('.blink-token')].map(x=>x.textContent));
-      assert.deepEqual(tokens,[action.params.token]);
+      const count=action.action==='blink-all'?[...code.matchAll(/[A-Za-z_][A-Za-z_0-9]*/g)]
+        .filter(m=>m[0]===action.params.token).length:1;
+      assert.ok(count>0);
+      assert.deepEqual(tokens,Array(count).fill(action.params.token));
+      if(action.action==='blink-all')await page.locator('iframe').screenshot({path:resolve(output,`all-${action.params.token}.png`)});
       checks.push({id,token:action.params.token,from:shot.start+cue.at,to:shot.start+cue.until});
     }
   }
