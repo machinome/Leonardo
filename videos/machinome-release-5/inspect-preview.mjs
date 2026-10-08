@@ -24,12 +24,49 @@ try{
     await page.evaluate(async time=>{window.player.seek(time);await window.player.idle();},time);
     const fault=await page.locator('#fault').textContent();assert.equal(fault,'');
   };
-  for(const id of ['document','behind-the-film','mirror','open-source','wheel-returns','invitation']){
+  const ancestor=doc.chapters[0].shots.find(s=>s.id==='ancestor');
+  const revealOpacity=()=>page.evaluate(()=>{
+    const w=document.querySelector('iframe').contentWindow;
+    const element=w.document.querySelector('[data-element="continuous.mill"]');
+    return element?Number(w.getComputedStyle(element).opacity):0;
+  });
+  await seek(ancestor.start+.6);
+  assert.ok(Math.abs(await revealOpacity()-.5)<.06,
+    'The machine must be half faded in at the opening reveal midpoint, not cut in');
+  assert.equal(ancestor.transition.kind,'reframe');
+  for(const offset of [0,.3,.6,.9,1.25]){
+    const time=ancestor.start+offset;
+    await seek(time);
+    const opacity=await revealOpacity();
+    const progress=Math.min(1,offset/1.2),expected=progress*progress*(3-2*progress);
+    assert.ok(Math.abs(opacity-expected)<.06);
+    const frame=await (await fetch(`${origin}/frame?t=${time}`)).json();
+    const wheel=frame.elements['continuous.wheel'],mill=frame.elements['continuous.mill'];
+    assert.equal(wheel.time,mill.time,'Both layers show the same rotating wheel pose');
+    assert.deepEqual(wheel.view,mill.view,'No double image during the reveal');
+    const wheelOpacity=await page.evaluate(()=>{
+      const w=document.querySelector('iframe').contentWindow;
+      return Number(w.getComputedStyle(w.document.querySelector('[data-element="continuous.wheel"]')).opacity);
+    });
+    assert.equal(wheelOpacity,1,'The opening wheel stays fully visible');
+    await page.locator('iframe').screenshot({path:resolve(output,`opening-reveal-${offset}.png`)});
+    checks.push({id:'opening-reveal',time,opacity,wheelOpacity});
+  }
+  for(const id of ['ancestor','document','behind-the-film','mirror','open-source','wheel-returns','invitation']){
     const shot=shots.find(s=>s.id===id);
     for(const fraction of id==='document'||id==='open-source'?[.05,.8]:[.5]){
       const time=shot.start+(shot.end-shot.start)*fraction;
       await seek(time);
       await page.locator('iframe').screenshot({path:resolve(output,`${id}-${fraction}.png`)});
+      if(id==='ancestor'){
+        const withBase=await page.locator('iframe').screenshot();
+        await page.evaluate(()=>document.querySelector('iframe').contentDocument
+          .querySelector('[data-element="continuous.wheel"]').style.visibility='hidden');
+        const withoutBase=await page.locator('iframe').screenshot();
+        assert.ok(withBase.equals(withoutBase),'The faded-in machine must fully cover the old wheel during the orbit');
+        await page.evaluate(()=>document.querySelector('iframe').contentDocument
+          .querySelector('[data-element="continuous.wheel"]').style.visibility='');
+      }
       const overflow=await page.evaluate(()=>[...document.querySelector('iframe').contentDocument.querySelectorAll('.listing')]
         .map(el=>({file:el.querySelector('.listing-file').textContent,
           bottom:el.querySelector('pre').getBoundingClientRect().bottom,

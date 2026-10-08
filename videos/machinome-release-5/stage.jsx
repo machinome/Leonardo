@@ -6,7 +6,7 @@ import './stage.css';
 import './_build/fonts.css';
 
 const sets={
-  exhibition:['ghost','stage','graphic','heading','note','veil'],
+  exhibition:['ghost','backdrop','stage','graphic','heading','note','veil'],
   mechanism:['ghost','stage','note'], archive:['picture','note'],
   workbench:['stage','imports','code'], 'source-room':['code'],
   'test-bench':['stage','code','note'],

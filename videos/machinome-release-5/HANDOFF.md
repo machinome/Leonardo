@@ -25,7 +25,9 @@ Review the full-frame manuscript reveal and bottom-right source label, shorter
 code enumeration, token flashes, faster stream overlapping the physical wheel,
 short pause, and closing zoom on “and humans”. The wheel disappears by the end
 of “their own”, then the logo fades in. The closing question remains speech
-only. No MP4 has been rendered. Twenty-eight live browser checks pass.
+only. The opening machine reveal now fades in from 7.29s to 8.49s while the
+wheel stays fully visible. No MP4 has been rendered. Thirty-four live browser
+checks pass, including absence of a duplicate wheel during the later orbit.
 
 The live player still shows composed dissolves as cuts at their midpoint.
 Cut 5 declares a 1.8-second transition starting on “With Machinome” and a
@@ -33,8 +35,10 @@ Cut 5 declares a 1.8-second transition starting on “With Machinome” and a
 player cannot demonstrate their final blended appearance. The pilot was
 told this limitation during work. Do not claim the crossfades were visually
 reviewed as rendered, or silently expand this into a Videomaker change.
-The wheel/stream overlap and ending zoom/fade instead use project-owned live
-actions and have been inspected in the browser.
+The opening reveal now uses a supported live reframe, with the complete
+incoming view (including its opaque background) fading over a shared wheel.
+The wheel/stream overlap and ending zoom/fade use project-owned live actions.
+These have been inspected in the browser. This is not a tool-wide dissolve fix.
 
 This revision's narration was generated once. `speech.mjs` retains the provider
 original and inserts a documented 1.2-second silence before the return

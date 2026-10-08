@@ -6,6 +6,10 @@ Commissioned 7 October 2026 from the pilot's viewing of cut 4; revised in place
 on 8 October after reviewing cut 5.
 Status: implementation for live preview; no MP4 requested.
 
+- Opening reveal: keep the wheel solid while the machine fades in behind it
+  over 1.2 seconds. The original dissolve was authored but shown as a cut by
+  the live player; use the supported live reframe with identical view boxes
+  and an opaque incoming view plate. No duplicate wheel remains in the orbit.
 - Highlight the driving pawl again on “while the first returns”.
 - Historical drawing: start with the sawmill drawing filling the entire frame,
   then pull back to reveal the manuscript, never exposing black borders. Put
@@ -40,5 +44,6 @@ model export and image assets. No CAD edits, video render or publication.
 The live player's composed dissolves are currently displayed as midpoint
 cuts; their authored timing is inspectable, but their blend requires the
 renderer or still-frame inspection. This preview does not claim otherwise.
-The stream/wheel overlap, final wheel disappearance and logo fade use actual
-project-owned opacity actions and are visible in the live player.
+The opening reveal uses a live reframe; the stream/wheel overlap, final wheel
+disappearance and logo fade use actual project-owned opacity actions. All
+are visible in the live player.

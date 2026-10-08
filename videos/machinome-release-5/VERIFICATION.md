@@ -20,12 +20,26 @@ The standard check passes, including the drawing's peak enlargement of
 3.36 against its explicit 3.4 allowance. This is the requested close crop of
 the existing 1000×1000 image, not a higher-resolution replacement. The movie
 reuses the existing cut-3 export.
-`inspect-preview.mjs` passes 28 browser frame/cue checks: manuscript coverage
+`inspect-preview.mjs` passes 34 browser frame/cue checks: five opening fade
+positions and a later orbit frame, manuscript coverage
 and source-label placement, code bounds, seven enumeration tokens and four
 meta-scene tokens, returning-pawl highlight, stream/wheel overlap, four zoom
 positions, three logo-fade positions, and absence of the closing question.
 Screenshots of the manuscript, code, overlap, zoom and logo were inspected.
 No page errors were reported. `git diff --check` passes.
+
+Opening-reveal correction: the original `Dissolve(1.2)` was present in the
+movie; the live player's documented midpoint-cut approximation caused the
+abrupt appearance. A browser assertion for half-opacity at the reveal's
+midpoint failed before the correction. The opening now uses `Reframe(1.2)`
+with a shared, fully visible wheel in an identical backdrop box and the full
+machine fading over it from 7.292 to 8.492 seconds. Both views have the same
+camera and model time throughout the fade. Screenshot inspection caught a
+duplicate background wheel during the later orbit: the incoming view now
+fades its opaque background plate too. A pixel comparison that hides the old
+wheel at the orbit midpoint failed before that fix and passes afterward.
+Opening fade and orbit screenshots were inspected. This is an episode edit,
+not a general live-player dissolve fix; no narration was regenerated.
 
 Key locations in the revised film:
 
@@ -61,7 +75,8 @@ displayed on the movie's 24 fps grid. Cue readback matches the intended
 token in the actual browser.
 
 Limits: the live player approximates composed dissolves as midpoint cuts;
-this applies to the other scene joins, not the custom closing actions above.
+this applies to the other scene joins, not the opening reframe or the custom
+closing actions above.
 This run verified those joins' declared timings, not final blended pixels.
 The provider assigned only 10 ms to “crankshaft” and 4 ms to the following
 “With”. A separate forced-alignment request was refused with HTTP 401 by the

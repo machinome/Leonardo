@@ -28,8 +28,10 @@ the film's three-second lead-in. It does not request speech or render video.
 
 The live player shows composed dissolves as midpoint cuts. Review their
 timing here; this player does not yet show their final blended appearance.
-The stream/wheel overlap and closing zoom/fade are project-owned live actions
-and do display their blending. Current duration: 191 seconds. The second
+The opening machine reveal now uses a live reframe from 7.29s to 8.49s:
+the wheel stays solid and the full machine fades in. The stream/wheel overlap
+and closing zoom/fade are project-owned live actions and also display their
+blending. Current duration: 191 seconds. The second
 wheel line starts around 174.8s, its zoom starts at 177.96s, and the logo
 begins fading in at 179.83s. See [VERIFICATION.md](VERIFICATION.md) for checks
 and the known provider-alignment issue.

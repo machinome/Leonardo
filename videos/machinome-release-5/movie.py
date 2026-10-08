@@ -5,7 +5,7 @@ from pathlib import Path
 from machinome_movie import (
     Action, Camera, Chapter, Credits, Cue, Dissolve, Element, Evidence,
     FadeIn, FadeOut, Format, Layer, Loop, Movie, Narrator, Picture,
-    Release, Set, Shot, Slot, Source, Still, Style, Title, View, evaluate, write,
+    Reframe, Release, Set, Shot, Slot, Source, Still, Style, Title, View, evaluate, write,
 )
 from models.hydraulic_sawmill.model import LeonardoHydraulicSawmill as Mill
 from narration import AUDIO, lines
@@ -21,6 +21,7 @@ class Exhibition(Set):
     module = 'stage.jsx'
     stage = Slot()
     ghost = Slot()
+    backdrop = Slot()
     heading = Slot()
     note = Slot()
     graphic = Slot()
@@ -220,8 +221,11 @@ class Continuous(Chapter):
     revolution = Shot(Exhibition, {Exhibition.stage: wheel},
         until=lines.spoken('Five centuries'), fade_in=FadeIn(0.5),
         model=Sawmill.run(400, 404))
-    ancestor = Shot(Exhibition, {Exhibition.stage: mill, Exhibition.heading: identity},
-        until=lines.spoken('Water beneath'), transition=Dissolve(1.2),
+    # Keep the wheel as an opaque base while the full machine fades over it.
+    # Reframe draws this live; a composed dissolve is a cut in the player.
+    ancestor = Shot(Exhibition, {Exhibition.backdrop: wheel, Exhibition.stage: mill,
+                                Exhibition.heading: identity},
+        until=lines.spoken('Water beneath'), transition=Reframe(1.2),
         model=Sawmill.run(404, 424), cues=[
             Cue(0, identity.show(enter=0.6, leave=0.6), until=lines.spoken('I am a machine')),
             # finish.mjs samples one continuous orbit on the measured take.
