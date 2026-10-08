@@ -34,7 +34,7 @@ for(const id of ['behind-the-film','mirror']){
     if(id==='mirror'&&!phrase.startsWith('code of'))continue;
     const index=alignedText.indexOf(phrase);
     assert.ok(index>=0&&alignedText.indexOf(phrase,index+1)<0);
-    const firstWord=phrase.split(' ')[0];
+    const firstWord=phrase.split(' ')[0].replace(/[.,;:!?]+$/,'');
     const last=Array.from(alignedText.slice(0,index)+firstWord).length-1;
     cue.until=chapter.speechOffset+take.alignment.character_end_times_seconds[last]-timed.start;
   }
@@ -113,6 +113,17 @@ for(const cue of two.cues)for(const action of cue.actions)action.element='return
 const open=chapter.shots.find(s=>s.id==='open-source');
 const openTimed=measured.chapters[0].shots.find(s=>s.id==='open-source');
 const driveStart=openTimed.start+openTimed.cues.find(c=>c.actions.some(a=>a.action==='drive')).at;
+// Every label gets the same acceleration. Fit all seven passages into the
+// measured speech, starting on Trimesh and ending with the word tools.
+const streamPhrase='a stream of open source tools';
+const streamIndex=alignedText.indexOf(streamPhrase);
+assert.ok(streamIndex>=0&&alignedText.indexOf(streamPhrase,streamIndex+1)<0);
+const streamLast=Array.from(alignedText.slice(0,streamIndex)+streamPhrase).length-1;
+const streamEnd=chapter.speechOffset+take.alignment.character_end_times_seconds[streamLast];
+const streamDuration=streamEnd-driveStart;
+const streamRate=streamDuration/5.8;
+Object.assign(chapter.elements.ecosystem.props,{arrival:1.65*streamRate,
+  stagger:.45*streamRate,streamDuration});
 const returned=chapter.shots.find(s=>s.id==='wheel-returns');
 const returnTimed=measured.chapters[0].shots.find(s=>s.id==='wheel-returns');
 const handoffDuration=returned.transition.duration;
@@ -121,7 +132,7 @@ chapter.elements['handoff-ecosystem']=structuredClone(chapter.elements.ecosystem
 Object.assign(chapter.elements['handoff-ecosystem'].props,{timeOffset:offset,fadeDuration:handoffDuration});
 returned.places.graphic='handoff-ecosystem';
 delete returned.transition;
-returned.cues=[{at:0,until:returned.until,actions:[
+returned.cues=[...(returned.cues??[]),{at:0,until:returned.until,actions:[
   {element:'handoff-ecosystem',action:'drive',params:{}},
   ...chapter.elements.ecosystem.props.names.map(name=>({element:'handoff-ecosystem',action:'reveal',params:{name}})),
 ]}];

@@ -112,7 +112,7 @@ export async function main(args) {
     assert.ok(alignment, 'Provider text differs from the script; response retained, no retry.');
     validateAlignment(alignment, 'continuous');
     // Keep provider audio intact beside the deliberately edited preview take.
-    // Seven seconds of silence give the stream and wheel time to breathe.
+    // Only a brief pause on the wheel; the stream finishes during speech.
     await writeFile(resolve(build, 'provider-original.wav'), pcmWav(originalPCM, 24000));
     const returnText = 'The wheel... makes revolutions... and humans... build';
     const textBefore = alignment.characters.join('').split(returnText)[0];
@@ -120,7 +120,7 @@ export async function main(args) {
     const boundary = Array.from(textBefore).length;
     const at = alignment.character_start_times_seconds[boundary];
     const cutSample = Math.round(at * 24000);
-    const silenceSeconds = 7;
+    const silenceSeconds = 1.2;
     const pcm = Buffer.concat([originalPCM.subarray(0, cutSample * 2),
       Buffer.alloc(silenceSeconds * 48000), originalPCM.subarray(cutSample * 2)]);
     for (let i = boundary; i < alignment.characters.length; i++) {
@@ -129,7 +129,7 @@ export async function main(args) {
     }
     const wav = pcmWav(pcm, 24000);
     const edits = [{kind:'insert-silence', at:cutSample / 24000, seconds:silenceSeconds,
-      reason:'Let the stream arrive and the spinning wheel build before the return line'}];
+      reason:'Brief pause on the physical wheel after the narrated stream handoff'}];
     const duration = pcm.length / 48000;
     assert.ok(alignment.character_end_times_seconds.at(-1) <= duration + 0.05);
     resolveBeats(alignment, input.beats, duration);

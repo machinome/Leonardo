@@ -6,7 +6,7 @@ import './stage.css';
 import './_build/fonts.css';
 
 const sets={
-  exhibition:['ghost','stage','graphic','heading','note'],
+  exhibition:['ghost','stage','graphic','heading','note','veil'],
   mechanism:['ghost','stage','note'], archive:['picture','note'],
   workbench:['stage','imports','code'], 'source-room':['code'],
   'test-bench':['stage','code','note'],
@@ -48,30 +48,41 @@ function Listing({state}){
 }
 function Signature({state}){
   const p=state.actions.find(a=>a.action==='enter');
-  return <div className={'signature'+(state.props.compact?' compact':'')}>
+  const opacity=p?smooth(p.progress):1;
+  useReport({opacity});
+  return <div className={'signature'+(state.props.compact?' compact':'')} style={{opacity}}>
     <div className="wordmark" dangerouslySetInnerHTML={{__html:state.props.svg}}/>
     <div className="tagline">{state.props.tagline}</div>
     {state.props.url&&<div className="repository-url">{state.props.url}</div>}
     {state.props.question&&<div className="question" style={{opacity:p?smooth(elapsed(p)/.65):0}}>{state.props.question}</div>}
   </div>;
 }
+function Curtain({state}){
+  const p=state.actions.find(a=>a.action==='darken');
+  // Be completely dark for the last two frames before the logo starts.
+  const opacity=p?smooth(elapsed(p)/.4):0;
+  useReport({opacity});
+  return <div className="wheel-exit" style={{position:'absolute',inset:0,background:'#101419',opacity}}/>;
+}
 function Constellation({state}){
-  const {names,mark,title,drivers,spacing,timeOffset=0,fadeDuration=0}=state.props;
+  const {names,mark,title,drivers,stagger,streamDuration,timeOffset=0,fadeDuration=0}=state.props;
   const reveal=name=>state.actions.find(a=>a.action==='reveal'&&a.params.name===name);
   const drive=state.actions.find(a=>a.action==='drive');
   const driverElapsed=elapsed(drive)+timeOffset;
   const rotation=wheelAngle(driverElapsed,state.props);
   const approach=state.actions.find(a=>a.action==='approach');
   const scale=approach?.18+.82*smooth(approach.progress):1;
-  const positions=drivers.map((name,i)=>({name,x:driverX(driverElapsed-i*.85,state.props)}));
+  const positions=drivers.map((name,i)=>({name,x:driverX(driverElapsed-i*stagger,state.props)}));
   const opacity=fadeDuration?1-smooth(elapsed(drive)/fadeDuration):1;
-  useReport({rotation,driverElapsed,scale,opacity,visible:names.filter(n=>reveal(n)),
+  const streamOpacity=drive?1-smooth((driverElapsed-streamDuration+.15)/.15):0;
+  useReport({rotation,driverElapsed,scale,opacity,streamOpacity,visible:names.filter(n=>reveal(n)),
     drivers:positions});
-  return <div className="constellation" style={{background:'#101419',opacity,transform:`scale(${scale})`,transformOrigin:'50% 50%'}}>
-    <div className="graph-title">{title}</div>
+  return <div className="constellation" style={{transform:`scale(${scale})`,transformOrigin:'50% 50%'}}>
+    <div style={{position:'absolute',inset:0,background:'#101419',opacity}}/>
+    <div className="graph-title" style={{opacity}}>{title}</div>
     <svg viewBox="0 0 1920 1080" className="spokes">
-      <path d="M1920 835 H0" fill="none" stroke="#79a7b9" strokeWidth="2" opacity={drive?.45:0}/>
-      <g transform={`rotate(${rotation} 960 540)`}>
+      <path d="M1920 835 H0" fill="none" stroke="#79a7b9" strokeWidth="2" opacity={.45*streamOpacity}/>
+      <g opacity={opacity} transform={`rotate(${rotation} 960 540)`}>
         <circle cx="960" cy="540" r="275" fill="none" stroke="#8c9ba8" strokeWidth="1" opacity=".22"/>
         {names.map((name,i)=>{
           const a=-Math.PI/2+i*Math.PI/4, r=reveal(name);
@@ -87,11 +98,12 @@ function Constellation({state}){
         })}
       </g>
       {drive&&positions.map(({name,x},i)=><text key={name} className="incoming" textAnchor="middle"
-        opacity={driverElapsed>=i*.85?1:0} x={x} y={820}>{name}</text>)}
+        opacity={driverElapsed>=i*stagger?streamOpacity:0} x={x} y={820}>{name}</text>)}
     </svg>
-    <div className="hub-mark" dangerouslySetInnerHTML={{__html:mark}}/>
+    <div className="hub-mark" style={{opacity}} dangerouslySetInnerHTML={{__html:mark}}/>
   </div>;
 }
 defineElement({kind:'listing',component:Listing});
 defineElement({kind:'signature',component:Signature});
+defineElement({kind:'curtain',component:Curtain});
 defineElement({kind:'constellation',component:Constellation});

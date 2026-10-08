@@ -14,6 +14,7 @@ from scene_source import excerpt, model_excerpt, token_line
 HERE = Path(__file__).resolve().parent
 BRAND = HERE.parent / 'machinome-release-3/assets'
 RETURN = 'The wheel... makes revolutions... and humans... build'
+HANDOFF = 'And beneath it all'
 
 
 class Exhibition(Set):
@@ -23,6 +24,7 @@ class Exhibition(Set):
     heading = Slot()
     note = Slot()
     graphic = Slot()
+    veil = Slot()
 
 
 class Mechanism(Set):
@@ -78,11 +80,17 @@ class Signature(Element):
     enter = Action()
 
 
+class Curtain(Element):
+    module = 'stage.jsx'
+    darken = Action()
+
+
 class Sawmill(Loop):
     model = Mill
     export = '../machinome-release-3/_build/model'
     readiness = 'Posed reconstruction of a museum interpretation; no fluid, force or cutting physics.'
     wheel = Camera(position=(0, -575, 120), target=(0, -151, 120), fov=37)
+    hub = Camera(position=(0, -154, 120), target=(0, -151, 120), fov=37)
     wide = Camera(position=(948, -1273, 856), target=(0, -20, 205), fov=37)
     side = Camera(position=(980, -450, 780), target=(0, 0, 260), fov=37)
     rear = Camera(position=(850, 850, 710), target=(0, 0, 285), fov=37)
@@ -107,7 +115,7 @@ class Sawmill(Loop):
     drawing = Still('../machinome-release-3/assets/000R-1078.jpg',
                     credit='Leonardo da Vinci, Codex Atlanticus 1078r; codex-atlanticus.it via Wikimedia Commons, File:000R-1078.jpg.',
                     rights='Public domain, as recorded by Wikimedia Commons (PD-Art / PD-old); retrieved 2026-10-07.',
-                    upscale=1.5)
+                    upscale=3.4)
 
 
 class CrankStroke:
@@ -160,12 +168,15 @@ class ThisScene:
 
 
 def technology_cues(element):
-    return [Cue(lines.spoken(name), element.reveal(name=name), until=lines.spoken(RETURN, plus=-3.5))
+    return [Cue(lines.spoken(name), element.reveal(name=name), until=lines.spoken(HANDOFF))
             for name in ['OpenSCAD', 'SolidPython', 'CadQuery', 'Build123d', 'FreeCAD', 'JSCAD', 'OCCT', 'Trimesh']]
 
 
 def relation_blinks(element):
-    return [Cue(lines.spoken(word), element.blink(token=word, line=416, occurrence=0),
+    # This take's crankshaft interval is only 10 ms, immediately before the
+    # next shot. Give it one preceding frame; do not invent audio timestamps.
+    return [Cue(lines.spoken(word, plus=-1/24 if word == 'crankshaft' else 0),
+                element.blink(token=word, line=416, occurrence=0),
                 until=lines.spoken_end(word))
             for word in ['waterwheel', 'spin', 'drives', 'crankshaft']]
 
@@ -179,10 +190,11 @@ class Continuous(Chapter):
     feed = View(Sawmill, camera=Sawmill.saw, hide=[Sawmill.feed_context])
     ropes = View(Sawmill, camera=Sawmill.pawls, hide=[Sawmill.rope_context])
     returned = View(Sawmill, camera=Sawmill.wheel, hide=[Sawmill.not_wheel])
+    wheel_exit = Curtain()
     identity = Title('Hydraulic sawmill', subtitle='LEONARDO DA VINCI')
     limits = Title('Reconstructed motion · forces and cutting not simulated')
-    drawing = Picture(Sawmill.drawing, fit='contain')
-    drawing_source = Title('Codex Atlanticus · 1078r')
+    drawing = Picture(Sawmill.drawing, fit='cover')
+    drawing_source = Title('Source: Codex Atlanticus · 1078r')
     python = Signature(svg=(HERE.parent / 'machinome-release-2/assets/python-logo.svg').read_text(),
                        tagline='Python', url='', question='', compact=True)
     imports = Source.panel(Sawmill.imports)
@@ -197,7 +209,8 @@ class Continuous(Chapter):
         names=['OpenSCAD', 'SolidPython', 'CadQuery', 'Build123d', 'FreeCAD', 'JSCAD', 'OCCT', 'Trimesh'],
         drivers=['Three.js', 'NumPy', 'SciPy', 'Manifold', 'FastAPI', 'React', 'OpenSpec'],
         spacing=310.0, mark=(BRAND / 'mark-orange.svg').read_text(),
-        title='OPEN SOURCE', arrival=2.5, angularAcceleration=7.0, entrySpeedFraction=0.45, timeOffset=0.0, fadeDuration=0.0,
+        title='OPEN SOURCE', arrival=1.65, stagger=0.45, streamDuration=5.8,
+        angularAcceleration=7.0, entrySpeedFraction=0.65, timeOffset=0.0, fadeDuration=0.0,
     )
     signature = Signature(svg=(BRAND / 'wordmark-orange.svg').read_text(),
                           tagline='Source code for machines.',
@@ -239,6 +252,8 @@ class Continuous(Chapter):
                 until=lines.spoken('A second pawl', plus=-0.25)),
             Cue(lines.spoken('A second pawl'), feed.highlight(Mill.feed.holding_pawl, others='keep'),
                 until=lines.spoken('while the first returns')),
+            Cue(lines.spoken('while the first returns'), feed.highlight(Mill.feed.pawl, others='keep'),
+                until=lines.spoken_end('while the first returns')),
             Cue(0, limits.show(), until=lines.spoken('That small step')),
         ])
     transmission = Shot(Mechanism, {Mechanism.ghost: ghost, Mechanism.stage: ropes, Mechanism.note: limits},
@@ -273,8 +288,8 @@ class Continuous(Chapter):
         model=Sawmill.run(460, 464), cues=[Cue(0, mill.move(Sawmill.wide, until=lines.spoken('To reconstruct')))])
     document = Shot(Archive, {Archive.picture: drawing, Archive.note: drawing_source},
         until=lines.spoken('and used the Python'), model=Sawmill.run(464, 470), transition=Dissolve(0.4), cues=[
-            Cue(0, drawing.show(leave=0.2, view=[(0, (0.5, 0.34), 1.7),
-                (lines.spoken('and used the Python'), (0.5, 0.5), 1.0, 'out')]),
+            Cue(0, drawing.show(view=[(0, (0.51, 0.26), 1.75),
+                (lines.spoken('and used the Python'), (0.5, 0.35), 1.0, 'out')]),
                 drawing_source.show(enter=0.3, leave=0.2), until=lines.spoken('and used the Python'))])
     python_language = Shot(Exhibition, {Exhibition.graphic: python},
         until=lines.spoken('From Machinome'), model=Sawmill.run(470, 472), transition=Dissolve(0.35))
@@ -313,29 +328,33 @@ class Continuous(Chapter):
     behind_the_film = Shot(SourceRoom, {SourceRoom.code: film_code},
         until=lines.spoken("And here's the code"), model=Sawmill.run(480, 484), transition=Dissolve(0.9),
         cues=source_cues(film_code, 'CrankStroke', [
-                ('narration holds', 'narration =', 'narration'),
-                ('View selects', 'view = View', 'View'),
-                ('stroke uses', 'stroke =', 'stroke'),
-                ('spoken to find', 'stroke =', 'spoken'),
-                ('Cue starts', 'Cue(0,', 'Cue'),
-                ('move sends', 'Cue(0,', 'move'),
-                ('until makes', 'Cue(0,', 'until'),
-                ('highlight lights', 'Cue(stroke,', 'highlight'),
-                ('end cuts', 'end =', 'end'),
+                ('narration, a camera', 'narration =', 'narration'),
+                ('camera, a shot', 'view = View', 'camera'),
+                ('shot. Cues', 'shot =', 'shot'),
+                ('Cues move', 'cues=[', 'cues'),
+                ('move the camera', 'Cue(0,', 'move'),
+                ('highlight the saw', 'Cue(stroke,', 'highlight'),
+                ('spoken words', 'stroke =', 'spoken'),
             ]))
     mirror = ThisScene.shot
     open_source = Shot(Exhibition, {Exhibition.graphic: ecosystem},
-        until=lines.spoken(RETURN, plus=-3.5), model=Sawmill.run(488, 492), transition=Dissolve(0.4), cues=[
-            Cue(0, ecosystem.hub(), until=lines.spoken(RETURN, plus=-3.5)),
+        until=lines.spoken(HANDOFF), model=Sawmill.run(488, 492), transition=Dissolve(0.4), cues=[
+            Cue(0, ecosystem.hub(), until=lines.spoken(HANDOFF)),
             Cue(0, ecosystem.approach(), until=lines.spoken('OpenSCAD')),
             *technology_cues(ecosystem),
-            Cue(lines.spoken('And beneath it all'), ecosystem.drive(), until=lines.spoken(RETURN, plus=-3.5)),
+            Cue(lines.spoken('Trimesh'), ecosystem.drive(), until=lines.spoken(HANDOFF)),
         ])
-    wheel_returns = Shot(Exhibition, {Exhibition.stage: returned}, until=lines.spoken("I'm Machinome"),
-        model=Sawmill.run(492, 496), transition=Dissolve(1.25))
+    wheel_returns = Shot(Exhibition, {Exhibition.stage: returned, Exhibition.veil: wheel_exit},
+        until=lines.spoken_end('their own'),
+        model=Sawmill.run(492, 496), transition=Dissolve(1.25), cues=[
+            Cue(lines.spoken('and humans...'),
+                returned.move(Sawmill.hub, until=lines.spoken_end('their own'), ease='linear')),
+            Cue(lines.spoken_end('their own', plus=-0.5), wheel_exit.darken(),
+                until=lines.spoken_end('their own')),
+        ])
     invitation = Shot(Exhibition, {Exhibition.graphic: signature}, until=lines.end(plus=2.5),
-        model=Sawmill.run(496, 504), transition=Dissolve(0.8), fade_out=FadeOut(0.7), cues=[
-            Cue(lines.spoken('What do YOU want'), signature.enter(), until=lines.end(plus=2.5))])
+        model=Sawmill.run(496, 504), fade_out=FadeOut(0.7), cues=[
+            Cue(0, signature.enter(), until=0.8)])
 
 
 class Revolutions(Movie):

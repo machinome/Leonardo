@@ -46,14 +46,9 @@ TESTING = (
     "Each sample poses the machine again, then checks the geometry. "
 )
 FILM_SOURCE = (
-    "This video's source code is in Python too. Here is the crank scene "
-    "you just watched. narration holds its words. View selects the model "
-    "and camera. stroke uses spoken to find the recorded moment of the "
-    "phrase about the saw's stroke. Cue starts a camera move at zero. "
-    "move sends it towards the saw; until makes it arrive on that word. "
-    "highlight lights the sash at that same spoken moment. "
-    "end cuts to the next shot when its phrase begins. "
-    "The recording sets the timing, so the picture follows the voice."
+    "This video's source code is in Python too. "
+    "A narration, a camera, a shot. "
+    "Cues move the camera and highlight the saw in sync with the spoken words."
 )
 THIS_SCENE = scene_narration("ThisScene")
 OPEN_SOURCE = (
