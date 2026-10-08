@@ -23,13 +23,13 @@ function syntax(line){
 }
 function Listing({state}){
   const token=state.actions.find(a=>a.action==='focus')?.params.token;
-  const blink=state.actions.find(a=>a.action==='blink')?.params;
+  const blinks=state.actions.filter(a=>a.action==='blink').map(a=>a.params);
   const all=state.actions.find(a=>a.action==='blink-all')?.params.token;
   const typing=state.actions.find(a=>a.action==='write');
   const reveal=state.actions.find(a=>a.action==='complete');
   const progress=typing?.progress??(reveal||!state.props.initiallyEmpty?1:0);
   const shown=state.props.code.slice(0,Math.ceil(state.props.code.length*progress));
-  useReport({sourceSha256:state.props.digest,text:shown,blink:blink??null,all:all??null});
+  useReport({sourceSha256:state.props.digest,text:shown,blink:blinks[0]??null,blinks,all:all??null});
   const renderLine=(line,i)=>{
     if(all){
       const matches=[...line.matchAll(/[A-Za-z_][A-Za-z_0-9]*/g)].filter(m=>m[0]===all);
@@ -41,7 +41,8 @@ function Listing({state}){
       }
       return <>{pieces}{syntax(line.slice(end))}</>;
     }
-    if(!blink||state.props.numbers[i]!==blink.line)return syntax(line);
+    const blink=blinks.find(mark=>mark.line===state.props.numbers[i]);
+    if(!blink)return syntax(line);
     let at=-1;
     for(let n=0;n<=blink.occurrence;n++)at=line.indexOf(blink.token,at+1);
     if(at<0)throw Error(`Missing highlighted token ${blink.token} at ${blink.line}`);
@@ -83,6 +84,10 @@ function Curtain({state}){
 function Constellation({state}){
   const {names,mark,title,drivers,stagger,streamDuration,timeOffset=0,fadeDuration=0}=state.props;
   const reveal=name=>state.actions.find(a=>a.action==='reveal'&&a.params.name===name);
+  const technologyOpacity=name=>{
+    const cue=reveal(name);
+    return timeOffset?1:cue?smooth(elapsed(cue)/.35):0;
+  };
   const drive=state.actions.find(a=>a.action==='drive');
   const driverElapsed=elapsed(drive)+timeOffset;
   const rotation=wheelAngle(driverElapsed,state.props);
@@ -99,10 +104,10 @@ function Constellation({state}){
     <svg viewBox="0 0 1920 1080" className="spokes">
       <path d="M1920 835 H0" fill="none" stroke="#79a7b9" strokeWidth="2" opacity={.45*streamOpacity}/>
       <g opacity={opacity} transform={`rotate(${rotation} 960 540)`}>
-        <circle cx="960" cy="540" r="275" fill="none" stroke="#8c9ba8" strokeWidth="1" opacity=".22"/>
+        <circle cx="960" cy="540" r="275" fill="none" stroke="#8c9ba8" strokeWidth="1" opacity={.22*technologyOpacity(names[0])}/>
         {names.map((name,i)=>{
-          const a=-Math.PI/2+i*Math.PI/4, r=reveal(name);
-          const opacity=timeOffset?1:r?smooth(elapsed(r)/.35):0;
+          const a=-Math.PI/2+i*Math.PI/4;
+          const opacity=technologyOpacity(name);
           const x=960+Math.cos(a)*275,y=540+Math.sin(a)*275;
           return <g key={name} opacity={opacity}>
             <line x1={960+Math.cos(a)*110} y1={540+Math.sin(a)*110} x2={x} y2={y} stroke="#e9b778" strokeWidth="2"/>

@@ -40,11 +40,14 @@ The rehearsal reuses the current finished movie and cached narration unchanged.
   Type this source during its first two seconds, 131.08–133.08s. Inline the
   stroke and end anchors in the real source: no distant helper variables.
   On “Cues”, flash all four `Cue` declarations, then all three `highlight`
-  calls on “highlight” and all eight `spoken` calls on “spoken”.
+  calls on “highlight”. On “spoken”, flash only the seven calls inside those
+  four `Cue` declarations; leave the earlier shot-ending call unhighlighted
+  so the eye stays in the cue block. This supersedes the all-eight direction.
   Retain word cues in the ThisScene meta-reference.
-- Bring the open-source circle and title forward from the distance;
+- Bring the M and Open Source title forward from the distance;
   use a cubic ease-out to advance promptly and settle at full scale on the
-  first technology's spoken onset.
+  first technology's spoken onset. Keep the circumference hidden during the
+  approach; reveal it with the first OpenSCAD label and spoke, on the same fade.
 - Give each supporting technology its own acceleration from entry,
   with equal stagger and equal time through the readable region.
 - Start the stream on “Trimesh” and start revealing the physical wheel on

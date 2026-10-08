@@ -10,6 +10,7 @@ from machinome_movie import (
 from models.hydraulic_sawmill.model import LeonardoHydraulicSawmill as Mill
 from narration import AUDIO, lines
 from scene_source import excerpt, model_excerpt, token_line
+from scene_source import cue_token_lines
 
 HERE = Path(__file__).resolve().parent
 BRAND = HERE.parent / 'machinome-release-3/assets'
@@ -195,6 +196,11 @@ def relation_blinks(element):
             for word in ['waterwheel', 'spin', 'drives', 'crankshaft']]
 
 
+def cue_blinks(element, scene, token):
+    return [element.blink(token=token, line=row, occurrence=0)
+            for row in cue_token_lines(scene, token)]
+
+
 class Continuous(Chapter):
     performance = lines
     wheel = View(Sawmill, camera=Sawmill.wheel, hide=[Sawmill.not_wheel])
@@ -361,8 +367,10 @@ class Continuous(Chapter):
                 ('Cues move', None, 'Cue'),
                 ('move the camera', 'Cue(0,', 'move'),
                 ('highlight the saw', None, 'highlight'),
-                ('spoken words', None, 'spoken'),
-            ])])
+            ]),
+              Cue(lines.spoken('spoken words'),
+                  *cue_blinks(film_code, 'CrankStroke', 'spoken'),
+                  until=lines.spoken_end('spoken words'))])
     mirror = ThisScene.shot
     open_source = Shot(Exhibition, {Exhibition.graphic: ecosystem},
         until=lines.spoken(HANDOFF), model=Sawmill.run(488, 492), transition=Dissolve(0.4), cues=[

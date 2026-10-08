@@ -14,6 +14,9 @@ request on 8 October 2026: 191 seconds, 1920×1080, 24 fps. Optional
 The live preview now includes the subsequent relation-word sync correction:
 `drives` at 101.917s and `crankshaft` at 102.458s. The existing MP4 predates
 this correction and is retained unchanged; no replacement render was requested.
+The preview also confines “spoken” to the seven calls inside the displayed
+`Cue`s (142.3s), and delays the circumference until the OpenSCAD label and
+spoke appear (157.75s). Only the M and title approach beforehand.
 
 From the Leonardo repository:
 

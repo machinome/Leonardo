@@ -219,9 +219,26 @@ try{
     return new w.DOMMatrix(w.getComputedStyle(w.document.querySelector('.constellation')).transform).a;
   });
   assert.ok(Math.abs(scale-approachScale(approach.progress))<.0001,'The approach uses the authored ease-out curve');
-  assert.ok(scale>.5,'The circle advances promptly from the distance');
+  assert.ok(scale>.5,'The M and title advance promptly from the distance');
   await page.locator('iframe').screenshot({path:resolve(output,'open-source-ease-out.png')});
   checks.push({id:'open-source-ease-out',time:approachTime,scale});
+  const firstTechnology=open.start+open.cues.find(c=>c.actions.some(a=>
+    a.action==='reveal'&&a.params.name==='OpenSCAD')).at;
+  for(const time of [approachTime,firstTechnology-1/doc.output.fps,firstTechnology,firstTechnology+.175,firstTechnology+.4]){
+    await seek(time);
+    const appearance=await page.evaluate(()=>{
+      const w=document.querySelector('iframe').contentWindow,d=w.document;
+      const circle=d.querySelector('.spokes > g > circle');
+      const spoke=d.querySelector('.spokes > g > g');
+      return {circle:Number(w.getComputedStyle(circle).opacity),spoke:Number(w.getComputedStyle(spoke).opacity)};
+    });
+    if(time<firstTechnology)assert.equal(appearance.circle,0,'No circumference during the M/title zoom-in');
+    assert.ok(Math.abs(appearance.circle-.22*appearance.spoke)<.00001,
+      'The circumference appears with the first OpenSCAD label and spoke');
+    if(time>firstTechnology+.35)assert.equal(appearance.circle,.22);
+    await page.locator('iframe').screenshot({path:resolve(output,`circumference-${time.toFixed(3)}.png`)});
+    checks.push({id:'circumference-arrival',time,...appearance});
+  }
   const speechEnd=endOf('a stream of open source tools');
   const returnSpeech=startOf('The wheel... makes revolutions');
   const streamEnd=driveStart+props.streamDuration;
@@ -388,11 +405,22 @@ try{
       const action=cue.actions.find(a=>['blink','blink-all'].includes(a.action));if(!action)continue;
       await seek(shot.start+(cue.at+cue.until)/2);
       const tokens=await page.evaluate(()=>[...document.querySelector('iframe').contentDocument.querySelectorAll('.blink-token')].map(x=>x.textContent));
-      const count=action.action==='blink-all'?[...code.matchAll(/[A-Za-z_][A-Za-z_0-9]*/g)]
-        .filter(m=>m[0]===action.params.token).length:1;
+      const cueSpoken=id==='behind-the-film'&&action.params.token==='spoken';
+      const rows=code.split('\n'),firstCue=rows.findIndex(line=>/^\s*Cue\(/.test(line));
+      const spokenRows=rows.flatMap((line,i)=>i>=firstCue&&/\bspoken\b/.test(line)
+        ?[doc.chapters[0].elements['film-code'].props.numbers[i]]:[]);
+      const count=cueSpoken?spokenRows.length:action.action==='blink-all'
+        ?[...code.matchAll(/[A-Za-z_][A-Za-z_0-9]*/g)].filter(m=>m[0]===action.params.token).length
+        :cue.actions.filter(a=>a.action==='blink').length;
       assert.ok(count>0);
       assert.deepEqual(tokens,Array(count).fill(action.params.token));
-      if(action.action==='blink-all'||action.params.token==='Shot')
+      if(cueSpoken){
+        assert.equal(count,7,'Only the seven spoken calls inside the four Cues light up');
+        const markedRows=await page.evaluate(()=>[...document.querySelector('iframe').contentDocument
+          .querySelectorAll('.blink-token')].map(mark=>Number(mark.parentElement.querySelector('.line-number').textContent)));
+        assert.deepEqual(markedRows,spokenRows,'Do not jump to the earlier shot-ending spoken call');
+      }
+      if(action.action==='blink-all'||action.params.token==='Shot'||cueSpoken)
         await page.locator('iframe').screenshot({path:resolve(output,`all-${action.params.token}.png`)});
       checks.push({id,token:action.params.token,from:shot.start+cue.at,to:shot.start+cue.until});
     }

@@ -5,6 +5,28 @@ Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
 8 October 2026. Status: one narrated MP4 rehearsal rendered after the pilot
 approved the current preview and requested it. No publication.
 
+## Post-rehearsal cue scope and circumference arrival
+
+The later live preview restricts the 142.292–142.637s `spoken` flash to
+seven calls inside the four `Cue` declarations. The preceding `Shot.until`
+call stays unlit. `scene_source.py` identifies the nested calls from the real
+Python AST; one cue dispatches seven per-line blink actions. Browser checks
+compare the exact marked line numbers as well as the token count. The new
+expectation failed against the old preview, which highlighted eight calls.
+
+During the 148.667–157.75s approach, only the M and Open Source title appear.
+The circumference shares the first OpenSCAD label/spoke's 0.35s entrance,
+starting at 157.75s. A pre-change check at 150.2s found opacity 0.22 instead
+of zero. Five browser samples now verify absence during the approach and
+immediately before OpenSCAD, then equal relative fade progress at onset,
+mid-fade and full appearance. The later graphic-to-waterwheel fade is retained.
+
+All 83 preview checks and eight relation-sync checks pass. Screenshots of
+the scoped `spoken` marks, ring-free approach and arriving circumference
+were inspected. The narration and original rehearsal MP4 retain their hashes
+recorded below; no synthesis or replacement render occurred. These changes
+are available on the live server, not in the existing MP4.
+
 ## Post-rehearsal relation sync correction
 
 The pilot heard delayed `drives` and much later `crankshaft` highlights.
@@ -210,13 +232,14 @@ transformed layer; its width stays fixed throughout the approach and fade.
 No tagline remains. These actions
 are visible and checked in the live player.
 
-The circle's cubic ease-out advances promptly and ends at the first
+The M/title's cubic ease-out advances promptly and ends at the first
 technology's measured onset (scale 0.523 at 150.17s).
 The enumeration is 12.375 seconds, down from 41.708. Its token flashes use
 recorded first-word start/end times,
 displayed on the movie's 24 fps grid. The real CrankStroke source now inlines
 its stroke and end anchors; all four `Cue` calls, all three `highlight`
-calls and all eight `spoken` calls flash on their respective words. Browser
+calls flash on their respective words. The later scoped correction above
+limits `spoken` to seven calls inside those Cues, instead of all eight. Browser
 readback checks both the exact token and occurrence count. “A shot” now marks
 `Shot`, the constructor, instead of its variable. Testing source
 types from 105 to 110s, as clarified by the pilot; film source types from

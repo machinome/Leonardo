@@ -19,6 +19,16 @@ manifest remain unchanged and **do not contain this follow-up fix**.
 Eight new browser boundary checks and all 78 prior checks pass. Review from
 100s at the same live URL. No further synthesis or render was performed.
 
+Next two live-only refinements: at 142.292–142.637s, “spoken” lights only
+the seven calls inside the four highlighted `Cue` declarations, excluding
+the earlier `Shot.until` call. The targets come from the actual Python AST;
+the listing now draws simultaneous per-line blink actions. At 148.667–157.75s
+the M/title approach has no circumference. The circumference appears with
+OpenSCAD and its spoke, sharing their 0.35s fade starting at 157.75s.
+Both new expectations failed against the old preview. All 83 preview checks
+and the eight relation-sync checks now pass; screenshots were inspected.
+The live server is online at the same address. Audio and MP4 hashes are unchanged.
+
 ## Preview and records
 
 - Cut 5: http://127.0.0.1:8785/#movie (detached live server).
@@ -40,9 +50,10 @@ final stream slowdown. The current cut includes a matching fade at 32.46s,
 the complete second rope highlighted up to the cart, the source plate flush
 right/bottom and naming Wikimedia Commons, testing code typed over 105–110s
 (explicitly clarified), and film source typed over 131.08–133.08s. CrankStroke's
-stroke/end anchors are inline in its actual source; all `Cue`, `highlight`,
-and `spoken` identifiers flash as groups on their respective spoken words.
-The open-source circle now approaches with cubic ease-out.
+stroke/end anchors are inline in its actual source; all `Cue` and `highlight`
+identifiers flash as groups. The `spoken` group is now restricted to those
+Cue arguments. The open-source M/title approach uses cubic ease-out; the
+circumference waits for OpenSCAD.
 Latest refinements: the opening wheel turns from the first frame; the
 manuscript source plate hugs its text; “a shot” highlights `Shot`, not `shot`.
 The latest wheel-speed review raises its ending acceleration from 7 to 42

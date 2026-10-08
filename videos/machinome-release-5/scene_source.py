@@ -72,3 +72,18 @@ def token_line(name, row, token):
     if len(matches) != 1:
         raise ValueError(f"Expected one row for {name}: {row}")
     return matches[0]
+
+
+def cue_token_lines(name, token):
+    """Find spoken calls inside Cue arguments, not the enclosing Shot."""
+    _, scene = scene_source(name)
+    cues = [node for node in ast.walk(scene)
+            if isinstance(node, ast.Call)
+            and isinstance(node.func, ast.Name) and node.func.id == "Cue"]
+    lines = sorted({node.lineno for cue in cues for node in ast.walk(cue)
+                    if isinstance(node, ast.Call)
+                    and isinstance(node.func, ast.Attribute)
+                    and node.func.attr == token})
+    if not lines:
+        raise ValueError(f"No {token} calls inside {name}'s Cues")
+    return lines
