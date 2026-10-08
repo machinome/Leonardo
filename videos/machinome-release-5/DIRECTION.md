@@ -50,8 +50,9 @@ Status: implementation for live preview; no MP4 requested.
   and record the edit; no speech stretching or truncation.
 - Keep the slower return line. At its “and humans”, push directly into the
   wheel's centre. Fade the last part of the push to the dark background so
-  the wheel is gone by the end of “their own”. Only then bring the Machinome
-  logo forward from the centre over 1.2 seconds, as if continuing the camera
+  the wheel is gone by the end of “their own”. Wait for the recorded “I'm”
+  (180.521s), then bring the Machinome logo forward from the centre over
+  1.2 seconds, as if continuing the camera
   through the wheel hole. Its opacity stays constant; this replaces the
   earlier requested logo fade. Hold the logo alone while saying “My purpose
   is to enable all machines to be Open Source”, then fade in the GitHub

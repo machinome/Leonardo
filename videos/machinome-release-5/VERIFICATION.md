@@ -20,13 +20,14 @@ The standard check passes, including the drawing's peak enlargement of
 3.36 against its explicit 3.4 allowance. This is the requested close crop of
 the existing 1000×1000 image, not a higher-resolution replacement. The movie
 reuses the existing cut-3 export.
-`inspect-preview.mjs` passes 62 browser frame/cue checks: five opening-spin
+`inspect-preview.mjs` passes 64 browser frame/cue checks: five opening-spin
 positions (including the second frame), five positions each
 for the opening and 32s fades, a later orbit frame, manuscript coverage and
 edge-aligned source plate, code bounds, two five-sample typing passes, seven
 enumeration cues and four meta-scene tokens, returning-pawl and complete-rope
 highlights, circle easing, stream/wheel overlap, four hub-zoom positions, five
-logo-approach positions, four synchronized URL/licence-fade positions, and no closing question.
+logo-approach positions, two blank pre-logo positions, four synchronized
+URL/licence-fade positions, and no closing question.
 At each typing onset the incoming source state is checked, because the live
 player still displays the outgoing composed transition; the remaining eight
 typing samples check actual browser text. Screenshots of the fades,
@@ -86,10 +87,13 @@ The graphic and physical wheel phases are checked against the same motion law.
 The camera moves directly towards the hub from 177.958 (“and humans”) to
 179.833 (end of “their own”), with a dark fade over its last half-second.
 The wheel is entirely gone before the boundary. Following the pilot's latest
-direction, the logo does not fade: it approaches from the screen-centre
+direction, the logo waits for “I'm” at 180.521s, rather than entering at the
+shot boundary. An onset assertion failed before this delay; browser checks
+now verify zero logo width at the boundary and immediately before “I'm”.
+The logo does not fade: it approaches from the screen-centre
 vanishing point at constant opacity, growing from 0.002 to full scale over
 1.2 seconds. A constant-opacity/scale assertion failed against the earlier
-fade and passes now. The logo settles around 181.03s; the URL waits for the
+fade and passes now. The logo settles around 181.72s; the URL waits for the
 closing “Open Source” at 185.607–186.487s (placed on the 24 fps grid), below
 it and about 18% wider. The pilot's exact licence line appears beneath it.
 Browser checks verify both lines' equal opacity, the licence's exact text and

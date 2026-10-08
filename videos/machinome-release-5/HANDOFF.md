@@ -32,8 +32,9 @@ Latest refinements: the opening wheel turns from the first frame; the
 manuscript source plate hugs its text; “a shot” highlights `Shot`, not `shot`.
 
 The latest instruction supersedes the former closing logo fade: after the
-wheel disappears at the end of “their own”, the logo approaches from the
-screen centre at constant opacity over 1.2s, as if the camera continued
+wheel disappears at the end of “their own”, the screen stays clear until
+“I'm” starts at 180.521s. Then the logo approaches from the screen centre
+at constant opacity over 1.2s, as if the camera continued
 through the wheel hole. It settles, then the GitHub address fades in beneath
 it on the closing “Open Source” (185.607–186.487s), about 18% wider than the
 logo. The exact requested `GPL-2.0-or-later OR CERN-OHL-S-2.0+` appears below
@@ -41,7 +42,7 @@ it in the same fade. Both lines are outside the zooming layer and never scale.
 The requested purpose sentence was already recorded, so no synthesis was
 needed. The licence overlay is explicit pilot direction overriding the skill's
 no-licence-text default; gallery records remain AGPL-3.0-only and were not changed.
-There is no tagline or drawn question. Sixty-two live browser checks pass,
+There is no tagline or drawn question. Sixty-four live browser checks pass,
 including no duplicate wheels and the new code/ending behavior. Screenshots
 were inspected. No MP4 rendered and no narration regenerated for this batch.
 

@@ -244,7 +244,7 @@ try{
   assert.ok(Math.abs(zoomStart-startOf('and humans...'))<=frameTolerance);
   assert.ok(Math.abs(zoomEnd-endOf('their own'))<=frameTolerance);
   const invitation=doc.chapters[0].shots.find(s=>s.id==='invitation');
-  assert.equal(invitation.start,zoomEnd,'Logo begins only after their own ends');
+  assert.equal(invitation.start,zoomEnd,'The closing scene begins after their own ends');
   let previousDistance=Infinity;
   for(const fraction of [0,.5,.8,.99]){
     const time=Math.floor((zoomStart+(zoomEnd-zoomStart)*fraction)*doc.output.fps+1e-9)/doc.output.fps;
@@ -262,8 +262,20 @@ try{
   }
   let previousLogoScale=-1;
   let fixedUrlWidth;
+  const logoApproach=invitation.cues.find(c=>c.actions.some(a=>a.action==='approach'));
+  const logoStart=invitation.start+logoApproach.at;
+  assert.ok(Math.abs(logoStart-startOf("I'm Machinome"))<=frameTolerance,
+    'The logo approach starts on the recorded I am entrance');
+  for(const time of [invitation.start,logoStart-1/doc.output.fps]){
+    await seek(time);
+    const width=await page.evaluate(()=>document.querySelector('iframe').contentDocument
+      .querySelector('.wordmark').getBoundingClientRect().width);
+    assert.equal(width,0,'No full-size logo flashes before the spoken I am');
+    await page.locator('iframe').screenshot({path:resolve(output,`logo-wait-${time.toFixed(3)}.png`)});
+    checks.push({id:'logo-wait',time,width});
+  }
   for(const offset of [0,.3,.6,.9,1.25]){
-    await seek(invitation.start+offset);
+    await seek(logoStart+offset);
     const {opacity,scale,urlWidth}=await page.evaluate(()=>{
       const w=document.querySelector('iframe').contentWindow;
       const style=w.getComputedStyle(w.document.querySelector('.signature'));
@@ -280,7 +292,7 @@ try{
     else if(offset===.6)assert.ok(scale>.45&&scale<.55);
     else if(offset===1.25)assert.equal(scale,1);
     await page.locator('iframe').screenshot({path:resolve(output,`logo-approach-${offset}.png`)});
-    checks.push({id:'logo-approach',time:invitation.start+offset,opacity,scale});
+    checks.push({id:'logo-approach',time:logoStart+offset,opacity,scale});
   }
   const closingFade=invitation.cues.find(c=>c.actions.some(a=>a.action==='link'));
   const linkStart=invitation.start+closingFade.at,linkEnd=invitation.start+closingFade.until;

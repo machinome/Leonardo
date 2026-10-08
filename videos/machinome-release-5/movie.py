@@ -82,6 +82,7 @@ class Constellation(Element):
 class Signature(Element):
     module = 'stage.jsx'
     enter = Action()
+    wait = Action()
     approach = Action()
     link = Action()
     linked = Action()
@@ -379,7 +380,9 @@ class Continuous(Chapter):
         ])
     invitation = Shot(Exhibition, {Exhibition.graphic: signature}, until=lines.end(plus=2.5),
         model=Sawmill.run(496, 504), fade_out=FadeOut(0.7), cues=[
-            Cue(0, signature.approach(), until=1.2),
+            Cue(0, signature.wait(), until=lines.spoken("I'm Machinome")),
+            Cue(lines.spoken("I'm Machinome"), signature.approach(),
+                until=lines.spoken("I'm Machinome", plus=1.2)),
             Cue(lines.spoken('Open Source'), signature.link(), until=lines.spoken_end('Open Source')),
             Cue(lines.spoken_end('Open Source'), signature.linked(), until=lines.end(plus=2.5))])
 

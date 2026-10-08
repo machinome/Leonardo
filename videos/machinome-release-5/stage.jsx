@@ -57,7 +57,8 @@ function Signature({state}){
   const p=state.actions.find(a=>a.action==='enter');
   const opacity=p?smooth(p.progress):1;
   const approach=state.actions.find(a=>a.action==='approach');
-  const scale=approach?logoScale(approach.progress):1;
+  const waiting=state.actions.some(a=>a.action==='wait');
+  const scale=waiting?0:approach?logoScale(approach.progress):1;
   const link=state.actions.find(a=>a.action==='link');
   const linkOpacity=link?smooth(link.progress):state.actions.some(a=>a.action==='linked')?1:0;
   useReport({opacity,scale,linkOpacity});

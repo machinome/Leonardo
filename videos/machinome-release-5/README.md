@@ -36,7 +36,8 @@ the film source types from 131.08–133.08s before the word-synced enumeration.
 The stream/wheel overlap and closing motion are project-owned live actions.
 Current duration: 191 seconds. The second
 wheel line starts around 174.8s, its zoom starts at 177.96s, and the logo
-approaches from the distance at 179.83–181.03s without fading. Its GitHub
+waits for “I'm”, then approaches from the distance at approximately
+180.52–181.72s without fading. Its GitHub
 address and the pilot-supplied licence line fade in together on the closing
 “Open Source” at about 185.61–186.49s, both at fixed size, with no tagline.
 See [VERIFICATION.md](VERIFICATION.md) for checks
