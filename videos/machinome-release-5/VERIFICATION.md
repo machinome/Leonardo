@@ -1,9 +1,41 @@
-# Cut 5 preview evidence
+# Cut 5 preview and rehearsal evidence
 
 Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
 
-8 October 2026. Status: ready for the pilot's live viewing and listening
-review. No MP4 rendered; no publication.
+8 October 2026. Status: one narrated MP4 rehearsal rendered after the pilot
+approved the current preview and requested it. No publication.
+
+## Encoded rehearsal
+
+`_build/rehearsal.mp4`: H.264, 1920×1080, 24 fps, 4,584 frames,
+191.000 seconds, 25,464,703 bytes. AAC narration also spans 191.000 seconds.
+The separate SRT is not burned into the picture. Render used cached speech
+only; no synthesis, retiming, source edit or extra silent MP4 was made.
+The captured cut-5 source revision is `e5e577931bb0`.
+
+SHA-256, independently checked against `_build/rehearsal-manifest.json`:
+`14db64cfa4bb32efeb01cc1586d5ea1aa0f8257770db697c1455997f0fc07d02`.
+All frames were newly captured. The render and encoded review-pack generation
+completed successfully. The review pack decoded all 4,584 frames and verified
+their dimensions and increasing presentation timestamps. It is retained at
+`_build/review-packs/1eef183e87bb-14db64cfa4bb-79ab3332-733d-4002-9f00-5585e3f11376/`.
+
+All four decoded overview sheets were visually inspected, plus full-resolution
+frames at the 104s and 131s crossfade midpoints, the late tool stream over the
+physical wheel, and the settled closing logo/address/licence. The code-scene
+crossfades do blend both pictures, unlike the live player's midpoint cuts;
+overlapping code is transient during those authored dissolves. This is sampled
+visual inspection and technical audio verification, not a fresh listening pass.
+The existing provider-alignment caveat below remains.
+
+The manifest correctly says `releaseReady: false`: public simulation/source
+URLs are unresolved, unrelated project and Videomaker files were dirty, and
+the reused model export records dirty provenance. No unrelated edits were
+included in a commit. The pilot's displayed closing licence still differs
+from the gallery's AGPL-3.0-only record; see `description.md` before publication.
+The cut-5 live server was stopped during rendering and restored afterward.
+
+## Preview evidence retained
 
 The resolved movie is 191 seconds at 24 fps, with a 185.68-second edited
 Jessica take, a three-second lead-in and a final hold. One new provider
@@ -141,7 +173,9 @@ with the complete source. No narration or duration changed for this review.
 Limits: the live player approximates composed dissolves as midpoint cuts;
 this applies to the other scene joins, not the two live reframes or the custom
 closing actions above.
-This run verified those joins' declared timings, not final blended pixels.
+The original preview run verified those joins' declared timings, not final
+blended pixels; the encoded rehearsal inspection above now adds sampled
+blended-pixel evidence.
 The provider assigned only 10 ms to “crankshaft” and 4 ms to the following
 “With”. A separate forced-alignment request was refused with HTTP 401 by the
 configured key; no retry or second synthesis was made. The final relation

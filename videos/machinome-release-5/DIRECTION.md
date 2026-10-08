@@ -4,7 +4,8 @@ Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
 
 Commissioned 7 October 2026 from the pilot's viewing of cut 4; revised in place
 on 8 October after reviewing cut 5.
-Status: implementation for live preview; no MP4 requested.
+Status: live-preview edits approved for one MP4 rehearsal on 8 October 2026.
+The rehearsal reuses the current finished movie and cached narration unchanged.
 
 - Start the wheel spinning immediately, with no held first second or delayed
   acceleration. Keep the model's phase aligned at the start of the pawl lesson.
@@ -77,7 +78,8 @@ Status: implementation for live preview; no MP4 requested.
 - Speak “What do YOU want to build?” and draw no closing question.
 
 Cut 4 and the Portuguese production are separate and retained. Reuse cut 3's
-model export and image assets. No CAD edits, video render or publication.
+model export and image assets. No CAD edits or publication. The subsequent
+one-MP4 rehearsal request supersedes the original preview-only restriction.
 
 The live player's composed dissolves are currently displayed as midpoint
 cuts; their authored timing is inspectable, but their blend requires the

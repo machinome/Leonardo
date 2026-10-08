@@ -1,11 +1,14 @@
-# Machinome release — cut 5 preview
+# Machinome release — cut 5
 
 Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
 
 Live preview of the edits in [DIRECTION.md](DIRECTION.md), with new Jessica
 narration, brief word-synced code enumeration, a narrated stream/wheel overlap,
 and a closing zoom through the wheel towards the approaching logo.
-No MP4 is rendered. [Narration](narration.py), [movie](movie.py),
+One narrated [MP4 rehearsal](_build/rehearsal.mp4) was rendered on the pilot's
+request on 8 October 2026: 191 seconds, 1920×1080, 24 fps. Optional
+[subtitles](_build/rehearsal.srt) are separate, not burned in.
+[Narration](narration.py), [movie](movie.py),
 [upload description draft](description.md).
 
 From the Leonardo repository:
@@ -26,8 +29,19 @@ its metadata records the edit and all following timestamps shift with it.
 `finish.mjs` follows a fresh movie evaluation and mixes the cached audio at
 the film's three-second lead-in. It does not request speech or render video.
 
-The live player shows composed dissolves as midpoint cuts. Review their
-timing here; this player does not yet show their final blended appearance.
+To reproduce the rehearsal from the finished movie and cached narration,
+stop this film's live server first, then run from the Leonardo repository:
+
+```sh
+node /home/asa/devel/machinome/videomaker/bin/videomaker.mjs render videos/machinome-release-5/_build/movie.json --viewer /home/asa/devel/machinome/machinome-viewer/machinome_viewer/widget/dist/machinome-viewer.js
+```
+
+This uses cached speech only. The rendered source revision is `e5e5779`;
+the manifest and decoded review pack remain in `_build/`. This is a local
+rehearsal, not a release-ready publication. See [VERIFICATION.md](VERIFICATION.md).
+
+The live player shows composed dissolves as midpoint cuts. The MP4 contains
+their final blends, inspected in decoded midpoint and end frames.
 The opening wheel turns from the first frame, without the former one-second hold.
 The opening machine reveal now uses a live reframe from 7.29s to 8.49s:
 the wheel stays solid and the full machine fades in. The mechanism change

@@ -2,9 +2,11 @@
 
 Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
 
-Status: revised in place on 8 October 2026 after the pilot resumed work and
-gave another review. The requested cut-5 live preview is built and running.
-Do not render an MP4 without the pilot's direction.
+Status: on 8 October 2026 the pilot approved the current preview and requested
+one MP4 rehearsal. It is built at `_build/rehearsal.mp4`, with separate
+`_build/rehearsal.srt`: 191 seconds, 1080p/24 fps, existing narration.
+The cut-5 live preview was restored after rendering. No publication.
+Further renders or content changes require the pilot's direction.
 
 ## Preview and records
 
@@ -14,14 +16,16 @@ Do not render an MP4 without the pilot's direction.
 - Duration: 191 seconds. Sources and reproduction commands: `README.md`.
 - Commission and implementation choices: `DIRECTION.md`.
 - Checks, revised scene times and limits: `VERIFICATION.md`.
+- Rehearsal source revision: `e5e5779`. Reproduction command: `README.md`.
+  Output hash and decoded review-pack identity: `VERIFICATION.md`.
 - Generated movie, audio, provider receipt, screenshots and browser check
   results are local and ignored under `_build/`. They are required to reuse
   this precise performance; do not discard or regenerate them casually.
 
 ## What remains for review
 
-The pilot has reviewed the earlier cut-5 changes and confirmed the opening
-fade worked. This latest batch awaits their viewing: a matching fade at 32.46s,
+The pilot reviewed the cut-5 changes and requested the rehearsal after the
+final stream slowdown. The current cut includes a matching fade at 32.46s,
 the complete second rope highlighted up to the cart, the source plate flush
 right/bottom and naming Wikimedia Commons, testing code typed over 105–110s
 (explicitly clarified), and film source typed over 131.08–133.08s. CrankStroke's
@@ -57,14 +61,17 @@ needed. The licence overlay is explicit pilot direction overriding the skill's
 no-licence-text default; gallery records remain AGPL-3.0-only and were not changed.
 There is no tagline or drawn question. Seventy-eight live browser checks pass,
 including no duplicate wheels and the new code/ending behavior. Screenshots
-were inspected. No MP4 rendered and no narration regenerated for this batch.
+were inspected. The subsequent MP4 request was fulfilled using this source
+unchanged and without regenerating narration.
 
 The live player still shows composed dissolves as cuts at their midpoint.
 Cut 5 declares a 1.8-second transition starting on “With Machinome” and a
 0.9-second dissolve into the film-code enumeration, but the live
-player cannot demonstrate their final blended appearance. The pilot was
-told this limitation during work. Do not claim the crossfades were visually
-reviewed as rendered, or silently expand this into a Videomaker change.
+player cannot demonstrate their final blended appearance. The MP4 now
+contains the blends; decoded midpoint frames at both joins were visually
+inspected, along with all four overview sheets, the late stream and closing
+identity. This is sampled visual review, not a complete real-time viewing or
+new listening pass. Do not expand it into a Videomaker change.
 The opening reveal uses a supported live reframe, with the complete
 incoming view (including its opaque background) fading over a shared wheel.
 The 32s reveal also uses a live reframe and an opaque incoming plate. The
