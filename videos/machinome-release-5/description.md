@@ -75,6 +75,12 @@ Python's unchanged two-snakes logo identifies the language used. It is a tradema
 
 ## Upload checklist for the pilot
 
+The pilot directed the closing frame to show
+`GPL-2.0-or-later OR CERN-OHL-S-2.0+` beneath the GitHub address. This is
+authored display text, not a licence change to the gallery or its dependencies;
+the gallery's existing records remain AGPL-3.0-only. Reconcile what the closing
+line is intended to license before publishing.
+
 Replace unresolved public URLs only after verification. Check the final
 narration and mix by listening. Confirm the intended release version and
 distribution permissions. The line “this is all open source” expresses the

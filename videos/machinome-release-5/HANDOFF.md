@@ -28,15 +28,20 @@ right/bottom and naming Wikimedia Commons, testing code typed over 105–110s
 stroke/end anchors are inline in its actual source; all `Cue`, `highlight`,
 and `spoken` identifiers flash as groups on their respective spoken words.
 The open-source circle now approaches with cubic ease-out.
+Latest refinements: the opening wheel turns from the first frame; the
+manuscript source plate hugs its text; “a shot” highlights `Shot`, not `shot`.
 
 The latest instruction supersedes the former closing logo fade: after the
 wheel disappears at the end of “their own”, the logo approaches from the
 screen centre at constant opacity over 1.2s, as if the camera continued
 through the wheel hole. It settles, then the GitHub address fades in beneath
-it (2–3s after the closing shot starts), about 18% wider than the logo. The
-address is outside the zooming layer and never scales; the pilot explicitly
-asked for its later fade only.
-There is no tagline or drawn question. Fifty-seven live browser checks pass,
+it on the closing “Open Source” (185.607–186.487s), about 18% wider than the
+logo. The exact requested `GPL-2.0-or-later OR CERN-OHL-S-2.0+` appears below
+it in the same fade. Both lines are outside the zooming layer and never scale.
+The requested purpose sentence was already recorded, so no synthesis was
+needed. The licence overlay is explicit pilot direction overriding the skill's
+no-licence-text default; gallery records remain AGPL-3.0-only and were not changed.
+There is no tagline or drawn question. Sixty-two live browser checks pass,
 including no duplicate wheels and the new code/ending behavior. Screenshots
 were inspected. No MP4 rendered and no narration regenerated for this batch.
 

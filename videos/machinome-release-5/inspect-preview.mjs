@@ -24,6 +24,18 @@ try{
     await page.evaluate(async time=>{window.player.seek(time);await window.player.idle();},time);
     const fault=await page.locator('#fault').textContent();assert.equal(fault,'');
   };
+  let previousOpeningTime=-Infinity,openingPixels;
+  for(const time of [0,1/doc.output.fps,.25,.5,1]){
+    await seek(time);
+    const frame=await (await fetch(`${origin}/frame?t=${time}`)).json();
+    const modelTime=frame.elements['continuous.wheel'].time*doc.model.expectedDurationSeconds;
+    assert.ok(modelTime>previousOpeningTime,'The opening wheel moves from the very first frame');
+    previousOpeningTime=modelTime;
+    const pixels=await page.locator('iframe').screenshot({path:resolve(output,`opening-spin-${time.toFixed(3)}.png`)});
+    if(openingPixels)assert.ok(!pixels.equals(openingPixels),'The opening must not hold a static image');
+    openingPixels=pixels;
+    checks.push({id:'opening-spin',time,modelTime});
+  }
   const ancestor=doc.chapters[0].shots.find(s=>s.id==='ancestor');
   const revealOpacity=()=>page.evaluate(()=>{
     const w=document.querySelector('iframe').contentWindow;
@@ -102,9 +114,13 @@ try{
           const img=win.document.querySelector('.vm-picture-img').getBoundingClientRect();
           const note=win.document.querySelector('.archive .vm-title');
           const box=note.getBoundingClientRect();
+          const range=win.document.createRange();range.selectNodeContents(note);
+          const textWidth=range.getBoundingClientRect().width;
+          const style=win.getComputedStyle(note);
           return {image:{left:img.left,top:img.top,right:img.right,bottom:img.bottom},
             width:win.innerWidth,height:win.innerHeight,text:note.textContent,
-            note:{left:box.left,top:box.top,right:box.right,bottom:box.bottom},background:win.getComputedStyle(note).backgroundColor};
+            note:{left:box.left,top:box.top,right:box.right,bottom:box.bottom,width:box.width},
+            textWidth,padding:parseFloat(style.paddingLeft)+parseFloat(style.paddingRight),background:style.backgroundColor};
         });
         assert.ok(picture.image.left<=0.5&&picture.image.top<=0.5&&picture.image.right>=picture.width-.5&&picture.image.bottom>=picture.height-.5,
           'The manuscript covers every edge of the video');
@@ -113,6 +129,8 @@ try{
         assert.ok(Math.abs(picture.note.right-picture.width)<.6&&Math.abs(picture.note.bottom-picture.height)<.6,
           'The source plate touches the right and bottom edges');
         assert.notEqual(picture.background,'rgba(0, 0, 0, 0)');
+        assert.ok(Math.abs(picture.note.width-picture.textWidth-picture.padding)<1,
+          'The source plate hugs the text plus padding, without an empty wide rectangle');
       }
       checks.push({id,time,overflow});
     }
@@ -120,6 +138,8 @@ try{
   const source=doc.chapters[0].shots.find(s=>s.id==='behind-the-film');
   assert.ok(source.end-source.start<18,'The enumeration must stay brief');
   const code=doc.chapters[0].elements['film-code'].props.code;
+  const shotToken=source.cues.flatMap(c=>c.actions).find(a=>a.params?.token==='Shot');
+  assert.ok(shotToken,'The spoken a shot highlights the Shot constructor, not the variable');
   assert.ok(!/^\s*(stroke|end)\s*=/m.test(code),'Speech anchors are inline in the actual shot and cues');
   for(const [id,element,from,to] of [
     ['testing','tests',105,110],['behind-the-film','film-code',source.start,source.start+2],
@@ -262,22 +282,33 @@ try{
     await page.locator('iframe').screenshot({path:resolve(output,`logo-approach-${offset}.png`)});
     checks.push({id:'logo-approach',time:invitation.start+offset,opacity,scale});
   }
-  for(const offset of [1.25,2,2.5,3.1]){
-    await seek(invitation.start+offset);
+  const closingFade=invitation.cues.find(c=>c.actions.some(a=>a.action==='link'));
+  const linkStart=invitation.start+closingFade.at,linkEnd=invitation.start+closingFade.until;
+  assert.ok(Math.abs(linkStart-startOf('Open Source'))<=frameTolerance,'The address fade starts on the closing Open Source');
+  assert.ok(Math.abs(linkEnd-endOf('Open Source'))<=frameTolerance,'The address fade completes with the spoken phrase');
+  for(const [sample,time] of [['before',linkStart-.25],['start',linkStart],['middle',(linkStart+linkEnd)/2],['after',linkEnd+.15]]){
+    await seek(time);
     const result=await page.evaluate(()=>{
       const w=document.querySelector('iframe').contentWindow,d=w.document;
       const url=d.querySelector('.repository-url');
+      const license=d.querySelector('.repository-license');
+      const licenseBox=license.getBoundingClientRect(),urlBox=url.getBoundingClientRect();
       return {opacity:Number(w.getComputedStyle(url).opacity),urlWidth:url.getBoundingClientRect().width,
-        logoWidth:d.querySelector('.wordmark').getBoundingClientRect().width,tagline:!!d.querySelector('.tagline')};
+        logoWidth:d.querySelector('.wordmark').getBoundingClientRect().width,tagline:!!d.querySelector('.tagline'),
+        license:license.textContent,licenseOpacity:Number(w.getComputedStyle(license).opacity),
+        licenseBelow:licenseBox.top>urlBox.bottom,licenseFits:licenseBox.left>=0&&licenseBox.right<=w.innerWidth};
     });
     assert.equal(result.tagline,false);
-    if(offset<=2)assert.ok(result.opacity<.01,'Only the logo appears first');
-    else if(offset===2.5)assert.ok(result.opacity>.4&&result.opacity<.6);
+    if(['before','start'].includes(sample))assert.ok(result.opacity<.01,'Only the logo appears until open source');
+    else if(sample==='middle')assert.ok(result.opacity>.4&&result.opacity<.6);
     else assert.equal(result.opacity,1);
+    assert.equal(result.license,'GPL-2.0-or-later OR CERN-OHL-S-2.0+');
+    assert.equal(result.licenseOpacity,result.opacity,'The licence line fades together with the address');
+    assert.ok(result.licenseBelow&&result.licenseFits);
     assert.equal(result.urlWidth,fixedUrlWidth,'The address fades at a fixed size');
     assert.ok(result.urlWidth>result.logoWidth&&result.urlWidth<result.logoWidth*1.2,'GitHub address is slightly wider than the logo');
-    await page.locator('iframe').screenshot({path:resolve(output,`github-fade-${offset}.png`)});
-    checks.push({id:'github-fade',time:invitation.start+offset,...result});
+    await page.locator('iframe').screenshot({path:resolve(output,`github-fade-${sample}.png`)});
+    checks.push({id:'github-fade',time,...result});
   }
   for(const id of ['behind-the-film','mirror']){
     const shot=doc.chapters[0].shots.find(s=>s.id===id);
@@ -289,7 +320,8 @@ try{
         .filter(m=>m[0]===action.params.token).length:1;
       assert.ok(count>0);
       assert.deepEqual(tokens,Array(count).fill(action.params.token));
-      if(action.action==='blink-all')await page.locator('iframe').screenshot({path:resolve(output,`all-${action.params.token}.png`)});
+      if(action.action==='blink-all'||action.params.token==='Shot')
+        await page.locator('iframe').screenshot({path:resolve(output,`all-${action.params.token}.png`)});
       checks.push({id,token:action.params.token,from:shot.start+cue.at,to:shot.start+cue.until});
     }
   }

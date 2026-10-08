@@ -210,7 +210,7 @@ class Continuous(Chapter):
     drawing = Picture(Sawmill.drawing, fit='cover')
     drawing_source = Title('Source: Codex Atlanticus 1078r · Wikimedia Commons')
     python = Signature(svg=(HERE.parent / 'machinome-release-2/assets/python-logo.svg').read_text(),
-                       tagline='Python', url='', question='', compact=True)
+                       tagline='Python', url='', license='', question='', compact=True)
     imports = Source.panel(Sawmill.imports)
     assembly = Listing(**model_excerpt('models/hydraulic_sawmill/model.py', [(401, 417)], type_in=True))
     tests = Listing(**model_excerpt('models/hydraulic_sawmill/test_model.py',
@@ -229,6 +229,7 @@ class Continuous(Chapter):
     signature = Signature(svg=(BRAND / 'wordmark-orange.svg').read_text(),
                           tagline='',
                           url='https://github.com/machinome/machinome/',
+                          license='GPL-2.0-or-later OR CERN-OHL-S-2.0+',
                           question='', compact=False)
 
     revolution = Shot(Exhibition, {Exhibition.stage: wheel},
@@ -354,7 +355,7 @@ class Continuous(Chapter):
               *source_cues(film_code, 'CrankStroke', [
                 ('narration, a camera', 'narration =', 'narration'),
                 ('camera, a shot', 'view = View', 'camera'),
-                ('shot. Cues', 'shot =', 'shot'),
+                ('shot. Cues', 'shot =', 'Shot'),
                 ('Cues move', None, 'Cue'),
                 ('move the camera', 'Cue(0,', 'move'),
                 ('highlight the saw', None, 'highlight'),
@@ -379,8 +380,8 @@ class Continuous(Chapter):
     invitation = Shot(Exhibition, {Exhibition.graphic: signature}, until=lines.end(plus=2.5),
         model=Sawmill.run(496, 504), fade_out=FadeOut(0.7), cues=[
             Cue(0, signature.approach(), until=1.2),
-            Cue(2, signature.link(), until=3),
-            Cue(3, signature.linked(), until=lines.end(plus=2.5))])
+            Cue(lines.spoken('Open Source'), signature.link(), until=lines.spoken_end('Open Source')),
+            Cue(lines.spoken_end('Open Source'), signature.linked(), until=lines.end(plus=2.5))])
 
 
 class Revolutions(Movie):

@@ -20,17 +20,24 @@ The standard check passes, including the drawing's peak enlargement of
 3.36 against its explicit 3.4 allowance. This is the requested close crop of
 the existing 1000×1000 image, not a higher-resolution replacement. The movie
 reuses the existing cut-3 export.
-`inspect-preview.mjs` passes 57 browser frame/cue checks: five positions each
+`inspect-preview.mjs` passes 62 browser frame/cue checks: five opening-spin
+positions (including the second frame), five positions each
 for the opening and 32s fades, a later orbit frame, manuscript coverage and
 edge-aligned source plate, code bounds, two five-sample typing passes, seven
 enumeration cues and four meta-scene tokens, returning-pawl and complete-rope
 highlights, circle easing, stream/wheel overlap, four hub-zoom positions, five
-logo-approach positions, four URL-fade positions, and no closing question.
+logo-approach positions, four synchronized URL/licence-fade positions, and no closing question.
 At each typing onset the incoming source state is checked, because the live
 player still displays the outgoing composed transition; the remaining eight
 typing samples check actual browser text. Screenshots of the fades,
 manuscript, code, rope, easing, overlap, zoom and logo were inspected.
 No page errors were reported. `git diff --check` passes.
+
+Immediate opening motion: a new assertion failed against the old first-second
+hold. The film now advances linearly from model second 400 on its first frame,
+reaching second 432 at the unchanged start of the pawl lesson. Both model time
+and actual browser pixels change at all five sampled opening instants. This
+retimes the posed reconstruction, not its physical dynamics.
 
 Opening-reveal correction: the original `Dissolve(1.2)` was present in the
 movie; the live player's documented midpoint-cut approximation caused the
@@ -52,7 +59,8 @@ model time; a fading dark plate covers the old full machine. Hiding that
 base after the fade makes no pixel difference. The highlighted second rope
 now includes its central take-up, upper-roller span and carriage haul; the
 browser image shows the highlight reaching the timber cart. The source plate
-names Wikimedia Commons and touches both the right and bottom edges.
+names Wikimedia Commons and touches both the right and bottom edges; its
+width now equals measured text width plus the authored padding within one pixel.
 
 Key locations in the revised film:
 
@@ -81,8 +89,11 @@ The wheel is entirely gone before the boundary. Following the pilot's latest
 direction, the logo does not fade: it approaches from the screen-centre
 vanishing point at constant opacity, growing from 0.002 to full scale over
 1.2 seconds. A constant-opacity/scale assertion failed against the earlier
-fade and passes now. The logo settles around 181.03s; the URL fades in at
-181.83–182.83s, below it and about 18% wider. The URL is outside the logo's
+fade and passes now. The logo settles around 181.03s; the URL waits for the
+closing “Open Source” at 185.607–186.487s (placed on the 24 fps grid), below
+it and about 18% wider. The pilot's exact licence line appears beneath it.
+Browser checks verify both lines' equal opacity, the licence's exact text and
+bounds, and the fade's measured speech anchors. The URL is outside the logo's
 transformed layer; its width stays fixed throughout the approach and fade.
 No tagline remains. These actions
 are visible and checked in the live player.
@@ -94,7 +105,8 @@ recorded first-word start/end times,
 displayed on the movie's 24 fps grid. The real CrankStroke source now inlines
 its stroke and end anchors; all four `Cue` calls, all three `highlight`
 calls and all eight `spoken` calls flash on their respective words. Browser
-readback checks both the exact token and occurrence count. Testing source
+readback checks both the exact token and occurrence count. “A shot” now marks
+`Shot`, the constructor, instead of its variable. Testing source
 types from 105 to 110s, as clarified by the pilot; film source types from
 131.083 to 133.083s. Both reveal exact prefixes of the real source and finish
 with the complete source. No narration or duration changed for this review.

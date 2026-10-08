@@ -14,7 +14,7 @@
 .archive .slot-note{left:auto;right:0;top:auto;bottom:0;width:64%;height:6%;
   --vm-title-size:1.25vw;--vm-title-align:right;--vm-title-color:#eeeae3;
   --vm-title-background:#101419dd;--vm-title-padding:.3em .65em}
-.archive .vm-title{position:absolute;right:0;bottom:0;width:100%;box-sizing:border-box}
+.archive .vm-title{position:absolute;right:0;bottom:0;width:max-content;max-width:100%;box-sizing:border-box}
 .workbench .slot-stage{left:60%;width:40%;top:5%;height:90%}
 .workbench .slot-imports{left:5%;top:17%;width:59%;height:8%;--vm-source-size:1.32vw}
 .workbench .slot-code{left:5%;top:28%;width:61%;height:67%;--vm-source-size:1.04vw}
@@ -44,6 +44,7 @@
 .wordmark svg{display:block;width:100%;height:auto}
 .tagline{position:absolute;top:52%;width:100%;text-align:center;font-size:2.4vw;color:#dce3e9}
 .repository-url{position:absolute;top:55%;left:50%;transform:translateX(-50%);width:max-content;white-space:nowrap;text-align:center;font-size:2.75vw;color:#aeb8c1}
+.repository-license{position:absolute;top:64%;left:50%;transform:translateX(-50%);width:max-content;white-space:nowrap;text-align:center;font-size:1.8vw;color:#aeb8c1}
 .compact .wordmark{left:44%;top:29%;width:12%}
 .compact .tagline{top:58%;font-size:2.5vw;color:#eeeae3}
 .question{position:absolute;top:74%;width:100%;text-align:center;font-size:2.6vw;letter-spacing:-.035em}

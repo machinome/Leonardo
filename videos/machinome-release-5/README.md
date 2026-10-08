@@ -28,6 +28,7 @@ the film's three-second lead-in. It does not request speech or render video.
 
 The live player shows composed dissolves as midpoint cuts. Review their
 timing here; this player does not yet show their final blended appearance.
+The opening wheel turns from the first frame, without the former one-second hold.
 The opening machine reveal now uses a live reframe from 7.29s to 8.49s:
 the wheel stays solid and the full machine fades in. The mechanism change
 at 32.46s also fades live over 1.2 seconds. Testing code types from 105–110s;
@@ -36,6 +37,7 @@ The stream/wheel overlap and closing motion are project-owned live actions.
 Current duration: 191 seconds. The second
 wheel line starts around 174.8s, its zoom starts at 177.96s, and the logo
 approaches from the distance at 179.83–181.03s without fading. Its GitHub
-address then fades in at 181.83–182.83s at fixed size, with no tagline.
+address and the pilot-supplied licence line fade in together on the closing
+“Open Source” at about 185.61–186.49s, both at fixed size, with no tagline.
 See [VERIFICATION.md](VERIFICATION.md) for checks
 and the known provider-alignment issue.

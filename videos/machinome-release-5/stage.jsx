@@ -68,6 +68,7 @@ function Signature({state}){
     </div>
     {state.props.tagline&&<div className="tagline">{state.props.tagline}</div>}
     {state.props.url&&<div className="repository-url" style={{opacity:linkOpacity}}>{state.props.url}</div>}
+    {state.props.license&&<div className="repository-license" style={{opacity:linkOpacity}}>{state.props.license}</div>}
     {state.props.question&&<div className="question" style={{opacity:p?smooth(elapsed(p)/.65):0}}>{state.props.question}</div>}
   </div>;
 }

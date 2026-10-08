@@ -41,16 +41,13 @@ for(const id of ['behind-the-film','mirror']){
   }
 }
 const feedTimed=measured.chapters[0].shots.find(s=>s.id==='feed-motion');
-const rate=32/(feedTimed.start-3+2/3);
-const clock=t=>t<=feedTimed.start?400+rate*2/3+Math.max(0,t-3)*rate:
+// Already turning on frame one; still reach the authored pawl phase exactly.
+const rate=32/feedTimed.start;
+const clock=t=>t<=feedTimed.start?400+t*rate:
   440+(t-feedTimed.end)*.65;
 for(const [i,shot] of chapter.shots.entries()){
   const timed=measured.chapters[0].shots[i];
-  shot.model=i?{from:clock(timed.start),to:clock(timed.end)}:{keys:[
-    {at:0,seconds:400},{at:1,seconds:400},
-    {at:3,seconds:clock(3),ease:'in'},
-    {at:shot.until,seconds:clock(timed.end)},
-  ]};
+  shot.model={from:clock(timed.start),to:clock(timed.end)};
 }
 chapter.shots.find(s=>s.id==='feed-motion').model={keys:[
   {at:0,seconds:432},
