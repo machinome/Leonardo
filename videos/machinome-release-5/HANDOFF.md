@@ -30,6 +30,11 @@ and `spoken` identifiers flash as groups on their respective spoken words.
 The open-source circle now approaches with cubic ease-out.
 Latest refinements: the opening wheel turns from the first frame; the
 manuscript source plate hugs its text; “a shot” highlights `Shot`, not `shot`.
+The latest wheel-speed review raises its ending acceleration from 7 to 42
+degrees/s², shared by the graphic and physical wheel. It reaches just over
+one turn per second as the hub zoom starts and about 1.25 turns/s by its end,
+still accelerating. Stream-label speed, cameras, narration and logo timing
+are unchanged. This is film playback timing, not a CAD or dynamics change.
 
 The latest instruction supersedes the former closing logo fade: after the
 wheel disappears at the end of “their own”, the screen stays clear until
@@ -42,7 +47,7 @@ it in the same fade. Both lines are outside the zooming layer and never scale.
 The requested purpose sentence was already recorded, so no synthesis was
 needed. The licence overlay is explicit pilot direction overriding the skill's
 no-licence-text default; gallery records remain AGPL-3.0-only and were not changed.
-There is no tagline or drawn question. Sixty-four live browser checks pass,
+There is no tagline or drawn question. Sixty-nine live browser checks pass,
 including no duplicate wheels and the new code/ending behavior. Screenshots
 were inspected. No MP4 rendered and no narration regenerated for this batch.
 

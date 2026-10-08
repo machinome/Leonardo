@@ -34,6 +34,8 @@ the wheel stays solid and the full machine fades in. The mechanism change
 at 32.46s also fades live over 1.2 seconds. Testing code types from 105–110s;
 the film source types from 131.08–133.08s before the word-synced enumeration.
 The stream/wheel overlap and closing motion are project-owned live actions.
+The ending wheel keeps accelerating through the hub zoom, from just over
+one turn per second at zoom onset to about 1.25 turns/s at its end.
 Current duration: 191 seconds. The second
 wheel line starts around 174.8s, its zoom starts at 177.96s, and the logo
 waits for “I'm”, then approaches from the distance at approximately

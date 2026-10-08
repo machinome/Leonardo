@@ -45,6 +45,10 @@ Status: implementation for live preview; no MP4 requested.
 - Start the stream on “Trimesh” and start revealing the physical wheel on
   “And beneath it all”, while more tool names are still entering. Finish the
   stream by the end of “tools”, with no silent streaming tail.
+- Keep the final wheel accelerating through the camera's push into its hub.
+  Use 42 degrees/s² (six times the previous ramp): above one turn per second
+  when the zoom starts, reaching about 1.25 turns/s at the end. The graphic
+  and physical wheels share this phase; tool-label speeds stay unchanged.
 - Leave a short pause on the physical wheel, replacing the former seven-second
   addition with 1.2 seconds of inserted silence. Preserve the provider original
   and record the edit; no speech stretching or truncation.

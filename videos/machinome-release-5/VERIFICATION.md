@@ -20,12 +20,13 @@ The standard check passes, including the drawing's peak enlargement of
 3.36 against its explicit 3.4 allowance. This is the requested close crop of
 the existing 1000×1000 image, not a higher-resolution replacement. The movie
 reuses the existing cut-3 export.
-`inspect-preview.mjs` passes 64 browser frame/cue checks: five opening-spin
+`inspect-preview.mjs` passes 69 browser frame/cue checks: five opening-spin
 positions (including the second frame), five positions each
 for the opening and 32s fades, a later orbit frame, manuscript coverage and
 edge-aligned source plate, code bounds, two five-sample typing passes, seven
 enumeration cues and four meta-scene tokens, returning-pawl and complete-rope
-highlights, circle easing, stream/wheel overlap, four hub-zoom positions, five
+highlights, circle easing, stream/wheel overlap, five ending angular-speed
+samples, four hub-zoom positions, five
 logo-approach positions, two blank pre-logo positions, four synchronized
 URL/licence-fade positions, and no closing question.
 At each typing onset the incoming source state is checked, because the live
@@ -83,6 +84,17 @@ The graphic wheel fades over 1.25 seconds while labels remain independent.
 They finish at 172.401, with the end of “tools”; the returning sentence starts
 at 174.821, after 2.42 seconds on the wheel without streaming.
 The graphic and physical wheel phases are checked against the same motion law.
+
+The ending wheel now uses 42 degrees/s², six times the previous acceleration,
+and keeps gaining speed through the hub zoom. A speed assertion failed against
+the prior approximately 75 degrees/s ending. Independent differences between
+the actual posed model times now show over 360 degrees/s at zoom onset and
+over 440 degrees/s at the final sample (about 1.25 turns/s), increasing at
+every sampled point. Each authored 24 fps angular step remains below 22.5°,
+half the eight-spoke interval; live playback dropping frames can still affect
+perceived motion. The graphic and physical wheels remain phase-aligned; the
+tool-label trajectory, all cuts, zoom and logo timing are unchanged. The wheel's phase law
+is faster; this is editorial retiming, not simulated acceleration dynamics.
 
 The camera moves directly towards the hub from 177.958 (“and humans”) to
 179.833 (end of “their own”), with a dark fade over its last half-second.

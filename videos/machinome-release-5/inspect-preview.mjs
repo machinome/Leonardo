@@ -243,6 +243,27 @@ try{
   const zoomStart=returned.start+zoom.at,zoomEnd=returned.start+zoom.actions[0].until;
   assert.ok(Math.abs(zoomStart-startOf('and humans...'))<=frameTolerance);
   assert.ok(Math.abs(zoomEnd-endOf('their own'))<=frameTolerance);
+  // Measure angular speed from the actual posed model, not the animation helper.
+  // Eight similar spokes repeat every 45 degrees; keep each 24 fps step below
+  // half that angle while making the zoom substantially faster than a slow turn.
+  let previousSpeed=0;
+  const speedTimes=[returned.start+2,speechEnd,zoomStart,(zoomStart+zoomEnd)/2,zoomEnd-1/doc.output.fps];
+  for(const sample of speedTimes){
+    const time=Math.floor(sample*doc.output.fps+1e-9)/doc.output.fps;
+    const [before,current]=await Promise.all([time-1/doc.output.fps,time]
+      .map(async t=>(await fetch(`${origin}/frame?t=${t}`)).json()));
+    const angleStep=(current.elements['continuous.returned'].time-before.elements['continuous.returned'].time)
+      *doc.model.expectedDurationSeconds*90;
+    const speed=angleStep/(current.time-before.time);
+    assert.ok(speed>previousSpeed,'The final wheel keeps accelerating through the zoom');
+    assert.ok(angleStep<22.5,'The eight-spoke wheel stays below half a spoke interval per authored frame');
+    if(sample>=zoomStart)assert.ok(speed>360,'The zoom must start above one revolution per second');
+    if(sample===speedTimes.at(-1))assert.ok(speed>440,'The final wheel reaches a very fast spin');
+    previousSpeed=speed;
+    await seek(time);
+    await page.locator('iframe').screenshot({path:resolve(output,`wheel-speed-${time.toFixed(3)}.png`)});
+    checks.push({id:'wheel-acceleration',time,degreesPerSecond:speed,revolutionsPerSecond:speed/360,angleStep});
+  }
   const invitation=doc.chapters[0].shots.find(s=>s.id==='invitation');
   assert.equal(invitation.start,zoomEnd,'The closing scene begins after their own ends');
   let previousDistance=Infinity;
