@@ -21,6 +21,25 @@ assert.ok(take,'Continuous take is missing. This command does not generate speec
 assert.equal(take.sha256,approved.sha256,'The film must reuse the recorded audio bytes.');
 assert.equal(doc.chapters.length,1);
 assert.equal(doc.chapters[0].narration,approved.text);
+// The provider collapsed crankshaft to 10 ms and delayed drives. Correct
+// only these visual spans from local forced alignment of the same recording;
+// neither the cached alignment nor audio nor scene boundaries are rewritten.
+const relationTiming=JSON.parse(await readFile(resolve(base,'relation-timing.json')));
+assert.equal(relationTiming.schema,'cut5-relation-timing/1');
+assert.equal(take.sha256,relationTiming.audioSha256,'Realign the relation cues if the take changes.');
+const relationText=take.alignment.characters.join('');
+const relation=doc.chapters[0].shots.find(s=>s.id==='face-reveal');
+for(const [token,timing] of Object.entries(relationTiming.words)){
+  const index=relationText.indexOf(token);
+  assert.ok(index>=0&&relationText.indexOf(token,index+1)<0,`Ambiguous relation word: ${token}`);
+  const first=Array.from(relationText.slice(0,index)).length,last=first+Array.from(token).length-1;
+  const cue=relation.cues.find(c=>c.actions.some(a=>a.action==='blink'&&a.params.token===token));
+  assert.ok(cue,`Missing relation blink: ${token}`);
+  if(timing.start!==undefined)cue.at={spoken:token,
+    plus:timing.start-take.alignment.character_start_times_seconds[first]};
+  if(timing.end!==undefined)cue.until={spokenEnd:token,
+    plus:timing.end-take.alignment.character_end_times_seconds[last]};
+}
 const measured=resolveMovie(doc,{continuous:take});
 const chapter=doc.chapters[0];
 // The explanatory tokens flash for their own recorded word, not the rest

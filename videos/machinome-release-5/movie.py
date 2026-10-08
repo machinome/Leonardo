@@ -187,9 +187,9 @@ def technology_cues(element):
 
 
 def relation_blinks(element):
-    # This take's crankshaft interval is only 10 ms, immediately before the
-    # next shot. Give it one preceding frame; do not invent audio timestamps.
-    return [Cue(lines.spoken(word, plus=-1/24 if word == 'crankshaft' else 0),
+    # finish.mjs applies the take-bound local alignment in relation-timing.json.
+    # Keep the provider timestamps and narration intact.
+    return [Cue(lines.spoken(word),
                 element.blink(token=word, line=416, occurrence=0),
                 until=lines.spoken_end(word))
             for word in ['waterwheel', 'spin', 'drives', 'crankshaft']]

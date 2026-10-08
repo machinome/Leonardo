@@ -5,6 +5,59 @@ Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
 8 October 2026. Status: one narrated MP4 rehearsal rendered after the pilot
 approved the current preview and requested it. No publication.
 
+## Post-rehearsal relation sync correction
+
+The pilot heard delayed `drives` and much later `crankshaft` highlights.
+The provider assigned raw-take spans 99.371–100.171s and 101.130–101.140s;
+with the three-second film lead-in these appeared at about 102.37s and
+104.08s (the latter had an inadequate one-frame-early workaround).
+
+Local forced alignment used PocketSphinx 5.1.1, its bundled English acoustic
+model, 16 kHz mono PCM decoded by FFmpeg from the existing take, and 100 Hz
+alignment frames. `Decoder.set_align_text` aligned the known transcript in
+`relation-timing.json`, not a guessed speaking rate. The crop 97.4–104.25s
+gave `drives` 98.90–99.37s and `crankshaft` 99.46–100.23s. Two shifted crop
+starts (97.3 and 97.5s) and the sentence-only crop 97.4–100.8s agreed within
+10 ms. The installed diagnostic was isolated by `uv run --no-project --with
+pocketsphinx==5.1.1`; it is not a production dependency or paid service.
+
+`finish.mjs` applies only take-bound visual offsets, rejecting a different
+audio SHA-256. The resulting 24 fps film spans are:
+
+| Token | Start | End |
+| --- | ---: | ---: |
+| spin | 101.500 | 101.917 |
+| drives | 101.917 | 102.375 |
+| crankshaft | 102.458 | 103.250 |
+
+Waterwheel and spin onsets stay unchanged. Shortening spin's end is necessary:
+the stage selects one active blink, so overlapping it with the earlier drives
+would hide that correction. No relation highlights overlap. The prior
+one-frame crankshaft workaround is removed.
+
+`inspect-relation-sync.mjs` failed before the change on the late spin boundary.
+Afterward it checks all corrected endpoints within half an output frame and
+passes eight live browser checks: before, onset, middle and clearing of both
+words, including exact marked text and no page errors. The two word screenshots
+were visually inspected. All 78 existing browser/frame checks also pass.
+Run both from the project root with the live server online:
+
+```sh
+node videos/machinome-release-5/inspect-relation-sync.mjs /home/asa/devel/machinome/videomaker
+node videos/machinome-release-5/inspect-preview.mjs /home/asa/devel/machinome/videomaker
+```
+
+Comparison with `_build/revisions/before-relation-sync/movie.json` confirms
+only these three cue spans and the updated movie.py source-provenance hashes
+changed; every other movie field, including code excerpts, model clocks and
+scene boundaries, is identical. Mixed narration SHA-256 remains
+`e93ac2c2c7c549da87b8638d65e188096b5438f93728925487338328a1d07848`.
+The existing MP4 and its hash below are unchanged and predate this correction.
+The live server answers HTTP 200 at port 8785. No audio synthesis, provider
+alignment rewrite, MP4 render or fresh human listening pass was performed.
+This is a measured acoustic-model correction ready for the pilot's listening
+check, not a claim of sample-exact phonetic boundaries.
+
 ## Encoded rehearsal
 
 `_build/rehearsal.mp4`: H.264, 1920×1080, 24 fps, 4,584 frames,

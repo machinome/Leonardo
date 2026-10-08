@@ -8,6 +8,17 @@ one MP4 rehearsal. It is built at `_build/rehearsal.mp4`, with separate
 The cut-5 live preview was restored after rendering. No publication.
 Further renders or content changes require the pilot's direction.
 
+Subsequent pilot review: the live preview now corrects `drives` and
+`crankshaft` in the assembly-code sentence. Local PocketSphinx forced
+alignment of the unchanged recording puts their visual spans at
+101.917–102.375s and 102.458–103.250s on the 24 fps grid. `spin` clears at
+101.917s to avoid masking `drives`. `relation-timing.json` binds these
+corrections to the exact take; `finish.mjs` applies visual offsets without
+modifying the provider alignment, audio or cuts. The original MP4 and its
+manifest remain unchanged and **do not contain this follow-up fix**.
+Eight new browser boundary checks and all 78 prior checks pass. Review from
+100s at the same live URL. No further synthesis or render was performed.
+
 ## Preview and records
 
 - Cut 5: http://127.0.0.1:8785/#movie (detached live server).
@@ -87,10 +98,11 @@ movie document, so stop that specific server before future rebuilds if
 avoiding transient intermediate loads is important.
 
 The provider collapsed “crankshaft” and “With” to implausibly short timestamps;
-forced alignment was unavailable (HTTP 401). Only that relation flash has a
-one-frame early entrance to remain visible before the scene cut. The recorded
-timing itself was not changed. See `VERIFICATION.md`; do not claim acoustic
-review or regenerate the whole performance casually to work around this.
+its remote forced-alignment endpoint was unavailable (HTTP 401). The later
+local forced alignment above replaces the old one-frame-early workaround for
+the relation highlights. Raw provider timing and the “With Machinome” cut
+remain unchanged. This is acoustic-model alignment, not a new human listening
+approval; the pilot requested the live server to check it. See `VERIFICATION.md`.
 
 The initial cut-5 sources are in commit `c8b9f7b`; its local movie/audio backup
 is `_build/revisions/before-second-review/`. Preserve both speech generations.

@@ -11,6 +11,10 @@ request on 8 October 2026: 191 seconds, 1920×1080, 24 fps. Optional
 [Narration](narration.py), [movie](movie.py),
 [upload description draft](description.md).
 
+The live preview now includes the subsequent relation-word sync correction:
+`drives` at 101.917s and `crankshaft` at 102.458s. The existing MP4 predates
+this correction and is retained unchanged; no replacement render was requested.
+
 From the Leonardo repository:
 
 ```sh
@@ -60,4 +64,4 @@ waits for “I'm”, then approaches from the distance at approximately
 address and the pilot-supplied licence line fade in together on the closing
 “Open Source” at about 185.61–186.49s, both at fixed size, with no tagline.
 See [VERIFICATION.md](VERIFICATION.md) for checks
-and the known provider-alignment issue.
+and the take-bound local correction of the provider-alignment issue.

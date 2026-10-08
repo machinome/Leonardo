@@ -25,6 +25,10 @@ The rehearsal reuses the current finished movie and cached narration unchanged.
   background, flush to both edges. Fit the plate to the text and its padding,
   with no wide empty rectangle. The full source URL remains in the description.
 - Speak the complete import, including AssemblyNode.
+- After reviewing the MP4, correct the late `drives` and `crankshaft`
+  highlights in the relation sentence against the existing recording.
+  Clear `spin` before `drives`; keep narration and scene boundaries unchanged.
+  This follow-up is live-preview only, without replacing the rehearsal MP4.
 - Begin the transition to testing on “With Machinome”.
 - Type the testing source over 105–110s (the pilot clarified the original typo).
 - Remove “That checks the sampled positions, not every moment between them.”
