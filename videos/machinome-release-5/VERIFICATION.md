@@ -2,8 +2,70 @@
 
 Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
 
-8 October 2026. Status: one narrated MP4 rehearsal rendered after the pilot
-approved the current preview and requested it. No publication.
+8 October 2026. Current status: Studio revision in the live preview;
+the earlier narrated MP4 rehearsal remains unchanged. No publication.
+
+## Studio scene and continuous narration — current preview
+
+194s at 1920×1080 / 24 fps. One fresh paid request produced the 188.72s
+Jessica/Eleven v3 take, with 39 unique measured beats. The cache is
+`_build/audio/continuous-11e9ec5460036865.wav`, SHA-256
+`d656061d09062e49df946f42cee850da48af2b80c2ac24672f8c4848555c569a`.
+Its bytes equal `provider-original.wav`; metadata records no audio edits.
+The natural pause between “technologies” ending at raw 174.74s and the
+returning “The wheel” at 175.52s is 0.78s. No zero-PCM splice is inserted.
+The raw-take timeline receives the usual three-second film lead-in.
+
+The narration includes the requested Studio introduction and corrected
+“Machinome also lets us test…” boundary, with no discarded sentence about
+agents writing models because of tests. “Open source technologies” is present.
+
+`capture-studio.mjs` used the real running Studio surface and the existing
+sawmill export, with browser-local session/chat fixtures and non-GET requests
+blocked. No broker mutation was attempted. Screenshot: 3840×2160, 1280×720
+CSS viewport at DPR 3. The model and assembly navigator loaded before only
+the central model host was hidden. The fictional completion message has
+3000px padding, a 3549px transcript and a 3056px final scroll position;
+its tail fills the chat without long filler text. Geometry, screenshot hash
+and disclosure are retained in `assets/studio-capture.json`.
+
+The shared live model stays on the same source camera while the screenshot
+fades in over 1.2s, beginning at 99.67s. At 100.875–103.675s, synchronous
+cue-driven layout scales/translates the screenshot and moves its model slot
+into the photographed viewport. No animation timer or alternative simulation
+was added. Prompt/chat, Code and Build highlights follow the measured phrases.
+Testing begins at 114.333s; its code finishes typing at 118.17s.
+
+The updated relation spans were locally re-aligned, not copied from the
+previous take: raw `drives` 94.87–95.40s, `crankshaft` 95.50–96.33s.
+PocketSphinx 5.1.1 crops 93.25, 93.35 and 93.45 through 96.6s agree on
+onsets exactly and drives end within 20ms. Film-grid spans are
+97.875–98.417s and 98.500–99.333s. The take-hash guard remains active.
+
+The supporting stream runs 171.417–178.32s and overlaps the physical wheel
+from 173.5s; all seven labels remain fully visible for 3.04–3.21s. The
+wheel reaches 1.03 turns/s at zoom onset and 1.26 at the end, accelerating
+through the zoom without crossing half a spoke interval per output frame.
+
+All 104 checks pass: 83 preview frame/cue checks, 8 relation boundary checks
+and 13 new Studio frames. Studio checks cover actual canvas bounds, model
+clock continuity, unchanged camera, background opacity/placement, typed
+prompt and exact menu targets. Saved transition and full-screen frames were
+visually inspected, including each highlight. Run with the live server online:
+
+```sh
+node videos/machinome-release-5/inspect-preview.mjs /home/asa/devel/machinome/videomaker
+node videos/machinome-release-5/inspect-relation-sync.mjs /home/asa/devel/machinome/videomaker
+node videos/machinome-release-5/inspect-studio.mjs /home/asa/devel/machinome/videomaker
+```
+
+No new MP4 was rendered. The original rehearsal hash below remains unchanged.
+The old movie/mix/provider-original are retained in `_build/revisions/before-studio/`,
+and old keyed takes are untouched. Audio integrity and acoustic-model timing
+were checked; this is not a new human listening approval. The new Studio
+reveal works live; the ordinary dissolve into testing still appears as a
+midpoint cut in the player. Older evidence below is historical, including
+its now-superseded inserted pause and numeric timings.
 
 ## Post-rehearsal cue scope and circumference arrival
 

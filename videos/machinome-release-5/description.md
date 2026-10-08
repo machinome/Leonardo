@@ -50,8 +50,18 @@ Machinome as a fictional composite character: the tools, framework,
 foundry and AI agent. The reconstruction and research claims refer to
 the project's recorded work, not to new historical research by a person
 speaking in the film. Narration uses Jessica through ElevenLabs. The current
-cut-5 performance includes a documented 1.2-second inserted pause before the
-returning wheel line; spoken audio is not stretched or truncated.
+Studio revision is one unedited provider performance, including its natural
+pause before the returning wheel line. No digital silence is spliced into
+the take, and spoken audio is not stretched or truncated.
+
+The Studio scene uses a screenshot of the real Machinome Studio interface
+with a browser-only staged completion message, not a recording of an actual
+agent session. The model was hidden for that screenshot and the existing
+moving sawmill is composited into its viewport. Studio's UI is copyright
+2023–2026 Luis Henrique Cassis Fagundes, AGPL-3.0-or-later; its artwork and
+trademarks retain their separate terms. Studio 0.1.0 is experimental and
+unpublished, running locally on Linux; this scene does not claim a hosted
+service or a portable released browser installation.
 
 Machinome identity assets are the approved brand/v1 orange symbol and
 wordmark, used unchanged. Artwork and trademark permissions are separate

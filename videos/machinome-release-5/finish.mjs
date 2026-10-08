@@ -21,8 +21,8 @@ assert.ok(take,'Continuous take is missing. This command does not generate speec
 assert.equal(take.sha256,approved.sha256,'The film must reuse the recorded audio bytes.');
 assert.equal(doc.chapters.length,1);
 assert.equal(doc.chapters[0].narration,approved.text);
-// The provider collapsed crankshaft to 10 ms and delayed drives. Correct
-// only these visual spans from local forced alignment of the same recording;
+// The earlier provider take collapsed crankshaft to 10 ms and delayed drives.
+// Re-measure each fresh take and correct only these visual spans locally;
 // neither the cached alignment nor audio nor scene boundaries are rewritten.
 const relationTiming=JSON.parse(await readFile(resolve(base,'relation-timing.json')));
 assert.equal(relationTiming.schema,'cut5-relation-timing/1');
@@ -132,7 +132,7 @@ const openTimed=measured.chapters[0].shots.find(s=>s.id==='open-source');
 const driveStart=openTimed.start+openTimed.cues.find(c=>c.actions.some(a=>a.action==='drive')).at;
 // Every label gets the same acceleration, with extra reading time over the
 // waterwheel. Clear the stream just before the returning sentence.
-const streamPhrase='a stream of open source tools';
+const streamPhrase='a stream of open source technologies';
 const streamIndex=alignedText.indexOf(streamPhrase);
 assert.ok(streamIndex>=0&&alignedText.indexOf(streamPhrase,streamIndex+1)<0);
 const streamLast=Array.from(alignedText.slice(0,streamIndex)+streamPhrase).length-1;

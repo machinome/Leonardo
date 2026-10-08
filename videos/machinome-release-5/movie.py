@@ -1,6 +1,8 @@
 """Revolutions — fifth cut, live preview."""
 # Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
 from pathlib import Path
+import base64
+import json
 
 from machinome_movie import (
     Action, Camera, Chapter, Credits, Cue, Dissolve, Element, Evidence,
@@ -49,6 +51,23 @@ class Workbench(Set):
     stage = Slot()
     imports = Slot()
     code = Slot()
+    surface = Slot()
+
+
+class Studio(Set):
+    module = 'stage.jsx'
+    surface = Slot()
+    stage = Slot()
+
+
+class StudioSurface(Element):
+    module = 'stage.jsx'
+    reveal = Action()
+    arrive = Action()
+    settled = Action()
+    focus = Action(area=str)
+    type_prompt = Action()
+    prompt_complete = Action()
 
 
 class SourceRoom(Set):
@@ -220,6 +239,12 @@ class Continuous(Chapter):
                        tagline='Python', url='', license='', question='', compact=True)
     imports = Source.panel(Sawmill.imports)
     assembly = Listing(**model_excerpt('models/hydraulic_sawmill/model.py', [(401, 417)], type_in=True))
+    studio_ui = StudioSurface(
+        screenshot='data:image/png;base64,' + base64.b64encode(
+            (HERE / 'assets/studio-background.png').read_bytes()).decode(),
+        geometry=json.loads((HERE / 'assets/studio-capture.json').read_text()),
+        prompt="There's one more adjustment:",
+    )
     tests = Listing(**model_excerpt('models/hydraulic_sawmill/test_model.py',
                                    [(8, 8), (25, 27), (604, 612)], type_in=True))
     test_view = View(Sawmill, camera=Sawmill.test, hide=[Sawmill.test_context])
@@ -232,7 +257,7 @@ class Continuous(Chapter):
         spacing=310.0, mark=(BRAND / 'mark-orange.svg').read_text(),
         title='OPEN SOURCE', arrival=1.65, spinDelay=1.65, stagger=0.45, streamDuration=5.8,
         # Keep gaining speed through the hub zoom: about 1.25 turns/s at exit.
-        angularAcceleration=42.0, entrySpeedFraction=0.65, timeOffset=0.0, fadeDuration=0.0,
+        angularAcceleration=45.0, entrySpeedFraction=0.65, timeOffset=0.0, fadeDuration=0.0,
     )
     signature = Signature(svg=(BRAND / 'wordmark-orange.svg').read_text(),
                           tagline='',
@@ -322,22 +347,38 @@ class Continuous(Chapter):
                 drawing_source.show(enter=0.3, leave=0.2), until=lines.spoken('and used the Python'))])
     python_language = Shot(Exhibition, {Exhibition.graphic: python},
         until=lines.spoken('From Machinome'), model=Sawmill.run(470, 472), transition=Dissolve(0.35))
-    face_reveal = Shot(Workbench, {Workbench.stage: mill, Workbench.imports: imports, Workbench.code: assembly},
-        until=lines.spoken('With Machinome'), model=Sawmill.run(472, 480), transition=Dissolve(0.4), cues=[
-            Cue(0, mill.move(Sawmill.source, until=lines.spoken('This is Machinome')),
+    face_reveal = Shot(Workbench, {Workbench.stage: mill, Workbench.imports: imports,
+                                  Workbench.code: assembly, Workbench.surface: studio_ui},
+        until=lines.spoken('Machinome builds', plus=1.2), model=Sawmill.run(472, 480), transition=Dissolve(0.4), cues=[
+            Cue(0, mill.move(Sawmill.source, until=lines.spoken('This is Machinome, the open')),
                 imports.type(through_line=7, over=2.7)),
-            Cue(lines.spoken('This is Machinome'), assembly.write(),
-                until=lines.spoken('This is Machinome', plus=2.7)),
-            Cue(lines.spoken('This is Machinome', plus=2.7), assembly.complete(),
-                until=lines.spoken('With Machinome')),
+            Cue(lines.spoken('This is Machinome, the open'), assembly.write(),
+                until=lines.spoken('This is Machinome, the open', plus=2.7)),
+            Cue(lines.spoken('This is Machinome, the open', plus=2.7), assembly.complete(),
+                until=lines.spoken('Machinome builds', plus=1.2)),
+            Cue(lines.spoken('Machinome builds'), studio_ui.reveal(),
+                until=lines.spoken('Machinome builds', plus=1.2)),
             *relation_blinks(assembly),
+        ])
+    studio = Shot(Studio, {Studio.surface: studio_ui, Studio.stage: mill},
+        until=lines.spoken('Machinome also lets us test'), model=Sawmill.run(480, 488), cues=[
+            Cue(0, studio_ui.arrive(), until=2.8),
+            Cue(2.8, studio_ui.settled(), until=lines.spoken('Machinome also lets us test')),
+            Cue(lines.spoken('prompt your agents'), studio_ui.focus(area='chat'),
+                studio_ui.type_prompt(), until=lines.spoken('see the source code')),
+            Cue(lines.spoken('see the source code'), studio_ui.prompt_complete(),
+                until=lines.spoken('Machinome also lets us test')),
+            Cue(lines.spoken('see the source code'), studio_ui.focus(area='code'),
+                until=lines.spoken_end('see the source code')),
+            Cue(lines.spoken('build the project'), studio_ui.focus(area='build'),
+                until=lines.spoken_end('build the project')),
         ])
     testing = Shot(TestBench, {TestBench.stage: test_view, TestBench.code: tests,
                                TestBench.note: test_note},
         until=lines.spoken("This video's source code"), model=Sawmill.run(0, 4),
         transition=Dissolve(1.8), cues=[
-            Cue(0.875, tests.write(), until=5.875),
-            Cue(5.875, tests.complete(), until=lines.spoken("This video's source code")),
+            Cue(0, tests.write(), until=lines.spoken('This test checks')),
+            Cue(lines.spoken('This test checks'), tests.complete(), until=lines.spoken("This video's source code")),
             Cue(lines.spoken('This test checks'), tests.blink(token='test_blade_clears_both_log_halves', line=606, occurrence=0),
                 until=lines.spoken_end('This test checks')),
             Cue(lines.spoken('the blade does not'), test_view.highlight(Mill.saw.sash.blade, others='keep'),
@@ -377,7 +418,7 @@ class Continuous(Chapter):
             Cue(0, ecosystem.hub(), until=lines.spoken(HANDOFF)),
             Cue(0, ecosystem.approach(), until=lines.spoken('OpenSCAD')),
             *technology_cues(ecosystem),
-            Cue(lines.spoken('Trimesh'), ecosystem.drive(), until=lines.spoken(HANDOFF)),
+            Cue(lines.spoken('Trimesh', plus=-0.85), ecosystem.drive(), until=lines.spoken(HANDOFF)),
         ])
     wheel_returns = Shot(Exhibition, {Exhibition.stage: returned, Exhibition.veil: wheel_exit},
         until=lines.spoken_end('their own'),

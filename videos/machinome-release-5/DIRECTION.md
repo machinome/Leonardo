@@ -4,8 +4,42 @@ Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
 
 Commissioned 7 October 2026 from the pilot's viewing of cut 4; revised in place
 on 8 October after reviewing cut 5.
-Status: live-preview edits approved for one MP4 rehearsal on 8 October 2026.
-The rehearsal reuses the current finished movie and cached narration unchanged.
+Status: new Studio scene and regenerated narration in the live preview.
+The earlier MP4 rehearsal remains unchanged. No new render requested.
+
+## Studio revision — latest pilot direction
+
+Replace “With Machinome, machines can have a source code” with:
+“Machinome builds the machine's source code into a JavaScript application,
+and you can work from your browser.” Fade everything but the moving model
+out while Studio's background fades in. Keep the camera unchanged, then
+translate and scale the composition until Studio fills the video.
+
+Capture the real Studio UI with the Leonardo hydraulic sawmill loaded.
+Stage a fictional end-of-work checklist in its chat, with only the tail
+visible and a long scroll made by spacing, not filler text. Hide the actual
+model for the screenshot; composite the existing moving model separately.
+Keep all fixture changes browser-local, with no actual agent work dispatched.
+
+“This is Machinome Studio, where you can prompt your agents” highlights the
+chat while typing “There's one more adjustment:”. “See the source code”
+highlights Code in the menu, then “build the project” highlights Build.
+Do not open either. Transition to the testing code and say “Machinome also
+lets us test how parts fit together.” The pilot explicitly removed the
+proposed “Agents can write mechanical models because of tests.” sentence.
+
+Say “open source technologies”, not “open source tools”. Keep a continuous
+audio signal and a natural performed pause before the returning wheel line:
+remove the earlier digital-silence insertion. Preserve the old take/MP4.
+Re-measure cues against the regenerated narration. Studio reveal now starts
+at 99.67s; testing starts at 114.333s. The stream starts 0.85s before Trimesh
+to preserve at least three seconds of reading time for every name. A 45°/s²
+wheel ramp retains the approved fast accelerating hub-zoom experience.
+
+## Earlier direction retained
+
+Numeric times below refer to the previous recording, not the new take.
+The latest instructions above supersede conflicting timing/audio decisions.
 
 - Start the wheel spinning immediately, with no held first second or delayed
   acceleration. Keep the model's phase aligned at the start of the pawl lesson.
@@ -29,8 +63,8 @@ The rehearsal reuses the current finished movie and cached narration unchanged.
   highlights in the relation sentence against the existing recording.
   Clear `spin` before `drives`; keep narration and scene boundaries unchanged.
   This follow-up is live-preview only, without replacing the rehearsal MP4.
-- Begin the transition to testing on “With Machinome”.
-- Type the testing source over 105–110s (the pilot clarified the original typo).
+- Keep the testing-source typing entrance, now aligned from its new scene
+  start through “This test checks”; Studio replaces the old direct transition.
 - Remove “That checks the sampled positions, not every moment between them.”
   Crossfade from the shortened test scene into the film-source explanation.
 - Briefly enumerate the visible CrankStroke source: “A narration, a camera,
@@ -63,10 +97,8 @@ The rehearsal reuses the current finished movie and cached narration unchanged.
   when the zoom starts, reaching about 1.25 turns/s at the end. The graphic
   and physical wheels share this phase; label travel now has its own clock so
   slowing the stream cannot postpone or weaken the wheel acceleration.
-- Retain the 1.2 seconds of inserted silence before the returning wheel line,
-  replacing the former seven-second addition. The stream now uses that pause
-  for reading time. Preserve the provider original and record the edit;
-  no speech stretching or truncation.
+- The former 1.2-second inserted silence is superseded by the continuous
+  unedited take above. No speech stretching or truncation.
 - Keep the slower return line. At its “and humans”, push directly into the
   wheel's centre. Fade the last part of the push to the dark background so
   the wheel is gone by the end of “their own”. Wait for the recorded “I'm”

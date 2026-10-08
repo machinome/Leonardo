@@ -2,23 +2,43 @@
 
 Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
 
-Live preview of the edits in [DIRECTION.md](DIRECTION.md), with new Jessica
-narration, brief word-synced code enumeration, a narrated stream/wheel overlap,
-and a closing zoom through the wheel towards the approaching logo.
-One narrated [MP4 rehearsal](_build/rehearsal.mp4) was rendered on the pilot's
-request on 8 October 2026: 191 seconds, 1920×1080, 24 fps. Optional
-[subtitles](_build/rehearsal.srt) are separate, not burned in.
-[Narration](narration.py), [movie](movie.py),
-[upload description draft](description.md).
+Current **live preview**: http://127.0.0.1:8785/#movie — 194 seconds,
+1920×1080, 24 fps. The Studio revision has a new continuous Jessica take.
+[Narration](narration.py), [movie](movie.py), [direction](DIRECTION.md),
+[upload description draft](description.md), [verification](VERIFICATION.md).
 
-The live preview now includes the subsequent relation-word sync correction:
-`drives` at 101.917s and `crankshaft` at 102.458s. The existing MP4 predates
-this correction and is retained unchanged; no replacement render was requested.
-The preview also confines “spoken” to the seven calls inside the displayed
-`Cue`s (142.3s), and delays the circumference until the OpenSCAD label and
-spoke appear (157.75s). Only the M and title approach beforehand.
+At 99.7s, the assembly source fades into the Studio background while the
+model keeps moving without a camera change. At 100.875–103.675s, the whole
+composition translates and scales into the full-screen Studio layout.
+The chat prompt types on “prompt your agents”; Code and Build highlight
+on their spoken phrases. Testing begins at 114.333s with “Machinome also
+lets us test how parts fit together.” The discarded sentence about agents
+and tests is absent.
 
-From the Leonardo repository:
+The screenshot is the real Studio UI with the existing sawmill export,
+a **browser-only staged** completion message, and a long scroll created
+by spacing rather than filler text. The actual model was hidden for the
+capture and is composed as a live View in the film. No broker session was
+opened, no message submitted and no build dispatched by the capture.
+The screenshot, geometry and provenance are under [assets/](assets/).
+
+“Open source technologies” replaces “open source tools”. Speech is one
+unedited provider recording, including its natural pause before the returning
+wheel line. No zero-PCM block, splice, stretching or truncation is applied.
+The stream overlaps the physical wheel from 173.5s and clears at 178.32s,
+0.2s before the returning sentence. Every name remains fully visible for
+at least three seconds. The wheel keeps accelerating through its hub zoom.
+
+The original [MP4 rehearsal](_build/rehearsal.mp4) and separate
+[subtitles](_build/rehearsal.srt) remain **unchanged**: 191 seconds, rendered
+from `e5e5779`. They do not include the Studio scene or subsequent live fixes.
+No replacement MP4 was requested. Previous preview/audio records are retained
+under `_build/revisions/before-studio/`; keyed speech caches are also retained.
+
+## Reproduce the live preview
+
+Stop this film's live server before evaluating/finishing; leave Studio and
+the cut-4 server alone. From the Leonardo repository:
 
 ```sh
 node videos/machinome-release-5/prepare.mjs
@@ -29,42 +49,23 @@ node videos/machinome-release-5/finish.mjs /home/asa/devel/machinome/videomaker
 node /home/asa/devel/machinome/videomaker/bin/videomaker.mjs live videos/machinome-release-5/_build/movie.json --viewer /home/asa/devel/machinome/machinome-viewer/machinome_viewer/widget/dist/machinome-viewer.js --port 8785
 ```
 
-Speech is cache-only by default; the initial take requires `--generate`.
-The provider receipt and untouched provider WAV are retained. The preview
-take inserts 1.2 seconds of silence before the returning wheel line;
-its metadata records the edit and all following timestamps shift with it.
-`finish.mjs` follows a fresh movie evaluation and mixes the cached audio at
-the film's three-second lead-in. It does not request speech or render video.
+Speech is cache-only unless explicitly passed `--generate`; generation costs
+money and is not required for reuse. `finish.mjs` must follow a **fresh** movie
+evaluation. It mixes the take with the three-second lead-in and applies the
+take-bound relation timing in `relation-timing.json`; a new take requires
+remeasuring that timing. It does not generate speech or render video.
 
-To reproduce the rehearsal from the finished movie and cached narration,
-stop this film's live server first, then run from the Leonardo repository:
+To recapture the staged Studio UI, with Studio already running at port 9000:
 
 ```sh
-node /home/asa/devel/machinome/videomaker/bin/videomaker.mjs render videos/machinome-release-5/_build/movie.json --viewer /home/asa/devel/machinome/machinome-viewer/machinome_viewer/widget/dist/machinome-viewer.js
+node videos/machinome-release-5/capture-studio.mjs /home/asa/devel/machinome/videomaker /home/asa/devel/machinome/machinome-viewer/machinome_viewer/widget/dist/machinome-viewer.js
 ```
 
-This uses cached speech only. The rendered source revision is `e5e5779`;
-the manifest and decoded review pack remain in `_build/`. This is a local
-rehearsal, not a release-ready publication. See [VERIFICATION.md](VERIFICATION.md).
+Do not recapture casually: a different Studio layout changes the recorded
+geometry and screenshot. The script blocks all non-GET requests and serves
+the fixture session/model only to its isolated capture browser.
 
-The live player shows composed dissolves as midpoint cuts. The MP4 contains
-their final blends, inspected in decoded midpoint and end frames.
-The opening wheel turns from the first frame, without the former one-second hold.
-The opening machine reveal now uses a live reframe from 7.29s to 8.49s:
-the wheel stays solid and the full machine fades in. The mechanism change
-at 32.46s also fades live over 1.2 seconds. Testing code types from 105–110s;
-the film source types from 131.08–133.08s before the word-synced enumeration.
-The stream/wheel overlap and closing motion are project-owned live actions.
-The slower tool stream lasts 167.75–174.62s, continuing over the waterwheel
-after the graphic circle fades and clearing 0.2s before the returning speech.
-Each name stays fully in frame for at least three seconds.
-The ending wheel keeps accelerating through the hub zoom, from just over
-one turn per second at zoom onset to about 1.25 turns/s at its end.
-Current duration: 191 seconds. The second
-wheel line starts around 174.8s, its zoom starts at 177.96s, and the logo
-waits for “I'm”, then approaches from the distance at approximately
-180.52–181.72s without fading. Its GitHub
-address and the pilot-supplied licence line fade in together on the closing
-“Open Source” at about 185.61–186.49s, both at fixed size, with no tagline.
-See [VERIFICATION.md](VERIFICATION.md) for checks
-and the take-bound local correction of the provider-alignment issue.
+The Studio reveal, opening reveals and ending motion are visible live.
+Ordinary composed dissolves (including Studio → testing) still appear as
+midpoint cuts in the live player; a future requested render supplies their
+final blend. No tool-wide transition behavior was changed.

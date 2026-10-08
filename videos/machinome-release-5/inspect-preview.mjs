@@ -141,8 +141,11 @@ try{
   const shotToken=source.cues.flatMap(c=>c.actions).find(a=>a.params?.token==='Shot');
   assert.ok(shotToken,'The spoken a shot highlights the Shot constructor, not the variable');
   assert.ok(!/^\s*(stroke|end)\s*=/m.test(code),'Speech anchors are inline in the actual shot and cues');
+  const testing=doc.chapters[0].shots.find(s=>s.id==='testing');
+  const testTyping=testing.cues.find(c=>c.actions.some(a=>a.action==='write'));
   for(const [id,element,from,to] of [
-    ['testing','tests',105,110],['behind-the-film','film-code',source.start,source.start+2],
+    ['testing','tests',testing.start+testTyping.at,testing.start+testTyping.until],
+    ['behind-the-film','film-code',source.start,source.start+2],
   ]){
     const full=doc.chapters[0].elements[element].props.code;
     let prior=-1;
@@ -239,7 +242,7 @@ try{
     await page.locator('iframe').screenshot({path:resolve(output,`circumference-${time.toFixed(3)}.png`)});
     checks.push({id:'circumference-arrival',time,...appearance});
   }
-  const speechEnd=endOf('a stream of open source tools');
+  const speechEnd=endOf('a stream of open source technologies');
   const returnSpeech=startOf('The wheel... makes revolutions');
   const streamEnd=driveStart+props.streamDuration;
   assert.ok(returned.start<driveStart+6*props.stagger,'The handoff starts before the last tool is released');

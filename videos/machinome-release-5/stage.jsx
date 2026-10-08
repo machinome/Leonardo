@@ -8,15 +8,59 @@ import './_build/fonts.css';
 const sets={
   exhibition:['ghost','backdrop','stage','graphic','heading','note','veil'],
   mechanism:['backdrop','plate','ghost','stage','note'], archive:['picture','note'],
-  workbench:['stage','imports','code'], 'source-room':['code'],
+  'source-room':['code'],
   'test-bench':['stage','code','note'],
 };
 for(const [kind,slots] of Object.entries(sets))
   defineSet({kind,slots,component:()=> <div className={'set '+kind}>
     {slots.map(name=><Slot key={name} name={name} className={'slot-'+name}/>)}</div>});
 
+// StudioSurface lays out the model slot together with the photographed UI.
+// Its boxes follow cue progress synchronously; no DOM measurement drives motion.
+defineSet({kind:'workbench',slots:['stage','imports','code','surface'],component:()=>
+  <div className="set workbench">
+    <Slot name="imports" className="slot-imports"/><Slot name="code" className="slot-code"/>
+    <Slot name="surface" className="slot-surface"/>
+  </div>});
+defineSet({kind:'studio',slots:['surface','stage'],component:()=>
+  <div className="set studio"><Slot name="surface" className="slot-surface"/></div>});
+
 const smooth=x=>{const p=Math.max(0,Math.min(1,x));return p*p*(3-2*p);};
 const elapsed=a=>a?a.progress*(a.until-a.since):0;
+function StudioSurface({state}){
+  const {geometry:g,screenshot,prompt}=state.props;
+  const arriving=state.actions.find(a=>a.action==='arrive');
+  const settled=state.actions.some(a=>a.action==='settled');
+  const reveal=state.actions.find(a=>a.action==='reveal');
+  const p=settled?1:arriving?smooth(arriving.progress):0;
+  const opacity=arriving||settled?1:reveal?smooth(reveal.progress):0;
+  const initial={x:.6,y:.05,width:.4,height:.9};
+  const final={x:g.model.x/g.viewport.width,y:g.model.y/g.viewport.height,
+    width:g.model.width/g.viewport.width,height:g.model.height/g.viewport.height};
+  const box=Object.fromEntries(Object.keys(initial).map(k=>[k,initial[k]+(final[k]-initial[k])*p]));
+  const startScale=initial.height/final.height;
+  const scale=startScale+(1-startScale)*p;
+  const tx=(initial.x+initial.width/2-(final.x+final.width/2)*startScale)*(1-p);
+  const ty=(initial.y+initial.height/2-(final.y+final.height/2)*startScale)*(1-p);
+  const focus=state.actions.find(a=>a.action==='focus')?.params.area;
+  const typing=state.actions.find(a=>a.action==='type-prompt');
+  const text=typing?prompt.slice(0,Math.ceil(prompt.length*typing.progress)):
+    state.actions.some(a=>a.action==='prompt-complete')?prompt:'';
+  const rect=r=>({left:`${100*r.x/g.viewport.width}%`,top:`${100*r.y/g.viewport.height}%`,
+    width:`${100*r.width/g.viewport.width}%`,height:`${100*r.height/g.viewport.height}%`});
+  useReport({progress:p,opacity,scale,tx,ty,modelBox:box,focus:focus??null,prompt:text});
+  return <div className="studio-surface">
+    <div style={{position:'absolute',inset:0,background:'#101419',opacity}}/>
+    <div className="studio-photograph" style={{opacity,
+      transform:`translate(${100*tx}%,${100*ty}%) scale(${scale})`}}>
+      <img src={screenshot}/>
+    </div>
+    <Slot name="stage" className="studio-model" style={{left:`${box.x*100}%`,top:`${box.y*100}%`,
+      width:`${box.width*100}%`,height:`${box.height*100}%`}}/>
+    {focus&&<div className="studio-focus" data-focus={focus} style={rect(g[focus])}/>}
+    {text&&<div className="studio-prompt" style={rect(g.input)}>{text}<span className="studio-caret"/></div>}
+  </div>;
+}
 function syntax(line){
   return line.split(/("[^"\n]*"|'[^'\n]*'|\b(?:class|from|import|def|return)\b)/g)
     .map((s,i)=><span key={i} className={/^["']/.test(s)?'string':/^(class|from|import|def|return)$/.test(s)?'keyword':''}>{s}</span>);
@@ -125,6 +169,7 @@ function Constellation({state}){
   </div>;
 }
 defineElement({kind:'listing',component:Listing});
+defineElement({kind:'studio-surface',component:StudioSurface});
 defineElement({kind:'signature',component:Signature});
 defineElement({kind:'curtain',component:Curtain});
 defineElement({kind:'shade',component:()=> <div style={{position:'absolute',inset:0,background:'#101419'}}/>});

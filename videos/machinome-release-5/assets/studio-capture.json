@@ -1,0 +1,56 @@
+{
+  "schema": "studio-staged-capture/1",
+  "capturedAt": "2026-10-08T13:18:44.118Z",
+  "origin": "http://127.0.0.1:9000",
+  "project": "Leonardo/hydraulic_sawmill",
+  "screenshot": "studio-background.png",
+  "sha256": "7204add229ce3a590caa0f0792ea1821c6207d613c6670c73e1e255857854b92",
+  "pixelRatio": 3,
+  "viewport": {
+    "width": 1280,
+    "height": 720
+  },
+  "model": {
+    "x": 358,
+    "y": 104,
+    "width": 508,
+    "height": 576
+  },
+  "chat": {
+    "x": 880,
+    "y": 50,
+    "width": 400,
+    "height": 644
+  },
+  "input": {
+    "x": 897,
+    "y": 608,
+    "width": 300,
+    "height": 74
+  },
+  "code": {
+    "x": 0,
+    "y": 119,
+    "width": 73,
+    "height": 59
+  },
+  "build": {
+    "x": 0,
+    "y": 237,
+    "width": 73,
+    "height": 59
+  },
+  "scroll": {
+    "top": 3056,
+    "height": 3549,
+    "clientHeight": 493
+  },
+  "inputStyle": {
+    "font": "13px \"Space Grotesk\", ui-sans-serif, system-ui, sans-serif",
+    "color": "rgb(230, 232, 236)"
+  },
+  "provenance": "Real Machinome Studio UI, existing sawmill export; browser-only staged session and fictional completion message. Model hidden after it loaded; composited as a moving View by movie.py.",
+  "message": "The sawmill adjustments are complete.\n\n✓ Waterwheel and crankshaft are linked through the drive relation.\n\n✓ The connecting rod moves the saw through its full up-and-down stroke.\n\n✓ The driving pawl advances the ratchet, and the holding pawl keeps that progress while it returns.\n\n✓ Both ropes follow the compound shaft through to the timber carriage.\n\n✓ Blade clearance is checked against both halves of the timber at thirteen positions across a full wheel turn.\n\n✓ Source, tests and the browser model are ready for review.\n\nThe machine is moving in the viewer. You can inspect the mechanism or ask for another adjustment.",
+  "mutations": [],
+  "errors": []
+}
