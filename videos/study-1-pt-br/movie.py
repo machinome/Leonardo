@@ -96,26 +96,17 @@ class Continuous(Chapter):
     )
     whole = View(Sawmill, camera=Sawmill.carriage)
     ghost = View(Sawmill, camera=Sawmill.rear)
-    hook_title = Title("Uma roda. Duas funções.")
-    identity = Title("A serraria de Leonardo", subtitle="HÁ CINCO SÉCULOS")
+    identity = Title("Serraria hidráulica", subtitle="LEONARDO DA VINCI")
     limits = Title(
         "Reconstrução do movimento", subtitle="Forças e corte não simulados"
     )
-    ending = Title("Cortar e avançar.")
 
     revolution = Shot(
         Portrait,
-        {Portrait.stage: wheel, Portrait.heading: hook_title},
+        {Portrait.stage: wheel},
         until=lines.spoken("Há cinco séculos"),
-        fade_in=FadeIn(0.25),
+        fade_in=FadeIn(0.5),
         model=Sawmill.run(400, 404),
-        cues=[
-            Cue(
-                0,
-                hook_title.show(enter=0.3, leave=0.25),
-                until=lines.spoken("Há cinco séculos"),
-            )
-        ],
     )
     ancestor = Shot(
         Portrait,
@@ -124,18 +115,20 @@ class Continuous(Chapter):
             Portrait.stage: mill,
             Portrait.heading: identity,
         },
-        until=lines.spoken("A água gira"),
-        transition=Reframe(0.8),
+        until=lines.spoken("A água sob a roda"),
+        transition=Reframe(1.2),
         model=Sawmill.run(404, 420),
         cues=[
             Cue(
                 0,
                 identity.show(enter=0.5, leave=0.4),
-                until=lines.spoken("A água gira"),
+                until=lines.spoken("A água sob a roda"),
             ),
             Cue(
                 lines.spoken("Leonardo da Vinci"),
-                mill.move(Sawmill.rear, until=lines.spoken("A água gira")),
+                mill.move(
+                    Sawmill.rear, until=lines.spoken("A água sob a roda")
+                ),
             ),
         ],
     )
@@ -148,16 +141,16 @@ class Continuous(Chapter):
             Cue(
                 0,
                 detail.move(
-                    Sawmill.crank, until=lines.spoken("movimenta este eixo")
+                    Sawmill.crank, until=lines.spoken("gira este eixo")
                 ),
             ),
             Cue(
                 0,
                 detail.highlight(Mill.water_drive.waterwheel, others="keep"),
-                until=lines.spoken("que movimenta"),
+                until=lines.spoken("gira este eixo"),
             ),
             Cue(
-                lines.spoken("que movimenta"),
+                lines.spoken("gira este eixo"),
                 detail.highlight(Mill.water_drive.crankshaft, others="keep"),
                 until=lines.spoken("Uma manivela"),
             ),
@@ -171,7 +164,13 @@ class Continuous(Chapter):
         model=Sawmill.run(424, 432),
         cues=[
             Cue(
-                0, detail.move(Sawmill.saw, until=lines.spoken("sobe e desce"))
+                0,
+                detail.move(
+                    Sawmill.saw,
+                    until=lines.spoken(
+                        "no movimento de subida e descida da serra"
+                    ),
+                ),
             ),
             Cue(
                 0,
@@ -181,10 +180,12 @@ class Continuous(Chapter):
             Cue(
                 lines.spoken("uma biela"),
                 detail.highlight(Mill.saw.connecting_rod, others="keep"),
-                until=lines.spoken("sobe e desce"),
+                until=lines.spoken(
+                    "no movimento de subida e descida da serra"
+                ),
             ),
             Cue(
-                lines.spoken("sobe e desce"),
+                lines.spoken("no movimento de subida e descida da serra"),
                 detail.highlight(Mill.saw.sash, others="keep"),
                 until=lines.spoken("Mas a tora"),
             ),
@@ -198,13 +199,13 @@ class Continuous(Chapter):
             Portrait.stage: feed_view,
             Portrait.note: limits,
         },
-        until=lines.spoken("Cada passo"),
+        until=lines.spoken("Esse pequeno passo"),
         model=Sawmill.keys(
             {
                 0: 432,
                 lines.spoken("Durante o corte"): 436,
                 lines.spoken("Uma segunda lingueta"): 438,
-                lines.spoken("Cada passo"): 440,
+                lines.spoken("Esse pequeno passo"): 440,
             }
         ),
         cues=[
@@ -237,14 +238,14 @@ class Continuous(Chapter):
             Cue(
                 lines.spoken("Uma segunda lingueta"),
                 feed_view.highlight(Mill.feed.holding_pawl, others="keep"),
-                until=lines.spoken("enquanto a primeira volta"),
+                until=lines.spoken("enquanto a primeira retorna"),
             ),
             Cue(
-                lines.spoken("enquanto a primeira volta"),
+                lines.spoken("enquanto a primeira retorna"),
                 feed_view.highlight(Mill.feed.pawl, others="keep"),
-                until=lines.spoken("Cada passo"),
+                until=lines.spoken("Esse pequeno passo"),
             ),
-            Cue(0, limits.show(), until=lines.spoken("Cada passo")),
+            Cue(0, limits.show(), until=lines.spoken("Esse pequeno passo")),
         ],
     )
     transmission = Shot(
@@ -274,21 +275,21 @@ class Continuous(Chapter):
             Cue(
                 lines.spoken("Ela gira"),
                 ropes_view.move(
-                    Sawmill.drum, until=lines.spoken("O tambor largo")
+                    Sawmill.drum, until=lines.spoken("um tambor largo")
                 ),
             ),
             Cue(
                 lines.spoken("Ela gira"),
                 ropes_view.highlight(Mill.feed.reduction_shaft, others="keep"),
-                until=lines.spoken("O tambor largo"),
+                until=lines.spoken("um tambor largo"),
             ),
             Cue(
-                lines.spoken("O tambor largo"),
+                lines.spoken("um tambor largo"),
                 ropes_view.highlight(Mill.feed.reserve, others="keep"),
-                until=lines.spoken("enquanto a parte mais fina"),
+                until=lines.spoken("enquanto uma seção mais fina"),
             ),
             Cue(
-                lines.spoken("enquanto a parte mais fina"),
+                lines.spoken("enquanto uma seção mais fina"),
                 ropes_view.highlight(Mill.feed.takeup, others="keep"),
                 until=lines.spoken("A segunda corda"),
             ),
@@ -331,10 +332,10 @@ class Continuous(Chapter):
     )
     two_jobs = Shot(
         Portrait,
-        {Portrait.stage: whole, Portrait.heading: ending},
-        until=lines.end(plus=1.25),
+        {Portrait.stage: whole},
+        until=lines.end(plus=2.5),
         model=Sawmill.run(460, 464),
-        fade_out=FadeOut(0.6),
+        fade_out=FadeOut(1.0),
         cues=[
             Cue(
                 0,
@@ -342,17 +343,12 @@ class Continuous(Chapter):
                     Sawmill.wide, until=lines.spoken("cortar e avançar")
                 ),
             ),
-            Cue(
-                lines.spoken("cortar e avançar"),
-                ending.show(enter=0.2),
-                until=lines.end(plus=1.25),
-            ),
         ],
     )
 
 
 class Study(Movie):
-    title = "Uma roda, duas funções"
+    title = "Revoluções"
     status = "study-1-pt-br"
     learning_goal = "Ver como uma roda aciona a serra e o avanço da tora."
     format = Format(1080, 1920, fps=24)
@@ -390,6 +386,7 @@ class Study(Movie):
 if __name__ == "__main__":
     output = HERE / "_build/movie.json"
     doc = evaluate(Study, name="study-1-pt-br", out=output)
-    doc["chapters"][0]["speechOffset"] = 0.35
+    doc["audio"]["replacements"] = AUDIO["replacements"]
+    doc["chapters"][0]["speechOffset"] = 0.6
     write(doc, output)
     print(output)

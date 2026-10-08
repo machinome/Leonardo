@@ -1,4 +1,4 @@
-# Uma roda, duas funções
+# Revoluções
 
 Como uma roda-d'água consegue serrar a madeira e, ao mesmo tempo, fazer
 a tora avançar? Siga a manivela, a catraca e as cordas de uma serraria
@@ -25,9 +25,11 @@ CAD, código e documentação originais: AGPL-3.0-only; consulte LICENSE e
 NOTICE do projeto. Os modelos são creditados pelo projeto a Astra,
 desenvolvidos por IA a partir de instruções humanas.
 
-Roteiro, tradução, direção e montagem deste estudo elaborados por um agente
-de IA sob direção humana. Voz sintética Leo Antonio, em português do Brasil,
-gerada com ElevenLabs. A voz não representa Leonardo da Vinci.
+Este estudo preserva o roteiro e a tradução em português da abertura do
+filme anterior, até “Uma roda, duas tarefas: cortar e avançar”, e reutiliza
+esse trecho da gravação original de Leo Antonio. Produção com assistência
+de IA sob direção humana. Voz sintética em português do Brasil, gerada com
+ElevenLabs; não representa Leonardo da Vinci.
 Space Grotesk conserva sua licença SIL Open Font License.
 Dependências conservam suas próprias licenças.
 

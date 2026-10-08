@@ -1,88 +1,101 @@
-# Study 1 — production evidence
+# Study 1 — restored original script and Leo performance
 
 Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
 
-8 October 2026. This is an independent portrait adaptation, not a replacement
-of cut 5 or the Portuguese cut 4. Only `videos/study-1-pt-br/` was authored.
-The gallery's pre-existing edits were retained.
+8 October 2026. The pilot rejected the rewritten, hurried 58-second version
+and explicitly requested the original script. That rejected render and its
+evidence are retained under `_build/revisions/fast-58s/`. This revision changes
+only `videos/study-1-pt-br/`; existing work in other productions is untouched.
 
-## Narration and editorial boundary
+## Text and recording
 
-- Leo Antonio — Welcoming & Serene, `EbiSUflQjzm4g7S895SC`, the exact voice
-  recorded by `machinome-release-4-pt-br/voice.json`.
-- One new continuous ElevenLabs `eleven_v3` performance, 805 characters,
-  57.12 seconds; lossless 24 kHz provider audio retained in `_build/audio/`.
-- Brazilian Portuguese, with no Machinome character, implementation lesson,
-  source code, Studio sequence, product attribution or closing invitation.
-- Ends with “Uma roda, duas funções: cortar e avançar.” The 0.35-second
-  lead-in and 1.07-second tail give a 58.541667-second film, 1405 frames.
-- No speech trimming, stretching or splicing. Final mix peaks at -1.5 dBFS;
-  mean level -20.3 dBFS, measured with FFmpeg `volumedetect`.
-- The spoken text, closing shot and visible titles were inspected for
-  credits. Attribution remains in `description.md` and operator metadata.
-- Audio duration, alignment and levels were checked. The agent did not
-  listen to the performance; human listening review remains outstanding.
+`delivery.json` preserves the directed opening from cut 4's
+`auditions/opening.json` and the first mechanical section of its
+`delivery.json`. Removing non-spoken direction tags and normalizing whitespace
+produces the exact text of `narration.py` and the readable `roteiro.txt`.
+This equality was checked programmatically. No sentences were shortened,
+rephrased or replaced. The first-person machine narrator is retained.
+The final sentence is “Uma roda, duas tarefas: cortar e avançar.”
+
+The revised film uses the **original Leo audio**, not another generation:
+
+- Voice `EbiSUflQjzm4g7S895SC`, model `eleven_v3`.
+- Source receipt: cut 4's
+  `_build/audio/continuous-5c0fb0eadc157e2b.wav.provider.json`.
+- Original request ID `6fNdExDYiSpe0v0Gy9Fl`, generated 7 October 2026.
+- The original request begins with this exact directed script.
+- The excerpt contains the original mono 24 kHz PCM samples 0–2147795,
+  unchanged: 89.4915 seconds of the 220.32-second source recording.
+- Excerpt WAV SHA-256:
+  `8f315504745ecbbf66d10bace511041b19bc690155052c929b45b5c015720777`.
+- No stretching, inserted internal silence, internal cuts, or regenerated
+  words. The only edit to the source take is its ending, in the pause before
+  “Para reconstruir”. FFmpeg silence detection at -40 dB confirms the excerpt
+  ends in 0.677 seconds of silence following the last audible phrase.
+- Source character alignment is retained with only non-spoken tags removed.
+  A fresh alignment request was refused with HTTP 401 and was not retried.
+  Timings are therefore the original provider's estimates, not independently
+  verified forced alignment. No key or response secrets are recorded here.
+
+The native film mix adds a 0.6-second lead-in, resamples and normalizes
+loudness, but does not alter performance speed. The closing image continues
+after the voice, with a one-second fade. Total timeline: 91.958333 seconds.
+
+A failed new take of the rejected wording, attempted before the pilot's
+explicit restoration instruction, is not used. Its raw receipt remains in
+the ignored audio evidence. Recovery now runs entirely offline through the
+project-owned `speech.mjs`; native speech generation is unnecessary.
+
+The agent has not listened to the recording. The recovery proves audio and
+text provenance, not human listening approval. Listening and final editorial
+approval remain with the pilot.
 
 ## Picture and timing
 
-1080 × 1920, 24 fps. The model is rendered again with portrait cameras,
-not cropped from the earlier landscape MP4. The dark stage uses the existing
-local Space Grotesk font. Machine details remain opaque against a faint
-complete assembly; moving views share exactly the same camera and pose.
+Portrait 1080 × 1920, 24 fps, 2207 frames. Original mechanism explanation,
+with the study's portrait cameras retimed to the restored performance.
+The invented hook and closing slogan are removed. The opening title is
+“Serraria hidráulica / LEONARDO DA VINCI”. No author/product/licence credits
+appear in the film; historical subject naming and reconstruction limits
+remain. Attribution is in `description.md`.
 
-The opening wheel moves immediately. A live 0.8-second reveal retains the
-wheel while the whole machine appears. A continuous arc orbits around it.
-`finish.mjs` fits that arc and a continuous model clock to the cached take.
-The pawl sequence retains the source film's actual model-phase anchors:
-436–438 model seconds for the pull, 438–440 for the return.
+The preview at 960 × 1706 checked 162 frames, 18 highlights, five title-fade
+checks and three transition checks. All passed, including deterministic pixel
+replay and invalid-camera rejection. Every highlight changes the intended
+part and can be restored and reapplied. Framing was inspected for the full
+machine, saw linkage, holding pawl and compound winding shaft.
 
-The final portrait preview at 540 × 960 checked 186 frames, 18 highlights,
-13 title-fade checks, opening/closing fades, the assembly reveal, deterministic
-pixel replay and invalid-camera rejection. All passed. Each highlight changed
-the intended part's pixels, including the previously obscured input winding.
-The output and per-part difference images are in `_build/preview/`.
-
-The agent inspected opening, orbit, linkage, pawl, winding, compound-shaft,
-carriage and closing images for framing and text. Close-ups deliberately
-exclude surrounding structure while preserving faint assembly context.
-
-Python formatting/PEP 8 and JavaScript syntax checks pass for the new sources.
-No CAD, dependency, framework or production-tool source was changed.
+Model phases remain 436–438 seconds for the ratchet pull and 438–440 for
+its return. No model, framework, viewer or production-tool code is changed.
+Python PEP 8 and JavaScript syntax checks pass. The original text equality
+and sample-preserving recovery assertions pass.
 
 ## Provenance and release limits
 
-The existing model export is cut 3's `_build/model`, also used by cut 5.
-Its recorded source is `94a8562cc70e96de0cad1b85a4a7c1e092d2ed5c`, with
-`dirty: true`. Its 1460-second posed timeline and Viewer API 29 are reused.
-The gallery was at `efff48d7ae2e` and Videomaker at `1617f8184acd` when
-rendering began, both with pre-existing uncommitted changes. The actual
-asset and stage hashes are recorded in the generated manifests; those
-commit IDs alone are not the content rendered.
+The existing cut-3 model export is reused, as in cut 5. Its recorded source
+is `94a8562cc70e96de0cad1b85a4a7c1e092d2ed5c`, with `dirty: true`, a
+1460-second posed timeline and Viewer API 29. The project and Videomaker
+checkouts also contain pre-existing changes; generated manifests retain
+content hashes, rather than pretending their Git heads fully describe them.
 
-Public source/simulation URLs remain unresolved. The description follows
-the gallery's AGPL-3.0-only NOTICE; there is no conflicting licence line
-in this cut. These facts make the production manifest's `releaseReady`
-false, without preventing a local study. Nothing was published.
+The upload description remains a draft. Public source/simulation URLs are
+unresolved; `releaseReady` remains false. Nothing was published or pushed.
 
-## Completed MP4
+## Encoded delivery
 
-`_build/study-1-pt-br.mp4` is the byte-identical named delivery copy of
-`_build/rehearsal.mp4`, the output recorded by `rehearsal-manifest.json`.
-SHA-256: `09f47b8854d9c90a10800e1f6579503f0a40fc680dce52e7eb8870eaa40e8118`.
+`_build/study-1-pt-br.mp4` is a byte-identical copy of the new
+`_build/rehearsal.mp4`; its optional SRT is copied alongside it.
+SHA-256: `2aa36b10856cb29f03d1d73c1d793a311526a0ece56a12f7c452a74ce7195f5f`.
 
-FFprobe confirms 58.541667 seconds, 1405 H.264 frames at 24 fps,
-1080 × 1920, with stereo AAC at 48 kHz. File size: 9,379,570 bytes.
-A complete FFmpeg decode of video and audio finishes without errors.
-All 1405 frames were captured for this film; none came from a landscape
-video or a previous shot cache.
+FFprobe confirms 91.958333 seconds, 2207 H.264 frames at 24 fps,
+1080 × 1920, with stereo AAC at 48 kHz. File size: 13,251,516 bytes.
+Full FFmpeg decode of audio and video completed without errors.
+Decoded AAC peak: -1.2 dBFS; mean: -20.4 dBFS. The subtitle text matches
+the restored script exactly, with no direction tags.
 
-The renderer generated and verified an encoded-film review pack under
-`_build/review-packs/597304a56ef1-09f47b8854d9-599ecff1-95db-44d6-901c-af50047dbee7/`.
-Its decoded frame count and dimensions agree with FFprobe. The agent also
-inspected `_build/encoded-overview.jpg`, twelve chronological samples
-decoded from the actual MP4, including the mechanism sequence and closing.
-The automatic pack's “generated, not reviewed” status is retained; it does
-not substitute for the pilot's review or imply listening approval.
-
-`_build/study-1-pt-br.srt` is a copy of the renderer's separate Portuguese
-subtitles. No captions or credits are burned into the film.
+The encoded review pack is retained at
+`_build/review-packs/29080a67d913-2aa36b10856c-b8d02439-76a6-4e72-a58b-f7bd1e7c7ad1/`.
+The agent inspected chronological samples decoded from the actual MP4
+in `_build/encoded-overview.jpg`, plus the closing at 88 seconds in
+`_build/encoded-closing.png`. These image and technical checks do not
+constitute listening approval; that limitation remains as stated above.
