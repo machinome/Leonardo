@@ -20,12 +20,13 @@ The standard check passes, including the drawing's peak enlargement of
 3.36 against its explicit 3.4 allowance. This is the requested close crop of
 the existing 1000×1000 image, not a higher-resolution replacement. The movie
 reuses the existing cut-3 export.
-`inspect-preview.mjs` passes 69 browser frame/cue checks: five opening-spin
+`inspect-preview.mjs` passes 78 browser frame/cue checks: five opening-spin
 positions (including the second frame), five positions each
 for the opening and 32s fades, a later orbit frame, manuscript coverage and
 edge-aligned source plate, code bounds, two five-sample typing passes, seven
 enumeration cues and four meta-scene tokens, returning-pawl and complete-rope
-highlights, circle easing, stream/wheel overlap, five ending angular-speed
+highlights, circle easing, stream/wheel overlap, seven tool-reading windows,
+two late-stream samples, five ending angular-speed
 samples, four hub-zoom positions, five
 logo-approach positions, two blank pre-logo positions, four synchronized
 URL/licence-fade positions, and no closing question.
@@ -78,12 +79,22 @@ Key locations in the revised film:
 | Closing identity | 179.833 | 191.000 |
 
 The stream starts at 167.750 seconds, under “Trimesh”. Its seven labels
-share one accelerating trajectory and a 0.361-second stagger; the handoff
+share one accelerating trajectory and a 0.533-second stagger; the handoff
 starts on “And beneath it all” at 168.792, before the last label is released.
 The graphic wheel fades over 1.25 seconds while labels remain independent.
-They finish at 172.401, with the end of “tools”; the returning sentence starts
-at 174.821, after 2.42 seconds on the wheel without streaming.
+The stream now finishes at 174.621, 0.2 seconds before the returning sentence
+at 174.821. Its duration grows from 4.651 to 6.871 seconds, giving every name
+about 48% longer to cross. The pilot explicitly extended streaming through
+the pause after “tools”. An endpoint assertion failed against the earlier
+short stream. Browser checks now measure each label's actual text width and
+verify at least three seconds fully inside the frame with a 48-unit inset;
+the last name remains visible after the circle has disappeared, and all names
+are gone before the returning sentence. This checks available reading time,
+not a claim that every viewer has read the names.
 The graphic and physical wheel phases are checked against the same motion law.
+Separating `spinDelay` from label `arrival` preserves the approved wheel clock:
+the complete resolved waterwheel model-key record retains SHA-256
+`6d7029e0046d4f4bfd55e85259c6c7ccccafd0d4755a41cdbc48cfb70667b7f4`.
 
 The ending wheel now uses 42 degrees/s², six times the previous acceleration,
 and keeps gaining speed through the hub zoom. A speed assertion failed against
@@ -93,7 +104,7 @@ over 440 degrees/s at the final sample (about 1.25 turns/s), increasing at
 every sampled point. Each authored 24 fps angular step remains below 22.5°,
 half the eight-spoke interval; live playback dropping frames can still affect
 perceived motion. The graphic and physical wheels remain phase-aligned; the
-tool-label trajectory, all cuts, zoom and logo timing are unchanged. The wheel's phase law
+tool-label trajectory is now slower, while all cuts, zoom and logo timing are unchanged. The wheel's phase law
 is faster; this is editorial retiming, not simulated acceleration dynamics.
 
 The camera moves directly towards the hub from 177.958 (“and humans”) to

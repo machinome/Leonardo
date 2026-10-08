@@ -33,8 +33,16 @@ manuscript source plate hugs its text; “a shot” highlights `Shot`, not `shot
 The latest wheel-speed review raises its ending acceleration from 7 to 42
 degrees/s², shared by the graphic and physical wheel. It reaches just over
 one turn per second as the hub zoom starts and about 1.25 turns/s by its end,
-still accelerating. Stream-label speed, cameras, narration and logo timing
-are unchanged. This is film playback timing, not a CAD or dynamics change.
+still accelerating. This is film playback timing, not a CAD or dynamics change.
+
+Latest stream review: slow the tool names uniformly by extending the stream
+from 4.651 to 6.871 seconds (167.75–174.621s). It continues over the physical
+wheel after the graphic circle disappears and clears 0.2s before the returning
+sentence at 174.821s. Each name has at least three seconds wholly inside the
+frame. This supersedes the previous no-silent-streaming-tail direction.
+The separate `spinDelay` preserves every approved waterwheel model key exactly;
+do not tie it back to label `arrival`. Camera, narration, logo and closing
+text timings remain unchanged.
 
 The latest instruction supersedes the former closing logo fade: after the
 wheel disappears at the end of “their own”, the screen stays clear until
@@ -47,7 +55,7 @@ it in the same fade. Both lines are outside the zooming layer and never scale.
 The requested purpose sentence was already recorded, so no synthesis was
 needed. The licence overlay is explicit pilot direction overriding the skill's
 no-licence-text default; gallery records remain AGPL-3.0-only and were not changed.
-There is no tagline or drawn question. Sixty-nine live browser checks pass,
+There is no tagline or drawn question. Seventy-eight live browser checks pass,
 including no duplicate wheels and the new code/ending behavior. Screenshots
 were inspected. No MP4 rendered and no narration regenerated for this batch.
 

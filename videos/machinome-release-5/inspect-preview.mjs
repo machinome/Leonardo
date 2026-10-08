@@ -223,8 +223,11 @@ try{
   await page.locator('iframe').screenshot({path:resolve(output,'open-source-ease-out.png')});
   checks.push({id:'open-source-ease-out',time:approachTime,scale});
   const speechEnd=endOf('a stream of open source tools');
+  const returnSpeech=startOf('The wheel... makes revolutions');
+  const streamEnd=driveStart+props.streamDuration;
   assert.ok(returned.start<driveStart+6*props.stagger,'The handoff starts before the last tool is released');
-  assert.ok(Math.abs(driveStart+props.streamDuration-speechEnd)<.001,'The stream ends with the spoken phrase');
+  assert.ok(Math.abs(streamEnd-(returnSpeech-.2))<.001,'The slower stream clears just before the returning wheel sentence');
+  assert.ok(props.arrival>1.9,'Each label takes nearly two seconds to reach the centre');
   assert.ok(driverX(props.streamDuration-6*props.stagger,props)<-100,'The last label has crossed the whole frame');
   const overlapTime=returned.start+.8;
   await seek(overlapTime);
@@ -239,6 +242,42 @@ try{
   assert.ok(overlap.length>0,'Tool names remain visible while the real wheel appears');
   await page.locator('iframe').screenshot({path:resolve(output,'stream-wheel-overlap.png')});
   checks.push({id:'stream-wheel-overlap',time:overlapTime,visible:overlap});
+  for(const [i,name] of props.drivers.entries()){
+    const time=driveStart+i*props.stagger+props.arrival;
+    await seek(time);
+    const label=await page.evaluate(name=>{
+      const w=document.querySelector('iframe').contentWindow;
+      const el=[...w.document.querySelectorAll('.incoming')].find(el=>el.textContent===name);
+      const rect=el.getBoundingClientRect();
+      return {width:el.getBBox().width,opacity:Number(w.getComputedStyle(el).opacity),
+        fits:rect.left>=0&&rect.right<=w.innerWidth};
+    },name);
+    assert.ok(label.fits&&label.opacity===1,`The complete ${name} label is visible at centre`);
+    let readableFrames=0;
+    for(let n=0;n/doc.output.fps<props.streamDuration;n++){
+      const elapsed=n/doc.output.fps,age=elapsed-i*props.stagger;
+      const x=driverX(age,props),half=label.width/2;
+      if(age>=0&&x-half>=48&&x+half<=1872&&elapsed<props.streamDuration-.15)readableFrames++;
+    }
+    const seconds=readableFrames/doc.output.fps;
+    assert.ok(seconds>=3,`${name} stays fully visible for at least three seconds`);
+    if(i===props.drivers.length-1)await page.locator('iframe').screenshot({path:resolve(output,'last-tool-over-waterwheel.png')});
+    checks.push({id:'tool-reading-window',name,time,fullyVisibleSeconds:seconds});
+  }
+  for(const [sample,time] of [['late',streamEnd-.6],['cleared',returnSpeech-.05]]){
+    await seek(time);
+    const result=await page.evaluate(()=>{
+      const w=document.querySelector('iframe').contentWindow;
+      return {circleOpacity:Number(w.getComputedStyle(w.document.querySelector('.graph-title')).opacity),
+        names:[...w.document.querySelectorAll('.incoming')].filter(el=>Number(w.getComputedStyle(el).opacity)>.1&&
+          el.getBoundingClientRect().right>0&&el.getBoundingClientRect().left<w.innerWidth).map(el=>el.textContent)};
+    });
+    assert.equal(result.circleOpacity,0,'Only the stream remains over the waterwheel, not the graphic wheel');
+    if(sample==='late')assert.ok(result.names.includes('OpenSpec'),'The last tool remains readable after the graphic wheel fades');
+    else assert.deepEqual(result.names,[],'The stream is clear before the returning sentence');
+    await page.locator('iframe').screenshot({path:resolve(output,`stream-tail-${sample}.png`)});
+    checks.push({id:'stream-tail',sample,time,...result});
+  }
   const zoom=returned.cues.find(c=>c.actions.some(a=>a.action==='move'));
   const zoomStart=returned.start+zoom.at,zoomEnd=returned.start+zoom.actions[0].until;
   assert.ok(Math.abs(zoomStart-startOf('and humans...'))<=frameTolerance);

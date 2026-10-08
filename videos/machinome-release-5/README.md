@@ -34,6 +34,9 @@ the wheel stays solid and the full machine fades in. The mechanism change
 at 32.46s also fades live over 1.2 seconds. Testing code types from 105–110s;
 the film source types from 131.08–133.08s before the word-synced enumeration.
 The stream/wheel overlap and closing motion are project-owned live actions.
+The slower tool stream lasts 167.75–174.62s, continuing over the waterwheel
+after the graphic circle fades and clearing 0.2s before the returning speech.
+Each name stays fully in frame for at least three seconds.
 The ending wheel keeps accelerating through the hub zoom, from just over
 one turn per second at zoom onset to about 1.25 turns/s at its end.
 Current duration: 191 seconds. The second

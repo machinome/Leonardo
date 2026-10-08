@@ -224,7 +224,7 @@ class Continuous(Chapter):
         names=['OpenSCAD', 'SolidPython', 'CadQuery', 'Build123d', 'FreeCAD', 'JSCAD', 'OCCT', 'Trimesh'],
         drivers=['Three.js', 'NumPy', 'SciPy', 'Manifold', 'FastAPI', 'React', 'OpenSpec'],
         spacing=310.0, mark=(BRAND / 'mark-orange.svg').read_text(),
-        title='OPEN SOURCE', arrival=1.65, stagger=0.45, streamDuration=5.8,
+        title='OPEN SOURCE', arrival=1.65, spinDelay=1.65, stagger=0.45, streamDuration=5.8,
         # Keep gaining speed through the hub zoom: about 1.25 turns/s at exit.
         angularAcceleration=42.0, entrySpeedFraction=0.65, timeOffset=0.0, fadeDuration=0.0,
     )

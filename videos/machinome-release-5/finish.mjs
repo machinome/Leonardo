@@ -111,17 +111,24 @@ for(const cue of two.cues)for(const action of cue.actions)action.element='return
 const open=chapter.shots.find(s=>s.id==='open-source');
 const openTimed=measured.chapters[0].shots.find(s=>s.id==='open-source');
 const driveStart=openTimed.start+openTimed.cues.find(c=>c.actions.some(a=>a.action==='drive')).at;
-// Every label gets the same acceleration. Fit all seven passages into the
-// measured speech, starting on Trimesh and ending with the word tools.
+// Every label gets the same acceleration, with extra reading time over the
+// waterwheel. Clear the stream just before the returning sentence.
 const streamPhrase='a stream of open source tools';
 const streamIndex=alignedText.indexOf(streamPhrase);
 assert.ok(streamIndex>=0&&alignedText.indexOf(streamPhrase,streamIndex+1)<0);
 const streamLast=Array.from(alignedText.slice(0,streamIndex)+streamPhrase).length-1;
-const streamEnd=chapter.speechOffset+take.alignment.character_end_times_seconds[streamLast];
+const spokenStreamEnd=chapter.speechOffset+take.alignment.character_end_times_seconds[streamLast];
+const returnPhrase='The wheel... makes revolutions';
+const returnIndex=alignedText.indexOf(returnPhrase);
+assert.ok(returnIndex>=0&&alignedText.indexOf(returnPhrase,returnIndex+1)<0);
+const returnFirst=Array.from(alignedText.slice(0,returnIndex)).length;
+const streamEnd=chapter.speechOffset+take.alignment.character_start_times_seconds[returnFirst]-.2;
 const streamDuration=streamEnd-driveStart;
 const streamRate=streamDuration/5.8;
+// Preserve the approved wheel phase exactly; label travel is a separate clock.
+const wheelRate=(spokenStreamEnd-driveStart)/5.8;
 Object.assign(chapter.elements.ecosystem.props,{arrival:1.65*streamRate,
-  stagger:.45*streamRate,streamDuration});
+  spinDelay:1.65*wheelRate,stagger:.45*streamRate,streamDuration});
 const returned=chapter.shots.find(s=>s.id==='wheel-returns');
 const returnTimed=measured.chapters[0].shots.find(s=>s.id==='wheel-returns');
 const handoffDuration=returned.transition.duration;

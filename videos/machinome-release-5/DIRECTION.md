@@ -43,15 +43,22 @@ Status: implementation for live preview; no MP4 requested.
 - Give each supporting technology its own acceleration from entry,
   with equal stagger and equal time through the readable region.
 - Start the stream on “Trimesh” and start revealing the physical wheel on
-  “And beneath it all”, while more tool names are still entering. Finish the
-  stream by the end of “tools”, with no silent streaming tail.
+  “And beneath it all”, while more tool names are still entering. Slow all
+  seven passages equally and continue them over the physical wheel after the
+  open-source circle has faded. End at 174.621s, 0.2 seconds before the
+  returning “The wheel” starts. This supersedes the earlier requirement to
+  finish the stream on “tools”: the pilot now explicitly permits the stream
+  to continue through the pause. Each name gets at least three seconds fully
+  inside the frame, rather than compressing the last names.
 - Keep the final wheel accelerating through the camera's push into its hub.
   Use 42 degrees/s² (six times the previous ramp): above one turn per second
   when the zoom starts, reaching about 1.25 turns/s at the end. The graphic
-  and physical wheels share this phase; tool-label speeds stay unchanged.
-- Leave a short pause on the physical wheel, replacing the former seven-second
-  addition with 1.2 seconds of inserted silence. Preserve the provider original
-  and record the edit; no speech stretching or truncation.
+  and physical wheels share this phase; label travel now has its own clock so
+  slowing the stream cannot postpone or weaken the wheel acceleration.
+- Retain the 1.2 seconds of inserted silence before the returning wheel line,
+  replacing the former seven-second addition. The stream now uses that pause
+  for reading time. Preserve the provider original and record the edit;
+  no speech stretching or truncation.
 - Keep the slower return line. At its “and humans”, push directly into the
   wheel's centre. Fade the last part of the push to the dark background so
   the wheel is gone by the end of “their own”. Wait for the recorded “I'm”
