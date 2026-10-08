@@ -1,0 +1,8 @@
+/* Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only. */
+.portrait{position:absolute;inset:0;background:#101419;color:#eeeae3;font-family:'Space Grotesk',sans-serif}
+.slot-stage,.slot-backdrop,.slot-ghost{left:0;top:16%;width:100%;height:61%}
+.slot-ghost{opacity:.12}
+.portrait:has(.slot-ghost > .vm-element) .slot-stage{mix-blend-mode:lighten}
+.slot-stage > .vm-element-view{background:#101419}
+.slot-heading{left:8%;top:9%;width:80%;height:14%;--vm-title-size:6.8vw;--vm-title-weight:600;--vm-title-align:left;--vm-title-line:1.08;--vm-subtitle-size:2.6vw}
+.slot-note{left:8%;top:79%;width:78%;height:8%;--vm-title-size:3.1vw;--vm-title-align:left;--vm-title-line:1.35;--vm-title-color:#aeb8c1;--vm-subtitle-size:2.4vw}
