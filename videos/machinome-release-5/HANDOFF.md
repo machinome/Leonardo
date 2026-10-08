@@ -14,6 +14,17 @@ Live URL: http://127.0.0.1:8785/#movie (194s).
 Log: `/tmp/machinome-release-5-live.log`. Cut 4 stays on 8784.
 Studio was already running on http://127.0.0.1:9000; leave it alone.
 
+Latest visual follow-up: the screenshot is now a **native Firefox window**
+showing `http://localhost:9000/`. Captured on a private 3840×2160 Xvfb display
+with Playwright Firefox 153.0 (DPR 3), not a drawn browser mockup. The capture
+helper sizes only that isolated window, and FFmpeg captures the full frame.
+The page's native offset is 84⅓ CSS pixels; recorded model/menu rectangles
+include it. The existing composition uses the new geometry automatically.
+All movie fields except the screenshot and capture geometry are identical
+to the approved Studio revision (`b7ea1d6`). Narration and MP4 hashes are
+unchanged, and no speech generation or MP4 render was performed. Before-frame
+records remain under `_build/revisions/before-firefox/`.
+
 The pilot corrected the new narration: **remove** “Agents can write mechanical
 models because of tests.” After the Studio → testing transition use
 “Machinome also lets us test how parts fit together.” This is implemented.
@@ -34,7 +45,8 @@ Do not regenerate without direction.
   It loads the real sawmill export and assembly navigator, then hides only
   the model host. A 3000px padding creates the long chat scroll without
   filler text. No agent conversation or broker state was changed.
-- `assets/studio-background.png`: 3840×2160, captured at 1280×720 / DPR 3.
+- `assets/studio-background.png`: 3840×2160, native window 1280×720 / DPR 3;
+  its page is 1280×636 beneath the Firefox controls.
   `assets/studio-capture.json` records rectangles, text, scroll and provenance.
 - `StudioSurface` is a project element containing the shared model's `Slot`.
   It synchronously moves that box and the screenshot from cue progress; no

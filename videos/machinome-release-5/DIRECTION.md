@@ -16,6 +16,10 @@ out while Studio's background fades in. Keep the camera unchanged, then
 translate and scale the composition until Studio fills the video.
 
 Capture the real Studio UI with the Leonardo hydraulic sawmill loaded.
+The follow-up request frames it in a real Mozilla Firefox window showing
+`http://localhost:9000/`; include the native tabs and address bar, and fit the
+moving model and all highlights to the page below those controls. Keep the
+approved camera, narration and timing unchanged.
 Stage a fictional end-of-work checklist in its chat, with only the tail
 visible and a long scroll made by spacing, not filler text. Hide the actual
 model for the screenshot; composite the existing moving model separately.

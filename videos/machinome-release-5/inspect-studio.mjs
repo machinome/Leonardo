@@ -17,6 +17,10 @@ assert.deepEqual(meta.edits,[]);
 assert.ok((await readFile(meta.cacheFile)).equals(await readFile(resolve(base,'_build/provider-original.wav'))),
   'No audio splicing: the take is byte-identical to the provider WAV');
 const capture=JSON.parse(await readFile(resolve(base,'assets/studio-capture.json')));
+assert.equal(capture.browserWindow?.browser,'Mozilla Firefox');
+assert.equal(capture.browserWindow.address,'http://localhost:9000/');
+assert.ok(capture.browserWindow.content.y>50,'The actual tab and address bars are visible');
+assert.ok(capture.model.y>capture.browserWindow.content.y,'The live model sits below the browser controls');
 assert.equal(createHash('sha256').update(await readFile(resolve(base,'assets/studio-background.png'))).digest('hex'),capture.sha256);
 assert.deepEqual(capture.mutations,[]);assert.ok(capture.scroll.top>2500);
 const face=shot('face-reveal'),studio=shot('studio'),testing=shot('testing');
@@ -41,6 +45,8 @@ try{
       return {picture:picture?{...rect(picture),opacity:Number(w.getComputedStyle(picture).opacity),loaded:picture.querySelector('img').complete}:null,
         model:model?rect(model):null,canvas:canvas?rect(canvas):null,
         focus:d.querySelector('.studio-focus')?.dataset.focus??null,prompt:d.querySelector('.studio-prompt')?.textContent??'',
+        focusBox:d.querySelector('.studio-focus')?rect(d.querySelector('.studio-focus')):null,
+        promptBox:d.querySelector('.studio-prompt')?rect(d.querySelector('.studio-prompt')):null,
         viewport:{width:w.innerWidth,height:w.innerHeight}};
     });
     await page.locator('iframe').screenshot({path:resolve(output,`${name}.png`)});
@@ -69,13 +75,24 @@ try{
     if(name==='full-screen'){
       assert.ok(Math.abs(dom.picture.x)<1&&Math.abs(dom.picture.y)<1);
       assert.ok(Math.abs(dom.picture.width-dom.viewport.width)<1);
-      assert.ok(Math.abs(dom.model.x-dom.viewport.width*capture.model.x/capture.viewport.width)<1);
+      for(const key of ['x','y','width','height']){
+        const axis=['x','width'].includes(key)?'width':'height';
+        assert.ok(Math.abs(dom.model[key]-dom.viewport[axis]*capture.model[key]/capture.viewport[axis])<1,
+          'The model fits the photographed viewport below the Firefox bars');
+      }
     }
   }
   for(const area of ['chat','code','build']){
     const cue=studio.cues.find(c=>c.actions.some(a=>a.action==='focus'&&a.params.area===area));
     const {dom}=await sample(area,studio.start+(cue.at+cue.until)/2);
     assert.equal(dom.focus,area);
+    for(const [box,target] of [[dom.focusBox,capture[area]],[dom.promptBox,capture.input]]){
+      for(const key of ['x','y','width','height']){
+        const axis=['x','width'].includes(key)?'width':'height';
+        assert.ok(Math.abs(box[key]-dom.viewport[axis]*target[key]/capture.viewport[axis])<1,
+          'Highlights and typing include the native browser-controls offset');
+      }
+    }
     if(area==='chat')assert.ok(dom.prompt.length>0&&dom.prompt.length<"There's one more adjustment:".length);
     else assert.equal(dom.prompt,"There's one more adjustment:");
   }

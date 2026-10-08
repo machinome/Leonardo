@@ -7,6 +7,34 @@ the earlier narrated MP4 rehearsal remains unchanged. No publication.
 
 ## Studio scene and continuous narration — current preview
 
+### Firefox-window follow-up
+
+The pilot requested the approved Studio scene inside Mozilla Firefox with
+`http://localhost:9000/` in the address bar. A new pre-change assertion failed
+because the earlier capture contained no browser window. The new asset is a
+native Firefox 153.0 capture, not a raster edit or imitation browser chrome.
+An isolated Xvfb display holds one temporary Firefox profile/window; a scoped
+X11 helper sizes it to 3840×2160 and FFmpeg captures its pixels with no mouse.
+The address bar is unfocused and displays the complete requested URL. A
+tab-local history replacement changes only the capture's displayed address.
+
+Native controls are 84⅓ CSS pixels high. Capture geometry adds that offset
+to the Studio rectangles; the moving model, chat highlight, both menu targets
+and typing now fit the browser content. The strengthened Studio test checks
+all four rectangle coordinates, not only horizontal placement. Its 13 frames
+and the 83 general preview checks pass; the native capture, full-screen film
+frame and chat highlight were visually inspected. No broker writes or page
+errors were observed. The chat retains the long scroll with only its tail
+visible (3140px scroll position, 409px visible transcript).
+
+Comparison against `_build/revisions/before-firefox/movie.json` proves the
+only document changes are the Studio screenshot and its geometry/provenance.
+All narration, timing, camera and motion fields are identical. Mixed-audio
+SHA-256 remains `2b8391cebe8f59a7493219e6ce7e26bb40af6d178cd26026e056a9c3d4859c08`;
+the original MP4 also retains its hash below. No synthesis or MP4 render.
+
+### Studio revision baseline
+
 194s at 1920×1080 / 24 fps. One fresh paid request produced the 188.72s
 Jessica/Eleven v3 take, with 39 unique measured beats. The cache is
 `_build/audio/continuous-11e9ec5460036865.wav`, SHA-256

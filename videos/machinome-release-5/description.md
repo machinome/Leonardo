@@ -54,7 +54,8 @@ Studio revision is one unedited provider performance, including its natural
 pause before the returning wheel line. No digital silence is spliced into
 the take, and spoken audio is not stretched or truncated.
 
-The Studio scene uses a screenshot of the real Machinome Studio interface
+The Studio scene uses a screenshot of a native Mozilla Firefox window at
+`http://localhost:9000/`, showing the real Machinome Studio interface
 with a browser-only staged completion message, not a recording of an actual
 agent session. The model was hidden for that screenshot and the existing
 moving sawmill is composited into its viewport. Studio's UI is copyright

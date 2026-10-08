@@ -15,7 +15,8 @@ on their spoken phrases. Testing begins at 114.333s with “Machinome also
 lets us test how parts fit together.” The discarded sentence about agents
 and tests is absent.
 
-The screenshot is the real Studio UI with the existing sawmill export,
+The screenshot includes a real Mozilla Firefox window with the address
+`http://localhost:9000/`, around the real Studio UI and existing sawmill export,
 a **browser-only staged** completion message, and a long scroll created
 by spacing rather than filler text. The actual model was hidden for the
 capture and is composed as a live View in the film. No broker session was
@@ -56,6 +57,15 @@ take-bound relation timing in `relation-timing.json`; a new take requires
 remeasuring that timing. It does not generate speech or render video.
 
 To recapture the staged Studio UI, with Studio already running at port 9000:
+the capture uses Playwright's Firefox, Xvfb, xwininfo, FFmpeg, and Python's
+standard-library ctypes with the system libX11. It captures a private virtual
+display, never the user's desktop. Install the capture browser only if missing:
+
+```sh
+PLAYWRIGHT_SKIP_BROWSER_GC=1 node /home/asa/devel/machinome/videomaker/node_modules/playwright/cli.js install firefox
+```
+
+Then capture the native tab/address bars and the staged page together:
 
 ```sh
 node videos/machinome-release-5/capture-studio.mjs /home/asa/devel/machinome/videomaker /home/asa/devel/machinome/machinome-viewer/machinome_viewer/widget/dist/machinome-viewer.js
