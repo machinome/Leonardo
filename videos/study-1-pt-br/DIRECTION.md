@@ -2,7 +2,24 @@
 
 Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
 
-## Current authority — v3 restored
+## Current authority — silence during the mechanism entrance
+
+After approving the film, the pilot requested a longer silence between
+“Vou mostrar como ela funciona” and the explanation, with the machine held
+during the zoom and motion beginning only after the camera settles. This is
+explicit permission to extend that existing silence without another voice
+generation, superseding the no-internal-edit rule for this one gap only.
+
+Add two seconds at film frame 854 (35.583333 s), inside the existing silence.
+Keep every original mixed PCM sample, voice setting and word unchanged.
+Hold the mechanism, move the camera to the existing crank view over 38 frames,
+preserve the original gradual 1.2-second fade, settle for 10 frames, then
+resume the same model clock and highlights. No accelerated catch-up.
+The final film is 89.583333 seconds. The independent edit recipe and checks
+are `pause-transition.mjs` and `verify-pause.mjs`; the base film/cache remains
+unchanged. Only the 98 entrance frames are replaced.
+
+## Approved base — v3 restored
 
 The pilot approved the 85.52-second v3 take below ("great") and then
 requested rendering. Reuse this exact approved audio; no new synthesis.

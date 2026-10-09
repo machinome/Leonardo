@@ -4,10 +4,52 @@ Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
 
 ## Current delivery — 9 October 2026
 
+The pilot requested a longer silence during the mechanism entrance, explicitly
+allowing this local audio edit without regenerating the approved performance.
+The current `_build/study-1-pt-br.mp4` is **89.583333 seconds**, 2150 frames,
+1080 × 1920 at 24 fps, H.264/AAC, without on-screen text or embedded subtitles.
+SHA-256: `d1f71caf179a3d89b0a8b70ed2851229c40b991c0869572de5aff945408ddf79`.
+Its own edit manifest and verification are under `_build/zoom-pause/`.
+The base `_build/rehearsal.mp4` and native manifest remain unchanged below.
+
+`pause-transition.mjs` inserts 96,000 zero PCM sample frames (two seconds,
+stereo 48 kHz) at sample 1,708,000 of the finished mix. Every original sample
+before and after is byte-identical, in the same order and at the same rate.
+No word, breath, delivery, synthesis setting or approved raw recording changed.
+No voice request or purchase was made. Independent silence detection at
+-45 dB measures the target gap expanding from 35.3375–36.1372 seconds
+(0.7997 s) to 35.3375–38.1372 seconds (2.7997 s).
+
+The machine holds from 35.583333 to 37.583333. The zoom to the original
+crank camera ends at 37.166667, leaving 0.416667 seconds with both camera
+and mechanism still. The original 1.2-second fade is preserved inside this
+move. Motion then resumes at its original rate; speech follows at 38.1372.
+No phase jump or accelerated catch-up is used. Existing highlights and all
+later images/cues shift by exactly two seconds, with no new highlighting.
+
+Only 98 entrance frames were captured through Videomaker's checked browser;
+2052 lossless PNGs were reused after their manifest hashes were verified.
+`verify-pause.mjs` independently verifies the complete PCM insertion,
+every output frame/hash/mapping, unchanged caption words and shifted timings,
+2150 encoded frames, the under-90-second duration and full video decode.
+Both replacement endpoints match the base images **pixel for pixel**.
+Frames 892–902 are pixel-identical, proving the settled camera/model hold;
+frame 910 differs, confirming motion resumes. The 12-image contact sheet
+`_build/zoom-pause/encoded-transition.png`, extracted from the finished MP4,
+was inspected for the fade, framing and both joins. Audio was not re-auditioned:
+the approved performance is preserved rather than replaced.
+
+The edit recipe and independent verifier preserve the base and its cache;
+the native `movie.json` intentionally still describes that base. Reproduction
+must finish with the pause-edit command in `README.md`, not stop at the base
+render. The model, viewer, video tool and unrelated productions are unchanged.
+
+## Approved base film — 9 October 2026
+
 The pilot approved the 85.52-second Leo v3 audition and requested rendering.
 The complete film is 87.583333 seconds: 2102 H.264 frames, 1080 × 1920,
 24 fps, stereo AAC, no subtitle stream and no on-screen text.
-`_build/study-1-pt-br.mp4` is byte-identical to `_build/rehearsal.mp4`,
+The then-delivered `_build/study-1-pt-br.mp4` was byte-identical to `_build/rehearsal.mp4`,
 12,424,856 bytes, SHA-256:
 `1ef4847a8ea0246a4ad38275008bfa22bbf774ab6fd6e042eb5a043e53812d28`.
 
