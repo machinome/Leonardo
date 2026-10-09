@@ -1,0 +1,16 @@
+{
+  "id": "study-2-pt-br",
+  "base": "../study-1-pt-br",
+  "baseMovieSha256": "d1f71caf179a3d89b0a8b70ed2851229c40b991c0869572de5aff945408ddf79",
+  "baseMixSha256": "904eab471094a5dd7b0e47f423f0991d6fec64a1a384c1d6ab207601ff64a371",
+  "fps": 24,
+  "frames": 2150,
+  "openingReplacementFrames": 12,
+  "closingStartFrame": 1997,
+  "cameraMoveFrames": 126,
+  "backgroundFadeStartFrame": 60,
+  "backgroundFadeEndFrame": 126,
+  "constantTailFrames": 18,
+  "wheelPeriodModelSeconds": 4,
+  "closingEndModelSeconds": 456
+}
