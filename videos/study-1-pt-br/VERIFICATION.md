@@ -1,6 +1,61 @@
-# Study 1 — restored original script and Leo performance
+# Study 1 — approved v3 performance and portrait film
 
 Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
+
+## Current delivery — 9 October 2026
+
+The pilot approved the 85.52-second Leo v3 audition and requested rendering.
+The complete film is 87.583333 seconds: 2102 H.264 frames, 1080 × 1920,
+24 fps, stereo AAC, no subtitle stream and no on-screen text.
+`_build/study-1-pt-br.mp4` is byte-identical to `_build/rehearsal.mp4`,
+12,424,856 bytes, SHA-256:
+`1ef4847a8ea0246a4ad38275008bfa22bbf774ab6fd6e042eb5a043e53812d28`.
+
+The exact approved audio remains the complete provider performance:
+`continuous-f5670ed891a3674c.wav`, request `g2t6jQk8ABrawMG2rkCn`,
+Leo `EbiSUflQjzm4g7S895SC`, `eleven_v3`, stability 0.5 and similarity 0.75.
+SHA-256: `f237b17e6bc5be12732a8bab81c684bad52903f4212c555cb79bfcac7b582ec6`.
+No speech requests, audio cuts, phrase patches or speed changes were made
+for this render. Native mixing adds the declared 0.6-second lead-in,
+resampling and loudness normalization. The complete take fits before the
+closing image and fade. The agent has not listened; the pilot approved the
+take, and independent transcription previously recovered all 175 words.
+
+`verify-direction.mjs` passes all 17 original cut-5 highlight targets and
+translated anchors, the approved opening, absence of text elements and
+byte-for-byte provider PCM preservation. Preview verified 154 frames,
+17 highlights, four transition/fade checks and exact pixel replay.
+`inspect-motion.mjs` rechecks both 1.2-second fades, synchronized camera and
+model time, outgoing-image coverage and all text-free shots. Its six
+closing-path images were also inspected. The preview contact sheet can
+include old PNGs left by earlier passes; exact report-listed stills and
+the encoded review pack, not that mixed sheet, were used for inspection.
+
+The first encoded pass exposed a straight closing camera path through the
+model, producing an unintended zoom. It is preserved under
+`_build/revisions/rejected-closing-camera/`, not delivered. The replacement
+keeps the camera endpoints and 6.375-second shot but uses an outward arc.
+`check-closing-camera.mjs` failed on the old path and passes every one of
+the 153 closing frames. The final render reused all 1949 earlier frames;
+their seven shot keys and the common cache key are unchanged.
+
+`verify-render.mjs` first rejected the old recording and then rejected the
+stale closing-path render. It passes the delivery: current movie-document
+hash, approved audio hash, full take extent, dimensions/rate/frame count,
+under-90-second duration, external subtitle text and full FFmpeg decode.
+Evidence: `_build/encoded-verification.json` and `rehearsal-manifest.json`.
+All four encoded overview pages and the join samples were inspected on the
+first pass; the corrected closing was inspected in the final pack:
+`_build/review-packs/2a4633f6efff-1ef4847a8ea0-296c7577-997b-42f6-a01b-48bc2803a523/`.
+
+The model export, viewer, tool and other productions are unchanged. Their
+pre-existing dirty state and unresolved public URLs remain explicit in the
+manifest; this is a local delivery, not a published release. Nothing was
+pushed or uploaded. The workspace videomaker skill was separately updated
+and integrated at `66bf15c` before production, covering emotional direction
+by passage and preservation of approved voice, model, text and performance.
+
+## Historical delivery — 8 October (superseded)
 
 8 October 2026. The pilot rejected the rewritten, hurried 58-second version
 and explicitly requested the original script. That rejected render and its

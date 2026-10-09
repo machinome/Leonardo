@@ -20,7 +20,8 @@ for (const shot of chapter.shots) {
   if (!shot.places.ghost) continue;
   for (const cue of shot.cues) {
     for (const action of [...cue.actions]) {
-      if (action.action === 'move') cue.actions.push({...action, element: 'ghost'});
+      if (action.action === 'move' && action.element !== 'mill')
+        cue.actions.push({...action, element: 'ghost'});
     }
   }
 }
@@ -52,6 +53,33 @@ for (let i = 1; i <= 120; i++) {
   ancestor.cues.push({at: start + (end - start) * (i - 1) / 120,
     actions: [{element: 'mill', action: 'move', camera: name, ease: 'linear',
       until: start + (end - start) * u}]});
+}
+// Preserve the closing cameras and timing, but pull back around the model.
+// A straight Cartesian interpolation crosses its centre and creates a zoom.
+const closing = chapter.shots.find(s => s.id === 'two-jobs');
+const closingTime = measured.chapters[0].shots.find(s => s.id === 'two-jobs');
+const closingMove = closing.cues.find(c => c.actions.some(a => a.action === 'move'));
+const closingEnd = closingTime.cues[0].actions[0].until;
+closing.cues = closing.cues.filter(c => c !== closingMove);
+const from = doc.cameras.carriage, to = doc.cameras.wide;
+const relative = camera => camera.position.map((v, i) => v - camera.target[i]);
+const a = relative(from), b = relative(to);
+const angle = Math.atan2(a[1], a[0]);
+const turn = Math.atan2(Math.sin(Math.atan2(b[1], b[0]) - angle),
+  Math.cos(Math.atan2(b[1], b[0]) - angle));
+for (let i = 1; i <= 120; i++) {
+  const u = i / 120, p = u * u * u * (10 + u * (-15 + 6 * u));
+  const target = from.target.map((v, k) => v + (to.target[k] - v) * p);
+  const radius = Math.hypot(a[0], a[1]) * (1 - p) + Math.hypot(b[0], b[1]) * p;
+  const theta = angle + turn * p;
+  const name = `portrait-closing-${String(i).padStart(3, '0')}`;
+  doc.cameras[name] = {position: [target[0] + radius * Math.cos(theta),
+    target[1] + radius * Math.sin(theta), target[2] + a[2] * (1 - p) + b[2] * p],
+    target, up: from.up, fov: from.fov};
+  if (i === 120) doc.cameras[name] = structuredClone(to);
+  closing.cues.push({at: closingEnd * (i - 1) / 120,
+    actions: [{element: 'whole', action: 'move', camera: name, ease: 'linear',
+      until: closingEnd * u}]});
 }
 await writeFile(file, JSON.stringify(doc, null, 2) + '\n');
 console.log('Continuous model clock and portrait orbit fitted to the cached Leo take.');

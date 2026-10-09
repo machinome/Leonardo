@@ -25,11 +25,12 @@ CAD, código e documentação originais: AGPL-3.0-only; consulte LICENSE e
 NOTICE do projeto. Os modelos são creditados pelo projeto a Astra,
 desenvolvidos por IA a partir de instruções humanas.
 
-Este estudo preserva o roteiro e a tradução em português da abertura do
-filme anterior, até “Uma roda, duas tarefas: cortar e avançar”, e reutiliza
-esse trecho da gravação original de Leo Antonio. Produção com assistência
-de IA sob direção humana. Voz sintética em português do Brasil, gerada com
-ElevenLabs; não representa Leonardo da Vinci.
+Este estudo preserva o roteiro da abertura do filme anterior até “Uma roda,
+duas tarefas: cortar e avançar”, com a primeira frase em português revisada
+e aprovada pelo diretor. A narração de Leo Antonio foi gerada novamente em
+uma única tomada, sem emendas. Produção com assistência de IA sob direção
+humana. Voz sintética em português do Brasil, gerada com ElevenLabs;
+não representa Leonardo da Vinci.
 Space Grotesk conserva sua licença SIL Open Font License.
 Dependências conservam suas próprias licenças.
 

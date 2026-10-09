@@ -9,6 +9,7 @@ from machinome_movie import (
     Chapter,
     Credits,
     Cue,
+    Element,
     Evidence,
     FadeIn,
     FadeOut,
@@ -23,7 +24,6 @@ from machinome_movie import (
     Shot,
     Slot,
     Style,
-    Title,
     View,
     evaluate,
     write,
@@ -38,10 +38,13 @@ TRANSMISSION = "../../models/hydraulic_sawmill/docs/transmission-validation.md"
 class Portrait(Set):
     module = "stage.jsx"
     backdrop = Slot()
+    plate = Slot()
     ghost = Slot()
     stage = Slot()
-    heading = Slot()
-    note = Slot()
+
+
+class Shade(Element):
+    module = "stage.jsx"
 
 
 class Sawmill(Loop):
@@ -76,8 +79,6 @@ class Sawmill(Loop):
         Mill.frame,
         Mill.carriage,
         Mill.feed,
-        Mill.water_drive.channel,
-        Mill.water_drive.water,
     )
     feed_context = Layer(Mill.frame, Mill.water_drive, Mill.carriage)
     rope_context = Layer(
@@ -96,10 +97,7 @@ class Continuous(Chapter):
     )
     whole = View(Sawmill, camera=Sawmill.carriage)
     ghost = View(Sawmill, camera=Sawmill.rear)
-    identity = Title("Serraria hidráulica", subtitle="LEONARDO DA VINCI")
-    limits = Title(
-        "Reconstrução do movimento", subtitle="Forças e corte não simulados"
-    )
+    shade = Shade()
 
     revolution = Shot(
         Portrait,
@@ -113,19 +111,13 @@ class Continuous(Chapter):
         {
             Portrait.backdrop: wheel,
             Portrait.stage: mill,
-            Portrait.heading: identity,
         },
         until=lines.spoken("A água sob a roda"),
         transition=Reframe(1.2),
         model=Sawmill.run(404, 420),
         cues=[
             Cue(
-                0,
-                identity.show(enter=0.5, leave=0.4),
-                until=lines.spoken("A água sob a roda"),
-            ),
-            Cue(
-                lines.spoken("Leonardo da Vinci"),
+                lines.spoken("projetou"),
                 mill.move(
                     Sawmill.rear, until=lines.spoken("A água sob a roda")
                 ),
@@ -134,8 +126,14 @@ class Continuous(Chapter):
     )
     water = Shot(
         Portrait,
-        {Portrait.ghost: ghost, Portrait.stage: detail, Portrait.note: limits},
+        {
+            Portrait.backdrop: mill,
+            Portrait.plate: shade,
+            Portrait.ghost: ghost,
+            Portrait.stage: detail,
+        },
         until=lines.spoken("Uma manivela"),
+        transition=Reframe(1.2),
         model=Sawmill.run(420, 424),
         cues=[
             Cue(
@@ -143,23 +141,23 @@ class Continuous(Chapter):
                 detail.move(
                     Sawmill.crank, until=lines.spoken("gira este eixo")
                 ),
+                mill.move(Sawmill.crank, until=lines.spoken("gira este eixo")),
             ),
             Cue(
-                0,
+                lines.spoken("roda gira"),
                 detail.highlight(Mill.water_drive.waterwheel, others="keep"),
-                until=lines.spoken("gira este eixo"),
+                until=lines.spoken("este eixo", plus=-0.12),
             ),
             Cue(
-                lines.spoken("gira este eixo"),
+                lines.spoken("este eixo"),
                 detail.highlight(Mill.water_drive.crankshaft, others="keep"),
-                until=lines.spoken("Uma manivela"),
+                until=lines.spoken("Uma manivela", plus=-0.2),
             ),
-            Cue(0, limits.show(), until=lines.spoken("Uma manivela")),
         ],
     )
     stroke = Shot(
         Portrait,
-        {Portrait.ghost: ghost, Portrait.stage: detail, Portrait.note: limits},
+        {Portrait.ghost: ghost, Portrait.stage: detail},
         until=lines.spoken("Mas a tora"),
         model=Sawmill.run(424, 432),
         cues=[
@@ -173,23 +171,20 @@ class Continuous(Chapter):
                 ),
             ),
             Cue(
-                0,
+                lines.spoken("Uma manivela"),
                 detail.highlight(Mill.water_drive.crank, others="keep"),
-                until=lines.spoken("uma biela"),
+                until=lines.spoken("uma biela", plus=-0.12),
             ),
             Cue(
                 lines.spoken("uma biela"),
                 detail.highlight(Mill.saw.connecting_rod, others="keep"),
-                until=lines.spoken(
-                    "no movimento de subida e descida da serra"
-                ),
+                until=lines.spoken("transformam esse giro", plus=-0.1),
             ),
             Cue(
                 lines.spoken("no movimento de subida e descida da serra"),
                 detail.highlight(Mill.saw.sash, others="keep"),
-                until=lines.spoken("Mas a tora"),
+                until=lines.spoken("Mas a tora", plus=-0.2),
             ),
-            Cue(0, limits.show(), until=lines.spoken("Mas a tora")),
         ],
     )
     feed = Shot(
@@ -197,7 +192,6 @@ class Continuous(Chapter):
         {
             Portrait.ghost: ghost,
             Portrait.stage: feed_view,
-            Portrait.note: limits,
         },
         until=lines.spoken("Esse pequeno passo"),
         model=Sawmill.keys(
@@ -216,24 +210,19 @@ class Continuous(Chapter):
                 ),
             ),
             Cue(
-                0,
-                feed_view.highlight(Mill.feed, others="keep"),
-                until=lines.spoken("esta alavanca"),
-            ),
-            Cue(
                 lines.spoken("esta alavanca"),
                 feed_view.highlight(Mill.feed.rocker, others="keep"),
-                until=lines.spoken("puxa uma lingueta"),
+                until=lines.spoken("puxa uma lingueta", plus=-0.12),
             ),
             Cue(
                 lines.spoken("puxa uma lingueta"),
                 feed_view.highlight(Mill.feed.pawl, others="keep"),
-                until=lines.spoken("um dente"),
+                until=lines.spoken("um dente", plus=-0.12),
             ),
             Cue(
                 lines.spoken("um dente"),
                 feed_view.highlight(Mill.feed.feed_drum, others="keep"),
-                until=lines.spoken("Uma segunda lingueta"),
+                until=lines.spoken("Uma segunda lingueta", plus=-0.25),
             ),
             Cue(
                 lines.spoken("Uma segunda lingueta"),
@@ -243,9 +232,8 @@ class Continuous(Chapter):
             Cue(
                 lines.spoken("enquanto a primeira retorna"),
                 feed_view.highlight(Mill.feed.pawl, others="keep"),
-                until=lines.spoken("Esse pequeno passo"),
+                until=lines.spoken_end("enquanto a primeira retorna"),
             ),
-            Cue(0, limits.show(), until=lines.spoken("Esse pequeno passo")),
         ],
     )
     transmission = Shot(
@@ -253,24 +241,23 @@ class Continuous(Chapter):
         {
             Portrait.ghost: ghost,
             Portrait.stage: ropes_view,
-            Portrait.note: limits,
         },
         until=lines.spoken("A segunda corda"),
         model=Sawmill.run(440, 452),
         cues=[
             Cue(
-                0,
+                lines.spoken("enrola uma corda nesse eixo"),
                 ropes_view.highlight(Mill.feed.winding, others="keep"),
-                until=lines.spoken("Siga a corda"),
+                until=lines.spoken("Siga a corda", plus=-0.25),
             ),
             Cue(
                 lines.spoken("Siga a corda"),
                 ropes_view.move(Sawmill.ropes, until=lines.spoken("Ela gira")),
             ),
             Cue(
-                lines.spoken("Siga a corda"),
+                lines.spoken("para baixo e para o outro lado"),
                 ropes_view.highlight(Mill.feed.drive_line, others="keep"),
-                until=lines.spoken("Ela gira"),
+                until=lines.spoken("Ela gira", plus=-0.1),
             ),
             Cue(
                 lines.spoken("Ela gira"),
@@ -279,21 +266,20 @@ class Continuous(Chapter):
                 ),
             ),
             Cue(
-                lines.spoken("Ela gira"),
+                lines.spoken("um eixo composto"),
                 ropes_view.highlight(Mill.feed.reduction_shaft, others="keep"),
-                until=lines.spoken("um tambor largo"),
+                until=lines.spoken("um tambor largo", plus=-0.1),
             ),
             Cue(
                 lines.spoken("um tambor largo"),
                 ropes_view.highlight(Mill.feed.reserve, others="keep"),
-                until=lines.spoken("enquanto uma seção mais fina"),
+                until=lines.spoken("enquanto uma seção mais fina", plus=-0.12),
             ),
             Cue(
                 lines.spoken("enquanto uma seção mais fina"),
                 ropes_view.highlight(Mill.feed.takeup, others="keep"),
-                until=lines.spoken("A segunda corda"),
+                until=lines.spoken("A segunda corda", plus=-0.25),
             ),
-            Cue(0, limits.show(), until=lines.spoken("A segunda corda")),
         ],
     )
     consequence = Shot(
@@ -301,7 +287,6 @@ class Continuous(Chapter):
         {
             Portrait.ghost: ghost,
             Portrait.stage: ropes_view,
-            Portrait.note: limits,
         },
         until=lines.spoken("Uma roda,"),
         model=Sawmill.run(452, 460),
@@ -313,35 +298,32 @@ class Continuous(Chapter):
                 ),
             ),
             Cue(
-                0,
+                lines.spoken("A segunda corda"),
                 ropes_view.highlight(
                     Mill.feed.takeup,
                     Mill.feed.haul_span,
                     Mill.feed.haul,
                     others="keep",
                 ),
-                until=lines.spoken("puxa a tora"),
+                until=lines.spoken("puxa a tora", plus=-0.1),
             ),
             Cue(
                 lines.spoken("puxa a tora"),
                 ropes_view.highlight(Mill.carriage.timber, others="keep"),
-                until=lines.spoken("Uma roda,"),
+                until=lines.spoken("em direção à lâmina"),
             ),
-            Cue(0, limits.show(), until=lines.spoken("Uma roda,")),
         ],
     )
     two_jobs = Shot(
         Portrait,
         {Portrait.stage: whole},
-        until=lines.end(plus=2.5),
+        until=lines.end(plus=2.2),
         model=Sawmill.run(460, 464),
         fade_out=FadeOut(1.0),
         cues=[
             Cue(
                 0,
-                whole.move(
-                    Sawmill.wide, until=lines.spoken("cortar e avançar")
-                ),
+                whole.move(Sawmill.wide, until=lines.end(plus=2.2)),
             ),
         ],
     )
