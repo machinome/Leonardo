@@ -2,6 +2,21 @@
 
 Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
 
+Preserved on `release-video-sound-effects`, 12 October 2026. Main selects
+the same pictures with narration only. This branch keeps the effects sources,
+recipes, tests and listening history. Generated recordings remain under this
+checkout's ignored `_build/`; switching branches does not remove them.
+The missing model export was recovered as `_build/recovered-model`, and
+`_build/movie-recovered.json` records its actual source revision. All 96
+model assets match the earlier film's checksums. Reopen the preserved effects
+preview locally with the command below (port 8787 avoids main's 8785):
+
+```sh
+node /home/asa/devel/machinome/videomaker/WTs/live-audio-mixer/bin/videomaker.mjs live videos/machinome-release-5/_build/movie-recovered.json --audio-stems videos/machinome-release-5/_build/sfx-manual-saw-9gNoO1/stems.json --viewer /home/asa/devel/machinome/machinome-viewer/machinome_viewer/widget/dist/machinome-viewer.js --port 8787
+```
+
+The records below describe the original 9 October listening session.
+
 Current **live preview**: http://127.0.0.1:8785/#movie — 203.625 seconds,
 1920×1080, 24 fps. The sequential testing revision has a new continuous Jessica take.
 [Narration](narration.py), [movie](movie.py), [direction](DIRECTION.md),
