@@ -1,34 +1,38 @@
-# Primeira proposta de áudio — 12 de outubro de 2026
+# Segunda proposta de áudio — 12 de outubro de 2026
 
 Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
 
-Leo Antonio / Eleven v3. Duração medida: 194,960 segundos. Uma chamada
-contínua, 2.514 caracteres falados e 3.024 caracteres incluindo direção.
+A primeira tomada foi rejeitada pelo piloto: faltaram curiosidade,
+continuidade entre frases e mudanças audíveis de intenção entre cenas.
+Seu roteiro e registro estão preservados em auditions/proposal-1;
+os arquivos de áudio locais estão em _build/proposal-1 e no player antigo.
+
+Nova tomada inteira com Leo Antonio / Eleven v3. Duração: 187,280 segundos.
+Uma chamada contínua, 2.508 caracteres falados e 2.977 incluindo direção.
+Stability 0.0, antes 0.5; mesmo modelo e voz. As etiquetas de interpretação
+foram reforçadas nas transições e nos pontos de descoberta. O roteiro
+incorpora as correções do piloto; delivery.json conserva o texto e os
+controles efetivamente enviados, além da intenção editorial por passagem.
+
 Sem efeitos, cortes, montagem de frases, normalização, aceleração ou pausas
 digitais acrescentadas. MP3 a 192 kbps para escuta; WAV PCM mono, 24 kHz,
 16 bits, preservado como matriz.
 
 SHA-256 do WAV:
-0e7a0b455842b9fab8bef058579ff7477fe9c977c86a235a086cfa3f712390f6
+c51799d788dc2585ae999657fb8d927f179d4385b6fd6b0442a902c5256129ae
 
-O texto retorna integralmente no alinhamento do provedor, após remover
-somente as indicações não faladas. Entretanto, a marcação final avança
-0,144 segundo além do PCM e atribui duração zero a CONSTRUIR. A primeira
-validação detectou isso e reteve o recibo sem fazer nova chamada.
+O alinhamento do provedor passou pelas verificações do gerador, sem o
+problema de término encontrado na primeira tomada. A transcrição local
+independente do trecho final, com Whisper base e sem roteiro como prompt,
+confirmou “O que você quer construir?”. Relatório: _build/ending-check.json.
 
-A transcrição independente dos últimos 24,96 segundos, com Whisper base
-local e sem o roteiro como prompt, confirmou a frase final completa:
-“O que você quer construir?”. O áudio não foi cortado. O relatório está
-em _build/ending-check.json, associado ao mesmo hash. Os tempos originais
-do provedor estão preservados; a navegação é aproximada. Legendas e
-sincronização do vídeo aguardam novo alinhamento da tomada aprovada.
+Essas verificações são técnicas, não uma avaliação auditiva de emoção,
+ritmo ou pronúncia. A interpretação não foi ouvida pelo agente e aguarda
+a escuta do piloto. Os controles generativos não garantem o resultado.
 
-O MP3 decodifica integralmente. A intenção emocional está em delivery.json
-e DIRECTION.md; essas indicações foram efetivamente enviadas ao provedor.
-As verificações técnicas não equivalem a uma avaliação auditiva de emoção,
-ritmo ou pronúncia dos trechos em inglês. A proposta aguarda a escuta do piloto.
+Player: http://127.0.0.1:8786/proposal-2/
+Comparação: http://127.0.0.1:8786/proposal-1/
 
 O vídeo inglês de main e seus arquivos de áudio permanecem inalterados.
-Os arquivos visuais e finalizadores nesta pasta são a cópia desse corte,
-ainda com âncoras inglesas. Esta entrega é a primeira audição, não um
-vídeo português sincronizado.
+Esta entrega é somente a nova proposta de áudio completo; o vídeo em
+português ainda não está sincronizado.

@@ -2,13 +2,14 @@
 
 Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
 
-Primeira proposta de narração do filme inteiro, copiada do corte 5 de main
+Segunda proposta de narração do filme inteiro, baseada na cópia do corte 5 de main
 (e8e16a8) em 12 de outubro de 2026. Voz: Leo Antonio, Eleven v3.
 Uma tomada contínua, sem efeitos sonoros, cortes, montagem de frases,
 aceleração ou silêncio acrescentado. Os trechos de código são falados em
 inglês, sem tradução intercalada; o restante é português brasileiro.
 
-[Ouvir a proposta](http://127.0.0.1:8786/) ·
+[Ouvir a segunda proposta](http://127.0.0.1:8786/proposal-2/) ·
+[Comparar com a primeira](http://127.0.0.1:8786/proposal-1/) ·
 [Direção e roteiro](delivery.json) · [Direção emocional](DIRECTION.md).
 
 O áudio é uma proposta para escuta. O vídeo português ainda não foi
@@ -33,7 +34,7 @@ voz. Cada seção registra separadamente a intenção emocional. As etiquetas
 entre colchetes orientam a geração e não fazem parte das legendas.
 A duração é medida na gravação, sem limite herdado do corte inglês.
 
-_build/narration.wav preserva integralmente a tomada; audition-1.mp3 é uma
+_build/narration.wav preserva integralmente a tomada; audition-2.mp3 é uma
 cópia comprimida para escuta. O manifesto registra duração, hash, texto,
 tempos das seções e a ausência de edição. Os recibos e gravações são locais
 e ignorados pelo Git. A escuta do piloto decide a interpretação e a
