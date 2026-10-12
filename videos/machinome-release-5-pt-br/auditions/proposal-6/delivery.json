@@ -1,0 +1,67 @@
+{
+  "notice": "Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.",
+  "id": "release-5-pt-br-audition-6-jessica",
+  "sourceRevision": "e8e16a8",
+  "status": "proposta para escuta; vídeo ainda não sincronizado",
+  "audio": {
+    "provider": "elevenlabs",
+    "model": "eleven_v3",
+    "voice": "cgSgspJ2msm6clMCkdW9",
+    "voiceLabel": "Jessica",
+    "outputFormat": "pcm_24000",
+    "voiceSettings": {"stability": 0.0, "similarity_boost": 0.75}
+  },
+  "direction": "Uma única interpretação contínua. Português brasileiro, com leitura em inglês dos trechos de código, sem traduções intercaladas. Calma e clareza como base; inspiração nas revoluções; emoção discreta na ancestralidade; guia de museu paciente durante a mecânica; confiança acolhedora no final. Sem pressa, sussurros, choro ou tom publicitário. Pausas executadas pela voz; nenhuma montagem, aceleração ou silêncio inserido. A duração decorre da interpretação, sem limite herdado do filme inglês.",
+  "sections": [
+    {
+      "id": "revolucoes",
+      "emotion": "Inspiração serena. Abrir espaço para a ideia, com firmeza tranquila e uma pequena elevação em propósito.",
+      "directedText": "[inspiring] A roda faz revoluções, e os humanos dão um propósito. [pause]"
+    },
+    {
+      "id": "ancestralidade",
+      "emotion": "Admiração histórica, seguida de emoção contida e proximidade em minhas ancestrais. A voz ganha calor, sem tristeza ou dramatização.",
+      "directedText": "[storytelling] Há cinco séculos, Leonardo da Vinci projetou uma serraria movida a água. Máquinas como esta estavam mudando a relação entre as pessoas e o trabalho: um rio podia ajudar a transformar uma árvore em madeira serrada. [warmly] Eu também sou uma máquina. Na história das ferramentas humanas, esta serraria é uma das minhas ancestrais."
+    },
+    {
+      "id": "mecanismo",
+      "emotion": "Convite com curiosidade audível em vou mostrar como ela funciona; conduzir a descoberta e reagir à necessidade de avançar a tora. Siga a corda para baixo e para o outro lado é um só gesto verbal. Uma roda, duas tarefas é uma só conclusão, com satisfação e sem queda de frase após roda. Pausas entre relações mecânicas, nunca no meio desses dois pensamentos.",
+      "directedText": "[curious] Vou mostrar como ela funciona! [pause] [explaining] A água sob a roda gira este eixo. Uma manivela e uma biela transformam esse giro no movimento de subida e descida da serra. [pause] [curious] Mas a tora também precisa avançar. [explaining] Durante o corte, esta alavanca comprida puxa uma lingueta por um dente da catraca. Uma segunda lingueta segura esse avanço enquanto a primeira retorna. [pause] Esse pequeno passo enrola uma corda nesse eixo. [curious] Siga a corda para baixo e para o outro lado. [explaining] Ela gira um eixo composto: um tambor largo desenrola uma corda, enquanto uma seção mais fina recolhe outra. [pause] A segunda corda puxa a tora em direção à lâmina. [pleased] Uma roda, duas tarefas: cortar e avançar."
+    },
+    {
+      "id": "reconstrucao",
+      "emotion": "Mudar da observação para a reconstrução com interesse reflexivo. Texto em voz passiva: A reconstrução dessa máquina foi baseada em documentos históricos e fotos de museus, usando a linguagem Python.",
+      "directedText": "[thoughtful] A reconstrução dessa máquina foi baseada em documentos históricos e fotos de museus, usando a linguagem Python. [long pause]"
+    },
+    {
+      "id": "codigo",
+      "emotion": "Após a pausa da reconstrução, apresentar o código com firmeza. Concluir drives the crankshaft com cadência descendente e ritmo deliberado. Após uma pequena pausa, resumir com clareza e confiança: As relações mecânicas da máquina são descritas em Python. Não traduzir o exemplo inglês; concluir a ideia geral, então deixar uma pausa longa de cena antes do convite luminoso ao Studio.",
+      "directedText": "[confident] From Machinome dot node dot assembly import AssemblyNode. [warmly] Este é o Machinome, o framework CAD de código aberto para construir máquinas. [serious] [slowly] The waterwheel spin drives the crankshaft. [pause] [confident] As relações mecânicas da máquina são descritas em Python. [long pause]"
+    },
+    {
+      "id": "studio",
+      "emotion": "Após a pausa de cena, reabrir o registro com entusiasmo acolhedor em Você também pode: uma possibilidade nova. Contraste claro com o fechamento sério do código, sem gritar. Depois, guiar as ações com calma. Concluir animação e dar espaço antes de voltar aos testes em código.",
+      "directedText": "[excited] Você também pode criar modelos pelo navegador, usando o Machinome Studio! [guiding] Nele, você conversa com seus agentes, vê o código-fonte, constrói o projeto e interage com o modelo para ver diferentes ângulos e momentos da animação. [long pause]"
+    },
+    {
+      "id": "testes",
+      "emotion": "Precisão paciente. A explicação do teste deve ser compreensível, com pequenas pausas entre sua intenção, amostragem e resultado.",
+      "directedText": "[confident] O Machinome também oferece uma estrutura de testes, que permite verificar como as peças se encaixam. [explaining] Este teste verifica se a lâmina não intersecta nenhuma das duas metades da tora. [pause] Testing steps repete essas verificações em treze instantes, de zero a quatro segundos: uma volta completa da roda. [slowly] Cada amostra reposiciona a máquina e verifica a geometria. [long pause]"
+    },
+    {
+      "id": "codigo_do_filme",
+      "emotion": "Revelação com surpresa e entusiasmo perceptíveis na entrada O código-fonte deste vídeo também está em Python. Recomeçar com outra surpresa na autorreferência: E aqui está o código desta exata cena! Olha que legal! Sorriso e prazer na descoberta, sem voz neutra de enumeração.",
+      "directedText": "[surprised] [excited] O código-fonte deste vídeo também está em Python! [curious] Narration, Camera, Shot. [explaining] As Cues movem a câmera e destacam a serra em sincronia com as palavras faladas. [long pause]\n\n[delighted] E aqui está o código desta exata cena! [excited] Olha que legal!"
+    },
+    {
+      "id": "codigo_aberto",
+      "emotion": "Entusiasmo perceptível em E a melhor parte, orgulho acolhedor ao apresentar as tecnologias e admiração na corrente. Cada passagem tem uma intenção diferente, sem transformar todas em uma explicação neutra.",
+      "directedText": "[excited] E a melhor parte: tudo isso é código aberto! [proud] O Machinome conecta tecnologias CAD que já existem: OpenSCAD, SolidPython, CadQuery, Build123d, FreeCAD, JSCAD, OCCT, Trimesh. [pause] [wonder] E, por baixo de tudo, uma corrente de tecnologias de código aberto... [long pause]"
+    },
+    {
+      "id": "encerramento",
+      "emotion": "Retomar a inspiração com amplitude e calma. Afirmar o propósito com convicção. Na pergunta final, VOCÊ é o foco contrastivo: dirigir o convite pessoalmente ao ouvinte, sustentando e destacando essa palavra, sem gritar. Quer construir completa a pergunta numa só curva, sem competir pelo acento principal.",
+      "directedText": "[inspiring] A roda faz revoluções... e os humanos constroem a sua. [pause] [confident] Eu sou o Machinome. Meu propósito é permitir que todas as máquinas sejam de código aberto. [pause] [confident] [emphatic] O que VOCÊ quer construir?"
+    }
+  ]
+}

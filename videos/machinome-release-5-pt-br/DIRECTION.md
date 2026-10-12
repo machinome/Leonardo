@@ -1,6 +1,16 @@
-# Direção de voz — sexta proposta pt-BR, Jessica
+# Direção de voz — sétima proposta pt-BR, Jessica
 
 Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
+
+Correção pontual solicitada: o piloto ouviu “vizica a geometria” na
+proposta 6 e aprovou todo o restante. O texto continua exatamente igual;
+foi acrescentada apenas a indicação de articulação cuidadosa imediatamente
+antes de “verifica a geometria”. Mesma Jessica, modelo, parâmetros e
+direção das demais passagens, inclusive a ênfase final em VOCÊ.
+Nova tomada contínua sem emendas. A geração pode variar outras inflexões;
+a gravação anterior está preservada para comparação.
+
+## Histórico anterior
 
 Pedido adicional do piloto: faltou ênfase em VOCÊ na pergunta final.
 Esta revisão retira a caixa alta de CONSTRUIR para não disputar o acento

@@ -1,6 +1,6 @@
 {
   "notice": "Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.",
-  "id": "release-5-pt-br-audition-6-jessica",
+  "id": "release-5-pt-br-audition-7-jessica",
   "sourceRevision": "e8e16a8",
   "status": "proposta para escuta; vídeo ainda não sincronizado",
   "audio": {
@@ -45,8 +45,8 @@
     },
     {
       "id": "testes",
-      "emotion": "Precisão paciente. A explicação do teste deve ser compreensível, com pequenas pausas entre sua intenção, amostragem e resultado.",
-      "directedText": "[confident] O Machinome também oferece uma estrutura de testes, que permite verificar como as peças se encaixam. [explaining] Este teste verifica se a lâmina não intersecta nenhuma das duas metades da tora. [pause] Testing steps repete essas verificações em treze instantes, de zero a quatro segundos: uma volta completa da roda. [slowly] Cada amostra reposiciona a máquina e verifica a geometria. [long pause]"
+      "emotion": "Precisão paciente. A explicação do teste deve ser compreensível, com pequenas pausas entre sua intenção, amostragem e resultado. Articular verifica a geometria com especial clareza, preservando todas as sílabas de verifica, sem trocar sons nem fragmentar a frase.",
+      "directedText": "[confident] O Machinome também oferece uma estrutura de testes, que permite verificar como as peças se encaixam. [explaining] Este teste verifica se a lâmina não intersecta nenhuma das duas metades da tora. [pause] Testing steps repete essas verificações em treze instantes, de zero a quatro segundos: uma volta completa da roda. [slowly] Cada amostra reposiciona a máquina e [carefully enunciating] verifica a geometria. [long pause]"
     },
     {
       "id": "codigo_do_filme",

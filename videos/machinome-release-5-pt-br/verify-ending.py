@@ -30,7 +30,10 @@ report = {
     "audioSha256": digest, "model": "faster-whisper/base",
     "scriptPromptProvided": False, "audioOffset": 170,
     "segments": result, "text": text,
-    "completeEnding": text.lower().endswith("o que você quer construir?"),
+    # ASR punctuation is inferred, not an acoustic completeness signal.
+    "completeEnding": text.lower().rstrip(".?! ").endswith(
+        "o que você quer construir"
+    ),
     "scope": "Ending completeness only; not emotional or bilingual approval.",
 }
 (build / "ending-check.json").write_text(

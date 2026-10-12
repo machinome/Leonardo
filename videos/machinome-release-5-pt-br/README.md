@@ -2,16 +2,18 @@
 
 Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
 
-Sexta proposta de narração do filme inteiro, baseada na cópia do corte 5 de main
+Sétima proposta de narração do filme inteiro, baseada na cópia do corte 5 de main
 (e8e16a8) em 12 de outubro de 2026. Voz: Jessica, Eleven v3.
 Jessica foi a voz preferida pelo piloto. Mesma direção, com a frase
 “As relações mecânicas da máquina são descritas em Python” antes do Studio,
-e ênfase concentrada em VOCÊ na pergunta final.
+e ênfase concentrada em VOCÊ na pergunta final. Nesta revisão, apenas a
+direção de articulação em “verifica a geometria” muda; o texto é idêntico.
 Uma tomada contínua, sem efeitos sonoros, cortes, montagem de frases,
 aceleração ou silêncio acrescentado. Os trechos de código são falados em
 inglês, sem tradução intercalada; o restante é português brasileiro.
 
-[Ouvir Jessica revisada](http://127.0.0.1:8786/proposal-6/) ·
+[Ouvir Jessica revisada](http://127.0.0.1:8786/proposal-7/) ·
+[Tomada anterior](http://127.0.0.1:8786/proposal-6/) ·
 [Jessica anterior](http://127.0.0.1:8786/proposal-4/) ·
 [Comparar com Leo aprovado](http://127.0.0.1:8786/proposal-3/) ·
 [Comparar com a segunda](http://127.0.0.1:8786/proposal-2/) ·
@@ -40,7 +42,7 @@ voz. Cada seção registra separadamente a intenção emocional. As etiquetas
 entre colchetes orientam a geração e não fazem parte das legendas.
 A duração é medida na gravação, sem limite herdado do corte inglês.
 
-_build/narration.wav preserva integralmente a tomada; audition-6.mp3 é uma
+_build/narration.wav preserva integralmente a tomada; audition-7.mp3 é uma
 cópia comprimida para escuta. O manifesto registra duração, hash, texto,
 tempos das seções e a ausência de edição. Os recibos e gravações são locais
 e ignorados pelo Git. A escuta do piloto decide a interpretação e a

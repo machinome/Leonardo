@@ -1,31 +1,36 @@
-# Sexta proposta — conexão e VOCÊ — 12 de outubro de 2026
+# Sétima proposta — articulação — 12 de outubro de 2026
 
 Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
 
-Jessica, preferida pelo piloto, com dois ajustes solicitados:
-“As relações mecânicas da máquina são descritas em Python” entre o exemplo
-inglês e o Studio; pergunta final dirigida com ênfase em VOCÊ.
-CONSTRUIR deixou de ter caixa alta para não competir pelo acento.
-A comparação automática confirmou apenas essa inclusão e mudança de caixa
-no texto falado. Nenhuma troca de voz, modelo ou parâmetros.
+O piloto aprovou todo o restante da proposta 6 e pediu corrigir a pronúncia
+de “verifica a geometria”, ouvida como “vizica”. O texto falado é idêntico;
+uma comparação automática confirmou isso e a igualdade dos parâmetros.
+Apenas a seção de testes ganhou direção local de articulação cuidadosa.
+Mesma Jessica e Eleven v3, stability 0.0, similarity_boost 0.75.
 
-Eleven v3, stability 0.0, similarity_boost 0.75. Uma chamada contínua,
-2.564 caracteres falados, 3.107 incluindo direção. Duração: 206,800s.
-Sem efeitos, cortes, montagem, normalização, aceleração ou silêncio inserido.
-WAV mono PCM 24 kHz/16 bits; MP3 a 192 kbps.
+Uma nova chamada contínua: 2.564 caracteres falados, 3.131 com direção.
+Duração: 203,280 segundos. Sem cortes, emendas, efeitos, normalização,
+aceleração ou silêncio inserido. A nova geração pode variar outras
+inflexões, embora o roteiro e as demais direções sejam iguais.
+A proposta 6 permanece preservada em auditions/proposal-6 e no player.
 
-SHA-256 do WAV:
-25ad812cf31ec9a9822cf21b199cf6e7931cd8152ce049211103586978d85671
+SHA-256 do WAV PCM mono 24 kHz/16 bits:
+d2dc2542d7a15e0fdb83451e002dea8a2c8dbbf4d6b71564d68086bcc23e2b2d
+MP3 de escuta a 192 kbps.
 
-O provedor devolveu o texto integral, mas o alinhamento terminal ultrapassa
-o PCM em 0,147s. O recibo foi preservado, sem repetir a chamada. Whisper
-base local, sem roteiro como prompt, confirmou a pergunta final completa.
-Relatório: _build/ending-check.json. Navegação aproximada e legendas
-aguardando realinhamento. Não houve avaliação auditiva de ênfase, emoção
-ou pronúncia pelo agente; as etiquetas são direção, não garantia.
+Whisper base local, sem roteiro como prompt, transcreveu “verifica a
+geometria” no trecho entre 140 e 149 segundos. É evidência independente
+de reconhecimento, não uma garantia fonética nem avaliação auditiva
+de interpretação pelo agente. A escuta do piloto continua necessária.
 
-A proposta 4 com Jessica e a intermediária 5 estão preservadas nos
-respectivos diretórios auditions/ e players. A 3 com Leo também permanece.
-O vídeo inglês está inalterado; o português ainda não foi sincronizado.
+O alinhamento terminal do provedor ultrapassa o PCM em 0,167s. O recibo
+foi preservado e não houve nova chamada. A transcrição independente
+confirmou o fechamento completo. O verificador passou a ignorar apenas
+a pontuação terminal inferida pelo ASR: esta tomada foi transcrita com
+ponto em vez de interrogação, mas com todas as palavras corretas.
+Navegação aproximada; legendas aguardam realinhamento.
 
-Player: http://127.0.0.1:8786/proposal-6/
+Player: http://127.0.0.1:8786/proposal-7/
+Trecho: http://127.0.0.1:8786/proposal-7/audition-7.mp3#t=140
+
+O vídeo inglês permanece inalterado. O português ainda não foi sincronizado.
