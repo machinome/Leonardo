@@ -11,7 +11,8 @@ const doc=JSON.parse(await readFile(resolve(base,'_build/movie-resolved.json')))
 const chapter=doc.chapters[0],shot=id=>chapter.shots.find(s=>s.id===id);
 const meta=JSON.parse(await readFile(resolve(base,'_build/narration-manifest.json')));
 assert.ok(meta.text.includes('a stream of open source technologies'));
-assert.ok(meta.text.includes('Machinome also lets us test how parts fit together.'));
+assert.ok(meta.text.includes('Machinome also provides a testing framework, that allows us to test how parts fit together.'));
+assert.ok(meta.text.endsWith('What do YOU want to BUILD?'));
 assert.ok(!meta.text.includes('Agents can write mechanical models because of tests'));
 assert.deepEqual(meta.edits,[]);
 assert.ok((await readFile(meta.cacheFile)).equals(await readFile(resolve(base,'_build/provider-original.wav'))),
@@ -24,7 +25,9 @@ assert.ok(capture.model.y>capture.browserWindow.content.y,'The live model sits b
 assert.equal(createHash('sha256').update(await readFile(resolve(base,'assets/studio-background.png'))).digest('hex'),capture.sha256);
 assert.deepEqual(capture.mutations,[]);assert.ok(capture.scroll.top>2500);
 const face=shot('face-reveal'),studio=shot('studio'),testing=shot('testing');
-assert.equal(face.end,studio.start);assert.equal(studio.end,testing.start);
+const rewinds=chapter.shots.filter(s=>s.id.startsWith('studio-rewind-'));
+assert.equal(face.end,studio.start);assert.equal(studio.end,rewinds[0].start);
+assert.equal(rewinds.at(-1).end,testing.start);
 const reveal=face.cues.find(c=>c.actions.some(a=>a.action==='reveal'));
 const output=resolve(base,'_build/inspection/studio');await mkdir(output,{recursive:true});
 const {chromium}=await import(pathToFileURL(resolve(tool,'node_modules/playwright/index.mjs')));
@@ -96,7 +99,7 @@ try{
     if(area==='chat')assert.ok(dom.prompt.length>0&&dom.prompt.length<"There's one more adjustment:".length);
     else assert.equal(dom.prompt,"There's one more adjustment:");
   }
-  const {dom}=await sample('before-testing',studio.end-1/doc.output.fps);
+  const {dom}=await sample('before-testing',testing.start-1/doc.output.fps);
   assert.equal(dom.prompt,"There's one more adjustment:");
   await sample('testing',testing.start+2);
   assert.deepEqual(errors,[]);

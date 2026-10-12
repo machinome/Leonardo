@@ -1,0 +1,13 @@
+{
+  "schema": "leonardo-manual-saw-audition/1",
+  "prompt": "A person slowly sawing a wooden board by hand, with separate push-and-pull scrapes and quiet gaps.",
+  "topMm": 170,
+  "bottomMm": 122,
+  "startProgress": 0.25,
+  "returnGain": 0.18,
+  "edgeSeconds": 0.008,
+  "sourceGain": 1.6,
+  "segments": [[0.60, 0.43], [1.60, 0.44], [3.45, 0.40], [4.80, 0.40]],
+  "source": {"file": "hacksaw-recording.mp3", "title": "Handheld Hacksaw.wav", "author": "aidansamuel", "page": "https://freesound.org/people/aidansamuel/sounds/540143/", "preview": "https://cdn.freesound.org/previews/540/540143_10965608-hq.mp3", "license": "CC0-1.0", "sha256": "315cc52ce98a51a8fd7ec3202a621abf4603d8696eb333ba72a73c68d097dec8"},
+  "limits": "Manual-tool foley audition. Actual blade travel triggers native-pitch recorded scrapes. It does not fill the complete slow cutting stroke, model tooth friction, or demonstrate velocity-dependent pitch. No time stretching, pitch sweep, grain loop or synthesized buzzing."
+}

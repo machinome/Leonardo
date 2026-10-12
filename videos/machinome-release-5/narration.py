@@ -39,13 +39,14 @@ MACHINOME = (
     "drives the crankshaft."
 )
 STUDIO = (
-    "Machinome builds the machine's source code into a JavaScript application, "
-    "and you can work from your browser. "
-    "This is Machinome Studio, where you can prompt your agents, "
-    "see the source code, build the project."
+    "You can build models from your browser, using Machinome Studio, "
+    "where you can prompt your agents, "
+    "see the source code, build the project, and interact with the model "
+    "to see different angles and moments of the animation."
 )
 TESTING = (
-    "Machinome also lets us test how parts fit together. "
+    "Machinome also provides a testing framework, "
+    "that allows us to test how parts fit together. "
     "This test checks that the blade does not intersect either half "
     "of the timber. Testing steps repeats those assertions at thirteen "
     "instants from zero to four seconds: one full wheel turn. "
@@ -66,7 +67,7 @@ STREAM = "And beneath it all, a stream of open source technologies..."
 CLOSING = (
     "The wheel... makes revolutions... and humans... build their own. "
     "I'm Machinome. My purpose is to enable all machines to be Open "
-    "Source. What do YOU want to build?"
+    "Source. What do YOU want to BUILD?"
 )
 
 # A future film chapter imports this object, not eight new Narrations.
@@ -117,12 +118,16 @@ BEATS = (
     ("museum", "Museum pictures", "museum pictures"),
     ("import", "Machinome entrance", "From Machinome dot node dot assembly import"),
     ("relation", "The relation", "The waterwheel spin drives"),
-    ("studio-transition", "Into the browser", "Machinome builds the machine's source code"),
-    ("studio", "Machinome Studio", "This is Machinome Studio"),
+    ("studio-transition", "Into the browser", "You can build models from your browser"),
+    ("studio", "Machinome Studio", "using Machinome Studio"),
     ("prompt", "Prompt your agents", "prompt your agents"),
     ("source-menu", "Source code", "see the source code"),
     ("build-menu", "Build the project", "build the project"),
-    ("testing", "Testing geometry", "Machinome also lets us test"),
+    ("interact", "Interact with the model", "interact with the model"),
+    ("angles", "Different angles", "different angles"),
+    ("moments", "Animation timeline", "moments of the animation"),
+    ("testing", "Testing geometry", "Machinome also provides a testing framework"),
+    ("test-code", "Testing source", "to test how parts fit together"),
     ("steps", "Testing steps", "Testing steps repeats"),
     ("film", "Film source", "This video's source code is in Python too"),
     ("mirror", "This exact scene", "And here's the code of this exact"),
@@ -143,7 +148,7 @@ BEATS = (
         "The wheel... makes revolutions... and humans... build",
     ),
     ("purpose", "Purpose", "I'm Machinome"),
-    ("question", "Invitation", "What do YOU want to build"),
+    ("question", "Invitation", "What do YOU want to BUILD"),
 )
 
 

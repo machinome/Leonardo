@@ -1,0 +1,9 @@
+{
+  "schema": "sawmill-audio-spike/1",
+  "seed": 73621,
+  "water": {"rms": 0.035, "flowIntensity": 1, "pitch": 1},
+  "saw": {"rms": 0.115, "referenceVelocityMmPerSecond": 24, "pitchRange": [0.65, 1.65], "returnGain": 0.13},
+  "wheel": {"rms": 0.021, "resonancesHz": [103, 167, 241]},
+  "paddles": {"count": 8, "phaseOffsetDeg": 180, "rms": 0.042, "decaySeconds": 0.16},
+  "limits": "Authored acoustic response, not fluid or force simulation. Paddle entry phase is a bottom-contact approximation."
+}

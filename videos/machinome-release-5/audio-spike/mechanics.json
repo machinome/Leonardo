@@ -1,0 +1,22 @@
+{
+  "schema": "leonardo-mechanical-audition/1",
+  "topMm": 170,
+  "bottomMm": 122,
+  "referenceVelocity": 24,
+  "returnGain": 0.1,
+  "turnaroundFraction": 0.07,
+  "ironOffsetDeg": 60,
+  "ironEveryDeg": 180,
+  "ironReferenceRate": 70.75,
+  "sawRms": 0.115,
+  "ironRms": 0.035,
+  "sawSegments": [[0.60, 0.43], [1.60, 0.44], [3.45, 0.40], [4.80, 0.40]],
+  "ironSegments": [[2.75, 0.60], [4.00, 0.50], [6.45, 0.55], [7.75, 0.50]],
+  "sawFilter": "highpass=f=140,lowpass=f=7500,atempo=0.5,atempo=0.5,atempo=0.8",
+  "ironFilter": "highpass=f=180,lowpass=f=3300",
+  "sources": {
+    "saw": {"file": "hacksaw-recording.mp3", "title": "Handheld Hacksaw.wav", "author": "aidansamuel", "page": "https://freesound.org/people/aidansamuel/sounds/540143/", "preview": "https://cdn.freesound.org/previews/540/540143_10965608-hq.mp3", "license": "CC0-1.0", "description": "Handheld hacksaw cutting plywood; source description verified 2026-10-09."},
+    "iron": {"file": "iron-recording.mp3", "title": "Metal Squeak 2.wav", "author": "rdneubauer", "page": "https://freesound.org/people/rdneubauer/sounds/93783/", "preview": "https://cdn.freesound.org/previews/93/93783_1441763-hq.mp3", "license": "CC0-1.0", "description": "Metal fireplace door creaking; source description verified 2026-10-09. Joint-friction proxy, not an axle field recording."}
+  },
+  "limits": "Recorded hand-tool and metal-joint foley, mapped to actual model motion. Neither historical acoustics nor friction forces are simulated. Metal fireplace hinge recording is a timbral proxy for the requested iron axle/crank/levers, not a recording of this machine."
+}

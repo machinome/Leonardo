@@ -2,10 +2,385 @@
 
 Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
 
-8 October 2026. Current status: Studio revision in the live preview;
-the earlier narrated MP4 rehearsal remains unchanged. No publication.
+9 October 2026. Current status: full-film listening experiment in the live
+preview; approved pictures/narration and the earlier MP4 remain unchanged.
+No publication.
 
-## Studio scene and continuous narration — current preview
+## Native hand-tool scrapes — current preview
+
+After the pilot rejected the stretched sound, only saw.wav was replaced in
+`_build/sfx-manual-saw-9gNoO1/`. The same verified manual-tool source now
+supplies exact 0.40–0.44s contiguous samples at original pitch/duration,
+with constant gain and short edge fades. No atempo, filtering, grain loop,
+displacement-based resampling or synthetic oscillator is used. Blade travel
+controls event timing, not sample playback speed. A lighter return and
+quiet gaps intentionally replace the continuous slow-stroke coverage.
+
+Twenty-four unit tests pass. Six new native-sample tests first failed on the
+missing implementation, then passed, proving exact source waveform retention,
+unchanged pitch when motion speed changes, silence after each scrape,
+cut/return contrast, stopped/disengaged silence, discontinuities and block
+replay. The complete full-film saw render also matches for 128/4096 blocks.
+`revise-manual-saw.mjs --verify OUTPUT` passes: 35 events, rate 1 throughout,
+203.625s duration, silent editorial spans, default mixed peak 0.7877 and
+absolute bound 0.8205. Water, paddles and the iron axle are byte-identical;
+narration, all ten protected sources and the resolved movie are unchanged.
+
+The simplified person-sawing-by-hand prompt was submitted but returned a
+null service error. Only the retained recording is used. No subjective
+listening approval, acoustic simulation or AI-generated replacement is claimed.
+No MP4 or new narration was rendered/generated.
+Seventeen final real-film browser checks passed against this sidecar at 8785,
+including actual solo output, synchronization, mute, seek/pause, stable surface
+geometry and the two-second shortcuts. The initial browser probe preceded
+server readiness and refused its connection; the rerun after the server's
+ready address passed. No source or assertions were changed to bypass it.
+
+## Hacksaw and iron mechanism — previous preview
+
+Only the saw and axle sounds were replaced after the pilot's listening
+feedback. Current output: `_build/sfx-mechanics-jgZGkp/`. Actual hacksaw-on-
+plywood strokes are driven by the existing blade-position readout. A
+recorded metal hinge supplies subtle iron-joint creaks; it is a foley proxy
+for the requested axle/crank/levers, not an acoustically simulated machine.
+Both sources are CC0; exact source pages, preview URLs and hashes are in
+`mechanics-evidence.json`. Anonymous MMAudio failed; no generated saw or
+axle sample is claimed. Water's previous publication-rights caveat remains.
+
+Eighteen pure tests pass, including six new tests for quiet turnarounds,
+cut/return contrast, displacement-linked pitch/cadence, stopped/disengaged
+silence, discrete iron friction, discontinuities and exact block replay.
+The new module failed before implementation. A separate extraction-duration
+assertion failed on output-clipped time stretching, then passed after
+trimming the input before stretching. That rejected intermediate was never
+served. Final prepared strokes are 1.907–2.099 seconds, not flattened loops.
+
+`verify-mechanics.mjs` passes on the completed output: all four WAVs are
+203.625 seconds; water and paddles are byte-identical to the preceding build;
+saw and wheel intentionally differ. All ten protected movie/narration/source
+files and the resolved movie are unchanged. Silent scenes remain silent.
+Default mixed PCM peak is 0.8022 and absolute-sum bound 0.8575; every previous
+mixer gain is preserved without additional attenuation. Fifty-three
+phase-driven iron events replace the continuous wooden-axle sound. Audio
+blocks of 128 and 4,096 samples produce identical replacements.
+Technical tests do not certify the subjective timbre; the pilot auditions it.
+Seventeen final real-film browser checks pass against the new sidecar at
+8785, measuring each solo channel's native output and preserving synchronized
+playback, mute, pause, rapid seek, stable layout and two-second shortcuts.
+The updated mixer labels and machine screenshot were visually inspected.
+
+## Full-film sound and live mixer — previous preview
+
+The audio-only build in `_build/sfx-full-cCdE5v/` contains Water flow,
+Paddle splashes, Wheel / axle and Saw stems, each 203.625 seconds, 48 kHz,
+mono 24-bit PCM (9,774,000 samples). Every stem's opening 17 seconds is
+sample-identical to the approved spike. Seeded replay is exact with 128-
+and 4,096-sample blocks. The adapter evaluated 27,919 actual model poses
+at 240 Hz; the maximum blade/CAD readout difference is 0.000266 mm.
+Closing paddle intervals shorten from 0.545 to 0.0875 seconds while water
+pitch stays fixed. Twelve project unit tests and full output verification pass.
+
+The final server at http://127.0.0.1:8785/#movie uses Videomaker branch
+`live-audio-mixer`, implementation `866c25a`. Seventeen real-film browser
+checks pass: five native audio sources share context, start instant and
+offset; all four effects produce measured output when soloed; muting all
+channels leaves the clock advancing; rapid seeks choose the final position;
+pause is silent; two-second shortcuts and stable geometry across 12 scene
+positions remain. Solo measurements wait for the gain ramp and analyser
+history to clear. `mixer-machine.png` and `mixer-ending.png` were inspected;
+`browser-verification.json` retains the measured results. This is technical
+playback evidence, not a subjective listening assessment.
+
+The tool's cold suite passed 507 tests, with 16 real-viewer checks skipped
+because no bundle was selected. The final mixer 8 and original player 10
+browser tests also passed cold, including native PCM output and a red/green
+Back/Forward-cache recovery regression. The real-film checks above used
+the installed viewer bundle. The feature is isolated, not integrated/pushed.
+
+`verification.json` proves the ten protected picture/narration/source files
+and old MP4 are unchanged; the resolved movie also compares byte-identical
+to the audio build's snapshot. Narration SHA-256 remains
+`069804c8984224a171c7dd26641e9475baad5b2b461194e965c50b613efb155c`.
+No new narration, full-film video render, saved mix or exported mix was made.
+See `audio-spike/README.md` for the explicit silent scenes, initial headroom,
+experimental acoustic claims and retained source-rights caveat.
+
+## Mid-right reading hold and descending curve — approved pictures
+
+Names now hold at (1830,540), vertically aligned with the wheel centre, then
+follow a smooth descending curve to (960,820) before continuing left. Text
+stays horizontal. The guide line follows the same cubic 15px below the text
+baseline; its entry and exit tangents are level. Only vertical placement and
+the drawn guide changed. Horizontal motion, 14-frame holds, 0.5s launches,
+stagger, spin-on-first-pass and later waterwheel transition remain unchanged.
+
+The mid-height assertion failed against the former y820 hold, then passed.
+All 162 browser samples/checks pass: 118 general, 8 relation, 13 Studio entrance,
+23 interaction. Every name is tested at both ends of its hold and during its
+descending launch. Five additional curve samples measure the actual SVG path,
+checking a gentle descent, no upward reversal, the constant line/text offset,
+and the original level exit beneath the wheel. Hold, descent, blended-wheel
+and final-name images were visually inspected. No new audio listening claim.
+
+Movie source/resolved documents and Studio edit compare byte-identical to the
+previous preview. Narration WAV SHA-256 remains
+`069804c8984224a171c7dd26641e9475baad5b2b461194e965c50b613efb155c`;
+the earlier MP4 hash is unchanged. The live stage picks up these presentation
+edits directly: no evaluation, speech generation or MP4 render. Previous
+sources/documents: `_build/revisions/before-curved-stream/`.
+
+## First name pass, graphic spin, then waterwheel — previous preview
+
+The graphic wheel now starts turning when Three.js passes beneath its centre
+at 180.8765s (`streamDelay + arrival`). It stays still during the name's reading
+hold and initial launch. The waterwheel transition starts at 182.125s, after
+1.2485s of graphic-only spin, and completes at 183.375s. The graphic has turned
+40.53° at handoff. Both wheels share one phase across the fade.
+
+The later start uses 52°/s² acceleration to retain the established fast ending:
+the actual model measures ~410.5°/s at zoom start and ~516.7°/s near its end,
+still below half a spoke interval per 24fps frame. Zoom and narration anchors
+are unchanged. Every stream parameter (entrance, holds, launch, cadence, end)
+and the Studio edit record compare identical to the preceding preview.
+
+The new spin-on-pass assertion failed against the previous edit, then passed.
+All 157 browser samples/checks pass: 113 general, 8 relation, 13 Studio entrance,
+23 interaction. Five additional samples verify zero graphic rotation before
+the first centre passage, visible rotation with full opacity before handoff,
+and no physical-wheel element until that boundary. Existing stream holds,
+phase continuity, accelerating zoom and tail-clearance checks remain green.
+Held-graphic, pre-handoff and blended wheel screenshots were visually inspected.
+
+Narration WAV SHA-256 remains
+`069804c8984224a171c7dd26641e9475baad5b2b461194e965c50b613efb155c`.
+Fresh evaluation and cache-only finishing; no speech generation or MP4 render.
+Previous source/documents: `_build/revisions/before-later-wheel-handoff/`.
+
+## Individual reading holds and launches — previous preview
+
+The pilot accepted the entrance timing but rejected the continuously moving
+names as unreadable. The new pattern holds each name at x1830 for 14 frames
+(0.583s), then accelerates from rest to x-110 in 0.5s. Each gets an identical
+hold and launch, with entries ~0.733s apart and no overlap. The first entrance
+remains 179.958s on “beneath”; the last name completes its launch at 185.440s,
+before the baseline fades by 185.590s and the returning sentence at 185.790s.
+
+The stationary-hold assertion failed against the former motion, then passed.
+All 152 browser samples/checks pass: 108 general, 8 relation, 13 Studio entrance,
+23 interaction. For each name, browser samples prove identical positions at
+the first/last held frames, then match the independently calculated quadratic
+launch position. All seven have exactly 14 stationary reading frames; adjacent
+names retain at least 24px of separation at 1080p. This replaces the earlier
+three-second moving-window metric, which did not establish perceptual readability.
+The onset, wheel-phase and stream-tail checks remain green. First-name hold
+start/end and last-name launch screenshots were visually inspected.
+
+Wheel shot/model/camera/cues and Studio timing compare identical to the prior
+movie. Narration WAV SHA-256 remains
+`069804c8984224a171c7dd26641e9475baad5b2b461194e965c50b613efb155c`.
+Fresh evaluation and cache-only finishing; no speech generation or MP4 render.
+Previous source/documents: `_build/revisions/before-stream-hold-launch/`.
+
+## Stream entrance on “beneath” — previous preview
+
+The measured “beneath it all” onset is 179.950s. Three.js now first appears
+at 179.958s, the first 24fps frame at/after that onset, instead of during
+the preceding technology enumeration. The line under the stream also stays
+absent before that instant. The graphic/physical wheel clock remains separate
+and unchanged, including the handoff at 179.250s and acceleration through zoom.
+
+`streamDelay` is measured from the unchanged drive clock. A tighter stagger
+(~0.349s), 1.75s centre arrival and entry-speed fraction 0.9 give each label
+gentler individual acceleration while retaining at least three seconds fully
+inside the frame. Adjacent labels retain at least 24px separation at 1080p.
+The stream still clears at 185.590s, 0.2s before the returning wheel sentence.
+
+The onset assertion failed against the old timing, then passed. All 131 browser
+samples/checks pass: 87 general, 8 relation, 13 Studio entrance, 23 interaction.
+The four new entrance samples verify no visible names at the old launch,
+handoff or preceding frame, then Three.js alone at the new launch. Existing
+per-label reading-time, wheel-phase and tail-clearance checks remain green;
+added checks verify individual acceleration and separation. Before/onset and
+last-tool screenshots were visually inspected.
+
+The physical wheel shot (model keys, camera and cues) compares identical to
+the prior movie, as does the Studio edit record. Narration WAV SHA-256 remains
+`069804c8984224a171c7dd26641e9475baad5b2b461194e965c50b613efb155c`.
+Fresh evaluation and cache-only finishing; no speech generation or MP4 render.
+Previous source/documents are retained in `_build/revisions/before-beneath-stream/`.
+
+## Faster testing travel — previous preview
+
+The pilot requested a slightly faster center-to-right move. Its duration is
+now 2.75s instead of 3.625s (24% shorter), keeping the same quintic easing and
+17% top margin. It starts at 117.417s and lands at 120.167s. Typing advances
+with the move to 119.667s, preserving the final half-second overlap; completion
+stays at 123.958s. The 0.6s fade, camera and rewind are unchanged.
+
+The new duration assertion failed against the prior edit, then passed after
+the cue change. All 127 browser samples/checks pass (83 general, 8 relation,
+13 Studio entrance, 23 interaction), including the eased layout samples,
+typing during travel, margin, fast fade and exact replay. At the first sampled
+typing frame, over 97% of the faster layout move is complete. Mid-travel,
+typing onset and landing screenshots were visually inspected.
+
+Comparison with `_build/revisions/before-faster-testing-travel/` confirms only
+landing and typing onset change in the edit record, both advancing by 0.875s.
+Narration WAV retains SHA-256
+`069804c8984224a171c7dd26641e9475baad5b2b461194e965c50b613efb155c`.
+Fresh evaluation and cache-only finishing; no speech generation or MP4 render.
+
+## Testing margin, eased travel and earlier typing — previous preview
+
+The testing model now lands at y17% rather than y7% of the frame, retaining
+its x64% position, 36% width and 83% height. The extra margin lowers it without
+shrinking it. The 3.625s layout move uses quintic smootherstep, with zero
+velocity and acceleration at both ends. The 0.6s Studio fade is unchanged.
+
+Following the pilot's explicit overlap correction, typing starts at 120.542s,
+half a second before landing at 121.042s, instead of at 121.750s. It still
+finishes at 123.958s. This supersedes the earlier post-landing blank pause;
+the browser remains entirely gone before any code appears.
+
+The revised onset assertion failed against the old edit, then passed after
+the cue change. All 127 browser samples/checks pass: 83 general, 8 relation,
+13 Studio entrance and 23 interaction. Four travel samples independently
+verify quintic interpolation of all four layout coordinates; landing verifies
+top margin, unchanged size and canvas containment. The first typing sample
+has visible code while the model is still moving, with over 98% of its layout
+travel completed. Code continues typing through landing. Prior fade, camera,
+rewind, highlight, concealment and pixel-replay checks remain green.
+
+Quarter-travel, typing onset and completed-source screenshots were visually
+inspected. They show clear separation of the early source text and timber,
+and the larger top margin. The live server reports no refusal.
+The edit timing record differs only in typing onset; camera/rewind/landing
+and typing completion are identical. Narration WAV SHA-256 remains
+`069804c8984224a171c7dd26641e9475baad5b2b461194e965c50b613efb155c`.
+Fresh evaluation and cache-only finishing; no speech generation or MP4 render.
+Previous source/movie documents remain in `_build/revisions/before-testing-spacing/`.
+
+## Faster Studio fade — previous preview
+
+The Studio screenshot, controls and full-machine context now fade in 0.6s,
+independently of the unchanged 3.625s model travel. The retained timber/blade
+stays fully opaque. Departure begins at 117.417s; the first fully clear video
+frame is 118.042s. Travel still ends at 121.042s, and typing still runs from
+121.750s to 123.958s. Code remains left and model right.
+
+The new half-opacity assertion failed against the old fade, then passed with
+`StudioSurface.departureFade=0.6`. All 123 browser samples/checks pass: 83
+general, 8 relation, 13 Studio entrance and 19 interaction. The added samples
+check half opacity after 0.3s and zero screenshot/full-model opacity after
+0.75s, with detail opacity one, continued rightward travel and no code yet.
+The halfway fade, clear-travel and later travel screenshots were visually
+inspected. Existing camera, rewind, layout, concealment and replay checks pass.
+
+Fresh evaluation and cache-only finishing preserved the narration WAV hash
+`069804c8984224a171c7dd26641e9475baad5b2b461194e965c50b613efb155c`.
+The edit record is byte-identical to the pre-change backup. Movie-document
+comparison finds only the new fade prop/schema and corresponding movie.py
+source-provenance digests; excerpt text and line numbers are unchanged.
+No speech generation or MP4 render. Previous sources and movie documents are
+retained in `_build/revisions/before-fast-studio-fade/`.
+
+## Code-left / model-right follow-up — previous preview
+
+The pilot requested the original left-code/right-model layout while keeping
+the approved transition and narration. The source slot returns to x4%, width
+60%; the model's landing box returns to x64%, width 36%. Its travel now goes
+right from Studio. No camera, pose, fade, blank-pause or typing timing changed.
+`movie.json`, `movie-resolved.json`, `studio-edit.json` and the narration manifest
+are byte-identical to `_build/revisions/before-code-left/`. The narration WAV
+retains the hash below. No evaluation, speech generation or MP4 render.
+
+The updated layout assertion failed against the old layout (“Code left, model
+right”), then passed after the slot/destination changes. All 83 general,
+13 Studio entrance and 17 interaction checks pass. Interaction additionally
+asserts continuous rightward travel, x64% landing, code left without overlap,
+blank-left before typing and unchanged pixel replay. The blank-left and fully
+typed frames were visually inspected. Timing/audio evidence below still applies.
+
+## Sequential testing and BUILD emphasis — preceding layout
+
+203.625s / authored 1080p24, live stage at 960×540. The three text changes
+were generated together in one unedited 198.24s Jessica take, 2376 characters
+and 43 measured beats. The Studio introduction is “You can build models from
+your browser, using Machinome Studio”, continuing “where you can prompt…”;
+testing now says “Machinome also provides a testing framework, that allows us
+to test how parts fit together.” The last question is “What do YOU want to
+BUILD?” Uppercase requests emphasis; the question is not drawn on screen.
+
+Raw SHA-256: `cf456cb9b5f93fd39b288c0d48708d47e5437b471b2deae6d6794a810267efb7`.
+Mix SHA-256: `069804c8984224a171c7dd26641e9475baad5b2b461194e965c50b613efb155c`.
+FFprobe verifies a 203.625s mix. Raw/provider-original bytes match. No audio
+splicing, signal break insertion, stretching or automatic retry. Previous
+audio/source state is retained in `_build/revisions/before-sequential-testing/`.
+The old MP4 hash remains unchanged; no new render or publication.
+
+The short turn is 112.708–115.083s, slider highlight at 115.125s, and rewind
+115.417–116.792s, using 48 held-pose edits of the existing export. Testing
+starts 117.417s: the screenshot fades while the model travels left, arriving
+at 121.042s on “that allows us”. The right remains blank for 0.708s. Code
+typing starts at 121.750s on “to test how parts fit together” and completes
+at 123.958s on “This test checks”. No testing transition compositor or code
+cross-fade exists; the new `conceal` action removes the whole listing DOM,
+filename included, until the typing cue.
+
+All 121 browser samples/checks pass: 83 general preview, 8 relation, 13 Studio
+entrance, 17 interaction. The interaction check verifies every pre-typing
+frame is concealed, samples the halfway fade with no source, the landed
+blank-right frame, typing onset and completed source, and retains its exact
+rewind, short-turn and pixel-replay checks. Camera comparisons allow 1e-8
+model units for floating-point interpolation roundoff (observed 3e-13), not
+visible camera drift. Departure, blank-right and complete-code screenshots
+were visually inspected. No page errors or live-server refusal.
+
+Local forced alignment remeasured the relation against this take: crops
+starting 97.0/97.1/97.2s and ending 100.0/100.15s agree on corrected boundaries.
+Film drives: 101.417–101.958s; crankshaft: 102.042–102.750s. The take hash guard
+and browser word checks pass. Acoustic delivery/emphasis still awaits the
+pilot's listening review; this records integrity, timing and visual evidence.
+
+## Studio interaction — previous preview
+
+199.125s / 1080p24. The requested longer interaction sentence is in a new,
+single unedited 193.76s Jessica take (2408 characters, 42 measured beats).
+Raw SHA-256: `d999aa3b7b584206bf2f4a410252a9c70090c53a66f9c234de68d5e78f277b23`.
+Mix SHA-256: `d41a74657f8b2ec0e054833a2ff453bd680bc5ef433ec1b98612ef0bb0dfca4f`.
+Provider-original and raw take match byte-for-byte; no audio edits or retries.
+The old MP4 hash below is unchanged. No new render.
+
+Latest direction: no pointer and no long camera orbit. Model highlight starts
+at 115.875s. The 110.137° short turn runs 116.208–118.292s, with a held test
+camera thereafter. Slider highlight starts 118.333s; rewind runs
+118.625–119.750s from actual model time 481.302s to zero. Testing begins
+120.417s with the same camera, zero model time and exact outgoing screen box.
+The browser and full-model context fade over 1.8s while the blade/timber view
+moves left and code types at right. Sampled tests still cover thirteen poses
+from 0 to 4s, with the existing source-token highlights.
+
+The movie's public format refuses backwards keys within a shot. The project
+encodes this scrub as 43 held-pose, single-frame edits, preserving the same
+model/view and using no dependency changes. The new regression initially
+caught cumulative 1/24-duration floating-point drift at frame boundaries;
+absolute spoken anchors corrected that, without weakening the pose assertions.
+
+All browser checks pass: 83 general preview samples, 8 relation word checks,
+13 Studio entrance frames and 14 interaction frames. The latter also checks
+every camera/rewind frame: monotone short turn under π, camera held throughout
+rewind, exact expected model time and matching slider, no pointer, continuous
+box at the testing boundary, left-model/right-code layout and pixel-exact replay.
+Evidence is in `_build/inspection/studio-interaction/`; run
+`inspect-studio-interaction.mjs` as documented in README. Short-turn, rewind
+and testing-transition images were visually inspected. No page errors.
+
+Relation timing was remeasured using local PocketSphinx 5.1.1. Three crop
+starts agree on drives/crankshaft onsets; three crop ends agree on their
+ends. The take-bound hash guard and eight browser checks pass. This is timing
+and integrity evidence, not human listening approval of the new performance.
+
+## Studio scene and continuous narration — previous checkpoint
 
 ### Firefox-window follow-up
 

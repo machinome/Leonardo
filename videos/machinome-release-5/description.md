@@ -17,6 +17,8 @@ Its dimensions and concealed fittings include documented choices.
 Motion is prescribed. Water, cutting and the opening kerf are illustrative;
 forces, friction, stresses, winding stability and material removal are not
 simulated. The film slows selected movements for explanation.
+The Studio sequence demonstrates changing a viewing angle and scrubbing
+back through recorded model time, not physically reversing the historical saw.
 
 Historical references recorded by the project:
 
@@ -83,6 +85,22 @@ features are local development capabilities, not published package claims.
 Python's unchanged two-snakes logo identifies the language used. It is a trademark of the Python Software Foundation; the official logo page permits this referential use (https://www.python.org/community/logos/). No endorsement is implied.
 
 {{pictureCredits}}
+
+## Experimental sound effects — listening preview only
+
+The current mixer auditions motion-timed sound effects, not simulated
+acoustics or a claimed historical recording. Hacksaw strokes use
+[Handheld Hacksaw.wav by aidansamuel](https://freesound.org/people/aidansamuel/sounds/540143/),
+recorded cutting plywood. Iron-joint friction uses
+[Metal Squeak 2.wav by rdneubauer](https://freesound.org/people/rdneubauer/sounds/93783/),
+a metal fireplace hinge used as a proxy for the axle/crank/levers.
+Both source pages state CC0. The manual saw uses short original-pitch
+scrapes, with no time stretching or looping; their starts follow blade
+motion, with a lighter return and quiet gaps. The iron recording is filtered
+and scheduled at motion cues. These are foley choices, not solved acoustics.
+Water uses the earlier generated audition; its redistribution/commercial
+rights remain unresolved. This experiment has not been rendered into a
+replacement film and must not be treated as publication-ready audio.
 
 ## Upload checklist for the pilot
 

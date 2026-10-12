@@ -54,9 +54,10 @@ export async function main(args) {
   const {captionsFromAlignment, srt} = await import(pathToFileURL(resolve(tool, 'src/timeline.mjs')));
   const input = JSON.parse(await readFile(resolve(build, 'narration-input.json'), 'utf8'));
   const text = verifyInput(input);
-  assert.ok(text.includes('What do YOU want to build?'));
+  assert.ok(text.includes('What do YOU want to BUILD?'));
   assert.ok(text.includes('And beneath it all, a stream of open source technologies... The wheel... makes revolutions'));
-  assert.ok(text.includes('Machinome also lets us test how parts fit together.'));
+  assert.ok(text.includes('Machinome also provides a testing framework, that allows us to test how parts fit together.'));
+  assert.ok(text.includes('You can build models from your browser, using Machinome Studio'));
   assert.ok(!text.includes('Agents can write mechanical models because of tests'));
   const dictionary = JSON.parse(await readFile(resolve(base, input.pronunciation), 'utf8'));
   assert.equal(dictionary.rules[0].phoneme, 'məˈʃiːnoʊm');
