@@ -4,7 +4,7 @@ from pathlib import Path
 import base64
 import json
 
-from machinome_movie import (
+from machinome.movie import (
     Action, Camera, Chapter, Credits, Cue, Dissolve, Element, Evidence,
     FadeIn, FadeOut, Format, Layer, Loop, Movie, Narrator, Picture,
     Reframe, Release, Set, Shot, Slot, Source, Still, Style, Title, View, evaluate, write,

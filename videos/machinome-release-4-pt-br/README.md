@@ -41,10 +41,10 @@ node videos/machinome-release-4-pt-br/speech.mjs /home/asa/devel/machinome/video
 node videos/machinome-release-4-pt-br/audio-evidence.mjs
 PYTHONPATH=. /home/asa/devel/machinome/.venv/bin/python videos/machinome-release-4-pt-br/movie.py
 node videos/machinome-release-4-pt-br/finish.mjs /home/asa/devel/machinome/videomaker
-node /home/asa/devel/machinome/videomaker/bin/videomaker.mjs check videos/machinome-release-4-pt-br/_build/movie.json --viewer /home/asa/devel/machinome/machinome-viewer/machinome_viewer/widget/dist/machinome-viewer.js
-node /home/asa/devel/machinome/videomaker/bin/videomaker.mjs preview videos/machinome-release-4-pt-br/_build/movie.json --viewer /home/asa/devel/machinome/machinome-viewer/machinome_viewer/widget/dist/machinome-viewer.js --width 1280
+machinome movie check videos/machinome-release-4-pt-br/_build/movie.json
+machinome movie preview videos/machinome-release-4-pt-br/_build/movie.json --width 1280
 node videos/machinome-release-4-pt-br/inspect.mjs /home/asa/devel/machinome/videomaker /home/asa/devel/machinome/machinome-viewer/machinome_viewer/widget/dist/machinome-viewer.js
-node /home/asa/devel/machinome/videomaker/bin/videomaker.mjs render videos/machinome-release-4-pt-br/_build/movie.json --viewer /home/asa/devel/machinome/machinome-viewer/machinome_viewer/widget/dist/machinome-viewer.js
+machinome movie render videos/machinome-release-4-pt-br/_build/movie.json
 node videos/machinome-release-4-pt-br/postflight.mjs
 python videos/machinome-revolutions-v2/serve-review.py --port 8785 --directory videos/machinome-release-4-pt-br
 ```

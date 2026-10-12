@@ -6,7 +6,7 @@ import ast
 import hashlib
 import textwrap
 
-from machinome_movie import (
+from machinome.movie import (
     Action,
     Camera,
     Chapter,

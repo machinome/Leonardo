@@ -4,7 +4,7 @@
 
 from pathlib import Path
 
-from machinome_movie import (
+from machinome.movie import (
     Camera,
     Chapter,
     Credits,

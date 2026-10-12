@@ -63,12 +63,12 @@ From the Leonardo repository, after stopping this study's live preview:
 PYTHONPATH=. /home/asa/devel/machinome/.venv/bin/python videos/study-1-pt-br/movie.py
 node videos/study-1-pt-br/speech.mjs /home/asa/devel/machinome/videomaker
 node videos/study-1-pt-br/finish.mjs /home/asa/devel/machinome/videomaker
-ELEVENLABS_API_KEY='' node /home/asa/devel/machinome/videomaker/bin/videomaker.mjs speech videos/study-1-pt-br/_build/movie.json
+machinome movie speech videos/study-1-pt-br/_build/movie.json
 node videos/study-1-pt-br/verify-direction.mjs
 node videos/study-1-pt-br/check-closing-camera.mjs /home/asa/devel/machinome/videomaker
-node /home/asa/devel/machinome/videomaker/bin/videomaker.mjs check videos/study-1-pt-br/_build/movie.json --viewer /home/asa/devel/machinome/machinome-viewer/machinome_viewer/widget/dist/machinome-viewer.js
-node /home/asa/devel/machinome/videomaker/bin/videomaker.mjs preview videos/study-1-pt-br/_build/movie.json --viewer /home/asa/devel/machinome/machinome-viewer/machinome_viewer/widget/dist/machinome-viewer.js --width 540
-node /home/asa/devel/machinome/videomaker/bin/videomaker.mjs render videos/study-1-pt-br/_build/movie.json --viewer /home/asa/devel/machinome/machinome-viewer/machinome_viewer/widget/dist/machinome-viewer.js
+machinome movie check videos/study-1-pt-br/_build/movie.json
+machinome movie preview videos/study-1-pt-br/_build/movie.json --width 540
+machinome movie render videos/study-1-pt-br/_build/movie.json
 node videos/study-1-pt-br/verify-render.mjs
 node videos/study-1-pt-br/pause-transition.mjs
 node videos/study-1-pt-br/verify-pause.mjs

@@ -6,7 +6,7 @@ import json
 import re
 from pathlib import Path
 
-from machinome_movie import Narration
+from machinome.movie import Narration
 
 delivery = json.loads(
     (Path(__file__).resolve().parent / "delivery.json").read_text()
