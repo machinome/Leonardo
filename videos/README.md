@@ -2,7 +2,16 @@
 
 Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
 
-The current rendered release-film proposal is
+The selected release film on `main` is
+[Revolutions — cut 5](machinome-release-5/README.md): the Studio sequence,
+descending open-source technology stream and continuous Jessica narration,
+without sound effects. Its current deliverable is the 203.625-second web
+preview; the older saved MP4 does not contain the latest scenes.
+The sound-effects experiment is preserved separately on the local
+`release-video-sound-effects` branch, with its generated audio retained in
+the original checkout's ignored build directory.
+
+The earlier rendered release-film proposal is
 [Revolutions — proposal 1](machinome-release-1/README.md), following the
 pilot's [original brief](machinome-release.md): a dark, continuous camera encounter
 with the sawmill, its real Python source, the film's own source and the

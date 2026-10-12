@@ -54,8 +54,11 @@ export async function main(args) {
   const {captionsFromAlignment, srt} = await import(pathToFileURL(resolve(tool, 'src/timeline.mjs')));
   const input = JSON.parse(await readFile(resolve(build, 'narration-input.json'), 'utf8'));
   const text = verifyInput(input);
-  assert.ok(text.includes('What do YOU want to build?'));
-  assert.ok(text.includes('And beneath it all, a stream of open source tools... The wheel... makes revolutions'));
+  assert.ok(text.includes('What do YOU want to BUILD?'));
+  assert.ok(text.includes('And beneath it all, a stream of open source technologies... The wheel... makes revolutions'));
+  assert.ok(text.includes('Machinome also provides a testing framework, that allows us to test how parts fit together.'));
+  assert.ok(text.includes('You can build models from your browser, using Machinome Studio'));
+  assert.ok(!text.includes('Agents can write mechanical models because of tests'));
   const dictionary = JSON.parse(await readFile(resolve(base, input.pronunciation), 'utf8'));
   assert.equal(dictionary.rules[0].phoneme, 'məˈʃiːnoʊm');
   const film = {...input, paths: {build}};
@@ -64,7 +67,7 @@ export async function main(args) {
     pronunciation_dictionary_id: dictionary.id, version_id: dictionary.version_id,
   }]};
   assert.ok(!request.previous_text && !request.next_text);
-  assert.ok(request.text.includes('tools...\n\nThe wheel'));
+  assert.ok(request.text.includes('technologies...\n\nThe wheel'));
   const productionRequestHash = hash(JSON.stringify({request, voice: input.audio.voice, format: entry.format}));
   console.log(`One ${text.length}-character request; ${input.beats.length} unique beats; Jessica / eleven_v3.`);
   if (args[1] === '--check') return;
@@ -111,25 +114,12 @@ export async function main(args) {
       a?.characters && canonical(a.characters.join('')) === canonical(text));
     assert.ok(alignment, 'Provider text differs from the script; response retained, no retry.');
     validateAlignment(alignment, 'continuous');
-    // Keep provider audio intact beside the deliberately edited preview take.
-    // Only a brief pause on the wheel; the stream finishes during speech.
+    // The pause belongs to the performance. Never splice digital silence into
+    // a breath or phoneme: the film follows this continuous provider signal.
     await writeFile(resolve(build, 'provider-original.wav'), pcmWav(originalPCM, 24000));
-    const returnText = 'The wheel... makes revolutions... and humans... build';
-    const textBefore = alignment.characters.join('').split(returnText)[0];
-    assert.ok(textBefore.length < alignment.characters.join('').length, 'Missing return line');
-    const boundary = Array.from(textBefore).length;
-    const at = alignment.character_start_times_seconds[boundary];
-    const cutSample = Math.round(at * 24000);
-    const silenceSeconds = 1.2;
-    const pcm = Buffer.concat([originalPCM.subarray(0, cutSample * 2),
-      Buffer.alloc(silenceSeconds * 48000), originalPCM.subarray(cutSample * 2)]);
-    for (let i = boundary; i < alignment.characters.length; i++) {
-      alignment.character_start_times_seconds[i] += silenceSeconds;
-      alignment.character_end_times_seconds[i] += silenceSeconds;
-    }
+    const pcm = originalPCM;
     const wav = pcmWav(pcm, 24000);
-    const edits = [{kind:'insert-silence', at:cutSample / 24000, seconds:silenceSeconds,
-      reason:'Brief pause on the physical wheel after the narrated stream handoff'}];
+    const edits = [];
     const duration = pcm.length / 48000;
     assert.ok(alignment.character_end_times_seconds.at(-1) <= duration + 0.05);
     resolveBeats(alignment, input.beats, duration);
@@ -137,19 +127,19 @@ export async function main(args) {
     record = {cache: entry.cache, voice: input.audio.voice, model: input.audio.model,
       format: entry.format, request, productionRequestHash, pronunciation: dictionary,
       alignment, sha256: hash(wav), duration, requestId: receipt.requestId,
-      generatedAt: receipt.generatedAt, source: 'one-provider-request-with-directed-silence', edits};
+      generatedAt: receipt.generatedAt, source: 'one-provider-request-unedited', edits};
     await writeFile(entry.meta, JSON.stringify(record, null, 2) + '\n', {flag: 'wx'});
   }
   validateAlignment(record.alignment, 'continuous');
   const beats = resolveBeats(record.alignment, input.beats, record.duration);
   const captions = captionsFromAlignment(record.alignment);
-  // This listening copy is byte-identical to the edited, aligned preview take.
+  // This listening copy is byte-identical to the provider's continuous take.
   await writeFile(resolve(build, 'narration.wav'), await readFile(entry.file));
   await writeFile(resolve(build, 'captions.srt'), srt(captions));
   await writeFile(resolve(build, 'captions.json'), JSON.stringify(captions, null, 2) + '\n');
   const manifest = {schema: 'continuous-narration-review/1', status: 'awaiting-listening-review',
     source: 'narration.py', sourceSha256: await fileHash(resolve(base, 'narration.py')),
-    text, characters: text.length, generation: 'one-provider-request-with-directed-silence', edits: record.edits,
+    text, characters: text.length, generation: record.source, edits: record.edits,
     duration: record.duration, sha256: record.sha256, cacheFile: entry.file,
     productionRequestHash, providerRequestId: record.requestId, generatedAt: record.generatedAt,
     voice: input.audio, audioTimeOrigin: 0, filmLeadIn: 'not yet placed',

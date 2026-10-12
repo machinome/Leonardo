@@ -2,15 +2,15 @@
   "schema": "cut5-relation-timing/1",
   "copyright": "Copyright (C) 2026 Luis Henrique Cassis Fagundes",
   "license": "AGPL-3.0-only",
-  "audioSha256": "52b3b64585913f48c6a1196ffbe71cf093c3c597a8b5f5bb09f1665ae69f9a9f",
+  "audioSha256": "cf456cb9b5f93fd39b288c0d48708d47e5437b471b2deae6d6794a810267efb7",
   "method": "PocketSphinx 5.1.1 forced word alignment, bundled English acoustic model, 100 frames/s, mono 16 kHz PCM decoded from the unchanged take",
-  "phrase": "the waterwheel spin drives the crankshaft with machinome machines can have a source code",
-  "audioCrop": [97.4, 104.25],
-  "crossChecks": "Crops 97.3–104.25, 97.5–104.25 and 97.4–100.8 agree on corrected boundaries within 0.01 seconds.",
+  "phrase": "the waterwheel spin drives the crankshaft",
+  "audioCrop": [97.1, 100.0],
+  "crossChecks": "Start crops 97.0, 97.1 and 97.2 and end crops 100.0 and 100.15 agree on all corrected boundaries. Fresh unedited sequential-testing/BUILD take, not offsets copied from the earlier recording.",
   "scope": "Visual cues only. Preserve waterwheel and spin onsets, cut timings, provider alignment and all audio bytes.",
   "words": {
-    "spin": {"end": 98.9},
-    "drives": {"start": 98.9, "end": 99.37},
-    "crankshaft": {"start": 99.46, "end": 100.23}
+    "spin": {"end": 98.43},
+    "drives": {"start": 98.43, "end": 98.94},
+    "crankshaft": {"start": 99.03, "end": 99.77}
   }
 }

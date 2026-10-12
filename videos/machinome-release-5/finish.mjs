@@ -5,6 +5,7 @@ import {readFile,writeFile} from 'node:fs/promises';
 import {resolve,dirname} from 'node:path';
 import {fileURLToPath,pathToFileURL} from 'node:url';
 import {wheelAngle} from './ending-motion.mjs';
+import {finishStudio} from './studio-motion.mjs';
 const base=dirname(fileURLToPath(import.meta.url));
 assert.ok(process.argv[2],'Pass Videomaker checkout.');
 const tool=resolve(process.argv[2]);
@@ -21,8 +22,8 @@ assert.ok(take,'Continuous take is missing. This command does not generate speec
 assert.equal(take.sha256,approved.sha256,'The film must reuse the recorded audio bytes.');
 assert.equal(doc.chapters.length,1);
 assert.equal(doc.chapters[0].narration,approved.text);
-// The provider collapsed crankshaft to 10 ms and delayed drives. Correct
-// only these visual spans from local forced alignment of the same recording;
+// The earlier provider take collapsed crankshaft to 10 ms and delayed drives.
+// Re-measure each fresh take and correct only these visual spans locally;
 // neither the cached alignment nor audio nor scene boundaries are rewritten.
 const relationTiming=JSON.parse(await readFile(resolve(base,'relation-timing.json')));
 assert.equal(relationTiming.schema,'cut5-relation-timing/1');
@@ -132,26 +133,35 @@ const openTimed=measured.chapters[0].shots.find(s=>s.id==='open-source');
 const driveStart=openTimed.start+openTimed.cues.find(c=>c.actions.some(a=>a.action==='drive')).at;
 // Every label gets the same acceleration, with extra reading time over the
 // waterwheel. Clear the stream just before the returning sentence.
-const streamPhrase='a stream of open source tools';
-const streamIndex=alignedText.indexOf(streamPhrase);
-assert.ok(streamIndex>=0&&alignedText.indexOf(streamPhrase,streamIndex+1)<0);
-const streamLast=Array.from(alignedText.slice(0,streamIndex)+streamPhrase).length-1;
-const spokenStreamEnd=chapter.speechOffset+take.alignment.character_end_times_seconds[streamLast];
 const returnPhrase='The wheel... makes revolutions';
 const returnIndex=alignedText.indexOf(returnPhrase);
 assert.ok(returnIndex>=0&&alignedText.indexOf(returnPhrase,returnIndex+1)<0);
 const returnFirst=Array.from(alignedText.slice(0,returnIndex)).length;
 const streamEnd=chapter.speechOffset+take.alignment.character_start_times_seconds[returnFirst]-.2;
 const streamDuration=streamEnd-driveStart;
-const streamRate=streamDuration/5.8;
-// Preserve the approved wheel phase exactly; label travel is a separate clock.
-const wheelRate=(spokenStreamEnd-driveStart)/5.8;
-Object.assign(chapter.elements.ecosystem.props,{arrival:1.65*streamRate,
-  spinDelay:1.65*wheelRate,stagger:.45*streamRate,streamDuration});
+const entryPhrase='beneath it all',entryIndex=alignedText.indexOf(entryPhrase);
+assert.ok(entryIndex>=0&&alignedText.indexOf(entryPhrase,entryIndex+1)<0);
+const entryFirst=Array.from(alignedText.slice(0,entryIndex)).length;
+// Enter on the first film frame at/after "beneath", never in the Trimesh list.
+const streamStart=Math.ceil((chapter.speechOffset+take.alignment.character_start_times_seconds[entryFirst])*doc.output.fps)/doc.output.fps;
+const streamDelay=streamStart-driveStart;
+// Hold each name for 14 reading frames, then shoot it left from rest in 0.5s.
+// Centre arrival maps that flight from x1830 through x960 to x-110. The last
+// name exits before the baseline fades, so it gets the same complete launch.
+const hold=14/doc.output.fps,flight=.5,entrySpeedFraction=0;
+const arrival=hold+flight*Math.sqrt(870/1940),travel=hold+flight;
+const stagger=(streamEnd-streamStart-.15-travel)/(chapter.elements.ecosystem.props.drivers.length-1);
+assert.ok(stagger>0,'The measured stream window must fit all technology entries.');
+// The first name passing below the hub starts the wheel, not its entry/hold.
+const spinDelay=streamDelay+arrival;
+Object.assign(chapter.elements.ecosystem.props,{arrival,hold,entrySpeedFraction,streamDelay,
+  spinDelay,stagger,streamDuration});
 const returned=chapter.shots.find(s=>s.id==='wheel-returns');
 const returnTimed=measured.chapters[0].shots.find(s=>s.id==='wheel-returns');
 const handoffDuration=returned.transition.duration;
 const offset=returnTimed.start-driveStart;
+assert.ok(Math.abs(offset-spinDelay-1.25)<1/doc.output.fps,
+  'Let the graphic wheel spin alone for 1.25s after the first passing name.');
 chapter.elements['handoff-ecosystem']=structuredClone(chapter.elements.ecosystem);
 Object.assign(chapter.elements['handoff-ecosystem'].props,{timeOffset:offset,fadeDuration:handoffDuration});
 returned.places.graphic='handoff-ecosystem';
@@ -171,6 +181,8 @@ returned.model={keys:times.map((at,i)=>({
   at:i===times.length-1?returned.until:at,
   seconds:500+wheelAngle(offset+at,chapter.elements.ecosystem.props)/90,
 }))};
+const studioEdit=finishStudio(doc,measured,clock);
+await writeFile(resolve(base,'_build/studio-edit.json'),JSON.stringify(studioEdit,null,2)+'\n');
 await writeFile(file,JSON.stringify(doc,null,2)+'\n');
 const {captionsFromAlignment,srt}=await import(pathToFileURL(resolve(tool,'src/timeline.mjs')));
 await writeFile(resolve(base,'_build/raw-narration.wav'),await readFile(take.file));

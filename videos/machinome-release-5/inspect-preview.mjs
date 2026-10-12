@@ -141,8 +141,11 @@ try{
   const shotToken=source.cues.flatMap(c=>c.actions).find(a=>a.params?.token==='Shot');
   assert.ok(shotToken,'The spoken a shot highlights the Shot constructor, not the variable');
   assert.ok(!/^\s*(stroke|end)\s*=/m.test(code),'Speech anchors are inline in the actual shot and cues');
+  const testing=doc.chapters[0].shots.find(s=>s.id==='testing');
+  const testTyping=testing.cues.find(c=>c.actions.some(a=>a.action==='write'));
   for(const [id,element,from,to] of [
-    ['testing','tests',105,110],['behind-the-film','film-code',source.start,source.start+2],
+    ['testing','tests',testing.start+testTyping.at,testing.start+testTyping.until],
+    ['behind-the-film','film-code',source.start,source.start+2],
   ]){
     const full=doc.chapters[0].elements[element].props.code;
     let prior=-1;
@@ -239,13 +242,59 @@ try{
     await page.locator('iframe').screenshot({path:resolve(output,`circumference-${time.toFixed(3)}.png`)});
     checks.push({id:'circumference-arrival',time,...appearance});
   }
-  const speechEnd=endOf('a stream of open source tools');
+  const speechEnd=endOf('a stream of open source technologies');
   const returnSpeech=startOf('The wheel... makes revolutions');
+  const streamSpeech=startOf('beneath it all');
+  const streamStart=driveStart+(props.streamDelay??0);
   const streamEnd=driveStart+props.streamDuration;
-  assert.ok(returned.start<driveStart+6*props.stagger,'The handoff starts before the last tool is released');
+  const firstPass=streamStart+props.arrival,spinStart=driveStart+props.spinDelay;
+  assert.ok(Math.abs(spinStart-firstPass)<1e-8,'Graphic wheel starts spinning when the first name passes its centre');
+  assert.ok(Math.abs(returned.start-spinStart-1.25)<1/doc.output.fps,
+    'The graphic wheel spins alone for about 1.25s before the waterwheel transition');
+  assert.ok(streamStart>=streamSpeech&&streamStart<streamSpeech+1/doc.output.fps,
+    'First stream technology appears on beneath, never before');
+  assert.ok(returned.start<streamStart+6*props.stagger,'The handoff starts before the last tool is released');
   assert.ok(Math.abs(streamEnd-(returnSpeech-.2))<.001,'The slower stream clears just before the returning wheel sentence');
-  assert.ok(props.arrival>1.9,'Each label takes nearly two seconds to reach the centre');
-  assert.ok(driverX(props.streamDuration-6*props.stagger,props)<-100,'The last label has crossed the whole frame');
+  assert.ok(props.hold>=.55,'Each technology has a readable stationary hold before launch');
+  assert.equal(props.entrySpeedFraction,0,'Each technology accelerates from rest');
+  assert.equal(driverX(props.hold,props),driverX(0,props),'No drift during the reading hold');
+  assert.ok(driverX(1,props)-driverX(2,props)>driverX(0,props)-driverX(1,props),
+    'Each individual label keeps accelerating');
+  assert.ok(driverX(streamEnd-streamStart-6*props.stagger,props)<-100,'The last label has crossed the whole frame');
+  for(const [sample,time] of [['old-start',driveStart],['phrase-start',startOf('And beneath it all')],
+      ['before',streamStart-1/doc.output.fps],['onset',streamStart]]){
+    await seek(time);
+    const visible=await page.evaluate(()=>{
+      const w=document.querySelector('iframe').contentWindow;
+      return [...w.document.querySelectorAll('.incoming')].filter(el=>Number(w.getComputedStyle(el).opacity)>.1&&
+        el.getBoundingClientRect().right>0&&el.getBoundingClientRect().left<w.innerWidth).map(el=>el.textContent);
+    });
+    assert.deepEqual(visible,sample==='onset'?['Three.js']:[],
+      'Only the first technology enters at beneath; the stream is absent before it');
+    await page.locator('iframe').screenshot({path:resolve(output,`stream-entrance-${sample}.png`)});
+    checks.push({id:'stream-entrance',sample,time,visible});
+  }
+  for(const [sample,time] of [['hold',streamStart+.25],['before-pass',firstPass-1/doc.output.fps],
+      ['spinning',firstPass+.75],['before-handoff',returned.start-1/doc.output.fps],
+      ['handoff',returned.start]]){
+    await seek(time);
+    const frame=await (await fetch(`${origin}/frame?t=${time}`)).json();
+    const appearance=await page.evaluate(()=>{
+      const w=document.querySelector('iframe').contentWindow,d=w.document;
+      const graphic=d.querySelector('.spokes > g');
+      return {rotation:Number(graphic.getAttribute('transform').match(/rotate\(([-\d.e+]+)/)[1]),
+        opacity:Number(w.getComputedStyle(graphic).opacity)};
+    });
+    const expected=frame.time<=firstPass?0:.5*props.angularAcceleration*(frame.time-firstPass)**2;
+    assert.ok(Math.abs(appearance.rotation-expected)<1e-6,'Live graphic wheel follows the first passing name');
+    assert.equal(appearance.opacity,1,'The graphic remains fully opaque through its solo spin');
+    if(time<returned.start)assert.equal(frame.elements['continuous.returned'],undefined,
+      'No physical waterwheel before the delayed transition');
+    else assert.ok(frame.elements['continuous.returned'],'Physical wheel mounts at the delayed handoff');
+    if(sample==='spinning'||sample==='before-handoff')assert.ok(appearance.rotation>10,'Visible spin precedes the transition');
+    await page.locator('iframe').screenshot({path:resolve(output,`graphic-spin-${sample}.png`)});
+    checks.push({id:'graphic-spin-before-handoff',sample,time,...appearance});
+  }
   const overlapTime=returned.start+.8;
   await seek(overlapTime);
   const frame=await (await fetch(`${origin}/frame?t=${overlapTime}`)).json();
@@ -259,27 +308,84 @@ try{
   assert.ok(overlap.length>0,'Tool names remain visible while the real wheel appears');
   await page.locator('iframe').screenshot({path:resolve(output,'stream-wheel-overlap.png')});
   checks.push({id:'stream-wheel-overlap',time:overlapTime,visible:overlap});
+  const labelWidths=[];
   for(const [i,name] of props.drivers.entries()){
-    const time=driveStart+i*props.stagger+props.arrival;
-    await seek(time);
-    const label=await page.evaluate(name=>{
+    const entry=streamStart+i*props.stagger;
+    const firstFrame=Math.ceil(entry*doc.output.fps-1e-8)/doc.output.fps;
+    const readLabel=()=>page.evaluate(name=>{
       const w=document.querySelector('iframe').contentWindow;
       const el=[...w.document.querySelectorAll('.incoming')].find(el=>el.textContent===name);
       const rect=el.getBoundingClientRect();
-      return {width:el.getBBox().width,opacity:Number(w.getComputedStyle(el).opacity),
+      return {x:Number(el.getAttribute('x')),y:Number(el.getAttribute('y')),width:el.getBBox().width,opacity:Number(w.getComputedStyle(el).opacity),
         fits:rect.left>=0&&rect.right<=w.innerWidth};
     },name);
-    assert.ok(label.fits&&label.opacity===1,`The complete ${name} label is visible at centre`);
-    let readableFrames=0;
-    for(let n=0;n/doc.output.fps<props.streamDuration;n++){
-      const elapsed=n/doc.output.fps,age=elapsed-i*props.stagger;
-      const x=driverX(age,props),half=label.width/2;
-      if(age>=0&&x-half>=48&&x+half<=1872&&elapsed<props.streamDuration-.15)readableFrames++;
+    // Sample the same fixed reading position at the first and last held frame,
+    // then verify an independently computed accelerating launch in the browser.
+    for(const [phase,time] of [['hold-start',firstFrame],
+        ['hold-end',firstFrame+props.hold-1/doc.output.fps],['launch',entry+props.hold+.25]]){
+      await seek(time);const label=await readLabel();
+      assert.ok(label.fits&&label.opacity===1,`${name} stays fully visible through its hold and launch`);
+      if(phase.startsWith('hold')){
+        assert.equal(label.x,1830,`${name} is stationary while it can be read`);
+        assert.equal(label.y,540,`${name} is read at mid-height on the right, not the bottom corner`);
+      }
+      else{
+        const flightAge=Math.round(time*doc.output.fps)/doc.output.fps-entry-props.hold;
+        assert.ok(Math.abs(label.x-(1830-1940*(flightAge/.5)**2))<1e-6,
+          `${name} accelerates independently from rest after its hold`);
+        assert.ok(label.y>540&&label.y<820,`${name} descends along the curve during launch`);
+      }
+      if(i===0||i===props.drivers.length-1)
+        await page.locator('iframe').screenshot({path:resolve(output,`stream-${name}-${phase}.png`)});
+      checks.push({id:'tool-hold-launch',name,phase,time,x:label.x,y:label.y});
     }
-    const seconds=readableFrames/doc.output.fps;
-    assert.ok(seconds>=3,`${name} stays fully visible for at least three seconds`);
+    const time=entry+props.arrival;
+    await seek(time);const label=await readLabel();
+    assert.ok(label.fits&&label.opacity===1,`The complete ${name} label is visible at centre`);
+    labelWidths.push(label.width);
+    let heldFrames=0;
+    for(let n=Math.round(firstFrame*doc.output.fps);n/doc.output.fps<entry+props.hold-1e-8;n++){
+      assert.equal(driverX(n/doc.output.fps-entry,props),1830);
+      heldFrames++;
+    }
+    assert.equal(heldFrames,14,`${name} gets the same 14 stationary reading frames`);
     if(i===props.drivers.length-1)await page.locator('iframe').screenshot({path:resolve(output,'last-tool-over-waterwheel.png')});
-    checks.push({id:'tool-reading-window',name,time,fullyVisibleSeconds:seconds});
+    checks.push({id:'tool-reading-hold',name,time,heldFrames,holdSeconds:props.hold});
+  }
+  // Inspect the drawn SVG curve, not just the animation helper: text follows
+  // its slope at a fixed vertical offset, then leaves on the original baseline.
+  let previousStreamY=540;
+  for(const x of [1830,1650,1395,1200,700]){
+    const time=streamStart+props.hold+.5*Math.sqrt((1830-x)/1940);
+    await seek(time);
+    const point=await page.evaluate(()=>{
+      const w=document.querySelector('iframe').contentWindow;
+      const el=[...w.document.querySelectorAll('.incoming')].find(el=>el.textContent==='Three.js');
+      const x=Number(el.getAttribute('x')),y=Number(el.getAttribute('y'));
+      const path=w.document.querySelector('.stream-path');
+      let low=0,high=path.getTotalLength();
+      for(let i=0;i<30;i++){
+        const middle=(low+high)/2;
+        if(path.getPointAtLength(middle).x>x)low=middle;else high=middle;
+      }
+      const line=path.getPointAtLength((low+high)/2);
+      return {x,y,lineX:line.x,lineY:line.y};
+    });
+    assert.ok(point.y>=previousStreamY,'Stream curves downward, never back upward');
+    assert.ok(Math.abs(point.lineX-point.x)<.05&&Math.abs(point.lineY-point.y-15)<.05,
+      'The guide curve follows the text with a constant 15px vertical gap');
+    if(x===1830)assert.equal(point.y,540,'The curve begins at mid-height');
+    if(x===700)assert.equal(point.y,820,'The stream levels out beneath the wheel');
+    if(x===1650)assert.ok(point.y<590,'The descent starts gently from higher ground');
+    previousStreamY=point.y;
+    await page.locator('iframe').screenshot({path:resolve(output,`stream-curve-${x}.png`)});
+    checks.push({id:'stream-curve',time,...point});
+  }
+  // The next name must not land on the previous name's reading hold. Identical
+  // holds/acceleration make adjacent labels closest at the later entry.
+  for(let i=1;i<labelWidths.length;i++){
+    const gap=driverX(0,props)-driverX(props.stagger,props)-(labelWidths[i-1]+labelWidths[i])/2;
+    assert.ok(gap>=24,'Stream labels retain at least 24 pixels of separation at 1080p');
   }
   for(const [sample,time] of [['late',streamEnd-.6],['cleared',returnSpeech-.05]]){
     await seek(time);
@@ -303,7 +409,7 @@ try{
   // Eight similar spokes repeat every 45 degrees; keep each 24 fps step below
   // half that angle while making the zoom substantially faster than a slow turn.
   let previousSpeed=0;
-  const speedTimes=[returned.start+2,speechEnd,zoomStart,(zoomStart+zoomEnd)/2,zoomEnd-1/doc.output.fps];
+  const speedTimes=[returned.start+2,speechEnd,zoomStart,(zoomStart+zoomEnd)/2,zoomEnd-1/doc.output.fps].sort((a,b)=>a-b);
   for(const sample of speedTimes){
     const time=Math.floor(sample*doc.output.fps+1e-9)/doc.output.fps;
     const [before,current]=await Promise.all([time-1/doc.output.fps,time]

@@ -5,7 +5,7 @@
 import json
 from pathlib import Path
 
-from machinome_movie import Narration
+from machinome.movie import Narration
 from scene_source import scene_narration
 
 # Ellipsis and paragraph separation request a pause; YOU requests vocal emphasis.
@@ -36,10 +36,17 @@ RECONSTRUCTION = (
 MACHINOME = (
     "From Machinome dot node dot assembly import AssemblyNode. This is Machinome, the open "
     "source CAD framework for building machines... The waterwheel spin "
-    "drives the crankshaft. With Machinome, machines can have a source code."
+    "drives the crankshaft."
+)
+STUDIO = (
+    "You can build models from your browser, using Machinome Studio, "
+    "where you can prompt your agents, "
+    "see the source code, build the project, and interact with the model "
+    "to see different angles and moments of the animation."
 )
 TESTING = (
-    "Source code also lets us test how parts fit together. "
+    "Machinome also provides a testing framework, "
+    "that allows us to test how parts fit together. "
     "This test checks that the blade does not intersect either half "
     "of the timber. Testing steps repeats those assertions at thirteen "
     "instants from zero to four seconds: one full wheel turn. "
@@ -56,11 +63,11 @@ OPEN_SOURCE = (
     "Machinome connects existing CAD technologies: "
     "OpenSCAD, SolidPython, CadQuery, Build123d, FreeCAD, JSCAD, OCCT, Trimesh."
 )
-STREAM = "And beneath it all, a stream of open source tools..."
+STREAM = "And beneath it all, a stream of open source technologies..."
 CLOSING = (
     "The wheel... makes revolutions... and humans... build their own. "
     "I'm Machinome. My purpose is to enable all machines to be Open "
-    "Source. What do YOU want to build?"
+    "Source. What do YOU want to BUILD?"
 )
 
 # A future film chapter imports this object, not eight new Narrations.
@@ -71,6 +78,7 @@ lines = Narration(
             MECHANISM,
             RECONSTRUCTION,
             MACHINOME,
+            STUDIO,
             TESTING,
             FILM_SOURCE,
             THIS_SCENE,
@@ -89,7 +97,7 @@ AUDIO = {
     "outputFormat": "pcm_24000",
     "voiceSettings": {"stability": 0.5, "similarity_boost": 0.75},
     # Narration normalizes whitespace; restore this delivery break in TTS only.
-    "replacements": {"tools... The wheel": "tools...\n\nThe wheel"},
+    "replacements": {"technologies... The wheel": "technologies...\n\nThe wheel"},
 }
 
 # Unique phrase anchors, all measured on the same audio clock.
@@ -110,7 +118,16 @@ BEATS = (
     ("museum", "Museum pictures", "museum pictures"),
     ("import", "Machinome entrance", "From Machinome dot node dot assembly import"),
     ("relation", "The relation", "The waterwheel spin drives"),
-    ("testing", "Testing geometry", "Source code also lets us test"),
+    ("studio-transition", "Into the browser", "You can build models from your browser"),
+    ("studio", "Machinome Studio", "using Machinome Studio"),
+    ("prompt", "Prompt your agents", "prompt your agents"),
+    ("source-menu", "Source code", "see the source code"),
+    ("build-menu", "Build the project", "build the project"),
+    ("interact", "Interact with the model", "interact with the model"),
+    ("angles", "Different angles", "different angles"),
+    ("moments", "Animation timeline", "moments of the animation"),
+    ("testing", "Testing geometry", "Machinome also provides a testing framework"),
+    ("test-code", "Testing source", "to test how parts fit together"),
     ("steps", "Testing steps", "Testing steps repeats"),
     ("film", "Film source", "This video's source code is in Python too"),
     ("mirror", "This exact scene", "And here's the code of this exact"),
@@ -131,7 +148,7 @@ BEATS = (
         "The wheel... makes revolutions... and humans... build",
     ),
     ("purpose", "Purpose", "I'm Machinome"),
-    ("question", "Invitation", "What do YOU want to build"),
+    ("question", "Invitation", "What do YOU want to BUILD"),
 )
 
 
