@@ -25,12 +25,12 @@ assert.ok(!/copyright|vibecoded|created by|\b(?:AGPL|GPL|CERN-OHL)\b/i.test(text
 for (const line of ['From Machinome dot node dot assembly import AssemblyNode.',
   'The waterwheel spin drives the crankshaft.']) assert.ok(text.includes(line));
 assert.equal(delivery.audio.model, 'eleven_v3');
-assert.equal(delivery.audio.voice, 'EbiSUflQjzm4g7S895SC');
+assert.ok(['EbiSUflQjzm4g7S895SC', 'cgSgspJ2msm6clMCkdW9'].includes(delivery.audio.voice));
 const audio = {...delivery.audio, replacements: {[text]: directedText}};
 const doc = {audio, chapters: [{id: 'continuous', narration: text}], paths: {build}};
 const entry = speechCacheEntry(doc, spokenChapters(doc), 0);
 assert.equal(entry.request.text, directedText, 'Direction must actually reach the provider.');
-console.log(`${text.length} spoken characters; ${directedText.length} with direction; Leo / eleven_v3.`);
+console.log(`${text.length} spoken characters; ${directedText.length} with direction; ${delivery.audio.voiceLabel} / eleven_v3.`);
 if (mode === '--check') process.exit(0);
 await mkdir(resolve(build, 'audio'), {recursive: true});
 const optional = async path => {

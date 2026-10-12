@@ -1,6 +1,19 @@
-# Direção de voz — terceira proposta pt-BR
+# Direção de voz — quarta proposta pt-BR, Jessica
 
 Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
+
+O piloto aprovou a terceira proposta e pediu experimentar uma voz feminina
+mais próxima de Jessica, com a mesma direção. Esta quarta proposta usa
+a própria Jessica do filme inglês, cgSgspJ2msm6clMCkdW9, no Eleven v3.
+Texto, etiquetas, descrição emocional, pausas e parâmetros permanecem
+exatamente iguais aos da proposta 3. Só mudam a voz e o identificador
+da audição. A comparação automática entre os roteiros confirmou isso.
+
+A tomada aprovada com Leo está preservada em auditions/proposal-3 e no
+player proposal-3. A quarta é uma alternativa para escuta, não substitui
+a aprovação anterior. Uma nova geração contínua, sem cortes ou emendas.
+
+## Direção aprovada e histórico
 
 Terceira proposta: o piloto considerou a segunda próxima do desejado,
 mas pediu o singular “e os humanos constroem a sua” e mais pausa e

@@ -1,13 +1,13 @@
 {
   "notice": "Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.",
-  "id": "release-5-pt-br-audition-3",
+  "id": "release-5-pt-br-audition-4-jessica",
   "sourceRevision": "e8e16a8",
   "status": "proposta para escuta; vídeo ainda não sincronizado",
   "audio": {
     "provider": "elevenlabs",
     "model": "eleven_v3",
-    "voice": "EbiSUflQjzm4g7S895SC",
-    "voiceLabel": "Leo Antonio - Welcoming & Serene",
+    "voice": "cgSgspJ2msm6clMCkdW9",
+    "voiceLabel": "Jessica",
     "outputFormat": "pcm_24000",
     "voiceSettings": {"stability": 0.0, "similarity_boost": 0.75}
   },
