@@ -3,7 +3,7 @@ degrees."""
 
 # Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
 from machinome.math import cos, sin, sqrt
-from machinome_mechanics import harmonic_cam_lift
+from machinome.mechanics import harmonic_cam_lift
 
 
 def lift_envelope(angle, amplitude, return_span=80):

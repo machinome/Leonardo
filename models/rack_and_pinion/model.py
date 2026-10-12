@@ -6,7 +6,7 @@ from math import pi
 
 import cadquery as cq
 from machinome.math import cos
-from machinome_mechanics import rolling_travel
+from machinome.mechanics import rolling_travel
 from machinome.node.assembly import AssemblyNode
 from machinome.node.cadquery import CadQueryNode
 from machinome.node.fusion import FusionNode

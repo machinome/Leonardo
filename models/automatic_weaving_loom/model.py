@@ -4,7 +4,7 @@ transmissions."""
 # Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
 import math
 
-from machinome_mechanics import rolling_travel
+from machinome.mechanics import rolling_travel
 from machinome.node.assembly import AssemblyNode
 from machinome.node.cadquery import CadQueryNode
 from machinome.parameters import Length
