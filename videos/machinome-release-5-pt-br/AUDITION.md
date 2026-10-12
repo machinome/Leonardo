@@ -1,38 +1,45 @@
-# Segunda proposta de áudio — 12 de outubro de 2026
+# Terceira proposta de áudio — 12 de outubro de 2026
 
 Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
 
-A primeira tomada foi rejeitada pelo piloto: faltaram curiosidade,
-continuidade entre frases e mudanças audíveis de intenção entre cenas.
-Seu roteiro e registro estão preservados em auditions/proposal-1;
-os arquivos de áudio locais estão em _build/proposal-1 e no player antigo.
+Revisão solicitada após a segunda proposta: singular em “e os humanos
+constroem a sua”, mais pausa e contraste de entonação nas mudanças de cena
+de código e Studio. Uma comparação automática do roteiro sem etiquetas
+confirmou que esta é a única mudança de palavras. Voz e parâmetros iguais.
+A segunda proposta está preservada em auditions/proposal-2 e no seu player.
 
-Nova tomada inteira com Leo Antonio / Eleven v3. Duração: 187,280 segundos.
-Uma chamada contínua, 2.508 caracteres falados e 2.977 incluindo direção.
-Stability 0.0, antes 0.5; mesmo modelo e voz. As etiquetas de interpretação
-foram reforçadas nas transições e nos pontos de descoberta. O roteiro
-incorpora as correções do piloto; delivery.json conserva o texto e os
-controles efetivamente enviados, além da intenção editorial por passagem.
-
-Sem efeitos, cortes, montagem de frases, normalização, aceleração ou pausas
-digitais acrescentadas. MP3 a 192 kbps para escuta; WAV PCM mono, 24 kHz,
-16 bits, preservado como matriz.
+Leo Antonio / Eleven v3, stability 0.0, similarity_boost 0.75.
+Uma nova chamada contínua: 2.506 caracteres falados, 3.030 com direção.
+Duração medida: 193,600 segundos. Sem efeitos, cortes, montagem de frases,
+normalização, aceleração ou silêncio acrescentado. WAV mono PCM 24 kHz,
+16 bits; cópia MP3 a 192 kbps para escuta.
 
 SHA-256 do WAV:
-c51799d788dc2585ae999657fb8d927f179d4385b6fd6b0442a902c5256129ae
+cf6430525ed37fd0cfecb188bdecdce14f1fc931c4395eb67de149d434be4bbd
 
-O alinhamento do provedor passou pelas verificações do gerador, sem o
-problema de término encontrado na primeira tomada. A transcrição local
-independente do trecho final, com Whisper base e sem roteiro como prompt,
-confirmou “O que você quer construir?”. Relatório: _build/ending-check.json.
+Intervalos segundo o alinhamento do provedor, não medição fonética:
 
-Essas verificações são técnicas, não uma avaliação auditiva de emoção,
-ritmo ou pronúncia. A interpretação não foi ouvida pelo agente e aguarda
-a escuta do piloto. Os controles generativos não garantem o resultado.
+| Transição | Proposta 2 | Proposta 3 |
+| --- | ---: | ---: |
+| Reconstrução → código | 0,608 s | 0,940 s |
+| Código → Studio | 0,596 s | 1,112 s |
+| Studio → testes | 0,790 s | 0,661 s |
+| Testes → código do filme | 1,007 s | 1,230 s |
 
-Player: http://127.0.0.1:8786/proposal-2/
-Comparação: http://127.0.0.1:8786/proposal-1/
+A pausa pedida não aumentou em todas as transições. Os controles são
+generativos, não garantias. Não houve avaliação auditiva da entonação pelo
+agente; a interpretação continua sujeita à escuta do piloto.
 
-O vídeo inglês de main e seus arquivos de áudio permanecem inalterados.
-Esta entrega é somente a nova proposta de áudio completo; o vídeo em
-português ainda não está sincronizado.
+A marcação terminal do provedor ultrapassa o PCM em 0,141 segundo.
+O recibo foi retido e não houve nova chamada: Whisper base local, sem
+roteiro como prompt, confirmou o singular e a pergunta final completa.
+Relatório: _build/ending-check.json. Os tempos originais são preservados,
+a navegação é aproximada e as legendas desta tomada aguardam realinhamento.
+As legendas anteriores foram movidas para _build/proposal-2/captions.srt
+para não serem confundidas com as desta tomada.
+
+Player: http://127.0.0.1:8786/proposal-3/
+Comparação: http://127.0.0.1:8786/proposal-2/
+
+O vídeo inglês permanece inalterado. Esta entrega é apenas áudio completo;
+o vídeo português ainda não está sincronizado.

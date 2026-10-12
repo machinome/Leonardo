@@ -1,6 +1,21 @@
-# Direção de voz — segunda proposta pt-BR
+# Direção de voz — terceira proposta pt-BR
 
 Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
+
+Terceira proposta: o piloto considerou a segunda próxima do desejado,
+mas pediu o singular “e os humanos constroem a sua” e mais pausa e
+contraste nas cenas de código e Studio. Nenhuma outra palavra falada muda.
+A segunda proposta permanece em auditions/proposal-2 e no seu player.
+
+As entradas e saídas de reconstrução/código, código/Studio, Studio/testes,
+testes/código do filme e a autorreferência recebem pausas longas.
+O fechamento em inglês fica deliberado e sério; o Studio reabre com
+entusiasmo acolhedor. A conclusão dos testes desacelera pontualmente,
+e a descoberta do código do filme recebe surpresa explícita.
+Mesma voz, modelo e parâmetros; uma nova geração inteira, sem emendas.
+As pausas são solicitadas à interpretação, não silêncios digitais inseridos.
+
+## Histórico da direção anterior
 
 A primeira proposta foi rejeitada pelo piloto por monotonia, transições
 sem intenção audível e frases quebradas. As etiquetas foram enviadas, mas

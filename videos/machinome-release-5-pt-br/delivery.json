@@ -1,6 +1,6 @@
 {
   "notice": "Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.",
-  "id": "release-5-pt-br-audition-2",
+  "id": "release-5-pt-br-audition-3",
   "sourceRevision": "e8e16a8",
   "status": "proposta para escuta; vídeo ainda não sincronizado",
   "audio": {
@@ -31,27 +31,27 @@
     {
       "id": "reconstrucao",
       "emotion": "Mudar da observação para a reconstrução com interesse reflexivo. Texto em voz passiva: A reconstrução dessa máquina foi baseada em documentos históricos e fotos de museus, usando a linguagem Python.",
-      "directedText": "[thoughtful] A reconstrução dessa máquina foi baseada em documentos históricos e fotos de museus, usando a linguagem Python."
+      "directedText": "[thoughtful] A reconstrução dessa máquina foi baseada em documentos históricos e fotos de museus, usando a linguagem Python. [long pause]"
     },
     {
       "id": "codigo",
-      "emotion": "Inglês legível dentro do fluxo; concluir drives the crankshaft com uma cadência de encerramento. Uma pausa de cena precede a nova intenção do Studio, não uma tradução.",
-      "directedText": "[confident] From Machinome dot node dot assembly import AssemblyNode. [warmly] Este é o Machinome, o framework CAD de código aberto para construir máquinas. [explaining] The waterwheel spin drives the crankshaft. [long pause]"
+      "emotion": "Após a pausa da reconstrução, apresentar o código com firmeza. Concluir drives the crankshaft com cadência descendente e ritmo deliberado; deixar uma pausa longa de cena e uma respiração antes do convite luminoso ao Studio. Não emendar assuntos nem traduzir o inglês.",
+      "directedText": "[confident] From Machinome dot node dot assembly import AssemblyNode. [warmly] Este é o Machinome, o framework CAD de código aberto para construir máquinas. [serious] [slowly] The waterwheel spin drives the crankshaft. [long pause]"
     },
     {
       "id": "studio",
-      "emotion": "Entrada claramente renovada, curiosa e luminosa: Você também pode criar modelos pelo navegador. É a descoberta de outra possibilidade, não a continuação da explicação do virabrequim. Depois, guiar as ações com calma e interesse.",
-      "directedText": "[curious] [upbeat] Você também pode criar modelos pelo navegador, usando o Machinome Studio! [guiding] Nele, você conversa com seus agentes, vê o código-fonte, constrói o projeto e interage com o modelo para ver diferentes ângulos e momentos da animação."
+      "emotion": "Após a pausa de cena, reabrir o registro com entusiasmo acolhedor em Você também pode: uma possibilidade nova. Contraste claro com o fechamento sério do código, sem gritar. Depois, guiar as ações com calma. Concluir animação e dar espaço antes de voltar aos testes em código.",
+      "directedText": "[excited] Você também pode criar modelos pelo navegador, usando o Machinome Studio! [guiding] Nele, você conversa com seus agentes, vê o código-fonte, constrói o projeto e interage com o modelo para ver diferentes ângulos e momentos da animação. [long pause]"
     },
     {
       "id": "testes",
       "emotion": "Precisão paciente. A explicação do teste deve ser compreensível, com pequenas pausas entre sua intenção, amostragem e resultado.",
-      "directedText": "[confident] O Machinome também oferece uma estrutura de testes, que permite verificar como as peças se encaixam. [explaining] Este teste verifica se a lâmina não intersecta nenhuma das duas metades da tora. [pause] Testing steps repete essas verificações em treze instantes, de zero a quatro segundos: uma volta completa da roda. Cada amostra reposiciona a máquina e verifica a geometria. [pause]"
+      "directedText": "[confident] O Machinome também oferece uma estrutura de testes, que permite verificar como as peças se encaixam. [explaining] Este teste verifica se a lâmina não intersecta nenhuma das duas metades da tora. [pause] Testing steps repete essas verificações em treze instantes, de zero a quatro segundos: uma volta completa da roda. [slowly] Cada amostra reposiciona a máquina e verifica a geometria. [long pause]"
     },
     {
       "id": "codigo_do_filme",
       "emotion": "Revelação com surpresa e entusiasmo perceptíveis na entrada O código-fonte deste vídeo também está em Python. Recomeçar com outra surpresa na autorreferência: E aqui está o código desta exata cena! Olha que legal! Sorriso e prazer na descoberta, sem voz neutra de enumeração.",
-      "directedText": "[excited] O código-fonte deste vídeo também está em Python! [curious] Narration, Camera, Shot. [explaining] As Cues movem a câmera e destacam a serra em sincronia com as palavras faladas. [pause] [delighted] E aqui está o código desta exata cena! [excited] Olha que legal!"
+      "directedText": "[surprised] [excited] O código-fonte deste vídeo também está em Python! [curious] Narration, Camera, Shot. [explaining] As Cues movem a câmera e destacam a serra em sincronia com as palavras faladas. [long pause]\n\n[delighted] E aqui está o código desta exata cena! [excited] Olha que legal!"
     },
     {
       "id": "codigo_aberto",
@@ -61,7 +61,7 @@
     {
       "id": "encerramento",
       "emotion": "Retomar a inspiração com amplitude e calma. Afirmar o propósito com convicção; terminar com um convite confiante e humano, sem aumentar o volume.",
-      "directedText": "[inspiring] A roda faz revoluções... e os humanos constroem as suas. [pause] [confident] Eu sou o Machinome. Meu propósito é permitir que todas as máquinas sejam de código aberto. [pause] [curious] [encouraging] O que VOCÊ quer CONSTRUIR?"
+      "directedText": "[inspiring] A roda faz revoluções... e os humanos constroem a sua. [pause] [confident] Eu sou o Machinome. Meu propósito é permitir que todas as máquinas sejam de código aberto. [pause] [curious] [encouraging] O que VOCÊ quer CONSTRUIR?"
     }
   ]
 }
