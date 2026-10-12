@@ -11,6 +11,10 @@ The sound-effects experiment is preserved separately on the local
 `release-video-sound-effects` branch, with its generated audio retained in
 the original checkout's ignored build directory.
 
+[Cut 5 in Brazilian Portuguese](machinome-release-5-pt-br/README.md) is a
+separate copy with its first complete, directed Leo narration available
+for listening. Its video has not yet been synchronized to that take.
+
 The earlier rendered release-film proposal is
 [Revolutions — proposal 1](machinome-release-1/README.md), following the
 pilot's [original brief](machinome-release.md): a dark, continuous camera encounter

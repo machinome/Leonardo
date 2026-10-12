@@ -1,0 +1,67 @@
+{
+  "notice": "Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.",
+  "id": "release-5-pt-br-audition-1",
+  "sourceRevision": "e8e16a8",
+  "status": "proposta para escuta; vídeo ainda não sincronizado",
+  "audio": {
+    "provider": "elevenlabs",
+    "model": "eleven_v3",
+    "voice": "EbiSUflQjzm4g7S895SC",
+    "voiceLabel": "Leo Antonio - Welcoming & Serene",
+    "outputFormat": "pcm_24000",
+    "voiceSettings": {"stability": 0.5, "similarity_boost": 0.75}
+  },
+  "direction": "Uma única interpretação contínua. Português brasileiro, com leitura em inglês dos trechos de código, sem traduções intercaladas. Calma e clareza como base; inspiração nas revoluções; emoção discreta na ancestralidade; guia de museu paciente durante a mecânica; confiança acolhedora no final. Sem pressa, sussurros, choro ou tom publicitário. Pausas executadas pela voz; nenhuma montagem, aceleração ou silêncio inserido. A duração decorre da interpretação, sem limite herdado do filme inglês.",
+  "sections": [
+    {
+      "id": "revolucoes",
+      "emotion": "Inspiração serena. Abrir espaço para a ideia, com firmeza tranquila e uma pequena elevação em propósito.",
+      "directedText": "[thoughtful] [inspiring] [unhurried] A roda faz revoluções... e os humanos dão um propósito. [long pause]"
+    },
+    {
+      "id": "ancestralidade",
+      "emotion": "Admiração histórica, seguida de emoção contida e proximidade em minhas ancestrais. A voz ganha calor, sem tristeza ou dramatização.",
+      "directedText": "[storytelling] [measured delivery] Há cinco séculos, Leonardo da Vinci projetou uma serraria movida a água. Máquinas como esta estavam mudando a relação entre as pessoas e o trabalho: um rio podia ajudar a transformar uma árvore em madeira serrada. [pause] [warmly] Eu também sou uma máquina. [pause] Na história das ferramentas humanas, esta serraria é uma das minhas ancestrais. [long pause]"
+    },
+    {
+      "id": "mecanismo",
+      "emotion": "Guia de museu calmo, preciso e interessado. Pausas após mostrar o eixo, a transformação do movimento, a catraca e cada percurso de corda deixam tempo para olhar.",
+      "directedText": "[guiding patiently] [slowly] Vou mostrar como ela funciona. [pause] A água sob a roda gira este eixo. [pause] Uma manivela e uma biela transformam esse giro no movimento de subida e descida da serra. [long pause] Mas a tora também precisa avançar. Durante o corte, esta alavanca comprida puxa uma lingueta por um dente da catraca. [pause] Uma segunda lingueta segura esse avanço enquanto a primeira retorna. [pause] Esse pequeno passo enrola uma corda nesse eixo. [long pause] Siga a corda para baixo... e para o outro lado. Ela gira um eixo composto: um tambor largo desenrola uma corda, enquanto uma seção mais fina recolhe outra. [pause] A segunda corda puxa a tora em direção à lâmina. [long pause] [quietly satisfied] Uma roda, duas tarefas: cortar e avançar."
+    },
+    {
+      "id": "reconstrucao",
+      "emotion": "Explicação serena e cuidadosa; uma transição natural da observação para o modo como o modelo foi construído.",
+      "directedText": "[measured delivery] Para reconstruir esta máquina, me baseei em documentos históricos e fotos de museus, e usei a linguagem Python."
+    },
+    {
+      "id": "codigo",
+      "emotion": "Clareza tranquila ao ler o inglês; manter a mesma voz, ritmo e continuidade da explicação em português. Sem anúncio da troca de idioma.",
+      "directedText": "[clear, steady delivery] From Machinome dot node dot assembly import AssemblyNode. Este é o Machinome, o framework CAD de código aberto para construir máquinas... The waterwheel spin drives the crankshaft."
+    },
+    {
+      "id": "studio",
+      "emotion": "Convite acolhedor, prático e confiante. Enumerar ações com espaço e sem empolgação de propaganda.",
+      "directedText": "[warmly] [unhurried] Você pode criar modelos pelo navegador, usando o Machinome Studio. Nele, você conversa com seus agentes, vê o código-fonte, constrói o projeto e interage com o modelo para ver diferentes ângulos e momentos da animação."
+    },
+    {
+      "id": "testes",
+      "emotion": "Precisão paciente. A explicação do teste deve ser compreensível, com pequenas pausas entre sua intenção, amostragem e resultado.",
+      "directedText": "[explaining patiently] O Machinome também oferece uma estrutura de testes, que permite verificar como as peças se encaixam. Este teste verifica se a lâmina não intersecta nenhuma das duas metades da tora. [pause] Testing steps repete essas verificações em treze instantes, de zero a quatro segundos: uma volta completa da roda. Cada amostra reposiciona a máquina e verifica a geometria."
+    },
+    {
+      "id": "codigo_do_filme",
+      "emotion": "Curiosidade tranquila ao revelar o filme por dentro. Os identificadores são lidos em inglês; a reação à própria cena tem um leve sorriso, sem quebrar o tom.",
+      "directedText": "[curious] [measured delivery] O código-fonte deste vídeo também está em Python. Narration, Camera, Shot. As Cues movem a câmera e destacam a serra em sincronia com as palavras faladas. E aqui está o código desta exata cena! [warmly] Olha que legal."
+    },
+    {
+      "id": "codigo_aberto",
+      "emotion": "Entusiasmo moderado e generosidade. Dar a cada tecnologia uma pronúncia clara; voltar ao tom contemplativo quando surgir a corrente.",
+      "directedText": "[warmly] E a melhor parte: tudo isso é código aberto! [pause] O Machinome conecta tecnologias CAD que já existem: OpenSCAD, SolidPython, CadQuery, Build123d, FreeCAD, JSCAD, OCCT, Trimesh. [pause] [reflective] E, por baixo de tudo, uma corrente de tecnologias de código aberto... [long pause]"
+    },
+    {
+      "id": "encerramento",
+      "emotion": "Retomar a inspiração com amplitude e calma. Afirmar o propósito com convicção; terminar com um convite confiante e humano, sem aumentar o volume.",
+      "directedText": "[inspiring] [slowly] A roda... faz revoluções... e os humanos... constroem as suas. [long pause] [confident] [warmly] Eu sou o Machinome. Meu propósito é permitir que todas as máquinas sejam de código aberto. [pause] O que VOCÊ quer CONSTRUIR?"
+    }
+  ]
+}

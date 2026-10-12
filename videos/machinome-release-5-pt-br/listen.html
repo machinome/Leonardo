@@ -1,0 +1,34 @@
+<!doctype html>
+<!-- Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only. -->
+<html lang="pt-BR">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Revoluções — proposta de narração pt-BR</title>
+<style>
+body{max-width:850px;margin:48px auto;padding:0 24px;background:#101419;color:#ece9df;font:18px/1.65 system-ui,sans-serif}
+h1{font-size:32px;line-height:1.2}audio{width:100%;margin:18px 0}a{color:#f59269}section{padding:20px 0;border-top:1px solid #374049}
+button{font:inherit;background:#27323a;color:#fff;border:1px solid #52616d;border-radius:6px;padding:5px 12px;cursor:pointer}
+.direction{color:#bbc4cc;font-size:16px}.player{position:sticky;top:0;background:#101419;padding:8px 0}#status{color:#bbc4cc}
+</style>
+<h1>Revoluções — primeira voz em português</h1>
+<p>Leo Antonio · português brasileiro · trechos de código em inglês · sem efeitos sonoros.</p>
+<p id="status">Carregando a proposta…</p>
+<div class="player"><audio id="audio" controls preload="metadata" src="audition-1.mp3"></audio></div>
+<p><a href="audition-1.mp3" download>Baixar MP3</a> · <a href="narration.wav" download>Baixar WAV original</a></p>
+<p>Uma interpretação contínua. As descrições abaixo registram a emoção pretendida em cada passagem; a escuta é a avaliação da proposta. Os atalhos de tempo são aproximados.</p>
+<main id="sections"></main>
+<script type="module">
+const manifest=await(await fetch('narration-manifest.json')).json();
+const time=s=>`${Math.floor(s/60)}:${String(Math.floor(s%60)).padStart(2,'0')}`;
+document.querySelector('#status').textContent=`Duração: ${time(manifest.duration)}. Áudio completo para aprovação; o vídeo ainda será sincronizado.`;
+const audio=document.querySelector('#audio');
+for(const section of manifest.sections){
+ const node=document.createElement('section'),button=document.createElement('button');
+ button.textContent=`Ouvir a partir de ${time(section.start)}`;
+ button.onclick=()=>{audio.currentTime=section.start;audio.play();};
+ const direction=document.createElement('p');direction.className='direction';direction.textContent=section.emotion;
+ const text=document.createElement('p');text.textContent=section.text;
+ node.append(button,direction,text);document.querySelector('#sections').append(node);
+}
+</script>
+</html>

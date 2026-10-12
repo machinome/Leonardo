@@ -1,0 +1,72 @@
+{
+  "schema": "studio-staged-capture/1",
+  "capturedAt": "2026-10-08T14:40:24.240Z",
+  "origin": "http://localhost:9000",
+  "project": "Leonardo/hydraulic_sawmill",
+  "screenshot": "studio-background.png",
+  "sha256": "0d4834d90a4e6b04bd06ea9ec77e629f90f2f70e839cabd3803269c72aa9cfa1",
+  "pixelRatio": 3,
+  "viewport": {
+    "width": 1280,
+    "height": 720
+  },
+  "model": {
+    "x": 358,
+    "y": 188.33333587646484,
+    "width": 508,
+    "height": 491.66668701171875
+  },
+  "chat": {
+    "x": 880,
+    "y": 134.33333587646484,
+    "width": 400,
+    "height": 559.6666870117188
+  },
+  "input": {
+    "x": 897,
+    "y": 608.0000228881836,
+    "width": 300.4666748046875,
+    "height": 74
+  },
+  "code": {
+    "x": 0,
+    "y": 203.33333587646484,
+    "width": 73,
+    "height": 59
+  },
+  "build": {
+    "x": 0,
+    "y": 321.33333587646484,
+    "width": 73,
+    "height": 59
+  },
+  "browserWindow": {
+    "browser": "Mozilla Firefox",
+    "address": "http://localhost:9000/",
+    "content": {
+      "x": 0,
+      "y": 84.33333587646484,
+      "width": 1280,
+      "height": 636
+    },
+    "screen": {
+      "x": 0,
+      "y": 0
+    },
+    "pixelRatio": 3,
+    "version": "153.0"
+  },
+  "scroll": {
+    "top": 3140,
+    "height": 3549,
+    "clientHeight": 409
+  },
+  "inputStyle": {
+    "font": "13px \"Space Grotesk\", ui-sans-serif, system-ui, sans-serif",
+    "color": "rgb(230, 232, 236)"
+  },
+  "provenance": "Real Mozilla Firefox window and Studio UI, existing sawmill export; browser-only staged session and fictional completion message. Model hidden after it loaded; composited as a moving View by movie.py. Tab-local history replacement displays the requested root URL without changing the project on the server.",
+  "message": "The sawmill adjustments are complete.\n\n✓ Waterwheel and crankshaft are linked through the drive relation.\n\n✓ The connecting rod moves the saw through its full up-and-down stroke.\n\n✓ The driving pawl advances the ratchet, and the holding pawl keeps that progress while it returns.\n\n✓ Both ropes follow the compound shaft through to the timber carriage.\n\n✓ Blade clearance is checked against both halves of the timber at thirteen positions across a full wheel turn.\n\n✓ Source, tests and the browser model are ready for review.\n\nThe machine is moving in the viewer. You can inspect the mechanism or ask for another adjustment.",
+  "mutations": [],
+  "errors": []
+}
