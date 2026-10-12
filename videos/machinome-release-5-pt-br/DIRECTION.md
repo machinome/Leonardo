@@ -1,6 +1,26 @@
-# Direção de voz — quarta proposta pt-BR, Jessica
+# Direção de voz — sexta proposta pt-BR, Jessica
 
 Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
+
+Pedido adicional do piloto: faltou ênfase em VOCÊ na pergunta final.
+Esta revisão retira a caixa alta de CONSTRUIR para não disputar o acento
+principal e dirige a pergunta como convite confiante e enfático.
+VOCÊ é o único foco contrastivo. Sem gritar e sem separar a pergunta em
+fragmentos. A frase de conexão solicitada continua presente.
+Mesma voz e parâmetros, nova tomada contínua; proposta 5 preservada.
+
+## Revisão da conexão
+
+O piloto preferiu Jessica e acrescentou uma frase de conexão entre o
+exemplo em Python e o Studio: “As relações mecânicas da máquina são
+descritas em Python”. Ela entra depois de “The waterwheel spin drives
+the crankshaft”, como conclusão clara e confiante, não tradução do exemplo.
+Uma pausa breve antecede a frase; a pausa longa de mudança de cena vem
+depois dela, antes do convite ao Studio. Nenhuma outra palavra muda.
+Voz, modelo e parâmetros permanecem iguais. Nova tomada inteira.
+A proposta 4 permanece preservada para comparação.
+
+## Histórico anterior
 
 O piloto aprovou a terceira proposta e pediu experimentar uma voz feminina
 mais próxima de Jessica, com a mesma direção. Esta quarta proposta usa
