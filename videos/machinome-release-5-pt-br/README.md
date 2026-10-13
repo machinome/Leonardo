@@ -9,20 +9,22 @@ manter esta porta e a interface completa do Videomaker: atualizar a tomada
 no viewer para ouvir com um reload, sem substituí-lo por HTML ou links de
 áudio em outra porta.
 
-A prévia atual é a experiência da tomada 10 de Jessica: interpretação
-contínua nova, com o mesmo texto, mais calma nas cenas de código e estúdio.
-Quatro pausas de leitura de pelo menos cinco segundos, após a última fala
+A prévia atual é a tomada 11 de Jessica: nova interpretação contínua,
+com leitura calma do código e estúdio e “Eu sou Machinome!” no fechamento.
+Quatro pausas de leitura de três segundos, após a última fala
 de cada cena de código; código completo e parado, animações continuam.
 O teste distribui suas treze amostras até o último quadro, inclusive no
-silêncio. Pequenos respiros entre ações do estúdio dão tempo para localizar
-cada área. Mantidos plural no encerramento, ausência de ênfase em você,
+silêncio. Não há inserções editoriais dentro da fala do estúdio: “diferentes
+ângulos e momentos da animação” permanece contínuo. Há 1,5s de contemplação
+após a identidade e 2s após o propósito, antes da pergunta. Mantidos plural
+no encerramento, ausência de ênfase em você,
 contemplação após ancestrais e todos os ajustes visuais aprovados.
 
-Duração: **236,750s (3min56,75s)**, deixando 63,250s dentro dos cinco
-minutos da lightning talk. Voz original: 208,400s; derivado com pausas:
-231,309208s. Nenhuma alteração digital de velocidade ou tom. A naturalidade
+Duração: **222,125s (3min42,125s)**, deixando 77,875s dentro dos cinco
+minutos da lightning talk. Voz original: 202,960s; derivado com pausas:
+216,838750s. Nenhuma alteração digital de velocidade ou tom. A naturalidade
 da nova interpretação aguarda o piloto; nenhuma alegação de escuta subjetiva
-pelo agente. Nenhum MP4 novo. Registro em auditions/proposal-10/AUDITION.md.
+pelo agente. Nenhum MP4 novo. Registro em auditions/proposal-11/AUDITION.md.
 
 A prévia aprovada anterior (tomada 8 com contemplação) tinha 206,791667s
 e está preservada em _build/approved-before-reading-pauses e no histórico
@@ -59,23 +61,30 @@ Na versão anterior, na cena do código do vídeo, `move` permanece destacado du
 gravada “movem a câmera” (158,625–159,430s), e `spoken` durante “palavras
 faladas” (161,625–162,630s), em vez de só a primeira palavra. Alterados
 somente os términos desses dois cues; a narração não foi modificada.
-Essa regra de frases inteiras foi mantida e realinhada à tomada 10.
+Essa regra de frases inteiras foi mantida e realinhada à tomada 11.
 
 ### Reproduzir a experiência de leitura
 
-Não gerar novamente: os recibos e arquivos originais das tomadas 9 e 10
-estão preservados nos respectivos _build. A tomada 9 não foi selecionada.
-Execute reading-pauses.mjs para produzir o derivado da tomada 10, copie
+Não gerar novamente: os recibos e arquivos originais das tomadas 9–11
+estão preservados nos respectivos _build. A tomada 9 não foi selecionada;
+a tomada 10 teve pausas que o piloto identificou dentro de sílabas.
+O novo editor exige silêncio acústico contínuo de no mínimo 120ms abaixo
+de -45dBFS, em vez de escolher um cruzamento por zero perto do timestamp.
+Calibra o relógio do alinhamento nas fronteiras medidas, sem alterar a voz.
+Execute reading-pauses.mjs para produzir o derivado da tomada 11, copie
 o cacheFile do manifesto gerado e seu .json para _build/audio, e o
 manifesto para _build/narration-manifest.json. Pare somente o viewer 8790
 antes de avaliar movie.py e executar finish.mjs, depois reabra live na
 mesma porta. Use o PYTHONPATH abaixo. Execute check-reading-pauses.mjs:
-verifica texto inalterado, quatro pausas, transição do estúdio só após
-leitura, steps até o fim, duração e preservação das remoções solicitadas.
+verifica a única mudança de texto pedida, quatro pausas, transição do
+estúdio só após leitura, steps até o fim, contemplações finais, silêncio
+nas inserções, duração e preservação das remoções solicitadas.
 
-Conferência no navegador: código integral idêntico a +1s e +4,5s em cada
+Conferência no navegador: código integral idêntico a +0,5s e +2,5s em cada
 pausa, estados do estúdio e ausência de erro do player. A conferência
-independente do encerramento está no _build/ending-check.json da tomada 10.
+independente do encerramento está no _build/ending-check.json da tomada 11;
+pause-transcription.json registra palavras e tempos independentes, sem
+fornecer o roteiro ao reconhecedor. Não é certificação de emoção.
 
 Para avaliar movie.py no ambiente atual, use
 `PYTHONPATH=.:/home/asa/devel/machinome/videomaker/python`.

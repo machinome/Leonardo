@@ -1,7 +1,7 @@
 {
   "notice": "Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.",
-  "manifest": "_build/reading-pauses/narration-manifest.json",
-  "relationTiming": "_build/reading-pauses/relation-timing.json",
-  "status": "Experimental continuous Jessica take 10, five-second code reading pauses and more patient Studio pacing. Awaiting pilot review; MP4 not rerendered.",
+  "manifest": "_build/reading-pauses-11/narration-manifest.json",
+  "relationTiming": "_build/reading-pauses-11/relation-timing.json",
+  "status": "Jessica take 11, three-second code holds, uninterrupted Studio phrasing and contemplative closing pauses. Awaiting pilot review; MP4 not rerendered.",
   "viewer": "http://127.0.0.1:8790/#movie"
 }

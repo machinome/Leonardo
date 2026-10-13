@@ -455,9 +455,9 @@ class Continuous(Chapter):
         ])
     invitation = Shot(Exhibition, {Exhibition.graphic: signature}, until=lines.end(plus=2.5),
         model=Sawmill.run(496, 504), fade_out=FadeOut(0.7), cues=[
-            Cue(0, signature.wait(), until=lines.spoken("Eu sou o Machinome")),
-            Cue(lines.spoken("Eu sou o Machinome"), signature.approach(),
-                until=lines.spoken("Eu sou o Machinome", plus=1.2)),
+            Cue(0, signature.wait(), until=lines.spoken("Eu sou Machinome")),
+            Cue(lines.spoken("Eu sou Machinome"), signature.approach(),
+                until=lines.spoken("Eu sou Machinome", plus=1.2)),
             Cue(lines.spoken('máquinas sejam de código aberto'), signature.link(), until=lines.spoken_end('máquinas sejam de código aberto')),
             Cue(lines.spoken_end('máquinas sejam de código aberto'), signature.linked(), until=lines.end(plus=2.5))])
 
