@@ -6,7 +6,7 @@ import {resolve,dirname} from 'node:path';
 import {fileURLToPath,pathToFileURL} from 'node:url';
 import {smooth} from './studio-motion.mjs';
 const base=dirname(fileURLToPath(import.meta.url)),tool=resolve(process.argv[2]);
-const origin=process.argv[3]??'http://127.0.0.1:8785';
+const origin=process.argv[3]??'http://127.0.0.1:8787';
 const read=name=>readFile(resolve(base,name),'utf8').then(JSON.parse);
 const doc=await read('_build/movie-resolved.json'),edit=await read('_build/studio-edit.json');
 const chapter=doc.chapters[0],studio=chapter.shots.find(s=>s.id==='studio');
@@ -16,9 +16,9 @@ const sameView=(actual,expected,message)=>{
     assert.ok(Math.abs(actual[key][i]-expected[key][i])<1e-8,message);
 };
 const narration=await read('_build/narration-manifest.json');
-assert.ok(narration.text.includes('interact with the model to see different angles and moments of the animation'));
-assert.ok(narration.text.includes('You can build models from your browser, using Machinome Studio'));
-assert.ok(narration.text.endsWith('What do YOU want to BUILD?'));
+assert.ok(narration.text.includes('interage com o modelo para ver diferentes ângulos e momentos da animação'));
+assert.ok(narration.text.includes('Você também pode criar modelos pelo navegador, usando o Machinome Studio'));
+assert.ok(narration.text.endsWith('O que VOCÊ quer construir?'));
 assert.ok(edit.cameraEnd<=edit.sliderHighlight&&edit.sliderHighlight<edit.rewindStart);
 assert.ok(Math.abs(edit.departureEnd-edit.testingStart-2.75)<1e-8,
   'Model completes its eased travel in 2.75 seconds');

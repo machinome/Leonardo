@@ -1,10 +1,9 @@
-# Versão pt-BR — primeira proposta de áudio
+# Versão pt-BR — render com áudio aprovado
 
-Roteiro e direção atuais: delivery.json. Produção da tomada: audition.mjs.
-O filme foi copiado do corte 5 de main (e8e16a8), sem efeitos sonoros.
-movie.py, narration.py e os finalizadores copiados ainda são a base inglesa;
-não os execute como produção portuguesa antes de adaptar as âncoras à voz
-aprovada. O texto português não depende deles para gerar esta audição.
+Estado de 13 de outubro de 2026: movie.py, narration.py e finish.mjs estão
+adaptados ao português. A tomada 7 aprovada está em _build/approved;
+nunca regenerar fala para renderizar. A conversa do Studio foi recapturada
+em português. README.md contém os comandos atuais e RENDER.md a evidência.
 
 Os registros abaixo pertencem ao filme inglês e são preservados como contexto.
 

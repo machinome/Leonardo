@@ -1,10 +1,8 @@
 # Registros herdados do corte 5 em inglês
 
-Esta é uma cópia da evidência do filme de origem, não uma verificação do
-vídeo em português. A primeira proposta pt-BR é apenas de áudio, produzida
-por audition.mjs a partir de delivery.json. Seu recibo, WAV intacto,
-alinhamento e manifesto ficam em _build/. A sincronização do vídeo e os
-testes visuais abaixo ainda não foram executados para o português.
+Esta é uma cópia da evidência do filme inglês de origem. A verificação
+atual do vídeo em português está em RENDER.md; os números abaixo não
+devem ser usados como prova da versão brasileira.
 
 Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
 

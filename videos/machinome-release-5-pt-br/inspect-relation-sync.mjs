@@ -7,7 +7,7 @@ import {resolve,dirname} from 'node:path';
 import {fileURLToPath,pathToFileURL} from 'node:url';
 const base=dirname(fileURLToPath(import.meta.url));
 assert.ok(process.argv[2],'Pass Videomaker checkout.');
-const tool=resolve(process.argv[2]),origin=process.argv[3]??'http://127.0.0.1:8785';
+const tool=resolve(process.argv[2]),origin=process.argv[3]??'http://127.0.0.1:8787';
 const timing=JSON.parse(await readFile(resolve(base,'relation-timing.json')));
 const doc=JSON.parse(await readFile(resolve(base,'_build/movie-resolved.json')));
 const meta=JSON.parse(await readFile(resolve(base,'_build/narration-manifest.json')));

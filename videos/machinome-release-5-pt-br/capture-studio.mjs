@@ -13,27 +13,27 @@ const [tool,viewer,origin='http://localhost:9000']=process.argv.slice(2);
 assert.ok(tool&&viewer,'Pass the Videomaker checkout and viewer bundle.');
 const {firefox}=await import(pathToFileURL(resolve(tool,'node_modules/playwright/index.mjs')));
 const exec=promisify(execFile);
-const model=resolve(base,'../machinome-release-3/_build/model');
+const model=resolve(base,'_build/model');
 const session='release-video-staged-capture';
 const prefix=`/api/sessions/${session}/`;
-const message=`The sawmill adjustments are complete.
+const message=`Os ajustes da serraria estão concluídos.
 
-✓ Waterwheel and crankshaft are linked through the drive relation.
+✓ A roda-d'água e o virabrequim estão ligados pela relação de movimento.
 
-✓ The connecting rod moves the saw through its full up-and-down stroke.
+✓ A biela move a serra por todo o seu curso de subida e descida.
 
-✓ The driving pawl advances the ratchet, and the holding pawl keeps that progress while it returns.
+✓ A lingueta motriz avança a catraca, e a segunda lingueta mantém esse avanço durante o retorno.
 
-✓ Both ropes follow the compound shaft through to the timber carriage.
+✓ As duas cordas transmitem o movimento pelo eixo composto até o carro da tora.
 
-✓ Blade clearance is checked against both halves of the timber at thirteen positions across a full wheel turn.
+✓ A folga da lâmina é verificada contra as duas metades da tora em treze posições de uma volta completa da roda.
 
-✓ Source, tests and the browser model are ready for review.
+✓ O código-fonte, os testes e o modelo no navegador estão prontos para revisão.
 
-The machine is moving in the viewer. You can inspect the mechanism or ask for another adjustment.`;
+A máquina está em movimento no visualizador. Você pode explorar o mecanismo ou pedir outro ajuste.`;
 const run={id:session,status:'open',profile_id:'openspec-builder',work_mode:'direct',
-  user_label:'You',user_agent:{id:'builder',label:'Builder'},roster:[{id:'builder',label:'Builder'}],
-  agents:[{role:'builder',label:'Builder',state:'waiting',failure:'',backend:'codex',provider:null,
+  user_label:'Você',user_agent:{id:'builder',label:'Construtor'},roster:[{id:'builder',label:'Construtor'}],
+  agents:[{role:'builder',label:'Construtor',state:'waiting',failure:'',backend:'codex',provider:null,
     model:'',effort:'',tools:[],backend_idle:true,runtime_idle:true,runtime_pristine:false,
     assignment_id:null,pending_assignments:[]}],activity:[],events:[],latest_event_sequence:1,
   model_build_error:null,model_building:false};

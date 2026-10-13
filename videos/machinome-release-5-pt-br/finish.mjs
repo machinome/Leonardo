@@ -13,10 +13,10 @@ const {readMovie,resolveMovie}=await import(pathToFileURL(resolve(tool,'src/movi
 const {cachedTake}=await import(pathToFileURL(resolve(tool,'src/speech.mjs')));
 const file=resolve(base,'_build/movie.json');
 const {doc,build}=await readMovie(file);
-const approved=JSON.parse(await readFile(resolve(base,'_build/narration-manifest.json')));
+const approved=JSON.parse(await readFile(resolve(base,'_build/approved/narration-manifest.json')));
 // The tool's request key uses JSON property order; restore the approved order
 // after Python's sorted JSON serialization. No request or audio bytes change.
-doc.audio=approved.voice;
+doc.audio=approved.audio;
 const take=await cachedTake({audio:doc.audio,chapters:doc.chapters,paths:{build}},0);
 assert.ok(take,'Continuous take is missing. This command does not generate speech.');
 assert.equal(take.sha256,approved.sha256,'The film must reuse the recorded audio bytes.');
@@ -43,7 +43,7 @@ for(const [token,timing] of Object.entries(relationTiming.words)){
 }
 const measured=resolveMovie(doc,{continuous:take});
 const chapter=doc.chapters[0];
-// The explanatory tokens flash for their own recorded word, not the rest
+// The explanatory tokens flash for a sua recorded word, not the rest
 // of the locating phrase. The longer phrase only disambiguates the anchor.
 const alignedText=take.alignment.characters.join('');
 for(const id of ['behind-the-film','mirror']){
@@ -52,7 +52,7 @@ for(const id of ['behind-the-film','mirror']){
   for(const cue of shot.cues){
     if(!cue.actions.some(a=>['blink','blink-all'].includes(a.action)))continue;
     const phrase=cue.at.spoken;
-    if(id==='mirror'&&!phrase.startsWith('code of'))continue;
+    if(id==='mirror'&&!phrase.startsWith('código desta'))continue;
     const index=alignedText.indexOf(phrase);
     assert.ok(index>=0&&alignedText.indexOf(phrase,index+1)<0);
     const firstWord=phrase.split(' ')[0].replace(/[.,;:!?]+$/,'');
@@ -71,9 +71,9 @@ for(const [i,shot] of chapter.shots.entries()){
 }
 chapter.shots.find(s=>s.id==='feed-motion').model={keys:[
   {at:0,seconds:432},
-  {at:{spoken:'On the cutting stroke'},seconds:436},
-  {at:{spoken:'A second pawl'},seconds:438},
-  {at:{spoken:'That small step'},seconds:440},
+  {at:{spoken:'Durante o corte'},seconds:436},
+  {at:{spoken:'Uma segunda lingueta'},seconds:438},
+  {at:{spoken:'Esse pequeno passo'},seconds:440},
 ]};
 // A single analytic orbit, sampled densely with linear microsegments. Only
 // the whole move eases; there are no corner stops or independently eased legs.
@@ -133,22 +133,23 @@ const openTimed=measured.chapters[0].shots.find(s=>s.id==='open-source');
 const driveStart=openTimed.start+openTimed.cues.find(c=>c.actions.some(a=>a.action==='drive')).at;
 // Every label gets the same acceleration, with extra reading time over the
 // waterwheel. Clear the stream just before the returning sentence.
-const returnPhrase='The wheel... makes revolutions';
+const returnPhrase='A roda faz revoluções...';
 const returnIndex=alignedText.indexOf(returnPhrase);
 assert.ok(returnIndex>=0&&alignedText.indexOf(returnPhrase,returnIndex+1)<0);
 const returnFirst=Array.from(alignedText.slice(0,returnIndex)).length;
 const streamEnd=chapter.speechOffset+take.alignment.character_start_times_seconds[returnFirst]-.2;
 const streamDuration=streamEnd-driveStart;
-const entryPhrase='beneath it all',entryIndex=alignedText.indexOf(entryPhrase);
+const entryPhrase='por baixo de tudo',entryIndex=alignedText.indexOf(entryPhrase);
 assert.ok(entryIndex>=0&&alignedText.indexOf(entryPhrase,entryIndex+1)<0);
 const entryFirst=Array.from(alignedText.slice(0,entryIndex)).length;
 // Enter on the first film frame at/after "beneath", never in the Trimesh list.
 const streamStart=Math.ceil((chapter.speechOffset+take.alignment.character_start_times_seconds[entryFirst])*doc.output.fps)/doc.output.fps;
 const streamDelay=streamStart-driveStart;
-// Hold each name for 14 reading frames, then shoot it left from rest in 0.5s.
+// Keep 14 reading frames; a 0.25s launch fits the shorter Portuguese passage
+// without adjacent labels overlapping. No speech is retimed.
 // Centre arrival maps that flight from x1830 through x960 to x-110. The last
 // name exits before the baseline fades, so it gets the same complete launch.
-const hold=14/doc.output.fps,flight=.5,entrySpeedFraction=0;
+const hold=14/doc.output.fps,flight=.25,entrySpeedFraction=0;
 const arrival=hold+flight*Math.sqrt(870/1940),travel=hold+flight;
 const stagger=(streamEnd-streamStart-.15-travel)/(chapter.elements.ecosystem.props.drivers.length-1);
 assert.ok(stagger>0,'The measured stream window must fit all technology entries.');

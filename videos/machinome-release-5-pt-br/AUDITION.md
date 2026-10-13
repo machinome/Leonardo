@@ -1,5 +1,9 @@
 # Sétima proposta — articulação — 12 de outubro de 2026
 
+Status: aprovada pelo piloto em 13 de outubro para renderizar o vídeo.
+A gravação original está preservada em _build/approved e no player
+proposal-7; o mix do filme é um arquivo separado dessa matriz aprovada.
+
 Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
 
 O piloto aprovou todo o restante da proposta 6 e pediu corrigir a pronúncia

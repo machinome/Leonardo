@@ -1,52 +1,59 @@
-# Revoluções — corte 5 em português brasileiro
+# Revoluções — release-5-pt-br
 
 Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
 
-Sétima proposta de narração do filme inteiro, baseada na cópia do corte 5 de main
-(e8e16a8) em 12 de outubro de 2026. Voz: Jessica, Eleven v3.
-Jessica foi a voz preferida pelo piloto. Mesma direção, com a frase
-“As relações mecânicas da máquina são descritas em Python” antes do Studio,
-e ênfase concentrada em VOCÊ na pergunta final. Nesta revisão, apenas a
-direção de articulação em “verifica a geometria” muda; o texto é idêntico.
-Uma tomada contínua, sem efeitos sonoros, cortes, montagem de frases,
-aceleração ou silêncio acrescentado. Os trechos de código são falados em
-inglês, sem tradução intercalada; o restante é português brasileiro.
+Versão brasileira do corte 5, com a tomada 7 de Jessica aprovada pelo
+piloto em 13 de outubro de 2026. O áudio original de 203,280 segundos
+permanece no cache e em _build/approved, sem regeneração, cortes,
+aceleração ou efeitos. O filme tem 1920×1080, 24 fps e cerca de 3min29s,
+incluindo três segundos de entrada e a saída da imagem.
 
-[Ouvir Jessica revisada](http://127.0.0.1:8786/proposal-7/) ·
-[Tomada anterior](http://127.0.0.1:8786/proposal-6/) ·
-[Jessica anterior](http://127.0.0.1:8786/proposal-4/) ·
-[Comparar com Leo aprovado](http://127.0.0.1:8786/proposal-3/) ·
-[Comparar com a segunda](http://127.0.0.1:8786/proposal-2/) ·
-[Comparar com a primeira](http://127.0.0.1:8786/proposal-1/) ·
-[Direção e roteiro](delivery.json) · [Direção emocional](DIRECTION.md).
+[Vídeo local](http://127.0.0.1:8786/film/) ·
+[Prévia interativa](http://127.0.0.1:8790/#movie) ·
+[Áudio aprovado](http://127.0.0.1:8786/proposal-7/) ·
+[Roteiro e direção](delivery.json) · [Registro de render](RENDER.md).
 
-O áudio é uma proposta para escuta. O vídeo português ainda não foi
-sincronizado: movie.py, narration.py e os finalizadores preservam a base
-inglesa copiada. Não execute esses finalizadores para produzir a versão
-portuguesa antes de adaptar suas âncoras à tomada aprovada. O registro da
-origem está em SOURCE-README.md e SOURCE-DIRECTION.md.
+movie.py é a declaração portuguesa; narration.py lê o texto aprovado
+de delivery.json. A interface do Studio foi recapturada com resposta
+demonstrativa em português, e “Há mais um ajuste:” é digitado na conversa.
+Nenhuma mensagem foi enviada e nenhuma sessão de agente foi criada.
+Os identificadores do código-fonte permanecem em inglês. Textos
+explicativos do filme e trechos de narração mostrados no código estão em
+português. A versão inglesa e as audições anteriores permanecem intactas.
 
-A produção de áudio desta etapa é independente desses arquivos:
+## Reproduzir usando somente o áudio aprovado
+
+O export local _build/model é uma cópia byte a byte do export recuperado
+do corte 5 inglês. O histórico dessa origem permanece em SOURCE-README.md.
+Pare somente a prévia portuguesa antes de reevaluar e finalizar.
+Na raiz deste repositório:
 
 ```sh
-node videos/machinome-release-5-pt-br/audition.mjs /home/asa/devel/machinome/videomaker --check
-node videos/machinome-release-5-pt-br/audition.mjs /home/asa/devel/machinome/videomaker --generate
+node videos/machinome-release-5-pt-br/prepare.mjs
+PYTHONPATH=. /home/asa/devel/machinome/.venv/bin/python videos/machinome-release-5-pt-br/movie.py
+node videos/machinome-release-5-pt-br/finish.mjs /home/asa/devel/machinome/videomaker
+node /home/asa/devel/machinome/videomaker/bin/videomaker.mjs render videos/machinome-release-5-pt-br/_build/movie.json --viewer /home/asa/devel/machinome/machinome-viewer/machinome_viewer/widget/dist/machinome-viewer.js
 ```
 
-Use --generate apenas para uma nova proposta autorizada. Sem essa opção,
-o comando reaproveita a tomada existente. Um recibo bem-sucedido é guardado
-antes de interpretar a resposta; não há repetição automática de chamadas.
+finish.mjs requer uma avaliação nova de movie.py; não é idempotente.
+Reutiliza apenas o cache da tomada aprovada. O render também é cache-only.
+O mix padrão do Videomaker acrescenta a entrada/saída e normaliza o nível;
+isso não altera a velocidade nem a interpretação da gravação original.
+Não execute audition.mjs --generate para renderizar: isso é uma nova
+audição e exige pedido do piloto. speech.mjs é apenas uma verificação
+do cache aprovado e não gera fala.
 
-delivery.json é a fonte do roteiro português e das indicações enviadas à
-voz. Cada seção registra separadamente a intenção emocional. As etiquetas
-entre colchetes orientam a geração e não fazem parte das legendas.
-A duração é medida na gravação, sem limite herdado do corte inglês.
+Prévia: o mesmo comando acima com live no lugar de render e --port 8790.
+Conferência no navegador: inspect-preview.mjs, inspect-studio.mjs,
+inspect-studio-interaction.mjs e inspect-relation-sync.mjs recebem o
+checkout do Videomaker e http://127.0.0.1:8790 como argumentos.
 
-_build/narration.wav preserva integralmente a tomada; audition-7.mp3 é uma
-cópia comprimida para escuta. O manifesto registra duração, hash, texto,
-tempos das seções e a ausência de edição. Os recibos e gravações são locais
-e ignorados pelo Git. A escuta do piloto decide a interpretação e a
-pronúncia; alinhamento textual não comprova emoção nem fluência bilíngue.
+As audições ficam em auditions/proposal-N e _build/listening/proposal-N.
+A gravação aprovada tem SHA-256
+d2dc2542d7a15e0fdb83451e002dea8a2c8dbbf4d6b71564d68086bcc23e2b2d.
+As marcações do provedor são aproximadas; sua pontuação terminal passa
+0,167s do PCM, com fechamento completo confirmado por transcrição local.
+Nenhum tempo do recibo original foi alterado. O filme tem margem no final.
 
-O player de escuta é servido de _build/listening, na porta 8786. O corte
-inglês permanece disponível separadamente na porta 8785.
+Nada foi publicado. description.md conserva a atribuição, a declaração
+de uso de IA e as pendências de direitos e URLs do corte inglês.

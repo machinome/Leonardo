@@ -6,15 +6,15 @@ import {readFile,mkdir,writeFile} from 'node:fs/promises';
 import {resolve,dirname} from 'node:path';
 import {fileURLToPath,pathToFileURL} from 'node:url';
 const base=dirname(fileURLToPath(import.meta.url)),tool=resolve(process.argv[2]);
-const origin=process.argv[3]??'http://127.0.0.1:8785';
+const origin=process.argv[3]??'http://127.0.0.1:8787';
 const doc=JSON.parse(await readFile(resolve(base,'_build/movie-resolved.json')));
 const chapter=doc.chapters[0],shot=id=>chapter.shots.find(s=>s.id===id);
 const meta=JSON.parse(await readFile(resolve(base,'_build/narration-manifest.json')));
-assert.ok(meta.text.includes('a stream of open source technologies'));
-assert.ok(meta.text.includes('Machinome also provides a testing framework, that allows us to test how parts fit together.'));
-assert.ok(meta.text.endsWith('What do YOU want to BUILD?'));
+assert.ok(meta.text.includes('uma corrente de tecnologias de código aberto'));
+assert.ok(meta.text.includes('O Machinome também oferece uma estrutura de testes, que permite verificar como as peças se encaixam.'));
+assert.ok(meta.text.endsWith('O que VOCÊ quer construir?'));
 assert.ok(!meta.text.includes('Agents can write mechanical models because of tests'));
-assert.deepEqual(meta.edits,[]);
+assert.deepEqual(meta.audioEdits,[]);
 assert.ok((await readFile(meta.cacheFile)).equals(await readFile(resolve(base,'_build/provider-original.wav'))),
   'No audio splicing: the take is byte-identical to the provider WAV');
 const capture=JSON.parse(await readFile(resolve(base,'assets/studio-capture.json')));
@@ -96,11 +96,11 @@ try{
           'Highlights and typing include the native browser-controls offset');
       }
     }
-    if(area==='chat')assert.ok(dom.prompt.length>0&&dom.prompt.length<"There's one more adjustment:".length);
-    else assert.equal(dom.prompt,"There's one more adjustment:");
+    if(area==='chat')assert.ok(dom.prompt.length>0&&dom.prompt.length<"Há mais um ajuste:".length);
+    else assert.equal(dom.prompt,"Há mais um ajuste:");
   }
   const {dom}=await sample('before-testing',testing.start-1/doc.output.fps);
-  assert.equal(dom.prompt,"There's one more adjustment:");
+  assert.equal(dom.prompt,"Há mais um ajuste:");
   await sample('testing',testing.start+2);
   assert.deepEqual(errors,[]);
   await writeFile(resolve(output,'checks.json'),JSON.stringify({status:'passed',checks,errors},null,2)+'\n');

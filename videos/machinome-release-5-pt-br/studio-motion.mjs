@@ -67,7 +67,7 @@ export function finishStudio(doc,measured,clock){
     const at=rewindStart+i/fps;
     // Absolute spoken anchors avoid cumulative floating-point drift from
     // adding 1/24 repeatedly (which can otherwise leave a cue one frame old).
-    const until={spoken:'Machinome also provides',
+    const until={spoken:'O Machinome também oferece',
       plus:grid(timing.start+rewindStart+(i+1)/fps)-timing.end};
     const seconds=rewindFrom*(1-smooth((at-rewindStart)/(rewindEnd-rewindStart)));
     const actions=[{element:'studio-ui',action:'settled',params:{}},

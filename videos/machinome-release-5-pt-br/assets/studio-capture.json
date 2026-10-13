@@ -1,10 +1,10 @@
 {
   "schema": "studio-staged-capture/1",
-  "capturedAt": "2026-10-08T14:40:24.240Z",
+  "capturedAt": "2026-10-13T01:06:29.136Z",
   "origin": "http://localhost:9000",
   "project": "Leonardo/hydraulic_sawmill",
   "screenshot": "studio-background.png",
-  "sha256": "0d4834d90a4e6b04bd06ea9ec77e629f90f2f70e839cabd3803269c72aa9cfa1",
+  "sha256": "8d6828b77d2b67a537524214e743f6cec78b187ea35388dd18a76ee27dfaf90d",
   "pixelRatio": 3,
   "viewport": {
     "width": 1280,
@@ -66,7 +66,7 @@
     "color": "rgb(230, 232, 236)"
   },
   "provenance": "Real Mozilla Firefox window and Studio UI, existing sawmill export; browser-only staged session and fictional completion message. Model hidden after it loaded; composited as a moving View by movie.py. Tab-local history replacement displays the requested root URL without changing the project on the server.",
-  "message": "The sawmill adjustments are complete.\n\n✓ Waterwheel and crankshaft are linked through the drive relation.\n\n✓ The connecting rod moves the saw through its full up-and-down stroke.\n\n✓ The driving pawl advances the ratchet, and the holding pawl keeps that progress while it returns.\n\n✓ Both ropes follow the compound shaft through to the timber carriage.\n\n✓ Blade clearance is checked against both halves of the timber at thirteen positions across a full wheel turn.\n\n✓ Source, tests and the browser model are ready for review.\n\nThe machine is moving in the viewer. You can inspect the mechanism or ask for another adjustment.",
+  "message": "Os ajustes da serraria estão concluídos.\n\n✓ A roda-d'água e o virabrequim estão ligados pela relação de movimento.\n\n✓ A biela move a serra por todo o seu curso de subida e descida.\n\n✓ A lingueta motriz avança a catraca, e a segunda lingueta mantém esse avanço durante o retorno.\n\n✓ As duas cordas transmitem o movimento pelo eixo composto até o carro da tora.\n\n✓ A folga da lâmina é verificada contra as duas metades da tora em treze posições de uma volta completa da roda.\n\n✓ O código-fonte, os testes e o modelo no navegador estão prontos para revisão.\n\nA máquina está em movimento no visualizador. Você pode explorar o mecanismo ou pedir outro ajuste.",
   "mutations": [],
   "errors": []
 }

@@ -1,4 +1,10 @@
-# Revolutions
+# Revoluções — versão brasileira
+
+Narração em português brasileiro com Jessica, mantendo os trechos de
+código em inglês. A conversa demonstrativa do Studio está em português.
+O filme usa a tomada 7 aprovada, sem gerar outra interpretação durante
+o render. Abaixo permanece o registro de atribuição e limites do original;
+a descrição pública ainda é um rascunho para revisão do responsável.
 
 A wheel makes revolutions. A machine meets one of its ancestors: a
 reconstruction of Leonardo da Vinci's hydraulic sawmill. Follow the

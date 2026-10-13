@@ -7,7 +7,7 @@ import {fileURLToPath,pathToFileURL} from 'node:url';
 import {driverX,wheelAngle,approachScale} from './ending-motion.mjs';
 const base=dirname(fileURLToPath(import.meta.url));
 const tool=resolve(process.argv[2]);
-const origin=process.argv[3]??'http://127.0.0.1:8785';
+const origin=process.argv[3]??'http://127.0.0.1:8787';
 const {chromium}=await import(pathToFileURL(resolve(tool,'node_modules/playwright/index.mjs')));
 const doc=JSON.parse(await readFile(resolve(base,'_build/movie-resolved.json')));
 const outline=await (await fetch(`${origin}/film.json`)).json();
@@ -124,7 +124,7 @@ try{
         });
         assert.ok(picture.image.left<=0.5&&picture.image.top<=0.5&&picture.image.right>=picture.width-.5&&picture.image.bottom>=picture.height-.5,
           'The manuscript covers every edge of the video');
-        assert.equal(picture.text,'Source: Codex Atlanticus 1078r · Wikimedia Commons');
+        assert.equal(picture.text,'Fonte: Codex Atlanticus 1078r · Wikimedia Commons');
         assert.ok(picture.note.left>picture.width*.3&&picture.note.top>picture.height*.85);
         assert.ok(Math.abs(picture.note.right-picture.width)<.6&&Math.abs(picture.note.bottom-picture.height)<.6,
           'The source plate touches the right and bottom edges');
@@ -192,7 +192,7 @@ try{
   };
   const frameTolerance=.5/doc.output.fps+1e-6;
   const firstReturn=feed.cues.find(c=>c.actions.some(a=>a.action==='highlight')&&
-    Math.abs(feed.start+c.until-endOf('while the first returns'))<=frameTolerance);
+    Math.abs(feed.start+c.until-endOf('enquanto a primeira retorna'))<=frameTolerance);
   assert.ok(firstReturn,'A measured highlight covers the first pawl returning');
   assert.deepEqual(firstReturn.actions.find(a=>a.action==='highlight').parts,
     [['Feed mechanism','Driving pawl']]);
@@ -242,9 +242,9 @@ try{
     await page.locator('iframe').screenshot({path:resolve(output,`circumference-${time.toFixed(3)}.png`)});
     checks.push({id:'circumference-arrival',time,...appearance});
   }
-  const speechEnd=endOf('a stream of open source technologies');
-  const returnSpeech=startOf('The wheel... makes revolutions');
-  const streamSpeech=startOf('beneath it all');
+  const speechEnd=endOf('uma corrente de tecnologias de código aberto');
+  const returnSpeech=startOf('A roda faz revoluções...');
+  const streamSpeech=startOf('por baixo de tudo');
   const streamStart=driveStart+(props.streamDelay??0);
   const streamEnd=driveStart+props.streamDuration;
   const firstPass=streamStart+props.arrival,spinStart=driveStart+props.spinDelay;
@@ -261,7 +261,7 @@ try{
   assert.ok(driverX(1,props)-driverX(2,props)>driverX(0,props)-driverX(1,props),
     'Each individual label keeps accelerating');
   assert.ok(driverX(streamEnd-streamStart-6*props.stagger,props)<-100,'The last label has crossed the whole frame');
-  for(const [sample,time] of [['old-start',driveStart],['phrase-start',startOf('And beneath it all')],
+  for(const [sample,time] of [['old-start',driveStart],['phrase-start',startOf('E, por baixo de tudo')],
       ['before',streamStart-1/doc.output.fps],['onset',streamStart]]){
     await seek(time);
     const visible=await page.evaluate(()=>{
@@ -322,7 +322,7 @@ try{
     // Sample the same fixed reading position at the first and last held frame,
     // then verify an independently computed accelerating launch in the browser.
     for(const [phase,time] of [['hold-start',firstFrame],
-        ['hold-end',firstFrame+props.hold-1/doc.output.fps],['launch',entry+props.hold+.25]]){
+        ['hold-end',firstFrame+props.hold-1/doc.output.fps],['launch',entry+props.hold+.125]]){
       await seek(time);const label=await readLabel();
       assert.ok(label.fits&&label.opacity===1,`${name} stays fully visible through its hold and launch`);
       if(phase.startsWith('hold')){
@@ -331,7 +331,7 @@ try{
       }
       else{
         const flightAge=Math.round(time*doc.output.fps)/doc.output.fps-entry-props.hold;
-        assert.ok(Math.abs(label.x-(1830-1940*(flightAge/.5)**2))<1e-6,
+        assert.ok(Math.abs(label.x-(1830-1940*(flightAge/.25)**2))<1e-6,
           `${name} accelerates independently from rest after its hold`);
         assert.ok(label.y>540&&label.y<820,`${name} descends along the curve during launch`);
       }
@@ -356,7 +356,7 @@ try{
   // its slope at a fixed vertical offset, then leaves on the original baseline.
   let previousStreamY=540;
   for(const x of [1830,1650,1395,1200,700]){
-    const time=streamStart+props.hold+.5*Math.sqrt((1830-x)/1940);
+    const time=streamStart+props.hold+.25*Math.sqrt((1830-x)/1940);
     await seek(time);
     const point=await page.evaluate(()=>{
       const w=document.querySelector('iframe').contentWindow;
@@ -403,8 +403,8 @@ try{
   }
   const zoom=returned.cues.find(c=>c.actions.some(a=>a.action==='move'));
   const zoomStart=returned.start+zoom.at,zoomEnd=returned.start+zoom.actions[0].until;
-  assert.ok(Math.abs(zoomStart-startOf('and humans...'))<=frameTolerance);
-  assert.ok(Math.abs(zoomEnd-endOf('their own'))<=frameTolerance);
+  assert.ok(Math.abs(zoomStart-startOf('e os humanos constroem'))<=frameTolerance);
+  assert.ok(Math.abs(zoomEnd-endOf('a sua'))<=frameTolerance);
   // Measure angular speed from the actual posed model, not the animation helper.
   // Eight similar spokes repeat every 45 degrees; keep each 24 fps step below
   // half that angle while making the zoom substantially faster than a slow turn.
@@ -427,7 +427,7 @@ try{
     checks.push({id:'wheel-acceleration',time,degreesPerSecond:speed,revolutionsPerSecond:speed/360,angleStep});
   }
   const invitation=doc.chapters[0].shots.find(s=>s.id==='invitation');
-  assert.equal(invitation.start,zoomEnd,'The closing scene begins after their own ends');
+  assert.equal(invitation.start,zoomEnd,'The closing scene begins after a sua ends');
   let previousDistance=Infinity;
   for(const fraction of [0,.5,.8,.99]){
     const time=Math.floor((zoomStart+(zoomEnd-zoomStart)*fraction)*doc.output.fps+1e-9)/doc.output.fps;
@@ -447,7 +447,7 @@ try{
   let fixedUrlWidth;
   const logoApproach=invitation.cues.find(c=>c.actions.some(a=>a.action==='approach'));
   const logoStart=invitation.start+logoApproach.at;
-  assert.ok(Math.abs(logoStart-startOf("I'm Machinome"))<=frameTolerance,
+  assert.ok(Math.abs(logoStart-startOf("Eu sou o Machinome"))<=frameTolerance,
     'The logo approach starts on the recorded I am entrance');
   for(const time of [invitation.start,logoStart-1/doc.output.fps]){
     await seek(time);
@@ -479,8 +479,8 @@ try{
   }
   const closingFade=invitation.cues.find(c=>c.actions.some(a=>a.action==='link'));
   const linkStart=invitation.start+closingFade.at,linkEnd=invitation.start+closingFade.until;
-  assert.ok(Math.abs(linkStart-startOf('Open Source'))<=frameTolerance,'The address fade starts on the closing Open Source');
-  assert.ok(Math.abs(linkEnd-endOf('Open Source'))<=frameTolerance,'The address fade completes with the spoken phrase');
+  assert.ok(Math.abs(linkStart-startOf('máquinas sejam de código aberto'))<=frameTolerance,'The address fade starts on the closing máquinas sejam de código aberto');
+  assert.ok(Math.abs(linkEnd-endOf('máquinas sejam de código aberto'))<=frameTolerance,'The address fade completes with the spoken phrase');
   for(const [sample,time] of [['before',linkStart-.25],['start',linkStart],['middle',(linkStart+linkEnd)/2],['after',linkEnd+.15]]){
     await seek(time);
     const result=await page.evaluate(()=>{
