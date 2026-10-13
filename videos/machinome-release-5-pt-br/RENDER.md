@@ -2,6 +2,39 @@
 
 Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
 
+## Python Brasil — tomada 12 aprovada
+
+Render solicitado após aprovação da prévia da tomada 12. Fontes no commit
+655fd33f5a63, branch PythonBrasil; nenhum ajuste editorial ou síntese nova.
+Arquivo: _build/machinome-pythonbrasil-pt-br-take12.mp4, cópia verificada
+de _build/rehearsal.mp4. H.264, 1920×1080, 24 fps, 5.183 quadros;
+215,958333s; AAC estéreo, 48 kHz; 27.789.697 bytes.
+SHA-256: 7bef02b468429333149d931c4fe4f1d116a58afa77d58c20f9569014923a4103.
+
+O manifesto confirma a tomada derivada aprovada com SHA-256
+0f2f0c8f8712a28e43c1f1e25c92ea579ba834da7131b146dd0cae0c69ba2d6d,
+210,593083s e entrada em 3s. O mix WAV após o render é byte a byte igual
+ao mix do viewer preservado antes dele. Sem efeitos sonoros ou novos cortes.
+As quatro pausas de código, steps até o fim e final contínuo passaram em
+check-reading-pauses.mjs. Inspecionadas as quatro folhas overview
+decodificadas do MP4: aviso de IA, ausência do título e aviso miúdo
+removidos, mecanismo, código, estúdio português e encerramento preservados.
+Isso é inspeção visual amostrada; interpretação aprovada pelo piloto.
+
+Pacote: _build/review-packs/3efd5b54b20a-7bef02b46842-dd8a6307-e5ed-4987-849d-7c2d90a9367a/.
+Render anterior preservado em _build/before-take12-render/.
+Viewer mantido em http://127.0.0.1:8790/#movie. Nenhuma publicação externa.
+O manifesto retém os avisos de procedência do export e da árvore do
+Videomaker com alterações locais; não certifica prontidão de publicação.
+
+Reprodução, a partir da raiz deste projeto:
+
+```sh
+node /home/asa/devel/machinome/videomaker/bin/videomaker.mjs render videos/machinome-release-5-pt-br/_build/movie.json --viewer /home/asa/devel/machinome/machinome-viewer/machinome_viewer/widget/dist/machinome-viewer.js
+```
+
+Os registros abaixo são dos renders anteriores, não da entrega atual.
+
 ## Correção posterior: retirar o título não solicitado
 
 Após relato de título ainda visível aos 11s, conferidos o MP4 servido via

@@ -25,13 +25,15 @@ Duração: **215,958s (3min35,958s)**, deixando 84,042s dentro dos cinco
 minutos da lightning talk. Voz original: 201,760s; derivado com pausas:
 210,593083s. Nenhuma alteração digital de velocidade ou tom. A naturalidade
 da nova interpretação aguarda o piloto; nenhuma alegação de escuta subjetiva
-pelo agente. Nenhum MP4 novo. Registro em auditions/proposal-12/AUDITION.md.
+pelo agente. O piloto aprovou a tomada 12 e solicitou o MP4, agora gerado
+em _build/machinome-pythonbrasil-pt-br-take12.mp4; ver RENDER.md.
+Registro da interpretação em auditions/proposal-12/AUDITION.md.
 
 A prévia aprovada anterior (tomada 8 com contemplação) tinha 206,791667s
 e está preservada em _build/approved-before-reading-pauses e no histórico
 02d52e5. preview-take.json seleciona a experiência; a tomada original 8
 continua intacta. finish.mjs usa somente áudio em cache, sem gerar voz.
-O MP4 aprovado abaixo continua sendo a tomada 7, preservada no checkpoint
+O MP4 histórico abaixo é a tomada 7, preservada no checkpoint
 b196e52, com sua matriz em _build/approved. Não confundir os dois estados.
 
 A tomada 8 foi aprovada pelo piloto antes do próximo ajuste: aviso
