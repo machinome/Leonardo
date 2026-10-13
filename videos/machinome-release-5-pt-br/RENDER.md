@@ -51,7 +51,26 @@ Studio: 13 amostras de entrada/layout; interação: 23 amostras, giro curto,
 scrub até zero, saída rápida, movimento do modelo e digitação; relação:
 8 amostras de destaque, com os tempos desta tomada e não do inglês.
 Captura do chat e quadros de código/Studio/tecnologias inspecionados.
-Conferência geral e MP4: resultados finais registrados após o render.
+Conferência geral: 118 amostras/âncoras passaram antes do render.
+
+Render concluído a partir do commit 7719337130c5, sem nova síntese.
+MP4 H.264, 1920×1080, 24 fps, 5.015 quadros, 208,958333s;
+AAC estéreo a 48 kHz; 27.934.643 bytes. SHA-256 conferido contra o manifesto:
+11b7e2fe46144b4e56e9746cbb6de98d90ba690f0ddf518aef72da9fd9236680.
+O manifesto de áudio confirma uma única tomada com o hash aprovado acima.
+
+Inspecionadas as quatro folhas de visão geral extraídas do MP4 e os
+quadros completos 2756 (conversa portuguesa), 3657 (código da cena) e
+4982 (encerramento). Pacote automático íntegro em
+_build/review-packs/5730c0791413-11b7e2fe4614-1830a0a4-4a36-4815-80da-6603c10bb64e/.
+Isso é inspeção visual amostrada, não nova revisão auditiva da interpretação:
+a tomada é a mesma já aprovada pelo piloto.
+
+Player em http://127.0.0.1:8786/film/; testados no Chromium os metadados,
+reprodução, pausa e salto para 115s. O servidor simples anterior não
+suportava avanço: serve-listening.py acrescenta byte ranges, mantendo as
+audições no mesmo endereço. A prévia interativa voltou na porta 8790.
+Não houve envio de mensagem ao agente nem publicação externa.
 
 Os registros herdados em HANDOFF.md e VERIFICATION.md são do inglês.
 Mantidos o rótulo de fonte e a linha final de licença explicitamente

@@ -44,6 +44,9 @@ audição e exige pedido do piloto. speech.mjs é apenas uma verificação
 do cache aprovado e não gera fala.
 
 Prévia: o mesmo comando acima com live no lugar de render e --port 8790.
+Player com reprodução e avanço: `python3 videos/machinome-release-5-pt-br/serve-listening.py`.
+Ele serve _build/listening na porta 8786; film/index.html é uma cópia de
+watch.html e film/revolucoes-pt-br.mp4 é uma cópia do MP4 renderizado.
 Conferência no navegador: inspect-preview.mjs, inspect-studio.mjs,
 inspect-studio-interaction.mjs e inspect-relation-sync.mjs recebem o
 checkout do Videomaker e http://127.0.0.1:8790 como argumentos.
