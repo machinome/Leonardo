@@ -46,7 +46,7 @@ const measured=resolveMovie(doc,{continuous:take});
 const chapter=doc.chapters[0];
 // Pilot-requested disclosure: centered below the opening wheel, leaving
 // as speech begins. The model already turns from the first film frame.
-chapter.elements['ai-notice']={kind:'title',text:'AI CONTENT'};
+chapter.elements['ai-notice']={kind:'title',text:'Conteúdo de IA'};
 const opening=chapter.shots.find(s=>s.id==='revolution');
 opening.places.note='ai-notice';
 opening.cues??=[];

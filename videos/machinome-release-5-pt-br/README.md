@@ -32,6 +32,10 @@ sob SIL OFL (origem em assets/fonts/SOURCE.md), ampliada de 1,4vw para 3vw.
 Verificada no viewer a 960×540: fonte carregada, 28,8px, centro 479,992px,
 sem cortes. Mantidos posição, fades, áudio e interface.
 
+Proposta seguinte: texto localizado para “Conteúdo de IA”, sem prefixo,
+em dourado suave #d2b078. Conferidos texto, cor e centralização no viewer;
+mesma EB Garamond, tamanho e animação. Áudio aprovado reutilizado.
+
 Para avaliar movie.py no ambiente atual, use
 `PYTHONPATH=.:/home/asa/devel/machinome/videomaker/python`.
 
