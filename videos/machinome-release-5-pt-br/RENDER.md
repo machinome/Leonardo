@@ -2,6 +2,29 @@
 
 Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
 
+## Correção posterior: retirar o título não solicitado
+
+Removidos “Serraria hidráulica” e “LEONARDO DA VINCI” do plano ancestor,
+sem outra mudança editorial. A remoção fica em finish.mjs para preservar
+o arquivo movie.py mostrado no próprio filme e o cache desses planos.
+Comparação estrutural do documento antes/depois: apenas a declaração,
+o posicionamento e a animação desse título foram retirados; todo o resto
+é idêntico. Fonte da correção: commit 6ffb665ff491.
+
+Render incremental: somente ancestor recapturado, 622 quadros; os demais
+4.393 quadros foram reutilizados nas mesmas gerações do cache. Mantidos
+5.015 quadros, 1920×1080, 24 fps e 208,958333s. A trilha AAC anterior e
+a nova têm o mesmo hash de conteúdo:
+bf4d2cf4319c29da77636bbb68be8fb4e168c8e36e08a885b53dab62380dd394.
+
+Novo MP4: 27.839.492 bytes; SHA-256 conferido contra o manifesto:
+e7d91497f71ba1ef1fc78a0f592ca0afe8c2ccfbce1a48b89c1a43292add7604.
+Inspecionados a folha overview-000 e o quadro 318 decodificados do MP4:
+título ausente, máquina e enquadramento preservados. Pacote de revisão:
+_build/review-packs/4e3b61fc4bc7-e7d91497f71b-e4a28278-09e2-4d6b-8de0-22e30e9a93ca/.
+Player atualizado no mesmo endereço. O registro abaixo descreve o render
+anterior; a correção acima é a entrega atual.
+
 Pedido: renderizar usando exatamente a proposta 7 aprovada, com a conversa
 do Studio em português. Nenhuma nova síntese de voz.
 
