@@ -10,6 +10,7 @@
 .exhibition:has(.wheel-exit) .slot-stage{inset:0;width:100%;height:100%}
 .slot-heading{left:6%;top:5%;width:88%;height:15%;--vm-title-size:2.5vw;--vm-title-align:left;--vm-subtitle-size:.8vw}
 .slot-note{left:6%;top:91%;width:88%;height:6%;--vm-title-size:1.05vw;--vm-title-align:center;--vm-title-color:#aeb8c1;--vm-subtitle-size:.85vw}
+.exhibition:has([data-element="continuous.ai-notice"]) .slot-note{top:86%;--vm-title-size:1.4vw;letter-spacing:.14em}
 .archive .slot-picture{inset:0;width:100%;height:100%;overflow:hidden}
 .archive .slot-note{left:auto;right:0;top:auto;bottom:0;width:64%;height:6%;
   --vm-title-size:1.25vw;--vm-title-align:right;--vm-title-color:#eeeae3;

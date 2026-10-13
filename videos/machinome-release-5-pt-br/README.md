@@ -17,6 +17,16 @@ prévia: 204,416667s, com voz de 198,960s, entrada de 3s e saída.
 O MP4 aprovado abaixo continua sendo a tomada 7, preservada no checkpoint
 b196e52, com sua matriz em _build/approved. Não confundir os dois estados.
 
+A tomada 8 foi aprovada pelo piloto antes do próximo ajuste: aviso
+“AI CONTENT” na abertura, abaixo da roda e centrado no mesmo eixo
+horizontal. Entrada de 0,6s desde o primeiro quadro em movimento;
+saída de 0,6s começando na primeira palavra, com término resolvido em
+3,666667s. Só aparece no plano revolution. Conferidos no navegador os
+estados inicial, visível, saída intermediária e ausente; centro do texto
+479,992px num quadro de 960px. Quadro inspecionado em
+_build/ai-content-preview.png. Áudio e duração preservados; MP4 anterior
+não refeito. O viewer continua em 8790, com a mesma interface.
+
 Para avaliar movie.py no ambiente atual, use
 `PYTHONPATH=.:/home/asa/devel/machinome/videomaker/python`.
 

@@ -44,6 +44,16 @@ for(const [token,timing] of Object.entries(relationTiming.words)){
 }
 const measured=resolveMovie(doc,{continuous:take});
 const chapter=doc.chapters[0];
+// Pilot-requested disclosure: centered below the opening wheel, leaving
+// as speech begins. The model already turns from the first film frame.
+chapter.elements['ai-notice']={kind:'title',text:'AI CONTENT'};
+const opening=chapter.shots.find(s=>s.id==='revolution');
+opening.places.note='ai-notice';
+opening.cues??=[];
+opening.cues.push({at:0,
+  until:{spoken:'A roda faz revoluções, e os humanos dão um propósito.',plus:0.6},
+  actions:[{element:'ai-notice',action:'show',
+    enter:{kind:'fade',duration:0.6},leave:{kind:'fade',duration:0.6}}]});
 // The explanatory tokens flash for a sua recorded word, not the rest
 // of the locating phrase. The longer phrase only disambiguates the anchor.
 const alignedText=take.alignment.characters.join('');
