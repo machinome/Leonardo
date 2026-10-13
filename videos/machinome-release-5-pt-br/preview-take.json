@@ -1,0 +1,6 @@
+{
+  "notice": "Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.",
+  "manifest": "auditions/proposal-8/_build/narration-manifest.json",
+  "status": "Take 8 selected by pilot for listening in the existing viewer, not a new MP4 approval.",
+  "viewer": "http://127.0.0.1:8790/#movie"
+}

@@ -2,6 +2,26 @@
 
 Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
 
+## Viewer de trabalho — endereço fixo
+
+Use sempre **http://127.0.0.1:8790/#movie**. O piloto pediu explicitamente
+manter esta porta e a interface completa do Videomaker: atualizar a tomada
+no viewer para ouvir com um reload, sem substituí-lo por HTML ou links de
+áudio em outra porta.
+
+A prévia usa agora a tomada 8 da Jessica: “constroem as suas” e pergunta
+final sem ênfase especial em você. preview-take.json seleciona o recibo
+existente; finish.mjs reutiliza o cache, refaz o mix e resolve as âncoras
+para a tomada nova. Nenhuma síntese extra e nenhum MP4 novo. Duração da
+prévia: 204,416667s, com voz de 198,960s, entrada de 3s e saída.
+O MP4 aprovado abaixo continua sendo a tomada 7, preservada no checkpoint
+b196e52, com sua matriz em _build/approved. Não confundir os dois estados.
+
+Para avaliar movie.py no ambiente atual, use
+`PYTHONPATH=.:/home/asa/devel/machinome/videomaker/python`.
+
+## Render aprovado anterior
+
 Versão brasileira do corte 5, com a tomada 7 de Jessica aprovada pelo
 piloto em 13 de outubro de 2026. O áudio original de 203,280 segundos
 permanece no cache e em _build/approved, sem regeneração, cortes,

@@ -446,12 +446,12 @@ class Continuous(Chapter):
             Cue(lines.spoken('Trimesh', plus=-0.85), ecosystem.drive(), until=HANDOFF),  # Shared clock; stream waits for beneath.
         ])
     wheel_returns = Shot(Exhibition, {Exhibition.stage: returned, Exhibition.veil: wheel_exit},
-        until=lines.spoken_end('a sua'),
+        until=lines.spoken_end('as suas'),
         model=Sawmill.run(492, 496), transition=Dissolve(1.25), cues=[
             Cue(lines.spoken('e os humanos constroem'),
-                returned.move(Sawmill.hub, until=lines.spoken_end('a sua'), ease='linear')),
-            Cue(lines.spoken_end('a sua', plus=-0.5), wheel_exit.darken(),
-                until=lines.spoken_end('a sua')),
+                returned.move(Sawmill.hub, until=lines.spoken_end('as suas'), ease='linear')),
+            Cue(lines.spoken_end('as suas', plus=-0.5), wheel_exit.darken(),
+                until=lines.spoken_end('as suas')),
         ])
     invitation = Shot(Exhibition, {Exhibition.graphic: signature}, until=lines.end(plus=2.5),
         model=Sawmill.run(496, 504), fade_out=FadeOut(0.7), cues=[

@@ -2,26 +2,26 @@
   "schema": "cut5-relation-timing/1",
   "copyright": "Copyright (C) 2026 Luis Henrique Cassis Fagundes",
   "license": "AGPL-3.0-only",
-  "audioSha256": "d2dc2542d7a15e0fdb83451e002dea8a2c8dbbf4d6b71564d68086bcc23e2b2d",
-  "method": "Approved Portuguese take provider character alignment; visual timings, not independent phonetic validation.",
+  "audioSha256": "48f80fd90c2896f130e7f4e7084b050b04ef238e5fd7ba7c5c1729746bd09241",
+  "method": "Portuguese take 8 provider character alignment for viewer listening; visual timings, not independent phonetic validation.",
   "phrase": "The waterwheel spin drives the crankshaft.",
   "scope": "Use new take timings only; original audio and provider alignment unchanged.",
   "words": {
     "waterwheel": {
-      "start": 98.284,
-      "end": 98.777
+      "start": 97.166,
+      "end": 97.726
     },
     "spin": {
-      "start": 98.857,
-      "end": 99.177
+      "start": 97.806,
+      "end": 98.126
     },
     "drives": {
-      "start": 99.234,
-      "end": 99.577
+      "start": 98.183,
+      "end": 98.526
     },
     "crankshaft": {
-      "start": 99.724,
-      "end": 100.457
+      "start": 98.673,
+      "end": 99.406
     }
   }
 }

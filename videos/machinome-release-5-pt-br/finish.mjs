@@ -13,7 +13,8 @@ const {readMovie,resolveMovie}=await import(pathToFileURL(resolve(tool,'src/movi
 const {cachedTake}=await import(pathToFileURL(resolve(tool,'src/speech.mjs')));
 const file=resolve(base,'_build/movie.json');
 const {doc,build}=await readMovie(file);
-const approved=JSON.parse(await readFile(resolve(base,'_build/approved/narration-manifest.json')));
+const selection=JSON.parse(await readFile(resolve(base,'preview-take.json')));
+const approved=JSON.parse(await readFile(resolve(base,selection.manifest)));
 // The tool's request key uses JSON property order; restore the approved order
 // after Python's sorted JSON serialization. No request or audio bytes change.
 doc.audio=approved.audio;
