@@ -78,6 +78,12 @@ chapter.shots.find(s=>s.id==='feed-motion').model={keys:[
 // A single analytic orbit, sampled densely with linear microsegments. Only
 // the whole move eases; there are no corner stops or independently eased legs.
 const ancestor=chapter.shots.find(s=>s.id==='ancestor');
+// Pilot correction: remove the unrequested machine title and subtitle.
+// Do this in the edit so the unchanged on-screen movie.py excerpts retain
+// their source identity and their already-rendered shot generations.
+delete ancestor.places.heading;
+ancestor.cues=ancestor.cues.filter(c=>!c.actions.some(a=>a.element==='identity'));
+delete chapter.elements.identity;
 const orbit=ancestor.cues.find(c=>c.actions.some(a=>a.action==='move'));
 const timedAncestor=measured.chapters[0].shots.find(s=>s.id==='ancestor');
 const timedOrbit=timedAncestor.cues.find(c=>c.actions.some(a=>a.action==='move'));
