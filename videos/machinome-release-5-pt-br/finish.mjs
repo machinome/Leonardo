@@ -61,6 +61,15 @@ ancestry.cues.find(c=>c.actions.some(a=>a.action==='move')).actions
   .find(a=>a.action==='move').until={spoken:'Vou mostrar como ela funciona!'};
 const measured=resolveMovie(doc,{continuous:take});
 const chapter=doc.chapters[0];
+// Pilot correction: no small reconstruction disclaimer over the mechanism.
+// Remove its placements and cues, not merely its CSS visibility.
+for(const shot of chapter.shots){
+  for(const [slot,element] of Object.entries(shot.places))
+    if(element==='limits')delete shot.places[slot];
+  if(shot.cues)shot.cues=shot.cues.map(c=>({...c,
+    actions:c.actions.filter(a=>a.element!=='limits')})).filter(c=>c.actions.length);
+}
+delete chapter.elements.limits;
 // Pilot-requested disclosure: centered below the opening wheel, leaving
 // as speech begins. The model already turns from the first film frame.
 chapter.elements['ai-notice']={kind:'title',text:'Conteúdo de IA'};

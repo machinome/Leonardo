@@ -37,6 +37,11 @@ Proposta seguinte: texto localizado para “Conteúdo de IA”, sem prefixo,
 em dourado suave #d2b078. Conferidos texto, cor e centralização no viewer;
 mesma EB Garamond, tamanho e animação. Áudio aprovado reutilizado.
 
+Por pedido do piloto, removido do filme o aviso miúdo “Movimento
+reconstruído · forças e corte não simulados”, em todas as quatro cenas
+que o colocavam sobre o mecanismo. finish.mjs elimina o elemento,
+suas posições e seus cues; áudio, câmeras e demais elementos preservados.
+
 Para avaliar movie.py no ambiente atual, use
 `PYTHONPATH=.:/home/asa/devel/machinome/videomaker/python`.
 
