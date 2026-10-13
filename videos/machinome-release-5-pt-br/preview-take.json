@@ -1,6 +1,6 @@
 {
   "notice": "Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.",
-  "manifest": "auditions/proposal-8/_build/narration-manifest.json",
-  "status": "Take 8 approved by pilot before adding the AI CONTENT opening notice; current viewer, MP4 not rerendered.",
+  "manifest": "_build/ancestry-pause/narration-manifest.json",
+  "status": "Approved take 8 with 2.4s editorial silence after ancestrais; camera orbit retimed. Awaiting pilot review; MP4 not rerendered.",
   "viewer": "http://127.0.0.1:8790/#movie"
 }

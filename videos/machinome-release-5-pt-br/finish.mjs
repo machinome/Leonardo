@@ -28,6 +28,17 @@ assert.equal(doc.chapters[0].narration,approved.text);
 // neither the cached alignment nor audio nor scene boundaries are rewritten.
 const relationTiming=JSON.parse(await readFile(resolve(base,'relation-timing.json')));
 assert.equal(relationTiming.schema,'cut5-relation-timing/1');
+// Local pause edits shift the approved phonetic measurements, not the words.
+if(take.sha256!==relationTiming.audioSha256){
+  const edits=approved.audioEdits;
+  assert.equal(edits?.length,1);
+  assert.equal(edits[0].kind,'insert-silence');
+  assert.equal(edits[0].sourceSha256,relationTiming.audioSha256);
+  for(const timing of Object.values(relationTiming.words))
+    for(const key of ['start','end'])
+      if(timing[key]>=edits[0].at)timing[key]+=edits[0].seconds;
+  relationTiming.audioSha256=take.sha256;
+}
 assert.equal(take.sha256,relationTiming.audioSha256,'Realign the relation cues if the take changes.');
 const relationText=take.alignment.characters.join('');
 const relation=doc.chapters[0].shots.find(s=>s.id==='face-reveal');
@@ -42,6 +53,12 @@ for(const [token,timing] of Object.entries(relationTiming.words)){
   if(timing.end!==undefined)cue.until={spokenEnd:token,
     plus:timing.end-take.alignment.character_end_times_seconds[last]};
 }
+// Finish the orbit on the invitation, then approach the wheel immediately.
+// Keep movie.py unchanged because its literal source is shown later on screen.
+const ancestry=doc.chapters[0].shots.find(s=>s.id==='ancestor');
+ancestry.until={spoken:'Vou mostrar como ela funciona!'};
+ancestry.cues.find(c=>c.actions.some(a=>a.action==='move')).actions
+  .find(a=>a.action==='move').until={spoken:'Vou mostrar como ela funciona!'};
 const measured=resolveMovie(doc,{continuous:take});
 const chapter=doc.chapters[0];
 // Pilot-requested disclosure: centered below the opening wheel, leaving
@@ -101,7 +118,11 @@ const timedOrbit=timedAncestor.cues.find(c=>c.actions.some(a=>a.action==='move')
 const start=timedOrbit.at, end=timedOrbit.actions[0].until;
 ancestor.cues=ancestor.cues.filter(c=>c!==orbit);
 for(let i=1;i<=160;i++){
-  const u=i/160, p=u*u*u*(10+u*(-15+6*u));
+  // Keep appreciable travel through the contemplative pause; only ease
+  // the first/last 0.8s, instead of almost stopping several seconds early.
+  const u=i/160, edge=.8/(end-start);
+  const p=(u<edge?u*u/(2*edge):u>1-edge?
+    1-edge-(1-u)*(1-u)/(2*edge):u-edge/2)/(1-edge);
   const theta=-Math.PI/2+3*Math.PI/4*p;
   const radius=575+(Math.hypot(850,850)-575)*p+550*Math.sin(Math.PI*p);
   const name=`orbit-${String(i).padStart(3,'0')}`;

@@ -9,11 +9,12 @@ manter esta porta e a interface completa do Videomaker: atualizar a tomada
 no viewer para ouvir com um reload, sem substituí-lo por HTML ou links de
 áudio em outra porta.
 
-A prévia usa agora a tomada 8 da Jessica: “constroem as suas” e pergunta
-final sem ênfase especial em você. preview-take.json seleciona o recibo
-existente; finish.mjs reutiliza o cache, refaz o mix e resolve as âncoras
-para a tomada nova. Nenhuma síntese extra e nenhum MP4 novo. Duração da
-prévia: 204,416667s, com voz de 198,960s, entrada de 3s e saída.
+A prévia usa a tomada 8 da Jessica: “constroem as suas” e pergunta
+final sem ênfase especial em você, agora com uma pausa editorial de 2,4s
+inserida depois de “ancestrais”. preview-take.json seleciona esse derivado;
+finish.mjs reutiliza o cache, refaz o mix e resolve as âncoras.
+Nenhuma síntese extra e nenhum MP4 novo. Duração atual da prévia:
+206,791667s; áudio de 201,360s, entrada de 3s e saída.
 O MP4 aprovado abaixo continua sendo a tomada 7, preservada no checkpoint
 b196e52, com sua matriz em _build/approved. Não confundir os dois estados.
 
@@ -38,6 +39,23 @@ mesma EB Garamond, tamanho e animação. Áudio aprovado reutilizado.
 
 Para avaliar movie.py no ambiente atual, use
 `PYTHONPATH=.:/home/asa/devel/machinome/videomaker/python`.
+
+### Pausa de contemplação
+
+`node videos/machinome-release-5-pt-br/ancestry-pause.mjs` reproduz a edição
+a partir da tomada 8 original preservada em auditions/proposal-8: insere
+2,4s de silêncio no intervalo entre as frases, sem remover nem substituir
+qualquer amostra falada. O script verifica os bytes antes/depois, registra
+a origem e desloca o alinhamento. Execute antes de avaliar movie.py e
+rodar finish.mjs. Não executar speech com geração para esse derivado.
+
+“Ancestrais” termina aproximadamente em 32,867s do filme; “Vou mostrar
+como ela funciona” começa em 35,870s. A pausa total fica em 3,003s.
+O giro termina no quadro 35,875s, junto ao convite e ao início da
+aproximação da roda. A desaceleração ocupa só os últimos 0,8s do giro,
+preservando movimento visível durante a contemplação. Conferidos no
+navegador cinco instantes da passagem, sem erro do player; quadros
+inspecionados. Revisão subjetiva da pausa aguarda o piloto na 8790.
 
 ## Render aprovado anterior
 
