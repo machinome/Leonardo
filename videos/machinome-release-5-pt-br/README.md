@@ -8,7 +8,7 @@ permanece no cache e em _build/approved, sem regeneração, cortes,
 aceleração ou efeitos. O filme tem 1920×1080, 24 fps e cerca de 3min29s,
 incluindo três segundos de entrada e a saída da imagem.
 
-[Vídeo local](http://127.0.0.1:8786/film/) ·
+[Vídeo local](http://127.0.0.1:8786/film-sem-titulo/) ·
 [Prévia interativa](http://127.0.0.1:8790/#movie) ·
 [Áudio aprovado](http://127.0.0.1:8786/proposal-7/) ·
 [Roteiro e direção](delivery.json) · [Registro de render](RENDER.md).
@@ -45,8 +45,9 @@ do cache aprovado e não gera fala.
 
 Prévia: o mesmo comando acima com live no lugar de render e --port 8790.
 Player com reprodução e avanço: `python3 videos/machinome-release-5-pt-br/serve-listening.py`.
-Ele serve _build/listening na porta 8786; film/index.html é uma cópia de
-watch.html e film/revolucoes-pt-br.mp4 é uma cópia do MP4 renderizado.
+Ele serve _build/listening na porta 8786; film-sem-titulo/index.html é uma
+cópia de watch.html, que aponta para revolucoes-pt-br-e7d91497f71b.mp4,
+cópia do MP4 renderizado identificada pelo prefixo de seu SHA-256.
 Conferência no navegador: inspect-preview.mjs, inspect-studio.mjs,
 inspect-studio-interaction.mjs e inspect-relation-sync.mjs recebem o
 checkout do Videomaker e http://127.0.0.1:8790 como argumentos.

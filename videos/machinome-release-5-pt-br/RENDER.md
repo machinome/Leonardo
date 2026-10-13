@@ -4,6 +4,15 @@ Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
 
 ## Correção posterior: retirar o título não solicitado
 
+Após relato de título ainda visível aos 11s, conferidos o MP4 servido via
+HTTP e /frame?t=11 da prévia portuguesa: ambos sem o título. Não foi
+possível determinar qual cópia o navegador do piloto mostrava; cache é
+hipótese, não causa comprovada. Criado o endereço /film-sem-titulo/ com
+nome de MP4 versionado pelo hash e atualizado também o player /film/.
+Chromium abriu o novo player, avançou a 11s e teve seu quadro inspecionado,
+sem título. O download HTTP completo coincide com o SHA-256 abaixo.
+Nenhuma nova renderização nem alteração de conteúdo nesse ajuste de entrega.
+
 Removidos “Serraria hidráulica” e “LEONARDO DA VINCI” do plano ancestor,
 sem outra mudança editorial. A remoção fica em finish.mjs para preservar
 o arquivo movie.py mostrado no próprio filme e o cache desses planos.
