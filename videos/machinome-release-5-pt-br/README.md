@@ -27,6 +27,11 @@ estados inicial, visível, saída intermediária e ausente; centro do texto
 _build/ai-content-preview.png. Áudio e duração preservados; MP4 anterior
 não refeito. O viewer continua em 8790, com a mesma interface.
 
+Revisão tipográfica do aviso: EB Garamond semibold, incorporada localmente
+sob SIL OFL (origem em assets/fonts/SOURCE.md), ampliada de 1,4vw para 3vw.
+Verificada no viewer a 960×540: fonte carregada, 28,8px, centro 479,992px,
+sem cortes. Mantidos posição, fades, áudio e interface.
+
 Para avaliar movie.py no ambiente atual, use
 `PYTHONPATH=.:/home/asa/devel/machinome/videomaker/python`.
 
