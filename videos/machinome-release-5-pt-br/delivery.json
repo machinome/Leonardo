@@ -1,32 +1,35 @@
 {
   "notice": "Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.",
-  "id": "pythonbrasil-audition-11-jessica",
-  "sourceRevision": "1c31c6d",
-  "status": "tomada 11 com pausas entre frases; aguardando escuta no viewer 8790",
+  "id": "pythonbrasil-audition-12-jessica",
+  "sourceRevision": "cba692b",
+  "status": "Nova interpretação contínua; pausas internas exclusivamente geradas pela voz.",
   "audio": {
     "provider": "elevenlabs",
     "model": "eleven_v3",
     "voice": "cgSgspJ2msm6clMCkdW9",
     "voiceLabel": "Jessica",
     "outputFormat": "pcm_24000",
-    "voiceSettings": {"stability": 0.0, "similarity_boost": 0.75}
+    "voiceSettings": {
+      "stability": 0,
+      "similarity_boost": 0.75
+    }
   },
-  "direction": "Uma única interpretação contínua de Jessica, com o mesmo texto. Português brasileiro e trechos de código em inglês, sem traduções intercaladas. Preservar inspiração, curiosidade, ancestralidade calorosa e confiança final sem enfatizar você. Código: explicação mais lenta e paciente, dando tempo de acompanhar a tela. Estúdio: ainda mais devagar, um guia acolhedor que dá tempo para localizar cada ação. Não preencher cinco minutos: deixar espaço para a apresentação ao vivo. Os tags em directedText são enviados; esta descrição registra a intenção. Após a geração, pausas editoriais garantem três segundos de leitura em cada cena de código e três segundos após ancestrais; sem acelerar nem alongar artificialmente a voz.",
+  "direction": "Uma única interpretação contínua de Jessica. Começo natural, sereno e vivo, sem arrastar. Respiro antes de Um rio e de Mas a tora; entusiasmo acolhedor em Vou mostrar como ela funciona. Código paciente e estúdio calmo. Contemplação em ancestrais e no encerramento realizada exclusivamente pela interpretação, usando tags de pausa e estrutura de parágrafos. Não inserir silêncio, cortar ou esticar dentro de nenhuma cena. Só as quatro transições após código admitem três segundos de leitura na montagem. Não preencher cinco minutos.",
   "sections": [
     {
       "id": "revolucoes",
-      "emotion": "Inspiração serena. Abrir espaço para a ideia, com firmeza tranquila e uma pequena elevação em propósito.",
-      "directedText": "[inspiring] A roda faz revoluções, e os humanos dão um propósito. [pause]"
+      "emotion": "Confiança serena com ritmo conversacional natural. Inspirar sem solenidade lenta ou alongamento artificial de sílabas.",
+      "directedText": "[conversational] [confident] A roda faz revoluções, e os humanos dão um propósito. [pause]"
     },
     {
       "id": "ancestralidade",
-      "emotion": "Admiração histórica, seguida de emoção contida e proximidade em minhas ancestrais. A voz ganha calor, sem tristeza ou dramatização.",
-      "directedText": "[storytelling] Há cinco séculos, Leonardo da Vinci projetou uma serraria movida a água. Máquinas como esta estavam mudando a relação entre as pessoas e o trabalho: um rio podia ajudar a transformar uma árvore em madeira serrada. [warmly] Eu também sou uma máquina. Na história das ferramentas humanas, esta serraria é uma das minhas ancestrais."
+      "emotion": "Admiração histórica, seguida de emoção contida e proximidade em minhas ancestrais. A voz ganha calor, sem tristeza ou dramatização. Respirar na própria interpretação antes de um rio, sem disparar a frase. Ao final, contemplar ancestrais com pausa natural enquanto a câmera termina o giro; nenhuma inserção editorial.",
+      "directedText": "[warmly] [conversational] Há cinco séculos, Leonardo da Vinci projetou uma serraria movida a água. Máquinas como esta estavam mudando a relação entre as pessoas e o trabalho: [long pause] [measured] um rio podia ajudar a transformar uma árvore em madeira serrada. [warmly] Eu também sou uma máquina. Na história das ferramentas humanas, esta serraria é uma das minhas ancestrais. [long pause]"
     },
     {
       "id": "mecanismo",
-      "emotion": "Convite com curiosidade audível em vou mostrar como ela funciona; conduzir a descoberta e reagir à necessidade de avançar a tora. Siga a corda para baixo e para o outro lado é um só gesto verbal. Uma roda, duas tarefas é uma só conclusão, com satisfação e sem queda de frase após roda. Pausas entre relações mecânicas, nunca no meio desses dois pensamentos.",
-      "directedText": "[curious] Vou mostrar como ela funciona! [pause] [explaining] A água sob a roda gira este eixo. Uma manivela e uma biela transformam esse giro no movimento de subida e descida da serra. [pause] [curious] Mas a tora também precisa avançar. [explaining] Durante o corte, esta alavanca comprida puxa uma lingueta por um dente da catraca. Uma segunda lingueta segura esse avanço enquanto a primeira retorna. [pause] Esse pequeno passo enrola uma corda nesse eixo. [curious] Siga a corda para baixo e para o outro lado. [explaining] Ela gira um eixo composto: um tambor largo desenrola uma corda, enquanto uma seção mais fina recolhe outra. [pause] A segunda corda puxa a tora em direção à lâmina. [pleased] Uma roda, duas tarefas: cortar e avançar."
+      "emotion": "Convite com curiosidade audível em vou mostrar como ela funciona; conduzir a descoberta e reagir à necessidade de avançar a tora. Siga a corda para baixo e para o outro lado é um só gesto verbal. Uma roda, duas tarefas é uma só conclusão, com satisfação e sem queda de frase após roda. Pausas entre relações mecânicas, nunca no meio desses dois pensamentos. Um pouco mais de entusiasmo no convite inicial e respiro natural antes de Mas a tora também precisa avançar.",
+      "directedText": "[excited] [inviting] Vou mostrar como ela funciona! [pause] [explaining] A água sob a roda gira este eixo. Uma manivela e uma biela transformam esse giro no movimento de subida e descida da serra. [long pause] [curious] Mas a tora também precisa avançar. [explaining] Durante o corte, esta alavanca comprida puxa uma lingueta por um dente da catraca. Uma segunda lingueta segura esse avanço enquanto a primeira retorna. [pause] Esse pequeno passo enrola uma corda nesse eixo. [curious] Siga a corda para baixo e para o outro lado. [explaining] Ela gira um eixo composto: um tambor largo desenrola uma corda, enquanto uma seção mais fina recolhe outra. [pause] A segunda corda puxa a tora em direção à lâmina. [pleased] Uma roda, duas tarefas: cortar e avançar."
     },
     {
       "id": "reconstrucao",
@@ -60,8 +63,8 @@
     },
     {
       "id": "encerramento",
-      "emotion": "Retomar a inspiração com amplitude e calma. Declarar Eu sou Machinome! com confiança serena e deixar contemplar o nome. Afirmar o propósito com convicção e contemplá-lo antes da pergunta. Na pergunta final, fazer um convite natural e acolhedor, numa só curva, sem acento contrastivo, sustentação ou ênfase especial em você. Manter confiança tranquila até o final.",
-      "directedText": "[inspiring] A roda faz revoluções... e os humanos constroem as suas. [pause] [confident] Eu sou Machinome! [long pause] [confident] Meu propósito é permitir que todas as máquinas sejam de código aberto. [long pause] [warmly] O que você quer construir?"
+      "emotion": "Retomar a inspiração com amplitude e calma. Declarar Eu sou Machinome! com confiança serena e deixar contemplar o nome. Afirmar o propósito com convicção e contemplá-lo antes da pergunta. Na pergunta final, fazer um convite natural e acolhedor, numa só curva, sem acento contrastivo, sustentação ou ênfase especial em você. Manter confiança tranquila até o final. Uma única interpretação contínua; deixar o peso da identidade e do propósito assentar em respiros naturais. Não montar pausas ou separar as frases na edição.",
+      "directedText": "[inspiring] A roda faz revoluções... e os humanos constroem as suas. [pause]\n\n[confident] Eu sou Machinome! [long pause]\n\n[reflective] Meu propósito é permitir que todas as máquinas sejam de código aberto. [long pause]\n\n[warmly] O que você quer construir?"
     }
   ]
 }

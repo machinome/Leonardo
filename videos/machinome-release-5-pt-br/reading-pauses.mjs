@@ -6,7 +6,7 @@ import {createHash} from 'node:crypto';
 import {dirname,resolve,basename} from 'node:path';
 import {fileURLToPath} from 'node:url';
 const base=dirname(fileURLToPath(import.meta.url));
-const source=JSON.parse(await readFile(resolve(base,'auditions/proposal-11/_build/narration-manifest.json')));
+const source=JSON.parse(await readFile(resolve(base,'auditions/proposal-12/_build/narration-manifest.json')));
 const record=JSON.parse(await readFile(source.cacheFile+'.json'));
 const wav=await readFile(source.cacheFile),hash=b=>createHash('sha256').update(b).digest('hex');
 assert.equal(hash(wav),source.sha256);
@@ -23,13 +23,10 @@ const bounds=phrase=>{
   return [alignment.character_start_times_seconds[first],alignment.character_end_times_seconds[last]];
 };
 const holds=[
-  ['ancestor','minhas ancestrais.','Vou mostrar como ela funciona!',3],
   ['face-reveal','As relações mecânicas da máquina são descritas em Python.','Você também pode criar modelos',3],
   ['testing','verifica a geometria.','O código-fonte deste vídeo',3],
   ['behind-the-film','palavras faladas.','E aqui está o código',3],
   ['mirror','Olha que legal!','E a melhor parte',3],
-  ['identity','Eu sou Machinome!','Meu propósito',1.5],
-  ['purpose','Meu propósito é permitir que todas as máquinas sejam de código aberto.','O que você quer construir?',2],
 ].map(([shot,after,before,minimum])=>{
   const end=bounds(after)[1],next=bounds(before)[0],gap=next-end;
   assert(gap>.06,`No safe sentence gap for ${shot}`);
@@ -93,8 +90,8 @@ const pauses=holds.map(h=>({...h,voiceEnd:shift(h.acousticSilence.start),nextVoi
 for(const key of ['character_start_times_seconds','character_end_times_seconds'])alignment[key]=alignment[key].map(t=>shift(correct(t)));
 Object.assign(record,{sha256:hash(edited),duration:(edited.length-44)/48000,audioEdits:holds,
   alignmentCalibration:calibration,
-  source:'Continuous Jessica take 11 plus sentence-boundary silences; no internal Studio edits, voice stretching or phrase replacement.'});
-const build=resolve(base,'_build/reading-pauses-11');await mkdir(resolve(build,'audio'),{recursive:true});
+  source:'Continuous Jessica take 12; editorial silence only at four code-scene transitions. All within-scene pauses belong to the generated performance.'});
+const build=resolve(base,'_build/reading-pauses-12');await mkdir(resolve(build,'audio'),{recursive:true});
 const file=resolve(build,'audio',basename(source.cacheFile));
 await writeFile(file,edited);await writeFile(file+'.json',JSON.stringify(record,null,2)+'\n');
 const manifest={...source,cacheFile:file,sha256:record.sha256,duration:record.duration,audioEdits:holds,
@@ -108,5 +105,5 @@ const words=Object.fromEntries(['waterwheel','spin','drives','crankshaft'].map(w
   const [start,end]=bounds(word);return [word,{start,end}];
 }));
 await writeFile(resolve(build,'relation-timing.json'),JSON.stringify({schema:'cut5-relation-timing/1',
-  audioSha256:record.sha256,method:'Take 11 provider alignment shifted by documented sentence-boundary silences; not independent phonetic validation.',words},null,2)+'\n');
+  audioSha256:record.sha256,method:'Take 12 provider alignment calibrated and shifted at code-scene transitions only; not independent phonetic validation.',words},null,2)+'\n');
 console.log(JSON.stringify({duration:record.duration,sha256:record.sha256,pauses,spokenSamplesPreserved:true},null,2));

@@ -14,6 +14,8 @@ assert.equal(manifest.text,original.text.replace('Eu sou o Machinome.','Eu sou M
 const chapter=doc.chapters[0],fps=doc.output.fps;
 const pauses=manifest.pauses.filter(p=>['face-reveal','testing','behind-the-film','mirror'].includes(p.shot));
 assert.equal(pauses.length,4);
+assert.equal(manifest.audioEdits.length,4,'No editorial pauses within scenes.');
+assert(manifest.audioEdits.every(p=>pauses.some(h=>h.shot===p.shot)));
 for(const pause of pauses){
   const shot=chapter.shots.find(s=>s.id===pause.shot);
   const end=chapter.speechOffset+pause.voiceEnd;
@@ -39,11 +41,14 @@ for(const p of manifest.pauses){
   assert(p.at>p.acousticSilence.start&&p.at<p.acousticSilence.end);
   assert(p.nextVoiceStart-p.voiceEnd>=p.minimum);
 }
-const identity=manifest.pauses.find(p=>p.shot==='identity');
-assert(identity.nextVoiceStart-identity.voiceEnd>=1.5);
-const purpose=manifest.pauses.find(p=>p.shot==='purpose');
-assert(purpose.nextVoiceStart-purpose.voiceEnd>=2);
-const studio=manifest.sections.find(s=>s.id==='studio');
-assert(studio.end-studio.start>original.sections.find(s=>s.id==='studio').end-original.sections.find(s=>s.id==='studio').start);
+// The entire ending, including natural pauses, must be byte-identical to
+// the provider performance; only trailing post-performance padding is extra.
+const source=await read('auditions/proposal-12/_build/narration-manifest.json');
+const raw=await readFile(source.cacheFile),edited=await readFile(manifest.cacheFile);
+const last=manifest.audioEdits.at(-1);
+const offset=44+last.sample*2;
+const inserted=manifest.audioEdits.reduce((n,e)=>n+e.samples*2,0);
+assert(edited.subarray(offset+inserted,offset+inserted+raw.length-offset).equals(raw.subarray(offset)),
+  'The open-source passage and final performance must remain continuous and untouched.');
 assert(doc.output.durationSeconds<270,'Leave at least half a minute for the live introduction.');
 console.log(`Duration ${doc.output.durationSeconds}s; ${300-doc.output.durationSeconds}s available in five minutes.`);
