@@ -42,6 +42,11 @@ reconstruído · forças e corte não simulados”, em todas as quatro cenas
 que o colocavam sobre o mecanismo. finish.mjs elimina o elemento,
 suas posições e seus cues; áudio, câmeras e demais elementos preservados.
 
+Na cena do código do vídeo, `move` permanece destacado durante a expressão
+gravada “movem a câmera” (158,625–159,430s), e `spoken` durante “palavras
+faladas” (161,625–162,630s), em vez de só a primeira palavra. Alterados
+somente os términos desses dois cues; a narração não foi modificada.
+
 Para avaliar movie.py no ambiente atual, use
 `PYTHONPATH=.:/home/asa/devel/machinome/videomaker/python`.
 

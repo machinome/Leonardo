@@ -80,8 +80,8 @@ opening.cues.push({at:0,
   until:{spoken:'A roda faz revoluções, e os humanos dão um propósito.',plus:0.6},
   actions:[{element:'ai-notice',action:'show',
     enter:{kind:'fade',duration:0.6},leave:{kind:'fade',duration:0.6}}]});
-// The explanatory tokens flash for a sua recorded word, not the rest
-// of the locating phrase. The longer phrase only disambiguates the anchor.
+// Most tokens follow their recorded word. The pilot requested that move
+// and spoken stay lit for their complete explanatory phrases.
 const alignedText=take.alignment.characters.join('');
 for(const id of ['behind-the-film','mirror']){
   const shot=chapter.shots.find(s=>s.id===id);
@@ -92,8 +92,10 @@ for(const id of ['behind-the-film','mirror']){
     if(id==='mirror'&&!phrase.startsWith('código desta'))continue;
     const index=alignedText.indexOf(phrase);
     assert.ok(index>=0&&alignedText.indexOf(phrase,index+1)<0);
-    const firstWord=phrase.split(' ')[0].replace(/[.,;:!?]+$/,'');
-    const last=Array.from(alignedText.slice(0,index)+firstWord).length-1;
+    const fullPhrase=id==='behind-the-film'&&cue.actions.some(a=>
+      ['move','spoken'].includes(a.params?.token));
+    const span=fullPhrase?phrase:phrase.split(' ')[0].replace(/[.,;:!?]+$/,'');
+    const last=Array.from(alignedText.slice(0,index)+span).length-1;
     cue.until=chapter.speechOffset+take.alignment.character_end_times_seconds[last]-timed.start;
   }
 }
