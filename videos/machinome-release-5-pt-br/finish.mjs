@@ -26,7 +26,7 @@ assert.equal(doc.chapters[0].narration,approved.text);
 // The earlier provider take collapsed crankshaft to 10 ms and delayed drives.
 // Re-measure each fresh take and correct only these visual spans locally;
 // neither the cached alignment nor audio nor scene boundaries are rewritten.
-const relationTiming=JSON.parse(await readFile(resolve(base,'relation-timing.json')));
+const relationTiming=JSON.parse(await readFile(resolve(base,selection.relationTiming??'relation-timing.json')));
 assert.equal(relationTiming.schema,'cut5-relation-timing/1');
 // Local pause edits shift the approved phonetic measurements, not the words.
 if(take.sha256!==relationTiming.audioSha256){
@@ -59,6 +59,22 @@ const ancestry=doc.chapters[0].shots.find(s=>s.id==='ancestor');
 ancestry.until={spoken:'Vou mostrar como ela funciona!'};
 ancestry.cues.find(c=>c.actions.some(a=>a.action==='move')).actions
   .find(a=>a.action==='move').until={spoken:'Vou mostrar como ela funciona!'};
+// Re-snap the existing graphic-to-wheel handoff for this take's frame grid.
+// Its 1.25s of graphic-only spin stays the same, even after inserted pauses.
+if(approved.pauses){
+  const phrase='por baixo de tudo',index=relationText.indexOf(phrase);
+  assert(index>=0&&relationText.indexOf(phrase,index+1)<0);
+  const first=Array.from(relationText.slice(0,index)).length;
+  const spoken=doc.chapters[0].speechOffset+take.alignment.character_start_times_seconds[first];
+  const fps=doc.output.fps,arrival=14/fps+.25*Math.sqrt(870/1940);
+  const target=Math.round((Math.ceil(spoken*fps)/fps+arrival+1.25)*fps)/fps;
+  const retime=value=>{
+    if(!value||typeof value!=='object')return;
+    if(value.spoken===phrase&&value.plus===2.01)value.plus=target-spoken;
+    else for(const child of Object.values(value))retime(child);
+  };
+  retime(doc.chapters[0]);
+}
 const measured=resolveMovie(doc,{continuous:take});
 const chapter=doc.chapters[0];
 // Pilot correction: no small reconstruction disclaimer over the mechanism.
@@ -149,8 +165,11 @@ for(let i=1;i<=160;i++){
 const testing=chapter.shots.find(s=>s.id==='testing');
 const timedTesting=measured.chapters[0].shots.find(s=>s.id==='testing');
 const stepsCue=timedTesting.cues.find(c=>c.actions.some(a=>a.params?.token==='testing_steps'));
-const sampleStart=stepsCue.at, sampleEnd=timedTesting.end-timedTesting.start-1;
-const samplePeriod=(sampleEnd-sampleStart)/13;
+const sampleStart=stepsCue.at;
+// In the reading experiment keep stepping right through the silent tail:
+// thirteen samples include both endpoints, hence twelve intervals.
+const sampleEnd=timedTesting.end-timedTesting.start-(approved.pauses?1/doc.output.fps:1);
+const samplePeriod=(sampleEnd-sampleStart)/(approved.pauses?12:13);
 const keys=[{at:0,seconds:0},{at:sampleStart,seconds:0}];
 for(let i=1;i<13;i++){
   const t=sampleStart+i*samplePeriod;

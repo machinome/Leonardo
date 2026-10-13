@@ -1,8 +1,8 @@
 {
   "notice": "Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.",
-  "id": "pythonbrasil-audition-8-jessica",
-  "sourceRevision": "b196e52",
-  "status": "proposta para escuta; vídeo ainda não sincronizado",
+  "id": "pythonbrasil-audition-10-jessica",
+  "sourceRevision": "02d52e5",
+  "status": "experiência sincronizada no viewer 8790; nova interpretação e pausas aguardam escuta do piloto",
   "audio": {
     "provider": "elevenlabs",
     "model": "eleven_v3",
@@ -11,7 +11,7 @@
     "outputFormat": "pcm_24000",
     "voiceSettings": {"stability": 0.0, "similarity_boost": 0.75}
   },
-  "direction": "Uma única interpretação contínua. Português brasileiro, com leitura em inglês dos trechos de código, sem traduções intercaladas. Calma e clareza como base; inspiração nas revoluções; emoção discreta na ancestralidade; guia de museu paciente durante a mecânica; confiança acolhedora no final. Sem pressa, sussurros, choro ou tom publicitário. Pausas executadas pela voz; nenhuma montagem, aceleração ou silêncio inserido. A duração decorre da interpretação, sem limite herdado do filme inglês.",
+  "direction": "Uma única interpretação contínua de Jessica, com o mesmo texto. Português brasileiro e trechos de código em inglês, sem traduções intercaladas. Preservar inspiração, curiosidade, ancestralidade calorosa e confiança final sem enfatizar você. Código: explicação mais lenta e paciente, dando tempo de acompanhar a tela. Estúdio: ainda mais devagar, um guia acolhedor que dá tempo para localizar cada ação. Não preencher cinco minutos: deixar espaço para a apresentação ao vivo. Os tags em directedText são enviados; esta descrição registra a intenção. Após a geração, pausas editoriais garantem cinco segundos de leitura em cada cena de código e três segundos após ancestrais; sem acelerar nem alongar artificialmente a voz.",
   "sections": [
     {
       "id": "revolucoes",
@@ -36,22 +36,22 @@
     {
       "id": "codigo",
       "emotion": "Após a pausa da reconstrução, apresentar o código com firmeza. Concluir drives the crankshaft com cadência descendente e ritmo deliberado. Após uma pequena pausa, resumir com clareza e confiança: As relações mecânicas da máquina são descritas em Python. Não traduzir o exemplo inglês; concluir a ideia geral, então deixar uma pausa longa de cena antes do convite luminoso ao Studio.",
-      "directedText": "[confident] From Machinome dot node dot assembly import AssemblyNode. [warmly] Este é o Machinome, o framework CAD de código aberto para construir máquinas. [serious] [slowly] The waterwheel spin drives the crankshaft. [pause] [confident] As relações mecânicas da máquina são descritas em Python. [long pause]"
+      "directedText": "[very slowly] [deliberately] From Machinome dot node dot assembly import AssemblyNode. [long pause] [slowly] [warmly] Este é o Machinome, o framework CAD de código aberto para construir máquinas. [long pause] [serious] [very slowly] The waterwheel spin drives the crankshaft. [long pause] [slowly] As relações mecânicas da máquina são descritas em Python. [long pause]"
     },
     {
       "id": "studio",
-      "emotion": "Após a pausa de cena, reabrir o registro com entusiasmo acolhedor em Você também pode: uma possibilidade nova. Contraste claro com o fechamento sério do código, sem gritar. Depois, guiar as ações com calma. Concluir animação e dar espaço antes de voltar aos testes em código.",
-      "directedText": "[excited] Você também pode criar modelos pelo navegador, usando o Machinome Studio! [guiding] Nele, você conversa com seus agentes, vê o código-fonte, constrói o projeto e interage com o modelo para ver diferentes ângulos e momentos da animação. [long pause]"
+      "emotion": "Após a pausa de cena, abrir uma possibilidade com calor acolhedor, sem pressa. Estúdio é o trecho mais paciente: um guia que espera o público localizar chat, código, construção, ângulo e tempo da animação. Tags very slowly, patiently e unhurried e pausas longas entre ações são enviados no texto. A montagem acrescenta pequenos respiros mensurados entre ações, sem alterar a velocidade da voz.",
+      "directedText": "[very slowly] [warmly] Você também pode criar modelos pelo navegador, usando o Machinome Studio! [long pause] [patiently] [very slowly] Nele, você conversa com seus agentes, [long pause] [unhurried] vê o código-fonte, [long pause] constrói o projeto [long pause] [very slowly] e interage com o modelo para ver diferentes ângulos [long pause] e momentos da animação. [long pause]"
     },
     {
       "id": "testes",
       "emotion": "Precisão paciente. A explicação do teste deve ser compreensível, com pequenas pausas entre sua intenção, amostragem e resultado. Articular verifica a geometria com especial clareza, preservando todas as sílabas de verifica, sem trocar sons nem fragmentar a frase.",
-      "directedText": "[confident] O Machinome também oferece uma estrutura de testes, que permite verificar como as peças se encaixam. [explaining] Este teste verifica se a lâmina não intersecta nenhuma das duas metades da tora. [pause] Testing steps repete essas verificações em treze instantes, de zero a quatro segundos: uma volta completa da roda. [slowly] Cada amostra reposiciona a máquina e [carefully enunciating] verifica a geometria. [long pause]"
+      "directedText": "[very slowly] [confident] O Machinome também oferece uma estrutura de testes, que permite verificar como as peças se encaixam. [long pause] [slowly] [explaining] Este teste verifica se a lâmina não intersecta nenhuma das duas metades da tora. [long pause] [very slowly] Testing steps repete essas verificações em treze instantes, de zero a quatro segundos: uma volta completa da roda. [long pause] [slowly] Cada amostra reposiciona a máquina e [carefully enunciating] verifica a geometria. [long pause]"
     },
     {
       "id": "codigo_do_filme",
       "emotion": "Revelação com surpresa e entusiasmo perceptíveis na entrada O código-fonte deste vídeo também está em Python. Recomeçar com outra surpresa na autorreferência: E aqui está o código desta exata cena! Olha que legal! Sorriso e prazer na descoberta, sem voz neutra de enumeração.",
-      "directedText": "[surprised] [excited] O código-fonte deste vídeo também está em Python! [curious] Narration, Camera, Shot. [explaining] As Cues movem a câmera e destacam a serra em sincronia com as palavras faladas. [long pause]\n\n[delighted] E aqui está o código desta exata cena! [excited] Olha que legal!"
+      "directedText": "[very slowly] [surprised] O código-fonte deste vídeo também está em Python! [long pause] [slowly] [curious] Narration, [pause] Camera, [pause] Shot. [long pause] [very slowly] [explaining] As Cues movem a câmera e destacam a serra em sincronia com as palavras faladas. [long pause]\n\n[slowly] [delighted] E aqui está o código desta exata cena! [long pause] [warmly] Olha que legal!"
     },
     {
       "id": "codigo_aberto",

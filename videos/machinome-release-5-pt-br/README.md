@@ -9,12 +9,25 @@ manter esta porta e a interface completa do Videomaker: atualizar a tomada
 no viewer para ouvir com um reload, sem substituí-lo por HTML ou links de
 áudio em outra porta.
 
-A prévia usa a tomada 8 da Jessica: “constroem as suas” e pergunta
-final sem ênfase especial em você, agora com uma pausa editorial de 2,4s
-inserida depois de “ancestrais”. preview-take.json seleciona esse derivado;
-finish.mjs reutiliza o cache, refaz o mix e resolve as âncoras.
-Nenhuma síntese extra e nenhum MP4 novo. Duração atual da prévia:
-206,791667s; áudio de 201,360s, entrada de 3s e saída.
+A prévia atual é a experiência da tomada 10 de Jessica: interpretação
+contínua nova, com o mesmo texto, mais calma nas cenas de código e estúdio.
+Quatro pausas de leitura de pelo menos cinco segundos, após a última fala
+de cada cena de código; código completo e parado, animações continuam.
+O teste distribui suas treze amostras até o último quadro, inclusive no
+silêncio. Pequenos respiros entre ações do estúdio dão tempo para localizar
+cada área. Mantidos plural no encerramento, ausência de ênfase em você,
+contemplação após ancestrais e todos os ajustes visuais aprovados.
+
+Duração: **236,750s (3min56,75s)**, deixando 63,250s dentro dos cinco
+minutos da lightning talk. Voz original: 208,400s; derivado com pausas:
+231,309208s. Nenhuma alteração digital de velocidade ou tom. A naturalidade
+da nova interpretação aguarda o piloto; nenhuma alegação de escuta subjetiva
+pelo agente. Nenhum MP4 novo. Registro em auditions/proposal-10/AUDITION.md.
+
+A prévia aprovada anterior (tomada 8 com contemplação) tinha 206,791667s
+e está preservada em _build/approved-before-reading-pauses e no histórico
+02d52e5. preview-take.json seleciona a experiência; a tomada original 8
+continua intacta. finish.mjs usa somente áudio em cache, sem gerar voz.
 O MP4 aprovado abaixo continua sendo a tomada 7, preservada no checkpoint
 b196e52, com sua matriz em _build/approved. Não confundir os dois estados.
 
@@ -42,15 +55,32 @@ reconstruído · forças e corte não simulados”, em todas as quatro cenas
 que o colocavam sobre o mecanismo. finish.mjs elimina o elemento,
 suas posições e seus cues; áudio, câmeras e demais elementos preservados.
 
-Na cena do código do vídeo, `move` permanece destacado durante a expressão
+Na versão anterior, na cena do código do vídeo, `move` permanece destacado durante a expressão
 gravada “movem a câmera” (158,625–159,430s), e `spoken` durante “palavras
 faladas” (161,625–162,630s), em vez de só a primeira palavra. Alterados
 somente os términos desses dois cues; a narração não foi modificada.
+Essa regra de frases inteiras foi mantida e realinhada à tomada 10.
+
+### Reproduzir a experiência de leitura
+
+Não gerar novamente: os recibos e arquivos originais das tomadas 9 e 10
+estão preservados nos respectivos _build. A tomada 9 não foi selecionada.
+Execute reading-pauses.mjs para produzir o derivado da tomada 10, copie
+o cacheFile do manifesto gerado e seu .json para _build/audio, e o
+manifesto para _build/narration-manifest.json. Pare somente o viewer 8790
+antes de avaliar movie.py e executar finish.mjs, depois reabra live na
+mesma porta. Use o PYTHONPATH abaixo. Execute check-reading-pauses.mjs:
+verifica texto inalterado, quatro pausas, transição do estúdio só após
+leitura, steps até o fim, duração e preservação das remoções solicitadas.
+
+Conferência no navegador: código integral idêntico a +1s e +4,5s em cada
+pausa, estados do estúdio e ausência de erro do player. A conferência
+independente do encerramento está no _build/ending-check.json da tomada 10.
 
 Para avaliar movie.py no ambiente atual, use
 `PYTHONPATH=.:/home/asa/devel/machinome/videomaker/python`.
 
-### Pausa de contemplação
+### Pausa de contemplação — versão anterior, tomada 8
 
 `node videos/machinome-release-5-pt-br/ancestry-pause.mjs` reproduz a edição
 a partir da tomada 8 original preservada em auditions/proposal-8: insere
