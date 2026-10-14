@@ -23,6 +23,13 @@ assert.ok(take,'Continuous take is missing. This command does not generate speec
 assert.equal(take.sha256,approved.sha256,'The film must reuse the recorded audio bytes.');
 assert.equal(doc.chapters.length,1);
 assert.equal(doc.chapters[0].narration,approved.text);
+// The upstream SVG uses point dimensions but has no viewBox. Without it,
+// CSS scales the viewport, not the paths: the logo drifts left at 1080p.
+// Preserve the original art and its full intrinsic extent, including shadow.
+const pythonLogo=doc.chapters[0].elements.python.props;
+assert.equal(pythonLogo.tagline,'Python');
+if(!/\bviewBox=/.test(pythonLogo.svg))
+  pythonLogo.svg=pythonLogo.svg.replace('<svg','<svg viewBox="0 0 111.161356 134.668107"');
 // The earlier provider take collapsed crankshaft to 10 ms and delayed drives.
 // Re-measure each fresh take and correct only these visual spans locally;
 // neither the cached alignment nor audio nor scene boundaries are rewritten.
