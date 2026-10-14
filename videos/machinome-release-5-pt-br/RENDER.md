@@ -2,6 +2,51 @@
 
 Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
 
+## Telão — Full HD supersampled, 14 de outubro de 2026
+
+Entrega atual: _build/machinome-pythonbrasil-pt-br-fullhd-projection.mp4.
+Captura real de todos os 5.183 quadros a 3840×2160, reduzida diretamente
+dos PNGs sem perdas para 1920×1080 por Lanczos. H.264, preset slow,
+CRF 14, yuv420p, 24 fps, faststart; 215,958333s; 35.896.853 bytes.
+Não é ampliação de um vídeo de menor resolução nem recompressão do MP4
+anterior. O intermediário 4K e seus PNGs permanecem no _build.
+SHA-256: c28d8ce17a8b33362d728f7da4b36afdfaf922306ecb593d68883db1e95ce391.
+
+Causa do logo deslocado: SVG upstream sem viewBox, com dimensões em pt;
+o CSS aumentava seu viewport, mas não seus paths. finish.mjs acrescenta
+viewBox equivalente às dimensões intrínsecas completas, incluindo sombra,
+sem modificar o arquivo upstream. Centros dos paths medidos em
+479,984 / 959,992 / 1919,992 pixels para larguras 960 / 1920 / 3840.
+Comparação estrutural dos documentos: somente o SVG Python mudou.
+Os tempos, a narração e todas as outras declarações permaneceram iguais.
+
+O MP4 anterior já era Full HD; as bordas mostravam serrilhado nos PNGs
+antes da compressão. A captura 4K e redução suavizam essa amostragem;
+o novo CRF 14 também reduz perdas frente ao CRF 18 anterior. As imagens
+raster herdadas não ganham detalhe inventado: a tolerância de ampliação
+foi validada em Full HD e duplicada apenas no intermediário 4K. O primeiro
+render parou nesse limite no desenho; a retomada reutilizou os planos
+concluídos, sem alterar a ampliação final aprovada.
+
+Trilha AAC copiada sem reencodificação da entrega anterior. Hash dos
+pacotes de áudio idêntico nos dois MP4:
+2704906c8457342248e7a2309abe9ddbc0692d1e4012dc63c54472f05c47233d.
+Nenhuma síntese nova. Inspecionados quadros decodificados do Full HD em
+2s, 87,5s, 118s e 212s: abertura, Python, estúdio e encerramento.
+Contagem de quadros, dimensões, fps e trilha verificados pelo script.
+
+Procedência em _build/projection-master.json e
+_build/projection-4k-manifest.json. O segundo mantém a procedência
+herdada e as ressalvas de publicação; isto não é autorização de publicação.
+Render anterior preservado em _build/before-projection-render/.
+Viewer completo mantido na 8790, com o logo corrigido.
+
+Reprodução:
+
+```sh
+node videos/machinome-release-5-pt-br/render-projection.mjs /home/asa/devel/machinome/videomaker /home/asa/devel/machinome/machinome-viewer/machinome_viewer/widget/dist/machinome-viewer.js
+```
+
 ## Python Brasil — tomada 12 aprovada
 
 Render solicitado após aprovação da prévia da tomada 12. Fontes no commit

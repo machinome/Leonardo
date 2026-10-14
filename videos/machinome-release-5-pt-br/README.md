@@ -26,7 +26,10 @@ minutos da lightning talk. Voz original: 201,760s; derivado com pausas:
 210,593083s. Nenhuma alteração digital de velocidade ou tom. A naturalidade
 da nova interpretação aguarda o piloto; nenhuma alegação de escuta subjetiva
 pelo agente. O piloto aprovou a tomada 12 e solicitou o MP4, agora gerado
-em _build/machinome-pythonbrasil-pt-br-take12.mp4; ver RENDER.md.
+em _build/machinome-pythonbrasil-pt-br-fullhd-projection.mp4; ver RENDER.md.
+Esta entrega para telão captura em 4K e reduz para Full HD, com compressão
+CRF 14 e logo Python centralizado em todas as resoluções. Áudio inalterado.
+O primeiro MP4 take12 permanece preservado.
 Registro da interpretação em auditions/proposal-12/AUDITION.md.
 
 A prévia aprovada anterior (tomada 8 com contemplação) tinha 206,791667s
