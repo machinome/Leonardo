@@ -22,6 +22,21 @@ const approved=JSON.parse(await readFile(resolve(base,'_build/reading-pauses-12/
 assert.equal(audio.records[0].sha256,approved.sha256);
 assert.equal(await fileHash(audio.mix),
   await fileHash(resolve(base,'_build/before-projection-render/narration.wav')));
+// Allowances describe final delivered pixels, not the oversampled intermediate.
+// Validate at 1080p first, then scale only the capture allowance by exactly 2.
+// The artwork itself is unchanged and gains no invented source detail.
+const {browserSession}=await use('src/render.mjs');
+await browserSession(film,viewer,1920,[],async({pose})=>{
+  const shot=film.chapters[0].shots.find(s=>s.id==='document');
+  for(const t of [shot.start,(shot.start+shot.end)/2,shot.end-1/24])await pose(t);
+});
+const mediaAllowances=[];
+for(const kind of ['stills','clips'])for(const [name,media] of Object.entries(film.pictureMedia?.[kind]??{})){
+  if(media.format!=='svg'){
+    mediaAllowances.push({kind,name,finalAllowance:media.upscale,captureAllowance:media.upscale*2});
+    media.upscale*=2;
+  }
+}
 await render(film,{viewer,width:3840,fps:24,audio,label:'projection-4k'});
 const capturePath=resolve(base,'_build/projection-4k-manifest.json');
 const capture=JSON.parse(await readFile(capturePath));
@@ -49,7 +64,7 @@ assert.equal(copiedAudio,await audioHash(resolve(base,'_build/before-projection-
 await writeFile(resolve(base,'_build/projection-master.json'),JSON.stringify({
   schema:'leonardo-projection-master/1',output,outputSha256:await fileHash(output),
   captureManifest:capturePath,captureManifestSha256:await fileHash(capturePath),
-  sourceResolution:[3840,2160],outputResolution:[1920,1080],
+  sourceResolution:[3840,2160],outputResolution:[1920,1080],mediaAllowances,
   frames:capture.count,fps:24,duration:film.output.durationSeconds,
   audioPackets:copiedAudio,approvedTake:approved.sha256,ffmpegArgs:args,probe,
 },null,2)+'\n');
