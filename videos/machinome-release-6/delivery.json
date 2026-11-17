@@ -1,0 +1,71 @@
+{
+  "notice": "Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.",
+  "id": "revolutions-en-final-audition-1-jessica",
+  "sourceRevision": "7d537d7",
+  "status": "First English audition after the Brazilian cut; one continuous performance, awaiting the pilot's listening review.",
+  "audio": {
+    "provider": "elevenlabs",
+    "model": "eleven_v3",
+    "voice": "cgSgspJ2msm6clMCkdW9",
+    "voiceLabel": "Jessica",
+    "outputFormat": "pcm_24000",
+    "voiceSettings": {
+      "stability": 0,
+      "similarity_boost": 0.75
+    }
+  },
+  "pronunciation": "../machinome-release-1/assets/pronunciation.json",
+  "direction": "One continuous Jessica performance, carrying the direction approved for Brazilian take 12 into English. A natural, serene and lively opening that does not drag. A breath before 'a river' and before 'But the timber'; welcoming enthusiasm on 'Let me show you how it works'. Patient code reading and a calm Studio. The contemplation after 'ancestors' and in the closing belongs to the performance alone, through pause tags and paragraph structure. No silence is inserted, cut or stretched inside any scene; only the four transitions after code admit a three-second reading hold in the edit.",
+  "sections": [
+    {
+      "id": "revolutions",
+      "emotion": "Serene confidence at a natural conversational pace. Inspiring without slow solemnity or stretched syllables.",
+      "directedText": "[conversational] [confident] The wheel makes revolutions, and humans give it a purpose. [pause]"
+    },
+    {
+      "id": "ancestry",
+      "emotion": "Historical admiration, then contained emotion and closeness on 'one of my ancestors'. The voice warms without sadness or drama. A performed breath before 'a river', without rushing the sentence. At the end, contemplate 'ancestors' with a natural pause while the camera finishes its turn.",
+      "directedText": "[warmly] [conversational] Five centuries ago, Leonardo da Vinci designed a water-powered sawmill. Machines like this were changing the relationship between people and work: [long pause] [measured] a river could help turn a tree into timber. [warmly] I am a machine, too. In the history of human tools, this sawmill is one of my ancestors. [long pause]"
+    },
+    {
+      "id": "mechanism",
+      "emotion": "An invitation with audible curiosity on 'Let me show you how it works'; lead the discovery and react to the timber's need to move. 'Follow it down and across' is one verbal gesture. 'One wheel, two jobs' is one satisfied conclusion, with no falling phrase after 'wheel'. Pauses fall between mechanical relations, never inside those two thoughts. A natural breath before 'But the timber has to move, too'.",
+      "directedText": "[excited] [inviting] Let me show you how it works! [pause] [explaining] Water beneath the wheel turns this shaft. A crank and connecting rod turn that rotation into the saw's up-and-down stroke. [long pause] [curious] But the timber has to move, too. [explaining] On the cutting stroke, this long lever pulls a pawl across one tooth of a ratchet. A second pawl holds that progress while the first returns. [pause] That small step winds a rope onto this axle. [curious] Follow it down and across. [explaining] It turns a compound shaft: a broad drum unwinds one rope while a thinner section takes up another. [pause] The second rope draws the timber towards the blade. [pleased] One wheel, two jobs: cut and advance."
+    },
+    {
+      "id": "reconstruction",
+      "emotion": "Turn from observing to reconstructing with reflective interest.",
+      "directedText": "[thoughtful] To reconstruct this machine, I relied on historical documents and museum pictures, and used the Python language. [long pause]"
+    },
+    {
+      "id": "code",
+      "emotion": "After the reconstruction pause, present the code firmly. Read the import and the relation slowly enough to follow on screen; end 'drives the crankshaft' with a falling cadence. After a small pause, conclude clearly and confidently: the machine's mechanical relations are described in Python. Then leave a long scene pause before the bright invitation to Studio.",
+      "directedText": "[very slowly] [deliberately] From Machinome dot node dot assembly import AssemblyNode. [long pause] [slowly] [warmly] This is Machinome, the open source CAD framework for building machines. [long pause] [serious] [very slowly] The waterwheel spin drives the crankshaft. [long pause] [slowly] The machine's mechanical relations are described in Python. [long pause]"
+    },
+    {
+      "id": "studio",
+      "emotion": "After the scene pause, open a possibility with unhurried, welcoming warmth. Studio is the most patient passage: a guide waiting for the audience to find the chat, the code, the build, the angle and the animation's time. No editorial insertion inside this sentence: 'different angles and moments of the animation' stays continuous.",
+      "directedText": "[very slowly] [warmly] You can also build models from your browser, using Machinome Studio! [long pause] [patiently] [very slowly] There, you can prompt your agents, [long pause] [unhurried] see the source code, [long pause] build the project, [long pause] [very slowly] and interact with the model to see different angles and moments of the animation. [long pause]"
+    },
+    {
+      "id": "testing",
+      "emotion": "Patient precision. The test's explanation should be easy to follow, with small pauses between its intention, its sampling and its result.",
+      "directedText": "[very slowly] [confident] Machinome also provides a testing framework, that allows us to test how parts fit together. [long pause] [slowly] [explaining] This test checks that the blade does not intersect either half of the timber. [long pause] [very slowly] Testing steps repeats those assertions at thirteen instants from zero to four seconds: one full wheel turn. [long pause] [slowly] Each sample poses the machine again, then checks the geometry. [long pause]"
+    },
+    {
+      "id": "film-source",
+      "emotion": "Audible surprise and enthusiasm at the change of scene; pleasure in the reveal of 'How cool is that?'. Identifiers are read plainly, one at a time.",
+      "directedText": "[very slowly] [surprised] This video's source code is in Python too! [long pause] [slowly] [curious] A narration, [pause] a camera, [pause] a shot. [long pause] [very slowly] [explaining] Cues move the camera and highlight the saw in sync with the spoken words. [long pause]\n\n[slowly] [delighted] And here's the code of this exact scene! [long pause] [warmly] How cool is that?"
+    },
+    {
+      "id": "open-source",
+      "emotion": "Moderate enthusiasm; every name legible, returning to contemplation on the stream of technologies.",
+      "directedText": "[excited] And the best part is: this is all open source! [proud] Machinome connects existing CAD technologies: OpenSCAD, SolidPython, CadQuery, Build123d, FreeCAD, JSCAD, OCCT, Trimesh. [pause] [wonder] And beneath it all, a stream of open source technologies... [long pause]"
+    },
+    {
+      "id": "closing",
+      "emotion": "Take up the inspiration again, state the identity and the purpose with confidence, each followed by a performed pause, and end on a warm, natural question with no shouted or contrastive emphasis.",
+      "directedText": "[inspiring] The wheel makes revolutions... and humans build their own. [pause]\n\n[confident] I'm Machinome! [long pause]\n\n[reflective] My purpose is to enable all machines to be open source. [long pause]\n\n[warmly] What do you want to build?"
+    }
+  ]
+}

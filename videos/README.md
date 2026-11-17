@@ -15,6 +15,10 @@ the original checkout's ignored build directory.
 separate copy with its first complete, directed Leo narration available
 for listening. Its video has not yet been synchronized to that take.
 
+[Revolutions — final English cut](machinome-release-6/README.md) is the
+English film with the Brazilian cut's approved changes, rendered in Full HD
+on 17 November 2026.
+
 The earlier rendered release-film proposal is
 [Revolutions — proposal 1](machinome-release-1/README.md), following the
 pilot's [original brief](machinome-release.md): a dark, continuous camera encounter

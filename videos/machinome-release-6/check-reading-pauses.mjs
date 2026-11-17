@@ -1,0 +1,52 @@
+// Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
+import assert from 'node:assert/strict';
+import {readFile} from 'node:fs/promises';
+import {dirname,resolve} from 'node:path';
+import {fileURLToPath} from 'node:url';
+const base=dirname(fileURLToPath(import.meta.url));
+const read=async file=>JSON.parse(await readFile(resolve(base,file)));
+const doc=await read('_build/movie-resolved.json');
+const selection=await read('preview-take.json');
+const manifest=await read(selection.manifest);
+const source=await read('_build/audition-1/narration-manifest.json');
+assert.equal(manifest.text,source.text,'The pauses change no word of the approved take.');
+const chapter=doc.chapters[0],fps=doc.output.fps;
+const pauses=manifest.pauses.filter(p=>['face-reveal','testing','behind-the-film','mirror'].includes(p.shot));
+assert.equal(pauses.length,4);
+assert.equal(manifest.audioEdits.length,4,'No editorial pauses within scenes.');
+assert(manifest.audioEdits.every(p=>pauses.some(h=>h.shot===p.shot)));
+for(const pause of pauses){
+  const shot=chapter.shots.find(s=>s.id===pause.shot);
+  const end=chapter.speechOffset+pause.voiceEnd;
+  const next=chapter.speechOffset+pause.nextVoiceStart;
+  assert.equal(pause.minimum,3);
+  assert(next-end>=3&&shot.end-end>=3);
+  // The browser layout starts arriving before the next shot's formal cut.
+  const reveal=shot.cues.find(c=>c.actions.some(a=>a.element==='studio-ui'&&a.action==='reveal'));
+  if(reveal)assert(shot.start+reveal.at-end>=3);
+  if(shot.id==='testing'){
+    const keys=shot.model.keys.filter(k=>shot.start+k.at>end);
+    assert(new Set(keys.map(k=>k.seconds)).size>=2,'Keep stepping in the silent tail.');
+    const lastChange=keys.findLast(k=>k.seconds!==keys[keys.indexOf(k)-1]?.seconds);
+    assert(shot.end-shot.start-lastChange.at<=2/fps,'No frozen tail after the steps.');
+  }
+  console.log(`${shot.id}: ${end.toFixed(3)}–${next.toFixed(3)}s without narration; cut ${shot.end.toFixed(3)}s`);
+}
+assert(!chapter.elements.limits);
+assert.equal(chapter.elements['ai-notice'].text,'AI content');
+assert(!chapter.elements.identity,'No machine title over the ancestor shot.');
+assert(!manifest.audioEdits.some(e=>e.shot.startsWith('studio')),'Never splice the Studio phrase.');
+for(const p of manifest.pauses){
+  assert(p.acousticSilence.end-p.acousticSilence.start>=.12);
+  assert(p.at>p.acousticSilence.start&&p.at<p.acousticSilence.end);
+  assert(p.nextVoiceStart-p.voiceEnd>=p.minimum);
+}
+// The entire ending, including natural pauses, must be byte-identical to
+// the provider performance; only trailing post-performance padding is extra.
+const raw=await readFile(source.cacheFile),edited=await readFile(manifest.cacheFile);
+const last=manifest.audioEdits.at(-1);
+const offset=44+last.sample*2;
+const inserted=manifest.audioEdits.reduce((n,e)=>n+e.samples*2,0);
+assert(edited.subarray(offset+inserted,offset+inserted+raw.length-offset).equals(raw.subarray(offset)),
+  'The open-source passage and final performance must remain continuous and untouched.');
+console.log(`Duration ${doc.output.durationSeconds}s.`);
