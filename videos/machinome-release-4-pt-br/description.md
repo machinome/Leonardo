@@ -51,7 +51,7 @@ pessoa é Machinome como personagem composto: ferramentas, framework,
 fundição e agente de IA. As afirmações sobre reconstrução e pesquisa se
 referem ao trabalho registrado pelo projeto, não a uma nova pesquisa
 histórica realizada por uma pessoa falando no vídeo. A voz brasileira é
-Raquel, do ElevenLabs, em uma gravação contínua.
+Leo Antonio, do ElevenLabs, em uma gravação contínua.
 
 A identidade Machinome usa o símbolo e a marca laranja aprovados de brand/v1,
 sem alterações. Permissões sobre a arte e a marca são separadas da licença

@@ -43,10 +43,10 @@ PYTHONPATH=. /home/asa/devel/machinome/.venv/bin/python videos/machinome-release
 node videos/machinome-release-3/pickup-manifold.mjs /home/asa/devel/machinome/videomaker
 PYTHONPATH=. /home/asa/devel/machinome/.venv/bin/python videos/machinome-release-3/movie.py
 node videos/machinome-release-3/finish.mjs /home/asa/devel/machinome/videomaker
-node /home/asa/devel/machinome/videomaker/bin/videomaker.mjs check videos/machinome-release-3/_build/movie.json --viewer /home/asa/devel/machinome/machinome-viewer/machinome_viewer/widget/dist/machinome-viewer.js
-node /home/asa/devel/machinome/videomaker/bin/videomaker.mjs preview videos/machinome-release-3/_build/movie.json --viewer /home/asa/devel/machinome/machinome-viewer/machinome_viewer/widget/dist/machinome-viewer.js --width 1280
+machinome movie check videos/machinome-release-3/_build/movie.json
+machinome movie preview videos/machinome-release-3/_build/movie.json --width 1280
 node videos/machinome-release-3/inspect.mjs /home/asa/devel/machinome/videomaker /home/asa/devel/machinome/machinome-viewer/machinome_viewer/widget/dist/machinome-viewer.js
-node /home/asa/devel/machinome/videomaker/bin/videomaker.mjs render videos/machinome-release-3/_build/movie.json --viewer /home/asa/devel/machinome/machinome-viewer/machinome_viewer/widget/dist/machinome-viewer.js
+machinome movie render videos/machinome-release-3/_build/movie.json
 node videos/machinome-release-3/postflight.mjs
 python videos/machinome-revolutions-v2/serve-review.py --port 8783 --directory videos/machinome-release-3
 ```

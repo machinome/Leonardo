@@ -38,13 +38,13 @@ node videos/machinome-release-1/speech.mjs \
 node videos/machinome-release-1/finish.mjs \
   /home/asa/devel/machinome/videomaker
 
-node /home/asa/devel/machinome/videomaker/bin/videomaker.mjs check \
+machinome movie check \
   videos/machinome-release-1/_build/movie.json \
   --viewer /home/asa/devel/machinome/machinome-viewer/machinome_viewer/widget/dist/machinome-viewer.js
-node /home/asa/devel/machinome/videomaker/bin/videomaker.mjs preview \
+machinome movie preview \
   videos/machinome-release-1/_build/movie.json \
   --viewer /home/asa/devel/machinome/machinome-viewer/machinome_viewer/widget/dist/machinome-viewer.js
-node /home/asa/devel/machinome/videomaker/bin/videomaker.mjs render \
+machinome movie render \
   videos/machinome-release-1/_build/movie.json --width 1280 \
   --viewer /home/asa/devel/machinome/machinome-viewer/machinome_viewer/widget/dist/machinome-viewer.js
 ```

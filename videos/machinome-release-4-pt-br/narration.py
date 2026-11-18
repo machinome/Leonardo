@@ -3,9 +3,10 @@
 # Copyright (C) 2026 Luis Henrique Cassis Fagundes. CERN-OHL-S-2.0+.
 
 import json
+import re
 from pathlib import Path
 
-from machinome_movie import Narration
+from machinome.movie import Narration
 from scene_source import scene_narration
 
 OPENING = (
@@ -70,15 +71,26 @@ lines = Narration("\n\n".join((
     THIS_SCENE, OPEN_SOURCE, STREAM, CLOSING,
 )))
 
+BASE = Path(__file__).resolve().parent
+audition = json.loads((BASE / "auditions/opening.json").read_text())
+delivery = json.loads((BASE / "delivery.json").read_text())
+directed_text = " [long pause]\n\n".join((
+    audition["directedText"], *delivery["sectionsAfterOpening"],
+))
+tags = re.findall(r"\[([^\]]+)\]", directed_text)
+assert set(tags) <= set(audition["tags"])
+assert " ".join(re.sub(r"\[[^\]]+\]", "", directed_text).split()) == lines.text
+assert len(directed_text) <= 5000
+
 AUDIO = {
     "provider": "elevenlabs",
     "model": "eleven_v3",
-    "voice": "GDzHdQOi6jjf8zaXhCYD",
-    "voiceLabel": "Raquel — Português (Brasil)",
+    "voice": "EbiSUflQjzm4g7S895SC",
+    "voiceLabel": "Leo Antonio — Português (Brasil)",
     "outputFormat": "pcm_24000",
     "voiceSettings": {"stability": 0.5, "similarity_boost": 0.75},
-    # Restore the delivery break normalized out by Narration.
-    "replacements": {"aberto... A roda": "aberto... [long pause]\n\nA roda"},
+    # Keep spoken/caption text plain; direct the full continuous performance.
+    "replacements": {lines.text: directed_text},
 }
 
 BEATS = (

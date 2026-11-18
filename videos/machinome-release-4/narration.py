@@ -5,7 +5,7 @@
 import json
 from pathlib import Path
 
-from machinome_movie import Narration
+from machinome.movie import Narration
 from scene_source import scene_narration
 
 # Ellipsis and paragraph separation request a pause; YOU requests vocal emphasis.

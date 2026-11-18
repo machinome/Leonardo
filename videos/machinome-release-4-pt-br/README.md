@@ -6,7 +6,7 @@ Copyright (C) 2026 Luis Henrique Cassis Fagundes. CERN-OHL-S-2.0+.
 [Narração original](_build/raw-narration.wav) · [Fonte](movie.py) ·
 [Texto](narration.py) · [Descrição](description.md).
 
-Versão brasileira independente do candidato a lançamento 4, com Raquel,
+Versão brasileira independente do candidato a lançamento 4, com Leo Antonio,
 voz nativa pt-BR. A relação entre roda e eixo é lida em inglês e traduzida
 imediatamente. Os identificadores Python permanecem reais; os destaques
 acompanham as duas leituras. Importação e testing_steps também recebem
@@ -18,16 +18,17 @@ a marca laranja, o texto final ampliado e a URL do framework.
 [Direção](DIRECTION.md) e [verificação](VERIFICATION.md) registram as
 escolhas e os limites. Nada publicado.
 
-Estado atual: retomada somente das [audições da abertura](auditions/README.md).
-Após cancelar a produção, o piloto decidiu manter uma voz de máquina e
-pediu opções com mais emoção e pausas entre frases. A tomada com Raquel
-foi rejeitada; não há voz escolhida ou master português aprovado.
-O novo reprodutor de áudio fica em http://127.0.0.1:8785/auditions/.
+Estado atual: o piloto escolheu Leo Antonio, opção A das
+[audições da abertura](auditions/README.md), e pediu uma tentativa do
+vídeo completo: “Let's do a full video shot with leo to see how it goes”.
+Essa instrução autoriza a nova tomada e o render de teste; não equivale
+a aprovação auditiva da performance completa, ainda por avaliar.
+`delivery.json` estende a interpretação da abertura ao restante do roteiro,
+com pausas geradas e emoção dirigida. Não há aceleração de áudio.
 
-A renderização continua interrompida. Primeiro escolher voz/interpretação;
-depois aprovar a narração completa; somente então renderizar. Fontes,
-tomadas e cache foram preservados. Os comandos abaixo são registro de
-reprodução, não uma fila de trabalho. O inglês permanece inalterado.
+A tomada com Raquel foi rejeitada. Fontes, tomadas e caches anteriores
+continuam preservados. As audições seguem em
+http://127.0.0.1:8785/auditions/. O inglês permanece inalterado.
 
 ## Reproduzir
 
@@ -41,10 +42,10 @@ node videos/machinome-release-4-pt-br/speech.mjs /home/asa/devel/machinome/video
 node videos/machinome-release-4-pt-br/audio-evidence.mjs
 PYTHONPATH=. /home/asa/devel/machinome/.venv/bin/python videos/machinome-release-4-pt-br/movie.py
 node videos/machinome-release-4-pt-br/finish.mjs /home/asa/devel/machinome/videomaker
-node /home/asa/devel/machinome/videomaker/bin/videomaker.mjs check videos/machinome-release-4-pt-br/_build/movie.json --viewer /home/asa/devel/machinome/machinome-viewer/machinome_viewer/widget/dist/machinome-viewer.js
-node /home/asa/devel/machinome/videomaker/bin/videomaker.mjs preview videos/machinome-release-4-pt-br/_build/movie.json --viewer /home/asa/devel/machinome/machinome-viewer/machinome_viewer/widget/dist/machinome-viewer.js --width 1280
+machinome movie check videos/machinome-release-4-pt-br/_build/movie.json
+machinome movie preview videos/machinome-release-4-pt-br/_build/movie.json --width 1280
 node videos/machinome-release-4-pt-br/inspect.mjs /home/asa/devel/machinome/videomaker /home/asa/devel/machinome/machinome-viewer/machinome_viewer/widget/dist/machinome-viewer.js
-node /home/asa/devel/machinome/videomaker/bin/videomaker.mjs render videos/machinome-release-4-pt-br/_build/movie.json --viewer /home/asa/devel/machinome/machinome-viewer/machinome_viewer/widget/dist/machinome-viewer.js
+machinome movie render videos/machinome-release-4-pt-br/_build/movie.json
 node videos/machinome-release-4-pt-br/postflight.mjs
 python videos/machinome-revolutions-v2/serve-review.py --port 8785 --directory videos/machinome-release-4-pt-br
 ```

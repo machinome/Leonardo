@@ -1,13 +1,13 @@
 {
-  "voiceId": "GDzHdQOi6jjf8zaXhCYD",
-  "publicOwnerId": "4a19cd68f5f2e5172b5eddbfaafdb226726e0b4035e27e952df6bbac94b8aada",
-  "name": "Raquel - Expressive and Energetic",
+  "voiceId": "EbiSUflQjzm4g7S895SC",
+  "publicOwnerId": "b0f2837ab607e8cd12a2f7327af8d88720f45812a30e3c660fb5056c69638773",
+  "name": "Leo Antonio - Welcoming & Serene",
   "locale": "pt-BR",
   "accent": "brazilian",
-  "source": "ElevenLabs Voice Library API",
-  "retrievedAt": "2026-10-07T14:06:38.111Z",
-  "preview": "https://storage.googleapis.com/eleven-public-prod/database/user/t1nBFVlw8ahi8WVJ0bXtyohGNAI2/voices/GDzHdQOi6jjf8zaXhCYD/LCt0ufE4oVO5zb1QbhsQ.mp3",
-  "englishPreview": "https://storage.googleapis.com/eleven-public-prod/database/user/t1nBFVlw8ahi8WVJ0bXtyohGNAI2/voices/GDzHdQOi6jjf8zaXhCYD/4ec7ecde-b044-4980-a623-51809a4865d3.mp3",
-  "accountStatus": "added successfully after permission grant",
-  "selection": "Native Brazilian Portuguese requested by the pilot; listening review pending."
+  "source": "ElevenLabs Voice Library API; auditions/opening.json",
+  "accountStatus": "added and used successfully for audition A",
+  "selection": "Pilot chose Leo and requested a full video trial on 2026-10-07; full-performance listening review pending.",
+  "auditionSha256": "0f4487297d4d61c538c1b34200858257acd0750974b4d6c5a58bb78d2da4b823",
+  "englishVerified": false,
+  "previousRejectedVoice": "Raquel; voice metadata retained in Git revision efc83fa and original provider receipts."
 }

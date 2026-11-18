@@ -2,6 +2,11 @@
 
 Copyright (C) 2026 Luis Henrique Cassis Fagundes. CERN-OHL-S-2.0+.
 
+Decisão posterior: o piloto escolheu Leo Antonio (A) e pediu uma tentativa
+do vídeo completo. As audições abaixo permanecem intactas. A nova produção
+e sua autorização estão registradas no [diretório principal](../README.md).
+As restrições abaixo documentam o escopo original das audições.
+
 Nova comissão do piloto: voltar à narração por máquina e comparar vozes
 somente até antes da apresentação das peças. Não reabrir o render.
 As tomadas completas anteriores foram rejeitadas por rapidez e pouca emoção.

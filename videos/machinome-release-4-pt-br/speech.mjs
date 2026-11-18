@@ -7,6 +7,8 @@ import {fileURLToPath, pathToFileURL} from 'node:url';
 import {parseEnv} from 'node:util';
 
 const base = dirname(fileURLToPath(import.meta.url));
+export const deliveryTags = ['thoughtful', 'slowly', 'pause', 'long pause',
+  'curious', 'short pause', 'storytelling', 'warmly'];
 
 export function verifyInput(input) {
   assert.equal(input.format, 'machinome-release-narration/1');
@@ -41,19 +43,29 @@ export function resolveBeats(alignment, beats, duration) {
 
 export function spokenAlignment(alignment) {
   if (!alignment?.characters) return null;
-  // A delivery tag is not a caption. Remove only this known instruction,
+  // A delivery tag is not a caption. Remove only known instructions,
   // retaining every spoken character's exact provider timestamps. Audio is
   // never trimmed, padded or stitched; the full raw response is retained.
-  const tag = Array.from('[long pause]');
+  const tags = deliveryTags.map(tag => `[${tag}]`);
   const result = {characters: [], character_start_times_seconds: [],
     character_end_times_seconds: []};
   for (let i = 0; i < alignment.characters.length; i++) {
-    if (alignment.characters.slice(i, i + tag.length).join('') === tag.join('')) {
+    const tag = tags.find(tag => alignment.characters.slice(i, i + tag.length).join('') === tag);
+    if (tag) {
       i += tag.length - 1;
+      continue;
+    }
+    const character = alignment.characters[i];
+    if (/\s/u.test(character)) {
+      if (!result.characters.length || result.characters.at(-1) === ' ') continue;
+      result.characters.push(' ');
+      result.character_start_times_seconds.push(alignment.character_start_times_seconds[i]);
+      result.character_end_times_seconds.push(alignment.character_end_times_seconds[i]);
       continue;
     }
     for (const key of Object.keys(result)) result[key].push(alignment[key][i]);
   }
+  if (result.characters.at(-1) === ' ') for (const key of Object.keys(result)) result[key].pop();
   return result;
 }
 
@@ -83,9 +95,13 @@ export async function main(args) {
     pronunciation_dictionary_id: dictionary.id, version_id: dictionary.version_id,
   }]};
   assert.ok(!request.previous_text && !request.next_text);
-  assert.ok(request.text.includes('aberto... [long pause]\n\nA roda'));
+  assert.ok(request.text.length <= 5000);
+  assert.ok(/aberto\.\.\. \[long pause\]\s+\[thoughtful\] \[slowly\] A roda/.test(request.text));
+  assert.equal(spokenAlignment({characters: Array.from(request.text),
+    character_start_times_seconds: Array.from(request.text, () => 0),
+    character_end_times_seconds: Array.from(request.text, () => 0)}).characters.join(''), text);
   const productionRequestHash = hash(JSON.stringify({request, voice: input.audio.voice, format: entry.format}));
-  console.log(`One ${text.length}-character request; ${input.beats.length} unique beats; Raquel / eleven_v3.`);
+  console.log(`One ${text.length}-character script (${request.text.length} directed); ${input.beats.length} unique beats; ${input.audio.voiceLabel} / eleven_v3.`);
   if (args[1] === '--check') return;
   await mkdir(resolve(build, 'audio'), {recursive: true});
   const receiptPath = entry.file + '.provider.json';
@@ -127,17 +143,32 @@ export async function main(args) {
     const pcm = Buffer.from(data.audio_base64, 'base64');
     const wav = pcmWav(pcm, 24000);
     const canonical = value => value.replace(/\s+/gu, ' ').trim();
-    const alignment = [data.normalized_alignment, data.alignment].map(spokenAlignment).find(a =>
+    let alignment = [data.normalized_alignment, data.alignment].map(spokenAlignment).find(a =>
       a?.characters && canonical(a.characters.join('')) === canonical(text));
     assert.ok(alignment, 'Provider text differs from the script; response retained, no retry.');
     validateAlignment(alignment, 'continuous');
     const duration = pcm.length / 48000;
-    assert.ok(alignment.character_end_times_seconds.at(-1) <= duration + 0.05);
+    const forced = await optionalJSON(entry.file + '.forced-alignment.json');
+    if (forced) {
+      assert.equal(forced.audioSha256, hash(wav));
+      assert.equal(forced.text, text);
+      const recovered = JSON.parse(forced.body).characters;
+      alignment = {characters: recovered.map(c => c.text),
+        character_start_times_seconds: recovered.map(c => c.start),
+        character_end_times_seconds: recovered.map(c => c.end)};
+      assert.equal(alignment.characters.join(''), text);
+      validateAlignment(alignment, 'continuous');
+    }
+    // Punctuation may extend slightly past the PCM; spoken characters may not.
+    const lastSpoken = alignment.characters.findLastIndex(c => /[\p{L}\p{N}]/u.test(c));
+    assert.ok(lastSpoken >= 0 && alignment.character_end_times_seconds[lastSpoken] <= duration + 0.02);
     resolveBeats(alignment, input.beats, duration);
     await writeFile(entry.file, wav, {flag: 'wx'});
     record = {cache: entry.cache, voice: input.audio.voice, model: input.audio.model,
       format: entry.format, request, productionRequestHash, pronunciation: dictionary,
-      alignment, alignmentPolicy: 'known delivery tag omitted; word timestamps unchanged',
+      alignment, alignmentPolicy: forced ? 'provider forced alignment against byte-identical WAV and plain script; original TTS timing retained in receipt' :
+        'known delivery tags omitted and whitespace canonicalized; spoken character timestamps unchanged',
+      alignmentRequestId: forced?.requestId,
       sha256: hash(wav), duration, requestId: receipt.requestId,
       generatedAt: receipt.generatedAt, source: 'one-provider-request'};
     await writeFile(entry.meta, JSON.stringify(record, null, 2) + '\n', {flag: 'wx'});

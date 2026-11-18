@@ -2,7 +2,7 @@
 # Copyright (C) 2026 Luis Henrique Cassis Fagundes. CERN-OHL-S-2.0+.
 from pathlib import Path
 
-from machinome_movie import (
+from machinome.movie import (
     Action, Camera, Chapter, Credits, Cue, Dissolve, Element, Evidence,
     FadeIn, FadeOut, Format, Layer, Loop, Movie, Narrator, Picture,
     Release, Set, Shot, Slot, Source, Still, Style, Title, View, evaluate, write,

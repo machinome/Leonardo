@@ -85,7 +85,7 @@ Before production:
 Draft checks can be reproduced from Videomaker with:
 
 ```sh
-node bin/videomaker.mjs check \
+machinome movie check \
   ../projects/Leonardo/videos/machinome-revolutions-v2/episode.yaml
 ```
 
