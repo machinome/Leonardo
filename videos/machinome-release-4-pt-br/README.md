@@ -1,6 +1,6 @@
 # Machinome — corte 4, português brasileiro
 
-Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
+Copyright (C) 2026 Luis Henrique Cassis Fagundes. CERN-OHL-S-2.0+.
 
 [Assistir localmente](http://127.0.0.1:8785/) · [MP4](_build/rehearsal.mp4) ·
 [Narração original](_build/raw-narration.wav) · [Fonte](movie.py) ·

@@ -1,4 +1,4 @@
-<!-- Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only. -->
+<!-- Copyright (C) 2026 Luis Henrique Cassis Fagundes. CERN-OHL-S-2.0+. -->
 # Rack lift demonstration
 
 ## Purpose
@@ -47,7 +47,7 @@ desktop and narrow screens.
 The exhibit SHALL cite its museum source and distinguish Leonardo's study,
 the later museum reconstruction and Astra's original dimensions and modern
 teeth. It SHALL identify machinome, Astra's single-prompt design credit,
-the gallery source and AGPL copyright. It SHALL disclose that brake,
+the gallery source and CERN-OHL-S copyright. It SHALL disclose that brake,
 holding torque, lifting capacity and dynamics are outside the demonstration.
 
 #### Scenario: Read the exhibit limits

@@ -1,6 +1,6 @@
 # Quinta proposta — Jessica com conexão — 12 de outubro de 2026
 
-Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
+Copyright (C) 2026 Luis Henrique Cassis Fagundes. CERN-OHL-S-2.0+.
 
 Adicionada a frase exata “As relações mecânicas da máquina são descritas
 em Python” depois do exemplo em inglês e antes do Studio. Nenhuma outra

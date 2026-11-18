@@ -1,6 +1,6 @@
 # Direção de voz — quarta proposta pt-BR, Jessica
 
-Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
+Copyright (C) 2026 Luis Henrique Cassis Fagundes. CERN-OHL-S-2.0+.
 
 O piloto aprovou a terceira proposta e pediu experimentar uma voz feminina
 mais próxima de Jessica, com a mesma direção. Esta quarta proposta usa

@@ -1,5 +1,5 @@
 """Approved Portuguese performance: source text only, never synthesize here."""
-# Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
+# Copyright (C) 2026 Luis Henrique Cassis Fagundes. CERN-OHL-S-2.0+.
 import json
 import re
 from pathlib import Path

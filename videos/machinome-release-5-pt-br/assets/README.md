@@ -24,5 +24,5 @@ names and browser artwork are used referentially, not as an endorsement.
 Studio UI: Copyright (C) 2023–2026 Luis Henrique Cassis Fagundes,
 AGPL-3.0-or-later, https://github.com/machinome/machinome-studio/.
 Screenshot capture and original video code: Copyright (C) 2026 Luis Henrique
-Cassis Fagundes, AGPL-3.0-only, as the gallery records. Brand artwork and
+Cassis Fagundes, CERN-OHL-S-2.0+, as the gallery records. Brand artwork and
 trademarks retain their separate terms; no trademark permission is implied.

@@ -1,6 +1,6 @@
 # Second-cut production evidence
 
-Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
+Copyright (C) 2026 Luis Henrique Cassis Fagundes. CERN-OHL-S-2.0+.
 
 This records the initial second cut. The completed class-context correction,
 current MP4 checksum and incremental-render evidence are in

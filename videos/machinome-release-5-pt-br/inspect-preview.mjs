@@ -1,4 +1,4 @@
-// Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
+// Copyright (C) 2026 Luis Henrique Cassis Fagundes. CERN-OHL-S-2.0+.
 // Inspect the live preview and its aligned cues; never render a movie.
 import assert from 'node:assert/strict';
 import {readFile,mkdir,writeFile} from 'node:fs/promises';

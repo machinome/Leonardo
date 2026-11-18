@@ -4,7 +4,7 @@ Status: aprovada pelo piloto em 13 de outubro para renderizar o vídeo.
 A gravação original está preservada em _build/approved e no player
 proposal-7; o mix do filme é um arquivo separado dessa matriz aprovada.
 
-Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
+Copyright (C) 2026 Luis Henrique Cassis Fagundes. CERN-OHL-S-2.0+.
 
 O piloto aprovou todo o restante da proposta 6 e pediu corrigir a pronúncia
 de “verifica a geometria”, ouvida como “vizica”. O texto falado é idêntico;

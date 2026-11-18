@@ -1,6 +1,6 @@
 # Media provenance
 
-Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only (this record).
+Copyright (C) 2026 Luis Henrique Cassis Fagundes. CERN-OHL-S-2.0+ (this record).
 
 - python-logo.svg: unchanged official PSF two-snakes SVG, downloaded 3 October
   2026 from https://s3.dualstack.us-east-2.amazonaws.com/pythondotorg-assets/media/files/python-logo-only.svg.

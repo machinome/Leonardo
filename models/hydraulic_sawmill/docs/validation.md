@@ -4,7 +4,7 @@ Historical certificate for the 12 September four-turn exhibit. For the current
 full timber course, timeline-only controls and progressive kerf insert, see
 [19 September validation](full-pass-validation.md).
 
-Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
+Copyright (C) 2026 Luis Henrique Cassis Fagundes. CERN-OHL-S-2.0+.
 
 Validated 12 September 2026 in the Machinome Studio workspace. This replaces
 the simplified exhibit’s certificate, preserved at gallery commit `0936085`.

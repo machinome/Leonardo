@@ -1,6 +1,6 @@
 # Machinome release — cut 5
 
-Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
+Copyright (C) 2026 Luis Henrique Cassis Fagundes. CERN-OHL-S-2.0+.
 
 Main-branch **narration-only live preview**: http://127.0.0.1:8785/#movie — 203.625 seconds,
 1920×1080, 24 fps. The sequential testing revision has a new continuous Jessica take.

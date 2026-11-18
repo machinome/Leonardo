@@ -1,6 +1,6 @@
 # Direção de voz — sétima proposta pt-BR, Jessica
 
-Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
+Copyright (C) 2026 Luis Henrique Cassis Fagundes. CERN-OHL-S-2.0+.
 
 Correção pontual solicitada: o piloto ouviu “vizica a geometria” na
 proposta 6 e aprovou todo o restante. O texto continua exatamente igual;

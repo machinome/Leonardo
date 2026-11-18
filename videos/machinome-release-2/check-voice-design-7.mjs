@@ -1,4 +1,4 @@
-// Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
+// Copyright (C) 2026 Luis Henrique Cassis Fagundes. CERN-OHL-S-2.0+.
 // Verify five J1-derived samples, a fixed Jessica timing gate and preservation.
 import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';

@@ -1,7 +1,7 @@
 """Contracts for the descending feed and lower four-wheel
 transmission."""
 
-# Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
+# Copyright (C) 2026 Luis Henrique Cassis Fagundes. CERN-OHL-S-2.0+.
 import math
 
 import numpy as np

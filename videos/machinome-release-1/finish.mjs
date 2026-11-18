@@ -1,4 +1,4 @@
-// Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
+// Copyright (C) 2026 Luis Henrique Cassis Fagundes. CERN-OHL-S-2.0+.
 // Measure speech first, then match the model clock through the two reveals.
 // This edits only the generated movie document, never the model or its export.
 import assert from 'node:assert/strict';

@@ -1,6 +1,6 @@
 # Revolutions — final English cut commission
 
-Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
+Copyright (C) 2026 Luis Henrique Cassis Fagundes. CERN-OHL-S-2.0+.
 
 On 16 November 2026 the pilot asked for a final English version of the
 release film, carrying every improvement made for the Brazilian cut that

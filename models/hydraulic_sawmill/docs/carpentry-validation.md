@@ -1,6 +1,6 @@
 # Buildable frame: verification record
 
-Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
+Copyright (C) 2026 Luis Henrique Cassis Fagundes. CERN-OHL-S-2.0+.
 
 24 September 2026. The fixed-frame increment is complete: 11/11 frame checks
 and all 42 mechanism checks pass on exact solids, including both boundary

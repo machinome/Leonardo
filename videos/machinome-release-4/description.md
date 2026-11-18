@@ -39,7 +39,7 @@ physical safety.
 ## Attribution and AI disclosure
 
 Leonardo da Vinci Gallery. Copyright (C) 2026 Luis Henrique Cassis
-Fagundes. Original gallery CAD, code and documentation are AGPL-3.0-only;
+Fagundes. Original gallery CAD, code and documentation are CERN-OHL-S-2.0+;
 see the repository's LICENSE and NOTICE. The gallery records the models
 as vibecoded by Astra from human commissions.
 

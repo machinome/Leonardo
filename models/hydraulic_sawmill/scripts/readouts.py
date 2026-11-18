@@ -8,7 +8,7 @@ No alternate JavaScript linkage is needed: all labels derive from CAD
 meshes.
 """
 
-# Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
+# Copyright (C) 2026 Luis Henrique Cassis Fagundes. CERN-OHL-S-2.0+.
 import argparse
 import json
 import logging
@@ -93,7 +93,7 @@ def measurements():
         "turn_feed": feed_samples[::8],
         "notice": (
             "Copyright (C) 2026 Luis Henrique Cassis Fagundes. "
-            "AGPL-3.0-only."
+            "CERN-OHL-S-2.0+."
         ),
         "source": (
             "scripts/readouts.py; measured CAD, not a second "

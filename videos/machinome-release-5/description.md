@@ -41,7 +41,7 @@ physical safety.
 ## Attribution and AI disclosure
 
 Leonardo da Vinci Gallery. Copyright (C) 2026 Luis Henrique Cassis
-Fagundes. Original gallery CAD, code and documentation are AGPL-3.0-only;
+Fagundes. Original gallery CAD, code and documentation are CERN-OHL-S-2.0+;
 see the repository's LICENSE and NOTICE. The gallery records the models
 as vibecoded by Astra from human commissions.
 
@@ -92,7 +92,7 @@ Python's unchanged two-snakes logo identifies the language used. It is a tradema
 The pilot directed the closing frame to show
 `GPL-2.0-or-later OR CERN-OHL-S-2.0+` beneath the GitHub address. This is
 authored display text, not a licence change to the gallery or its dependencies;
-the gallery's existing records remain AGPL-3.0-only. Reconcile what the closing
+the gallery's existing records remain CERN-OHL-S-2.0+. Reconcile what the closing
 line is intended to license before publishing.
 
 Replace unresolved public URLs only after verification. Check the final

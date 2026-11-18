@@ -1,6 +1,6 @@
 # Reconstructing the Milan hydraulic saw
 
-Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
+Copyright (C) 2026 Luis Henrique Cassis Fagundes. CERN-OHL-S-2.0+.
 
 The pilot commissioned this reconstruction on 12 September 2026, replacing
 the earlier simplified exhibit's scope. The additional instruction was:

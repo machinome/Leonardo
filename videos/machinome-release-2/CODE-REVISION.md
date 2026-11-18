@@ -1,6 +1,6 @@
 # Restore the code as the character
 
-Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
+Copyright (C) 2026 Luis Henrique Cassis Fagundes. CERN-OHL-S-2.0+.
 
 The pilot's review of the delivered second cut, 3 October 2026: both video
 source panels lost the earlier class context; “How cool is that?” belongs

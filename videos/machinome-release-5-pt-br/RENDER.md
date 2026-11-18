@@ -1,6 +1,6 @@
 # Render pt-BR — 13 de outubro de 2026
 
-Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
+Copyright (C) 2026 Luis Henrique Cassis Fagundes. CERN-OHL-S-2.0+.
 
 ## Telão — Full HD supersampled, 14 de outubro de 2026
 
@@ -185,5 +185,5 @@ Não houve envio de mensagem ao agente nem publicação externa.
 Os registros herdados em HANDOFF.md e VERIFICATION.md são do inglês.
 Mantidos o rótulo de fonte e a linha final de licença explicitamente
 pedidos pelo piloto no corte de origem, conforme HANDOFF.md; a divergência
-da linha de licença com o AGPL-3.0-only da galeria continua declarada em
+da linha de licença com o CERN-OHL-S-2.0+ da galeria continua declarada em
 description.md, não resolvida por este render. Nenhuma publicação.

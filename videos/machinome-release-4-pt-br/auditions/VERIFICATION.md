@@ -1,6 +1,6 @@
 # Audições — evidência técnica, não aprovação de interpretação
 
-Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
+Copyright (C) 2026 Luis Henrique Cassis Fagundes. CERN-OHL-S-2.0+.
 
 7 de outubro de 2026. Três gravações da abertura, cada uma em uma única
 solicitação Eleven v3. O texto falado corresponde exatamente a OPENING

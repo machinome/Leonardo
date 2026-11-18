@@ -46,7 +46,7 @@ machinome snapshot hydraulic_sawmill -o models/hydraulic_sawmill/docs/evidence/f
 The images and commands below document the former four-turn model. Its phase
 fractions are historical; the current timeline spans 365 turns.
 
-Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
+Copyright (C) 2026 Luis Henrique Cassis Fagundes. CERN-OHL-S-2.0+.
 
 Original CAD renders, inspected on 12 September 2026. These are not museum
 photographs. Read the [research record](../reconstruction.md) for provenance

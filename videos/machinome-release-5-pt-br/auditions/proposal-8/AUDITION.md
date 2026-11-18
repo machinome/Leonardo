@@ -1,6 +1,6 @@
 # Python Brasil — proposta 8
 
-Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
+Copyright (C) 2026 Luis Henrique Cassis Fagundes. CERN-OHL-S-2.0+.
 
 Pedido de 13 de outubro de 2026: manter o teste e o vídeo como estão;
 refazer a narração retirando a ênfase especial em você na pergunta final

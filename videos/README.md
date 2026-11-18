@@ -1,6 +1,6 @@
 # Leonardo video sources
 
-Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
+Copyright (C) 2026 Luis Henrique Cassis Fagundes. CERN-OHL-S-2.0+.
 
 The selected release film on `main` is
 [Revolutions — cut 5](machinome-release-5/README.md): the Studio sequence,

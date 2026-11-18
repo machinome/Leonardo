@@ -1,6 +1,6 @@
 # Quarta proposta — Jessica — 12 de outubro de 2026
 
-Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
+Copyright (C) 2026 Luis Henrique Cassis Fagundes. CERN-OHL-S-2.0+.
 
 O piloto aprovou a proposta 3 com Leo e pediu uma alternativa feminina
 mais parecida com Jessica, mantendo a direção. Esta tomada usa a própria

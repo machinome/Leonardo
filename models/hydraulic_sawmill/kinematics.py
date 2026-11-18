@@ -1,7 +1,7 @@
 """Closed geometric linkage; the same degree expressions drive the
 viewer."""
 
-# Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
+# Copyright (C) 2026 Luis Henrique Cassis Fagundes. CERN-OHL-S-2.0+.
 from math import pi
 
 from machinome.math import acos, sin, cos, sqrt, atan2

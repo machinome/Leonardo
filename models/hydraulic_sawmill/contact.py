@@ -9,7 +9,7 @@ they are not an independent timed ratchet animation or a dynamics
 solver.
 """
 
-# Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
+# Copyright (C) 2026 Luis Henrique Cassis Fagundes. CERN-OHL-S-2.0+.
 import math
 
 from .layout import TEETH, RATCHET_ROOT, RATCHET_TIP, PAWL_LENGTH

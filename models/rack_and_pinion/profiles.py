@@ -1,7 +1,7 @@
 """Original sampled involute and straight conjugate rack, dimensions in
 mm."""
 
-# Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
+# Copyright (C) 2026 Luis Henrique Cassis Fagundes. CERN-OHL-S-2.0+.
 import math
 
 

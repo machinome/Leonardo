@@ -2,7 +2,7 @@
 """Run every registered exhibit's browser check on an ephemeral local
 server."""
 
-# Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
+# Copyright (C) 2026 Luis Henrique Cassis Fagundes. CERN-OHL-S-2.0+.
 
 from functools import partial
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer

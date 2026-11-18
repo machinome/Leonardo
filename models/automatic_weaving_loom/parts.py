@@ -6,7 +6,7 @@ winding.py and head.py. The free weft span remains a schematic
 indicator.
 """
 
-# Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
+# Copyright (C) 2026 Luis Henrique Cassis Fagundes. CERN-OHL-S-2.0+.
 import cadquery as cq
 from molejo import Shape, Circle, Line, Spline, P
 from machinome.node.assembly import AssemblyNode

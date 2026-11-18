@@ -1,4 +1,4 @@
-// Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
+// Copyright (C) 2026 Luis Henrique Cassis Fagundes. CERN-OHL-S-2.0+.
 // Verify the encoded artifact and decode review frames from that MP4, not preview.
 import assert from 'node:assert/strict';
 import {readFile,writeFile,mkdir} from 'node:fs/promises';

@@ -1,6 +1,6 @@
 # Python Brasil — tomada 11, pausas de três segundos
 
-Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
+Copyright (C) 2026 Luis Henrique Cassis Fagundes. CERN-OHL-S-2.0+.
 
 Nova interpretação contínua solicitada após o piloto ouvir interrupções
 em “momentos” e “E aqui está”. Jessica / eleven_v3, mesmas configurações.

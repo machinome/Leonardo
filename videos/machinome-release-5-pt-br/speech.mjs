@@ -1,4 +1,4 @@
-// Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
+// Copyright (C) 2026 Luis Henrique Cassis Fagundes. CERN-OHL-S-2.0+.
 // The pilot approved proposal 7. Rendering never generates another take.
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';

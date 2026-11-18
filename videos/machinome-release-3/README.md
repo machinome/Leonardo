@@ -1,6 +1,6 @@
 # Machinome release — cut 3
 
-Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
+Copyright (C) 2026 Luis Henrique Cassis Fagundes. CERN-OHL-S-2.0+.
 
 Third version commissioned from [review 2](review-2.md), with Jessica
 retained and the opening “AI content” label removed at the pilot's request.

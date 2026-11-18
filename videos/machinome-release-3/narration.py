@@ -1,6 +1,6 @@
 """The complete script: approved Jessica narration with one name pickup."""
 
-# Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
+# Copyright (C) 2026 Luis Henrique Cassis Fagundes. CERN-OHL-S-2.0+.
 
 import json
 from pathlib import Path

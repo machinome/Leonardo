@@ -4,7 +4,7 @@ Esta é uma cópia da evidência do filme inglês de origem. A verificação
 atual do vídeo em português está em RENDER.md; os números abaixo não
 devem ser usados como prova da versão brasileira.
 
-Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
+Copyright (C) 2026 Luis Henrique Cassis Fagundes. CERN-OHL-S-2.0+.
 
 12 October 2026. Selected for main: the approved descending-stream pictures
 and continuous narration, without sound effects. The experiment and its
@@ -491,7 +491,7 @@ The manifest correctly says `releaseReady: false`: public simulation/source
 URLs are unresolved, unrelated project and Videomaker files were dirty, and
 the reused model export records dirty provenance. No unrelated edits were
 included in a commit. The pilot's displayed closing licence still differs
-from the gallery's AGPL-3.0-only record; see `description.md` before publication.
+from the gallery's CERN-OHL-S-2.0+ record; see `description.md` before publication.
 The cut-5 live server was stopped during rendering and restored afterward.
 
 ## Preview evidence retained

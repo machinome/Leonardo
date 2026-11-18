@@ -2,7 +2,7 @@
 """Finite browser acceptance of the real exported carpentry model and
 book."""
 
-# Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
+# Copyright (C) 2026 Luis Henrique Cassis Fagundes. CERN-OHL-S-2.0+.
 import argparse
 import csv
 from functools import partial

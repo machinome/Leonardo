@@ -1,5 +1,5 @@
 """Revoluções — fifth cut, live preview."""
-# Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
+# Copyright (C) 2026 Luis Henrique Cassis Fagundes. CERN-OHL-S-2.0+.
 from pathlib import Path
 import base64
 import json
@@ -474,7 +474,7 @@ class Revoluções(Movie):
     evidence = Evidence(brief='brief.md', review='DIRECTION.md',
         reconstruction='../../models/hydraulic_sawmill/docs/reconstruction.md')
     credits = Credits(project='Leonardo da Vinci Gallery', creator='AI-directed release film',
-        copyright='Copyright (C) 2026 Luis Henrique Cassis Fagundes', license='AGPL-3.0-only', license_file='../../LICENSE')
+        copyright='Copyright (C) 2026 Luis Henrique Cassis Fagundes', license='CERN-OHL-S-2.0+', license_file='../../LICENSE')
     release = Release(description='description.md')
     continuous = Continuous()
 

@@ -1,7 +1,7 @@
 schema: spec-driven
 context: |
   Leonardo da Vinci Gallery: original single-prompt educational CAD by Astra.
-  Copyright (C) 2026 Luis Henrique Cassis Fagundes; AGPL-3.0-only.
+  Copyright (C) 2026 Luis Henrique Cassis Fagundes; CERN-OHL-S-2.0+.
   This root owns gallery-wide behavior and the final Sphinx site.
   Each machine owns models/<name>/openspec; never mix those records here.
   docs/brief.md and QUEUE.md carry the pilot's delegated commission.

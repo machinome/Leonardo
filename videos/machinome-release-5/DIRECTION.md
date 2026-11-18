@@ -1,6 +1,6 @@
 # Cut 5 — preview direction
 
-Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
+Copyright (C) 2026 Luis Henrique Cassis Fagundes. CERN-OHL-S-2.0+.
 
 Commissioned 7 October 2026 from the pilot's viewing of cut 4; revised in place
 on 8 October after reviewing cut 5.

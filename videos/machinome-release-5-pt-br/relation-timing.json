@@ -1,7 +1,7 @@
 {
   "schema": "cut5-relation-timing/1",
   "copyright": "Copyright (C) 2026 Luis Henrique Cassis Fagundes",
-  "license": "AGPL-3.0-only",
+  "license": "CERN-OHL-S-2.0+",
   "audioSha256": "48f80fd90c2896f130e7f4e7084b050b04ef238e5fd7ba7c5c1729746bd09241",
   "method": "Portuguese take 8 provider character alignment for viewer listening; visual timings, not independent phonetic validation.",
   "phrase": "The waterwheel spin drives the crankshaft.",

@@ -6,7 +6,7 @@ made
 that a rope force, spring force, friction or impact solver is running.
 """
 
-# Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
+# Copyright (C) 2026 Luis Henrique Cassis Fagundes. CERN-OHL-S-2.0+.
 import math
 
 import cadquery as cq

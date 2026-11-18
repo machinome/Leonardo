@@ -119,7 +119,7 @@ choose laws/ranges accordingly. Explain any end-of-loop reset visibly.
   sources, assumptions, build/test commands), its own archived OpenSpec,
   complete evidence and no unfinished public UI. Add only working models
   to the registry. Every original new source file carries the copyright
-  and AGPL notice. Never include generated exports in Git.
+  and CERN-OHL-S-2.0+ notice. Never include generated exports in Git.
 
 The pilot will not fix this work. If evidence exposes a defect, fix it in
 the project while staying within the brief. Do not weaken a central promise,
@@ -134,6 +134,6 @@ brief in QUEUE.md. Sphinx creates a static directory; `machinome export`
 supplies every interactive exhibit. The visible site must identify itself
 as a **machinome demonstration**, link to machinome, credit **Astra's
 single-prompt designs**, and link to the **Leonardo gallery on GitHub**.
-Copyright remains Luis Henrique Cassis Fagundes, AGPL-3.0-only. Use
+Copyright remains Luis Henrique Cassis Fagundes, CERN-OHL-S-2.0+. Use
 gallery.toml for those URLs and credits. The pilot publishes; stop with a
 verified static artifact and exact build/hosting instructions.

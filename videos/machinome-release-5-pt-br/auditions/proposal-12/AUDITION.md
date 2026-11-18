@@ -1,6 +1,6 @@
 # Jessica — tomada 12
 
-Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
+Copyright (C) 2026 Luis Henrique Cassis Fagundes. CERN-OHL-S-2.0+.
 
 Nova proposta de interpretação solicitada em 13 de outubro de 2026.
 Uma única solicitação integral ao Eleven v3, Jessica, sem mudança digital

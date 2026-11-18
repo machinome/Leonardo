@@ -1,6 +1,6 @@
 # Primeira proposta de áudio — 12 de outubro de 2026
 
-Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
+Copyright (C) 2026 Luis Henrique Cassis Fagundes. CERN-OHL-S-2.0+.
 
 Leo Antonio / Eleven v3. Duração medida: 194,960 segundos. Uma chamada
 contínua, 2.514 caracteres falados e 3.024 caracteres incluindo direção.

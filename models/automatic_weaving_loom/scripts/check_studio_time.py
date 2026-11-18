@@ -7,7 +7,7 @@ It does not open a project, dispatch agents or send any project
 messages.
 """
 
-# Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
+# Copyright (C) 2026 Luis Henrique Cassis Fagundes. CERN-OHL-S-2.0+.
 import argparse
 from pathlib import Path
 

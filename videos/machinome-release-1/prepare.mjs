@@ -1,4 +1,4 @@
-// Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
+// Copyright (C) 2026 Luis Henrique Cassis Fagundes. CERN-OHL-S-2.0+.
 // Embed the pinned local fonts; no network resources enter the film stage.
 import {readFile,writeFile,mkdir} from 'node:fs/promises';
 const base=new URL('./',import.meta.url);

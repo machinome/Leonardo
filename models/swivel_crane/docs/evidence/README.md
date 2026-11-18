@@ -1,6 +1,6 @@
 # Swivel crane evidence
 
-<!-- Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only. -->
+<!-- Copyright (C) 2026 Luis Henrique Cassis Fagundes. CERN-OHL-S-2.0+. -->
 
 Completed 12 September 2026 under queue item 040 and planning commit `cbed3e9`.
 Tested model, companion tests, exhibit and browser-check source:

@@ -1,5 +1,5 @@
 """Read scene classes for their words and on-screen source."""
-# Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
+# Copyright (C) 2026 Luis Henrique Cassis Fagundes. CERN-OHL-S-2.0+.
 
 import ast
 import hashlib

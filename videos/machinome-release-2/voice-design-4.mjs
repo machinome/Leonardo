@@ -1,4 +1,4 @@
-// Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
+// Copyright (C) 2026 Luis Henrique Cassis Fagundes. CERN-OHL-S-2.0+.
 // Five performances of the film's actual words, using the selected C3 voice.
 import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';

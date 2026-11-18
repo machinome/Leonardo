@@ -1,7 +1,7 @@
 """Designed pitch envelope and periodic symbolic motion, all angles in
 degrees."""
 
-# Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
+# Copyright (C) 2026 Luis Henrique Cassis Fagundes. CERN-OHL-S-2.0+.
 from machinome.math import cos, sin, sqrt
 from machinome_mechanics import harmonic_cam_lift
 

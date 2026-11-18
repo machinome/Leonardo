@@ -1,7 +1,7 @@
 """Explicit control-state sweeps, independent of prior tests' held
 poses."""
 
-# Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
+# Copyright (C) 2026 Luis Henrique Cassis Fagundes. CERN-OHL-S-2.0+.
 from functools import wraps
 
 

@@ -1,4 +1,4 @@
-/* Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only. */
+/* Copyright (C) 2026 Luis Henrique Cassis Fagundes. CERN-OHL-S-2.0+. */
 .carpentry-links{margin-bottom:20px;padding:14px;border:1px solid #d8d5c9;border-radius:3px;font-size:11px;line-height:1.6}.carpentry-links strong{font:18px Georgia,serif}.carpentry-links p{margin:8px 0}.carpentry-links a{color:#73502b}@media(max-width:760px){.exhibit .notebook>.carpentry-links{display:block;margin:15px 0 0}}
 .exhibit .timeline>div{flex-wrap:wrap;gap:4px}
 @media(max-width:760px){.exhibit .view-tabs{gap:8px}.exhibit .view-tabs button{font-size:8px}}

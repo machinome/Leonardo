@@ -1,7 +1,7 @@
 """Independent measurements of the commissioned hammer, not its pose
 formulas."""
 
-# Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
+# Copyright (C) 2026 Luis Henrique Cassis Fagundes. CERN-OHL-S-2.0+.
 import math
 
 from trimesh.proximity import closest_point

@@ -1,4 +1,4 @@
-// Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
+// Copyright (C) 2026 Luis Henrique Cassis Fagundes. CERN-OHL-S-2.0+.
 // Same voice, same script, five directions; verify media and the comparison page.
 import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';

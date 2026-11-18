@@ -1,6 +1,6 @@
 # Revolutions — final English cut
 
-Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
+Copyright (C) 2026 Luis Henrique Cassis Fagundes. CERN-OHL-S-2.0+.
 
 The English release film with everything approved for the Brazilian cut
 (`../machinome-release-5-pt-br/`). [DIRECTION.md](DIRECTION.md) records what

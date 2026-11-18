@@ -1,4 +1,4 @@
-// Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
+// Copyright (C) 2026 Luis Henrique Cassis Fagundes. CERN-OHL-S-2.0+.
 // Real-browser evidence for the Studio reveal and its narration boundary.
 import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';

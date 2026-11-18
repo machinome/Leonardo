@@ -1,6 +1,6 @@
 # Inspected consolidation images — 12 September 2026
 
-Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
+Copyright (C) 2026 Luis Henrique Cassis Fagundes. CERN-OHL-S-2.0+.
 
 These are unedited renders of the gallery's own machinome models. No
 museum images or third-party CAD are included. Run from the repository root:

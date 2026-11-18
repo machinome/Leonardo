@@ -7,7 +7,7 @@ compaction and newly interlacing material are not solved by this
 construction.
 """
 
-# Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
+# Copyright (C) 2026 Luis Henrique Cassis Fagundes. CERN-OHL-S-2.0+.
 import math
 
 from molejo import Shape, Circle, Polygon, Line, Arc, P

@@ -4,7 +4,7 @@ Each record is one piece. See docs/carpentry.md for provenance and
 cutting.
 """
 
-# Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
+# Copyright (C) 2026 Luis Henrique Cassis Fagundes. CERN-OHL-S-2.0+.
 from dataclasses import dataclass, field
 
 FIT = 0.15

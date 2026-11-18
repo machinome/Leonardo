@@ -19,7 +19,7 @@ is historical; the former educational certificate does not certify this
 reconstruction.
 
 Vibecoded by Astra as part of the single [Leonardo gallery](../../README.md).
-Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only;
+Copyright (C) 2026 Luis Henrique Cassis Fagundes. CERN-OHL-S-2.0+;
 see [LICENSE](../../LICENSE).
 
 ## Open the reconstruction

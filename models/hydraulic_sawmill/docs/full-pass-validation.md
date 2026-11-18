@@ -1,6 +1,6 @@
 # Full timber pass — 19 September 2026
 
-Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
+Copyright (C) 2026 Luis Henrique Cassis Fagundes. CERN-OHL-S-2.0+.
 
 The pilot requested the complete timber course, useful assembly navigation,
 timeline-only controls and a molejo cutting insert. After rejecting the short

@@ -1,6 +1,6 @@
 # Continuous narration — technical assessment
 
-Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
+Copyright (C) 2026 Luis Henrique Cassis Fagundes. CERN-OHL-S-2.0+.
 
 Assessed 3 October 2026 against proposal 1 at Leonardo
 `ebf6c01fa57bdd108073b4f619032cdac27123c4`, and Videomaker

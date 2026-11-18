@@ -2,7 +2,7 @@
 """Finite acceptance of the real sawmill export and its explanatory
 exhibit."""
 
-# Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
+# Copyright (C) 2026 Luis Henrique Cassis Fagundes. CERN-OHL-S-2.0+.
 import argparse
 from functools import partial
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer

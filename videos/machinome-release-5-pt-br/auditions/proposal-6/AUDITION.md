@@ -1,6 +1,6 @@
 # Sexta proposta — conexão e VOCÊ — 12 de outubro de 2026
 
-Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
+Copyright (C) 2026 Luis Henrique Cassis Fagundes. CERN-OHL-S-2.0+.
 
 Jessica, preferida pelo piloto, com dois ajustes solicitados:
 “As relações mecânicas da máquina são descritas em Python” entre o exemplo

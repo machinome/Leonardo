@@ -1,6 +1,6 @@
 # The sawmill's fixed timber frame
 
-Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
+Copyright (C) 2026 Luis Henrique Cassis Fagundes. CERN-OHL-S-2.0+.
 
 The 24 September 2026 commission asks for a buildable frame that demonstrates
 carpentry as well as the already working mechanism. This design replaces the

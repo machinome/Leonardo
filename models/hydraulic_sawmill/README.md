@@ -12,7 +12,7 @@ Nazionale Scienza e Tecnologia, IGB-37, researched against its photographs and
 Leonardo’s Codex Atlanticus 1078r. Water passes **under** the paddlewheel.
 The actual CAD assembly animates in the browser.
 
-Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
+Copyright (C) 2026 Luis Henrique Cassis Fagundes. CERN-OHL-S-2.0+.
 Vibecoded by Astra for the [Leonardo gallery](../../README.md).
 The pilot commissioned this more complete reconstruction on 12 September 2026;
 it supersedes the earlier simplified sawmill’s scope, not its preserved history.

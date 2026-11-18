@@ -1,4 +1,4 @@
-// Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
+// Copyright (C) 2026 Luis Henrique Cassis Fagundes. CERN-OHL-S-2.0+.
 // Keep the approved continuous Jessica performance intact; add reading silence
 // after the four code scenes and put the word clock on the measured anchors.
 import assert from 'node:assert/strict';

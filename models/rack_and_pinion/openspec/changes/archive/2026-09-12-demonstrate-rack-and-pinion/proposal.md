@@ -1,4 +1,4 @@
-<!-- Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only. -->
+<!-- Copyright (C) 2026 Luis Henrique Cassis Fagundes. CERN-OHL-S-2.0+. -->
 ## Why
 
 Queue 020 commissions an inspectable rack lift showing how a turning pinion

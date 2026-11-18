@@ -1,5 +1,5 @@
 """Measure where the provider's word clock drifts, sentence by sentence."""
-# Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
+# Copyright (C) 2026 Luis Henrique Cassis Fagundes. CERN-OHL-S-2.0+.
 #
 # The provider's timestamps run late around performed pauses, by more than a
 # second near the end of this take. Sentence boundaries are re-anchored to

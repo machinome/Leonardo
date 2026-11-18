@@ -1,6 +1,6 @@
 # The compound pulley — pull three lengths, lift one
 
-Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
+Copyright (C) 2026 Luis Henrique Cassis Fagundes. CERN-OHL-S-2.0+.
 
 Astra's original single-prompt educational design, a
 [machinome demonstration](https://machinome.readthedocs.io/) in the

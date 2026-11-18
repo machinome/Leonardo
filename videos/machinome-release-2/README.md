@@ -1,6 +1,6 @@
 # Machinome release — cut 2
 
-Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
+Copyright (C) 2026 Luis Henrique Cassis Fagundes. CERN-OHL-S-2.0+.
 
 Status: built and verified on 3 October 2026. The completed cut is
 1920×1080, 24 fps, 141.75 seconds, with the approved single narration.

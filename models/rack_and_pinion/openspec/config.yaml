@@ -1,9 +1,9 @@
-# Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
+# Copyright (C) 2026 Luis Henrique Cassis Fagundes. CERN-OHL-S-2.0+.
 schema: spec-driven
 context: |
   This machine belongs to the independent Leonardo gallery repository.
   Queue item 020-rack-and-pinion delegates its complete educational build,
   ordinary design choices, validation, archival and local commits.
   From this machine root read ../../AGENTS.md, ../../QUEUE.md and ../../docs/brief.md.
-  Original CAD, AGPL-3.0-only, copyright Luis Henrique Cassis Fagundes.
+  Original CAD, CERN-OHL-S-2.0+, copyright Luis Henrique Cassis Fagundes.
   Modern conjugate teeth and dimensions are reconstruction choices.

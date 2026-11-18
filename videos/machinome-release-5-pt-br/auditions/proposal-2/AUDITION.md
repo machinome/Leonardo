@@ -1,6 +1,6 @@
 # Segunda proposta de áudio — 12 de outubro de 2026
 
-Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
+Copyright (C) 2026 Luis Henrique Cassis Fagundes. CERN-OHL-S-2.0+.
 
 A primeira tomada foi rejeitada pelo piloto: faltaram curiosidade,
 continuidade entre frases e mudanças audíveis de intenção entre cenas.

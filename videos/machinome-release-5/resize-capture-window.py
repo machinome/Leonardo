@@ -1,5 +1,5 @@
 """Size one Firefox window on the capture's private Xvfb display."""
-# Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
+# Copyright (C) 2026 Luis Henrique Cassis Fagundes. CERN-OHL-S-2.0+.
 import ctypes
 import re
 import sys

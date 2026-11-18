@@ -6,7 +6,7 @@ prompt per design, as a demonstration of
 [machinome](https://machinome.readthedocs.io/).
 
 Copyright (C) 2026 Luis Henrique Cassis Fagundes.
-All original gallery code, CAD and documentation are **AGPL-3.0-only**;
+All original gallery code, CAD and documentation are **CERN-OHL-S-2.0+**;
 see [LICENSE](LICENSE) and [NOTICE](NOTICE).
 
 This is one repository with several named models. Six exhibits are

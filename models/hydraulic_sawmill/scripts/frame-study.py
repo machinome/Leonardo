@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Build the portable carpentry study and its exact cutting book."""
 
-# Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
+# Copyright (C) 2026 Luis Henrique Cassis Fagundes. CERN-OHL-S-2.0+.
 import os
 from pathlib import Path
 import shutil

@@ -1,6 +1,6 @@
 # Inspected cam hammer images — 12 September 2026
 
-Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
+Copyright (C) 2026 Luis Henrique Cassis Fagundes. CERN-OHL-S-2.0+.
 
 Unedited OpenSCAD snapshots of this gallery's original CAD. The selected
 isometric view shows lift at 120°; the shaft-axis view shows release at

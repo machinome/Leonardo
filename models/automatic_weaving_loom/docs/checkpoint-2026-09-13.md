@@ -1,6 +1,6 @@
 # Loom reconstruction: Studio-time checkpoint, 13 September 2026
 
-Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
+Copyright (C) 2026 Luis Henrique Cassis Fagundes. CERN-OHL-S-2.0+.
 
 The pilot requested: “reach the next checkpoint and leave things in good state
 for next agent to resume the work, commit what you have done so far.” This is

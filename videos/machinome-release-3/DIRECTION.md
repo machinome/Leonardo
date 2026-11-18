@@ -1,6 +1,6 @@
 # Revolutions — third cut
 
-Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
+Copyright (C) 2026 Luis Henrique Cassis Fagundes. CERN-OHL-S-2.0+.
 
 Authority: the pilot's request for a third version, the verbatim
 `review-2.md` beside this file, and the subsequent choice to keep Jessica

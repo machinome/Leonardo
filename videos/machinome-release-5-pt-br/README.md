@@ -1,6 +1,6 @@
 # Revoluções — release-5-pt-br
 
-Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
+Copyright (C) 2026 Luis Henrique Cassis Fagundes. CERN-OHL-S-2.0+.
 
 ## Viewer de trabalho — endereço fixo
 

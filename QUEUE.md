@@ -180,7 +180,7 @@ One documented finite command from a fresh clone/environment must:
    Keep generated manifests out of Git and keep Sphinx from parsing exhibit
    assets as documents. Use `sphinx-build -b html -W --keep-going` or the
    current equivalent that makes warnings fail the build.
-3. Include copyright, the unchanged AGPL text, corresponding gallery source
+3. Include copyright, the unchanged CERN-OHL-S text, corresponding gallery source
    from the tested commit, dependency notices and source availability for
    bundled assets. Inspect the viewer distribution's actual notices when
    packaging it; gallery licensing does not overwrite dependency licenses.

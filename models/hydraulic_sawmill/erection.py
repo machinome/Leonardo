@@ -6,7 +6,7 @@ trestles and hold members while withdrawing their pegs. Reverse to
 erect.
 """
 
-# Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
+# Copyright (C) 2026 Luis Henrique Cassis Fagundes. CERN-OHL-S-2.0+.
 from machinome.math import ramp
 
 STAGES = (

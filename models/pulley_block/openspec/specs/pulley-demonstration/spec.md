@@ -1,6 +1,6 @@
 # Pulley demonstration specification
 
-<!-- Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only. -->
+<!-- Copyright (C) 2026 Luis Henrique Cassis Fagundes. CERN-OHL-S-2.0+. -->
 ## Purpose
 
 Let a visitor trace one continuous rope, measure the three-to-one exchange

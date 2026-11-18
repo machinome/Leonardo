@@ -1,6 +1,6 @@
 # Direção de voz — sexta proposta pt-BR, Jessica
 
-Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
+Copyright (C) 2026 Luis Henrique Cassis Fagundes. CERN-OHL-S-2.0+.
 
 Pedido adicional do piloto: faltou ênfase em VOCÊ na pergunta final.
 Esta revisão retira a caixa alta de CONSTRUIR para não disputar o acento

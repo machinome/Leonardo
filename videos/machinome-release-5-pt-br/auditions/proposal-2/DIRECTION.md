@@ -1,6 +1,6 @@
 # Direção de voz — segunda proposta pt-BR
 
-Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
+Copyright (C) 2026 Luis Henrique Cassis Fagundes. CERN-OHL-S-2.0+.
 
 A primeira proposta foi rejeitada pelo piloto por monotonia, transições
 sem intenção audível e frases quebradas. As etiquetas foram enviadas, mas

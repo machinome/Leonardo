@@ -1,6 +1,6 @@
 # Selected geometry views
 
-Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
+Copyright (C) 2026 Luis Henrique Cassis Fagundes. CERN-OHL-S-2.0+.
 
 These default OpenSCAD-renderer snapshots of the actual model were opened
 and inspected on 12 September 2026:

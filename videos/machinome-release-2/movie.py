@@ -1,5 +1,5 @@
 """Revolutions — the ratified second cut, one voice and one machine."""
-# Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
+# Copyright (C) 2026 Luis Henrique Cassis Fagundes. CERN-OHL-S-2.0+.
 from pathlib import Path
 
 from machinome_movie import (
@@ -300,7 +300,7 @@ class Revolutions(Movie):
     evidence = Evidence(brief='brief.md', review='review-1.md',
         reconstruction='../../models/hydraulic_sawmill/docs/reconstruction.md')
     credits = Credits(project='Leonardo da Vinci Gallery', creator='AI-directed release film',
-        copyright='Copyright (C) 2026 Luis Henrique Cassis Fagundes', license='AGPL-3.0-only', license_file='../../LICENSE')
+        copyright='Copyright (C) 2026 Luis Henrique Cassis Fagundes', license='CERN-OHL-S-2.0+', license_file='../../LICENSE')
     release = Release(description='description.md')
     continuous = Continuous()
 

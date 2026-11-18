@@ -1,4 +1,4 @@
-// Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
+// Copyright (C) 2026 Luis Henrique Cassis Fagundes. CERN-OHL-S-2.0+.
 // Preserve the approved performance and replace only its first technology name.
 import assert from 'node:assert/strict';
 import {readFile,writeFile,mkdir,copyFile,link,access} from 'node:fs/promises';

@@ -3,7 +3,7 @@
 Status posterior: aprovada pelo piloto (“está ok”). Preservada enquanto
 se experimenta Jessica com exatamente o mesmo texto e direção.
 
-Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
+Copyright (C) 2026 Luis Henrique Cassis Fagundes. CERN-OHL-S-2.0+.
 
 Revisão solicitada após a segunda proposta: singular em “e os humanos
 constroem a sua”, mais pausa e contraste de entonação nas mudanças de cena

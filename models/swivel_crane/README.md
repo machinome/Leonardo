@@ -1,6 +1,6 @@
 # The swivel crane
 
-<!-- Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only. -->
+<!-- Copyright (C) 2026 Luis Henrique Cassis Fagundes. CERN-OHL-S-2.0+. -->
 
 Three independent coordinates place one suspended stone: slew the mast,
 traverse the screw-driven trolley, then hoist through two supporting rope spans.

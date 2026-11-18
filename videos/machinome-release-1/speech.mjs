@@ -1,4 +1,4 @@
-// Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
+// Copyright (C) 2026 Luis Henrique Cassis Fagundes. CERN-OHL-S-2.0+.
 // Production adapter for the already-approved pronunciation dictionary.
 // Videomaker's current public speech command does not pass dictionaries.
 import assert from 'node:assert/strict';

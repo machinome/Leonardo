@@ -7,7 +7,7 @@ em português. README.md contém os comandos atuais e RENDER.md a evidência.
 
 Os registros abaixo pertencem ao filme inglês e são preservados como contexto.
 
-Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
+Copyright (C) 2026 Luis Henrique Cassis Fagundes. CERN-OHL-S-2.0+.
 
 ## Main-branch selection — 12 October 2026
 
@@ -276,7 +276,7 @@ server so it survives the launching shell. Ordinary composed dissolves still
 show as midpoint cuts live; the project-specific Studio reveal is fully live.
 
 The pilot-requested source label and final licence text explicitly override
-the Videomaker skill defaults. Gallery licence records remain AGPL-3.0-only;
+the Videomaker skill defaults. Gallery licence records remain CERN-OHL-S-2.0+;
 the closing `GPL-2.0-or-later OR CERN-OHL-S-2.0+` discrepancy and unresolved
 publication URLs remain in `description.md`. Do not alter licensing records
 or claim this local rehearsal is release-ready.

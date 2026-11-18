@@ -1,4 +1,4 @@
-// Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
+// Copyright (C) 2026 Luis Henrique Cassis Fagundes. CERN-OHL-S-2.0+.
 // Pin the comparison words, selected C3 recording and matched Jessica control.
 import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';

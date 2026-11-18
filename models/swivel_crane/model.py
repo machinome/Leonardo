@@ -1,7 +1,7 @@
 """Original three-coordinate crane with an engaged screw and continuous
 hoist."""
 
-# Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
+# Copyright (C) 2026 Luis Henrique Cassis Fagundes. CERN-OHL-S-2.0+.
 from math import pi, sin, cos, radians
 
 import cadquery as cq

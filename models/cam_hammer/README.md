@@ -1,6 +1,6 @@
 # The cam hammer — a circle becomes a beat
 
-Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
+Copyright (C) 2026 Luis Henrique Cassis Fagundes. CERN-OHL-S-2.0+.
 
 An original educational model by **Astra**, made from one continuation
 prompt as a [machinome demonstration](https://machinome.readthedocs.io/).

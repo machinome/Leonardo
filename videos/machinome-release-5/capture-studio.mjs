@@ -1,4 +1,4 @@
-// Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
+// Copyright (C) 2026 Luis Henrique Cassis Fagundes. CERN-OHL-S-2.0+.
 // Photograph the real Studio UI with browser-local session/chat fixtures.
 // No session is opened on the broker and no conversation is submitted.
 import assert from 'node:assert/strict';

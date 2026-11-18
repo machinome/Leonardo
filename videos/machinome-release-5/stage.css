@@ -1,4 +1,4 @@
-/* Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only. */
+/* Copyright (C) 2026 Luis Henrique Cassis Fagundes. CERN-OHL-S-2.0+. */
 .set{position:absolute;inset:0;background:#101419;color:#eeeae3;font-family:'Space Grotesk',sans-serif;isolation:isolate}
 .slot-stage,.slot-ghost,.slot-backdrop,.slot-plate{left:0;top:5%;width:100%;height:90%}
 .slot-ghost{opacity:.13}

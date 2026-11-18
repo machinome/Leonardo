@@ -1,4 +1,4 @@
-// Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
+// Copyright (C) 2026 Luis Henrique Cassis Fagundes. CERN-OHL-S-2.0+.
 // One analytical phase for the graphic and the real exported waterwheel.
 export function wheelAngle(elapsed,{arrival,angularAcceleration}){
   return .5*angularAcceleration*Math.max(0,elapsed-arrival)**2;

@@ -1,6 +1,6 @@
 # Machinome release — proposal 1
 
-Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
+Copyright (C) 2026 Luis Henrique Cassis Fagundes. CERN-OHL-S-2.0+.
 
 **Revolutions** — a narrated, 2 minute 20 second first proposal from
 [the release brief](brief.md). Machinome speaks as the

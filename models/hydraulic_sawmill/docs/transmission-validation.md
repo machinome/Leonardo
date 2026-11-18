@@ -1,6 +1,6 @@
 # Photographed transmission correction — 21 September 2026
 
-Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
+Copyright (C) 2026 Luis Henrique Cassis Fagundes. CERN-OHL-S-2.0+.
 
 **Verified for this sawmill, including the holding-pawl chatter correction.**
 The latest geometry uses the pilot's fixed-plane radial input winding, not

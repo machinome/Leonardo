@@ -3,7 +3,7 @@
 The pilot commissioned a single Leonardo da Vinci gallery, consolidating
 the hydraulic sawmill and automatic loom while preserving their Git
 histories. Each machine keeps its own OpenSpec; the sawmill receives the
-missing record. All original work uses AGPL with the pilot's copyright:
+missing record. All original work uses CERN-OHL-S-2.0+ with the pilot's copyright:
 Luis Henrique Cassis Fagundes.
 
 Authorship statement supplied by the pilot: the designs are single-shot

@@ -1,6 +1,6 @@
 # Automatic loom reconstruction: verification record
 
-Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
+Copyright (C) 2026 Luis Henrique Cassis Fagundes. CERN-OHL-S-2.0+.
 
 The current reed/carrier correction and its validation are recorded in
 [reed-correction.md](reed-correction.md). The report below preserves the

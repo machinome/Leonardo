@@ -2,7 +2,7 @@
 """Export the frame's actual cut solids, stock schedule and illustrated
 book."""
 
-# Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
+# Copyright (C) 2026 Luis Henrique Cassis Fagundes. CERN-OHL-S-2.0+.
 import argparse
 import csv
 from html import escape
@@ -237,7 +237,7 @@ or full-size structural loads. Vertical pins have whittled heads; heads in
 running rails are recessed below the wheel surface. The plinth is a display
 ground fixture.</p>
 <nav>{toc}</nav>{''.join(sections)}
-<footer>Copyright (C) 2026 Luis Henrique Cassis Fagundes · AGPL-3.0-only ·
+<footer>Copyright (C) 2026 Luis Henrique Cassis Fagundes · CERN-OHL-S-2.0+ ·
 Machinome Leonardo gallery</footer></html>"""
     (out / "index.html").write_text(page)
     print(

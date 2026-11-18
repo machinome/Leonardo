@@ -1,7 +1,7 @@
 """Finite acceptance of the real loom export at desktop and narrow
 viewports."""
 
-# Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
+# Copyright (C) 2026 Luis Henrique Cassis Fagundes. CERN-OHL-S-2.0+.
 from functools import partial
 from hashlib import sha256
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer

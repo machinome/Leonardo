@@ -1,6 +1,6 @@
 # Audições brasileiras — abertura
 
-Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
+Copyright (C) 2026 Luis Henrique Cassis Fagundes. CERN-OHL-S-2.0+.
 
 Nova comissão do piloto: voltar à narração por máquina e comparar vozes
 somente até antes da apresentação das peças. Não reabrir o render.

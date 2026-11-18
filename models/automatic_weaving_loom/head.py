@@ -11,7 +11,7 @@ These concealed profiles are our construction, not observed museum
 details.
 """
 
-# Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
+# Copyright (C) 2026 Luis Henrique Cassis Fagundes. CERN-OHL-S-2.0+.
 import cadquery as cq
 from molejo import Shape, Polygon, Spline, P
 from machinome.node.assembly import AssemblyNode

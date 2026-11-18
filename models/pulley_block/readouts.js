@@ -1,4 +1,4 @@
-// Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
+// Copyright (C) 2026 Luis Henrique Cassis Fagundes. CERN-OHL-S-2.0+.
 // Read-only explanatory arithmetic. All CAD, motion, controls and rope
 // evaluation belong to the actual machinome export in the iframe.
 // The browser smoke compares these labels against independently measured

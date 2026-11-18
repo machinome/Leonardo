@@ -1,6 +1,6 @@
 # Direction — Revolutions, final English cut
 
-Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
+Copyright (C) 2026 Luis Henrique Cassis Fagundes. CERN-OHL-S-2.0+.
 
 This cut is the English film with everything the pilot approved for the
 Brazilian cut (`../machinome-release-5-pt-br/`, take 12, rendered on

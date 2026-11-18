@@ -36,7 +36,7 @@ explain all modeled mechanisms and omitted physics, and provide source/license.
 
 #### Scenario: Retrieve source
 - **WHEN** a visitor follows the source link after a committed gallery export
-- **THEN** a downloadable source archive and the AGPL license are available.
+- **THEN** a downloadable source archive and the CERN-OHL-S licence are available.
 
 ### Requirement: Functional assembly navigation
 The assembly tree SHALL group the machine by frame, water drive, saw mechanism,

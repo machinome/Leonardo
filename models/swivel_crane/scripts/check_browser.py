@@ -2,7 +2,7 @@
 """Finite smoke of the real crane export, controls, geometry and local
 assets."""
 
-# Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
+# Copyright (C) 2026 Luis Henrique Cassis Fagundes. CERN-OHL-S-2.0+.
 import argparse
 from functools import partial
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer

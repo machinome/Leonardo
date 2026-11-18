@@ -41,7 +41,7 @@ nem segurança física.
 
 Leonardo da Vinci Gallery. Copyright (C) 2026 Luis Henrique Cassis
 Fagundes. CAD, código e documentação originais da galeria usam
-AGPL-3.0-only; consulte LICENSE e NOTICE do repositório. A galeria registra
+CERN-OHL-S-2.0+; consulte LICENSE e NOTICE do repositório. A galeria registra
 os modelos como produzidos por Astra a partir de comissões humanas.
 
 A direção, a adaptação da narração, as declarações do filme e o palco

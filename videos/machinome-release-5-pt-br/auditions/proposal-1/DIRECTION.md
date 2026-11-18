@@ -1,6 +1,6 @@
 # Direção de voz — primeira proposta pt-BR
 
-Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
+Copyright (C) 2026 Luis Henrique Cassis Fagundes. CERN-OHL-S-2.0+.
 
 A voz é Leo Antonio, já escolhido para os estudos brasileiros do projeto.
 A base é calma, com dicção clara e ritmo espaçado. A continuidade pertence

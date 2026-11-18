@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Local listening player with byte ranges for browser seeking."""
-# Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
+# Copyright (C) 2026 Luis Henrique Cassis Fagundes. CERN-OHL-S-2.0+.
 import argparse
 import functools
 import os

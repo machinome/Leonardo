@@ -1,6 +1,6 @@
 # Selected rack-lift images
 
-Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
+Copyright (C) 2026 Luis Henrique Cassis Fagundes. CERN-OHL-S-2.0+.
 
 Both images use the default OpenSCAD renderer, the actual root model,
 default module 3, and default phase/run. They were opened and inspected.

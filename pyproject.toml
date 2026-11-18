@@ -5,7 +5,7 @@ description = "Leonardo da Vinci's machines: a single-prompt machinome gallery b
 readme = "README.md"
 requires-python = ">=3.12"
 authors = [{name = "Luis Henrique Cassis Fagundes"}]
-license = "AGPL-3.0-only"
+license = "CERN-OHL-S-2.0+"
 license-files = ["LICENSE", "NOTICE"]
 # These version floors do not describe the post-0.6 API requirement in README.
 # The public-site task must establish a reproducible public dependency set.

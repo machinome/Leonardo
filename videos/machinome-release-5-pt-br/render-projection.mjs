@@ -1,4 +1,4 @@
-// Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
+// Copyright (C) 2026 Luis Henrique Cassis Fagundes. CERN-OHL-S-2.0+.
 // Project-owned projection master: 4K captures, Full HD lossless-source encode.
 import assert from 'node:assert/strict';
 import {readFile,writeFile} from 'node:fs/promises';

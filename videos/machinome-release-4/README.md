@@ -1,6 +1,6 @@
 # Machinome release — cut 4, release candidate
 
-Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
+Copyright (C) 2026 Luis Henrique Cassis Fagundes. CERN-OHL-S-2.0+.
 
 [Watch locally](http://127.0.0.1:8784/) · [MP4](_build/rehearsal.mp4) ·
 [Raw narration](_build/raw-narration.wav) · [Film source](movie.py) ·

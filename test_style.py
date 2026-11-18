@@ -1,6 +1,6 @@
 """PEP 8 regression checks for the gallery's Python source."""
 
-# Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
+# Copyright (C) 2026 Luis Henrique Cassis Fagundes. CERN-OHL-S-2.0+.
 from pathlib import Path
 import subprocess
 import unittest

@@ -1,6 +1,6 @@
 # Revolutions — first visual proposal
 
-Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
+Copyright (C) 2026 Luis Henrique Cassis Fagundes. CERN-OHL-S-2.0+.
 
 Machinome encounters its ancestor, opens the ancestor to inspection, then
 opens itself. The release is a small act of disclosure: the audience sees

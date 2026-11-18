@@ -9,7 +9,7 @@ here; the manuscript does not dimension those concealed contact
 surfaces.
 """
 
-# Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
+# Copyright (C) 2026 Luis Henrique Cassis Fagundes. CERN-OHL-S-2.0+.
 import cadquery as cq
 from machinome.node.assembly import AssemblyNode
 from machinome.node.cadquery import CadQueryNode

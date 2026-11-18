@@ -1,7 +1,7 @@
 """Leonardo's rack-lifting study, interpreted as an original desktop
 machine."""
 
-# Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
+# Copyright (C) 2026 Luis Henrique Cassis Fagundes. CERN-OHL-S-2.0+.
 from math import pi
 
 import cadquery as cq

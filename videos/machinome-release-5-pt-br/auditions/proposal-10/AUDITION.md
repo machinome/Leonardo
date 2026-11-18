@@ -1,6 +1,6 @@
 # Python Brasil — experiência de leitura, tomada 10
 
-Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
+Copyright (C) 2026 Luis Henrique Cassis Fagundes. CERN-OHL-S-2.0+.
 
 O piloto aprovou a versão em 02d52e5 e pediu mais calma nas cenas de
 código e especialmente no estúdio, preferindo nova interpretação de

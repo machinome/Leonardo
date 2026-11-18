@@ -1,6 +1,6 @@
 # Direção de voz — quinta proposta pt-BR, Jessica
 
-Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
+Copyright (C) 2026 Luis Henrique Cassis Fagundes. CERN-OHL-S-2.0+.
 
 O piloto preferiu Jessica e acrescentou uma frase de conexão entre o
 exemplo em Python e o Studio: “As relações mecânicas da máquina são

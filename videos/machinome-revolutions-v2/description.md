@@ -1,4 +1,4 @@
-<!-- Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only. -->
+<!-- Copyright (C) 2026 Luis Henrique Cassis Fagundes. CERN-OHL-S-2.0+. -->
 # Revolutions — a machine you can read
 
 Explore the reconstruction yourself:
@@ -23,7 +23,7 @@ licence does not license that third-party photograph.
 
 Leonardo da Vinci Gallery. Vibecoded by Astra under Luis Henrique Cassis
 Fagundes's direction. Copyright (C) 2026 Luis Henrique Cassis Fagundes.
-Original gallery source is AGPL-3.0-only; see its LICENSE and NOTICE.
+Original gallery source is CERN-OHL-S-2.0+; see its LICENSE and NOTICE.
 Filmed model/source selection: 844c723d81bc69d728b7d98e50e86c00829e2ec8.
 
 AI-written narration and script; synthetic feminine narration uses ElevenLabs

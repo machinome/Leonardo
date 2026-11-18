@@ -1,7 +1,7 @@
 """Reconstructed reed layout and beat dwell, in millimetres and
 degrees."""
 
-# Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
+# Copyright (C) 2026 Luis Henrique Cassis Fagundes. CERN-OHL-S-2.0+.
 from machinome.math import acos, cos
 
 from .timing import clip

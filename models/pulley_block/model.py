@@ -1,7 +1,7 @@
 """Original three-part tackle: one rope, three supporting spans, 3:1
 travel."""
 
-# Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
+# Copyright (C) 2026 Luis Henrique Cassis Fagundes. CERN-OHL-S-2.0+.
 from math import pi
 
 import cadquery as cq

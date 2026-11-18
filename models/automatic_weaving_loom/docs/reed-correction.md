@@ -1,6 +1,6 @@
 # Reed passage and beat-up correction — 13 September 2026
 
-Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
+Copyright (C) 2026 Luis Henrique Cassis Fagundes. CERN-OHL-S-2.0+.
 
 The pilot requested a functional reed/carrier crossing before continuing
 the loom. The checkpoint at `bb2a1ea` placed the reed's whole 37 mm stroke

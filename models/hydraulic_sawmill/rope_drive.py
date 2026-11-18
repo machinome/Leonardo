@@ -6,7 +6,7 @@ Tangencies are solved from circles, not tuned offsets or feed
 multipliers.
 """
 
-# Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
+# Copyright (C) 2026 Luis Henrique Cassis Fagundes. CERN-OHL-S-2.0+.
 import math
 
 from machinome.math import sqrt, sin, cos, asin, acos, atan2

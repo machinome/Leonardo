@@ -1,6 +1,6 @@
 # Python Brasil — proposta 9 (não selecionada)
 
-Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
+Copyright (C) 2026 Luis Henrique Cassis Fagundes. CERN-OHL-S-2.0+.
 
 Primeira experiência de leitura mais calma nas cenas de código e estúdio.
 Uma chamada contínua de Jessica / eleven_v3, com o mesmo texto falado.

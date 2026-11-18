@@ -1,6 +1,6 @@
 # Rack and pinion — turning becomes lifting
 
-Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
+Copyright (C) 2026 Luis Henrique Cassis Fagundes. CERN-OHL-S-2.0+.
 
 An original educational reconstruction by **Astra**, made from the gallery's
 single continuation prompt as a **machinome demonstration**. A hand crank

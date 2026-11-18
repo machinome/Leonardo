@@ -26,7 +26,7 @@ orange; neither was recolored or redrawn. SHA-256:
 
 Identity artwork has no public licence grant, and its presence does not
 grant trademark permission. Its rights are separate from the gallery's
-AGPL source licence.
+CERN-OHL-S source licence.
 
 The unchanged Python logo is read from cut 2. OFL fonts are read from cut 1,
 with their existing notices. Those assets keep their own rights.

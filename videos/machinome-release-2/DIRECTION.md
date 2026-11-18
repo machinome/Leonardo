@@ -1,6 +1,6 @@
 # Revolutions — ratified second cut
 
-Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
+Copyright (C) 2026 Luis Henrique Cassis Fagundes. CERN-OHL-S-2.0+.
 
 Authority: the original brief and review snapshots beside this file, followed
 by the pilot's 3 October 2026 instruction “ratified, build video”. The pilot

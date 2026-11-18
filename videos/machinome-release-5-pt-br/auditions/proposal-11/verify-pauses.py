@@ -1,5 +1,5 @@
 """Independent words near sentence edits; no transcript supplied to ASR."""
-# Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
+# Copyright (C) 2026 Luis Henrique Cassis Fagundes. CERN-OHL-S-2.0+.
 import hashlib
 import json
 import subprocess

@@ -1,6 +1,6 @@
 """The release film: a machine introduces its ancestor and itself."""
 
-# Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
+# Copyright (C) 2026 Luis Henrique Cassis Fagundes. CERN-OHL-S-2.0+.
 from pathlib import Path
 import ast
 import hashlib
@@ -572,7 +572,7 @@ class Revolutions(Movie):
         project="Leonardo da Vinci Gallery",
         creator="AI-directed proposal",
         copyright="Copyright (C) 2026 Luis Henrique Cassis Fagundes",
-        license="AGPL-3.0-only",
+        license="CERN-OHL-S-2.0+",
         license_file="../../LICENSE",
     )
     release = Release(description="description.md")

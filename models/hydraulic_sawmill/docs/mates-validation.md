@@ -1,6 +1,6 @@
 # Named attachment frames — 29 September 2026
 
-Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
+Copyright (C) 2026 Luis Henrique Cassis Fagundes. CERN-OHL-S-2.0+.
 
 The pilot requested simpler, presentable sawmill source using frames and
 mates, an unambiguous name for the stationary structure, and a PEP 8 test.

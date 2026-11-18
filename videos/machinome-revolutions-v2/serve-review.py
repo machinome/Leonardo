@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Serve rehearsal assets with byte-range support for video seeking."""
-# Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
+# Copyright (C) 2026 Luis Henrique Cassis Fagundes. CERN-OHL-S-2.0+.
 
 import argparse
 from functools import partial
