@@ -1,6 +1,6 @@
 # Study 1 — approved v3 performance and portrait film
 
-Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
+Copyright (C) 2026 Luis Henrique Cassis Fagundes. CERN-OHL-S-2.0+.
 
 ## Current delivery — 9 October 2026
 

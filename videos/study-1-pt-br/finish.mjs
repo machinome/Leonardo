@@ -1,4 +1,4 @@
-// Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
+// Copyright (C) 2026 Luis Henrique Cassis Fagundes. CERN-OHL-S-2.0+.
 // Measured continuity and the portrait opening orbit; no speech generation.
 import assert from 'node:assert/strict';
 import {writeFile} from 'node:fs/promises';

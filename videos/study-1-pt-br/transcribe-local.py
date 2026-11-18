@@ -1,6 +1,6 @@
 """Independent local transcription, without a script prompt."""
 
-# Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
+# Copyright (C) 2026 Luis Henrique Cassis Fagundes. CERN-OHL-S-2.0+.
 
 import dataclasses
 import hashlib

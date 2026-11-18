@@ -1,6 +1,6 @@
 # Revoluções — estudo 2, loop
 
-Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
+Copyright (C) 2026 Luis Henrique Cassis Fagundes. CERN-OHL-S-2.0+.
 
 Second portrait study, commissioned on 9 October 2026. Preserve study 1 and
 its exact 89.583333-second soundtrack, including the mechanism-entrance pause.

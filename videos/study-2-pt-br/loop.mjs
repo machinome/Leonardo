@@ -1,4 +1,4 @@
-// Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
+// Copyright (C) 2026 Luis Henrique Cassis Fagundes. CERN-OHL-S-2.0+.
 // Study 2: a cache-preserving visual loop over the exact approved soundtrack.
 import assert from 'node:assert/strict';
 import {readFile, writeFile, mkdir, link, symlink, realpath, copyFile} from 'node:fs/promises';

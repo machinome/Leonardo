@@ -1,6 +1,6 @@
 # Revoluções — estudo em português
 
-Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
+Copyright (C) 2026 Luis Henrique Cassis Fagundes. CERN-OHL-S-2.0+.
 
 9 October revision: one freshly generated continuous Leo performance,
 approved first sentence, no on-screen text, and the original cut-5 direction

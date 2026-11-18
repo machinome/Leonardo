@@ -1,4 +1,4 @@
-// Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
+// Copyright (C) 2026 Luis Henrique Cassis Fagundes. CERN-OHL-S-2.0+.
 // Compare every explanatory highlight with the pilot-directed cut 5.
 import assert from 'node:assert/strict';
 import {readFile, writeFile} from 'node:fs/promises';

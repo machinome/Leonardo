@@ -1,4 +1,4 @@
-// Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
+// Copyright (C) 2026 Luis Henrique Cassis Fagundes. CERN-OHL-S-2.0+.
 // Recover timing against existing speech, never generate or modify its audio.
 // https://elevenlabs.io/docs/api-reference/forced-alignment/create
 import assert from 'node:assert/strict';

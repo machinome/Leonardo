@@ -1,6 +1,6 @@
 """Portrait study of the sawmill, through 'one wheel, two jobs'."""
 
-# Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
+# Copyright (C) 2026 Luis Henrique Cassis Fagundes. CERN-OHL-S-2.0+.
 
 from pathlib import Path
 
@@ -358,7 +358,7 @@ class Study(Movie):
         project="Leonardo da Vinci Gallery",
         creator="Astra",
         copyright="Copyright (C) 2026 Luis Henrique Cassis Fagundes",
-        license="AGPL-3.0-only",
+        license="CERN-OHL-S-2.0+",
         license_file="../../LICENSE",
     )
     release = Release(description="description.md")

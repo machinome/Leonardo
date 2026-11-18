@@ -1,4 +1,4 @@
-// Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
+// Copyright (C) 2026 Luis Henrique Cassis Fagundes. CERN-OHL-S-2.0+.
 // Local editorial revision of the approved film, not a new voice generation.
 // Keep the base film/cache immutable; replace only the mechanism entrance.
 import assert from 'node:assert/strict';

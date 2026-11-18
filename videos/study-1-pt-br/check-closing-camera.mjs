@@ -1,4 +1,4 @@
-// Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
+// Copyright (C) 2026 Luis Henrique Cassis Fagundes. CERN-OHL-S-2.0+.
 // The concluding pullback must not move through the middle of the machine.
 import assert from 'node:assert/strict';
 import {dirname, resolve} from 'node:path';

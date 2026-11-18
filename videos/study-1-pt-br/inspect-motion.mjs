@@ -1,4 +1,4 @@
-// Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
+// Copyright (C) 2026 Luis Henrique Cassis Fagundes. CERN-OHL-S-2.0+.
 // Browser evidence for the pilot's continuity and no-text requirements.
 import assert from 'node:assert/strict';
 import {readFile, mkdir, writeFile} from 'node:fs/promises';

@@ -1,6 +1,6 @@
 # Study 2 — loop verification
 
-Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-only.
+Copyright (C) 2026 Luis Henrique Cassis Fagundes. CERN-OHL-S-2.0+.
 
 9 October 2026. The pilot requested a separate second study with the same
 audio, a wheel already moving at the opening, and a closing camera/background

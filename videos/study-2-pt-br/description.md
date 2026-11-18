@@ -23,7 +23,7 @@ Simulação interativa: {{simulationUrl}}
 Código do modelo e do vídeo: {{sourceUrl}}
 
 Leonardo da Vinci Gallery. Copyright (C) 2026 Luis Henrique Cassis Fagundes.
-CAD, código e documentação originais: AGPL-3.0-only; consulte LICENSE e
+CAD, código e documentação originais: CERN-OHL-S-2.0+; consulte LICENSE e
 NOTICE do projeto. Os modelos são creditados pelo projeto a Astra,
 desenvolvidos por IA a partir de instruções humanas.
 
