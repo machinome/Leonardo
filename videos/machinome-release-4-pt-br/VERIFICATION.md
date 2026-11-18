@@ -1,6 +1,18 @@
 # Versão brasileira — evidências de produção
 
-Data: 7 de outubro de 2026. Render cancelado; somente novas audições autorizadas.
+Data: 7 de outubro de 2026. Nova tentativa completa com Leo autorizada.
+
+## Tentativa Leo — em produção
+
+O piloto escolheu a opção A e pediu o vídeo completo para avaliar o resultado.
+A direção completa mantém a abertura da audição e acrescenta pausas e
+interpretação ao restante. Roteiro falado: 2.508 caracteres; solicitação
+dirigida: 3.689 caracteres. Testes de alinhamento passam para todas as oito
+instruções conhecidas, com tempos das palavras intactos. Evidências do novo
+master serão registradas após a captura. A performance inteira ainda precisa
+da avaliação do piloto.
+
+## Histórico: Raquel rejeitada, render cancelado, novas audições
 
 O piloto retomou a escolha de voz por máquina, sem autorizar o restante
 da produção. As três novas amostras da abertura e suas verificações estão
@@ -18,7 +30,7 @@ Os resultados técnicos abaixo não constituem aprovação da performance.
 Raquel — Expressive and Energetic, identificada como pt-BR na biblioteca
 ElevenLabs — foi adicionada à conta após a liberação de voices_write.
 O identificador retornado é `GDzHdQOi6jjf8zaXhCYD`; metadados públicos em
-`voice.json`. Nenhuma credencial está nos fontes ou artefatos de revisão.
+`voice.json` na revisão `efc83fa`. Nenhuma credencial está nos fontes ou artefatos de revisão.
 
 Foram feitas duas gravações completas de 2.508 caracteres. A primeira
 durou 172,40 segundos, mas sua pausa final de 0,373 segundo não atendia à

@@ -13,8 +13,8 @@ const bytes=await readFile(take.cacheFile);
 assert.equal(createHash('sha256').update(bytes).digest('hex'),take.sha256);
 assert.equal(take.generation,'one-provider-request');
 assert.deepEqual(take.edits,[]);
-assert.equal(record.request.text.includes('aberto... [long pause]\n\nA roda'),true);
-assert.equal(record.request.text.includes('O que VOCÊ quer construir agora?'),true);
+assert.match(record.request.text,/aberto\.\.\. \[long pause\]\s+\[thoughtful\] \[slowly\] A roda/);
+assert.match(record.request.text,/O que \[short pause\] VOCÊ quer construir agora\?/);
 const alignment=record.alignment,text=alignment.characters.join('');
 const span=phrase=>{
   const start=text.lastIndexOf(phrase);assert.ok(start>=0);

@@ -1,5 +1,20 @@
 # Versão brasileira — direção
 
+## Tentativa completa com Leo — 7 de outubro de 2026
+
+O piloto escolheu Leo Antonio, opção A, e autorizou uma tentativa completa:
+“Let's do a full video shot with leo to see how it goes”. Isso substitui
+a limitação anterior a audições e permite gerar e renderizar este teste.
+Não representa aprovação de uma performance completa ainda não ouvida.
+
+A abertura usa exatamente o texto dirigido da audição escolhida. O restante
+recebe a mesma direção em `delivery.json`: curiosidade na explicação,
+calor na voz da máquina, pausas entre ideias e antes do VOCÊ final.
+Uma única performance de Eleven v3, estabilidade 0,5 e similaridade 0,75,
+sem alteração de velocidade nem emendas. O alinhamento omite apenas as
+oito instruções conhecidas e normaliza espaços sem alterar os tempos de
+caracteres falados. Os registros abaixo são históricos.
+
 ## Retomada somente das audições — 7 de outubro de 2026
 
 O piloto decidiu manter a narração por máquina: o personagem pode dizer
@@ -13,7 +28,7 @@ essa aprovação há autorização para renderizar o vídeo.
 
 ## Cancelamento — 7 de outubro de 2026
 
-O piloto cancelou esta produção e fará a narração em português pessoalmente.
+Naquele momento, o piloto cancelou a produção e decidiu narrar pessoalmente.
 Rejeitou a voz gerada: rápida demais, sem a emoção e as pausas desejadas.
 O render foi abortado, sem apagar os fontes ou caches. Não há aprovação
 da narração. Não retomar geração ou renderização sem nova instrução.
